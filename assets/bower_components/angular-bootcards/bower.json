@@ -1,0 +1,17 @@
+{
+  "name": "angular-bootcards",
+  "version": "0.0.1",
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "bootcards"
+  ],
+  "dependencies": {
+    "bootcards": "~1.1.0"
+  },
+  "devDependencies": {
+    "angular": "latest",
+    "angular-mocks": "latest",
+    "jquery": "latest"
+  }
+}

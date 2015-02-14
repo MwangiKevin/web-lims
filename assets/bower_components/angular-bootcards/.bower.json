@@ -1,0 +1,28 @@
+{
+  "name": "angular-bootcards",
+  "version": "0.0.1",
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "bootcards"
+  ],
+  "dependencies": {
+    "bootcards": "~1.1.0"
+  },
+  "devDependencies": {
+    "angular": "latest",
+    "angular-mocks": "latest",
+    "jquery": "latest"
+  },
+  "homepage": "https://github.com/jonniespratley/angular-bootcards",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "7fcac8a2831a1103d7fb0cdaf488df5b329f7e42"
+  },
+  "_source": "git://github.com/jonniespratley/angular-bootcards.git",
+  "_target": "~0.0.1",
+  "_originalSource": "angular-bootcards",
+  "_direct": true
+}
