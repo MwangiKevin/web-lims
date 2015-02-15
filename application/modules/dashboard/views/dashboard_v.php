@@ -24,11 +24,14 @@
 
 </style>
 <!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
-<div class="ui black medium launch right attached button" >
+<div class="ui black medium launch right attached button" style="float:left">
 	<a ng-click="commons.toggleMenu()">
 		<i class="icon list layout right"></i>
 		<span class="text right" style="display:none;">Menu</span>
 	</a>
+</div>
+<div style="float:right;">
+	<h1 style="margin-bottom: 0px;margin-top: 0px;">{{commons.getTitle()}}</h1>
 </div>
 <script>
 $(".launch.button").mouseenter(function(){
@@ -41,7 +44,6 @@ $(".launch.button").mouseenter(function(){
 // $(".ui.overlay.sidebar").sidebar({overlay: true})
 // .sidebar('attach events','.ui.launch.button');
 </script>
-
 
 
 <div class="ui page site section group" style="margin-top:6px">
