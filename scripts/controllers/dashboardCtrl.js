@@ -1,8 +1,6 @@
 app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Commons','$activityIndicator',function($scope,$timeout,ngProgress,Filters,Commons,$activityIndicator){
 
 	ngProgress.color('#FFD3D3');
-
-	ngProgress.start();
 	$activityIndicator.startAnimating();
 
 	$scope.showMe =3;
@@ -15,6 +13,7 @@ app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Co
 
 	$timeout(function () {
 		$activityIndicator.stopAnimating()
+		ngProgress.start();
 		ngProgress.complete()
 	}, 300);
 	

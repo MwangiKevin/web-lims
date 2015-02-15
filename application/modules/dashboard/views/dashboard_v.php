@@ -24,11 +24,14 @@
 
 </style>
 <!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
-<div class="ui black medium launch right attached button" >
+<div class="ui black medium launch right attached button" style="float:left">
 	<a ng-click="commons.toggleMenu()">
 		<i class="icon list layout right"></i>
 		<span class="text right" style="display:none;">Menu</span>
 	</a>
+</div>
+<div style="float:right;">
+	<h1 style="margin-bottom: 0px;margin-top: 0px;">{{commons.getTitle()}}</h1>
 </div>
 <script>
 $(".launch.button").mouseenter(function(){
@@ -43,7 +46,6 @@ $(".launch.button").mouseenter(function(){
 </script>
 
 
-
 <div class="ui page site section group" style="margin-top:6px">
 	<div class="col span_2_of_12" ng-show="commons.getMenuShowStatus()">
 		<div class="ui vertical inverted  menu left uncover visible" id="toc">
@@ -52,6 +54,9 @@ $(".launch.button").mouseenter(function(){
 			</div>
 			<a class="item" href="">
 				<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
+			</a>
+			<a class="item" href="">
+				<b>Device Distribution</b><i class="fa fa-medkit " style="float:right"></i>
 			</a>
 			<a class="item" href="">
 				<i class="map icon"></i> <b>Map</b>
@@ -64,15 +69,22 @@ $(".launch.button").mouseenter(function(){
 				<div class="ui small active  inverted header">POC CD4</div>
 				<div class="menu">
 					<a class="item" href="">
-						Button
+						Device reporting rates
+					</a>
+					<a class="item" href="">
+						CD4 Suppression Level
 					</a>
 				</div>
 			</div>
 			<div class="item">
 				<div class="ui small active  inverted header">Conventional CD4</div>
 				<div class="menu">
-
-
+					<a class="item" href="">
+						Device reporting rates
+					</a>
+					<a class="item" href="">
+						CD4 Suppression Level
+					</a>
 				</div>
 			</div>
 		</div>

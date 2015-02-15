@@ -2,12 +2,16 @@ app.factory('Commons', ['$location',function($location){
 	var Commons={};
 	Commons.showMenu = true;
 	Commons.dashboardAreaClass = 'col span_10_of_12';
+	Commons.title = 'Summary';
 
 	Commons.getActiveMenu = function (path) {
 
 	};
 	Commons.getActiveSubmenu = function (path) {
 
+	};
+	Commons.getTitle = function (path) {
+		return Commons.title
 	};
 	Commons.getMenuShowStatus = function (path) {
 		return Commons.showMenu
