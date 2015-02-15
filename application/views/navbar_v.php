@@ -7,6 +7,9 @@
 <a href="" class="item"><i class="fa fa-file-o fa-sm icon"></i>Reports</a>
 
 <div class="right menu">
+  <a href="" class="item">
+    <div ng-activity-indicator="CircledWhite"></div>
+  </a>
   <a href="" class="active item"> 
     <center>
       <span class="user-info">
@@ -27,4 +30,11 @@
     </div>
   </a>
 </div>
+
+<style>
+  .ai-circled{
+    height: 19px !important;
+    width: 19px !important;
+  }
+</style>
 

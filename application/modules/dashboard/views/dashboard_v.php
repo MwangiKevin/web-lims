@@ -76,7 +76,6 @@ $(".launch.button").mouseenter(function(){
 
 
 
-
 <div class="row" style="border-color: #428bca;">
 
 </div>

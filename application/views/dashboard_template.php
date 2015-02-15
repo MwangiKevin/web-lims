@@ -38,6 +38,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/fontawesome/css/font-awesome.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/selectize/dist/css/selectize.bootstrap3.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
 	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css');?>"> -->
 
 </head>
@@ -73,6 +74,7 @@
 <script src="<?php echo base_url('assets/bower_components/highcharts/highcharts.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
 <script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
+<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 
 
 <!--app -->
@@ -85,10 +87,10 @@
 
 
 <!--Factories, Services and providers -->
-<!--
+
 <script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
 <script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
--->
+
 </html>
 
 <style>

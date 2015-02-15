@@ -1,6 +1,6 @@
-app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters',function($scope,$timeout,ngProgress,Filters){
+app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters','$activityIndicator',function($scope,$timeout,ngProgress,Filters,$activityIndicator){
 
-	// ngProgress.color('#cfba13');
+	ngProgress.color('#FFD3D3');
 	ngProgress.start();
 	$timeout(ngProgress.complete(), 100000);
 
@@ -8,22 +8,12 @@ app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters',func
 	$scope.filters 	={};
 	$scope.filters.programs 	={};
 
-	$scope.visible = 	function(page){
-
-		if((page=="tests" || page=="tat" || page=="facilitiesTests" || page=="labPerformance"|| page=="SampleType" ||page=="BF") && Filters.programs.selected.initials=="EID"){
-			return true;
-		}
-		else if((page=="tests" || page=="tat" || page=="facilitiesTests" || page=="labPerformance"|| page=="TBCoinf"|| page=="VLSuppression"|| page=="SampleType") && Filters.programs.selected.initials=="VL"){
-			return true;
-		}
-		else{
-			return false
-		}
-	}
-
 	$scope.filters.programs.selected = function(){
 		return Filters.programs.selected;
-	}
+	};
 
-
+	$activityIndicator.startAnimating();
+	$timeout(function () {
+		$activityIndicator.stopAnimating();
+	}, 300);
 }])
