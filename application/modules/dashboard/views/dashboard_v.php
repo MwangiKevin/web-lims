@@ -54,6 +54,9 @@ $(".launch.button").mouseenter(function(){
 				<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
 			</a>
 			<a class="item" href="">
+				<b>Device Distribution</b><i class="fa fa-medkit " style="float:right"></i>
+			</a>
+			<a class="item" href="">
 				<i class="map icon"></i> <b>Map</b>
 			</a>
 			<a class="item" href="/kitchen-sink.html">
@@ -64,15 +67,22 @@ $(".launch.button").mouseenter(function(){
 				<div class="ui small active  inverted header">POC CD4</div>
 				<div class="menu">
 					<a class="item" href="">
-						Button
+						Device reporting rates
+					</a>
+					<a class="item" href="">
+						CD4 Suppression Level
 					</a>
 				</div>
 			</div>
 			<div class="item">
 				<div class="ui small active  inverted header">Conventional CD4</div>
 				<div class="menu">
-
-
+					<a class="item" href="">
+						Device reporting rates
+					</a>
+					<a class="item" href="">
+						CD4 Suppression Level
+					</a>
 				</div>
 			</div>
 		</div>

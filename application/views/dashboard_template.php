@@ -36,7 +36,7 @@
 
 </head>
 
-<body>
+<body class="ui grid" style="width:100%">
 
 	<div class="m-app-loading" ng-animate-children >
 
