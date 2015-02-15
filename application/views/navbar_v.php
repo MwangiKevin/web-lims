@@ -1,9 +1,10 @@
 <a href="" class="brand item"><big>CD4 LIMS</big></a>
-<a href="" class="active item">Dashboard</a>
-<a href="" class="item">FCDRR</a>
-<a href="" class="item">Facilities</a>
-<a href="" class="item">CD4 Devices</a>
-<a href="" class="item">Reports</a>
+<a href="" class="active item"><i class="fa fa-dashboard fa-sm icon"></i>Dashboard</a>
+<a href="" class="item"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>
+<a href="" class="item"><i class="fa fa-upload fa-sm icon"></i>Device Uploads</a>
+<a href="" class="item"><i class="fa fa-hospital-o fa-sm icon"></i>Facilities</a>
+<a href="" class="item"><i class="fa fa-medkit fa-sm icon"></i>CD4 Devices</a>
+<a href="" class="item"><i class="fa fa-file-o fa-sm icon"></i>Reports</a>
 
 <div class="right menu">
   <a href="" class="active item"> 
@@ -17,12 +18,12 @@
   <a class="ui dropdown item">Actions
     <i class="dropdown icon"></i>
     <div class="menu">
-      <div class="item">Logout</div>
-      <div class="item">Help</div>
-      <div class="item">My Profile</div>
-      <div class="item">Change Password</div>
+      <div class="item">Logout<i class="key icon " style="float:right"></i></div>
+      <div class="item">Help<i class="help icon " style="float:right"></i></div>
+      <div class="item">My Profile<i class="user icon " style="float:right"></i></div>
+      <div class="item"><b>Change Password</b></div>
       <div class="ui divider"></div>
-      <div class="item">About</div>
+      <div class="item">About<i class="info icon " style="float:right"></i></div>
     </div>
   </a>
 </div>

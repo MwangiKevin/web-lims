@@ -19,7 +19,7 @@ var app = angular
 		abstract: true,
 		views:{
 			'main':{
-				// templateUrl: 'dashboard/dashboard_view',
+				 templateUrl: 'dashboard/dashboard_view',
 				// controller:'dashboardCtrl'
 			},
 			'navbar':{

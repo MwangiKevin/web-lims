@@ -48,7 +48,7 @@
 
 		<div ui-view="filter" class="ui column segment grid filter"></div>
 
-		<main ui-view="main" class="ui page grid full"></main>
+		<main ui-view="main" class="ui column  grid full"></main>
 
 	</div>
 	<div ui-view="footer"></div>

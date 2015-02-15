@@ -23,25 +23,66 @@
 
 
 </style>
+<!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
+<div class="ui black medium launch right attached button" ng-click="alert()">
+	<i class="icon list layout right"></i>
+	<span class="text right" style="display:none;">Menu</span>
+</div>
+<script>
+$(".launch.button").mouseenter(function(){
+	$(this).stop().animate({width: '100px'}, 300, 
+		function(){$(this).find('.text').show();});
+}).mouseleave(function (event){
+	$(this).find('.text').hide();
+	$(this).stop().animate({width: '70px'}, 300);
+});
+// $(".ui.overlay.sidebar").sidebar({overlay: true})
+// .sidebar('attach events','.ui.launch.button');
+</script>
+
+
+
+<div class="ui vertical inverted  menu left uncover visible" id="toc">
+	<div class="item active">
+		<a href=""><b>Summary</b></a>
+	</div>
+	<a class="item" href="">
+		<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
+	</a>
+	<a class="item" href="">
+		<i class="map icon"></i> <b>Map</b>
+	</a>
+	<a class="item" href="/kitchen-sink.html">
+		<b>FDRR Reporting </b><i class="fa fa-bar-chart " style="float:right"></i>
+	</a>
+	
+	<div class="item">
+		<div class="ui small active  inverted header">POC CD4</div>
+		<div class="menu">
+			<a class="item" href="">
+				Button
+			</a>
+		</div>
+	</div><div class="item">
+	<div class="ui small active  inverted header">Conventional CD4</div>
+	<div class="menu">
+
+
+	</div>
+</div>
+</div>
+
+
+
+
+
 
 <div class="row" style="border-color: #428bca;">
-	<div class="col-md-2" id="leftCol">
 
-		<ul class="nav nav-stacked" id="sidebar">
-			<!-- <li ng-show="true" ng-class="getActiveClass('/') || getActiveClass('/summary')"><a href="#summary">Summary</a></li>
-			<li ng-class = "getSpecActiveClass('/tests')"  ng-show="visible('tests')"><a href="#{{filters.programs.selected().initials}}/tests">Testing Trends</a></li>
-			<li ng-class = "getSpecActiveClass('/tat')"  ng-show="visible('tat')"><a href="#{{filters.programs.selected().initials}}/tat">Turn-Around-Time (TAT)</a></li>
-			<li ng-class = "getSpecActiveClass('/facilitiesTests')"  ng-show="visible('facilitiesTests')"><a href="#{{filters.programs.selected().initials}}/facilitiesTests">Facilities and Tests</a></li>
-			<li ng-class = "getSpecActiveClass('/labPerformance')"  ng-show="visible('labPerformance')"><a href="#{{filters.programs.selected().initials}}/labPerformance">Lab Performance</a></li>
-			<li ng-class = "getSpecActiveClass('/TBCoinf')"  ng-show="visible('TBCoinf')"><a href="#{{filters.programs.selected().initials}}/TBCoinf">TB Co-Infection </a></li>
-			<li ng-class = "getSpecActiveClass('/VLSuppression')"  ng-show="visible('VLSuppression')"><a href="#{{filters.programs.selected().initials}}/VLSuppression">Viral Load Suppression Level </a></li>
-			<li ng-class = "getSpecActiveClass('/SampleType')"  ng-show="visible('SampleType')"><a href="#{{filters.programs.selected().initials}}/SampleType">Sample Type </a></li>
-			 --><li ng-class = "getSpecActiveClass('/BF')"  ng-show="visible('BF')"><a href="#{{filters.programs.selected().initials}}/BF">EID Breast Feeding </a></li>
-		</ul>
-	</div>
-	<div class="col-md-10">
-		<div class="" ui-view></div>
-	</div>	
+</div>
+<div class="col-md-10">
+	<div class="" ui-view></div>
+</div>	
 </div>
 
 
