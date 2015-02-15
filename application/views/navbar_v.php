@@ -1,3 +1,7 @@
+
+<a href="" class="item">
+  <div ng-activity-indicator="CircledWhite"></div>
+</a>
 <a href="" class="brand item"><big>CD4 LIMS</big></a>
 <a href="" class="active item"><i class="fa fa-dashboard fa-sm icon"></i>Dashboard</a>
 <a href="" class="item"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>
@@ -7,9 +11,6 @@
 <a href="" class="item"><i class="fa fa-file-o fa-sm icon"></i>Reports</a>
 
 <div class="right menu">
-  <a href="" class="item">
-    <div ng-activity-indicator="CircledWhite"></div>
-  </a>
   <a href="" class="active item"> 
     <center>
       <span class="user-info">
@@ -32,9 +33,9 @@
 </div>
 
 <style>
-  .ai-circled{
-    height: 19px !important;
-    width: 19px !important;
-  }
+.ai-circled{
+  height: 19px !important;
+  width: 19px !important;
+}
 </style>
 

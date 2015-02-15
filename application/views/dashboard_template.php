@@ -105,8 +105,9 @@
 			<div class="messaging">
 
 				<h1>
-					Wait while <big>CD4 LIMS</big> app loads..
+					Please wait while <big>CD4 LIMS</big> app loads..
 				</h1>
+				<div class="ui active inline loader"></div>
 			</div>
 
 		</div>
