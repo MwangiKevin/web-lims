@@ -24,29 +24,50 @@
 
 </style>
 <!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
-<div class="ui black medium launch right attached button" style="float:left">
-	<a ng-click="commons.toggleMenu()">
-		<i class="icon list layout right"></i>
-		<span class="text right" style="display:none;">Menu</span>
-	</a>
-</div>
-<div style="float:right;">
-	<h1 style="margin-bottom: 0px;margin-top: 0px;">{{commons.getTitle()}}</h1>
+<div class="section group">
+	<div class="col span_2_of_12">
+		<div class="ui black medium launch right attached button" style="">
+			<a ng-click="commons.toggleMenu()">
+				<i class="icon list layout right"></i>
+				<span class="text right" style="display:none;">Menu</span>
+			</a>
+		</div>  
+	</div>  
+
+	<div class=" col span_7_of_12">  
+		<div class="ui grid right " style="">
+			<div class=" wide column">
+				<div class="ui segment">
+					<div class="ui large breadcrumb">
+						<a class="section">Home</a>
+						<i class="right chevron icon divider"></i>
+						<a class="section">Dashboard</a>
+						<i class="right chevron icon divider"></i>
+						<div class="active section">Summary</div>
+					</div>
+				</div>
+			</div>  
+		</div>
+	</div>
+
+	<div style="" class="col span_3_of_12">
+		<h1 style="float:right;margin-bottom: 0px;margin-top: 0px;">{{commons.getTitle()}}</h1>
+	</div>
 </div>
 <script>
-$(".launch.button").mouseenter(function(){
+	$(".launch.button").mouseenter(function(){
 	$(this).stop().animate({width: '100px'}, 300, 
-		function(){$(this).find('.text').show();});
+	function(){$(this).find('.text').show();});
 }).mouseleave(function (event){
-	$(this).find('.text').hide();
-	$(this).stop().animate({width: '70px'}, 300);
+$(this).find('.text').hide();
+$(this).stop().animate({width: '70px'}, 300);
 });
 // $(".ui.overlay.sidebar").sidebar({overlay: true})
 // .sidebar('attach events','.ui.launch.button');
 </script>
 
 
-<div class="ui page site section group" style="margin-top:6px">
+<div class="ui page site section group" style="margin-top:0px">
 	<div class="col span_2_of_12" ng-show="commons.getMenuShowStatus()">
 		<div class="ui vertical inverted  menu left uncover visible" id="toc">
 			<div class="item active">
@@ -157,10 +178,9 @@ $(".launch.button").mouseenter(function(){
 
 
 
-
 <style>
-/*  SECTIONS  */
-.section {
+	/*  SECTIONS  */
+	.section {
 	clear: both;
 	padding: 0px;
 	margin: 0px;
@@ -168,9 +188,9 @@ $(".launch.button").mouseenter(function(){
 
 /*  COLUMN SETUP  */
 .col {
-	display: block;
-	float:left;
-	margin: 1% 0 1% 1.6%;
+display: block;
+float:left;
+margin: 1% 0 1% 1.6%;
 }
 .col:first-child { margin-left: 0; }
 
@@ -181,59 +201,59 @@ $(".launch.button").mouseenter(function(){
 .group { zoom:1; /* For IE 6/7 */ }
 /*  GRID OF TWELVE  */
 .span_12_of_12 {
-	width: 100%;
+width: 100%;
 }
 
 .span_11_of_12 {
-	width: 91.53%;
+width: 91.53%;
 }
 .span_10_of_12 {
-	width: 83.06%;
+width: 83.06%;
 }
 
 .span_9_of_12 {
-	width: 74.6%;
+width: 74.6%;
 }
 
 .span_8_of_12 {
-	width: 66.13%;
+width: 66.13%;
 }
 
 .span_7_of_12 {
-	width: 57.66%;
+width: 57.66%;
 }
 
 .span_6_of_12 {
-	width: 49.2%;
+width: 49.2%;
 }
 
 .span_5_of_12 {
-	width: 40.73%;
+width: 40.73%;
 }
 
 .span_4_of_12 {
-	width: 32.26%;
+width: 32.26%;
 }
 
 .span_3_of_12 {
-	width: 23.8%;
+width: 23.8%;
 }
 
 .span_2_of_12 {
-	width: 15.33%;
+width: 15.33%;
 }
 
 .span_1_of_12 {
-	width: 6.866%;
+width: 6.866%;
 }
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */
 @media only screen and (max-width: 480px) {
-	.col {  margin: 1% 0 1% 0%; }
+.col {  margin: 1% 0 1% 0%; }
 
-	.span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
-		width: 100%; 
-	}
+.span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
+width: 100%; 
+}
 }
 </style>
 
