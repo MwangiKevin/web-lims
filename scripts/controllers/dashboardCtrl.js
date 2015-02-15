@@ -1,8 +1,9 @@
 app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Commons','$activityIndicator',function($scope,$timeout,ngProgress,Filters,Commons,$activityIndicator){
 
 	ngProgress.color('#FFD3D3');
+
 	ngProgress.start();
-	$timeout(ngProgress.complete(), 100000);
+	$activityIndicator.startAnimating();
 
 	$scope.showMe =3;
 	$scope.filters 	={};
@@ -12,11 +13,10 @@ app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Co
 		return Filters.programs.selected;
 	};
 
-	$activityIndicator.startAnimating();
 	$timeout(function () {
-		$activityIndicator.stopAnimating();
+		$activityIndicator.stopAnimating()
+		ngProgress.complete()
 	}, 300);
-
-	$scope.commons= Commons;
 	
+	$scope.commons= Commons;
 }])
