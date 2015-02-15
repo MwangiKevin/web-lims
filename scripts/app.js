@@ -1,5 +1,6 @@
 var app = angular
 .module('dashboard',[
+	'ngAnimate',
 	'ngRoute',
 	'ui.router',
 	'ngProgress',

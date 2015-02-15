@@ -33,6 +33,99 @@
 	<!-- Styles -->
 
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/semantic/dist/semantic.css');?>"> 
+
+</head>
+
+<body>
+
+	<div class="m-app-loading" ng-animate-children >
+
+		<!-- view-source:http://bennadel.github.io/JavaScript-Demos/demos/pre-bootstrap-loading-screen-angularjs/
+			HACKY CODE WARNING: I'm putting Style block inside directive so that it 
+			will be removed from the DOM when we remove the directive container.
+		-->
+		<style type="text/css">
+
+		div.m-app-loading {
+			position: fixed ;
+		}
+
+		div.m-app-loading div.animated-container {
+			background-color: #333333 ;
+			bottom: 0px ;
+			left: 0px ;
+			opacity: 1.0 ;
+			position: fixed ;
+			right: 0px ;
+			top: 0px ;
+			z-index: 9999990000000 ;
+		}
+
+		/* Used to initialize the ng-leave animation state. */
+		div.m-app-loading div.animated-container.ng-leave {
+			opacity: 1.0 ;
+			transition: all linear 200ms ;
+			-webkit-transition: all linear 200ms ;
+		}
+
+		/* Used to set the end properties of the ng-leave animation state. */
+		div.m-app-loading div.animated-container.ng-leave-active {
+			opacity: 0 ;
+		}
+
+		div.m-app-loading div.messaging {
+			color: #FFFFFF ;
+			font-family: monospace ;
+			left: 0px ;
+			margin-top: -37px ;
+			position: absolute ;
+			right: 0px ;
+			text-align: center ;
+			top: 50% ;
+		}
+
+		div.m-app-loading h1 {
+			font-size: 26px ;
+			line-height: 35px ;
+			margin: 0px 0px 20px 0px ;
+		}
+
+		div.m-app-loading p {
+			font-size: 18px ;
+			line-height: 14px ;
+			margin: 0px 0px 0px 0px ;
+		}
+
+		</style>
+		
+
+		<!-- BEGIN: Actual animated container. -->
+		<div class="animated-container">
+
+			<div class="messaging">
+
+				<h1>
+					Wait while <big>CD4 LIMS</big> app loads..
+				</h1>
+			</div>
+
+		</div>
+		<!-- END: Actual animated container. -->
+
+	</div>
+	<!-- END: App-Loading Screen. -->
+
+	<div class="" >
+		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar" ng-cloak=""></div>
+
+		<div ui-view="filter" class="ui column segment grid filter" ng-cloak=""></div>
+
+		<main ui-view="main" class="ui column  grid full" ng-cloak=""></main>
+
+	</div>
+	<div ui-view="footer"></div>
+
+
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngprogress/ngProgress.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/fontawesome/css/font-awesome.css');?>">
@@ -41,56 +134,51 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
 	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css');?>"> -->
 
-</head>
+	<!--JS libraries -->
+	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/semantic/dist/semantic.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular/angular.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-route/angular-route.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-ui-router/release/angular-ui-router.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ngprogress/build/ngprogress.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-sanitize/angular-sanitize.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-daterangepicker/js/angular-daterangepicker.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/Chart.js/Chart.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-chart.js/dist/angular-chart.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
 
-<body>
-	<div class="" >
-		<div ui-view="navbar" class="ui inverted fixed menu navbar page grid main-navbar"></div>
 
-		<div ui-view="filter" class="ui column segment grid filter"></div>
+	<!--app -->
+	<script src="<?php echo base_url('scripts/app.js');?>"></script>
 
-		<main ui-view="main" class="ui column  grid full"></main>
 
-	</div>
-	<div ui-view="footer"></div>
+	<!--Controllers -->
+	<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
+
+
+	<!--Factories, Services and providers -->
+
+	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
+
+	<!-- directives-->
+
+	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
+
+
+
 </body>
-
-<!--JS libraries -->
-<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/semantic/dist/semantic.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular/angular.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-route/angular-route.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-ui-router/release/angular-ui-router.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/ngprogress/build/ngprogress.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-sanitize/angular-sanitize.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-daterangepicker/js/angular-daterangepicker.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/Chart.js/Chart.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-chart.js/dist/angular-chart.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
-
-
-<!--app -->
-<script src="<?php echo base_url('scripts/app.js');?>"></script>
-
-<!--Controllers -->
-<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
-
-<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
-
-
-<!--Factories, Services and providers -->
-
-<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
-<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
-
 </html>
 
 <style>
