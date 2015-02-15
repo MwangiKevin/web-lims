@@ -1,10 +1,11 @@
 <a href="" class="brand item"><big>CD4 LIMS</big></a>
-<a href="" class="active item"><i class="fa fa-dashboard fa-sm icon"></i>Dashboard</a>
+<a href="" class="active item"><i class="fa fa-dashboard fa-sm icon blue"></i>Dashboard</a>
 <a href="" class="item"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>
-<a href="" class="item"><i class="fa fa-upload fa-sm icon"></i>Device Uploads</a>
-<a href="" class="item"><i class="fa fa-hospital-o fa-sm icon"></i>Facilities</a>
-<a href="" class="item"><i class="fa fa-medkit fa-sm icon"></i>CD4 Devices</a>
-<a href="" class="item"><i class="fa fa-file-o fa-sm icon"></i>Reports</a>
+<a href="" class="item"><i class="fa fa-upload fa-sm icon green"></i>Device Uploads</a>
+<a href="" class="item"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
+<a href="" class="item"><i class="fa fa-tint fa-sm icon red"></i>CD4 Tests</a>
+<a href="" class="item"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
+<a href="" class="item"><i class="fa fa-file-o fa-sm icon "></i>Reports</a>
 
 <div class="right menu">
   <a href="" class="active item"> 
