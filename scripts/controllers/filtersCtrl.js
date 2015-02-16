@@ -1,5 +1,7 @@
 app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$location,Filters){
 
+	$(".opensleft").hide();
+
 	Filters.entities= {};
 	Filters.dates= {}; 	
 	Filters.dates.start = ''
