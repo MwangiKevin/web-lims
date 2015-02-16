@@ -27,42 +27,65 @@ class filters extends MY_Controller {
 	}
 
 	public function entities(){
-		$entity_values = [];
-		$entities = $this->api_m->get_entities();
-		// print_r($entities);die;
-		$i = 0;
-		foreach ($entities as $key => $value) {
-			if($value['grp_type'] == 'region'){
-				$entity_values[$i]['name'] = $value['name'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type']; 
-			}else if($value['grp_type'] == 'district'){
-				$entity_values[$i]['name'] = $value['dis_name'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type'];	
-			}else if($value['grp_type'] == 'partner'){
-				$entity_values[$i]['name'] = $value['partner_name'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type'];
-			}else if($value['grp_type'] == 'lab'){
-				$entity_values[$i]['name'] = $value['name'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type'];
-			}else if($value['grp_type'] == 'facility'){
-				$entity_values[$i]['name'] = $value['facility_name'];
-				$entity_values[$i]['email'] = $value['facility_email'];
-				$entity_values[$i]['phone'] = $value['facility_phone'];
-				$entity_values[$i]['type'] = $value['grp_type'];
-			}
-			$i++;
-		}
-		print_r($entity_values);
+		// $entity_values = [];
+		// $entities = $this->api_m->get_entities();
+		// // print_r($entities);die;
+		// $i = 0;
+		// foreach ($entities as $key => $value) {
+		// 	if($value['grp_type'] == 'region'){
+		// 		$entity_values[$i]['name'] = $value['name'];
+		// 		$entity_values[$i]['email'] = 'null';
+		// 		$entity_values[$i]['phone'] = 'null';
+		// 		$entity_values[$i]['type'] = $value['grp_type']; 
+		// 	}else if($value['grp_type'] == 'district'){
+		// 		$entity_values[$i]['name'] = $value['dis_name'];
+		// 		$entity_values[$i]['email'] = 'null';
+		// 		$entity_values[$i]['phone'] = 'null';
+		// 		$entity_values[$i]['type'] = $value['grp_type'];	
+		// 	}else if($value['grp_type'] == 'partner'){
+		// 		$entity_values[$i]['name'] = $value['partner_name'];
+		// 		$entity_values[$i]['email'] = 'null';
+		// 		$entity_values[$i]['phone'] = 'null';
+		// 		$entity_values[$i]['type'] = $value['grp_type'];
+		// 	}else if($value['grp_type'] == 'lab'){
+		// 		$entity_values[$i]['name'] = $value['name'];
+		// 		$entity_values[$i]['email'] = 'null';
+		// 		$entity_values[$i]['phone'] = 'null';
+		// 		$entity_values[$i]['type'] = $value['grp_type'];
+		// 	}else if($value['grp_type'] == 'facility'){
+		// 		$entity_values[$i]['name'] = $value['facility_name'];
+		// 		$entity_values[$i]['email'] = $value['facility_email'];
+		// 		$entity_values[$i]['phone'] = $value['facility_phone'];
+		// 		$entity_values[$i]['type'] = $value['grp_type'];
+		// 	}
+		// 	$i++;
+		// }
+		// print_r($entity_values);
 	
-		return $entity_values;
+		// return $entity_values;
+
+			$entities = array(
+			array('name'=>'Ruvuma','phone'=>'1234567','type'=>'Regions'),
+			array('name'=>'CSSC','phone'=>'1234567','type'=>'Implementing Partner'),
+			array('name'=>'Iringa','phone'=>'1234567','type'=>'Regions'),
+			);
+
+
+		echo json_encode($entities,JSON_PRETTY_PRINT);
+		// echo "[{ 'name': 'Iringa',      						      					'phone':'1234567'		, 'type': 'Region' },
+		// { 'name': 'Ruvuma',    					'email': 'ruvuma@email.com',    'phone':'1234567'		, 'type': 'Region' },
+		// { 'name': 'CSSC', 						'email': 'cssc@email.com', 		'phone':'1234567'		, 'type': 'Implementing Partner' },
+		// { 'name': 'Walter Reed',				'email': 'adrian@email.com',    'phone':'1234567'		, 'type': 'Implementing Partner' },
+		// { 'name': 'Arumeru',  					'email': 'arumeru@email.com',  	'phone':'1234567'		, 'type': 'District' },
+		// { 'name': 'Kilolo',  					'email': 'Kilolo@email.com',  	'phone':'1234567'		, 'type': 'District' },
+		// { 'name': 'Idodo',  					'email': 'Idodo@email.com',  	'phone':'1234567'		, 'type': 'Facility' },
+		// { 'name': 'Mafinga',    				'email': 'Mafinga@email.com',   'phone':'1234567'		, 'type': 'District' },
+		// { 'name': 'Mbeya District Hospital',	'email': 'natasha@email.com',   'phone':'1234567'		, 'type': 'HPV Lab' },
+		// { 'name': 'Ruvuma Hospital',   			'email': 'natasha@email.com',   'phone':'1234567'		, 'type': 'HPV Lab' },
+		// { 'name': 'Mgololo',  					'email': 'Mgololo@email.com',  	'phone':'1234567'		, 'type': 'Facility' }
+		// ]
+		// ";
+		return $entities;
 	}	
 
 	public function programs(){
