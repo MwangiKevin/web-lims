@@ -16,6 +16,8 @@ $('#reportrange').daterangepicker(
 	format: 'YYYY-MM-DD',
 	startDate: '<?php echo date("Y");?>-1-1',
 	endDate: '<?php echo date("Y-m-d");?>',
+	maxDate:'<?php echo date("Y-m-d");?>',
+	minDate:'2011-1-1',
 	showWeekNumbers:true,
 	showDropdowns:true
 },
