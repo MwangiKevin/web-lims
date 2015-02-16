@@ -3,55 +3,82 @@
 		<div class="ui cards">
 			<div class="card">
 				<div class="content">
-					<div class="header">Elliot Fu</div>
+					<i class="right floated star icon yellow"></i>
+					<div class="header">CD4 Tests</div>
 					<div class="description">
-						Elliot Fu is a film-maker from New York.
+						
+					</div>
+					<div class="description">
+						
 					</div>
 				</div>
-				<div class="ui bottom attached button blue">
-					<i class="add icon"></i>
-					Add Friend
+				<div class="ui bottom attached button red">
+					<i class="fa fa-line-chart " style=""></i>
+					  Go to Analytics
 				</div>
 			</div>
 			<div class="card">
 				<div class="content">
-					<div class="header">Veronika Ossi</div>
+					<i class="right floated star icon yellow"></i>
+					<div class="header">Facilities</div>
 					<div class="description">
-						Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.
+						
+					</div>
+					<div class="description">
+						
 					</div>
 				</div>
 				<div class="ui bottom attached button yellow">
-					<i class="add icon"></i>
-					Add Friend
+					<i class="fa fa-line-chart " style=""></i>
+					Go to Analytics
 				</div>
 			</div>
 			<div class="card">
 				<div class="content">
-					<div class="header">Jenny Hess</div>
+					<i class="right floated star icon yellow"></i>
+					<div class="header">CD4 Device Uploads</div>
 					<div class="description">
-						Jenny is a student studying Media Management at the New School
+						
+					</div>
+					<div class="description">
+						
 					</div>
 				</div>
 				<div class="ui bottom attached button green">
-					<i class="add icon"></i>
-					Add Friend
+					<i class="fa fa-line-chart " style=""></i>
+					Go to Analytics
 				</div>
 			</div>
-			<div class="ui card">
+			<div class="card">
 				<div class="content">
-					<i class="right floated like icon yellow"></i>
-					<i class="right floated star icon pink"></i>
-					<div class="header">Cute Dog</div>
-					<div class="extra content">
-						<span class="like">
-							<i class="like icon red"></i>
-							Like
-						</span>
-						<span class="star">
-							<i class="star icon yellow"></i>
-							Favorite
-						</span>
+					<i class="right floated star icon yellow"></i>
+					<div class="header">FCDRR Reporting</div>
+					<div class="description">
+						
 					</div>
+					<div class="description">
+						
+					</div>
+				</div>
+				<div class="ui bottom attached button blue">
+					<i class="fa fa-line-chart " style=""></i>
+					  Go to Analytics
+				</div>
+			</div>
+			<div class="card">
+				<div class="content">
+					<i class="right floated star icon yellow"></i>
+					<div class="header">Device Distribution</div>
+					<div class="description">
+						
+					</div>
+					<div class="description">
+						
+					</div>
+				</div>
+				<div class="ui bottom attached button pink">
+					<i class="fa fa-line-chart " style=""></i>
+					  Go to Analytics
 				</div>
 			</div>
 		</div>
