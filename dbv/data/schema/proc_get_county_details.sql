@@ -1,6 +1,6 @@
-DROP PROCEDURE IF EXISTS `proc_get_region_details`;
+DROP PROCEDURE IF EXISTS `proc_get_county_details`;
 
-CREATE PROCEDURE  proc_get_region_details () 
+CREATE PROCEDURE  proc_get_county_details () 
 					BEGIN
 						SELECT 		
 							`cnt`.`id`					AS `region_id`,
