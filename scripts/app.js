@@ -30,7 +30,7 @@ var app = angular
 			},
 			'filter':{
 				templateUrl: 'dashboard/filter',
-				// controller: "filtersCtrl"
+				controller: "filtersCtrl"
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
@@ -83,7 +83,7 @@ var app = angular
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
-				controller: 'navbarCtrl'
+				// controller: 'navbarCtrl'
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',

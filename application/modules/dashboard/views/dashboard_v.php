@@ -195,6 +195,13 @@ $(".launch.button").mouseenter(function(){
 		width: 100%; 
 	}
 }
+
+.opensleft{
+	top: 123.5px; 
+	right: 209.875px; 
+	left: auto; 
+	display: none;
+}
 </style>
 
 
