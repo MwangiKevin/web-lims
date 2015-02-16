@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dashboard">
+<html ng-app="dashboard" style="width:100%">
 
 <head ui-view="head">    
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="ui grid" style="width:100%">
+<body class="" style="width:98%">
 
 	<div class="m-app-loading" ng-animate-children >
 
