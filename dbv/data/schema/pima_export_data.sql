@@ -1,0 +1,19 @@
+CREATE TABLE `pima_export_data` (
+  `test_id` int(11) NOT NULL,
+  `device_id` varchar(20) NOT NULL,
+  `assay_id` int(11) NOT NULL,
+  `assay_name` varchar(20) DEFAULT NULL,
+  `sample` varchar(255) DEFAULT NULL,
+  `cd3+cd4+value(cell/mm3)` int(11) DEFAULT NULL,
+  `error_message` varchar(255) DEFAULT NULL,
+  `operator` varchar(100) DEFAULT NULL,
+  `result_date` datetime DEFAULT NULL,
+  `barcode` varchar(255) DEFAULT NULL,
+  `expiry_date` varchar(100) DEFAULT NULL,
+  `volume` varchar(100) DEFAULT NULL,
+  `device` varchar(100) DEFAULT NULL,
+  `reagent` varchar(100) DEFAULT NULL,
+  `software_version` varchar(100) DEFAULT NULL,
+  `export_error_message` varchar(255) DEFAULT NULL,
+  UNIQUE KEY `test_id` (`test_id`,`device_id`,`result_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
