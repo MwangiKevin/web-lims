@@ -55,12 +55,12 @@
 	</div>
 </div>
 <script>
-	$(".launch.button").mouseenter(function(){
+$(".launch.button").mouseenter(function(){
 	$(this).stop().animate({width: '100px'}, 300, 
-	function(){$(this).find('.text').show();});
+		function(){$(this).find('.text').show();});
 }).mouseleave(function (event){
-$(this).find('.text').hide();
-$(this).stop().animate({width: '70px'}, 300);
+	$(this).find('.text').hide();
+	$(this).stop().animate({width: '70px'}, 300);
 });
 // $(".ui.overlay.sidebar").sidebar({overlay: true})
 // .sidebar('attach events','.ui.launch.button');
@@ -71,7 +71,7 @@ $(this).stop().animate({width: '70px'}, 300);
 	<div class="col span_2_of_12" ng-show="commons.getMenuShowStatus()">
 		<div class="ui vertical inverted  menu left uncover visible" id="toc">
 			<div class="item active">
-				<a href=""><b>Summary</b></a>
+				<a href="#summary"><b>Summary</b></a>
 			</div>
 			<a class="item" href="">
 				<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
@@ -112,75 +112,15 @@ $(this).stop().animate({width: '70px'}, 300);
 	</div>
 
 	<div class="" ng-class="commons.getDashboardAreaClass()">
-		<div class="ui grid">
-			<div class="sixteen wide column">
-				<div class="ui segment">
-					<div class="ui cards">
-						<div class="card">
-							<div class="content">
-								<div class="header">Elliot Fu</div>
-								<div class="description">
-									Elliot Fu is a film-maker from New York.
-								</div>
-							</div>
-							<div class="ui bottom attached button blue">
-								<i class="add icon"></i>
-								Add Friend
-							</div>
-						</div>
-						<div class="card">
-							<div class="content">
-								<div class="header">Veronika Ossi</div>
-								<div class="description">
-									Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.
-								</div>
-							</div>
-							<div class="ui bottom attached button yellow">
-								<i class="add icon"></i>
-								Add Friend
-							</div>
-						</div>
-						<div class="card">
-							<div class="content">
-								<div class="header">Jenny Hess</div>
-								<div class="description">
-									Jenny is a student studying Media Management at the New School
-								</div>
-							</div>
-							<div class="ui bottom attached button green">
-								<i class="add icon"></i>
-								Add Friend
-							</div>
-						</div>
-						<div class="ui card">
-							<div class="content">
-								<i class="right floated like icon yellow"></i>
-								<i class="right floated star icon pink"></i>
-								<div class="header">Cute Dog</div>
-								<div class="extra content">
-									<span class="like">
-										<i class="like icon red"></i>
-										Like
-									</span>
-									<span class="star">
-										<i class="star icon yellow"></i>
-										Favorite
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div ui-view class="ui grid"></div>
 	</div>
 </div>
 
 
 
 <style>
-	/*  SECTIONS  */
-	.section {
+/*  SECTIONS  */
+.section {
 	clear: both;
 	padding: 0px;
 	margin: 0px;
@@ -188,9 +128,9 @@ $(this).stop().animate({width: '70px'}, 300);
 
 /*  COLUMN SETUP  */
 .col {
-display: block;
-float:left;
-margin: 1% 0 1% 1.6%;
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
 }
 .col:first-child { margin-left: 0; }
 
@@ -201,59 +141,66 @@ margin: 1% 0 1% 1.6%;
 .group { zoom:1; /* For IE 6/7 */ }
 /*  GRID OF TWELVE  */
 .span_12_of_12 {
-width: 100%;
+	width: 100%;
 }
 
 .span_11_of_12 {
-width: 91.53%;
+	width: 91.53%;
 }
 .span_10_of_12 {
-width: 83.06%;
+	width: 83.06%;
 }
 
 .span_9_of_12 {
-width: 74.6%;
+	width: 74.6%;
 }
 
 .span_8_of_12 {
-width: 66.13%;
+	width: 66.13%;
 }
 
 .span_7_of_12 {
-width: 57.66%;
+	width: 57.66%;
 }
 
 .span_6_of_12 {
-width: 49.2%;
+	width: 49.2%;
 }
 
 .span_5_of_12 {
-width: 40.73%;
+	width: 40.73%;
 }
 
 .span_4_of_12 {
-width: 32.26%;
+	width: 32.26%;
 }
 
 .span_3_of_12 {
-width: 23.8%;
+	width: 23.8%;
 }
 
 .span_2_of_12 {
-width: 15.33%;
+	width: 15.33%;
 }
 
 .span_1_of_12 {
-width: 6.866%;
+	width: 6.866%;
 }
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */
 @media only screen and (max-width: 480px) {
-.col {  margin: 1% 0 1% 0%; }
+	.col {  margin: 1% 0 1% 0%; }
 
-.span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
-width: 100%; 
+	.span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
+		width: 100%; 
+	}
 }
+
+.opensleft{
+	top: 123.5px; 
+	right: 209.875px; 
+	left: auto; 
+	display: none;
 }
 </style>
 
