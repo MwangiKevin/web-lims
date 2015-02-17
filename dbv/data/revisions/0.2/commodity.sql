@@ -11,39 +11,6 @@
 -- first version of commodity 0.2
 -- has a status field
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `web-lims`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `commodity`
---
-
-CREATE TABLE IF NOT EXISTS `commodity` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(15) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `unit` varchar(20) NOT NULL,
-  `category_id` int(11) NOT NULL COMMENT 'FK to commdity_category',
-  `status` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
-
---
--- Dumping data for table `commodity`
---
-
 INSERT INTO `commodity` (`id`, `code`, `name`, `unit`, `category_id`, `status`) VALUES
 (1, 'CAL 002', 'Tri-TEST CD3/CD4/CD45 with TruCOUNT Tubes', 'Tests', 1, 1),
 (2, 'CAL 006', 'Falcon Tubes', 'Pieces', 1, 1),
