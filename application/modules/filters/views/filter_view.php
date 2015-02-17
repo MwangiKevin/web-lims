@@ -1,19 +1,4 @@
-<!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
-<div class="ui black medium launch right attached button" ng-click="alert()">
-	<i class="icon list layout"></i>
-	<span class="text" style="display:none;">Menu</span>
-</div>
-<script>
-$(".launch.button").mouseenter(function(){
-	$(this).stop().animate({width: '100px'}, 300, 
-		function(){$(this).find('.text').show();});
-}).mouseleave(function (event){
-	$(this).find('.text').hide();
-	$(this).stop().animate({width: '70px'}, 300);
-});
-// $(".ui.overlay.sidebar").sidebar({overlay: true})
-// .sidebar('attach events','.ui.launch.button');
-</script>
+
 
 <script type="text/javascript">
 $('#reportrange').daterangepicker(
@@ -46,7 +31,7 @@ function(start, end) {
 $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 })
 </script>
-<div class="ui right aligned grid" style="padding-left: 100px;">
+<div class="ui right aligned grid" >
 	<div class="right floated right aligned six wide column">
 		<div class="blue ui buttons">
 			<div id="reportrange" class="ui button pull-right filterButton" style="">

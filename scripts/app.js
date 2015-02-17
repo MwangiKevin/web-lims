@@ -1,5 +1,6 @@
 var app = angular
 .module('dashboard',[
+	'ngAnimate',
 	'ngRoute',
 	'ui.router',
 	'ngProgress',
@@ -7,7 +8,8 @@ var app = angular
 	'ui.select',
 	'daterangepicker',
 	'chart.js',
-	'highcharts-ng'
+	'highcharts-ng',
+	'ngActivityIndicator'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -19,8 +21,8 @@ var app = angular
 		abstract: true,
 		views:{
 			'main':{
-				// templateUrl: 'dashboard/dashboard_view',
-				// controller:'dashboardCtrl'
+				 templateUrl: 'dashboard/dashboard_view',
+				 controller:'dashboardCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
