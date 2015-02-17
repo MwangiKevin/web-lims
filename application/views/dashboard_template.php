@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dashboard">
+<html ng-app="dashboard" style="width:100%">
 
 <head ui-view="head">    
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="ui grid" style="width:100%">
+<body class="" style="width:98%">
 
 	<div class="m-app-loading" ng-animate-children >
 
@@ -133,7 +133,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/selectize/dist/css/selectize.bootstrap3.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
-	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css');?>"> -->
+	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/css/bootstrap.css');?>"> 
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>

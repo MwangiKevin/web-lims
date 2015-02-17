@@ -5,11 +5,12 @@ CREATE PROCEDURE  proc_get_county_details ()
 						SELECT 		
 							`cnt`.`id`					AS `region_id`,
 							`cnt`.`name`				AS `region_name`,
+                        
 							`par_cnt`.`partner_id`,
 							`par`.`name`				AS `partner_name`,
 							`par`.`email`				AS `partner_email`,
 							`par`.`phone`				AS `partner_phone`
-
+                            `type`
 
 						FROM `county` `cnt`
 							LEFT OUTER JOIN `partner_counties` `par_cnt`

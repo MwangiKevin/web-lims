@@ -16,6 +16,8 @@ $('#reportrange').daterangepicker(
 	format: 'YYYY-MM-DD',
 	startDate: '<?php echo date("Y");?>-1-1',
 	endDate: '<?php echo date("Y-m-d");?>',
+	maxDate:'<?php echo date("Y-m-d");?>',
+	minDate:'2011-1-1',
 	showWeekNumbers:true,
 	showDropdowns:true
 },
@@ -44,19 +46,19 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 	<div class="left floated right aligned six wide column">
 		<ui-select ng-model="filters.entities.selected" theme="selectize" ng-disabled="disabled" style="min-width: 300px;">
 		<ui-select-match placeholder="Search Criteria to Filter by...">{{$select.selected.name +" ("+ $select.selected.type +")"  }}</ui-select-match>
-			<ui-select-choices group-by="'type'" repeat="entity in filters.entities | entityFilter: {name: $select.search, type: $select.search}">
-			<div ng-bind-html="entity.name | highlight: $select.search"></div>
-			<small>
-				email: {{entity.email}}
-				phone: <span ng-bind-html="''+entity.phone | highlight: $select.search"></span>
-			</small>
-			</ui-select-choices>
-		</ui-select>
-	</div>
+		<ui-select-choices group-by="'type'" repeat="entity in filters.entities | entityFilter: {name: $select.search, type: $select.search}">
+		<div ng-bind-html="entity.name | highlight: $select.search"></div>
+		<small>
+			email: {{entity.email}}
+			phone: <span ng-bind-html="''+entity.phone | highlight: $select.search"></span>
+		</small>
+	</ui-select-choices>
+</ui-select>
+</div>
 
-	<div class="left floated left aligned two wide column">
-		 <div class="ui button blue">Reset</div>
-	</div>
+<div class="left floated left aligned two wide column">
+	<div class="ui button blue">Reset</div>
+</div>
 
 
 </div>
@@ -68,5 +70,4 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 	left: auto; 
 	display: none;
 }
-
 </style>

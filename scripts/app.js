@@ -30,7 +30,7 @@ var app = angular
 			},
 			'filter':{
 				templateUrl: 'dashboard/filter',
-				// controller: "filtersCtrl"
+				controller: "filtersCtrl"
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
@@ -45,8 +45,15 @@ var app = angular
 	//common routes
 	.state('Dashboard.main',{
 		url: '',
-		templateUrl: 'dashboard/dashboard_item',
-		// controller:'dashboardTestTrendsCtrl'		
+		templateUrl: 'dashboard/dashboard_summary',
+		// controller:'dashboardSummaryCtrl'		
+	})
+
+
+	.state('Dashboard.summary',{
+		url: 'summary',
+		templateUrl: 'dashboard/dashboard_summary',
+		// controller:'dashboardSummaryCtrl'		
 	})
 	
 	.state('facilities',{
@@ -60,16 +67,99 @@ var app = angular
 				templateUrl: 'dashboard/navbar',
 				controller: 'navbarCtrl'
 			},
-			'head':{
-				templateUrl: 'dashboard/head_template',
+			'footer':{
+				templateUrl: 'dashboard/footer',
 				controller: ['$scope', function($scope){
-					$scope.title= "EID/Viral Load Dashboard"
 				}]
+			}
+		}
+	})
+	.state('fillFCDRR',{
+		url: '/fillFCDRR',
+		views:{
+			'main':{
+				templateUrl: 'fcdrr/fillFCDRR_view',
+				// controller: ngProgress_Test
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				// controller: 'navbarCtrl'
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
 				controller: ['$scope', function($scope){
-					$scope.title= "EID/Viral Load Dashboard"
+				}]
+			}
+		}
+	})
+	.state('CD4DeviceUploads',{
+		url: '/CD4DeviceUploads',
+		views:{
+			'main':{
+				templateUrl: 'devices/CD4DeviceUploads_view',
+				// controller: ngProgress_Test
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
+	.state('CD4Tests',{
+		url: '/CD4Tests',
+		views:{
+			'main':{
+				templateUrl: 'tests/CD4Tests_view',
+				// controller: ngProgress_Test
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
+	.state('CD4Devices',{
+		url: '/CD4Devices',
+		views:{
+			'main':{
+				templateUrl: 'devices/CD4Devices_view',
+				// controller: ngProgress_Test
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
+	.state('Reports',{
+		url: '/Reports',
+		views:{
+			'main':{
+				templateUrl: 'reports/Reports_view',
+				// controller: ngProgress_Test
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
 				}]
 			}
 		}

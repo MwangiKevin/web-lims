@@ -27,4 +27,8 @@ class fcdrr extends MY_Controller {
 
 		$this->load->template($this->view_data);
 	}
+
+	public function fillFCDRR_view(){
+		echo "<h1>This is the fcdrr page<h1/>";
+	}
 }
