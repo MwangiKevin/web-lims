@@ -12,32 +12,18 @@ class api extends MY_Controller {
 
 	public function index() {
 		if($this->login_status){
-				$this->load->view('dashboard_template');
+			$this->load->view('dashboard_template');
 		}
 	}
 
 // new functions that fetch the data to display in the combo box
 
-public function regions(){
+	public function regions(){
 		$result = $this->api_m->get_region_details();
 		$result = json_encode($result);
 		print_r($result);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	public function regions(){
 		$result = $this->api_m->get_region_details();
 		$result = json_encode($result);

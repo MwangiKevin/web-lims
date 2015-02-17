@@ -38,19 +38,19 @@ class api_m extends MY_Model{
 
 		$sub_county_result = $this->get_sub_county_details();
 		foreach ($sub_county_result as $key => $value) {
-			$value['grp_type'] = 'Sub Counties';
+			$value['grp_type'] = 'Sub-Counties';
 			array_push($result,$value);
 		}
 
 		$partner_result = $this->get_partner_details();
 		foreach($partner_result as $key => $value3){
-			$value3['grp_type'] = 'Partner Details';
+			$value3['grp_type'] = 'Implementing Partners';
 			array_push($result,$value3);	
 		}
 		
 		$facility_result = $this->get_facility_details();
 		foreach($facility_result as $key => $value4){
-			$value4['grp_type'] = 'Facility Details';
+			$value4['grp_type'] = 'Facilities';
 			array_push($result,$value4);	
 		}
 		return $result;
