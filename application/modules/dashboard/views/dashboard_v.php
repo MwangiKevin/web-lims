@@ -70,40 +70,40 @@ $(".launch.button").mouseenter(function(){
 <div class="ui page site section group" style="margin-top:0px">
 	<div class="col span_2_of_12" ng-show="commons.getMenuShowStatus()">
 		<div class="ui vertical inverted  menu left uncover visible" id="toc">
-			<div class="item active">
-				<a href="#summary"><b>Summary</b></a>
-			</div>
-			<a class="item" href="">
+			<a class="item" ng-class="getActiveSubmenuLV1('summary')" href="#summary">
+				<b>Summary</b>
+			</a>
+			<a class="item" href="" ng-class="getActiveSubmenuLV1('testingTrends')">
 				<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
 			</a>
-			<a class="item" href="">
+			<a class="item" href="" ng-class="getActiveSubmenuLV1('deviceDistribution')">
 				<b>Device Distribution</b><i class="fa fa-medkit " style="float:right"></i>
 			</a>
-			<a class="item" href="">
+			<a class="item" href="" ng-class="getActiveSubmenuLV1('map')">
 				<i class="map icon"></i> <b>Map</b>
 			</a>
-			<a class="item" href="/kitchen-sink.html">
+			<a class="item" href="" ng-class="getActiveSubmenuLV1('fcdrrReporting')">
 				<b>FDRR Reporting </b><i class="fa fa-bar-chart " style="float:right"></i>
 			</a>
 
-			<div class="item">
+			<div class="item" ng-class="getActiveSubmenuLV1('pocCD4')">
 				<div class="ui small active  inverted header">POC CD4</div>
 				<div class="menu">
-					<a class="item" href="">
+					<a class="item" href="" ng-class="getActiveSubmenuLV2('pocReportingRates')">
 						Device reporting rates
 					</a>
-					<a class="item" href="">
+					<a class="item" href="" ng-class="getActiveSubmenuLV2('pocSuppression')">
 						CD4 Suppression Level
 					</a>
 				</div>
 			</div>
-			<div class="item">
+			<div class="item" ng-class="getActiveSubmenuLV1('conventionalCD4')">
 				<div class="ui small active  inverted header">Conventional CD4</div>
 				<div class="menu">
-					<a class="item" href="">
+					<a class="item" href="" ng-class="getActiveSubmenuLV2('convReportingRates')">
 						Device reporting rates
 					</a>
-					<a class="item" href="">
+					<a class="item" href="" ng-class="getActiveSubmenuLV2('convSuppression')">
 						CD4 Suppression Level
 					</a>
 				</div>

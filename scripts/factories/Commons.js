@@ -1,22 +1,44 @@
 app.factory('Commons', ['$location',function($location){
 	var Commons={};
+	var activeMenu = "";
+	var activeSubmenuLV1 = "";
+	var activeSubmenuLV2 = "";
 	Commons.showMenu = true;
 	Commons.dashboardAreaClass = 'col span_10_of_12';
-	Commons.title = 'Summary';
+	Commons.title = '';
 
-	Commons.getActiveMenu = function (path) {
+	Commons.getActiveMenu = function (name) {
+		// console.log(name)
+		if(name == Commons.activeMenu){
+			return "active"
+		}else{
+			return ""
+		}
 
 	};
-	Commons.getActiveSubmenu = function (path) {
+	Commons.getActiveSubmenuLV1 = function (name) {
+		if(name == Commons.activeSubmenuLV1){
+			return "active"
+		}else{
+			return ""
+		}
 
 	};
-	Commons.getTitle = function (path) {
+	Commons.getActiveSubmenuLV2 = function (name) {
+		if(name == Commons.activeSubmenuLV2){
+			return "active"
+		}else{
+			return ""
+		}
+
+	};
+	Commons.getTitle = function () {
 		return Commons.title
 	};
-	Commons.getMenuShowStatus = function (path) {
+	Commons.getMenuShowStatus = function () {
 		return Commons.showMenu
 	};
-	Commons.getDashboardAreaClass = function (path) {
+	Commons.getDashboardAreaClass = function () {
 		return Commons.dashboardAreaClass
 	};
 	Commons.toggleMenu = function () {

@@ -1,5 +1,13 @@
 app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Commons','$activityIndicator',function($scope,$timeout,ngProgress,Filters,Commons,$activityIndicator){
 
+
+	Commons.activeMenu = "dashboard";
+	
+	$scope.getActiveSubmenuLV1 = Commons.getActiveSubmenuLV1;
+	$scope.getActiveSubmenuLV2 = Commons.getActiveSubmenuLV2;
+
+
+
 	ngProgress.color('#FFD3D3');
 	$activityIndicator.startAnimating();
 

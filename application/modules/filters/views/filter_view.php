@@ -57,7 +57,7 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 </div>
 
 <div class="left floated left aligned two wide column">
-	<div class="ui button blue">Reset</div>
+	<div class="ui button blue"><i class="fa fa-undo fa-sm"></i> Reset</div>
 </div>
 
 

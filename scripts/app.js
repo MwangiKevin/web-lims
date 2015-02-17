@@ -26,7 +26,7 @@ var app = angular
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
-				// controller: 'navbarCtrl'
+				controller: 'navbarCtrl'
 			},
 			'filter':{
 				templateUrl: 'dashboard/filter',
@@ -46,14 +46,14 @@ var app = angular
 	.state('Dashboard.main',{
 		url: '',
 		templateUrl: 'dashboard/dashboard_summary',
-		// controller:'dashboardSummaryCtrl'		
+		controller:'dashboardSummaryCtrl'		
 	})
 
 
 	.state('Dashboard.summary',{
 		url: 'summary',
 		templateUrl: 'dashboard/dashboard_summary',
-		// controller:'dashboardSummaryCtrl'		
+		controller:'dashboardSummaryCtrl'		
 	})
 	
 	.state('facilities',{
