@@ -1,6 +1,6 @@
 DROP PROCEDURE IF EXISTS `proc_get_sub_county_details`;
 
-CREATE PROCEDURE  proc_get_sub_county_details () 
+CREATE DEFINER=`root`@`localhost` PROCEDURE  proc_get_sub_county_details () 
 					BEGIN
 						SELECT 
 
