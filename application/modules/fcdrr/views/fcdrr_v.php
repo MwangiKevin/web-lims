@@ -101,12 +101,12 @@
 					<th>Negative</th>    
 				</tr>
 			</thead>
-			<tbody>
-				<tr ng-repeat="user in users"><td rowspan="1" colspan="10" style="background:#eeeeee;">{{user.category_name}}</td></tr>	
+			<tbody ng-repeat="user in users">
+				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{user.category_name}}</td></tr>	
 				
 				<tr ng-repeat="suboption in user.commodities">
 					<td>{{suboption.name}}</td>
-					<td>q</td>
+					<td>{{suboption.unit}}</td>
 					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
