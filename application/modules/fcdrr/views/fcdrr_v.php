@@ -101,12 +101,13 @@
 					<th style="width:30em" >Negative</th>    
 				</tr>
 			</thead>
-			<tbody ng-repeat="user in users">
+
+			<tbody ng-repeat="commodity in the_commodities">
 				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{user.category_name}}</td></tr>	
 				
-				<tr ng-repeat="suboption in user.commodities">
-					<td style="width:50em">{{suboption.name}}</td>
-					<td style="width:10em">{{suboption.unit}}</td>
+				<tr ng-repeat="comod_cat in commodity.commodities">
+					<td style="width:50em">{{comod_cat.name}}</td>
+					<td style="width:10em">{{comod_cat.unit}}</td>
 					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td style="width:50em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
@@ -115,6 +116,7 @@
 					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" value="" required readonly/></div></td>
 					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></td>
+
 				</tr>
 			</tbody>
 		</table>
@@ -158,7 +160,7 @@ $(window).scroll(function(){
 .fixed {
     position: fixed;
     top:0; 
-    margin-top:40px; 
+    margin-top:45px; 
     left:0;
     width: 100%; }
 </style>
