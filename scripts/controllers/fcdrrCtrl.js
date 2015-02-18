@@ -3,8 +3,8 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 	
 	Commons.activeMenu = "fcdrr";
 
-	$scope.users = [];
-	$http.get('fcdrr/get_commodities').success(function($data){ $scope.users=$data; });
+	$scope.the_commodities = [];
+	$http.get('fcdrr/get_commodities_and_categories').success(function($data){ $scope.the_commodities=$data; });
 
 
 }])
