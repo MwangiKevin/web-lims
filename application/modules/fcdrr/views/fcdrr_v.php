@@ -12,7 +12,7 @@
 		<hr />
 		<div class="ui stackable grid">
 			<div class="three wide column">REPORT OF THE PERIOD</div>
-			<div class="four wide column">
+			<div class="three wide column">
 				<select  class="ui dropdown" name="report_year" onchange="" required>
 					<option value="">* Select Year *</option>
 					<option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>                 					
