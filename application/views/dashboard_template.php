@@ -133,7 +133,9 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/selectize/dist/css/selectize.bootstrap3.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
-	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/css/bootstrap.css');?>"> 
+	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/css/bootstrap.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
+
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
@@ -156,6 +158,7 @@
 	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 
 
 	<!--app -->
@@ -164,6 +167,7 @@
 
 	<!--Controllers -->
 	<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 
