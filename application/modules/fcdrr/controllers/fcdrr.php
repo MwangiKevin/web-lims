@@ -29,11 +29,14 @@ class fcdrr extends MY_Controller {
 	}
 	public function get_commodities(){
 
-		$data['facs_calibur']=$this->fcdrr_model->get_facs_calibur_commodities();
+		//$data['facs_calibur']=$this->fcdrr_model->get_facs_calibur_commodities();
+		$data=$this->fcdrr_model->get_categories();
 		// $data['facs_count']=$this->fcdrr_model->get_facs_count_commodities();
 		// $data['cyflow_partec']=$this->fcdrr_model->get_cyflow_commodities();
 		// $data['poc_commodities']=$this->fcdrr_model->get_poc_commodities();
-
-		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";die;
+		$this->output->set_content_type('application/json')->set_output(json_encode($data,JSON_PRETTY_PRINT));
 	}
 }

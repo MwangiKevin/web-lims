@@ -71,7 +71,7 @@
 					<div class="ui label">
 						Alere PIMA:
 					</div>
-					<input placeholder="Paed Tests" type="text" />
+					<input placeholder="" type="text" />
 				</div>
 			</div>
 		</div>
@@ -102,10 +102,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr><td rowspan="1" colspan="10" style="background:#eeeeee;">FACS Calibur reagents and consumables</td></tr>	
-				<tr ng-repeat="user in users.facs_calibur">
-					<td>{{user.name}}</td>
-					<td>{{user.unit}}</td>
+				<tr ng-repeat="user in users"><td rowspan="1" colspan="10" style="background:#eeeeee;">{{user.category_name}}</td></tr>	
+				
+				<tr ng-repeat="suboption in user.commodities">
+					<td>{{suboption.name}}</td>
+					<td>q</td>
 					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
