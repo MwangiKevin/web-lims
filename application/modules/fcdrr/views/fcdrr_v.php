@@ -1,6 +1,6 @@
 
-<div ui-view="filter" class="ui column segment grid" style="background-color:#CCC8C8;">
-<h2>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</h2>
+<div ui-view="filter" class="ui column segment grid" style="">
+<h3>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</h3>
 	<?php
 		//echo form_open('fcdrr/submit',"id='commodity' onsubmit='return doOnSubmit()' ");
 	?>

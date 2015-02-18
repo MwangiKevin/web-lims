@@ -69,7 +69,7 @@ $(".launch.button").mouseenter(function(){
 
 <div class="ui page site section group" style="margin-top:0px">
 	<div class="col span_2_of_12" ng-show="commons.getMenuShowStatus()">
-		<div class="ui vertical inverted  menu left uncover visible" id="toc">
+		<div class="ui vertical inverted  menu pointing left uncover visible" id="toc">
 			<a class="item" ng-class="getActiveSubmenuLV1('summary')" href="#summary">
 				<b>Summary</b>
 			</a>
@@ -115,8 +115,6 @@ $(".launch.button").mouseenter(function(){
 		<div ui-view class="ui grid"></div>
 	</div>
 </div>
-
-
 
 <style>
 /*  SECTIONS  */

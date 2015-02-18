@@ -1,5 +1,5 @@
 
-<a href="" class="item">
+<a href="" class="item down">
   <div ng-activity-indicator="CircledWhite"></div>
 </a>
 <a href="#dashboard" class="brand item"><big>CD4 LIMS</big></a>

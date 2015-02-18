@@ -83,7 +83,7 @@ var app = angular
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
-				// controller: 'navbarCtrl'
+				controller: 'navbarCtrl'
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',

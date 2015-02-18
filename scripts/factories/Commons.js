@@ -10,7 +10,7 @@ app.factory('Commons', ['$location',function($location){
 	Commons.getActiveMenu = function (name) {
 		// console.log(name)
 		if(name == Commons.activeMenu){
-			return "active"
+			return "active shadowed"
 		}else{
 			return ""
 		}
@@ -18,7 +18,7 @@ app.factory('Commons', ['$location',function($location){
 	};
 	Commons.getActiveSubmenuLV1 = function (name) {
 		if(name == Commons.activeSubmenuLV1){
-			return "active"
+			return "active shadowed"
 		}else{
 			return ""
 		}
@@ -26,7 +26,7 @@ app.factory('Commons', ['$location',function($location){
 	};
 	Commons.getActiveSubmenuLV2 = function (name) {
 		if(name == Commons.activeSubmenuLV2){
-			return "active"
+			return "active shadowed"
 		}else{
 			return ""
 		}

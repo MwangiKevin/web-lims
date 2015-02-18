@@ -117,7 +117,7 @@
 	<!-- END: App-Loading Screen. -->
 
 	<div class="" >
-		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar" ng-cloak=""></div>
+		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar pointing" ng-cloak=""></div>
 
 		<div ui-view="filter" class="ui column segment grid filter" ng-cloak=""></div>
 
@@ -197,5 +197,14 @@
 .filter{
 	/*padding-bottom: 200px;*/
 }
+
+
+.ui.menu.vertical  .active.item.shadowed{
+	box-shadow: 2px 0em 0em inset !important;
+}
+.ui.menu  .active.item.shadowed{
+	box-shadow:  0em 2px 0em inset !important;
+}
+
 </style>
 

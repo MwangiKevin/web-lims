@@ -70,4 +70,10 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 	left: auto; 
 	display: none;
 }
+.optgroup-header {
+	font-size: 20px !important;
+	line-height: 1.42857143 !important; 
+	color: #000000 !important; 
+	background: #D4DDB8 !important;
+}
 </style>
