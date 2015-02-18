@@ -74,12 +74,12 @@ var app = angular
 			}
 		}
 	})
-	.state('fillFCDRR',{
+	.state('fillFCDRR',{ /* fcdrr page loaded here */
 		url: '/fillFCDRR',
 		views:{
 			'main':{
 				templateUrl: 'fcdrr/fillFCDRR_view',
-				// controller: ngProgress_Test
+				 controller: 'fcdrrCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
