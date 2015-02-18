@@ -1,5 +1,5 @@
 <div style="margin-left:10px">
-	<div ui-view="filter" class="ui column segment grid" style="">
+	<div ui-view="filter" class="ui column segment grid" id="viewport">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
 		<div class="ui horizontal divider">Start</div>
 		<div class="ui stackable grid">
@@ -83,38 +83,38 @@
 			</div>
 		</div>
 		<hr />
-		<table  class="ui celled striped structured table">
-			<thead>
-				<tr>
-					<th rowspan="2">Commodity</th>
-					<th rowspan="2">Unit</th>
-					<th rowspan="2">Beginning Balance</th>
-					<th rowspan="2">Quantity Received <br/>From Warehouse(e.g Kemsa)</th>
-					<th rowspan="2"><center>Quantity Used</center></th>
-					<th rowspan="2"><center>Losses / Wastages &nbsp;</center></th>
-					<th colspan="2">Adjustments<br/><i>Indicate if (+) or (-)</i></th>
-					<th rowspan="2"><center>End Of Month<br/>Physical Count</center></th>
-					<th rowspan="2"><center>Quantity<br />Requested</center></th>
+		<table  class="ui celled striped structured table" >
+			<thead class="ui sticky" >
+				<tr style="width:98%">
+					<th  style="width:90em" rowspan="2">Commodity</th>
+					<th  style="width:10em" rowspan="2">Unit</th>
+					<th  style="width:30em" rowspan="2">Beginning Balance</th>
+					<th  style="width:30em" rowspan="2">Quantity Received <br/>From Warehouse(e.g Kemsa)</th>
+					<th  style="width:30em" rowspan="2"><center>Quantity Used</center></th>
+					<th  style="width:30em" rowspan="2"><center>Losses / Wastages &nbsp;</center></th>
+					<th   colspan="2">Adjustments<br/><i>Indicate if (+) or (-)</i></th>
+					<th  style="width:30em" rowspan="2"><center>End Of Month<br/>Physical Count</center></th>
+					<th  style="width:30em" rowspan="2"><center>Quantity<br />Requested</center></th>
 				</tr>
 				<tr>
-					<th>Positive</th>
-					<th>Negative</th>    
+					<th style="width:30em" >Positive</th>
+					<th style="width:30em" >Negative</th>    
 				</tr>
 			</thead>
 			<tbody ng-repeat="user in users">
 				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{user.category_name}}</td></tr>	
 				
 				<tr ng-repeat="suboption in user.commodities">
-					<td>{{suboption.name}}</td>
-					<td>{{suboption.unit}}</td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" value="" required readonly/></div></td>
-					<td><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></td>
+					<td style="width:50em">{{suboption.name}}</td>
+					<td style="width:10em">{{suboption.unit}}</td>
+					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
+					<td style="width:50em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
+					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
+					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
+					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
+					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
+					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" value="" required readonly/></div></td>
+					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></td>
 				</tr>
 			</tbody>
 		</table>
@@ -145,4 +145,21 @@
 		</div>
 	</div>
 </div>
+<script>
+$(window).scroll(function(){
+	var sticky = $('.sticky'),
+	scroll = $(window).scrollTop();
+	console.log(scroll);
+	if (scroll >= 314) sticky.addClass('fixed');
+	else sticky.removeClass('fixed');
+});
+</script>
+<style>
+.fixed {
+    position: fixed;
+    top:0; 
+    margin-top:40px; 
+    left:0;
+    width: 100%; }
+</style>
 
