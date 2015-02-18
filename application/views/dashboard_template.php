@@ -205,6 +205,9 @@
 .ui.menu  .active.item.shadowed{
 	box-shadow:  0em 2px 0em inset !important;
 }
+.ui.grid{
+	font-size: 1em !important;
+}
 
 </style>
 
