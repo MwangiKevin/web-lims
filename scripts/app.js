@@ -55,25 +55,6 @@ var app = angular
 		templateUrl: 'dashboard/dashboard_summary',
 		controller:'dashboardSummaryCtrl'		
 	})
-	
-	.state('facilities',{
-		url: '/facilities',
-		views:{
-			'main':{
-				templateUrl: 'facilities/facilities_view',
-				// controller: ngProgress_Test
-			},
-			'navbar':{
-				templateUrl: 'dashboard/navbar',
-				controller: 'navbarCtrl'
-			},
-			'footer':{
-				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
-			}
-		}
-	})
 	.state('fillFCDRR',{ /* fcdrr page loaded here */
 		url: '/fillFCDRR',
 		views:{
@@ -96,7 +77,26 @@ var app = angular
 		url: '/CD4DeviceUploads',
 		views:{
 			'main':{
-				templateUrl: 'devices/CD4DeviceUploads_view',
+				templateUrl: 'devices/device_uploads',
+				// controller: ngProgress_Test
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
+	
+	.state('Facilities',{
+		url: '/facilities',
+		views:{
+			'main':{
+				templateUrl: 'facilities',
 				// controller: ngProgress_Test
 			},
 			'navbar':{
@@ -114,7 +114,7 @@ var app = angular
 		url: '/CD4Tests',
 		views:{
 			'main':{
-				templateUrl: 'tests/CD4Tests_view',
+				templateUrl: 'tests',
 				// controller: ngProgress_Test
 			},
 			'navbar':{
@@ -132,7 +132,7 @@ var app = angular
 		url: '/CD4Devices',
 		views:{
 			'main':{
-				templateUrl: 'devices/CD4Devices_view',
+				templateUrl: 'devices',
 				// controller: ngProgress_Test
 			},
 			'navbar':{
@@ -150,7 +150,7 @@ var app = angular
 		url: '/Reports',
 		views:{
 			'main':{
-				templateUrl: 'reports/Reports_view',
+				templateUrl: 'reports',
 				// controller: ngProgress_Test
 			},
 			'navbar':{
