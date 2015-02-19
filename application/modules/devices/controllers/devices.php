@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class facilities extends MY_Controller {
+class devices extends MY_Controller {
 
 	public $login_status = false;
 
@@ -11,10 +11,10 @@ class facilities extends MY_Controller {
 	}
 
 	public function index() {
-		$this->load->view("facilities_v");
+		$this->load->view("devices_v");
 	}
 
-	public function details() {
+	public function device_uploads() {
 		$this->load->view("uploads_v");
 	}
 

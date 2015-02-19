@@ -21,8 +21,8 @@ var app = angular
 		abstract: true,
 		views:{
 			'main':{
-				 templateUrl: 'dashboard/dashboard_view',
-				 controller:'dashboardCtrl'
+				templateUrl: 'dashboard/dashboard_view',
+				controller:'dashboardCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -55,12 +55,12 @@ var app = angular
 		templateUrl: 'dashboard/dashboard_summary',
 		controller:'dashboardSummaryCtrl'		
 	})
-	
-	.state('facilities',{
-		url: '/facilities',
+	.state('fillFCDRR',{ /* fcdrr page loaded here */
+		url: '/fillFCDRR',
 		views:{
 			'main':{
-				templateUrl: 'facilities/facilities_view'
+				templateUrl: 'fcdrr/fillFCDRR_view',
+				controller: 'fcdrrCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -71,12 +71,12 @@ var app = angular
 			}
 		}
 	})
-	.state('fillFCDRR',{ /* fcdrr page loaded here */
-		url: '/fillFCDRR',
+	.state('CD4DeviceUploads',{
+		url: '/CD4DeviceUploads',
 		views:{
 			'main':{
-				templateUrl: 'fcdrr/fillFCDRR_view',
-				 controller: 'fcdrrCtrl'
+				templateUrl: 'devices/device_uploads',
+				// controller: ngProgress_Test
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -87,11 +87,12 @@ var app = angular
 			}
 		}
 	})
-	.state('CD4DeviceUploads',{
-		url: '/CD4DeviceUploads',
+	
+	.state('Facilities',{
+		url: '/facilities',
 		views:{
 			'main':{
-				templateUrl: 'devices/CD4DeviceUploads_view'
+				templateUrl: 'facilities'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -106,7 +107,7 @@ var app = angular
 		url: '/CD4Tests',
 		views:{
 			'main':{
-				templateUrl: 'tests/CD4Tests_view'
+				templateUrl: 'tests'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -121,7 +122,7 @@ var app = angular
 		url: '/CD4Devices',
 		views:{
 			'main':{
-				templateUrl: 'devices/CD4Devices_view',
+				templateUrl: 'devices',
 				// controller: ngProgress_Test
 			},
 			'navbar':{
@@ -137,8 +138,7 @@ var app = angular
 		url: '/Reports',
 		views:{
 			'main':{
-				templateUrl: 'reports/Reports_view',
-				// controller: ngProgress_Test
+				templateUrl: 'reports',
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
