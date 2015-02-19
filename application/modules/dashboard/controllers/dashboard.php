@@ -13,6 +13,10 @@ class dashboard extends MY_Controller {
 		
 		$this->load->view('dashboard_template');
 	}
+	public function footer() {
+		
+		$this->load->view('footer_v');
+	}
 
 	public function dashboard_view(){
 		$this->load->view("dashboard_v");

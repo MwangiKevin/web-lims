@@ -1,4 +1,4 @@
-<div style="margin-left:10px">
+<div style="">
 	<div ui-view="filter" class="ui column segment grid" style="">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
 		<div class="ui horizontal divider">Start</div>

@@ -60,17 +60,14 @@ var app = angular
 		url: '/facilities',
 		views:{
 			'main':{
-				templateUrl: 'facilities/facilities_view',
-				// controller: ngProgress_Test
+				templateUrl: 'facilities/facilities_view'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
 				controller: 'navbarCtrl'
 			},
 			'footer':{
-				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
+				templateUrl: 'dashboard/footer'
 			}
 		}
 	})
@@ -87,8 +84,6 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
 			}
 		}
 	})
@@ -96,17 +91,14 @@ var app = angular
 		url: '/CD4DeviceUploads',
 		views:{
 			'main':{
-				templateUrl: 'devices/CD4DeviceUploads_view',
-				// controller: ngProgress_Test
+				templateUrl: 'devices/CD4DeviceUploads_view'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
 				controller: 'navbarCtrl'
 			},
 			'footer':{
-				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
+				templateUrl: 'dashboard/footer'
 			}
 		}
 	})
@@ -114,8 +106,7 @@ var app = angular
 		url: '/CD4Tests',
 		views:{
 			'main':{
-				templateUrl: 'tests/CD4Tests_view',
-				// controller: ngProgress_Test
+				templateUrl: 'tests/CD4Tests_view'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -123,8 +114,6 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
 			}
 		}
 	})
@@ -141,8 +130,6 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
 			}
 		}
 	})
@@ -159,8 +146,6 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
 			}
 		}
 	})

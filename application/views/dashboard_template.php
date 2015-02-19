@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="" style="width:98%">
+<body class="" style="width:100%">
 
 	<div class="m-app-loading" ng-animate-children >
 
@@ -121,10 +121,10 @@
 
 		<div ui-view="filter" class="ui column segment grid filter" ng-cloak=""></div>
 
-		<main ui-view="main" class="ui column  grid full" ng-cloak=""></main>
+		<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
 
 	</div>
-	<div ui-view="footer"></div>
+	<div ui-view="footer" class=" ui column grid full"></div>
 
 
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css');?>">
@@ -205,10 +205,19 @@
 .ui.menu  .active.item.shadowed{
 	box-shadow:  0em 2px 0em inset !important;
 }
+/*overrides*/
 .ui.grid{
-	font-size: 1em !important;
-}
+	font-size: 1em !important;	
+	margin-top: 0rem !important; 
+	margin-bottom: 0rem !important; 
+	margin-left: 0rem !important; 
+	margin-right: 0rem !important; 
 
+}
+.ui.grid > * {
+	padding-left: 0rem !important;
+	padding-right: 0rem !important;
+}
 
 
 /*  SECTIONS  */
