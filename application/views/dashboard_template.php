@@ -159,6 +159,8 @@
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload-shim.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload.min.js');?>"></script>
 
 
 	<!--app -->
@@ -171,12 +173,15 @@
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
 
 
 	<!--Factories, Services and providers -->
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
 
 	<!-- directives-->
 

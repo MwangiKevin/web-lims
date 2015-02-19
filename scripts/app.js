@@ -9,7 +9,8 @@ var app = angular
 	'daterangepicker',
 	'chart.js',
 	'highcharts-ng',
-	'ngActivityIndicator'
+	'ngActivityIndicator',
+	'angularFileUpload'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -76,7 +77,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'devices/device_uploads',
-				// controller: ngProgress_Test
+				controller: deviceUploadsCtrl
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
