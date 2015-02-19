@@ -24,7 +24,7 @@
 
 </style>
 <!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
-<div class="section group">
+<div class="page section group">
 	<div class="col span_2_of_12">
 		<div class="ui black medium launch right attached button" style="">
 			<a ng-click="commons.toggleMenu()">

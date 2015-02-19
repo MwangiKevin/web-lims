@@ -214,7 +214,7 @@
 	margin-right: 0rem !important; 
 
 }
-.ui.grid > * {
+.ui.grid > .page  {
 	padding-left: 0rem !important;
 	padding-right: 0rem !important;
 }
