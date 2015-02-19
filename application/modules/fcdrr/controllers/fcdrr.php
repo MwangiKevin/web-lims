@@ -27,13 +27,11 @@ class fcdrr extends MY_Controller {
 		$this->load->view("fcdrr_v",$data);
 
 	}
-	public function get_commodities(){
+	public function get_commodities_and_categories(){
+		/* call the commodities and print the data in JSON format */
+		
+		$data=$this->fcdrr_model->get_commodities();
 
-		$data['facs_calibur']=$this->fcdrr_model->get_facs_calibur_commodities();
-		// $data['facs_count']=$this->fcdrr_model->get_facs_count_commodities();
-		// $data['cyflow_partec']=$this->fcdrr_model->get_cyflow_commodities();
-		// $data['poc_commodities']=$this->fcdrr_model->get_poc_commodities();
-
-		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+		$this->output->set_content_type('application/json')->set_output(json_encode($data,JSON_PRETTY_PRINT));
 	}
 }
