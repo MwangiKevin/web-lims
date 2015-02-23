@@ -159,6 +159,7 @@
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
 
 
 	<!--app -->
@@ -171,6 +172,9 @@
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/facilitiesCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 
 
 	<!--Factories, Services and providers -->
