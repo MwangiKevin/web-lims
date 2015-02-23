@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dashboard">
+<html ng-app="dashboard" style="width:100%">
 
 <head ui-view="head">    
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="ui grid" style="width:100%">
+<body class="" style="width:98%">
 
 	<div class="m-app-loading" ng-animate-children >
 
@@ -117,7 +117,7 @@
 	<!-- END: App-Loading Screen. -->
 
 	<div class="" >
-		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar" ng-cloak=""></div>
+		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar pointing" ng-cloak=""></div>
 
 		<div ui-view="filter" class="ui column segment grid filter" ng-cloak=""></div>
 
@@ -133,7 +133,9 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/selectize/dist/css/selectize.bootstrap3.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
-	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css');?>"> -->
+	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/css/bootstrap.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
+
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
@@ -156,6 +158,7 @@
 	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 
 
 	<!--app -->
@@ -164,8 +167,10 @@
 
 	<!--Controllers -->
 	<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
-
+	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
 
 
 	<!--Factories, Services and providers -->
@@ -192,5 +197,96 @@
 .filter{
 	/*padding-bottom: 200px;*/
 }
+
+
+.ui.menu.vertical  .active.item.shadowed{
+	box-shadow: 2px 0em 0em inset !important;
+}
+.ui.menu  .active.item.shadowed{
+	box-shadow:  0em 2px 0em inset !important;
+}
+.ui.grid{
+	font-size: 1em !important;
+}
+
+
+
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF TWELVE  */
+.span_12_of_12 {
+	width: 100%;
+}
+
+.span_11_of_12 {
+	width: 91.53%;
+}
+.span_10_of_12 {
+	width: 83.06%;
+}
+
+.span_9_of_12 {
+	width: 74.6%;
+}
+
+.span_8_of_12 {
+	width: 66.13%;
+}
+
+.span_7_of_12 {
+	width: 57.66%;
+}
+
+.span_6_of_12 {
+	width: 49.2%;
+}
+
+.span_5_of_12 {
+	width: 40.73%;
+}
+
+.span_4_of_12 {
+	width: 32.26%;
+}
+
+.span_3_of_12 {
+	width: 23.8%;
+}
+
+.span_2_of_12 {
+	width: 15.33%;
+}
+
+.span_1_of_12 {
+	width: 6.866%;
+}
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {  margin: 1% 0 1% 0%; }
+
+	.span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
+		width: 100%; 
+	}
+}
+
 </style>
 

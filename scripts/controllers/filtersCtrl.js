@@ -1,15 +1,13 @@
 app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$location,Filters){
 
-	Filters.programs= {};
+	$(".opensleft").hide();
+
 	Filters.entities= {};
 	Filters.dates= {}; 	
-	Filters.programs.selected =	{ name: 'Viral Load', 				initials:'VL' };			//all these needs to be put in a provider
 	Filters.dates.start = ''
 	Filters.dates.end = ''
 
 	$scope.filters = {};
-	$scope.filters.programs = [{ name: '', 				initials:'' }];	
-	$scope.filters.programs.selected = 	Filters.programs.selected ;
 	$scope.filters.dates = {};
 
 	$scope.filters.entities = [{ name: '', email:'',phone:'', type: '' }];
@@ -29,16 +27,6 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 			$scope.status = 'Unable to load Filters data: ' + error.message;
 		});
 
-
-		Filters.getPrograms()
-		.success(function (prog) {
-			$scope.filters.programs = prog;
-		})
-		.error(function (error) {
-			$scope.status = 'Unable to load Filters data: ' + error.message;
-		});
-
-
 		Filters.getDates()
 		.success(function (dates) {
 			$scope.filters.dates = dates;
@@ -50,16 +38,10 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 
 	$scope.filters.clear = function() {
 		$scope.filters.entities.selected = undefined;
-		$scope.filters.programs.selected = undefined;
 
 		Filters.entities.selected = undefined;
-		Filters.programs.selected = undefined;
 	};
 
-	$scope.bindProgramSelected= function (){
-		Filters.programs.selected =$scope.filters.programs.selected 
-		$location.path( Filters.programs.selected.initials );
-	}
 	$scope.bindDates = function(st,en){
 		$scope.filters.dates.start = st
 		$scope.filters.dates.end = en
