@@ -9,7 +9,6 @@ app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Co
 
 
 	ngProgress.color('#FFD3D3');
-	$activityIndicator.startAnimating();
 
 	$scope.showMe =3;
 	$scope.filters 	={};
@@ -20,9 +19,7 @@ app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Co
 	};
 
 	$timeout(function () {
-		$activityIndicator.stopAnimating()
-		ngProgress.start();
-		ngProgress.complete()
+		
 	}, 300);
 	
 	$scope.commons= Commons;

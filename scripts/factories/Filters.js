@@ -1,10 +1,14 @@
-app.factory('Filters',['$http', function($http){
+app.factory('Filters',['$http','$activityIndicator', function($http,$activityIndicator){
 	var Filters={};
   Filters.getEntities = function () {
-    return $http.get('api/filters/entities');
+
+	$activityIndicator.startAnimating();
+    return $http.get('api/filters/entities').success(function(){$activityIndicator.stopAnimating()});
   };
   Filters.getDates = function () {
-    return $http.get('api/filters/dates');
+  	
+	$activityIndicator.startAnimating();
+    return $http.get('api/filters/dates').success(function(){$activityIndicator.stopAnimating()});
   };
 
   return Filters;
