@@ -71,7 +71,7 @@
 				<div class="ui label">
 					Alere PIMA:
 				</div>
-				<input placeholder="" type="text" />
+				<input placeholder="PIMA Tests" type="text" />
 			</div>
 		</div>
 	</div>

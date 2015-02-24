@@ -10,11 +10,8 @@ var app = angular
 	'chart.js',
 	'highcharts-ng',
 	'ngActivityIndicator',
-<<<<<<< HEAD
-	'smart-table'
-=======
+	'smart-table',
 	'angularFileUpload'
->>>>>>> feature/uploads
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
