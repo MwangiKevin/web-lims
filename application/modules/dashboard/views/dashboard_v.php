@@ -49,7 +49,7 @@
 	</div>
 
 	<div style="margin:0px;padding:0px;" class="three wide column">
-		<h1 style="float:right;margin-bottom: 0px;margin-top: 0px;">{{commons.getTitle()}}</h1>
+		<h1 style="float:right;margin-bottom: 0px;margin-top: 0px;" class="ui inverted">{{commons.getTitle()}}</h1>
 	</div>
 </div>
 <script>
