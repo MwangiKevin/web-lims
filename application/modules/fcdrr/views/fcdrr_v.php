@@ -103,7 +103,7 @@
 		</thead>
 
 		<tbody ng-repeat="commodity in the_commodities">
-			<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{user.category_name}}</td></tr>	
+			<tr ><td rowspan="1" colspan="10" style="background:#ddd;">{{commodity.category_name}}</td></tr>	
 
 			<tr ng-repeat="comod_cat in commodity.commodities">
 				<td style="width:50em">{{comod_cat.name}}</td>

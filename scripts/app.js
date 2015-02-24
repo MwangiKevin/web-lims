@@ -10,7 +10,11 @@ var app = angular
 	'chart.js',
 	'highcharts-ng',
 	'ngActivityIndicator',
+<<<<<<< HEAD
 	'smart-table'
+=======
+	'angularFileUpload'
+>>>>>>> feature/uploads
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -77,7 +81,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'devices/device_uploads',
-				// controller: ngProgress_Test
+				controller: deviceUploadsCtrl
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

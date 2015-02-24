@@ -6,6 +6,7 @@ app.factory('Commons', ['$location',function($location){
 	Commons.showMenu = true;
 	Commons.dashboardAreaClass = 'column';
 	Commons.title = '';
+	Commons.projectName='web-lims';
 
 	Commons.getActiveMenu = function (name) {
 		// console.log(name)
