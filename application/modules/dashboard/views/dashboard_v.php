@@ -71,16 +71,16 @@ $(".launch.button").mouseenter(function(){
 			<a class="item" ng-class="getActiveSubmenuLV1('summary')" href="#summary">
 				<b>Summary</b>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('testingTrends')">
+			<a class="item" href="#testingTrends" ng-class="getActiveSubmenuLV1('testingTrends')">
 				<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('deviceDistribution')">
+			<a class="item" href="#deviceDistribution" ng-class="getActiveSubmenuLV1('deviceDistribution')">
 				<b>Device Distribution</b><i class="fa fa-medkit " style="float:right"></i>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('map')">
+			<a class="item" href="#map" ng-class="getActiveSubmenuLV1('map')">
 				<i class="map icon"></i> <b>Map</b>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('fcdrrReporting')">
+			<a class="item" href="#fcdrrReporting" ng-class="getActiveSubmenuLV1('fcdrrReporting')">
 				<b>FDRR Reporting </b><i class="fa fa-bar-chart " style="float:right"></i>
 			</a>
 
