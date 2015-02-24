@@ -117,7 +117,7 @@
 	<!-- END: App-Loading Screen. -->
 
 	<div class="" >
-		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar pointing" ng-cloak=""></div>
+		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
 
 		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
