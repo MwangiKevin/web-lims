@@ -1,4 +1,4 @@
-<div class="sixteen wide column">
+<div class="">
 	<div class="ui segment">
 		<div class="ui cards">
 			<div class="card">

@@ -33,17 +33,9 @@ function(start, end) {
 $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 })
 </script>
-<div class="ui right aligned grid" >
-	<div class="right floated right aligned six wide column">
-		<div class="blue ui buttons">
-			<div id="reportrange" class="ui button pull-right filterButton" style="">
-				<i class="fa fa-calendar fa-md"></i>
-				<span><?php echo 'January '.date("1, Y", strtotime('first day of this year')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>
-			</div>
-		</div>
-	</div>
+<div class="ui right aligned stackable grid" >
 
-	<div class="left floated right aligned six wide column">
+	<div class="left floated left aligned six wide column">
 		<ui-select ng-model="filters.entities.selected" theme="selectize" ng-disabled="disabled" style="min-width: 300px;">
 		<ui-select-match placeholder="Search Criteria to Filter by...">{{$select.selected.name +" ("+ $select.selected.type +")"  }}</ui-select-match>
 		<ui-select-choices group-by="'type'" repeat="entity in filters.entities | entityFilter: {name: $select.search, type: $select.search}">
@@ -60,6 +52,14 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 	<div class="ui button blue"><i class="fa fa-undo fa-sm"></i> Reset</div>
 </div>
 
+<div class="right floated right aligned six wide column">
+	<div class="blue ui buttons">
+		<div id="reportrange" class="ui button pull-right filterButton" style="">
+			<i class="fa fa-calendar fa-md"></i>
+			<span><?php echo 'January '.date("1, Y", strtotime('first day of this year')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>
+		</div>
+	</div>
+</div>
 
 </div>
 <style>
