@@ -1,6 +1,8 @@
+
 <div style="margin-left:10px">
 	<div ui-view="filter" class="ui column segment grid" style="">
-		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
+	<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
+	<form method="POST" action="#">
 		<div class="ui horizontal divider">Start</div>
 		<div class="ui stackable grid">
 			<div class="three wide column ">Facility: </div>
@@ -44,8 +46,8 @@
 					<div class="ui label">
 						Facs </br>Calibur:
 					</div>
-					<input placeholder="Paed Tests" type="text" />
-					<input placeholder="Adult Tests" type="text" />
+					<input placeholder="Paed Tests" type="text" ng-model="facs_calibur_paed" />
+					<input placeholder="Adult Tests" type="text" ng-model="facs_calibur_adult" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -53,8 +55,8 @@
 					<div class="ui label">
 						Facs </br>Count:
 					</div>
-					<input placeholder="Paed Tests" type="text" />
-					<input placeholder="Adult Tests" type="text" />
+					<input placeholder="Paed Tests" type="text" ng-model="facs_count_paed" />
+					<input placeholder="Adult Tests" type="text" ng-model="facs_count_adult" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -62,8 +64,8 @@
 					<div class="ui label">
 						Cyflow </br>Partec:
 					</div>
-					<input placeholder="Paed Tests" type="text" />
-					<input placeholder="Adult Tests" type="text" />
+					<input placeholder="Paed Tests" type="text" ng-model="cyflow_paed" />
+					<input placeholder="Adult Tests" type="text" ng-model="cyflow_adult" />
 				</div>
 			</div>
 			<div class="three wide column">
@@ -79,7 +81,7 @@
 		<div class="ui stackable grid">
 			<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
 			<div class="three wide column">
-				<div class="ui input"><input value="" type="text" readonly="readonly" /></div>
+				<div class="ui input"><input value="" type="text" readonly="readonly" value="{{facs_calibur_paed -- facs_calibur_adult -- facs_count_paed -- facs_count_adult -- cyflow_paed -- cyflow_adult}}"/></div>
 			</div>
 		</div>
 		<hr />
@@ -119,30 +121,32 @@
 			</tbody>
 		</table>
 		<hr />
-		<div class="sixteen wide column">	
-			<div class="ui form">
-				<div class="field">
-					<label>FCDRR Comments</label>
-					<textarea style="height:20px"></textarea>
+			<div class="sixteen wide column">	
+				<div class="ui form">
+					<div class="field">
+						<label>FCDRR Comments</label>
+						<textarea style="height:20px"></textarea>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="ui horizontal divider">END</div>
-		<div class="four wide column">
-			<div class="ui primary button">
-				Submit Commodity Report	
+			<div class="ui horizontal divider">END</div>
+			<div class="four wide column">
+				<div class="ui primary button">
+					Submit Commodity Report	
+				</div>
 			</div>
-		</div>
-		<div class="four wide column">
-			<div class="ui reset button">
-				Reset Form
+			<div class="four wide column">
+				<div class="ui reset button">
+					Reset Form
+				</div>
 			</div>
-		</div>
-		<div class="four wide column">
-			<div class="ui button">
-				Print	
+			<div class="four wide column">
+				<div class="ui button">
+					Print	
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
+	
 </div>
 
