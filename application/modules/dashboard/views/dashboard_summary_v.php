@@ -12,7 +12,7 @@
 						
 					</div>
 				</div>
-				<div class="ui bottom attached button red">
+				<div class="ui bottom attached button ">
 					<i class="fa fa-line-chart " style=""></i>
 					  Go to Analytics
 				</div>
@@ -28,7 +28,7 @@
 						
 					</div>
 				</div>
-				<div class="ui bottom attached button yellow">
+				<div class="ui bottom attached button ">
 					<i class="fa fa-line-chart " style=""></i>
 					Go to Analytics
 				</div>
@@ -44,7 +44,7 @@
 						
 					</div>
 				</div>
-				<div class="ui bottom attached button green">
+				<div class="ui bottom attached button ">
 					<i class="fa fa-line-chart " style=""></i>
 					Go to Analytics
 				</div>
@@ -60,7 +60,7 @@
 						
 					</div>
 				</div>
-				<div class="ui bottom attached button blue">
+				<div class="ui bottom attached button ">
 					<i class="fa fa-line-chart " style=""></i>
 					  Go to Analytics
 				</div>
@@ -76,7 +76,7 @@
 						
 					</div>
 				</div>
-				<div class="ui bottom attached button pink">
+				<div class="ui bottom attached button ">
 					<i class="fa fa-line-chart " style=""></i>
 					  Go to Analytics
 				</div>

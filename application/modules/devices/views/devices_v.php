@@ -7,7 +7,7 @@
 				</i> Add random item
 			</button>
 
-			<table st-table="displayedCollection" st-safe-src="facilitiesColl" class="ui table table-striped">
+			<table st-table="displayedCollection" st-safe-src="devicesColl" class="ui table table-striped">
 				<thead>
 					<tr>
 						<th colspan="1"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
@@ -15,8 +15,8 @@
 					<tr>
 						<th st-sort="firstName">Facility Name</th>
 						<th st-sort="lastName">MFL Code</th>
-						<th st-sort="lastName">County</th>
-						<th st-sort="birthDate">Sub-County</th>
+						<th st-sort="lastName">Device type</th>
+						<th st-sort="birthDate">Device Serial</th>
 						<th st-sort="birthDate">Action</th>
 					</tr>
 				</thead>

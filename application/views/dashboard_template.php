@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="" style="width:98%">
+<body class="" style="width:100%">
 
 	<div class="m-app-loading" ng-animate-children >
 
@@ -119,12 +119,12 @@
 	<div class="" >
 		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar pointing" ng-cloak=""></div>
 
-		<div ui-view="filter" class="ui column segment grid filter" ng-cloak=""></div>
+		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
-		<main ui-view="main" class="ui column  grid full" ng-cloak=""></main>
+		<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
 
 	</div>
-	<div ui-view="footer"></div>
+	<div ui-view="footer" class=" ui column grid full"></div>
 
 
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css');?>">
@@ -159,6 +159,7 @@
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
 
 
 	<!--app -->
@@ -171,6 +172,9 @@
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/facilitiesCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 
 
 	<!--Factories, Services and providers -->
@@ -205,10 +209,19 @@
 .ui.menu  .active.item.shadowed{
 	box-shadow:  0em 2px 0em inset !important;
 }
+/*overrides*/
 .ui.grid{
-	font-size: 1em !important;
-}
+	font-size: 1em !important;	
+	margin-top: 0rem !important; 
+	margin-bottom: 0rem !important; 
+	margin-left: 0rem !important; 
+	margin-right: 0rem !important; 
 
+}
+.ui.grid > .page  {
+	padding-left: 0rem !important;
+	padding-right: 0rem !important;
+}
 
 
 /*  SECTIONS  */

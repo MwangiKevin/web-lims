@@ -9,7 +9,8 @@ var app = angular
 	'daterangepicker',
 	'chart.js',
 	'highcharts-ng',
-	'ngActivityIndicator'
+	'ngActivityIndicator',
+	'smart-table'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -21,8 +22,8 @@ var app = angular
 		abstract: true,
 		views:{
 			'main':{
-				 templateUrl: 'dashboard/dashboard_view',
-				 controller:'dashboardCtrl'
+				templateUrl: 'dashboard/dashboard_view',
+				controller:'dashboardCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -55,40 +56,19 @@ var app = angular
 		templateUrl: 'dashboard/dashboard_summary',
 		controller:'dashboardSummaryCtrl'		
 	})
-	
-	.state('facilities',{
-		url: '/facilities',
-		views:{
-			'main':{
-				templateUrl: 'facilities/facilities_view',
-				// controller: ngProgress_Test
-			},
-			'navbar':{
-				templateUrl: 'dashboard/navbar',
-				controller: 'navbarCtrl'
-			},
-			'footer':{
-				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
-			}
-		}
-	})
 	.state('fillFCDRR',{ /* fcdrr page loaded here */
 		url: '/fillFCDRR',
 		views:{
 			'main':{
 				templateUrl: 'fcdrr/fillFCDRR_view',
-				 controller: 'fcdrrCtrl'
+				controller: 'fcdrrCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
 				controller: 'navbarCtrl'
 			},
 			'footer':{
-				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
+				templateUrl: 'dashboard/footer'
 			}
 		}
 	})
@@ -96,7 +76,7 @@ var app = angular
 		url: '/CD4DeviceUploads',
 		views:{
 			'main':{
-				templateUrl: 'devices/CD4DeviceUploads_view',
+				templateUrl: 'devices/device_uploads',
 				// controller: ngProgress_Test
 			},
 			'navbar':{
@@ -105,8 +85,23 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
+			}
+		}
+	})
+	
+	.state('Facilities',{
+		url: '/facilities',
+		views:{
+			'main':{
+				templateUrl: 'facilities',
+				controller:'facilitiesCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer'
 			}
 		}
 	})
@@ -114,8 +109,8 @@ var app = angular
 		url: '/CD4Tests',
 		views:{
 			'main':{
-				templateUrl: 'tests/CD4Tests_view',
-				// controller: ngProgress_Test
+				templateUrl: 'tests',
+				controller:'cd4TestsCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -123,8 +118,6 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
 			}
 		}
 	})
@@ -132,8 +125,8 @@ var app = angular
 		url: '/CD4Devices',
 		views:{
 			'main':{
-				templateUrl: 'devices/CD4Devices_view',
-				// controller: ngProgress_Test
+				templateUrl: 'devices',
+				controller:'cd4DevicesCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -141,8 +134,6 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
 			}
 		}
 	})
@@ -150,8 +141,7 @@ var app = angular
 		url: '/Reports',
 		views:{
 			'main':{
-				templateUrl: 'reports/Reports_view',
-				// controller: ngProgress_Test
+				templateUrl: 'reports',
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -159,8 +149,6 @@ var app = angular
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
 			}
 		}
 	})
