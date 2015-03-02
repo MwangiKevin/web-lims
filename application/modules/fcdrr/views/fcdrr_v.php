@@ -1,13 +1,14 @@
 <div style="margin-left:10px">
 	<div ui-view="filter" class="ui column segment grid" id="viewport">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
+		<form>
 		<div class="ui horizontal divider">Start</div>
 		<div class="ui stackable grid">
-			<div class="three wide column ">Facility: </div>
-			<div class="three wide column">Facility MFL: </div>
-			<div class="three wide column">Sub County: </div>
-			<div class="three wide column">County: </div>
-			<div class="three wide column">Affliation: </div>
+			<div class="three wide column "><b>Facility:</b><center>A.I.C Kijabe Naivasha Medical Centre</center></div>
+			<div class="three wide column"><b>Facility MFL:</b> 15282</div>
+			<div class="three wide column"><b>Sub County:</b> Naivasha</div>
+			<div class="three wide column"><b>County:</b> Nakuru</div>
+			<div class="three wide column"><b>Affliation:</b> CHAK</div>
 		</div>
 		<hr />
 		<div class="ui stackable grid">
@@ -44,8 +45,8 @@
 					<div class="ui label">
 						Facs </br>Calibur:
 					</div>
-					<input placeholder="Paed Tests" type="text" />
-					<input placeholder="Adult Tests" type="text" />
+					<input placeholder="Paed Tests" type="text" ng-model="facs_calibur_paed" />
+					<input placeholder="Adult Tests" type="text" ng-model="facs_calibur_adult" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -53,8 +54,8 @@
 					<div class="ui label">
 						Facs </br>Count:
 					</div>
-					<input placeholder="Paed Tests" type="text" />
-					<input placeholder="Adult Tests" type="text" />
+					<input placeholder="Paed Tests" type="text" ng-model="facs_count_paed" />
+					<input placeholder="Adult Tests" type="text" ng-model="facs_count_adult" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -62,8 +63,8 @@
 					<div class="ui label">
 						Cyflow </br>Partec:
 					</div>
-					<input placeholder="Paed Tests" type="text" />
-					<input placeholder="Adult Tests" type="text" />
+					<input placeholder="Paed Tests" type="text" ng-model="cyflow_paed" />
+					<input placeholder="Adult Tests" type="text" ng-model="cyflow_adult" />
 				</div>
 			</div>
 			<div class="three wide column">
@@ -71,15 +72,18 @@
 					<div class="ui label">
 						Alere PIMA:
 					</div>
-					<input placeholder="" type="text" />
+					<input placeholder="" type="text" readonly />
 				</div>
 			</div>
 		</div>
 		<hr />
 		<div class="ui stackable grid">
 			<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
-			<div class="three wide column">
-				<div class="ui input"><input value="" type="text" readonly="readonly" /></div>
+			<div class="three wide column" ng-controller="fcdrrCtrl">
+				<div class="ui input">
+					<input ng-model="total_cd4" placeholder="{{facs_calibur_paed -- facs_calibur_adult -- facs_count_paed -- facs_count_adult -- cyflow_paed -- cyflow_adult}}" type="text" readonly />
+					<!-- <input ng-model="total_cd4" placeholder="{{total()}}" readonly /> -->
+				</div>
 			</div>
 		</div>
 		<hr />
@@ -103,12 +107,12 @@
 			</thead>
 
 			<tbody ng-repeat="commodity in the_commodities">
-				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{user.category_name}}</td></tr>	
+				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity.category_name}}</td></tr>	
 				
 				<tr ng-repeat="comod_cat in commodity.commodities">
 					<td style="width:50em">{{comod_cat.name}}</td>
 					<td style="width:10em">{{comod_cat.unit}}</td>
-					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="qaz" name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td style="width:50em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
 					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
@@ -145,6 +149,7 @@
 				Print	
 			</div>
 		</div>
+		</form>
 	</div>
 </div>
 <script>
