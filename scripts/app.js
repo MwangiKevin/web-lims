@@ -59,7 +59,8 @@ var app = angular
 	})
 	.state('Dashboard.testingTrends',{
 		url: 'testingTrends',
-		templateUrl: 'dashboard/testing_trends'		
+		templateUrl: 'dashboard/testing_trends'	,
+		controller:'TestsTrendCtrl'
 	})
 	.state('Dashboard.devices',{
 		url: 'deviceDistribution',
@@ -67,7 +68,7 @@ var app = angular
 	})
 	.state('Dashboard.map',{
 		url: 'map',
-		templateUrl: 'dashboard/map'		
+		templateUrl: 'dashboard/map'
 	})
 	.state('Dashboard.fcdrr_reporting',{
 		url: 'fcdrrReporting',

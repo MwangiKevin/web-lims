@@ -174,6 +174,9 @@
 	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/dashboard/TestsTrendCtrl.js');?>"></script>
+
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/facilitiesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
@@ -229,6 +232,22 @@
 	padding-right: 0rem !important;
 }
 
+.chart-wrapper {
+	position: relative;
+	padding-bottom: 40%;
+	margin-left: 5%;
+	margin-right: 5%;
 
+	height:100px;
+	overflow-y: auto;
+}
+
+.chart-inner {
+	position: absolute;
+	width: 90%; 
+
+	/*height: 90%;*/
+
+}
 </style>
 

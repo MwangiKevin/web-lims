@@ -38,7 +38,8 @@ class dashboard extends MY_Controller {
 	}
 
 	public function testing_trends(){
-		echo "testing Trends";
+
+		$this->load->view("testing_trends_v");
 	}
 	public function devices(){
 		echo "devices";
