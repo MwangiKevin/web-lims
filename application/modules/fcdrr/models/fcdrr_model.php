@@ -12,7 +12,8 @@ function get_commodities(){
 											c.name as commodity,
 											c.unit as commodity_unit,
 											c.category_id as commodity_category
-										FROM commodity c");
+										FROM commodity c 
+										WHERE c.reporting_status='1'");
 	$sql_categories =$this->db->query("SELECT * FROM commodity_category");
 
 	$i=0;

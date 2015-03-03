@@ -179,8 +179,7 @@
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
-	<script src="<?php echo base_url('scripts/factories/API
-		.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
 
 	<!-- directives-->
 
