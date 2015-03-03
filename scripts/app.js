@@ -10,7 +10,8 @@ var app = angular
 	'chart.js',
 	'highcharts-ng',
 	'ngActivityIndicator',
-	'angularFileUpload'
+	'angularFileUpload',
+	'smart-table'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -93,7 +94,8 @@ var app = angular
 		url: '/facilities',
 		views:{
 			'main':{
-				templateUrl: 'facilities'
+				templateUrl: 'facilities',
+				controller:'facilitiesCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -108,7 +110,8 @@ var app = angular
 		url: '/CD4Tests',
 		views:{
 			'main':{
-				templateUrl: 'tests'
+				templateUrl: 'tests',
+				controller:'cd4TestsCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -124,7 +127,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'devices',
-				// controller: ngProgress_Test
+				controller:'cd4DevicesCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

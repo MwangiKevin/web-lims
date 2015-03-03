@@ -47,7 +47,8 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 		$scope.filters.dates.end = en
 
 		Filters.dates.start = st
-		Filters.dates.end = en	}
+		Filters.dates.end = en	
+	}
 
 }])
 .filter('entityFilter', function() {

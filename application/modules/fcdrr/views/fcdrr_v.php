@@ -147,6 +147,7 @@
 	</div>
 </div>
 </div>
+
 <script>
 $(window).scroll(function(){
 	var sticky = $('.sticky'),

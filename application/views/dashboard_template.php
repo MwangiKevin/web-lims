@@ -119,7 +119,7 @@
 	<div class="" >
 		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar pointing" ng-cloak=""></div>
 
-		<div ui-view="filter" class="ui column segment grid filter" ng-cloak=""></div>
+		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
 		<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
 
@@ -161,6 +161,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload-shim.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
 
 
 	<!--app -->
@@ -174,6 +175,9 @@
 	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/facilitiesCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 
 
 	<!--Factories, Services and providers -->
