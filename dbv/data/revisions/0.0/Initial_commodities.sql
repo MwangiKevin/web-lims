@@ -1,24 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.1.12
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Jan 28, 2015 at 11:01 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
-
--- Author Brian Hawi
--- first version of commodity 0.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 
 --
 -- Dumping data for table `commodity`
@@ -66,7 +45,3 @@ INSERT INTO `commodity` (`id`, `code`, `name`, `unit`, `category_id`,`reporting_
 (39, 'CON 002', 'Cleaning Fluid', '5L', 4, 0),
 (40, 'CON 003', 'Rinse Fluid', '5L', 4, 0),
 (41, '', 'EASY Count CD4/CD3 Reagent [Adult]', '100T Pack', 2, 1);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

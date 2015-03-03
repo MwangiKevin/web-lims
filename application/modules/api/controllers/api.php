@@ -7,7 +7,8 @@ class api extends MY_Controller {
 	function __construct() {
 
 		parent::__construct();
-		$this->load->model("api_m");	
+		
+		header('Content-Type: application/json; charset=utf-8');
 	}
 
 	public function facilities($id=NULL) {
@@ -122,6 +123,29 @@ class api extends MY_Controller {
 
 		else if ($method=="delete"){
 			echo json_encode($this->commodities_m->remove($id),JSON_PRETTY_PRINT);
+		}
+	}
+
+	public function commodity_categories($id=NULL) {
+
+		$this->load->model("commodity_categories_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->commodity_categories_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->commodity_categories_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->commodity_categories_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->commodity_categories_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
 
