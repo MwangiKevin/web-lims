@@ -200,6 +200,7 @@
 
 	<!-- directives-->
 
+	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
 	
 
