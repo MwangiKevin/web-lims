@@ -21,6 +21,8 @@ function get_commodities(){
 			foreach($sql_commodities->result_array() as $commodity){
 				if($cat['id']==$commodity["commodity_category"]){
 						$commodities_results[$i]['category_name']=$cat['name'];
+
+						$commodities_results[$i]["commodities"][$j]['id']=$commodity['commodity_id'];
 						$commodities_results[$i]["commodities"][$j]['name']=$commodity['commodity'];
 						$commodities_results[$i]["commodities"][$j]['unit']=$commodity['commodity_unit'];
 
