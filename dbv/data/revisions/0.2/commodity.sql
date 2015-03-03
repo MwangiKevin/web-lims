@@ -3,49 +3,69 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2015 at 01:34 PM
+-- Generation Time: Jan 28, 2015 at 11:01 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
 -- Author Brian Hawi
--- first version of commodity 0.2
--- has a status field
+-- first version of commodity 0.1
 
-INSERT INTO `commodity` (`id`, `code`, `name`, `unit`, `category_id`, `status`) VALUES
-(1, 'CAL 002', 'Tri-TEST CD3/CD4/CD45 with TruCOUNT Tubes', 'Tests', 1, 1),
-(2, 'CAL 006', 'Falcon Tubes', 'Pieces', 1, 1),
-(3, 'CAL 009', 'Printing Paper', 'Reams', 1, 1),
-(4, '', 'Printer Catridge', 'Pieces', 1, 1),
-(5, 'FAC 001', 'FACSCount CD4/CD3 Reagent [Adult]', 'Tests', 3, 1),
-(6, 'FAC 002', 'FACSCount CD4 % reagent [Paediatric]', 'Tests', 3, 1),
-(7, '', 'EASY Count CD4/CD3 Reagent [Adult]', 'Tests', 2, 1),
-(8, '', 'EASY Count CD4 % reagent [Paediatric]', 'Tests', 2, 1),
-(9, '', 'Cartridges', 'Pieces', 4, 1),
-(10, '', 'Cell / ACT Pack', 'Litres', 5, 1),
-(11, '', 'Cell Clean / ACT Rinse', 'Litres', 5, 1),
-(12, '', 'ACT Diff 3 kits', 'Tests', 5, 1),
-(13, '', 'ACT Diff 5 kits', 'Tests', 5, 1),
-(14, '', 'Celtac 6400 kits', 'Tests', 5, 1),
-(15, '', 'Celtac 8222', 'Tests', 5, 1),
-(16, '', 'Haemo cuvettes', 'Tests', 5, 1),
-(17, '', 'Albumin', 'Tests', 6, 1),
-(18, '', 'Alkaline phosphatase', 'Tests', 6, 1),
-(19, '', 'ALT (SGPT)', 'Tests', 6, 1),
-(20, '', 'AST (SGOT)', 'Tests', 6, 1),
-(21, '', 'Creatinine', 'Tests', 6, 1),
-(22, '', 'Potassium', 'Tests', 6, 1),
-(23, '', 'Sodium', 'Tests', 6, 1),
-(24, '', 'Chloride', 'Tests', 6, 1),
-(25, '', 'Gamma GT', 'Tests', 6, 1),
-(26, '', 'Glucose test strips', 'Pieces', 6, 1),
-(27, '', 'HDL Cholesterol', 'Tests', 6, 1),
-(28, '', 'Pregnancy test strips', 'Pieces', 6, 1),
-(29, '', 'Serum Amylase test kits', 'Tests', 6, 1),
-(30, '', 'Serum protein kit', 'Tests', 6, 1),
-(31, '', 'Total Cholesterol', 'Tests', 6, 1),
-(32, '', 'Triglycerides', 'Tests', 6, 1),
-(33, '', 'Bilirubin', 'Tests', 6, 1),
-(34, '', 'Urea', 'Tests', 6, 1);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+
+--
+-- Dumping data for table `commodity`
+--
+
+INSERT INTO `commodity` (`id`, `code`, `name`, `unit`, `category_id`,`reporting_status`) VALUES
+(1, 'CAL 002', 'Tri-TEST CD3/CD4/CD45 with TruCOUNT Tubes', '50T Pack', 1, 1),
+(2, 'CAL 003', 'Calibrite 3 Beads', '3 Vials Pack', 1, 0),
+(3, 'CAL 005', 'FACS Lysing solution', '100mL Pack', 1, 0),
+(4, '', 'FACS Clean solution', '5L Pack', 1, 0),
+(5, '', 'FACS Rinse solution', '5L Pack', 1, 0),
+(6, '', 'FACS Flow solution', '20L Pack', 1, 0),
+(7, 'CAL 006', 'Falcon Tubes', '125 pcs Pack', 1, 1),
+(8, '', 'BD Multi-Check Control', 'Pack', 1, 0),
+(9, '', 'BD Multi-Check CD4 Low Control', 'Pack', 1, 0),
+(10, 'CAL 009', 'Printing Paper (A4)', 'Raems', 1, 1),
+(11, 'CAL 010', 'HP Laser Jet Printer Catridge 53A', 'pcs', 1, 1),
+(12, '', 'PARTEC EASY Count CD4 Reagents (Paediatrcics)', '100T Pack', 2, 1),
+(13, '', 'PARTEC Control check beads', '25mL Pack', 2, 0),
+(14, '', 'PARTEC Sheath Fluid', '5L Pack', 2, 0),
+(15, '', 'PARTEC Cleaning Solution', '250mL Pack', 2, 0),
+(16, '', 'PARTEC Decontamination solution', '250mL Pack', 2, 0),
+(17, '', 'PARTEC Bleaching solution', '250mL Pack', 2, 0),
+(18, '', 'PARTEC Rohren Tubes', '500 pcs Pack', 2, 0),
+(19, '', 'printing Paper (A4)', 'Ream', 2, 0),
+(20, '', 'HP Laser Jet Printer Cartilage 35A', 'pcs', 2, 0),
+(21, '340167', 'FACSCount Kit 50T', '50T', 3, 0),
+(22, '340166', 'FACSCount Controls', ' 25T', 3, 0),
+(23, '342003', 'FACSFlow', '20L', 3, 0),
+(24, '340345', 'FACSClean', ' 5L', 3, 0),
+(25, '340346', 'FACS Rinse', '5L', 3, 0),
+(26, '332839', 'Thermal Paper FacsCount', '5 Rolls', 3, 0),
+(27, 'CON 007', 'Vacutainer EDTA 4ml  tubes', '100/pack', 4, 0),
+(28, 'CON 011', 'Vacutainer Needle 21G [Adult]', '100/pack', 4, 0),
+(29, 'FAC 002', 'FACSCount CD4 % reagent [Peadiatric]', '50 tests', 3, 1),
+(30, 'CON 009', 'Microtainer tubes [Paediatric]', '50/Pack', 4, 0),
+(31, 'CON 010', 'Microtainer Pink lancets 21G [Paediatric]', '200/Pack', 4, 0),
+(32, 'CON 012', 'Vacutainer Butterfly Needle 23G [Paediatrics]', '50/Pack', 4, 0),
+(33, 'CON 005', 'Yellow Pipette Tips (50 MicroL)', '1,000 tips', 4, 0),
+(34, 'CON 008', 'CD4 Stabilizer tubes 5ml', '100/Pack', 4, 0),
+(35, '', 'BD TruCount Control', 'pack', 1, 0),
+(36, '', 'PIMA Catridge', '1 unit', 5, 1),
+(37, 'FAC 001', 'FACSCount CD4 % reagent [Adult]', '50 tests', 3, 1),
+(38, 'CON 001', 'Sheath Fluid', '20L', 4, 0),
+(39, 'CON 002', 'Cleaning Fluid', '5L', 4, 0),
+(40, 'CON 003', 'Rinse Fluid', '5L', 4, 0),
+(41, '', 'EASY Count CD4/CD3 Reagent [Adult]', '100T Pack', 2, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

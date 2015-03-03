@@ -12,7 +12,8 @@ function get_commodities(){
 											c.name as commodity,
 											c.unit as commodity_unit,
 											c.category_id as commodity_category
-										FROM commodity c");
+										FROM commodity c 
+										WHERE c.reporting_status='1'");
 	$sql_categories =$this->db->query("SELECT * FROM commodity_category");
 
 	$i=0;
@@ -21,6 +22,8 @@ function get_commodities(){
 			foreach($sql_commodities->result_array() as $commodity){
 				if($cat['id']==$commodity["commodity_category"]){
 						$commodities_results[$i]['category_name']=$cat['name'];
+
+						$commodities_results[$i]["commodities"][$j]['id']=$commodity['commodity_id'];
 						$commodities_results[$i]["commodities"][$j]['name']=$commodity['commodity'];
 						$commodities_results[$i]["commodities"][$j]['unit']=$commodity['commodity_unit'];
 
