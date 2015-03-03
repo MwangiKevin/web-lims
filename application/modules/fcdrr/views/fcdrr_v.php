@@ -72,9 +72,8 @@
 					<div class="ui label">
 						Alere PIMA:
 					</div>
-					<input placeholder="PIMA Tests" type="text" ng-model="fcdrr.devicetests.pima.pima_tests"/>
+					<input placeholder="" type="text" ng-model="fcdrr.devicetests.pima.pima_tests"/>
 				</div>
-
 			</div>
 		</div>
 		<hr />
@@ -83,11 +82,12 @@
 			<div class="three wide column" ng-controller="fcdrrCtrl">
 				<div class="ui input">
 					<input ng-model="total_cd4" placeholder="{{facs_calibur_paed -- facs_calibur_adult -- facs_count_paed -- facs_count_adult -- cyflow_paed -- cyflow_adult}}" type="text" readonly />
-					<!-- <input ng-model="total_cd4" placeholder="{{total()}}" readonly /> -->
+					
 				</div>
 			</div>
 		</div>
 		<hr />
+		{{fcdrr}}
 		<table  class="ui celled striped structured table" >
 			<thead class="ui sticky" >
 				<tr style="width:98%">
@@ -111,6 +111,7 @@
 				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity.category_name}}</td></tr>	
 				
 				<tr ng-repeat="comod_cat in commodity.commodities">
+
 					<td style="width:50em">{{comod_cat.name}}</td>
 					<td style="width:10em">{{comod_cat.unit}}</td>
 					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].beg_bal" name="" id="" type="text"  required/></div></td>
@@ -152,7 +153,7 @@
 		</div>
 		</form>
 	</div>
-</div>{{fcdrr}}
+</div>
 <script>
 $(window).scroll(function(){
 	var sticky = $('.sticky'),
