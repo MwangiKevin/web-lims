@@ -158,9 +158,14 @@
 	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
+
 	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
 
+
+	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>
+	
 
 	<!--app -->
 	<script src="<?php echo base_url('scripts/app.js');?>"></script>
@@ -181,10 +186,12 @@
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
 
 	<!-- directives-->
 
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
+	
 
 
 
