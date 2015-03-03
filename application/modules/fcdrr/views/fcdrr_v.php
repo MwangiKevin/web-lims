@@ -4,8 +4,8 @@
 		<form>
 		<div class="ui horizontal divider">Start</div>
 		<div class="ui stackable grid">
-			<div class="three wide column "><b>Facility:</b><center>A.I.C Kijabe Naivasha Medical Centre</center></div>
-			<div class="three wide column"><b>Facility MFL:</b> 15282</div>
+			<div class="three wide column"><b>Facility:</b><div ng-model="fdcrr.head_info.facility"><center>A.I.C Kijabe Naivasha Medical Centre</center></div></div>
+			<div class="three wide column"><b ng-model="fdcrr.head_info.mfl">Facility MFL:</b> 15282</div>
 			<div class="three wide column"><b>Sub County:</b> Naivasha</div>
 			<div class="three wide column"><b>County:</b> Nakuru</div>
 			<div class="three wide column"><b>Affliation:</b> CHAK</div>
@@ -14,13 +14,13 @@
 		<div class="ui stackable grid">
 			<div class="three wide column">REPORT OF THE PERIOD</div>
 			<div class="three wide column">
-				<select  class="ui dropdown" name="report_year" onchange="" required>
+				<select  class="ui dropdown" name="report_year" onchange="" required ng-model="fdcrr.head_info.report_year">
 					<option value="">* Select Year *</option>
 					<option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>                 					
 				</select>
 			</div>
 			<div class="three wide column">
-				<select class="ui dropdown" name="report_month">
+				<select class="ui dropdown" name="report_month" ng-model="fdcrr.head_info.report_month">
 					<option value="">* Select Month *</option>
 					<option value="1">January</option>
 					<option value="2">February</option>
@@ -45,8 +45,8 @@
 					<div class="ui label">
 						Facs </br>Calibur:
 					</div>
-					<input placeholder="Paed Tests" type="text" ng-model="facs_calibur_paed" />
-					<input placeholder="Adult Tests" type="text" ng-model="facs_calibur_adult" />
+					<input placeholder="Paed Tests" type="text" ng-model="fcdrr.devicetests.facs_calibur.paed_tests" />
+					<input placeholder="Adult Tests" type="text" ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -54,8 +54,8 @@
 					<div class="ui label">
 						Facs </br>Count:
 					</div>
-					<input placeholder="Paed Tests" type="text" ng-model="facs_count_paed" />
-					<input placeholder="Adult Tests" type="text" ng-model="facs_count_adult" />
+					<input placeholder="Paed Tests" type="text" ng-model="fcdrr.devicetests.facs_count.paed_tests" />
+					<input placeholder="Adult Tests" type="text" ng-model="fcdrr.devicetests.facs_count.adult_tests" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -63,8 +63,8 @@
 					<div class="ui label">
 						Cyflow </br>Partec:
 					</div>
-					<input placeholder="Paed Tests" type="text" ng-model="cyflow_paed" />
-					<input placeholder="Adult Tests" type="text" ng-model="cyflow_adult" />
+					<input placeholder="Paed Tests" type="text" ng-model="fcdrr.devicetests.cyflow.paed_tests" />
+					<input placeholder="Adult Tests" type="text" ng-model="fcdrr.devicetests.cyflow.adult_tests" />
 				</div>
 			</div>
 			<div class="three wide column">
@@ -72,7 +72,7 @@
 					<div class="ui label">
 						Alere PIMA:
 					</div>
-					<input placeholder="" type="text" readonly />
+					<input placeholder="" type="text" ng-model="fcdrr.devicetests.pima.pima_tests"/>
 				</div>
 			</div>
 		</div>
@@ -110,16 +110,17 @@
 				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity.category_name}}</td></tr>	
 				
 				<tr ng-repeat="comod_cat in commodity.commodities">
+
 					<td style="width:50em">{{comod_cat.name}}</td>
 					<td style="width:10em">{{comod_cat.unit}}</td>
-					<td style="width:30em"><div class="ui input"><input ng-model="qaz" name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td style="width:50em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></div></td>
-					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" value="" required readonly/></div></td>
-					<td style="width:30em"><div class="ui input"><input name="" id="" style="" size="" type="text" class="form-control" required/></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].beg_bal" name="" id="" type="text"  required/></div></td>
+					<td style="width:50em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].qty_receive" name="" id="" type="text"   required/></div></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].qty_used" name="" id="" type="text"  required/></div></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].losses" name="" id="" type="text"  required/></div></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].positives" name="" id="" type="text"  required/></div></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].negatives" name="" id="" type="text"  required/></div></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].end_bal" name="" id="" type="text"  required value="" readonly/></div></td>
+					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].qty_request" name="" id="" type="text"  required/></td>
 
 				</tr>
 			</tbody>
@@ -151,12 +152,12 @@
 		</div>
 		</form>
 	</div>
-</div>
+</div>{{fcdrr}}
 <script>
 $(window).scroll(function(){
 	var sticky = $('.sticky'),
 	scroll = $(window).scrollTop();
-	console.log(scroll);
+	//console.log(scroll);
 	if (scroll >= 314) sticky.addClass('fixed');
 	else sticky.removeClass('fixed');
 });
