@@ -28,7 +28,7 @@
 						<td>{{row.balance}}</td>
 						<td>
 							<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
-								<i class="glyphicon glyphicon-remove-circle">
+								<i class="remove icon">
 								</i>
 							</button>
 						</td>

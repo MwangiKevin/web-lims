@@ -117,7 +117,7 @@
 	<!-- END: App-Loading Screen. -->
 
 	<div class="" >
-		<div ui-view="navbar" ng-class="'hide'" class="ui inverted fixed menu navbar page grid main-navbar pointing" ng-cloak=""></div>
+		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
 
 		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
@@ -161,6 +161,9 @@
 
 	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload-shim.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload.min.js');?>"></script>
+
 
 
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
@@ -176,10 +179,14 @@
 	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/dashboard/TestsTrendCtrl.js');?>"></script>
+
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/facilitiesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
 
 
 	<!--Factories, Services and providers -->
@@ -187,6 +194,8 @@
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
 
 	<!-- directives-->
 
@@ -230,83 +239,22 @@
 	padding-right: 0rem !important;
 }
 
+.chart-wrapper {
+	position: relative;
+	padding-bottom: 40%;
+	margin-left: 5%;
+	margin-right: 5%;
 
-/*  SECTIONS  */
-.section {
-	clear: both;
-	padding: 0px;
-	margin: 0px;
+	height:100px;
+	overflow-y: auto;
 }
 
-/*  COLUMN SETUP  */
-.col {
-	display: block;
-	float:left;
-	margin: 1% 0 1% 1.6%;
-}
-.col:first-child { margin-left: 0; }
+.chart-inner {
+	position: absolute;
+	width: 90%; 
 
-/*  GROUPING  */
-.group:before,
-.group:after { content:""; display:table; }
-.group:after { clear:both;}
-.group { zoom:1; /* For IE 6/7 */ }
-/*  GRID OF TWELVE  */
-.span_12_of_12 {
-	width: 100%;
-}
+	/*height: 90%;*/
 
-.span_11_of_12 {
-	width: 91.53%;
 }
-.span_10_of_12 {
-	width: 83.06%;
-}
-
-.span_9_of_12 {
-	width: 74.6%;
-}
-
-.span_8_of_12 {
-	width: 66.13%;
-}
-
-.span_7_of_12 {
-	width: 57.66%;
-}
-
-.span_6_of_12 {
-	width: 49.2%;
-}
-
-.span_5_of_12 {
-	width: 40.73%;
-}
-
-.span_4_of_12 {
-	width: 32.26%;
-}
-
-.span_3_of_12 {
-	width: 23.8%;
-}
-
-.span_2_of_12 {
-	width: 15.33%;
-}
-
-.span_1_of_12 {
-	width: 6.866%;
-}
-
-/*  GO FULL WIDTH BELOW 480 PIXELS */
-@media only screen and (max-width: 480px) {
-	.col {  margin: 1% 0 1% 0%; }
-
-	.span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
-		width: 100%; 
-	}
-}
-
 </style>
 

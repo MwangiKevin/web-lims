@@ -10,7 +10,8 @@ var app = angular
 	'chart.js',
 	'highcharts-ng',
 	'ngActivityIndicator',
-	'smart-table'
+	'smart-table',
+	'angularFileUpload'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -54,7 +55,24 @@ var app = angular
 	.state('Dashboard.summary',{
 		url: 'summary',
 		templateUrl: 'dashboard/dashboard_summary',
-		controller:'dashboardSummaryCtrl'		
+		controller:'dashboardSummaryCtrl'
+	})
+	.state('Dashboard.testingTrends',{
+		url: 'testingTrends',
+		templateUrl: 'dashboard/testing_trends'	,
+		controller:'TestsTrendCtrl'
+	})
+	.state('Dashboard.devices',{
+		url: 'deviceDistribution',
+		templateUrl: 'dashboard/devices'		
+	})
+	.state('Dashboard.map',{
+		url: 'map',
+		templateUrl: 'dashboard/map'
+	})
+	.state('Dashboard.fcdrr_reporting',{
+		url: 'fcdrrReporting',
+		templateUrl: 'dashboard/fcdrr_reporting'		
 	})
 	.state('fillFCDRR',{ /* fcdrr page loaded here */
 		url: '/fillFCDRR',
@@ -77,7 +95,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'devices/device_uploads',
-				// controller: ngProgress_Test
+				controller: deviceUploadsCtrl
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

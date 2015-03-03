@@ -4,8 +4,9 @@ app.factory('Commons', ['$location',function($location){
 	var activeSubmenuLV1 = "";
 	var activeSubmenuLV2 = "";
 	Commons.showMenu = true;
-	Commons.dashboardAreaClass = 'col span_10_of_12';
+	Commons.dashboardAreaClass = 'column';
 	Commons.title = '';
+	Commons.projectName='web-lims';
 
 	Commons.getActiveMenu = function (name) {
 		// console.log(name)
@@ -45,10 +46,10 @@ app.factory('Commons', ['$location',function($location){
 		// alert()
 		if(Commons.showMenu){
 			Commons.showMenu = false;
-			Commons.dashboardAreaClass = 'col span_12_of_12';
+			Commons.dashboardAreaClass = 'fullpage';
 		}else{			
 			Commons.showMenu = true;
-			Commons.dashboardAreaClass = 'col span_10_of_12';
+			Commons.dashboardAreaClass = 'column';
 		}
 
 	};

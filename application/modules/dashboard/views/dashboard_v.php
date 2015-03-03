@@ -24,8 +24,8 @@
 
 </style>
 <!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
-<div class="page section group">
-	<div class="col span_2_of_12">
+<div class="ui page stackable grid" style="padding-top:10px;">
+	<div class="three wide column" style="margin:0px;padding:0px;">
 		<div class="ui black medium launch right attached button" style="">
 			<a ng-click="commons.toggleMenu()">
 				<i class="icon list layout right"></i>
@@ -34,24 +34,22 @@
 		</div>  
 	</div>  
 
-	<div class=" col span_7_of_12">  
+	<div class="nine wide column" style="margin:0px;padding:0px;">  
 		<div class="ui grid right " style="">
-			<div class=" wide column">
-				<div class="ui segment">
-					<div class="ui large breadcrumb">
-						<a class="section">Home</a>
-						<i class="right chevron icon divider"></i>
-						<a class="section">Dashboard</a>
-						<i class="right chevron icon divider"></i>
-						<div class="active section">Summary</div>
-					</div>
+			<div class="ui segment">
+				<div class="ui large breadcrumb">
+					<a class="section">Home</a>
+					<i class="right chevron icon divider"></i>
+					<a class="section">Dashboard</a>
+					<i class="right chevron icon divider"></i>
+					<div class="active section">Summary</div>
 				</div>
 			</div>  
 		</div>
 	</div>
 
-	<div style="" class="col span_3_of_12">
-		<h1 style="float:right;margin-bottom: 0px;margin-top: 0px;">{{commons.getTitle()}}</h1>
+	<div style="margin:0px;padding:0px;" class="three wide column">
+		<h1 style="float:right;margin-bottom: 0px;margin-top: 0px;" class="ui inverted">{{commons.getTitle()}}</h1>
 	</div>
 </div>
 <script>
@@ -67,22 +65,22 @@ $(".launch.button").mouseenter(function(){
 </script>
 
 
-<div class="ui page site section group" style="margin-top:0px">
-	<div class="col span_2_of_12" ng-show="commons.getMenuShowStatus()">
+<div class="ui page site stackable grid" style="padding-top:20px">
+	<div class="three wide column" ng-show="commons.getMenuShowStatus()" style="margin:0px;padding:0px;">
 		<div class="ui vertical inverted  menu pointing left uncover visible" id="toc">
 			<a class="item" ng-class="getActiveSubmenuLV1('summary')" href="#summary">
 				<b>Summary</b>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('testingTrends')">
+			<a class="item" href="#testingTrends" ng-class="getActiveSubmenuLV1('testingTrends')">
 				<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('deviceDistribution')">
+			<a class="item" href="#deviceDistribution" ng-class="getActiveSubmenuLV1('deviceDistribution')">
 				<b>Device Distribution</b><i class="fa fa-medkit " style="float:right"></i>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('map')">
+			<a class="item" href="#map" ng-class="getActiveSubmenuLV1('map')">
 				<i class="map icon"></i> <b>Map</b>
 			</a>
-			<a class="item" href="" ng-class="getActiveSubmenuLV1('fcdrrReporting')">
+			<a class="item" href="#fcdrrReporting" ng-class="getActiveSubmenuLV1('fcdrrReporting')">
 				<b>FDRR Reporting </b><i class="fa fa-bar-chart " style="float:right"></i>
 			</a>
 
@@ -111,8 +109,8 @@ $(".launch.button").mouseenter(function(){
 		</div>
 	</div>
 
-	<div class="" ng-class="commons.getDashboardAreaClass()">
-		<div ui-view class="ui grid"></div>
+	<div class="twelve wide " ng-class="commons.getDashboardAreaClass()" style="margin:0px;padding:0px;">
+		<div ui-view class=""></div>
 	</div>
 </div>
 
@@ -125,6 +123,13 @@ $(".launch.button").mouseenter(function(){
 	left: auto; 
 	display: none;
 }
+.fullpage{
+	width: 100% !important;
+}
+.ui.vertical.menu {
+	width: 90% !important;
+}
+
 </style>
 
 

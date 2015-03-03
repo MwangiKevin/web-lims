@@ -72,8 +72,9 @@
 					<div class="ui label">
 						Alere PIMA:
 					</div>
-					<input placeholder="" type="text" ng-model="fcdrr.devicetests.pima.pima_tests"/>
+					<input placeholder="PIMA Tests" type="text" ng-model="fcdrr.devicetests.pima.pima_tests"/>
 				</div>
+
 			</div>
 		</div>
 		<hr />
@@ -110,7 +111,6 @@
 				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity.category_name}}</td></tr>	
 				
 				<tr ng-repeat="comod_cat in commodity.commodities">
-
 					<td style="width:50em">{{comod_cat.name}}</td>
 					<td style="width:10em">{{comod_cat.unit}}</td>
 					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].beg_bal" name="" id="" type="text"  required/></div></td>
