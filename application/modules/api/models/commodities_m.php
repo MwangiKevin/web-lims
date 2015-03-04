@@ -19,7 +19,8 @@ class commodities_m extends MY_Model{
 
 			$reporting_status = 1;
 		}
-
+		// echo "CALL `proc_get_commodities`('$id','$reporting_status')";
+		
 		$comodities = R::getAll("CALL `proc_get_commodities`('$id','$reporting_status')");
 
 		if($this->input->get('fcdrr_format') && $this->input->get('fcdrr_format')!='false'){

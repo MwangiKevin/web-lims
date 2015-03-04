@@ -109,21 +109,21 @@
 					</tr>
 				</thead>
 
-				<tbody ng-repeat="commodity in the_commodities">
-					<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity.category_name}}</td></tr>	
+				<tbody ng-repeat="commodity_cat in commodities">
+					<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity_cat.category_name}}</td></tr>	
 
-					<tr ng-repeat="comod_cat in commodity.commodities">
+					<tr ng-repeat="commodity in commodity_cat.commodities">
 
-						<td style="width:50em">{{comod_cat.name}}</td>
-						<td style="width:10em">{{comod_cat.unit}}</td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].beg_bal" name="" id="" type="text"  required/></div></td>
-						<td style="width:50em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].qty_receive" name="" id="" type="text"   required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].qty_used" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].losses" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].positives" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].negatives" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].end_bal" name="" id="" type="text"  required value="" readonly/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[comod_cat.id].qty_request" name="" id="" type="text"  required/></td>
+						<td style="width:50em">{{commodity.name}}</td>
+						<td style="width:10em">{{commodity.unit}}</td>
+						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].beg_bal" name="" id="" type="text"  required/></div></td>
+						<td style="width:50em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].qty_receive" name="" id="" type="text"   required/></div></td>
+						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].qty_used" name="" id="" type="text"  required/></div></td>
+						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].losses" name="" id="" type="text"  required/></div></td>
+						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].positives" name="" id="" type="text"  required/></div></td>
+						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].negatives" name="" id="" type="text"  required/></div></td>
+						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].end_bal" name="" id="" type="text"  required value="" readonly/></div></td>
+						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].qty_request" name="" id="" type="text"  required/></td>
 
 					</tr>
 				</tbody>
