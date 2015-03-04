@@ -2,7 +2,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `proc_get_commodities`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_commodities`(reporting_status int(2))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_commodities`(C_id int(2),reporting_status int(2))
 BEGIN
 
 
@@ -22,6 +22,13 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY, "  AND `c`.`reporting_status`='1' ");
         ELSE
             SET @QUERY = @QUERY;
+        END IF;
+
+        IF (C_id = 0 || C_id = '')
+        THEN
+            SET @QUERY = @QUERY;
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, ' AND `c`.`id`=', C_id, '');
         END IF;
 
         PREPARE stmt FROM @QUERY;

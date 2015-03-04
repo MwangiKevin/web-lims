@@ -11,7 +11,7 @@ class commodities_m extends MY_Model{
 
 	}
 
-	public function read(){
+	public function read($id=NULL){
 
 		$reporting_status = 0;
 
@@ -20,11 +20,11 @@ class commodities_m extends MY_Model{
 			$reporting_status = 1;
 		}
 
-		$comodities = R::getAll("CALL `proc_get_commodities`($reporting_status)");
+		$comodities = R::getAll("CALL `proc_get_commodities`('$id','$reporting_status')");
 
 		if($this->input->get('fcdrr_format') && $this->input->get('fcdrr_format')!='false'){
 
-			$comodity_categories = R::getAll("CALL `proc_get_commodity_categories`()");
+			$comodity_categories = R::getAll("CALL `proc_get_commodity_categories`('')");
 
 			$i=0;
 			foreach ($comodity_categories  as $cat) {
