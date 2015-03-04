@@ -20,7 +20,7 @@ class commodity_categories_m extends MY_Model{
 			$reporting_status = 1;
 		}
 
-		$result = R::getAll("CALL proc_get_commodities($reporting_status)");
+		$result = R::getAll("CALL `proc_get_commodity_categories`($reporting_status)");
 		return $result;	
 
 	}
