@@ -7,50 +7,168 @@ class api extends MY_Controller {
 	function __construct() {
 
 		parent::__construct();
-		$this->load->model("api_m");	
+		
+		header('Content-Type: application/json; charset=utf-8');
 	}
 
-	public function index() {
-		if($this->login_status){
-			$this->load->view('dashboard_template');
+	public function facilities($id=NULL) {
+
+		$this->load->model("facilities_m");	
+
+		$method= $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->facilities_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->facilities_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->facilities_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->facilities_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
 
-// new functions that fetch the data to display in the combo box
+	public function sub_counties($id=NULL) {
 
-	public function regions(){
-		$result = $this->api_m->get_region_details();
-		$result = json_encode($result);
-		print_r($result);
+		$this->load->model("sub_counties_m");	
+
+		$method= $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->sub_counties_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->sub_counties_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->sub_counties_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->sub_counties_m->remove($id),JSON_PRETTY_PRINT);
+		}
 	}
 
-	public function regions(){
-		$result = $this->api_m->get_region_details();
-		$result = json_encode($result);
-		print_r($result);
+	public function counties($id=NULL) {
+
+		$this->load->model("counties_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->counties_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->counties_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->counties_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->counties_m->remove($id),JSON_PRETTY_PRINT);
+		}
 	}
-	
-	public function labs(){
-		$result = $this->api_m->get_lab_details();
-		$result = json_encode($result);
-		print_r($result);
+
+	public function partners($id=NULL) {
+
+		$this->load->model("partners_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->partners_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->partners_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->partners_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->partners_m->remove($id),JSON_PRETTY_PRINT);
+		}
 	}
-	
-	public function districts(){
-		$result = $this->api_m->get_district_details();
-		$result = json_encode($result);
-		print_r($result);
+
+	public function commodities($id=NULL) {
+
+		$this->load->model("commodities_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->commodities_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->commodities_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->commodities_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->commodities_m->remove($id),JSON_PRETTY_PRINT);
+		}
 	}
-	
-	public function partners(){
-		$result = $this->api_m->get_partner_details();
-		$result = json_encode($result);
-		print_r($result);
+
+	public function commodity_categories($id=NULL) {
+
+		$this->load->model("commodity_categories_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->commodity_categories_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->commodity_categories_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->commodity_categories_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->commodity_categories_m->remove($id),JSON_PRETTY_PRINT);
+		}
 	}
-	
-	public function facility(){
-		$result = $this->api_m->get_facility_details();
-		$result = json_encode($result);
-		print_r($result);
+
+	public function fcdrrs($id=NULL) {
+
+		$this->load->model("fcdrrs_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->fcdrrs_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->fcdrrs_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->fcdrrs_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->fcdrrs_m->remove($id),JSON_PRETTY_PRINT);
+		}
 	}
 }

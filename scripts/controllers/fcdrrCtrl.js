@@ -1,20 +1,25 @@
-app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons','$activityIndicator',function($scope,$http,ngProgress,Filters,Commons,$activityIndicator){
-    
-    Commons.activeMenu = "fcdrr";
+app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons','$activityIndicator','API', function($scope,$http,ngProgress,Filters,Commons,$activityIndicator,API){
 
-    $scope.the_commodities = [];
-    $http.get('fcdrr/get_commodities_and_categories').success(function($data){ $scope.the_commodities=$data; });
+	Commons.activeMenu = "fcdrr";
 
-    $scope.fcdrr="";
-
+	$scope.commodities=[];
+	$scope.status = false;
 
     $scope.fcdrr={
-            head_info:{ },
-            devicetests:{ },
-            comodities:{ }
+    	head_info:{},
+    	devicetests:{},
+    	comodities:{}
     }
 
-}
+    function getCommodities() {
+    	API.getCommodities('',true,true)
+    	.success(function (comm) {
+    		$scope.commodities = comm;
+    	})
+    	.error(function (error) {
+    		$scope.status = 'Unable to load customer data: ' + error.message;
+    	});
+    }
+    getCommodities();
 
-
-])
+}])
