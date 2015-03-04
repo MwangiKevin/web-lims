@@ -162,6 +162,8 @@
 	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload-shim.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/underscore/underscore-min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-underscore/angular-underscore.min.js');?>"></script>
 
 
 
