@@ -2,15 +2,17 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 
 	Commons.activeMenu = "fcdrr";
 
-	$scope.commodities=[];
-	$scope.status = false;
-    $scope.earliest_date = moment().subtract('month', 3).startOf('month');
+    $scope.commodities=[];
 
-    $scope.selectableDates =
-    // {
-    //     years:[{label:"*Select a Year*", value: 0}],
-    //     months:[{label:"*Select a Month*", value: 0}]
-    // }  
+    $scope.facilities=[];  
+
+    $scope.status = false;
+    $scope.earliest_date = moment().subtract('month', 3).startOf('month');
+    $scope.months_back_reporting = 4;
+
+
+
+
     $scope.selectableDates =
     {
         years:[],
@@ -34,16 +36,52 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
         comodities:{}
     }
 
+
+
+
+
+    /* Start of facility Details*/
+
+    function getFacilities() {
+        API.getFacilities()
+        .success(function (fac) {
+            $scope.facilities = fac;
+            $scope.fcdrr.head_info.selected.facility = $scope.facilities[0];  //this is just a test 
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load customer data: ' + error.message;
+        });
+    }
+    getFacilities();
+
+    /* End of facility Details*/
+
+
+
+
+
+
+
+    /* Start of facility Details*/
     function getCommodities() {
     	API.getCommodities('',true,true)
     	.success(function (comm) {
-    		$scope.commodities = comm;
-    	})
+    		$scope.commodities = comm;            
+        })
     	.error(function (error) {
     		$scope.status = 'Unable to load customer data: ' + error.message;
     	});
     }
     getCommodities();
+
+
+    /* End of facility Details*/
+
+
+
+
+
+    /* Start of dates*/
 
     $scope.getSelectableMonths =function () {
 
@@ -53,7 +91,7 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
         $scope.fcdrr.head_info.selected.dates.month = null;
 
         nowNormalized = moment().startOf("month"), 
-        startDateNormalized = moment().subtract('month', 3).startOf('month');
+        startDateNormalized = moment().subtract('month', $scope.months_back_reporting).startOf('month');
         while (startDateNormalized.isBefore(nowNormalized) ) {
             if ($scope.fcdrr.head_info.selected.dates.year && (startDateNormalized.format("YYYY")== $scope.fcdrr.head_info.selected.dates.year.value)){
                 $scope.selectableDates.months.push({label : startDateNormalized.format("MMMM"),value : startDateNormalized.format("MM")});
@@ -66,7 +104,7 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
     $scope.getSelectableYears =function () {
 
         nowNormalized = moment().startOf("month"), 
-        startDateNormalized = moment().subtract('month', 3).startOf('month');
+        startDateNormalized = moment().subtract('month', $scope.months_back_reporting).startOf('month');
 
         $scope.selectableDates.years.push({label : startDateNormalized.format("YYYY"),value : startDateNormalized.format("YYYY")});
 
@@ -80,5 +118,7 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 
     $scope.getSelectableYears();
     $scope.getSelectableMonths();
+
+    /* End of dates*/
 
 }])

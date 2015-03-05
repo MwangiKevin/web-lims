@@ -4,11 +4,11 @@
 		<form>
 			<div class="ui horizontal divider">Start</div>
 			<div class="ui stackable grid">
-				<div class="three wide column"><b>Facility:</b><div ng-model="fdcrr.head_info.facility"><center>A.I.C Kijabe Naivasha Medical Centre</center></div></div>
-				<div class="three wide column"><b ng-model="fdcrr.head_info.mfl">Facility MFL:</b> 15282</div>
-				<div class="three wide column"><b>Sub County:</b> Naivasha</div>
-				<div class="three wide column"><b>County:</b> Nakuru</div>
-				<div class="three wide column"><b>Affliation:</b> CHAK</div>
+				<div class="three wide column"><b>Facility:</b><br/>  {{fcdrr.head_info.selected.facility.facility_name}}   </div>
+				<div class="three wide column"><b ng-model="fdcrr.head_info.mfl">Facility MFL:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_mfl_code}}   </div>
+				<div class="three wide column"><b>Sub County:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_sub_county_name}}   </div>
+				<div class="three wide column"><b>County:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_county_name}}   </div>
+				<div class="three wide column"><b>Affliation:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_affiliation}}   </div>
 			</div>
 			<hr />
 			<div class="ui stackable grid">

@@ -2,8 +2,17 @@ app.factory('API', ['$location','$http','$activityIndicator',function($location,
 	var API={};
 	var commodities = [34];
 
-	API.getFacilities = function () {
-		return $http.get('api/filters/dates');
+	API.getFacilities = function (id) {
+
+		params = {id: id};
+		$activityIndicator.startAnimating();
+		return $http.get(
+			'api/facilities',
+			{params: params}
+			)
+		.success(function(response){
+			$activityIndicator.stopAnimating() 
+		});
 	};
 	API.getCommodities = function (id,fcdrr_format,reportingOnly) {
 
