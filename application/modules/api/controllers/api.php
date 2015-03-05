@@ -10,6 +10,9 @@ class api extends MY_Controller {
 		
 		header('Content-Type: application/json; charset=utf-8');
 	}
+	public function index(){
+		echo "null";
+	}
 
 	public function facilities($id=NULL) {
 

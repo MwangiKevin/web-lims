@@ -35,8 +35,8 @@ class filters extends MY_Controller {
 				$entity_values[$i]['type'] = $value['grp_type'];	
 
 			}else if($value['grp_type'] == 'Facilities'){
-				$entity_values[$i]['name'] = $value['name'];
-				$entity_values[$i]['mfl_code'] = $value['grp_type'];
+				$entity_values[$i]['name'] = $value['facility_name'];
+				$entity_values[$i]['mfl_code'] = $value['facility_mfl_code'];
 				$entity_values[$i]['email'] = 'null';
 				$entity_values[$i]['phone'] = 'null';
 				$entity_values[$i]['type'] = $value['grp_type'];

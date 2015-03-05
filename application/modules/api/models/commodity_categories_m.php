@@ -11,17 +11,18 @@ class commodity_categories_m extends MY_Model{
 
 	}
 
-	public function read(){
+	public function read($id=NULL){
 
-		$reporting_status = 0;
+		$categories_res = R::getAll("CALL `proc_get_commodity_categories`('$id')");
 
-		if($this->input->get('reporting') && $this->input->get('reporting')!='false'){
+		if($id==NULL){
 
-			$reporting_status = 1;
+			return $categories_res;	
+
+		}else{
+
+			return $categories_res[0];	
 		}
-
-		$result = R::getAll("CALL `proc_get_commodity_categories`($reporting_status)");
-		return $result;	
 
 	}
 
