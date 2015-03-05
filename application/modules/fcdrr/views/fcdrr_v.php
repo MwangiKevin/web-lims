@@ -14,14 +14,20 @@
 			<div class="ui stackable grid">
 				<div class="three wide column">REPORT OF THE PERIOD</div>
 				<div class="three wide column">
-					<select  placeholder="Select a Month" class="ui dropdown" name="report_year" ng-change="getSelectableMonths()" required  ng-model="fcdrr.head_info.selected.dates.year" ng-options="opt as opt.label for opt in selectableDates.years">
-					</select>
+
+					<ui-select ng-click="getSelectableMonths()" ng-model="fcdrr.head_info.selected.dates.year" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+						<ui-select-match placeholder="Select a Year">{{$select.selected.label}}</ui-select-match>
+						<ui-select-choices repeat="year in selectableDates.years | filter: $select.search">
+							<span ng-bind-html="year.label | highlight: $select.search"></span>
+						</ui-select-choices>
+					</ui-select>
+
 				</div>
 				<div class="three wide column" ng-show="fcdrr.head_info.selected.dates.year">
 
 					<ui-select ng-model="fcdrr.head_info.selected.dates.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
 						<ui-select-match placeholder="Select a Month">{{$select.selected.label}}</ui-select-match>
-						<ui-select-choices repeat="month in selectableDates.months | filter: $select.search">
+						<ui-select-choices  repeat="month in selectableDates.months | filter: $select.search">
 							<span ng-bind-html="month.label | highlight: $select.search"></span>
 						</ui-select-choices>
 					</ui-select>

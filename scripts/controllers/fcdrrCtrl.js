@@ -25,16 +25,8 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
                 facility:{},
                 dates:
                 {
-                    year:
-                    {
-                        // label   : null,
-                        // value   : null
-                    },
-                    month:
-                    {
-                        // label   : null,
-                        // value   : null
-                    }
+                    year:null,
+                    month:null
                 }
             }
         },
@@ -60,12 +52,10 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 
         $scope.fcdrr.head_info.selected.dates.month = null;
 
-        $scope.resetMonth();
-
         nowNormalized = moment().startOf("month"), 
         startDateNormalized = moment().subtract('month', 3).startOf('month');
         while (startDateNormalized.isBefore(nowNormalized) ) {
-            if (startDateNormalized.format("YYYY")== $scope.fcdrr.head_info.selected.dates.year.value){
+            if ($scope.fcdrr.head_info.selected.dates.year && (startDateNormalized.format("YYYY")== $scope.fcdrr.head_info.selected.dates.year.value)){
                 $scope.selectableDates.months.push({label : startDateNormalized.format("MMMM"),value : startDateNormalized.format("MM")});
             }
             startDateNormalized.add("M", 1);
@@ -74,12 +64,6 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 
 
     $scope.getSelectableYears =function () {
-
-        // $scope.selectableDates.years=[$scope.selectableDates.years[1]];
-
-        // console.log($scope.selectableDates.years);
-
-        // $scope.fcdrr.head_info.selected.dates.month = $scope.selectableDates.months[1];
 
         nowNormalized = moment().startOf("month"), 
         startDateNormalized = moment().subtract('month', 3).startOf('month');
@@ -90,25 +74,11 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
             $scope.selectableDates.years.push({label : nowNormalized.format("YYYY"),value : nowNormalized.format("YYYY")});
         }
 
-        // $scope.fcdrr.head_info.selected.dates.month.value=null;
         $scope.getSelectableMonths();
-
-    }
-
-    $scope.resetMonth = function() {
-        // if(angular.isDefined($scope.fcdrr.head_info.selected.dates.month)){
-        //     delete $scope.fcdrr.head_info.selected.dates.month
-        // }
 
     }
 
     $scope.getSelectableYears();
     $scope.getSelectableMonths();
-
-
-    // $scope.fcdrr.head_info.selected.dates.month = $scope.selectableDates.months[1];
-
-
-    // $scope.fcdrr.head_info.selected.dates.year = $scope.selectableDates.years[1];
 
 }])
