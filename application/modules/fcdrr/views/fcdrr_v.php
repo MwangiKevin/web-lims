@@ -14,27 +14,18 @@
 			<div class="ui stackable grid">
 				<div class="three wide column">REPORT OF THE PERIOD</div>
 				<div class="three wide column">
-					<select  class="ui dropdown" name="report_year" onchange="" required ng-model="fdcrr.head_info.report_year">
-						<option value="">* Select Year *</option>
-						<option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>                 					
+					<select  placeholder="Select a Month" class="ui dropdown" name="report_year" ng-change="getSelectableMonths()" required  ng-model="fcdrr.head_info.selected.dates.year" ng-options="opt as opt.label for opt in selectableDates.years">
 					</select>
 				</div>
-				<div class="three wide column">
-					<select class="ui dropdown" name="report_month" ng-model="fdcrr.head_info.report_month">
-						<option value="">* Select Month *</option>
-						<option value="1">January</option>
-						<option value="2">February</option>
-						<option value="3">March</option>
-						<option value="4">April</option>
-						<option value="5">May</option>
-						<option value="6">June</option>
-						<option value="7">July</option>
-						<option value="8">August</option>
-						<option value="9">September</option>
-						<option value="10">October</option>
-						<option value="11">November</option>
-						<option value="12">December</option>                 					
-					</select>
+				<div class="three wide column" ng-show="fcdrr.head_info.selected.dates.year">
+
+					<ui-select ng-model="fcdrr.head_info.selected.dates.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+						<ui-select-match placeholder="Select a Month">{{$select.selected.label}}</ui-select-match>
+						<ui-select-choices repeat="month in selectableDates.months | filter: $select.search">
+							<span ng-bind-html="month.label | highlight: $select.search"></span>
+						</ui-select-choices>
+					</ui-select>
+
 				</div>
 			</div>
 			<hr />
@@ -89,6 +80,7 @@
 			<hr />
 			<pre>
 				{{fcdrr}}
+				{{selectableDates}}
 			</pre>
 			<table  class="ui celled striped structured table" >
 				<thead class="ui sticky" >

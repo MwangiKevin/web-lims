@@ -258,5 +258,13 @@
 	/*height: 90%;*/
 
 }
+
+.ng-hide:not(.ng-hide-animate) {
+  /* this is just another form of hiding an element */
+  display: none!important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
 </style>
 

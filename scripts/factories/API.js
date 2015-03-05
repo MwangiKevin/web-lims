@@ -8,9 +8,6 @@ app.factory('API', ['$location','$http','$activityIndicator',function($location,
 	API.getCommodities = function (id,fcdrr_format,reportingOnly) {
 
 		params = {id: id, fcdrr_format: fcdrr_format, reportingOnly: reportingOnly};
-
-		console.log(params);
-
 		$activityIndicator.startAnimating();
 		return $http.get(
 			'api/commodities',
