@@ -10,6 +10,8 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
     $scope.earliest_date = moment().subtract('month', 3).startOf('month');
     $scope.months_back_reporting = 4;
 
+    $scope.promise=null;
+
 
 
 
@@ -43,7 +45,8 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
     /* Start of facility Details*/
 
     function getFacilities() {
-        API.getFacilities()
+
+        $scope.promise = API.getFacilities()
         .success(function (fac) {
             $scope.facilities = fac;
             $scope.fcdrr.head_info.selected.facility = $scope.facilities[0];  //this is just a test 
@@ -64,7 +67,7 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 
     /* Start of facility Details*/
     function getCommodities() {
-    	API.getCommodities('',true,true)
+    	$scope.promise = API.getCommodities('',true,true)
     	.success(function (comm) {
     		$scope.commodities = comm;            
         })

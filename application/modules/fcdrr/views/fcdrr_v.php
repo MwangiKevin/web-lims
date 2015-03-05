@@ -1,7 +1,7 @@
 <div style="margin-left:10px">
 	<div ui-view="filter" class="ui column segment grid" id="viewport">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
-		<form>
+		<form cg-busy="promise">
 			<div class="ui horizontal divider">Start</div>
 			<div class="ui stackable grid">
 				<div class="three wide column"><b>Facility:</b><br/>  {{fcdrr.head_info.selected.facility.facility_name}}   </div>
@@ -87,6 +87,7 @@
 			<pre>
 				{{fcdrr}}
 				{{selectableDates}}
+				{{facilities}}
 			</pre>
 			<table  class="ui celled striped structured table" >
 				<thead class="ui sticky" >
