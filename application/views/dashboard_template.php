@@ -135,6 +135,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/css/bootstrap.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.css');?>">
 
 
 	<!--JS libraries -->
@@ -164,6 +165,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/underscore/underscore-min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-underscore/angular-underscore.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.js');?>"></script>
 
 
 
@@ -173,6 +175,11 @@
 
 	<!--app -->
 	<script src="<?php echo base_url('scripts/app.js');?>"></script>
+
+	
+	<!-- values -->
+
+	<script src="<?php echo base_url('scripts/values/cgBusyDefaults.js');?>"></script>
 
 
 	<!--Controllers -->
@@ -199,6 +206,7 @@
 	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
+
 
 	<!-- directives-->
 
@@ -259,6 +267,14 @@
 
 	/*height: 90%;*/
 
+}
+
+.ng-hide:not(.ng-hide-animate) {
+  /* this is just another form of hiding an element */
+  display: none!important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
 }
 </style>
 

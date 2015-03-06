@@ -13,6 +13,8 @@ class commodities_m extends MY_Model{
 
 	public function read($id=NULL){
 
+		$commodities;
+
 		$reporting_status = 0;
 
 		if($this->input->get('reportingOnly') && $this->input->get('reportingOnly')!='false'){
@@ -20,7 +22,7 @@ class commodities_m extends MY_Model{
 			$reporting_status = 1;
 		}
 
-		$comodities = R::getAll("CALL `proc_get_commodities`('$id','$reporting_status')");
+		$comodities_res = R::getAll("CALL `proc_get_commodities`('$id','$reporting_status')");
 
 		if($this->input->get('fcdrr_format') && $this->input->get('fcdrr_format')!='false'){
 
@@ -30,7 +32,7 @@ class commodities_m extends MY_Model{
 			foreach ($comodity_categories  as $cat) {
 				
 				$j=0;
-				foreach($comodities as $commodity){
+				foreach($comodities_res as $commodity){
 
 					if($cat['commodity_category_id']==$commodity["commodity_category_id"]){
 						$commodities_results[$i]['category_id']=$cat['commodity_category_id'];
@@ -52,11 +54,22 @@ class commodities_m extends MY_Model{
 				$i++;
 			}
 
-			return $commodities_results;
+			
+			$commodities = $commodities_results;
 
 		}else{
 
-			return $comodities;	 
+			$commodities =  $comodities_res;	 
+		}
+
+
+		if($id==NULL){
+
+			return $commodities;	
+
+		}else{
+
+			return $commodities[0];	
 		}
 
 	}

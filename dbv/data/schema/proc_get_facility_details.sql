@@ -8,6 +8,7 @@ CREATE PROCEDURE  proc_get_facility_details (user_group_id int(11), user_filter_
 										`fac`.`id` 				AS `facility_id`,
 										`fac`.`name` 			AS `facility_name`,
 										`fac`.`email` 			AS `facility_email`,
+										`fac`.`mfl_code` 		AS `facility_mfl_code`,
 										`fac`.`phone` 			AS `facility_phone`,
 										`fac`.`rollout_status` 	AS `facility_rollout_id`,
 										`fac`.`rollout_date`	AS `facility_rollout_date`,

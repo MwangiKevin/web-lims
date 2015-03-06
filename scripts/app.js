@@ -12,6 +12,7 @@ var app = angular
 	'ngActivityIndicator',
 	'angularFileUpload',
 	'smart-table',
+	'cgBusy'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -45,6 +46,7 @@ var app = angular
 
 
 	//common routes
+	
 	.state('Dashboard.main',{
 		url: '',
 		templateUrl: 'dashboard/dashboard_summary',
@@ -171,4 +173,4 @@ var app = angular
 		}
 	})
 
-}]);
+}])

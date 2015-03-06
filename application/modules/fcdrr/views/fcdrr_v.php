@@ -1,40 +1,37 @@
 <div style="margin-left:10px">
 	<div ui-view="filter" class="ui column segment grid" id="viewport">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
-		<form>
+		<form cg-busy="promise">
 			<div class="ui horizontal divider">Start</div>
 			<div class="ui stackable grid">
-				<div class="three wide column"><b>Facility:</b><div ng-model="fdcrr.head_info.facility"><center>A.I.C Kijabe Naivasha Medical Centre</center></div></div>
-				<div class="three wide column"><b ng-model="fdcrr.head_info.mfl">Facility MFL:</b> 15282</div>
-				<div class="three wide column"><b>Sub County:</b> Naivasha</div>
-				<div class="three wide column"><b>County:</b> Nakuru</div>
-				<div class="three wide column"><b>Affliation:</b> CHAK</div>
+				<div class="three wide column"><b>Facility:</b><br/>  {{fcdrr.head_info.selected.facility.facility_name}}   </div>
+				<div class="three wide column"><b ng-model="fdcrr.head_info.mfl">Facility MFL:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_mfl_code}}   </div>
+				<div class="three wide column"><b>Sub County:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_sub_county_name}}   </div>
+				<div class="three wide column"><b>County:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_county_name}}   </div>
+				<div class="three wide column"><b>Affliation:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_affiliation}}   </div>
 			</div>
 			<hr />
 			<div class="ui stackable grid">
 				<div class="three wide column">REPORT OF THE PERIOD</div>
 				<div class="three wide column">
-					<select  class="ui dropdown" name="report_year" onchange="" required ng-model="fdcrr.head_info.report_year">
-						<option value="">* Select Year *</option>
-						<option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>                 					
-					</select>
+
+					<ui-select ng-click="getSelectableMonths()" ng-model="fcdrr.head_info.selected.dates.year" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+						<ui-select-match placeholder="Select a Year">{{$select.selected.label}}</ui-select-match>
+						<ui-select-choices repeat="year in selectableDates.years | filter: $select.search">
+							<span ng-bind-html="year.label | highlight: $select.search"></span>
+						</ui-select-choices>
+					</ui-select>
+
 				</div>
-				<div class="three wide column">
-					<select class="ui dropdown" name="report_month" ng-model="fdcrr.head_info.report_month">
-						<option value="">* Select Month *</option>
-						<option value="1">January</option>
-						<option value="2">February</option>
-						<option value="3">March</option>
-						<option value="4">April</option>
-						<option value="5">May</option>
-						<option value="6">June</option>
-						<option value="7">July</option>
-						<option value="8">August</option>
-						<option value="9">September</option>
-						<option value="10">October</option>
-						<option value="11">November</option>
-						<option value="12">December</option>                 					
-					</select>
+				<div class="three wide column" ng-show="fcdrr.head_info.selected.dates.year">
+
+					<ui-select ng-model="fcdrr.head_info.selected.dates.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+						<ui-select-match placeholder="Select a Month">{{$select.selected.label}}</ui-select-match>
+						<ui-select-choices  repeat="month in selectableDates.months | filter: $select.search">
+							<span ng-bind-html="month.label | highlight: $select.search"></span>
+						</ui-select-choices>
+					</ui-select>
+
 				</div>
 			</div>
 			<hr />
@@ -89,6 +86,8 @@
 			<hr />
 			<pre>
 				{{fcdrr}}
+				{{selectableDates}}
+				{{facilities}}
 			</pre>
 			<table  class="ui celled striped structured table" >
 				<thead class="ui sticky" >
