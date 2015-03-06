@@ -62,9 +62,6 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 
 
 
-
-
-
     /* Start of facility Details*/
     function getCommodities() {
     	$scope.promise = API.getCommodities('',true,true)
@@ -79,8 +76,6 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
 
 
     /* End of facility Details*/
-
-
 
 
 
