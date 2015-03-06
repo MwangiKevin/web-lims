@@ -3,15 +3,16 @@
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
 		<form cg-busy="promise">
 			<div class="ui horizontal divider">Start</div>
+			<a class="ui teal ribbon label">Facility Details</a>
 			<div class="ui stackable grid">
-				<div class="three wide column"><b>Facility:</b><br/>  {{fcdrr.head_info.selected.facility.facility_name}}   </div>
-				<div class="three wide column"><b ng-model="fdcrr.head_info.mfl">Facility MFL:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_mfl_code}}   </div>
-				<div class="three wide column"><b>Sub County:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_sub_county_name}}   </div>
-				<div class="three wide column"><b>County:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_county_name}}   </div>
-				<div class="three wide column"><b>Affliation:</b> <br/>  {{fcdrr.head_info.selected.facility.facility_affiliation}}   </div>
+				<div class="six wide column"> <div class="ui horizontal label large">Facility (MFL Code):</div><b>{{ fcdrr.head_info.selected.facility.facility_name+'('+fcdrr.head_info.selected.facility.facility_mfl_code+')' }}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.head_info.selected.facility.facility_sub_county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.head_info.selected.facility.facility_county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.head_info.selected.facility.facility_affiliation}}</b></div>
 			</div>
 			<hr />
-			<div class="ui stackable grid">
+				<a class="ui teal ribbon label">Dates</a>
+			<div class="ui stackable grid ">
 				<div class="three wide column">REPORT OF THE PERIOD</div>
 				<div class="three wide column">
 
@@ -35,6 +36,7 @@
 				</div>
 			</div>
 			<hr />
+			<a class="ui teal ribbon label"><div>Device Tests</div></a>
 			<div class="ui stackable grid">
 				<div class="three wide column">State the number of CD4 Tests conducted:-</div>
 				<div class="three wide column">
@@ -42,7 +44,7 @@
 						<div class="ui label">
 							Facs </br>Calibur:
 						</div>
-						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests" />
+						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
 						<input placeholder="Adult Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
 					</div>
 				</div>
@@ -74,6 +76,7 @@
 				</div>
 			</div>
 			<hr />
+			<a class="ui teal ribbon label ">Total Tests</a>
 			<div class="ui stackable grid">
 				<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
 				<div class="three wide column" ng-controller="fcdrrCtrl">
@@ -89,6 +92,9 @@
 				{{selectableDates}}
 				{{facilities}}
 			</pre>
+
+			<hr />
+			<a class="ui teal ribbon label">Commodities/Consumables</a>
 			<table  class="ui celled striped structured table" >
 				<thead class="ui sticky" >
 					<tr style="width:98%">
@@ -128,28 +134,30 @@
 				</tbody>
 			</table>
 			<hr />
+			<a class="ui teal ribbon label">FCDRR Comments</a>
 			<div class="sixteen wide column">	
 				<div class="ui form">
 					<div class="field">
-						<label>FCDRR Comments</label>
 						<textarea style="height:20px"></textarea>
 					</div>
 				</div>
 			</div>
-			<div class="ui horizontal divider">END</div>
-			<div class="four wide column">
-				<div class="ui primary button">
-					Submit Commodity Report	
+			<div class="ui horizontal divider">END</div> 
+			<div class="ui stackable grid">
+				<div class="five wide column">
+					<div class="ui primary button">
+						Submit Commodity Report	
+					</div>
 				</div>
-			</div>
-			<div class="four wide column">
-				<div class="ui reset button">
-					Reset Form
+				<div class="five wide column">
+					<div class="ui active button">
+						Reset Form
+					</div>
 				</div>
-			</div>
-			<div class="four wide column">
-				<div class="ui button">
-					Print	
+				<div class="five wide column">
+					<div class="ui teal button">
+						Print	
+					</div>
 				</div>
 			</div>
 		</form>
