@@ -77,7 +77,7 @@
 			</div>
 			<hr />
 			<a class="ui teal ribbon label ">Total Tests</a>
-			<div class="ui stackable grid">
+			<div class="ui stackable grid" id="totalTests">
 				<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
 				<div class="three wide column" ng-controller="fcdrrCtrl">
 					<div class="ui input">
@@ -119,17 +119,58 @@
 
 					<tr ng-repeat="commodity in commodity_cat.commodities">
 
-						<td style="width:50em">{{commodity.name}}</td>
-						<td style="width:10em">{{commodity.unit}}</td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].beg_bal" name="" id="" type="text"  required/></div></td>
-						<td style="width:50em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].qty_receive" name="" id="" type="text"   required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].qty_used" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].losses" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].positives" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].negatives" name="" id="" type="text"  required/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].end_bal" name="" id="" type="text"  required value="" readonly/></div></td>
-						<td style="width:30em"><div class="ui input"><input only-digits ng-model="fcdrr.comodities[commodity.id].qty_request" name="" id="" type="text"  required/></td>
-
+						<td style="width:50em"><label class="ui horizontal label commodity-label commodity-hide" style="width:8em">Commodity:</label><div class="ui input">{{commodity.name}}</div></td>
+						<td style="width:10em"><label class="ui horizontal label commodity-label commodity-hide" style="width:8em">Unit:</label><div class="ui input">{{commodity.unit}}</div></td>
+						<td style="width:30em">
+							<div class="item">
+								<label class="ui horizontal label commodity-label commodity-hide">Beginning Balance:</label>								
+								<div class="ui input">
+									<input only-digits ng-model="fcdrr.comodities[commodity.id].beg_bal" type="text"  required/>
+								</div>
+							</div>
+						</td>
+						<td style="width:50em">
+							<label class="ui horizontal label commodity-label commodity-hide">Quantity Received:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_receive" type="text"   required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Quantity Used:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_used" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Losses / Wastages:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].losses" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Positive Adjustment:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].positives" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Negative Adjustment:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].negatives" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">End Balance:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].end_bal"  type="text"  readonly/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Quantity Requested:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_request"  type="text"  required/>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -164,20 +205,79 @@
 	</div>
 </div>
 <script>
+
+
 $(window).scroll(function(){
-	var sticky = $('.sticky'),
-	scroll = $(window).scrollTop();
-	//console.log(scroll);
-	if (scroll >= 514) sticky.addClass('fixed');
-	else sticky.removeClass('fixed');
+	stickY_();
+	commodity_labels_();
 });
+$(window).load(function(){
+	stickY_();
+	commodity_labels_();
+})
+
+$(window).resize(function(){
+	stickY_();
+	commodity_labels_();
+});
+
+
+function commodity_labels_(){	
+	width = $(window).width();
+	if (width>691) {
+		commodity_label.addClass(' commodity-hide');
+		commodity_label.removeClass(' commodity-diplay');
+	}else{
+
+		commodity_label.removeClass(' commodity-hide');
+		commodity_label.addClass(' commodity-diplay');
+	}
+}
+
+function stickY_(){
+	var sticky = $('.sticky');
+	var commodity_label = $('.commodity-label');
+	scroll = $(window).scrollTop();
+	width = $(window).width();
+
+	if (scroll >= 514 && width>691) {
+		sticky.addClass('fixed');
+	}
+	else {
+		sticky.removeClass('fixed');
+	}
+
+
+	if (width>691) {
+		commodity_label.addClass(' commodity-hide');
+		commodity_label.removeClass(' commodity-diplay');
+	}else{
+
+		commodity_label.removeClass(' commodity-hide');
+		commodity_label.addClass(' commodity-diplay');
+	}
+}
+
 </script>
 <style>
+.commodity-diplay{
+	display:auto !important;
+	width:15em;
+}
+.commodity-hide{
+	display:none !important;
+	width:15em;
+}
 .fixed {
 	position: fixed;
 	top:0; 
 	margin-top:45px; 
 	left:0;
-	width: 100%; }
+	width: 100%; 	
+	padding-right: 67px;
+}
+.ui.labeled.input{
+	width:100%;
+}
 	</style>
 
