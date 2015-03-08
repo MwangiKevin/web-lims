@@ -1,4 +1,15 @@
-app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons','$activityIndicator','API', function($scope,$http,ngProgress,Filters,Commons,$activityIndicator,API){
+app.controller('fcdrrCtrl',
+    [
+    '$scope',
+    '$http',
+    'ngProgress', 
+    'Filters', 
+    'Commons',
+    '$activityIndicator',
+    'API',
+    'SweetAlert', 
+    'notify',
+    function($scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify){
 
 	Commons.activeMenu = "fcdrr";
 
@@ -13,7 +24,10 @@ app.controller('fcdrrCtrl',['$scope','$http','ngProgress', 'Filters', 'Commons',
     $scope.promise=null;
 
 
+// SweetAlert.swal("Here's a message");
+// SweetAlert.swal("Good job!", "You clicked the button!", "success");
 
+ notify('Your notification message');
 
     $scope.selectableDates =
     {

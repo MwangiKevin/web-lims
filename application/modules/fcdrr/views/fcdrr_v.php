@@ -76,8 +76,8 @@
 				</div>
 			</div>
 			<hr />
-			<a class="ui teal ribbon label ">Total Tests</a>
-			<div class="ui stackable grid" id="totalTests">
+			<a class="ui teal ribbon label " >Total Tests</a>
+			<div class="ui stackable grid" >
 				<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
 				<div class="three wide column" ng-controller="fcdrrCtrl">
 					<div class="ui input">
@@ -94,23 +94,23 @@
 			</pre>
 
 			<hr />
-			<a class="ui teal ribbon label">Commodities/Consumables</a>
-			<table  class="ui celled striped structured table" >
+			<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
+			<table  class="ui celled striped structured table"   >
 				<thead class="ui sticky" >
 					<tr style="width:98%">
-						<th  style="width:90em" rowspan="2">Commodity</th>
-						<th  style="width:10em" rowspan="2">Unit</th>
-						<th  style="width:30em" rowspan="2">Beginning Balance</th>
-						<th  style="width:30em" rowspan="2">Quantity Received <br/>From Warehouse(e.g Kemsa)</th>
-						<th  style="width:30em" rowspan="2"><center>Quantity Used</center></th>
-						<th  style="width:30em" rowspan="2"><center>Losses / Wastages &nbsp;</center></th>
-						<th   colspan="2">Adjustments<br/><i>Indicate if (+) or (-)</i></th>
-						<th  style="width:30em" rowspan="2"><center>End Of Month<br/>Physical Count</center></th>
-						<th  style="width:30em" rowspan="2"><center>Quantity<br />Requested</center></th>
+						<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
+						<th   id="h_unit" rowspan="2"><center>Unit</center></th>
+						<th   id="h_beg_bal" rowspan="2"><center>Beginning Balance</center></th>
+						<th   id="h_quat_rec" rowspan="2"><center>Quantity Received <br/>From Warehouse(e.g Kemsa)</center></th>
+						<th   id="h_quant_used" rowspan="2"><center>Quantity Used</center></th>
+						<th   id="h_loss" rowspan="2"><center>Losses / Wastages </center></th>
+						<th   					colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</i></center></th>
+						<th   id="h_end_bal" rowspan="2"><center>End Of Month<br/>Physical Count</center></th>
+						<th   id="h_req" rowspan="2"><center>Quantity<br />Requested</center></th>
 					</tr>
 					<tr>
-						<th style="width:30em" >Positive</th>
-						<th style="width:30em" >Negative</th>    
+						<th  id="h_adj_pos" ><center>Positive</center></th>
+						<th  id="h_adj_neg" ><center>Negative</center></th>    
 					</tr>
 				</thead>
 
@@ -172,7 +172,24 @@
 							</div>
 						</td>
 					</tr>
-				</tbody>
+				</tbody>				
+				<tfooter class="ui label" >
+					<tr style="width:98%">
+						<td id="f_commodity_name"   rowspan="2"><center>Commodity</center></td>
+						<td id="f_unit"   			rowspan="2"><center>Unit</center></td>
+						<td id="f_beg_bal"   		rowspan="2"><center>Beginning Balance</center></td>
+						<td id="f_quat_rec" 	   	rowspan="2"><center>Quantity Received <br/>From Warehouse(e.g Kemsa)</center></td>
+						<td id="f_quant_used"   	rowspan="2"><center>Quantity Used</center></td>
+						<td id="f_loss"   			rowspan="2"><center>Losses / Wastages</center></td>
+						<td   						colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</center></i></td>
+						<td id="f_end_bal"   		rowspan="2"><center>End Of Month<br/>Physical Count</center></td>
+						<td id="f_req"   			rowspan="2"><center>Quantity<br />Requested</center></td>
+					</tr>
+					<tr>
+						<td id="f_adj_pos"  ><center>Positive</center></td>
+						<td id="f_adj_neg"  ><center>Negative</center></td>    
+					</tr>
+				</tfooter>
 			</table>
 			<hr />
 			<a class="ui teal ribbon label">FCDRR Comments</a>
@@ -208,21 +225,58 @@
 
 
 $(window).scroll(function(){
-	stickY_();
 	commodity_labels_();
+	header_width();	
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
+
 });
 $(window).load(function(){
-	stickY_();
 	commodity_labels_();
+	header_width();
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
 })
 
 $(window).resize(function(){
-	stickY_();
 	commodity_labels_();
+	header_width();
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
 });
 
+function header_width(){
+	$('#h_commodity_name').width($('#f_commodity_name').width());
+	$('#h_unit').width($('#f_unit').width());
+	$('#h_beg_bal').width($('#f_beg_bal').width());
+	$('#h_quat_rec').width($('#f_quat_rec').width());
+	$('#h_quant_used').width($('#f_quant_used').width());
+	$('#h_loss').width($('#f_loss').width());
+	$('#h_end_bal').width($('#f_end_bal').width());
+	$('#h_req').width($('#f_req').width());
+	$('#h_adj_pos').width($('#f_adj_pos').width());
+	$('#h_adj_neg').width($('#f_adj_neg').width());
+
+}
 
 function commodity_labels_(){	
+
+	var commodity_label = $('.commodity-label');
 	width = $(window).width();
 	if (width>691) {
 		commodity_label.addClass(' commodity-hide');
@@ -234,19 +288,17 @@ function commodity_labels_(){
 	}
 }
 
-function stickY_(){
+function stickY_(direction){
 	var sticky = $('.sticky');
 	var commodity_label = $('.commodity-label');
-	scroll = $(window).scrollTop();
 	width = $(window).width();
 
-	if (scroll >= 514 && width>691) {
+	if ((width>691 )&& (direction == 'down')) {
 		sticky.addClass('fixed');
 	}
 	else {
 		sticky.removeClass('fixed');
 	}
-
 
 	if (width>691) {
 		commodity_label.addClass(' commodity-hide');

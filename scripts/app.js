@@ -12,7 +12,9 @@ var app = angular
 	'ngActivityIndicator',
 	'angularFileUpload',
 	'smart-table',
-	'cgBusy'
+	'cgBusy',
+	'oitozero.ngSweetAlert',
+	'cgNotify'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
