@@ -135,6 +135,11 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/css/bootstrap.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/ie9.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 
 
 	<!--JS libraries -->
@@ -164,6 +169,12 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/underscore/underscore-min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-underscore/angular-underscore.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/waypoints/lib/jquery.waypoints.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-sweetalert/SweetAlert.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.js');?>"></script>
 
 
 
@@ -173,6 +184,14 @@
 
 	<!--app -->
 	<script src="<?php echo base_url('scripts/app.js');?>"></script>
+
+	
+	<!-- config -->
+
+
+	<!-- values -->
+
+	<script src="<?php echo base_url('scripts/values/cgBusyDefaults.js');?>"></script>
 
 
 	<!--Controllers -->
@@ -200,10 +219,14 @@
 
 	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
 
+
 	<!-- directives-->
 
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
+
+	
+	<script src="<?php echo base_url('scripts/config/notify.js');?>"></script>
 	
 
 
@@ -259,6 +282,14 @@
 
 	/*height: 90%;*/
 
+}
+
+.ng-hide:not(.ng-hide-animate) {
+  /* this is just another form of hiding an element */
+  display: none!important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
 }
 </style>
 
