@@ -71,7 +71,7 @@
 						<div class="ui label">
 							Alere PIMA:
 						</div>
-						<input placeholder="" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
+						<input placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
 					</div>
 				</div>
 			</div>
