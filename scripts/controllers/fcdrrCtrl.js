@@ -27,7 +27,7 @@ app.controller('fcdrrCtrl',
 // SweetAlert.swal("Here's a message");
 // SweetAlert.swal("Good job!", "You clicked the button!", "success");
 
- notify('Your notification message');
+ // notify('Your notification message');
 
     $scope.selectableDates =
     {
