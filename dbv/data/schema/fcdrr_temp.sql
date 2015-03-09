@@ -1,6 +1,6 @@
 CREATE TABLE `fcdrr_temp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `facility_id` varchar(10) NOT NULL COMMENT 'FK to facility',
+  `facility_id` int(11) NOT NULL COMMENT 'FK to facility',
   `from_date` date NOT NULL,
   `to_date` date NOT NULL,
   `calibur_tests_adults` int(11) NOT NULL,
@@ -14,5 +14,6 @@ CREATE TABLE `fcdrr_temp` (
   `cyflows` int(11) NOT NULL,
   `comments` varchar(200) DEFAULT NULL,
   `upload_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `facility_id` (`facility_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
