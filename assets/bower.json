@@ -101,6 +101,6 @@
     "angularjs-toaster": "~0.4.10"
   },
   "resolutions": {
-    "angular": "^1.2"
+    "angular": "~1.3"
   }
 }
