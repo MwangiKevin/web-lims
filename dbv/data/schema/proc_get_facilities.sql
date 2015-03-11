@@ -19,8 +19,24 @@ BEGIN
                                 `f`.`phone`                 as `facility_phone`,
                                 `f`.`rollout_status`        as `facility_rollout_status`,
                                 `f`.`rollout_date`          as `facility_rollout_date`,
-                                `f`.`google_maps`           as `facility_google_maps`
+                                `f`.`google_maps`           as `facility_google_maps`,
+                                `p`.`name`                  as `partner_name`,
+                                `sc`.`name`                 as `sub_county_name`,
+                                `c`.`name`                  as `county_name`,
+                                `central_site`.`name`       as `central_site_name`,
+                                `ft`.`initials`             as `affiliation`
                             FROM `facility` `f` 
+                                LEFT JOIN `partner` `p`
+                                ON `p`.`id`=`f`.`partner_id`
+                                LEFT JOIN `sub_county` `sc` 
+                                ON `sc`.`id`=`f`.`sub_county_id`
+                                    LEFT JOIN `county` `c`
+                                    ON `c`.`id`=`sc`.`county_id`
+                                LEFT JOIN `facility` `central_site`
+                                ON `central_site`.`id` = `f`.`central_site_id`
+                                LEFT JOIN `facility_type` `ft`
+                                ON `ft`.`id`=`f`.`facility_type_id`
+
                             WHERE 1 
                         ";
 

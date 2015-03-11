@@ -6,9 +6,9 @@
 			<a class="ui teal ribbon label">Facility Details</a>
 			<div class="ui stackable grid">
 				<div class="six wide column"> <div class="ui horizontal label large">Facility (MFL Code):</div><b>{{ fcdrr.head_info.selected.facility.facility_name+'('+fcdrr.head_info.selected.facility.facility_mfl_code+')' }}</b></div>
-				<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.head_info.selected.facility.facility_sub_county_name}}</b></div>
-				<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.head_info.selected.facility.facility_county_name}}</b></div>
-				<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.head_info.selected.facility.facility_affiliation}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.head_info.selected.facility.sub_county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.head_info.selected.facility.county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.head_info.selected.facility.affiliation}}</b></div>
 			</div>
 			<hr />
 				<a class="ui teal ribbon label">Dates</a>
@@ -71,7 +71,7 @@
 						<div class="ui label">
 							Alere PIMA:
 						</div>
-						<input placeholder="" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
+						<input placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
 					</div>
 				</div>
 			</div>

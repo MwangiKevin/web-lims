@@ -188,6 +188,7 @@
 	
 	<!-- config -->
 
+	<script src="<?php echo base_url('scripts/config/notify.js');?>"></script>
 
 	<!-- values -->
 
@@ -225,8 +226,6 @@
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
 
-	
-	<script src="<?php echo base_url('scripts/config/notify.js');?>"></script>
 	
 
 
