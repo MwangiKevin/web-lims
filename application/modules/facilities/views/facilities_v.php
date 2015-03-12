@@ -22,10 +22,10 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="row in displayedCollection">
-						<td>{{row.firstName}}</td>
-						<td>{{row.lastName}}</td>
-						<td>{{row.birthDate}}</td>
-						<td>{{row.balance}}</td>
+						<td>{{row.facility_name}}</td>
+						<td>{{row.facility_mfl_code}}</td>
+						<td>{{row.county_name}}</td>
+						<td>{{row.sub_county_name}}</td>
 						<td>
 							<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
 								<i class="remove icon">
@@ -41,9 +41,7 @@
 						</td>
 					</tr>
 				</tfoot>
-			</table>{{ }}
-
-
+			</table>
 		</div>
 	</div>
 	<div class="three wide column">
