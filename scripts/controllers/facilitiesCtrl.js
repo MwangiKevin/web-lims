@@ -1,15 +1,17 @@
-app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', function ($scope,Commons,Restangular) {
+app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', function ($scope,Commons,Restangular,$activityIndicator ) {
 
     Commons.activeMenu = "facilities";
 
     $scope.facilitiesColl = [];
 
-
+    $scope.promise=null;
     
     var baseFacilities = Restangular.all('facilities');
-
-    baseFacilities.getList().then(function(accounts) {
-        $scope.facilitiesColl = accounts;
+    $activityIndicator.startAnimating();
+    
+    $scope.promise =  baseFacilities.getList().then(function(fac) {
+        $scope.facilitiesColl = fac;
+        $activityIndicator.stopAnimating();
     });
     $scope.facilitiesColl = baseFacilities;
 

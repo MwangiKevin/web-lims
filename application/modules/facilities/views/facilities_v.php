@@ -1,5 +1,5 @@
 <div class="ui stackable page grid">
-	<div class="twelve wide column">
+	<div class="twelve wide column" cg-busy="promise">
 		<div style="" class="ui segment"> 
 
 			<button type="button" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
