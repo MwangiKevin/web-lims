@@ -16,6 +16,7 @@ class facilities_m extends MY_Model{
 		$facilities = array();
 
 		$verbose = $this->input->get('verbose');
+		// $verbose = true;
 
 		$facilities_res = R::getAll("CALL `proc_get_facilities`('$id')");
 		

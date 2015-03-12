@@ -9,7 +9,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
     var baseFacilities = Restangular.all('facilities');
     $activityIndicator.startAnimating();
     
-    $scope.promise =  baseFacilities.getList().then(function(fac) {
+    $scope.promise =  baseFacilities.getList({verbose:true}).then(function(fac) {
         $scope.facilitiesColl = fac;
         $activityIndicator.stopAnimating();
     });
@@ -17,7 +17,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
 
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
-    // $scope.displayedCollection = [].concat($scope.facilitiesColl);
+    $scope.displayedCollection = [].concat($scope.facilitiesColl);
 
     //add to the real data holder
     $scope.addFacility = function addFacility(fac) {
