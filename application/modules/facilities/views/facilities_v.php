@@ -4,7 +4,7 @@
 
 			<button type="button" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
 				<i class="glyphicon glyphicon-plus">
-				</i> Add random item
+				</i> Add an item
 			</button>
 
 			<table st-table="displayedCollection" st-safe-src="facilitiesColl" class="ui table table-striped">
@@ -37,7 +37,7 @@
 				<tfoot>
 					<tr>
 						<td colspan="5" class="text-center">
-							<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10"></div>
+							<center><div st-pagination=""  st-items-by-page="6" st-displayed-pages="10"></div></center>
 						</td>
 					</tr>
 				</tfoot>
@@ -53,3 +53,8 @@
 		</div>
 	</div>
 </div>
+
+<style>
+
+</style>
+

@@ -15,16 +15,13 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
     });
     $scope.facilitiesColl = baseFacilities;
 
-    
-    console.log( $scope.allAccounts);
-
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
-    $scope.displayedCollection = [].concat($scope.facilitiesColl);
+    // $scope.displayedCollection = [].concat($scope.facilitiesColl);
 
     //add to the real data holder
-    $scope.addRandomItem = function addRandomItem(item) {
-        $scope.facilitiesColl.push(item);
+    $scope.addFacility = function addFacility(fac) {
+        $scope.facilitiesColl.push(fac);
         id++;
     };
 
