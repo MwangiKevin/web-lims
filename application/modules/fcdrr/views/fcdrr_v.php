@@ -80,18 +80,36 @@
 			<div class="ui stackable grid" >
 				<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
 				<div class="three wide column" ng-controller="fcdrrCtrl">
-					<div class="ui input">
-						<input ng-model="total_cd4" placeholder="{{facs_calibur_paed -- facs_calibur_adult -- facs_count_paed -- facs_count_adult -- cyflow_paed -- cyflow_adult}}" type="text" readonly />
-
+					<div class="ui labeled input">
+						<div class="ui label">
+							Total :
+						</div>
+						<input ng-model="fcdrr.devicetests.total_cd4" placeholder="" type="text" readonly />
+					</div>
+				</div>
+				<div class="three wide column" ng-controller="fcdrrCtrl">
+					<div class="ui labeled input">
+						<div class="ui label">
+							Adults < 500 </br>CD4 count:
+						</div>
+						<input ng-model="fcdrr.devicetests.total_adults_under_500" type="text" />
+					</div>
+				</div>
+				<div class="three wide column" ng-controller="fcdrrCtrl">
+					<div class="ui labeled input">
+						<div class="ui label">
+							Pead < 500 </br>CD4 count:
+						</div>
+						<input ng-model="fcdrr.devicetests.total_pead_under_500" type="text" />
 					</div>
 				</div>
 			</div>
 			<hr />
-			<pre>
+			<!-- <pre>
 				{{fcdrr}}
 				{{selectableDates}}
 				{{facilities}}
-			</pre>
+			</pre> -->
 
 			<hr />
 			<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
