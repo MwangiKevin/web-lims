@@ -293,5 +293,12 @@
   top: -9999px;
   left: -9999px;
 }
+
+.pagination {
+    cursor: pointer;
+}
+.cg-busy-default-wrapper{	
+    cursor: no-drop;
+}
 </style>
 
