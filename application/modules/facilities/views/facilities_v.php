@@ -18,7 +18,7 @@
 						<th st-sort="county_name">County</th>
 						<th st-sort="sub_county_name">Sub-County</th>
 						<th st-sort="devices">Devices</th>
-						<th st-sort="devices">Action</th>
+						<th st-sort="">Action</th>
 					</tr>
 				</thead>
 				<tbody>
