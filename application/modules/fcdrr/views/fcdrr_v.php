@@ -1,7 +1,7 @@
-<div style="margin-left:10px">
+<div style="margin-left:2px" cg-busy="promise">
 	<div ui-view="filter" class="ui column segment grid" id="viewport">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
-		<form cg-busy="promise">
+		<form >
 			<div class="ui horizontal divider">Start</div>
 			<a class="ui teal ribbon label">Facility Details</a>
 			<div class="ui stackable grid">
@@ -38,14 +38,14 @@
 			<hr />
 			<a class="ui teal ribbon label"><div>Device Tests</div></a>
 			<div class="ui stackable grid">
-				<div class="three wide column">State the number of CD4 Tests conducted:-</div>
+				<div class="three wide column">STATE THE NUMBER OF CD4 TESTS CONDUCTED:</div>
 				<div class="three wide column">
 					<div class="ui labeled input">
 						<div class="ui label">
 							Facs </br>Calibur:
 						</div>
-						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
-						<input placeholder="Adult Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">			
@@ -53,8 +53,8 @@
 						<div class="ui label">
 							Facs </br>Count:
 						</div>
-						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
-						<input placeholder="Adult Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">			
@@ -62,14 +62,14 @@
 						<div class="ui label">
 							Cyflow </br>Partec:
 						</div>
-						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
-						<input placeholder="Adult Tests" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">
 					<div class="ui labeled input">
 						<div class="ui label">
-							Alere PIMA:
+							Alere </br>PIMA:
 						</div>
 						<input placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
 					</div>
@@ -115,7 +115,7 @@
 			<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
 			<table  class="ui celled striped structured table"   >
 				<thead class="ui sticky" >
-					<tr style="width:98%">
+					<tr style="">
 						<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
 						<th   id="h_unit" rowspan="2"><center>Unit</center></th>
 						<th   id="h_beg_bal" rowspan="2"><center>Beginning Balance</center></th>
@@ -192,7 +192,7 @@
 					</tr>
 				</tbody>				
 				<tfooter class="ui label" >
-					<tr style="width:98%">
+					<tr style="">
 						<td id="f_commodity_name"   rowspan="2"><center>Commodity</center></td>
 						<td id="f_unit"   			rowspan="2"><center>Unit</center></td>
 						<td id="f_beg_bal"   		rowspan="2"><center>Beginning Balance</center></td>
@@ -334,6 +334,10 @@ function stickY_(direction){
 	display:auto !important;
 	width:15em;
 }
+.ui.labeled.input input {
+   padding-right: 0.1em !important; 
+   padding-left: 0.1em !important; 
+}
 .commodity-hide{
 	display:none !important;
 	width:15em;
@@ -344,7 +348,7 @@ function stickY_(direction){
 	margin-top:45px; 
 	left:0;
 	width: 100%; 	
-	padding-right: 67px;
+	/*padding-right: 67px;*/
 }
 .ui.labeled.input{
 	width:100%;

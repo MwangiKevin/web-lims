@@ -1,48 +1,35 @@
-app.controller('cd4DevicesCtrl', ['$scope','Commons', function ($scope,Commons) {
+app.controller('cd4DevicesCtrl', ['$scope','Commons','Restangular','$activityIndicator', function ($scope,Commons,Restangular,$activityIndicator) {
 
-    var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
-    var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
-    var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
-    var id = 1;
 
     Commons.activeMenu = "cd4Devices";
+    $scope.facilitiesColl = [];
 
-    function generateRandomItem(id) {
+    $scope.promise=null;
+    
+    var baseFacilities = Restangular.all('facility_devices');
+    $activityIndicator.startAnimating();
+    
+    $scope.promise =  baseFacilities.getList({verbose:true}).then(function(fac) {
+        $scope.facilitiesColl = fac;
+        $activityIndicator.stopAnimating();
+    });
+    $scope.facilitiesColl = baseFacilities;
 
-        var firstname = firstnames[Math.floor(Math.random() * 3)];
-        var lastname = lastnames[Math.floor(Math.random() * 3)];
-        var birthdate = dates[Math.floor(Math.random() * 3)];
-        var balance = Math.floor(Math.random() * 2000);
-
-        return {
-            id: id,
-            firstName: firstname,
-            lastName: lastname,
-            birthDate: new Date(birthdate),
-            balance: balance
-        }
-    }
-
-    $scope.devicesColl = [];
-
-    for (id; id < 90; id++) {
-        $scope.devicesColl.push(generateRandomItem(id));
-    }
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
-    $scope.displayedCollection = [].concat($scope.devicesColl);
+    $scope.displayedCollection = [].concat($scope.facilitiesColl);
 
     //add to the real data holder
-    $scope.addRandomItem = function addRandomItem() {
-        $scope.devicesColl.push(generateRandomItem(id));
+    $scope.addFacility = function addFacility(fac) {
+        $scope.facilitiesColl.push(fac);
         id++;
     };
 
     //remove to the real data holder
     $scope.removeItem = function removeItem(row) {
-        var index = $scope.devicesColl.indexOf(row);
+        var index = $scope.facilitiesColl.indexOf(row);
         if (index !== -1) {
-            $scope.devicesColl.splice(index, 1);
+            $scope.facilitiesColl.splice(index, 1);
         }
     }
 }]);

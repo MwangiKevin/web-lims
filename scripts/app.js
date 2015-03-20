@@ -14,7 +14,8 @@ var app = angular
 	'smart-table',
 	'cgBusy',
 	'oitozero.ngSweetAlert',
-	'cgNotify'
+	'cgNotify',
+	'restangular'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 

@@ -133,7 +133,8 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/selectize/dist/css/selectize.bootstrap3.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
-	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/css/bootstrap.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/btn/bootstrap.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/pagination/bs-paginate-only.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.css');?>">
@@ -175,6 +176,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-sweetalert/SweetAlert.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/restangular/dist/restangular.min.js');?>"></script>
 
 
 
@@ -189,6 +191,7 @@
 	<!-- config -->
 
 	<script src="<?php echo base_url('scripts/config/notify.js');?>"></script>
+	<script src="<?php echo base_url('scripts/config/restangularCFG.js');?>"></script>
 
 	<!-- values -->
 
