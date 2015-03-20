@@ -87,7 +87,7 @@
 						<input ng-model="fcdrr.devicetests.total_cd4" type="text" placeholder="Total tests" readonly />
 					</div>
 				</div>
-				<div class="three wide column" ng-controller="fcdrrCtrl">
+				<div class="three wide column">
 					<div class="ui labeled input">
 						<div class="ui label">
 							Adults < 500 </br>CD4 count:
@@ -95,7 +95,7 @@
 						<input ng-model="fcdrr.devicetests.total_adults_under_500" placeholder="Adults < 500" type="text" />
 					</div>
 				</div>
-				<div class="three wide column" ng-controller="fcdrrCtrl">
+				<div class="three wide column">
 					<div class="ui labeled input">
 						<div class="ui label">
 							Pead < 500 </br>CD4 count:

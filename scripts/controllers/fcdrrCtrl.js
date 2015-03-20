@@ -73,7 +73,7 @@ app.controller('fcdrrCtrl',
 
     $scope.calculate_total= function(){
         $scope.fcdrr.devicetests.total_cd4 = 0 ;
-
+        
         $scope.fcdrr.devicetests.total_cd4 +=  isNaN(parseInt($scope.fcdrr.devicetests.facs_calibur.paed_tests))? 0 : parseInt($scope.fcdrr.devicetests.facs_calibur.paed_tests);
         $scope.fcdrr.devicetests.total_cd4 +=  isNaN(parseInt($scope.fcdrr.devicetests.facs_calibur.adult_tests))?0 : parseInt($scope.fcdrr.devicetests.facs_calibur.adult_tests);
         $scope.fcdrr.devicetests.total_cd4 +=  isNaN(parseInt($scope.fcdrr.devicetests.facs_count.paed_tests))? 0 : parseInt($scope.fcdrr.devicetests.facs_count.paed_tests);
