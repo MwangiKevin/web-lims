@@ -1218,7 +1218,7 @@ INSERT INTO `facility` (`id`, `name`, `mfl_code`, `site_prefix`, `sub_county_id`
 (1336, 'Kibera Health Centre (MSF Belgium)', '13030', NULL, 9, 0, 8, 0, 0, NULL, '', 0, '0000-00-00', ''),
 (1337, 'Malindi District Hospital ', '115551', NULL, 33, 0, 1, 0, 0, NULL, '', 0, '0000-00-00', ''),
 (1338, 'Mvita Dispensary', '11679', NULL, 16, 27, 1, 1, 212, NULL, '', 0, '0000-00-00', ''),
-(1339, ' Kingorani Prison Dispensary', '11303', NULL, 17, 0, 1, 1, 212, NULL, '', 0, '0000-00-00', ''),
+(1339, 'Kingorani Prison Dispensary', '11303', NULL, 17, 0, 1, 1, 212, NULL, '', 0, '0000-00-00', ''),
 (1341, 'Bamburi Dispensary ', '11239', NULL, 17, 27, 1, 1, 212, NULL, '', 0, '0000-00-00', ''),
 (1342, 'GK Prisons Dispensary (Shimo Bosrtal)', '11397', NULL, 16, 0, 9, 1, 212, NULL, '', 0, '0000-00-00', ''),
 (1343, 'GK Prison Health Centre (Shimo Main) 	', '11395', NULL, 16, 27, 1, 1, 212, NULL, '', 0, '0000-00-00', ''),

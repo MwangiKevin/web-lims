@@ -11,5 +11,6 @@ CREATE TABLE `fcdrr_commodity_temp` (
   `end_bal` int(11) NOT NULL,
   `requested` int(11) NOT NULL,
   `reagent_id` int(11) NOT NULL COMMENT 'FK to reagents',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fcdrr_temp_id` (`fcdrr_temp_id`,`reagent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='FCDRR reagents and other commodities'

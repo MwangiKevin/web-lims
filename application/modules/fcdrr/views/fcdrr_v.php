@@ -6,9 +6,9 @@
 			<a class="ui teal ribbon label">Facility Details</a>
 			<div class="ui stackable grid">
 				<div class="six wide column"> <div class="ui horizontal label large">Facility (MFL Code):</div><b>{{ fcdrr.head_info.selected.facility.facility_name+'('+fcdrr.head_info.selected.facility.facility_mfl_code+')' }}</b></div>
-				<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.head_info.selected.facility.facility_sub_county_name}}</b></div>
-				<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.head_info.selected.facility.facility_county_name}}</b></div>
-				<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.head_info.selected.facility.facility_affiliation}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.head_info.selected.facility.sub_county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.head_info.selected.facility.county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.head_info.selected.facility.affiliation}}</b></div>
 			</div>
 			<hr />
 				<a class="ui teal ribbon label">Dates</a>
@@ -38,14 +38,14 @@
 			<hr />
 			<a class="ui teal ribbon label"><div>Device Tests</div></a>
 			<div class="ui stackable grid">
-				<div class="three wide column">State the number of CD4 Tests conducted:-</div>
+				<div class="three wide column">STATE THE NUMBER OF CD4 TESTS CONDUCTED:</div>
 				<div class="three wide column">
 					<div class="ui labeled input">
 						<div class="ui label">
 							Facs </br>Calibur:
 						</div>
-						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
-						<input placeholder="Adult Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">			
@@ -53,8 +53,8 @@
 						<div class="ui label">
 							Facs </br>Count:
 						</div>
-						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
-						<input placeholder="Adult Tests" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">			
@@ -62,16 +62,16 @@
 						<div class="ui label">
 							Cyflow </br>Partec:
 						</div>
-						<input placeholder="Paed Tests" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
-						<input placeholder="Adult Tests" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">
 					<div class="ui labeled input">
 						<div class="ui label">
-							Alere PIMA:
+							Alere </br>PIMA:
 						</div>
-						<input placeholder="" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
+						<input placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
 					</div>
 				</div>
 			</div>
@@ -315,6 +315,10 @@ function stickY_(direction){
 .commodity-diplay{
 	display:auto !important;
 	width:15em;
+}
+.ui.labeled.input input {
+   padding-right: 0.1em !important; 
+   padding-left: 0.1em !important; 
 }
 .commodity-hide{
 	display:none !important;

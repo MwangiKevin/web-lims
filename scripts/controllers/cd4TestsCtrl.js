@@ -25,7 +25,7 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', function ($scope,Commons) {
 
     $scope.testsColl = [];
 
-    for (id; id < 90; id++) {
+    for (id; id < 90000; id++) {
         $scope.testsColl.push(generateRandomItem(id));
     }
 
