@@ -36,9 +36,10 @@ class facilities_m extends MY_Model{
 		}else{
 
 			$facilities =  $facilities_res[0];	
-
-			$facility_devices = R::getAll("CALL `proc_get_facility_devices`('','".$facilities['facility_id']."')");
-			$facilities['devices'] = $facility_devices;
+			if(sizeof($facilities)>0){
+				$facility_devices = R::getAll("CALL `proc_get_facility_devices`('','".$facilities['facility_id']."')");
+				$facilities['devices'] = $facility_devices;
+			}
 		}
 
 		return $facilities;
