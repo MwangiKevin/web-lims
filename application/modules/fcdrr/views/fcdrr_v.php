@@ -44,8 +44,8 @@
 						<div class="ui label">
 							Facs </br>Calibur:
 						</div>
-						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
-						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
+						<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
+						<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">			
@@ -53,8 +53,8 @@
 						<div class="ui label">
 							Facs </br>Count:
 						</div>
-						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
-						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
+						<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
+						<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">			
@@ -62,8 +62,8 @@
 						<div class="ui label">
 							Cyflow </br>Partec:
 						</div>
-						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
-						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
+						<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
+						<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
 					</div>
 				</div>
 				<div class="three wide column">
@@ -71,7 +71,7 @@
 						<div class="ui label">
 							Alere </br>PIMA:
 						</div>
-						<input placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
+						<input ng-keyup="calculate_total()" placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
 					</div>
 				</div>
 			</div>
@@ -79,12 +79,12 @@
 			<a class="ui teal ribbon label " >Total Tests</a>
 			<div class="ui stackable grid" >
 				<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
-				<div class="three wide column" ng-controller="fcdrrCtrl">
+				<div class="three wide column">
 					<div class="ui labeled input">
 						<div class="ui label">
 							Total :
 						</div>
-						<input ng-model="fcdrr.devicetests.total_cd4" placeholder="" type="text" readonly />
+						<input ng-model="fcdrr.devicetests.total_cd4" type="text" placeholder="Total tests" readonly />
 					</div>
 				</div>
 				<div class="three wide column" ng-controller="fcdrrCtrl">
@@ -92,7 +92,7 @@
 						<div class="ui label">
 							Adults < 500 </br>CD4 count:
 						</div>
-						<input ng-model="fcdrr.devicetests.total_adults_under_500" type="text" />
+						<input ng-model="fcdrr.devicetests.total_adults_under_500" placeholder="Adults < 500" type="text" />
 					</div>
 				</div>
 				<div class="three wide column" ng-controller="fcdrrCtrl">
@@ -100,16 +100,16 @@
 						<div class="ui label">
 							Pead < 500 </br>CD4 count:
 						</div>
-						<input ng-model="fcdrr.devicetests.total_pead_under_500" type="text" />
+						<input ng-model="fcdrr.devicetests.total_pead_under_500" placeholder="Peads < 500" type="text" />
 					</div>
 				</div>
 			</div>
 			<hr />
-			<!-- <pre>
-				{{fcdrr}}
-				{{selectableDates}}
-				{{facilities}}
-			</pre> -->
+			<pre>
+				{{fcdrr.devicetests}}
+				<!-- {{selectableDates}} -->
+				<!-- {{facilities}} -->
+			</pre>
 
 			<hr />
 			<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
