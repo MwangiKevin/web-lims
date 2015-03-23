@@ -106,15 +106,13 @@
 		</div>
 		<hr />
 		<pre>
-			{{fcdrr.devicetests}}
-			<!-- {{selectableDates}} -->
-			<!-- {{facilities}} -->
+			{{fcdrr.displayed_commodities}}
 		</pre>
 
 		<hr />
 		<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
 		<table  class="ui celled striped structured table"   >
-			<thead class="ui sticky" >
+			<thead class="ui sticky" style="  padding-right: 4%;">
 				<tr style="">
 					<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
 					<th   id="h_unit" rowspan="2"><center>Unit</center></th>
@@ -143,50 +141,50 @@
 						<div class="item">
 							<label class="ui horizontal label commodity-label commodity-hide">Beginning Balance:</label>								
 							<div class="ui input">
-								<input only-digits ng-model="fcdrr.comodities[commodity.id].beg_bal" type="text"  required/>
+								<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].beg_bal" type="text"  required/>
 							</div>
 						</div>
 					</td>
 					<td style="width:50em">
 						<label class="ui horizontal label commodity-label commodity-hide">Quantity Received:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_receive" type="text"   required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].qty_receive" type="text"   required/>
 						</div>
 					</td>
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Quantity Used:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_used" type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].qty_used" type="text"  required/>
 						</div>
 					</td>
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Losses / Wastages:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.comodities[commodity.id].losses" type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].losses" type="text"  required/>
 						</div>
 					</td>
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Positive Adjustment:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.comodities[commodity.id].positives" type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].positives" type="text"  required/>
 						</div>
 					</td>
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Negative Adjustment:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.comodities[commodity.id].negatives" type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].negatives" type="text"  required/>
 						</div>
 					</td>
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">End Balance:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.comodities[commodity.id].end_bal"  type="text"  readonly/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].end_bal"  type="text"  required/>
 						</div>
 					</td>
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Quantity Requested:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_request"  type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].qty_request"  type="text"  required/>
 						</div>
 					</td>
 				</tr>
