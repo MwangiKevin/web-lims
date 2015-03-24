@@ -9,6 +9,8 @@ BEGIN
                                 `fcdrr`.`facility_id`              ,
                                 `fcdrr`.`from_date`                ,
                                 `fcdrr`.`to_date`                  ,
+                                `fcdrr`.`year`                     ,
+                                `fcdrr`.`month`                    ,
                                 `fcdrr`.`calibur_tests_adults`     ,
                                 `fcdrr`.`calibur_tests_pead`       ,
                                 `fcdrr`.`caliburs`                 ,
@@ -18,6 +20,8 @@ BEGIN
                                 `fcdrr`.`cyflow_tests_adults`      ,
                                 `fcdrr`.`cyflow_tests_pead`        ,
                                 `fcdrr`.`cyflows`                  ,
+                                `fcdrr`.`adults_bel_cl`            ,
+                                `fcdrr`.`pead_bel_cl`              ,
                                 `fcdrr`.`comments`                 ,
                                 `fcdrr`.`upload_timestamp`         
                             FROM `fcdrr`

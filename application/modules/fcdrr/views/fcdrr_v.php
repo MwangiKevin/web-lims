@@ -212,7 +212,7 @@
 		<div class="sixteen wide column">	
 			<div class="ui form">
 				<div class="field">
-					<textarea style="height:20px"></textarea>
+					<textarea style="height:20px" ng-model="fcdrr.footer_info.comments"></textarea>
 				</div>
 			</div>
 		</div>
