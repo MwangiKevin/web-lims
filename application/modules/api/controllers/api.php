@@ -43,6 +43,7 @@ class api extends MY_Controller {
 
 		$method= $this->_detect_method();
 
+
 		if ($method=="post"){
 			echo json_encode($this->sub_counties_m->create(),JSON_PRETTY_PRINT);
 		}
