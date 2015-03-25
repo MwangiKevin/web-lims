@@ -175,4 +175,27 @@ class api extends MY_Controller {
 			echo json_encode($this->fcdrrs_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
+
+	public function facility_devices($id=NULL) {
+
+		$this->load->model("facility_devices_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->facility_devices_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->facility_devices_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->facility_devices_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->facility_devices_m->remove($id),JSON_PRETTY_PRINT);
+		}
+	}
 }

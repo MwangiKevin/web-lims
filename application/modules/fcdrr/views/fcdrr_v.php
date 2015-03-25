@@ -1,7 +1,7 @@
-<div style="margin-left:10px">
+<div style="margin-left:2px" cg-busy="promise">
 	<div ui-view="filter" class="ui column segment grid" id="viewport">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
-		<form cg-busy="promise">
+		<form >
 			<div class="ui horizontal divider">Start</div>
 			<a class="ui teal ribbon label">Facility Details</a>
 			<div class="ui stackable grid">
@@ -97,7 +97,7 @@
 			<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
 			<table  class="ui celled striped structured table"   >
 				<thead class="ui sticky" >
-					<tr style="width:98%">
+					<tr style="">
 						<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
 						<th   id="h_unit" rowspan="2"><center>Unit</center></th>
 						<th   id="h_beg_bal" rowspan="2"><center>Beginning Balance</center></th>
@@ -174,7 +174,7 @@
 					</tr>
 				</tbody>				
 				<tfooter class="ui label" >
-					<tr style="width:98%">
+					<tr style="">
 						<td id="f_commodity_name"   rowspan="2"><center>Commodity</center></td>
 						<td id="f_unit"   			rowspan="2"><center>Unit</center></td>
 						<td id="f_beg_bal"   		rowspan="2"><center>Beginning Balance</center></td>
@@ -330,7 +330,7 @@ function stickY_(direction){
 	margin-top:45px; 
 	left:0;
 	width: 100%; 	
-	padding-right: 67px;
+	/*padding-right: 67px;*/
 }
 .ui.labeled.input{
 	width:100%;
