@@ -112,7 +112,7 @@
 		<hr />
 		<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
 		<table  class="ui celled striped structured table"   >
-			<thead class="ui sticky" style="  padding-right: 4%;">
+			<thead class="ui sticky" style="  padding-right: 4%;z-index:1;">
 				<tr style="">
 					<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
 					<th   id="h_unit" rowspan="2"><center>Unit</center></th>
