@@ -12,20 +12,17 @@ class fcdrrs_m extends MY_Model{
 		$request_body = file_get_contents('php://input');
 
 		$fcdrr = json_decode($request_body,true);
-		// print_r($fcdrr);
 
-
-		// $this->db->trans_begin();
+		$this->db->trans_begin();
 
 		$fcdrr_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'fcdrr'"	);
 
-		$fcdrr_auto_id 		=	(int)	$fcdrr_st[0]["Auto_increment"];
+		$fcdrr_auto_id 		=	 $fcdrr['fcdrr_id'] =(int)	$fcdrr_st[0]["Auto_increment"];
 
-		$facility_id			= 	(int) $fcdrr['facility_id'];
+		$facility_id			= 	(int) $fcdrr['facility']['facility_id'];
 
-
-		$from_date				= 	Date('Y-m-d', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
-		$to_date				= 	Date('Y-m-t', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
+		$from_date		 = 			$fcdrr['from_date']		= 	Date('Y-m-d', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
+		$to_date		 = 			$fcdrr['to_date']		= 	Date('Y-m-t', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
 
 		$year					= 	Date('Y', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
 		$month					= 	Date('m', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
@@ -82,13 +79,15 @@ class fcdrrs_m extends MY_Model{
 				'$comments'
 
 			);";
+
+			$this->db->query($sql);
 		foreach ($commodities as $key => $value) {
 
 			$comm_sql = "INSERT INTO `fcdrr_commodity`
 			(
 				`fcdrr_id`, 
 				`beginning_bal`, 
-				`received_qty_warehouse`, 
+				`received_qty`, 
 				`lot_code`, 
 				`qty_used`, 
 				`losses`, 
@@ -110,10 +109,20 @@ class fcdrrs_m extends MY_Model{
 				'".$value['adjustment_minus']."',
 				'".$value['end_bal']."',
 				'".$value['requested']."',
-				'".$key."',
-		']	)
+				'".$key."'
+			)
 			";
+
+			$this->db->query($comm_sql);
 		}
+
+		if ($this->db->trans_status() === FALSE ){
+			$this->db->trans_rollback();
+			$fcdrr = array('error' => 'fcdrr save failed');
+		}
+		else{
+			$this->db->trans_commit();
+		}	
 
 		return $fcdrr;
 
