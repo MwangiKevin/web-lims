@@ -1,6 +1,6 @@
 <div style="margin-left:2px" cg-busy="promise">
 	<div ui-view="filter" class="ui column segment grid" id="viewport">
-		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
+		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS (MoH643B)</center></h3>
 		<div>
 		<div class="ui horizontal divider">Start</div>
 		<a class="ui teal ribbon label">Facility Details</a>
@@ -106,7 +106,7 @@
 		</div>
 		<hr />
 		<pre>
-			{{fcdrr.year}}
+			{{fcdrr_id}}
 		</pre>
 
 		<hr />

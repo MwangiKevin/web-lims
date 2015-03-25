@@ -8,6 +8,7 @@ class fcdrrs_m extends MY_Model{
 	}
 
 	public function create(){
+		$error = array();
 
 		$request_body = file_get_contents('php://input');
 
@@ -80,7 +81,10 @@ class fcdrrs_m extends MY_Model{
 
 			);";
 
-			$this->db->query($sql);
+			if(!$this->db->query($sql)){
+				$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+
+			}
 		foreach ($commodities as $key => $value) {
 
 			$comm_sql = "INSERT INTO `fcdrr_commodity`
@@ -113,12 +117,15 @@ class fcdrrs_m extends MY_Model{
 			)
 			";
 
-			$this->db->query($comm_sql);
+			if(!$this->db->query($comm_sql)){
+				$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			}
 		}
 
 		if ($this->db->trans_status() === FALSE ){
-			$this->db->trans_rollback();
-			$fcdrr = array('error' => 'fcdrr save failed');
+			$this->db->trans_rollback();			
+			http_response_code(500);
+			return $error;
 		}
 		else{
 			$this->db->trans_commit();

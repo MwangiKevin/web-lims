@@ -1,5 +1,7 @@
 app.controller('fcdrrCtrl',
     [
+    '$stateParams',
+    '$state',
     '$scope',
     '$http',
     'ngProgress', 
@@ -10,7 +12,9 @@ app.controller('fcdrrCtrl',
     'SweetAlert', 
     'notify',
     'Restangular',
-    function($scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
+    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
+
+        $scope.fcdrr_id = $stateParams.id;
 
         Commons.activeMenu = "fcdrr";
 
@@ -32,8 +36,6 @@ app.controller('fcdrrCtrl',
             year:null,
             month:null
         }
-
-
 
         $scope.fcdrr={
 
@@ -129,9 +131,15 @@ app.controller('fcdrrCtrl',
                 confirmButtonText: "Yes, Save it!",   
                 closeOnConfirm: false,
             },
-            function(){   
-                swal("Saved!", "Your Report has been saved", "success"); 
-                $scope.baseFcdrrs.post($scope.fcdrr);
+            function(){    
+                $scope.baseFcdrrs.post($scope.fcdrr).then(function(fcdrr){
+                    console.log(fcdrr);                    
+                    swal("Saved!", "Your Report has been saved", "success");
+                    $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
+                },function(response){
+                     console.log("Error with status code", response);
+                      swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");
+                });
             });
         }
 
@@ -151,7 +159,7 @@ app.controller('fcdrrCtrl',
             $scope.promise = API.getFacilities()
             .success(function (fac) {
                 $scope.facilities = fac;
-            $scope.fcdrr.facility = $scope.facilities[0];  //this is just a test 
+            $scope.fcdrr.facility = $scope.facilities[23];  //this is just a test 
         })
             .error(function (error) {
                 $scope.status = 'Unable to load customer data: ' + error.message;
