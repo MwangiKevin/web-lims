@@ -11,10 +11,17 @@ class counties_m extends MY_Model{
 
 	}
 
-	public function read($id){
-		$couties_res = R::getAll("CALL proc_get_county_details()");
+	public function read($id=NULL){
+		$couties_res = R::getAll("CALL proc_get_county_details('$id')");
 
-		return $couties_res;
+		if($id==NULL){
+
+			return $couties_res;	
+
+		}else{
+
+			return $couties_res;	
+		}
 	}
 
 	public function update($id){
