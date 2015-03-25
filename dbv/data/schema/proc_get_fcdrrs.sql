@@ -5,7 +5,7 @@ DROP PROCEDURE IF EXISTS `proc_get_fcdrrs`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_fcdrrs`(fcdrr_id int(11),facility_id int(11),year int(4),month int(2))
 BEGIN
         SET @QUERY =    " SELECT 
-                                `fcdrr`.`id`                       as  `fcdrr_id`,
+                                `fcdrr`.`id`                       as  `fcdrr_id` ,
                                 `fcdrr`.`facility_id`              ,
                                 `fcdrr`.`from_date`                ,
                                 `fcdrr`.`to_date`                  ,
@@ -20,6 +20,7 @@ BEGIN
                                 `fcdrr`.`cyflow_tests_adults`      ,
                                 `fcdrr`.`cyflow_tests_pead`        ,
                                 `fcdrr`.`cyflows`                  ,
+                                `fcdrr`.`pima_tests`               ,
                                 `fcdrr`.`adults_bel_cl`            ,
                                 `fcdrr`.`pead_bel_cl`              ,
                                 `fcdrr`.`comments`                 ,

@@ -14,6 +14,7 @@ CREATE TABLE `fcdrr` (
   `cyflow_tests_adults` int(11) NOT NULL,
   `cyflow_tests_pead` int(11) NOT NULL,
   `cyflows` int(11) NOT NULL,
+  `pima_tests` int(11) NOT NULL,
   `adults_bel_cl` int(11) NOT NULL,
   `pead_bel_cl` int(11) NOT NULL,
   `comments` varchar(200) DEFAULT NULL,

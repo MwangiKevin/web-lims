@@ -21,23 +21,27 @@ class fcdrrs_m extends MY_Model{
 
 		$fcdrr_auto_id 		=	(int)	$fcdrr_st[0]["Auto_increment"];
 
-		$facility_id			= 	(int) $fcdrr['head_info']['selected']['facility']['facility_id'];
-		$from_date				= 	Date('Y-m-d', strtotime($fcdrr['head_info']['selected']['dates']['year'].'-'.$fcdrr['head_info']['selected']['dates']['month'].'-1'));
-		$to_date				= 	Date('Y-m-d', strtotime($fcdrr['head_info']['selected']['dates']['year'].'-'.$fcdrr['head_info']['selected']['dates']['month'].'-t'));
-		$calibur_tests_adults	= 	$fcdrr['head_info']['devicetests'];
-		$calibur_tests_pead		= 	$fcdrr['head_info']['devicetests'];
-		$caliburs 				= 	$fcdrr['head_info']['devicetests'];
-		$count_tests_adults		= 	$fcdrr['head_info']['devicetests'];
-		$count_tests_pead		= 	$fcdrr['head_info']['devicetests'];
-		$counts 				= 	$fcdrr['head_info']['devicetests'];
-		$cyflow_tests_adults 	= 	$fcdrr['head_info']['devicetests'];
-		$cyflow_tests_pead		= 	$fcdrr['head_info']['devicetests'];
-		$cyflows 				= 	$fcdrr['head_info']['devicetests'];
-		$adults_bel_cl			= 	$fcdrr['head_info']['devicetests'];
-		$pead_bel_cl			= 	$fcdrr['head_info']['devicetests'];
-		$comments				= 	$fcdrr['footer_info']['comments'];
+		$facility_id			= 	(int) $fcdrr['facility_id'];
 
-		$commodities 			= 	$fcdrr['head_info']['devicetests'];
+
+		$from_date				= 	Date('Y-m-d', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
+		$to_date				= 	Date('Y-m-t', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
+
+		$year					= 	Date('Y', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
+		$month					= 	Date('m', strtotime($fcdrr['year'].'-'.$fcdrr['month'].'-1'));
+
+		$calibur_tests_adults	= 	(int) $fcdrr['calibur_tests_adults'];
+		$calibur_tests_pead		= 	(int) $fcdrr['calibur_tests_pead'];
+		$count_tests_adults		= 	(int) $fcdrr['count_tests_adults'];
+		$count_tests_pead		= 	(int) $fcdrr['count_tests_pead'];
+		$cyflow_tests_adults 	= 	(int) $fcdrr['cyflow_tests_adults'];
+		$cyflow_tests_pead		= 	(int) $fcdrr['cyflow_tests_pead'];
+		$adults_bel_cl			= 	(int) $fcdrr['adults_bel_cl'];
+		$pead_bel_cl			= 	(int) $fcdrr['pead_bel_cl'];
+
+		$comments				= 	$fcdrr['comments'];
+
+		$commodities 			= 	$fcdrr['displayed_commodities'];
 
 		$sql = "INSERT INTO `fcdrr` 
 			(
@@ -49,13 +53,11 @@ class fcdrrs_m extends MY_Model{
 				`month`, 
 				`calibur_tests_adults`, 
 				`calibur_tests_pead`, 
-				`caliburs`, 
 				`count_tests_adults`, 
 				`count_tests_pead`, 
-				`counts`, 
 				`cyflow_tests_adults`, 
 				`cyflow_tests_pead`, 
-				`cyflows`, 
+				`pima_tests`, 
 				`adults_bel_cl`, 
 				`pead_bel_cl`, 
 				`comments`
@@ -70,18 +72,48 @@ class fcdrrs_m extends MY_Model{
 				'$month', 
 				'$calibur_tests_adults', 
 				'$calibur_tests_pead', 
-				'$caliburs', 
 				'$count_tests_adults', 
 				'$count_tests_pead', 
-				'$counts', 
 				'$cyflow_tests_adults', 
 				'$cyflow_tests_pead', 
-				'$cyflows', 
+				'$pima_tests', 
 				'$adults_bel_cl', 
 				'$pead_bel_cl', 
 				'$comments'
-				);";
 
+			);";
+		foreach ($commodities as $key => $value) {
+
+			$comm_sql = "INSERT INTO `fcdrr_commodity`
+			(
+				`fcdrr_id`, 
+				`beginning_bal`, 
+				`received_qty_warehouse`, 
+				`lot_code`, 
+				`qty_used`, 
+				`losses`, 
+				`adjustment_plus`, 
+				`adjustment_minus`, 
+				`end_bal`, 
+				`requested`, 
+				`commodity_id`
+			)
+			VALUES(
+
+				'".$fcdrr_auto_id."',
+				'".$value['beginning_bal']."',
+				'".$value['received_qty']."',
+				'".$value['lot_code']."',
+				'".$value['qty_used']."',
+				'".$value['losses']."',
+				'".$value['adjustment_plus']."',
+				'".$value['adjustment_minus']."',
+				'".$value['end_bal']."',
+				'".$value['requested']."',
+				'".$key."',
+		']	)
+			";
+		}
 
 		return $fcdrr;
 

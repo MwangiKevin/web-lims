@@ -5,10 +5,10 @@
 		<div class="ui horizontal divider">Start</div>
 		<a class="ui teal ribbon label">Facility Details</a>
 		<div class="ui stackable grid">
-			<div class="six wide column"> <div class="ui horizontal label large">Facility (MFL Code):</div><b>{{ fcdrr.head_info.selected.facility.facility_name+'('+fcdrr.head_info.selected.facility.facility_mfl_code+')' }}</b></div>
-			<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.head_info.selected.facility.sub_county_name}}</b></div>
-			<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.head_info.selected.facility.county_name}}</b></div>
-			<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.head_info.selected.facility.affiliation}}</b></div>
+			<div class="six wide column"> <div class="ui horizontal label large">Facility (MFL Code):</div><b>{{ fcdrr.facility.facility_name+'('+fcdrr.facility.facility_mfl_code+')' }}</b></div>
+			<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.facility.sub_county_name}}</b></div>
+			<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.facility.county_name}}</b></div>
+			<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.facility.affiliation}}</b></div>
 		</div>
 		<hr />
 			<a class="ui teal ribbon label">Dates</a>
@@ -16,7 +16,7 @@
 			<div class="three wide column">REPORT OF THE PERIOD</div>
 			<div class="three wide column">
 
-				<ui-select ng-click="getSelectableMonths()" ng-model="fcdrr.head_info.selected.dates.year" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+				<ui-select ng-click="getSelectableMonths()" ng-model="selected.year" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
 					<ui-select-match placeholder="Select a Year">{{$select.selected.label}}</ui-select-match>
 					<ui-select-choices repeat="year in selectableDates.years | filter: $select.search">
 						<span ng-bind-html="year.label | highlight: $select.search"></span>
@@ -24,9 +24,9 @@
 				</ui-select>
 
 			</div>
-			<div class="three wide column" ng-show="fcdrr.head_info.selected.dates.year">
+			<div class="three wide column" ng-show="selected.year">
 
-				<ui-select ng-model="fcdrr.head_info.selected.dates.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+				<ui-select on-select="bind_dates()" ng-model="selected.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
 					<ui-select-match placeholder="Select a Month">{{$select.selected.label}}</ui-select-match>
 					<ui-select-choices  repeat="month in selectableDates.months | filter: $select.search">
 						<span ng-bind-html="month.label | highlight: $select.search"></span>
@@ -44,8 +44,8 @@
 					<div class="ui label">
 						Facs </br>Calibur:
 					</div>
-					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
-					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
+					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.calibur_tests_pead"/>
+					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.calibur_tests_adults" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -53,8 +53,8 @@
 					<div class="ui label">
 						Facs </br>Count:
 					</div>
-					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
-					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
+					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.count_tests_pead" />
+					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.count_tests_adults" />
 				</div>
 			</div>
 			<div class="three wide column">			
@@ -62,8 +62,8 @@
 					<div class="ui label">
 						Cyflow </br>Partec:
 					</div>
-					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
-					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
+					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.cyflow_tests_pead" />
+					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.cyflow_tests_adults" />
 				</div>
 			</div>
 			<div class="three wide column">
@@ -71,7 +71,7 @@
 					<div class="ui label">
 						Alere </br>PIMA:
 					</div>
-					<input ng-keyup="calculate_total()" placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
+					<input ng-keyup="calculate_total()" placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.pima_tests"/>
 				</div>
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 					<div class="ui label">
 						Total :
 					</div>
-					<input ng-model="fcdrr.devicetests.total_cd4" type="text" placeholder="Total tests" readonly />
+					<input ng-model="fcdrr.total_cd4" type="text" placeholder="Total tests" readonly />
 				</div>
 			</div>
 			<div class="three wide column">
@@ -92,7 +92,7 @@
 					<div class="ui label">
 						Adults < 500 </br>CD4 count:
 					</div>
-					<input ng-model="fcdrr.devicetests.total_adults_under_500" placeholder="Adults < 500" type="text" />
+					<input ng-model="fcdrr.adults_bel_cl" placeholder="Adults < 500" type="text" />
 				</div>
 			</div>
 			<div class="three wide column">
@@ -100,13 +100,13 @@
 					<div class="ui label">
 						Pead < 500 </br>CD4 count:
 					</div>
-					<input ng-model="fcdrr.devicetests.total_pead_under_500" placeholder="Peads < 500" type="text" />
+					<input ng-model="fcdrr.pead_bel_cl" placeholder="Peads < 500" type="text" />
 				</div>
 			</div>
 		</div>
 		<hr />
 		<pre>
-			{{fcdrr.displayed_commodities}}
+			{{fcdrr.year}}
 		</pre>
 
 		<hr />
@@ -117,7 +117,7 @@
 					<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
 					<th   id="h_unit" rowspan="2"><center>Unit</center></th>
 					<th   id="h_beg_bal" rowspan="2"><center>Beginning Balance</center></th>
-					<th   id="h_quat_rec" rowspan="2"><center>Quantity Received <br/>From Warehouse(e.g Kemsa)</center></th>
+					<th   id="h_quat_rec" colspan="2"><center>Received From<br/>Warehouse(e.g Kemsa) </center></th>
 					<th   id="h_quant_used" rowspan="2"><center>Quantity Used</center></th>
 					<th   id="h_loss" rowspan="2"><center>Losses / Wastages </center></th>
 					<th   					colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</i></center></th>
@@ -125,13 +125,15 @@
 					<th   id="h_req" rowspan="2"><center>Quantity<br />Requested</center></th>
 				</tr>
 				<tr>
+					<th  id="h_warehse" ><center>Quantity</center></th>
+					<th  id="h_lot_no" ><center>Lot Code</center></th> 
 					<th  id="h_adj_pos" ><center>Positive</center></th>
 					<th  id="h_adj_neg" ><center>Negative</center></th>    
 				</tr>
 			</thead>
 
 			<tbody ng-repeat="commodity_cat in commodities">
-				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity_cat.category_name}}</td></tr>	
+				<tr ><td rowspan="1" colspan="11" style="background:#eeeeee;">{{commodity_cat.category_name}}</td></tr>	
 
 				<tr ng-repeat="commodity in commodity_cat.commodities">
 
@@ -141,14 +143,20 @@
 						<div class="item">
 							<label class="ui horizontal label commodity-label commodity-hide">Beginning Balance:</label>								
 							<div class="ui input">
-								<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].beg_bal" type="text"  required/>
+								<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].beginning_bal" type="text"  required/>
 							</div>
 						</div>
 					</td>
 					<td style="width:50em">
 						<label class="ui horizontal label commodity-label commodity-hide">Quantity Received:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].qty_receive" type="text"   required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].received_qty" type="text"   required/>
+						</div>
+					</td>
+					<td style="width:50em">
+						<label class="ui horizontal label commodity-label commodity-hide">Lot No:</label>
+						<div class="ui input">
+							<input ng-model="fcdrr.displayed_commodities[commodity.id].lot_code" type="text"   required/>
 						</div>
 					</td>
 					<td style="width:30em">
@@ -166,13 +174,13 @@
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Positive Adjustment:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].positives" type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].adjustment_plus" type="text"  required/>
 						</div>
 					</td>
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Negative Adjustment:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].negatives" type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].adjustment_minus" type="text"  required/>
 						</div>
 					</td>
 					<td style="width:30em">
@@ -184,7 +192,7 @@
 					<td style="width:30em">
 						<label class="ui horizontal label commodity-label commodity-hide">Quantity Requested:</label>
 						<div class="ui input">
-							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].qty_request"  type="text"  required/>
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].requested"  type="text"  required/>
 						</div>
 					</td>
 				</tr>
@@ -194,7 +202,7 @@
 					<td id="f_commodity_name"   rowspan="2"><center>Commodity</center></td>
 					<td id="f_unit"   			rowspan="2"><center>Unit</center></td>
 					<td id="f_beg_bal"   		rowspan="2"><center>Beginning Balance</center></td>
-					<td id="f_quat_rec" 	   	rowspan="2"><center>Quantity Received <br/>From Warehouse(e.g Kemsa)</center></td>
+					<td id="f_quat_rec" 	   	colspan="2"><center>Received From <br/>Warehouse(e.g Kemsa)</center></td>
 					<td id="f_quant_used"   	rowspan="2"><center>Quantity Used</center></td>
 					<td id="f_loss"   			rowspan="2"><center>Losses / Wastages</center></td>
 					<td   						colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</center></i></td>
@@ -202,6 +210,8 @@
 					<td id="f_req"   			rowspan="2"><center>Quantity<br />Requested</center></td>
 				</tr>
 				<tr>
+					<td id="f_warehse"  ><center>Quantity</center></td>
+					<td id="f_lot_no"  ><center>Lot Code</center></td>   
 					<td id="f_adj_pos"  ><center>Positive</center></td>
 					<td id="f_adj_neg"  ><center>Negative</center></td>    
 				</tr>
@@ -212,7 +222,7 @@
 		<div class="sixteen wide column">	
 			<div class="ui form">
 				<div class="field">
-					<textarea style="height:20px" ng-model="fcdrr.footer_info.comments"></textarea>
+					<textarea style="height:20px" ng-model="fcdrr.comments"></textarea>
 				</div>
 			</div>
 		</div>
@@ -284,6 +294,8 @@ function header_width(){
 	$('#h_unit').width($('#f_unit').width());
 	$('#h_beg_bal').width($('#f_beg_bal').width());
 	$('#h_quat_rec').width($('#f_quat_rec').width());
+	$('#h_warehse').width($('#f_warehse').width());
+	$('#h_lot_no').width($('#f_lot_no').width());
 	$('#h_quant_used').width($('#f_quant_used').width());
 	$('#h_loss').width($('#f_loss').width());
 	$('#h_end_bal').width($('#f_end_bal').width());
