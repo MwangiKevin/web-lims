@@ -151,9 +151,10 @@ class fcdrrs_m extends MY_Model{
 		}else{
 
 			$fcdrr = $fcdrr_res[0];	
-
-			$fcdrr_commodities = R::getAll("CALL `proc_get_fcdrr_commodities`('','".$fcdrr['fcdrr_id']."')");
-			$fcdrr['commodities'] = $fcdrr_commodities;
+			if($fcdrr_res[0]){
+				$fcdrr_commodities = R::getAll("CALL `proc_get_fcdrr_commodities`('','".$fcdrr['fcdrr_id']."')");
+				$fcdrr['commodities'] = $fcdrr_commodities;
+			}
 		}
 
 		return $fcdrr;
