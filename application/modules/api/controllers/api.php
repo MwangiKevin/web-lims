@@ -8,7 +8,7 @@ class api extends MY_Controller {
 
 		parent::__construct();
 		
-		// header('Content-Type: application/json; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 	}
 	public function index(){
 		echo "null";

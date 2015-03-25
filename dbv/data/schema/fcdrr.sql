@@ -18,7 +18,7 @@ CREATE TABLE `fcdrr` (
   `adults_bel_cl` int(11) NOT NULL,
   `pead_bel_cl` int(11) NOT NULL,
   `comments` varchar(200) DEFAULT NULL,
-  `upload_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),  
   UNIQUE KEY `facility_id` (`facility_id`,`from_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

@@ -24,7 +24,7 @@ BEGIN
                                 `fcdrr`.`adults_bel_cl`            ,
                                 `fcdrr`.`pead_bel_cl`              ,
                                 `fcdrr`.`comments`                 ,
-                                `fcdrr`.`upload_timestamp`         
+                                `fcdrr`.`timestamp`         
                             FROM `fcdrr`
 
                             WHERE 1 
@@ -44,6 +44,7 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY," AND `fcdrr`.`from_date` = '",year,"-",month,"-1' " ); 
         END IF;
 
+            SET @QUERY = CONCAT(@QUERY," ORDER BY 'from_date' DESC" ); 
 
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
