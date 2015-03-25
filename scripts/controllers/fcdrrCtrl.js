@@ -233,9 +233,30 @@ app.controller('fcdrrCtrl',
 
         $scope.populateFcdrr = function(){
 
+            if($stateParams.id>0){
+
+                var loaded_fcdrr = Restangular.one('fcdrrs',$stateParams.id);
+
+                loaded_fcdrr.get().then(function(fcdrr_load){
+                    $scope.fcdrr = fcdrr_load;
+                     $scope.calculate_total();
+                    $scope.populate_displayed_commodities();
+                })
+            }
+
         }
         $scope.formatPostFcdrr = function(){
 
         }
+        $scope.populate_displayed_commodities = function(){
+
+            $scope.fcdrr.displayed_commodities={};
+
+            for (i = 0; i < $scope.fcdrr.commodities.length; i++) { 
+                $scope.fcdrr.displayed_commodities[$scope.fcdrr.commodities[i].commodity_id]= $scope.fcdrr.commodities[i];
+            }
+        }
+
+        $scope.populateFcdrr();
 
     }])

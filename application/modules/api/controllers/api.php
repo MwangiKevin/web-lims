@@ -8,7 +8,7 @@ class api extends MY_Controller {
 
 		parent::__construct();
 		
-		// header('Content-Type: application/json; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 		// $this->output->enable_profiler(TRUE);
 	}
 	public function index(){

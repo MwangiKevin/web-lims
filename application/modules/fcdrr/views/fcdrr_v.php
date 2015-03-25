@@ -105,9 +105,9 @@
 			</div>
 		</div>
 		<hr />
-		<pre>
+	<!-- 	<pre>
 			{{fcdrr_id}}
-		</pre>
+		</pre> -->
 
 		<hr />
 		<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
