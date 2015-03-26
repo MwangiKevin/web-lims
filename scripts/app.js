@@ -79,8 +79,24 @@ var app = angular
 		url: 'fcdrrReporting',
 		templateUrl: 'dashboard/fcdrr_reporting'		
 	})
-	.state('fillFCDRR',{ /* fcdrr page loaded here */
+	.state('fillFCDRRS',{ /* fcdrr page loaded here */
 		url: '/fillFCDRR',
+		views:{
+			'main':{
+				templateUrl: 'fcdrr/fillFCDRR_view',
+				controller: 'fcdrrCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer'
+			}
+		}
+	})
+	.state('editFCDRR',{ /* fcdrr page loaded here */
+		url: '/editFCDRR/{id:int}',
 		views:{
 			'main':{
 				templateUrl: 'fcdrr/fillFCDRR_view',

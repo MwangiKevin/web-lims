@@ -3,6 +3,8 @@ CREATE TABLE `fcdrr` (
   `facility_id` int(11) NOT NULL COMMENT 'FK to facility',
   `from_date` date NOT NULL,
   `to_date` date NOT NULL,
+  `year` int(5) NOT NULL,
+  `month` int(3) NOT NULL,
   `calibur_tests_adults` int(11) NOT NULL,
   `calibur_tests_pead` int(11) NOT NULL,
   `caliburs` int(11) NOT NULL,
@@ -12,8 +14,11 @@ CREATE TABLE `fcdrr` (
   `cyflow_tests_adults` int(11) NOT NULL,
   `cyflow_tests_pead` int(11) NOT NULL,
   `cyflows` int(11) NOT NULL,
+  `pima_tests` int(11) NOT NULL,
+  `adults_bel_cl` int(11) NOT NULL,
+  `pead_bel_cl` int(11) NOT NULL,
   `comments` varchar(200) DEFAULT NULL,
-  `upload_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),  
   UNIQUE KEY `facility_id` (`facility_id`,`from_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

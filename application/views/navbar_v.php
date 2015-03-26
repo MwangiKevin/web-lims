@@ -24,7 +24,7 @@
       </a>
       <a class="ui dropdown item">Actions
         <i class="dropdown icon"></i>
-        <div class="menu">
+        <div class="menu" style="z-index:200">
           <div class="item">Logout<i class="key icon " style="float:right"></i></div>
           <div class="item">Help<i class="help icon " style="float:right"></i></div>
           <div class="item">My Profile<i class="user icon " style="float:right"></i></div>
@@ -49,7 +49,7 @@
       </a>
     </div>
   </div>
-  <div class="ui vertical navbar menu top" style="width:100%;padding:0">
+  <div class="ui vertical navbar menu top" style="width:100%;padding:0;">
     <a href="#dashboard" class="item" ng-class="getActiveMenu('dashboard')"><i class="fa fa-dashboard fa-sm icon blue"></i>Dashboard</a>
     <a href="#fillFCDRR" class="item" ng-class="getActiveMenu('fcdrr')"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>
     <a href="#CD4DeviceUploads" class="item" ng-class="getActiveMenu('cd4DeviceUploads')"><i class="fa fa-upload fa-sm icon green"></i>Device Uploads</a>
