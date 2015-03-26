@@ -142,6 +142,16 @@ app.controller('fcdrrCtrl',
 
         $scope.save_fcdrr = function (){
 
+            if($scope.editState()=='new'){
+                $scope.post_fcdrr();
+            }else if($scope.editState()=='edit'){
+                $scope.put_fcdrr();
+            }
+
+        }
+
+        $scope.post_fcdrr  = function() {
+
             swal(
             {   
                 title: "Are you sure?",   
@@ -153,7 +163,32 @@ app.controller('fcdrrCtrl',
                 closeOnConfirm: false,
             },
             function(){    
-                $scope.baseFcdrrs.post($scope.fcdrr).then(function(fcdrr){
+                // $scope.baseFcdrrs.post( $scope.fcdrr_id,$scope.fcdrr).then(function(fcdrr){
+                //     console.log(fcdrr);                    
+                //     swal("Saved!", "Your Report has been saved", "success");
+                //     $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
+                // },function(response){
+                //      console.log("Error with status code", response);
+                //       swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");
+                // });
+                // $scope.fcdrr_id.put();
+            });
+        }
+
+
+        $scope.put_fcdrr  = function() {
+             swal(
+            {   
+                title: "Are you sure?",   
+                text: "This make changes to this exixting FCDRR!",   
+                type: "info",
+                showCancelButton: true,   
+                confirmButtonColor: "#00b5ad",   
+                confirmButtonText: "Yes, Save it!",   
+                closeOnConfirm: false,
+            },
+            function(){    
+                $scope.baseFcdrrs.putElement($scope.fcdrr).then(function(fcdrr){
                     console.log(fcdrr);                    
                     swal("Saved!", "Your Report has been saved", "success");
                     $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
@@ -163,7 +198,6 @@ app.controller('fcdrrCtrl',
                 });
             });
         }
-
 
         $scope.print = function (){
             swal("Printing!", "Print!", "success");
@@ -180,7 +214,7 @@ app.controller('fcdrrCtrl',
             $scope.promise = API.getFacilities()
             .success(function (fac) {
                 $scope.facilities = fac;
-            $scope.fcdrr.facility = $scope.facilities[78];  //this is just a test 
+            $scope.fcdrr.facility = $scope.facilities[128];  //this is just a test 
         })
             .error(function (error) {
                 $scope.status = 'Unable to load customer data: ' + error.message;
