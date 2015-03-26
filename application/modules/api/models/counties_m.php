@@ -25,7 +25,12 @@ class counties_m extends MY_Model{
 	}
 
 	public function update($id){
-
+		$name = $this->input->put('name');
+		$county = R::getAll("UPDATE `county` 
+								SET `name`='$name'
+								WHERE `id` = '$id'
+								");
+		return $county;
 	}
 
 	public function remove($id){

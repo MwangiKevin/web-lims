@@ -66,6 +66,7 @@ class api extends MY_Controller {
 		$this->load->model("counties_m");	
 
 		$method = $this->_detect_method();
+		echo $method;die();
 
 		if ($method=="post"){
 			echo json_encode($this->counties_m->create(),JSON_PRETTY_PRINT);
@@ -89,7 +90,7 @@ class api extends MY_Controller {
 		$this->load->model("partners_m");	
 
 		$method = $this->_detect_method();
-
+		
 		if ($method=="post"){
 			echo json_encode($this->partners_m->create(),JSON_PRETTY_PRINT);
 		}

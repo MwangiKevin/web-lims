@@ -19,7 +19,7 @@ class sub_counties_m extends MY_Model{
 	}
 
 	public function update($id){
-
+		
 	}
 
 	public function remove($id){
