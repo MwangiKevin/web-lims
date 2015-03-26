@@ -16,6 +16,27 @@ app.controller('fcdrrCtrl',
 
         $scope.fcdrr_id = $stateParams.id;
 
+        $scope.editState = function(){
+            if($stateParams.id>0){
+                return 'edit'
+            }else{
+                return 'new'
+            }
+        }
+
+        $scope.showMonth = function(){
+            var objDate = new Date($scope.fcdrr.from_date);
+            locale = "en-us",
+            month = objDate.toLocaleString(locale, { month: "long" });
+            return month; 
+        }
+        $scope.showYear = function(){
+            var objDate = new Date($scope.fcdrr.from_date);
+            locale = "en-us",
+            year = objDate.getFullYear();
+            return year; 
+        }
+
         Commons.activeMenu = "fcdrr";
 
         $scope.commodities=[];
@@ -159,7 +180,7 @@ app.controller('fcdrrCtrl',
             $scope.promise = API.getFacilities()
             .success(function (fac) {
                 $scope.facilities = fac;
-            $scope.fcdrr.facility = $scope.facilities[23];  //this is just a test 
+            $scope.fcdrr.facility = $scope.facilities[78];  //this is just a test 
         })
             .error(function (error) {
                 $scope.status = 'Unable to load customer data: ' + error.message;

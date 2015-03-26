@@ -14,7 +14,7 @@
 			<a class="ui teal ribbon label">Dates</a>
 		<div class="ui stackable grid ">
 			<div class="three wide column">REPORT OF THE PERIOD</div>
-			<div class="three wide column">
+			<div class="three wide column" ng-show="(editState()=='new')">
 
 				<ui-select ng-click="getSelectableMonths()" ng-model="selected.year" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
 					<ui-select-match placeholder="Select a Year">{{$select.selected.label}}</ui-select-match>
@@ -24,7 +24,7 @@
 				</ui-select>
 
 			</div>
-			<div class="three wide column" ng-show="selected.year">
+			<div class="three wide column" ng-show="selected.year&&(editState()=='new')">
 
 				<ui-select on-select="bind_dates()" ng-model="selected.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
 					<ui-select-match placeholder="Select a Month">{{$select.selected.label}}</ui-select-match>
@@ -33,6 +33,17 @@
 					</ui-select-choices>
 				</ui-select>
 
+			</div>
+
+			<div class="three wide column" ng-show="(editState()=='edit')">	
+				<div class="ui input">
+					<input  value="{{showYear()}}"   readonly/>
+				</div>
+			</div>
+			<div class="three wide column" ng-show="(editState()=='edit')">			
+				<div class="ui input">
+					<input  value="{{showMonth()}}"   readonly/>
+				</div>
 			</div>
 		</div>
 		<hr />
