@@ -55,7 +55,17 @@ class commodities_m extends MY_Model{
 			}
 
 			
-			$commodities = $commodities_results;
+			// $commodities = $commodities_results;
+			$commodities_clean = array();
+
+			foreach ($commodities_results as $key => $value) {
+				array_push($commodities_clean, $value);
+			}
+
+
+			$commodities = $commodities_clean;
+
+
 
 		}else{
 

@@ -202,8 +202,8 @@
 	<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
-	<script src="<?php echo base_url('scripts/controllers/dashboardSummaryCtrl.js');?>"></script>
 
+	<script src="<?php echo base_url('scripts/controllers/dashboard/summaryCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/dashboard/TestsTrendCtrl.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
@@ -292,6 +292,13 @@
   position: absolute;
   top: -9999px;
   left: -9999px;
+}
+
+.pagination {
+    cursor: pointer;
+}
+.cg-busy-default-wrapper{	
+    cursor: no-drop;
 }
 </style>
 
