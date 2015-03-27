@@ -8,7 +8,33 @@ class counties_m extends MY_Model{
 	}
 
 	public function create(){
+		$error = array();
+		$request_body = $this->input->post('name');
+		// $request_body = file_get_contents('php://input');
+		echo $request_body;die();
+		// $conuty = json_decode($request_body,true);
+		// echo "<pre>";print_r($conuty);die();
 
+		$county_table =	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'county'"	);
+		
+		$county_ID = $county_table[0][Auto_increment];
+		
+		$sql = "INSERT INTO `county`
+						(
+							`id`,
+							`name`
+						) 
+					VALUES 
+					(
+						'$county_ID',
+						''
+					)";
+
+		echo $sql;
+		die();
+		if(!$this->db->query($sql)){
+			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+		}
 	}
 
 	public function read($id=NULL){
@@ -25,12 +51,16 @@ class counties_m extends MY_Model{
 	}
 
 	public function update($id){
-		$name = $this->input->put('name');
-		$county = R::getAll("UPDATE `county` 
+		// parse_str(file_get_contents('php://input'), $_PUT);
+		$request_fields = file_get_contents('php://input');
+
+		$county = json_decode($request_fields, true);
+
+		$county_updated = R::getAll("UPDATE `county` 
 								SET `name`='$name'
 								WHERE `id` = '$id'
 								");
-		return $county;
+		return $county_updated;
 	}
 
 	public function remove($id){

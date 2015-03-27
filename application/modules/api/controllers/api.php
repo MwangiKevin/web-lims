@@ -8,11 +8,11 @@ class api extends MY_Controller {
 
 		parent::__construct();
 		
-		header('Content-Type: application/json; charset=utf-8');
+		// header('Content-Type: application/json; charset=utf-8');
 		// $this->output->enable_profiler(TRUE);
 	}
 	public function index(){
-		echo "null";
+		$this->load->view('create');
 	}
 
 	public function facilities($id=NULL) {
@@ -22,6 +22,7 @@ class api extends MY_Controller {
 		$method= $this->_detect_method();
 
 		if ($method=="post"){
+			echo "Arrived"; die();
 			echo json_encode($this->facilities_m->create(),JSON_PRETTY_PRINT);
 		}
 
@@ -67,8 +68,7 @@ class api extends MY_Controller {
 		$this->load->model("counties_m");	
 
 		$method = $this->_detect_method();
-		echo $method;die();
-
+		
 		if ($method=="post"){
 			echo json_encode($this->counties_m->create(),JSON_PRETTY_PRINT);
 		}

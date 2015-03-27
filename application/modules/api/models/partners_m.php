@@ -8,7 +8,35 @@ class partners_m extends MY_Model{
 	}
 
 	public function create(){
-
+		$error = array();
+		
+		$request_body = file_get_contents('php://input');
+		
+		$partner = json_decode($request_body,true);
+		
+		$partner_table =	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'partner'"	);
+		
+		$partner_ID = $partner_table[0][Auto_increment];
+		
+		$sql = "INSERT INTO `partner`
+						(
+						`id`,
+						`name`,
+						`phone`,
+						`email`
+						)
+					VALUES
+						(
+						'$partner_ID',
+						'',
+						'',
+						''
+						)";
+		echo $sql;
+		die();
+		if(!$this->db->query($sql)){
+			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+		}
 	}
 
 	public function read($id=NULL){
@@ -19,7 +47,20 @@ class partners_m extends MY_Model{
 	}
 
 	public function update($id){
+		// parse_str(file_get_contents('php://input'), $_PUT);
+		$request_fields = file_get_contents('php://input');
 
+		$partner = json_decode($request_fields, true);
+
+		$partner_updated = R::getAll("UPDATE `partner` 
+								SET 
+									`name`='',
+									`name`='',
+									`name`='$name'
+								WHERE 
+									`id` = '$id'
+								");
+		return $partner_updated;
 	}
 
 	public function remove($id){
