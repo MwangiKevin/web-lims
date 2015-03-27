@@ -39,7 +39,7 @@ class fcdrrs_m extends MY_Model{
 
 		$comments				= 	$fcdrr['comments'];
 
-		$commodities 			= 	$fcdrr['displayed_commodities'];
+		$displayed_commodities 			= 	$fcdrr['displayed_commodities'];
 
 		$sql = "INSERT INTO `fcdrr` 
 			(
@@ -85,7 +85,7 @@ class fcdrrs_m extends MY_Model{
 				$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
 
 			}
-		foreach ($commodities as $key => $value) {
+		foreach ($displayed_commodities as $key => $value) {
 
 			$comm_sql = "INSERT INTO `fcdrr_commodity`
 			(
@@ -171,7 +171,129 @@ class fcdrrs_m extends MY_Model{
 	}
 
 	public function update($id){
+		$error = array();
 
+		$request_body = file_get_contents('php://input');
+
+		$fcdrr = json_decode($request_body,true);
+
+
+		$this->db->trans_begin();
+
+		$fcdrr_id				= 	(int) $fcdrr['fcdrr_id'];
+		$calibur_tests_adults	= 	(int) $fcdrr['calibur_tests_adults'];
+		$calibur_tests_pead		= 	(int) $fcdrr['calibur_tests_pead'];
+		$count_tests_adults		= 	(int) $fcdrr['count_tests_adults'];
+		$count_tests_pead		= 	(int) $fcdrr['count_tests_pead'];
+		$cyflow_tests_adults 	= 	(int) $fcdrr['cyflow_tests_adults'];
+		$cyflow_tests_pead		= 	(int) $fcdrr['cyflow_tests_pead'];
+		$adults_bel_cl			= 	(int) $fcdrr['adults_bel_cl'];
+		$pead_bel_cl			= 	(int) $fcdrr['pead_bel_cl'];
+
+		$comments				= 	$fcdrr['comments'];
+
+		$displayed_commodities 			= 	$fcdrr['displayed_commodities'];
+
+		$sql = "UPDATE `fcdrr` 
+				SET 
+					`year` 					= '$year', 
+					`month` 				= '$month', 
+					`calibur_tests_adults` 	= '$calibur_tests_adults', 
+					`calibur_tests_pead` 	= '$calibur_tests_pead', 
+					`count_tests_adults` 	= '$count_tests_adults', 
+					`count_tests_pead` 		= '$count_tests_pead', 
+					`cyflow_tests_adults`	= '$cyflow_tests_adults', 
+					`cyflow_tests_pead` 	= '$cyflow_tests_pead', 
+					`pima_tests` 			= '$pima_tests', 
+					`adults_bel_cl` 		= '$adults_bel_cl', 
+					`pead_bel_cl` 			= '$pead_bel_cl', 
+					`comments` 				= '$comments'
+
+					WHERE 	`id` = '$fcdrr_id' 
+			 	
+				";
+
+		if(!$this->db->query($sql)){
+			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+
+		}
+		foreach ($displayed_commodities as $key => $value) {
+
+			$comm_exists_res	=	R::getAll(	"SELECT * FROM `fcdrr_commodity` WHERE 	`fcdrr_id`= '".$fcdrr_id."' AND `commodity_id` = '".$key."' ");
+			// echo sizeof($comm_exists_res);
+			if((int)sizeof($comm_exists_res)==0){
+
+				$comm_sql = "INSERT INTO `fcdrr_commodity`
+				(
+					`fcdrr_id`, 
+					`beginning_bal`, 
+					`received_qty`, 
+					`lot_code`, 
+					`qty_used`, 
+					`losses`, 
+					`adjustment_plus`, 
+					`adjustment_minus`, 
+					`end_bal`, 
+					`requested`, 
+					`commodity_id`
+				)
+				VALUES(
+
+					'".$fcdrr_id."',
+					'".$value['beginning_bal']."',
+					'".$value['received_qty']."',
+					'".$value['lot_code']."',
+					'".$value['qty_used']."',
+					'".$value['losses']."',
+					'".$value['adjustment_plus']."',
+					'".$value['adjustment_minus']."',
+					'".$value['end_bal']."',
+					'".$value['requested']."',
+					'".$key."'
+				)
+				";
+
+				if(!$this->db->query($comm_sql)){
+					$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+				}
+
+			}else{
+
+				$comm_sql = "UPDATE `fcdrr_commodity`
+				
+					SET 
+						`beginning_bal` 	= '".$value['beginning_bal']."',
+						`received_qty` 		= '".$value['received_qty']."',
+						`lot_code` 			= '".$value['lot_code']."',
+						`qty_used` 			= '".$value['qty_used']."',
+						`losses` 			= '".$value['losses']."',
+						`adjustment_plus`	= '".$value['adjustment_plus']."',
+						`adjustment_minus` 	= '".$value['adjustment_minus']."',
+						`end_bal` 			= '".$value['end_bal']."',
+						`requested` 		= '".$value['requested']."'
+
+					WHERE 
+							`fcdrr_id` 			= '".$fcdrr_id."' AND 
+							`commodity_id` 		= '".$key."'
+				
+				";
+
+				if(!$this->db->query($comm_sql)){
+					$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+				}
+			}
+		}
+
+		if ($this->db->trans_status() === FALSE ){
+			$this->db->trans_rollback();			
+			http_response_code(500);
+			return $error;
+		}
+		else{
+			$this->db->trans_commit();
+		}	
+
+		return $fcdrr;
 	}
 
 	public function remove($id){

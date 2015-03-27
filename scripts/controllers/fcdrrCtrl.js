@@ -163,15 +163,14 @@ app.controller('fcdrrCtrl',
                 closeOnConfirm: false,
             },
             function(){    
-                // $scope.baseFcdrrs.post( $scope.fcdrr_id,$scope.fcdrr).then(function(fcdrr){
-                //     console.log(fcdrr);                    
-                //     swal("Saved!", "Your Report has been saved", "success");
-                //     $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
-                // },function(response){
-                //      console.log("Error with status code", response);
-                //       swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");
-                // });
-                // $scope.fcdrr_id.put();
+                $scope.baseFcdrrs.post($scope.fcdrr).then(function(fcdrr){
+                    console.log(fcdrr);                    
+                    swal("Saved!", "Your Report has been saved", "success");
+                    $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
+                },function(response){
+                     console.log("Error with status code", response);
+                      swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");
+                });
             });
         }
 
@@ -187,10 +186,9 @@ app.controller('fcdrrCtrl',
                 confirmButtonText: "Yes, Save it!",   
                 closeOnConfirm: false,
             },
-            function(){    
-                $scope.baseFcdrrs.putElement($scope.fcdrr).then(function(fcdrr){
-                    console.log(fcdrr);                    
-                    swal("Saved!", "Your Report has been saved", "success");
+            function(){   
+                $scope.fcdrr.put().then(function(fcdrr){                 
+                    swal("Saved!", "Your Report has been Updated", "success");
                     $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
                 },function(response){
                      console.log("Error with status code", response);
@@ -214,7 +212,7 @@ app.controller('fcdrrCtrl',
             $scope.promise = API.getFacilities()
             .success(function (fac) {
                 $scope.facilities = fac;
-            $scope.fcdrr.facility = $scope.facilities[128];  //this is just a test 
+            $scope.fcdrr.facility = $scope.facilities[228];  //this is just a test 
         })
             .error(function (error) {
                 $scope.status = 'Unable to load customer data: ' + error.message;
