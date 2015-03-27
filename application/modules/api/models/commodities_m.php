@@ -30,18 +30,18 @@ class commodities_m extends MY_Model{
 						VALUES
 							(
 							'$commodity_ID',
-							'',
-							'',
-							'',
-							'',
-							''
+							'$commodity[code]',
+							'$commodity[name]',
+							'$commodity[unit]',
+							'$commodity[category_id]',
+							'$commodity[reporting_status]'
 							)";
 
-		echo $sql;
-		die();
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			return $error;
 		}
+		return $commodity;
 	}
 
 	public function read($id=NULL){

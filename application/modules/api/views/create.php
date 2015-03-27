@@ -13,23 +13,23 @@
     	//     json_string: JSON.stringify({name:"John", phone number:"+410000000"})
     	// });
     	var dataPath = {
-            name          : year,
-            kawasan      : areal,
-            path        : pathSend,
-            idGenangan  : jmlRecord
+                name : "Chemistry",
+                equipment_id : "0"
+            
         };
         console.log(dataPath);
         $.ajax({
-            url  :'<?php echo base_url(); ?>api/counties',
+            url  :'<?php echo base_url(); ?>api/commodity_categories',
             type    :'POST',
-            dataType:'json',
+            dataType:'jsonp',
             data    : JSON.stringify(dataPath),
             contentType:"application/json",
             success: function(data, xhr){
                 alert("Sukses Menggambar Genangan");
             },
             error:function(xhr, ajaxOptions, thrownError){
-                alert(thrownError);
+                // alert(thrownError);
+                 console.log(thrownError);
             }
         });
     });

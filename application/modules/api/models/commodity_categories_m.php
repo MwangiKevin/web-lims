@@ -27,15 +27,15 @@ class commodity_categories_m extends MY_Model{
 						VALUES
 							(
 							'$commodity_cat_ID',
-							'',
-							''
+							'$commodity_category[name]',
+							'$commodity_category[equipment_id]'
 							)";
 
-		echo $sql;
-		die();
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			return $error;
 		}
+		return $commodity_category;
 	}
 
 	public function read($id=NULL){

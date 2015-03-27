@@ -14,7 +14,7 @@ class facility_devices_m extends MY_Model{
 		
 		$facility_device = json_decode($request_body,true);
 		
-		$facility_device_table =	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'facility_device'"	);
+		$facility_device_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility_device'");
 		
 		$facility_device_ID = $county_table[0][Auto_increment];
 		
@@ -31,18 +31,19 @@ class facility_devices_m extends MY_Model{
 					VALUES
 						(
 						'$facility_device_ID',
-						'',
-						'',
-						'',
-						'',
-						''
+						'$facility_device[facility_id]',
+						'$facility_device[device_id]',
+						'$facility_device[status]',
+						'$facility_device[deactivation_reason]',
+						'$facility_device[date_added]',
+						'$facility_device[date_removed]'
 						)";
 
-		echo sql;
-		die();
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			return $error;
 		}
+		return $facility_device;
 	}
 
 	public function read($id){

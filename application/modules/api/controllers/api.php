@@ -12,6 +12,7 @@ class api extends MY_Controller {
 		// $this->output->enable_profiler(TRUE);
 	}
 	public function index(){
+		echo "null";
 		$this->load->view('create');
 	}
 

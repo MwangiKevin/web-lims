@@ -14,9 +14,9 @@ class sub_counties_m extends MY_Model{
 		
 		$sub_county = json_decode($request_body,true);
 		
-		$sub_county_table =	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'sub_county'"	);
+		$sub_county_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'sub_county'");
 		
-		$sub_county_ID = $county_table[0][Auto_increment];
+		$sub_county_ID = $sub_county_table[0][Auto_increment];
 		
 		$sql = "INSERT INTO `sub_county`
 							(
@@ -28,16 +28,18 @@ class sub_counties_m extends MY_Model{
 						VALUES
 							(
 								'$sub_county_ID',
-								'',
-								'',
-								''
+								'$sub_county[name]',
+								'$sub_county[county_id]',
+								'$sub_county[status]'
 							)";
 
-		echo $sql;
-		die();
+		
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			return $error;
 		}
+
+		return $sub_county;
 	}
 
 	public function read($id=NULL){

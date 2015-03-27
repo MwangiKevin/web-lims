@@ -28,15 +28,17 @@ class partners_m extends MY_Model{
 					VALUES
 						(
 						'$partner_ID',
-						'',
-						'',
-						''
+						'$partner[name]',
+						'$partner[phone]',
+						'$partner[email]'
 						)";
-		echo $sql;
-		die();
+		
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			return $error;
 		}
+
+		return $partner;
 	}
 
 	public function read($id=NULL){
