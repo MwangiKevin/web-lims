@@ -66,7 +66,17 @@ class partners_m extends MY_Model{
 	}
 
 	public function remove($id){
+		$request_partner = file_get_contents('php://input');
 
+		$partner = json_decode($request_partner, true);
+		
+		$partner_deleted = R::getAll("DELETE FROM 
+												 `partner`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $partner_deleted;
 	}
 
 }

@@ -118,6 +118,17 @@ class facility_devices_m extends MY_Model{
 
 	public function remove($id){
 
+		$request_fac_dev = file_get_contents('php://input');
+
+		$facility_dev = json_decode($request_fac_dev, true);
+		
+		$facility_dev_deleted = R::getAll("DELETE FROM 
+												 `facility_device`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $facility_dev_deleted;
 	}
 
 }

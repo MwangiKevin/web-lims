@@ -67,7 +67,17 @@ class sub_counties_m extends MY_Model{
 	}
 
 	public function remove($id){
+		$request_sub_county = file_get_contents('php://input');
 
+		$sub_county = json_decode($request_sub_county, true);
+		
+		$sub_county_deleted = R::getAll("DELETE FROM 
+												 `sub_county`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $sub_county_deleted;
 	}
 
 }

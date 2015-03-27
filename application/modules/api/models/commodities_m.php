@@ -137,6 +137,17 @@ class commodities_m extends MY_Model{
 
 	public function remove($id){
 
+		$request_comm = file_get_contents('php://input');
+
+		$commodity = json_decode($request_comm, true);
+		
+		$commodity_deleted = R::getAll("DELETE FROM 
+												 `commodity`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $commodity_deleted;
 	}
 
 }

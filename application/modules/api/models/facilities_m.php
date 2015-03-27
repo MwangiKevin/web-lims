@@ -49,7 +49,7 @@ class facilities_m extends MY_Model{
 							'$facility[rollout_status]'
 							)";
 		
-		
+
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
 			return $error;
@@ -118,7 +118,17 @@ class facilities_m extends MY_Model{
 	}
 
 	public function remove($id){
+		$request_fac = file_get_contents('php://input');
 
+		$facility = json_decode($request_fac, true);
+		
+		$facility_deleted = R::getAll("DELETE FROM 
+												 `facility`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $facility_deleted;
 	}
 
 }

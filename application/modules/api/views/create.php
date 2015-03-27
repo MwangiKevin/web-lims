@@ -20,7 +20,7 @@
         console.log(dataPath);
         $.ajax({
             url  :'<?php echo base_url(); ?>api/commodity_categories',
-            type    :'POST',
+            type    :'PUT',
             dataType:'jsonp',
             data    : JSON.stringify(dataPath),
             contentType:"application/json",

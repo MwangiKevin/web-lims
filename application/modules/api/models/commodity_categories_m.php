@@ -54,11 +54,13 @@ class commodity_categories_m extends MY_Model{
 	}
 
 	public function update($id){
+		echo 'null update';
 		// parse_str(file_get_contents('php://input'), $_PUT);
 		$request_fields = file_get_contents('php://input');
 
 		$commodity_cat = json_decode($request_fields, true);
-
+		print_r($commodity_cat);
+		die();
 		$commodity_cat_updated = R::getAll("UPDATE `commodity_category` 
 								SET 
 									`name`='$name',
@@ -70,7 +72,18 @@ class commodity_categories_m extends MY_Model{
 	}
 
 	public function remove($id){
+		
+		$request_comm_cat = file_get_contents('php://input');
 
+		$commodity_cat = json_decode($request_comm_cat, true);
+		
+		$commodity_cat_deleted = R::getAll("DELETE FROM 
+												 `commodity_category`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $commodity_cat_deleted;
 	}
 
 }
