@@ -15,7 +15,9 @@ var app = angular
 	'cgBusy',
 	'oitozero.ngSweetAlert',
 	'cgNotify',
-	'restangular'
+	'restangular',
+	'validation', 
+	'validation.rule'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
