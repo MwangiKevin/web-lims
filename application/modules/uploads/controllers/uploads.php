@@ -365,9 +365,9 @@ class uploads extends MY_Controller
 
 		        if(substr($entry, -4)==".csv" && $entry!="."&& $entry!=".."){
 
-		        	if($this-> server_upload_commit(realpath($root_folder."/".$entry))){
+		        	if($this-> server_upload_commit(realpath($root_folder."/".$entry)) ){
 
-		        		$files_to_move[$i]["source"] 		= 	$root_folder."/".$entry;
+		      			$files_to_move[$i]["source"] 		= 	$root_folder."/".$entry;
 					    $files_to_move[$i]["destination"]	= 	$uploaded_folder."/".$entry;
 
 					    $i++;
@@ -376,14 +376,13 @@ class uploads extends MY_Controller
 		    }
 		    closedir($handle);
 		}
-
+		
 		foreach ($files_to_move as $file) {
 
-			rename($file["source"] 	,$file["destination"]);            			
+			copy($file["source"] 	,$file["destination"]);            			
 					             			
 		}
-
-
+		echo 'new copy';  die;
 		$uploaded_new = false;
 
 		//$this->load->model('uploads_model');
