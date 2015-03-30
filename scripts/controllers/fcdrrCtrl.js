@@ -298,7 +298,7 @@ app.controller('fcdrrCtrl',
             }
 
         }
-        $scope.formatPostFcdrr = function(){
+        $scope.validate_fcdrr = function(){
 
         }
         $scope.populate_displayed_commodities = function(){
