@@ -19,16 +19,16 @@ var app = angular
 		abstract: true,
 		views:{
 			'main':{
-				// templateUrl: 'dashboard/dashboard_view',
-				// controller:'dashboardCtrl'
+				templateUrl: 'dashboard/dashboard_view',
+				controller:'dashboardCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
-				// controller: 'navbarCtrl'
+				controller: 'navbarCtrl'
 			},
 			'filter':{
 				templateUrl: 'dashboard/filter',
-				// controller: "filtersCtrl"
+				controller: "filtersCtrl"
 			},
 			'footer':{
 				templateUrl: 'dashboard/footer',
