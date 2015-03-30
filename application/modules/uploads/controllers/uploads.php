@@ -297,6 +297,48 @@ class uploads extends MY_Controller
 		fclose($file);
     }
 
+    public function read_csv($file_dir){
+		$row = 0;
+		$sheet_data = array();
+		$formatted_csv	=	array();
+
+		if (($handle = fopen("$file_dir", "r")) !== FALSE) {
+			while (($row_data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$sheet_data[$row]=$row_data;
+				$row++;
+			}			
+			fclose($handle);
+			if(count($sheet_data)>0){
+
+				$keys = $sheet_data[0];
+				$data = array();
+
+				for($i=1;$i<sizeof($sheet_data);$i++){
+					for($j=0;$j<sizeof($keys);$j++){
+						if(isset( $sheet_data[$i][$j])){
+							$data[$i][$keys[$j]] = str_replace("'","",$sheet_data[$i][$j]);
+						}else{
+							$data[$i][$keys[$j]] =	"";
+						}
+					}
+				}
+
+				$formatted_csv["data"] = $data; 
+				$formatted_csv["title"] = $keys; 
+			}
+
+			$arr["sheet_data"] 	= $this 	-> 	makeTable($formatted_csv);
+			$arr["upload_data"] = $this		->	format_upload_data($data);
+
+
+			return $arr;
+		}else{
+
+			return null;
+		}	
+
+	}
+
     public function server_upload(){
 
 		//get last upload id
@@ -344,11 +386,12 @@ class uploads extends MY_Controller
 
 		$uploaded_new = false;
 
-		$this->load->model('uploads_model');
+		//$this->load->model('uploads_model');
 
-		$view_data["upl_res"] = $this->uploads_model->get_Upload_details($last_upl);
+		//$view_data["upl_res"] = $this->uploads_model->get_Upload_details($last_upl);
+		$view_data['view_data']="Okay";
 
-		$this->load->view("uploaded_view",$view_data);
+		$this->load->view("server_uploaded_view",$view_data);
 		
 	}
 
@@ -447,12 +490,14 @@ class uploads extends MY_Controller
 			$assay_type = $data[0]['assay_id'];
 
 			$serial_number 			=	$data[0]['device_id'];
-			$facility_pima_id_res 	=	R::getAll("SELECT 	
-															`facility_pima_id`,
-															`facility_equipment_id`,
-															`facility_id`
-														FROM `v_facility_pima_details`
-														WHERE `serial_number` = '$serial_number'  LIMIT 1");
+			$facility_pima_id_res 	=	R::getAll("SELECT 
+													fp.id as facility_pima_id, 
+													fe.id as facility_equipment_id, 
+													f.id as facility_id 
+												FROM facility_pima fp,facility_equipment fe, facility f WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id 
+														AND fp.serial_num='$serial_number'  LIMIT 1");
+
+			//
 			if(sizeof($facility_pima_id_res)>0) {
 
 				$facility_pima_id =$facility_pima_id_res[0]['facility_pima_id'];
@@ -577,12 +622,15 @@ class uploads extends MY_Controller
 
 					}
 					$cd4_tst_auto_id++;
+
+					
 				}
-				if ($this->db->trans_status() === FALSE || $error){
-				    $this->db->trans_rollback();
+				if ($this->db->trans_status() === FALSE || $error===FALSE){
+				   $this->db->trans_rollback();
 				}
 				else{
-				    $this->db->trans_commit();
+				    $this->db->trans_commit();			   
+
 				}
 
 			}else{
@@ -697,12 +745,12 @@ class uploads extends MY_Controller
 			$assay_type = $data[0]['assay_id'];
 
 			$serial_number 			=	$data[0]['device_id'];
-			$facility_pima_res 	=	R::getAll("SELECT 	
-															`facility_pima_id`,
-															`facility_equipment_id`,
-															`facility_id`
-														FROM `v_facility_pima_details`
-														WHERE `serial_number` = '$serial_number'  LIMIT 1");
+			$facility_pima_res 	=	R::getAll("SELECT 
+													fp.id as facility_pima_id, 
+													fe.id as facility_equipment_id, 
+													f.id as facility_id 
+												FROM facility_pima fp,facility_equipment fe, facility f WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id 
+														AND fp.serial_num='$serial_number'  LIMIT 1");
 			if(sizeof($facility_pima_res)>0){
 
 				$facility_pima_id 		=	$facility_pima_res[0]['facility_pima_id'];
@@ -825,6 +873,78 @@ class uploads extends MY_Controller
 			$this->upload_status = true;
 		}
 
+	}
+
+
+	private function trim_uploaded_tests($data){
+
+		foreach ($data as $row) {
+			$device_test_id	=	$row['test_id'];
+			$sample_code	=	$row['sample'];
+			$result_date	=	$row['result_date']." ".$row['start_time'].":00";
+
+			$count_res = R::getAll("	SELECT 
+												COUNT(*) AS `num`
+											FROM `pima_test` 
+											LEFT JOIN `cd4_test`
+												ON `cd4_test`.`id`=`pima_test`.`cd4_test_id` 
+											WHERE 	`device_test_id`			= 	'$device_test_id'
+											AND		`sample_code` 				=	'$sample_code'
+											AND		`cd4_test`.`result_date`	=	'$result_date' "
+				);
+
+			if($count_res[0]['num']>0){
+				if (($key = array_search($row, $data)) !== false) {	//
+	    			unset($data[$key]);								// removing the data
+	    		}	
+			}
+		}
+
+		$trimmed_data = array();
+
+		foreach ($data as $datum) {
+			$trimmed_data[] = $datum;
+		}
+
+		return $trimmed_data;
+
+	}
+	private function trim_uploaded_controls($data){
+
+		foreach ($data as $row) {
+			$device_test_id	=	$row['test_id'];
+			$sample_code	=	$row['sample'];
+			$result_date	=	$row['result_date']." ".$row['start_time'].":00";
+
+			$count_res = R::getAll("	SELECT 
+												COUNT(*) AS `num`
+											FROM `pima_control` 
+
+											WHERE 	`device_test_id`			= 	'$device_test_id'
+											AND		`sample_code` 				=	'$sample_code'
+											AND		`result_date`				=	'$result_date' "
+				);
+
+			if($count_res[0]['num']>0){
+				if (($key = array_search($row, $data)) !== false) {	//
+	    			unset($data[$key]);								// removing the data
+	    		}	
+			}
+		}
+
+		$trimmed_data = array();
+
+		foreach ($data as $datum) {
+			$trimmed_data[] = $datum;
+		}
+	
+		return $trimmed_data;
+	}
+	private function device_not_recognized($serial_num,$user_id){
+		$this->db->query("INSERT INTO `pima_failed_upload_devices` 
+										(`serial_num`,`user_id`,`equipment_id`,`status`) 
+										VALUES
+											('$serial_num','$user_id','4','1')");
 	}
 }
 ?>
