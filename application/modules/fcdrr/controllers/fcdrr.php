@@ -10,21 +10,28 @@ class fcdrr extends MY_Controller {
 
 		parent::__construct();		
 
-        $this->view_data['content_view'] = "fcdrr/fcdrr_v";
-        $this->view_data['title'] = "FCDRR";
+        // $data['content_view'] = "fcdrr/fcdrr_v";
+        // $this->view_data['title'] = "FCDRR";
 
         $this->load->model('fcdrr_model');
 	}
 
 	public function index() {
-		//echo $this->config->item("copyrights");
-		$this->view_data['facs_calibur']=$this->fcdrr_model->get_facs_calibur_commodities();
-		$this->view_data['facs_count']=$this->fcdrr_model->get_facs_count_commodities();
-		$this->view_data['cyflow_partec']=$this->fcdrr_model->get_cyflow_commodities();
-		$this->view_data['poc_commodities']=$this->fcdrr_model->get_poc_commodities();
-		// $this->view_data['haematology']=$this->fcdrr_model->get_haematology_commodities();
-		// $this->view_data['biochemistry']=$this->fcdrr_model->get_biochemistry_commodities();		
+	
+	}
 
-		$this->load->template($this->view_data);
+	public function fillFCDRR_view(){
+
+		
+
+		$this->load->view("fcdrr_v",$data);
+
+	}
+	public function get_commodities_and_categories(){
+		/* call the commodities and print the data in JSON format */
+		
+		$data=$this->fcdrr_model->get_commodities();
+
+		$this->output->set_content_type('application/json')->set_output(json_encode($data,JSON_PRETTY_PRINT));
 	}
 }

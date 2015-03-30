@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dashboard">
+<html ng-app="dashboard" style="width:100%">
 
 <head ui-view="head">    
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -33,62 +33,209 @@
 	<!-- Styles -->
 
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/semantic/dist/semantic.css');?>"> 
+
+</head>
+
+<body class="" style="width:100%">
+
+	<div class="m-app-loading" ng-animate-children >
+
+		<!-- view-source:http://bennadel.github.io/JavaScript-Demos/demos/pre-bootstrap-loading-screen-angularjs/
+			HACKY CODE WARNING: I'm putting Style block inside directive so that it 
+			will be removed from the DOM when we remove the directive container.
+		-->
+		<style type="text/css">
+
+		div.m-app-loading {
+			position: fixed ;
+		}
+
+		div.m-app-loading div.animated-container {
+			background-color: #333333 ;
+			bottom: 0px ;
+			left: 0px ;
+			opacity: 1.0 ;
+			position: fixed ;
+			right: 0px ;
+			top: 0px ;
+			z-index: 9999990000000 ;
+		}
+
+		/* Used to initialize the ng-leave animation state. */
+		div.m-app-loading div.animated-container.ng-leave {
+			opacity: 1.0 ;
+			transition: all linear 200ms ;
+			-webkit-transition: all linear 200ms ;
+		}
+
+		/* Used to set the end properties of the ng-leave animation state. */
+		div.m-app-loading div.animated-container.ng-leave-active {
+			opacity: 0 ;
+		}
+
+		div.m-app-loading div.messaging {
+			color: #FFFFFF ;
+			font-family: monospace ;
+			left: 0px ;
+			margin-top: -37px ;
+			position: absolute ;
+			right: 0px ;
+			text-align: center ;
+			top: 50% ;
+		}
+
+		div.m-app-loading h1 {
+			font-size: 26px ;
+			line-height: 35px ;
+			margin: 0px 0px 20px 0px ;
+		}
+
+		div.m-app-loading p {
+			font-size: 18px ;
+			line-height: 14px ;
+			margin: 0px 0px 0px 0px ;
+		}
+
+		</style>
+		
+
+		<!-- BEGIN: Actual animated container. -->
+		<div class="animated-container">
+
+			<div class="messaging">
+
+				<h1>
+					Please wait while <big>CD4 LIMS</big> app loads..
+				</h1>
+				<div class="ui active inline loader"></div>
+			</div>
+
+		</div>
+		<!-- END: Actual animated container. -->
+
+	</div>
+	<!-- END: App-Loading Screen. -->
+
+	<div class="" >
+		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
+
+		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
+
+		<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
+
+	</div>
+	<div ui-view="footer" class=" ui column grid full"></div>
+
+
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngprogress/ngProgress.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/fontawesome/css/font-awesome.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/selectize/dist/css/selectize.bootstrap3.css');?>">
-	<!-- <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css');?>"> -->
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/ngActivityIndicator/css/ngActivityIndicator.min.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/btn/bootstrap.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/pagination/bs-paginate-only.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/ie9.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 
-</head>
 
-<body>
-	<div class="" >
-		<div ui-view="navbar" class="ui inverted fixed menu navbar page grid main-navbar"></div>
+	<!--JS libraries -->
+	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/semantic/dist/semantic.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular/angular.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-route/angular-route.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-ui-router/release/angular-ui-router.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ngprogress/build/ngprogress.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-sanitize/angular-sanitize.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-daterangepicker/js/angular-daterangepicker.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/Chart.js/Chart.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-chart.js/dist/angular-chart.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload-shim.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/danialfarid-angular-file-upload/dist/angular-file-upload.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-smart-table/dist/smart-table.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/underscore/underscore-min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-underscore/angular-underscore.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/waypoints/lib/jquery.waypoints.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-sweetalert/SweetAlert.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/restangular/dist/restangular.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation-rule.min.js');?>"></script>
 
-		<div ui-view="filter" class="ui column segment grid filter"></div>
 
-		<main ui-view="main" class="ui page grid full"></main>
 
-	</div>
-	<div ui-view="footer"></div>
+	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>
+	
+
+	<!--app -->
+	<script src="<?php echo base_url('scripts/app.js');?>"></script>
+
+	
+	<!-- config -->
+
+	<script src="<?php echo base_url('scripts/config/notify.js');?>"></script>
+	<script src="<?php echo base_url('scripts/config/restangularCFG.js');?>"></script>
+
+	<!-- values -->
+
+	<script src="<?php echo base_url('scripts/values/cgBusyDefaults.js');?>"></script>
+
+
+	<!--Controllers -->
+	<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/dashboard/summaryCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/dashboard/TestsTrendCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/facilitiesCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
+
+
+
+	<!--Factories, Services and providers -->
+
+	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
+
+
+	<!-- directives-->
+
+	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
+	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
+
+	
+
+
+
 </body>
-
-<!--JS libraries -->
-<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/semantic/dist/semantic.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular/angular.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-route/angular-route.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-ui-router/release/angular-ui-router.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/ngprogress/build/ngprogress.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-ui-select/dist/select.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-sanitize/angular-sanitize.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/bootstrap-daterangepicker/daterangepicker.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-daterangepicker/js/angular-daterangepicker.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/Chart.js/Chart.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/angular-chart.js/dist/angular-chart.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
-<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
-
-
-<!--app -->
-<script src="<?php echo base_url('scripts/app.js');?>"></script>
-
-<!--Controllers -->
-<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
-
-<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
-
-
-<!--Factories, Services and providers -->
-<!--
-<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
-<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
--->
 </html>
 
 <style>
@@ -100,6 +247,60 @@
 
 .filter{
 	/*padding-bottom: 200px;*/
+}
+
+
+.ui.menu.vertical  .active.item.shadowed{
+	box-shadow: 2px 0em 0em inset !important;
+}
+.ui.menu  .active.item.shadowed{
+	box-shadow:  0em 2px 0em inset !important;
+}
+/*overrides*/
+.ui.grid{
+	font-size: 1em !important;	
+	margin-top: 0rem !important; 
+	margin-bottom: 0rem !important; 
+	margin-left: 0rem !important; 
+	margin-right: 0rem !important; 
+
+}
+.ui.grid > .page  {
+	padding-left: 0rem !important;
+	padding-right: 0rem !important;
+}
+
+.chart-wrapper {
+	position: relative;
+	padding-bottom: 40%;
+	margin-left: 5%;
+	margin-right: 5%;
+
+	height:100px;
+	overflow-y: auto;
+}
+
+.chart-inner {
+	position: absolute;
+	width: 90%; 
+
+	/*height: 90%;*/
+
+}
+
+.ng-hide:not(.ng-hide-animate) {
+  /* this is just another form of hiding an element */
+  display: none!important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.pagination {
+    cursor: pointer;
+}
+.cg-busy-default-wrapper{	
+    cursor: no-drop;
 }
 </style>
 

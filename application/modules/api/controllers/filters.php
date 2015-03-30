@@ -14,16 +14,6 @@ class filters extends MY_Controller {
 	}
 
 	public function index(){
-		echo '<pre/>
-		{
-			"entities" 	: 	';
-			$this->entities(); echo ',
-			"programs" 	: 	';
-			$this->programs(); echo ',
-			"dates" 	: 	';
-			$this->dates(); echo '
-		}
-		';
 	}
 
 	public function entities(){
@@ -32,37 +22,38 @@ class filters extends MY_Controller {
 		// print_r($entities);die;
 		$i = 0;
 		foreach ($entities as $key => $value) {
-			if($value['grp_type'] == 'region'){
+			if($value['grp_type'] == 'Counties'){
 				$entity_values[$i]['name'] = $value['name'];
 				$entity_values[$i]['email'] = 'null';
 				$entity_values[$i]['phone'] = 'null';
 				$entity_values[$i]['type'] = $value['grp_type']; 
-			}else if($value['grp_type'] == 'district'){
-				$entity_values[$i]['name'] = $value['dis_name'];
+
+			}else if($value['grp_type'] == 'Sub-Counties'){
+				$entity_values[$i]['name'] = $value['name'];
 				$entity_values[$i]['email'] = 'null';
 				$entity_values[$i]['phone'] = 'null';
 				$entity_values[$i]['type'] = $value['grp_type'];	
-			}else if($value['grp_type'] == 'partner'){
-				$entity_values[$i]['name'] = $value['partner_name'];
+
+			}else if($value['grp_type'] == 'Facilities'){
+				$entity_values[$i]['name'] = $value['facility_name'];
+				$entity_values[$i]['mfl_code'] = $value['facility_mfl_code'];
 				$entity_values[$i]['email'] = 'null';
 				$entity_values[$i]['phone'] = 'null';
 				$entity_values[$i]['type'] = $value['grp_type'];
-			}else if($value['grp_type'] == 'lab'){
+
+			}else if($value['grp_type'] == 'Implementing Partners'){
 				$entity_values[$i]['name'] = $value['name'];
 				$entity_values[$i]['email'] = 'null';
 				$entity_values[$i]['phone'] = 'null';
 				$entity_values[$i]['type'] = $value['grp_type'];
-			}else if($value['grp_type'] == 'facility'){
-				$entity_values[$i]['name'] = $value['facility_name'];
-				$entity_values[$i]['email'] = $value['facility_email'];
-				$entity_values[$i]['phone'] = $value['facility_phone'];
-				$entity_values[$i]['type'] = $value['grp_type'];
+
 			}
 			$i++;
 		}
-		print_r($entity_values);
-	
+		echo json_encode($entity_values,JSON_PRETTY_PRINT);
 		return $entity_values;
+
+	
 	}	
 
 	public function programs(){

@@ -1,275 +1,386 @@
-<div>
-	<?php
-		echo form_open('fcdrr/submit',"id='commodity' onsubmit='return doOnSubmit()'");
-	?>
-	<h2 class= "ui header"style="text-align:center; font-size: 20px; font-family: tahoma;font-style: normal;font-variant: normal;font-weight: normal;">FACILITY CONSUMPTION DATA REPORT & REQUEST FORM(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</h2>
-	
-	<ol class="breadcrumb">
-		<li><a href="#">Home</a></li>
-		<li class="active"><a href="#">FCDRR</a></li>
-	</ol>
-	<h1 class="lighter">
-		<i class="ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue"></i>
-		<a href="#" data-toggle="modal" class="pink"> Fill The Form and Click Submit </a>
-	</h1>
-	<div class="ui horizontal divider">Start</div>
-	<div class="row">
-		<div class="col-md-3">
-			<div class="input-group my-input-group   ">
-				<span class="input-group-addon my-input-group-caption">
-					Facility
-				</span>
-				<input readonly="" name="facility" id="facility" class="form-control" style="" type="text" value="<?php //echo $this->session->userdata('facility'); ?>">
-			</div>
+<div style="margin-left:2px" cg-busy="promise">
+	<div ui-view="filter" class="ui column segment grid" id="viewport">
+		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS (MoH643B)</center></h3>
+		<div>
+		<div class="ui horizontal divider">Start</div>
+		<a class="ui teal ribbon label">Facility Details</a>
+		<div class="ui stackable grid">
+			<div class="six wide column"> <div class="ui horizontal label large">Facility (MFL Code):</div><b>{{ fcdrr.facility.facility_name+'('+fcdrr.facility.facility_mfl_code+')' }}</b></div>
+			<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.facility.sub_county_name}}</b></div>
+			<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.facility.county_name}}</b></div>
+			<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.facility.affiliation}}</b></div>
 		</div>
-		<div class="col-md-3">
-			<div class="input-group my-input-group   ">
-				<span class="input-group-addon my-input-group-caption">
-					Sub-County
-				</span>
-				<input readonly="" name="sub_county" id="sub_county" class="form-control" style="" type="text" value="<?php //echo $this->session->userdata('sub_county'); ?>">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="input-group my-input-group   ">
-				<span class="input-group-addon my-input-group-caption">
-					County
-				</span>
-				<input readonly="" name="county" id="county" class="form-control" style="" type="text" value="<?php //echo $this->session->userdata('county'); ?>">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="input-group my-input-group  ">
-				<span class="input-group-addon my-input-group-caption">
-					Facility MFL Code
-				</span>
-				<input readonly="" name="mflcode" id="mflcode" class="form-control" style="" type="text" value="<?php //echo $this->session->userdata('mfl_code'); ?>">
-			</div>
-		</div>
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-3">Report for The Period</div>
-		<div class="col-md-3">
-			<select  class="textfield form-control" style='border-radius:0px 5px 5px 0px;' name="report_year" onchange="" required>
-               	<option value="">* Select Year *</option>
-                <option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>                 					
-            </select>
-		</div>
-		<div class="col-md-3">
-			<select class="textfield form-control" style='border-radius:0px 5px 5px 0px;' name="report_month">
-               	<option value="">* Select Month *</option>
-               	<option value="1">January</option>
-                <option value="2">February</option>
-              	<option value="3">March</option>
-              	<option value="4">April</option>
-              	<option value="5">May</option>
-              	<option value="6">June</option>
-              	<option value="7">July</option>
-              	<option value="8">August</option>
-              	<option value="9">September</option>
-              	<option value="10">October</option>
-              	<option value="11">November</option>
-              	<option value="12">December</option>                 					
-            </select>
-		</div>
-		<!-- <div class="col-md-3">
-			<div class="input-group my-input-group  ">				
-				<input readonly="" name="affiliation" id="affiliation" class="form-control" type="text" style="width:19em;-webkit-box-sizing: border-box;  -moz-box-sizing: border-box;    box-sizing: border-box; ">
-			</div>
-		</div> -->
-	</div>
-	
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-3">State the number of CD4 Tests conducted</div>
-		<div class="col-md-3">			
-			<div class="input-group my-input-group">
-				<span class="input-group-addon my-input-group-caption">
-					Calibur
-				</span>
-				<input name="calibur_pead" id="calibur_peads" class="form-control" style="" type="text" >
-				<input name="calibur_adult" id="calibur_adults" class="form-control" style="" type="text" >
-			</div>
-		</div>
-		<div class="col-md-3">		
-			<div class="input-group my-input-group   ">
-				<span class="input-group-addon my-input-group-caption">
-					Count
-				</span>
-				<input name="count_pead" id="count_peads" class="form-control" placeholder="Pead Tests" type="text" required>
-				<input name="count_adult" id="count_adults" class="form-control" placeholder="Adult Tests" type="text" required>
-			</div>
-			
-		</div>
-		<div class="col-md-3">		
-			<div class="input-group my-input-group">
-				<span class="input-group-addon my-input-group-caption">
-					Cyflow Partec
-				</span>
-				<input name="cyfllow_pead" id="cyfllow_peads" class="form-control" placeholder="Pead Tests" type="text" required>
-				<input name="cyfllow_adult" id="cyfllow_adults" class="form-control" placeholder="Adult Tests" type="text" required>
-			</div>
-		</div> <br />
-		<div class="col-md-3">Alere PIMA</div>
-		<div class="col-md-3">		
-			<div class="input-group my-input-group">
-				<input name="alere" id="aleres" class="form-control" style="" type="text" readonly value="0" required>
-			</div>
-		</div><br />
-	</div>
-	<div class="row"><hr /></div>
-	<div class="row">
-		<div class="col-md-3">CD4 TESTS DONE IN REPORTING PERIOD</div>
-		<div class="col-md-3">
-			<div class="input-group my-input-group">
-				<span class="input-group-addon my-input-group-caption">
-					TOTAL NUMBER
-				</span>
-				<input name="total_tests_done" id="total_tests" class="form-control" style="min-width:200px;" type="text" readonly required>
-			</div>
-		</div>
-	</div>
+		<hr />
+			<a class="ui teal ribbon label">Dates</a>
+		<div class="ui stackable grid ">
+			<div class="three wide column">REPORT OF THE PERIOD</div>
+			<div class="three wide column" ng-show="(editState()=='new')">
 
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-12">
-			<table width="" id="commodities-heading" style="font-size:12px;" >
-				<thead>
-					<tr>
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;" ><b><center>Commodity Name</center></b></td>
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;"><b><center>Unit</center></b></td>
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;"><b><center>Beginning<br />Balance</center></b></td>
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;"><b>Quantity Recevied This Month From Central<br/> WAREHOUSE (e.g. KEMSA)</b></td>             
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;"><b><center>Quantity Used</center></b></td>
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;"><b><center>Losses / Wastages &nbsp;</center></b></td>
-						<td colspan="2" style="border:1px solid black !important; background:#eeeeee;"><b>Adjustments<br/><i>Indicate if (+) or (-)</i></b></td>
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;"><b><center>End Of Month<br/>Physical Count</center></b></td>
-						<td rowspan="2" style="border:1px solid black !important; background:#eeeeee;"><b><center>Quantity<br />Requested</center></b></td>
-					</tr>
-					<tr>
-						<!-- <td style="border:1px solid black !important">Quantity</td>
-						<td style="border:1px solid black !important">Lot No.</td> -->
-						<td style="border:1px solid black !important;background:#eeeeee;">Positive</td>
-						<td style="border:1px solid black !important;background:#eeeeee;">Negative</td>    
-					</tr>
+				<ui-select ng-click="getSelectableMonths()" ng-model="selected.year" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+					<ui-select-match placeholder="Select a Year">{{$select.selected.label}}</ui-select-match>
+					<ui-select-choices repeat="year in selectableDates.years | filter: $select.search">
+						<span ng-bind-html="year.label | highlight: $select.search"></span>
+					</ui-select-choices>
+				</ui-select>
 
-					<tr>
-					</tr>
-				</thead>	    
-				<tbody>  
-					<tr><td rowspan="1" colspan="10" style="border:1px solid black !important;background:#eeeeee;">FACS Calibur reagents and consumables</td></tr>
-						<?php foreach($facs_calibur as $facs_calibur_commodity): ?>
-						<tr>
-							<td><?php echo $facs_calibur_commodity['name'] ?></td>
-							<td><center><?php echo $facs_calibur_commodity['unit']; ?></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><center><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-						</tr>
-						<?php endforeach; ?>
-					<tr><td rowspan="1" colspan="10" style="border:1px solid black !important;background:#eeeeee;">FACS Count Reagents</td></tr>
-						<?php foreach($facs_count as $facs_count_commodity): ?>
-						<tr>
-							<td><?php echo $facs_count_commodity['name'] ?></td>
-							<td><center><?php echo $facs_count_commodity['unit'] ?></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><center><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-						</tr>
-						<?php endforeach; ?>
-					<tr><td rowspan="1" colspan="10" style="border:1px solid black !important;background:#eeeeee;">Cyflow Partec reagents</td></tr>
-						<?php foreach($cyflow_partec as $cyflow_commodity): ?>
-						<tr>
-							<td><?php echo $cyflow_commodity['name']; ?></td>
-							<td><center><?php echo $cyflow_commodity['unit']; ?></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><center><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" required/></td>
-						</tr>
-						<?php endforeach; ?>
-					<tr><td rowspan="1" colspan="10" style="border:1px solid black !important;background:#eeeeee;">Point of Care CD4 reagents (e.g. PIMA, etc)</td></tr>
-						<?php foreach($poc_commodities as $poc): ?>
-						<tr>
-							<td><?php echo $poc['name']; ?></td>
-							<td><center><?php echo $poc['unit']; ?></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></td>
-							<td><center><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></center></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></td>
-							<td><input name="" id="" style="width:100px;" size="5" type="text" class="form-control" /></td>
-						</tr>
-						<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-	</div>
-
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-12">
-			<div class="input-group my-input-group  ">
-				<span class="input-group-addon my-input-group-caption">
-					Comments
-				</span>
-				<textarea class="form-control" placeholder="FCDRR Comments" name="comments" id="comments" cols="150" style="width: 99%;">
-				</textarea>
 			</div>
-		</div>
+			<div class="three wide column" ng-show="selected.year&&(editState()=='new')">
 
+				<ui-select on-select="bind_dates()" ng-model="selected.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+					<ui-select-match placeholder="Select a Month">{{$select.selected.label}}</ui-select-match>
+					<ui-select-choices  repeat="month in selectableDates.months | filter: $select.search">
+						<span ng-bind-html="month.label | highlight: $select.search"></span>
+					</ui-select-choices>
+				</ui-select>
 
-		<!-- div class="col-md-3">
-			Order for extra LMIS tools:-
-				<div class="input-group my-input-group   ">
-					<span class="input-group-addon my-input-group-caption">
-						(1) Daily Activity Register for Laboratory Reagents and Consumables (MoH 642):
-					</span>
-					<input name="lab_reagents_consume" id="lab_reagents_consume" class="form-control" style="width:200px;" type="text" value="">
+			</div>
+
+			<div class="three wide column" ng-show="(editState()=='edit')">	
+				<div class="ui input">
+					<input  value="{{showYear()}}"   readonly/>
 				</div>
-				<div class="input-group my-input-group   ">
-					<span class="input-group-addon my-input-group-caption">
-						(2) F-CDRR for Lab Monitoring Reagents (MoH 643B):
-					</span>
-					<input name="monitoring_reagents" id="monitoring_reagents" class="form-control" style="width:365px;" type="text" value="">
+			</div>
+			<div class="three wide column" ng-show="(editState()=='edit')">			
+				<div class="ui input">
+					<input  value="{{showMonth()}}"   readonly/>
 				</div>
-		</div> -->
+			</div>
+		</div>
+		<hr />
+		<a class="ui teal ribbon label"><div>Device Tests</div></a>
+		<div class="ui stackable grid">
+			<div class="three wide column">STATE THE NUMBER OF CD4 TESTS CONDUCTED:</div>
+			<div class="three wide column">
+				<div class="ui labeled input">
+					<div class="ui label">
+						Facs </br>Calibur:
+					</div>
+					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.calibur_tests_pead"/>
+					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.calibur_tests_adults" />
+				</div>
+			</div>
+			<div class="three wide column">			
+				<div class="ui labeled input">
+					<div class="ui label">
+						Facs </br>Count:
+					</div>
+					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.count_tests_pead" />
+					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.count_tests_adults" />
+				</div>
+			</div>
+			<div class="three wide column">			
+				<div class="ui labeled input">
+					<div class="ui label">
+						Cyflow </br>Partec:
+					</div>
+					<input ng-keyup="calculate_total()" placeholder="Paeds" type="text" only-digits ng-model="fcdrr.cyflow_tests_pead" />
+					<input ng-keyup="calculate_total()" placeholder="Adults" type="text" only-digits ng-model="fcdrr.cyflow_tests_adults" />
+				</div>
+			</div>
+			<div class="three wide column">
+				<div class="ui labeled input">
+					<div class="ui label">
+						Alere </br>PIMA:
+					</div>
+					<input ng-keyup="calculate_total()" placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.pima_tests"/>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<a class="ui teal ribbon label " >Total Tests</a>
+		<div class="ui stackable grid" >
+			<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
+			<div class="three wide column">
+				<div class="ui labeled input">
+					<div class="ui label">
+						Total :
+					</div>
+					<input ng-model="fcdrr.total_cd4" type="text" placeholder="Total tests" readonly />
+				</div>
+			</div>
+			<div class="three wide column">
+				<div class="ui labeled input">
+					<div class="ui label">
+						Adults < 500 </br>CD4 count:
+					</div>
+					<input ng-model="fcdrr.adults_bel_cl" placeholder="Adults < 500" type="text" />
+				</div>
+			</div>
+			<div class="three wide column">
+				<div class="ui labeled input">
+					<div class="ui label">
+						Pead < 500 </br>CD4 count:
+					</div>
+					<input ng-model="fcdrr.pead_bel_cl" placeholder="Peads < 500" type="text" />
+				</div>
+			</div>
+		</div>
+		<hr />
+	<!-- 	<pre>
+			{{fcdrr_id}}
+		</pre> -->
+
+		<hr />
+		<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
+		<table  class="ui celled striped structured table"   >
+			<thead class="ui sticky" style="  padding-right: 4%;z-index:1;">
+				<tr style="">
+					<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
+					<th   id="h_unit" rowspan="2"><center>Unit</center></th>
+					<th   id="h_beg_bal" rowspan="2"><center>Beginning Balance</center></th>
+					<th   id="h_quat_rec" colspan="2"><center>Received From<br/>Warehouse(e.g Kemsa) </center></th>
+					<th   id="h_quant_used" rowspan="2"><center>Quantity Used</center></th>
+					<th   id="h_loss" rowspan="2"><center>Losses / Wastages </center></th>
+					<th   					colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</i></center></th>
+					<th   id="h_end_bal" rowspan="2"><center>End Of Month<br/>Physical Count</center></th>
+					<th   id="h_req" rowspan="2"><center>Quantity<br />Requested</center></th>
+				</tr>
+				<tr>
+					<th  id="h_warehse" ><center>Quantity</center></th>
+					<th  id="h_lot_no" ><center>Lot Code</center></th> 
+					<th  id="h_adj_pos" ><center>Positive</center></th>
+					<th  id="h_adj_neg" ><center>Negative</center></th>    
+				</tr>
+			</thead>
+
+			<tbody ng-repeat="commodity_cat in commodities">
+				<tr ><td rowspan="1" colspan="11" style="background:#eeeeee;">{{commodity_cat.category_name}}</td></tr>	
+
+				<tr ng-repeat="commodity in commodity_cat.commodities">
+
+					<td style="width:50em"><label class="ui horizontal label commodity-label commodity-hide" style="width:8em">Commodity:</label><div class="ui input">{{commodity.name}}</div></td>
+					<td style="width:10em"><label class="ui horizontal label commodity-label commodity-hide" style="width:8em">Unit:</label><div class="ui input">{{commodity.unit}}</div></td>
+					<td style="width:30em">
+						<div class="item">
+							<label class="ui horizontal label commodity-label commodity-hide">Beginning Balance:</label>								
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].beginning_bal" type="text"  required/>
+							</div>
+						</div>
+					</td>
+					<td style="width:50em">
+						<label class="ui horizontal label commodity-label commodity-hide">Quantity Received:</label>
+						<div class="ui input">
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].received_qty" type="text"   required/>
+						</div>
+					</td>
+					<td style="width:50em">
+						<label class="ui horizontal label commodity-label commodity-hide">Lot No:</label>
+						<div class="ui input">
+							<input ng-model="fcdrr.displayed_commodities[commodity.id].lot_code" type="text"   required/>
+						</div>
+					</td>
+					<td style="width:30em">
+						<label class="ui horizontal label commodity-label commodity-hide">Quantity Used:</label>
+						<div class="ui input">
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].qty_used" type="text"  required/>
+						</div>
+					</td>
+					<td style="width:30em">
+						<label class="ui horizontal label commodity-label commodity-hide">Losses / Wastages:</label>
+						<div class="ui input">
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].losses" type="text"  required/>
+						</div>
+					</td>
+					<td style="width:30em">
+						<label class="ui horizontal label commodity-label commodity-hide">Positive Adjustment:</label>
+						<div class="ui input">
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].adjustment_plus" type="text"  required/>
+						</div>
+					</td>
+					<td style="width:30em">
+						<label class="ui horizontal label commodity-label commodity-hide">Negative Adjustment:</label>
+						<div class="ui input">
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].adjustment_minus" type="text"  required/>
+						</div>
+					</td>
+					<td style="width:30em">
+						<label class="ui horizontal label commodity-label commodity-hide">End Balance:</label>
+						<div class="ui input">
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].end_bal"  type="text"  required/>
+						</div>
+					</td>
+					<td style="width:30em">
+						<label class="ui horizontal label commodity-label commodity-hide">Quantity Requested:</label>
+						<div class="ui input">
+							<input only-digits ng-model="fcdrr.displayed_commodities[commodity.id].requested"  type="text"  required/>
+						</div>
+					</td>
+				</tr>
+			</tbody>				
+			<tfooter class="ui label" >
+				<tr style="">
+					<td id="f_commodity_name"   rowspan="2"><center>Commodity</center></td>
+					<td id="f_unit"   			rowspan="2"><center>Unit</center></td>
+					<td id="f_beg_bal"   		rowspan="2"><center>Beginning Balance</center></td>
+					<td id="f_quat_rec" 	   	colspan="2"><center>Received From <br/>Warehouse(e.g Kemsa)</center></td>
+					<td id="f_quant_used"   	rowspan="2"><center>Quantity Used</center></td>
+					<td id="f_loss"   			rowspan="2"><center>Losses / Wastages</center></td>
+					<td   						colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</center></i></td>
+					<td id="f_end_bal"   		rowspan="2"><center>End Of Month<br/>Physical Count</center></td>
+					<td id="f_req"   			rowspan="2"><center>Quantity<br />Requested</center></td>
+				</tr>
+				<tr>
+					<td id="f_warehse"  ><center>Quantity</center></td>
+					<td id="f_lot_no"  ><center>Lot Code</center></td>   
+					<td id="f_adj_pos"  ><center>Positive</center></td>
+					<td id="f_adj_neg"  ><center>Negative</center></td>    
+				</tr>
+			</tfooter>
+		</table>
+		<hr />
+		<a class="ui teal ribbon label">FCDRR Comments</a>
+		<div class="sixteen wide column">	
+			<div class="ui form">
+				<div class="field">
+					<textarea style="height:20px" ng-model="fcdrr.comments"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="ui horizontal divider">END</div> 
+		<div class="ui stackable grid">
+			<div class="five wide column">
+				<button class="ui primary button" ng-click="save_fcdrr()">
+					Submit Commodity Report	
+				</button>
+			</div>
+			<div class="five wide column" ng-click="reset()">
+				<button class="ui active button">
+					Reset Form
+				</button>
+			</div>
+			<div class="five wide column" ng-click="print()">
+				<button class="ui teal button">
+					Print
+				</button>
+			</div>
+		</div>
+		<div style="height:300px">
 
 		</div>
-	
-	<div class="ui horizontal divider">END</div>
-
-	<div class="row" style="margin-top:20px;">
-		<div class="col-md-12">
-			<input type="submit" name="submit" value="Submit Commodity Report" class="button" />
-			<input type="hidden" value="true" name="exists" id="exists" />
-			<input type="hidden" value="true" name="repeat" id="repeat" /> 
-			<input type="button" value="Reset" class="button" onclick="clearTempData()"/>
-			<input type="button" onclick="printCommodity()" name="print" value="Print" class="button"  />
 		</div>
 	</div>
-
-	<div class="ui horizontal divider"></div>
-
-	<?php echo form_close();?>
 </div>
-<script type="text/javascript">
-    	$(function() {
-			$('#start_date').datepicker({dateFormat: 'dd/mm/yyyy'});
-			$('#end_date').datepicker({dateFormat: 'dd/mm/yyyy'});
-		});
+<script>
+
+
+$(window).scroll(function(){
+	commodity_labels_();
+	header_width();	
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
+
+});
+$(window).load(function(){
+	commodity_labels_();
+	header_width();
+
+	// try{
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
+	// }catch(err){
+
+	// }
+})
+
+$(window).resize(function(){
+	commodity_labels_();
+	header_width();
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
+});
+
+function header_width(){
+	$('#h_commodity_name').width($('#f_commodity_name').width());
+	$('#h_unit').width($('#f_unit').width());
+	$('#h_beg_bal').width($('#f_beg_bal').width());
+	$('#h_quat_rec').width($('#f_quat_rec').width());
+	$('#h_warehse').width($('#f_warehse').width());
+	$('#h_lot_no').width($('#f_lot_no').width());
+	$('#h_quant_used').width($('#f_quant_used').width());
+	$('#h_loss').width($('#f_loss').width());
+	$('#h_end_bal').width($('#f_end_bal').width());
+	$('#h_req').width($('#f_req').width());
+	$('#h_adj_pos').width($('#f_adj_pos').width());
+	$('#h_adj_neg').width($('#f_adj_neg').width());
+
+}
+
+function commodity_labels_(){	
+
+	var commodity_label = $('.commodity-label');
+	width = $(window).width();
+	if (width>691) {
+		commodity_label.addClass(' commodity-hide');
+		commodity_label.removeClass(' commodity-diplay');
+	}else{
+
+		commodity_label.removeClass(' commodity-hide');
+		commodity_label.addClass(' commodity-diplay');
+	}
+}
+
+function stickY_(direction){
+	var sticky = $('.sticky');
+	var commodity_label = $('.commodity-label');
+	width = $(window).width();
+
+	if ((width>691 )&& (direction == 'down')) {
+		sticky.addClass('fixed');
+	}
+	else {
+		sticky.removeClass('fixed');
+	}
+
+	if (width>691) {
+		commodity_label.addClass(' commodity-hide');
+		commodity_label.removeClass(' commodity-diplay');
+	}else{
+
+		commodity_label.removeClass(' commodity-hide');
+		commodity_label.addClass(' commodity-diplay');
+	}
+}
+
 </script>
+<style>
+.commodity-diplay{
+	display:auto !important;
+	width:15em;
+}
+.ui.labeled.input input {
+   padding-right: 0.1em !important; 
+   padding-left: 0.1em !important; 
+}
+.commodity-hide{
+	display:none !important;
+	width:15em;
+}
+.fixed {
+	position: fixed;
+	top:0; 
+	margin-top:45px; 
+	left:0;
+	width: 100%; 	
+	/*padding-right: 67px;*/
+}
+.ui.labeled.input{
+	width:100%;
+}
+	</style>
+

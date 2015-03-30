@@ -1,19 +1,4 @@
-<!-- <div class="ui thin vertical inverted labeled icon left overlay sidebar menu" >abc</div> -->
-<div class="ui black medium launch right attached button" ng-click="alert()">
-	<i class="icon list layout"></i>
-	<span class="text" style="display:none;">Menu</span>
-</div>
-<script>
-$(".launch.button").mouseenter(function(){
-	$(this).stop().animate({width: '100px'}, 300, 
-		function(){$(this).find('.text').show();});
-}).mouseleave(function (event){
-	$(this).find('.text').hide();
-	$(this).stop().animate({width: '70px'}, 300);
-});
-// $(".ui.overlay.sidebar").sidebar({overlay: true})
-// .sidebar('attach events','.ui.launch.button');
-</script>
+
 
 <script type="text/javascript">
 $('#reportrange').daterangepicker(
@@ -31,6 +16,8 @@ $('#reportrange').daterangepicker(
 	format: 'YYYY-MM-DD',
 	startDate: '<?php echo date("Y");?>-1-1',
 	endDate: '<?php echo date("Y-m-d");?>',
+	maxDate:'<?php echo date("Y-m-d");?>',
+	minDate:'2011-1-1',
 	showWeekNumbers:true,
 	showDropdowns:true
 },
@@ -46,33 +33,33 @@ function(start, end) {
 $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 })
 </script>
-<div class="ui right aligned grid" style="padding-left: 100px;">
-	<div class="right floated right aligned six wide column">
-		<div class="blue ui buttons">
-			<div id="reportrange" class="ui button pull-right filterButton" style="">
-				<i class="fa fa-calendar fa-md"></i>
-				<span><?php echo 'January '.date("1, Y", strtotime('first day of this year')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>
-			</div>
-		</div>
-	</div>
+<div class="ui right aligned stackable grid" >
 
-	<div class="left floated right aligned six wide column">
+	<div class="left floated left aligned six wide column">
 		<ui-select ng-model="filters.entities.selected" theme="selectize" ng-disabled="disabled" style="min-width: 300px;">
 		<ui-select-match placeholder="Search Criteria to Filter by...">{{$select.selected.name +" ("+ $select.selected.type +")"  }}</ui-select-match>
-			<ui-select-choices group-by="'type'" repeat="entity in filters.entities | entityFilter: {name: $select.search, type: $select.search}">
-			<div ng-bind-html="entity.name | highlight: $select.search"></div>
-			<small>
-				email: {{entity.email}}
-				phone: <span ng-bind-html="''+entity.phone | highlight: $select.search"></span>
-			</small>
-			</ui-select-choices>
-		</ui-select>
-	</div>
+		<ui-select-choices group-by="'type'" repeat="entity in filters.entities | entityFilter: {name: $select.search, type: $select.search}"  refresh-delay="2">
+		<div ng-bind-html="entity.name | highlight: $select.search"></div>
+		<small>
+			email: {{entity.email}}
+			phone: <span ng-bind-html="''+entity.phone | highlight: $select.search"></span>
+		</small>
+	</ui-select-choices>
+</ui-select>
+</div>
 
-	<div class="left floated left aligned two wide column">
-		 <div class="ui button blue">Reset</div>
-	</div>
+<div class="left floated left aligned two wide column">
+	<div class="ui button blue"><i class="fa fa-undo fa-sm"></i> Reset</div>
+</div>
 
+<div class="right floated right aligned six wide column">
+	<div class="blue ui buttons">
+		<div id="reportrange" class="ui button pull-right filterButton" style="">
+			<i class="fa fa-calendar fa-md"></i>
+			<span><?php echo 'January '.date("1, Y", strtotime('first day of this year')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>
+		</div>
+	</div>
+</div>
 
 </div>
 <style>
@@ -83,5 +70,10 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 	left: auto; 
 	display: none;
 }
-
+.optgroup-header {
+	font-size: 20px !important;
+	line-height: 1.42857143 !important; 
+	color: #000000 !important; 
+	background: #D4DDB8 !important;
+}
 </style>

@@ -1,14 +1,16 @@
-app.factory('Filters',['$http', function($http){
+app.factory('Filters',['$http','$activityIndicator', function($http,$activityIndicator){
 	var Filters={};
-  Filters.getEntities = function () {
-    return $http.get('api/filters/entities');
-  };
-  Filters.getPrograms = function () {
-    return $http.get('api/filters/programs');
-  };
-  Filters.getDates = function () {
-    return $http.get('api/filters/dates');
-  };
+	Filters.getEntities = function () {
 
-  return Filters;
+		$activityIndicator.startAnimating();
+		return $http.get('api/filters/entities').success(function(){$activityIndicator.stopAnimating()});
+	};
+	Filters.getDates = function () {
+		
+		$activityIndicator.startAnimating();
+		return $http.get('api/filters/dates').success(function(){$activityIndicator.stopAnimating()});
+	};
+
+
+	return Filters;
 }]);
