@@ -1,4 +1,4 @@
-CREATE TABLE `fcdrr_temp` (
+CREATE TABLE `temp_fcdrr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `facility_id` int(11) NOT NULL COMMENT 'FK to facility',
   `from_date` date NOT NULL,

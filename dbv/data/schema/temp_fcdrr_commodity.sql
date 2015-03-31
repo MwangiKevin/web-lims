@@ -1,4 +1,4 @@
-CREATE TABLE `fcdrr_commodity_temp` (
+CREATE TABLE `temp_fcdrr_commodity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fcdrr_temp_id` int(11) NOT NULL COMMENT 'FK to fcdrr',
   `beginning_bal` int(11) NOT NULL,
@@ -12,5 +12,5 @@ CREATE TABLE `fcdrr_commodity_temp` (
   `requested` int(11) NOT NULL,
   `reagent_id` int(11) NOT NULL COMMENT 'FK to reagents',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `fcdrr_temp_id` (`fcdrr_temp_id`,`reagent_id`)
+  UNIQUE KEY `fcdrr_and_reagent` (`fcdrr_temp_id`,`reagent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='FCDRR reagents and other commodities'
