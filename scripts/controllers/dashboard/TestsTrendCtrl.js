@@ -122,7 +122,7 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
             text: 'Tests & Errors'
         },
         subtitle: {
-            text: 'test subtitle'
+            text: ''
         },  
         series: [{
             type: 'pie',
@@ -142,6 +142,4 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
         }]
  	
 	}
-	
-	
 }])
