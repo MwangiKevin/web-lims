@@ -212,7 +212,7 @@ app.controller('fcdrrCtrl',
             $scope.promise = API.getFacilities()
             .success(function (fac) {
                 $scope.facilities = fac;
-            $scope.fcdrr.facility = $scope.facilities[228];  //this is just a test 
+            $scope.fcdrr.facility = $scope.facilities[221];  //this is just a test 
         })
             .error(function (error) {
                 $scope.status = 'Unable to load customer data: ' + error.message;
@@ -298,7 +298,7 @@ app.controller('fcdrrCtrl',
             }
 
         }
-        $scope.formatPostFcdrr = function(){
+        $scope.validate_fcdrr = function(){
 
         }
         $scope.populate_displayed_commodities = function(){
