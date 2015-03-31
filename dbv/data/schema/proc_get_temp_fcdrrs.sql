@@ -1,6 +1,6 @@
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS `proc_get_fcdrrs`$$
+DROP PROCEDURE IF EXISTS `proc_get_temp_fcdrrs`$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_temp_fcdrrs`(fcdrr_id int(11),facility_id int(11))
 BEGIN

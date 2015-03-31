@@ -112,13 +112,13 @@ class temp_fcdrrs_m extends MY_Model{
 
 			if(!$this->db->query($sql)){
 				$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
-
+				// print_r($error);
 			}
 		foreach ($displayed_commodities as $key => $value) {
 
 			$comm_sql = "INSERT INTO `temp_fcdrr_commodity`
 			(
-				`fcdrr_id`, 
+				`temp_fcdrr_id`, 
 				`beginning_bal`, 
 				`received_qty`, 
 				`lot_code`, 
@@ -179,7 +179,8 @@ class temp_fcdrrs_m extends MY_Model{
 			$fcdrr = $fcdrr_res;
 
 			foreach ($fcdrr as $key => $value) {
-				$fcdrr_commodities = R::getAll("CALL `proc_get_temp_fcdrr_commodities`('','".$value['fcdrr_id']."')");
+
+				$fcdrr_commodities = R::getAll("CALL `proc_get_temp_fcdrr_commodities`('','".$value['temp_fcdrr_id']."')");
 				$fcdrr[$key]['commodities'] = $fcdrr_commodities;
 			}	
 
@@ -187,7 +188,7 @@ class temp_fcdrrs_m extends MY_Model{
 
 			$fcdrr = $fcdrr_res[0];	
 			if($fcdrr_res[0]){
-				$fcdrr_commodities = R::getAll("CALL `proc_get_temp_fcdrr_commodities`('','".$fcdrr['fcdrr_id']."')");
+				$fcdrr_commodities = R::getAll("CALL `proc_get_temp_fcdrr_commodities`('','".$fcdrr['temp_fcdrr_id']."')");
 				$fcdrr_facility = R::getAll("CALL `proc_get_facilities`('".$fcdrr_res[0]['facility_id']."')");
 				$fcdrr['commodities'] = $fcdrr_commodities;
 				$fcdrr['facility'] = $fcdrr_facility[0];
@@ -208,7 +209,7 @@ class temp_fcdrrs_m extends MY_Model{
 
 		$this->db->trans_begin();
 
-		$fcdrr_id				= 	(int) $fcdrr['fcdrr_id'];
+		$temp_fcdrr_id				= 	(int) $fcdrr['temp_fcdrr_id'];
 		$calibur_tests_adults	= 	(int) $fcdrr['calibur_tests_adults'];
 		$calibur_tests_pead		= 	(int) $fcdrr['calibur_tests_pead'];
 		$count_tests_adults		= 	(int) $fcdrr['count_tests_adults'];
@@ -237,7 +238,7 @@ class temp_fcdrrs_m extends MY_Model{
 					`pead_bel_cl` 			= '$pead_bel_cl', 
 					`comments` 				= '$comments'
 
-					WHERE 	`id` = '$fcdrr_id' 
+					WHERE 	`id` = '$temp_fcdrr_id' 
 			 	
 				";
 
@@ -247,13 +248,13 @@ class temp_fcdrrs_m extends MY_Model{
 		}
 		foreach ($displayed_commodities as $key => $value) {
 
-			$comm_exists_res	=	R::getAll(	"SELECT * FROM `temp_fcdrr_commodity` WHERE 	`fcdrr_id`= '".$fcdrr_id."' AND `commodity_id` = '".$key."' ");
+			$comm_exists_res	=	R::getAll(	"SELECT * FROM `temp_fcdrr_commodity` WHERE 	`temp_fcdrr_id`= '".$temp_fcdrr_id."' AND `commodity_id` = '".$key."' ");
 			// echo sizeof($comm_exists_res);
 			if((int)sizeof($comm_exists_res)==0){
 
 				$comm_sql = "INSERT INTO `temp_fcdrr_commodity`
 				(
-					`fcdrr_id`, 
+					`temp_fcdrr_id`, 
 					`beginning_bal`, 
 					`received_qty`, 
 					`lot_code`, 
@@ -267,7 +268,7 @@ class temp_fcdrrs_m extends MY_Model{
 				)
 				VALUES(
 
-					'".$fcdrr_id."',
+					'".$temp_fcdrr_id."',
 					'".$value['beginning_bal']."',
 					'".$value['received_qty']."',
 					'".$value['lot_code']."',
@@ -301,7 +302,7 @@ class temp_fcdrrs_m extends MY_Model{
 						`requested` 		= '".$value['requested']."'
 
 					WHERE 
-							`fcdrr_id` 			= '".$fcdrr_id."' AND 
+							`temp_fcdrr_id` 			= '".$temp_fcdrr_id."' AND 
 							`commodity_id` 		= '".$key."'
 				
 				";

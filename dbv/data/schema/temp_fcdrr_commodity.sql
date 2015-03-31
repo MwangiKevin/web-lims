@@ -10,7 +10,7 @@ CREATE TABLE `temp_fcdrr_commodity` (
   `adjustment_minus` int(11) NOT NULL,
   `end_bal` int(11) NOT NULL,
   `requested` int(11) NOT NULL,
-  `reagent_id` int(11) NOT NULL COMMENT 'FK to reagents',
+  `commodity_id` int(11) NOT NULL COMMENT 'FK to reagents',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `fcdrr_and_reagent` (`temp_fcdrr_id`,`reagent_id`)
+  UNIQUE KEY `fcdrr_and_commodity` (`temp_fcdrr_id`,`commodity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='FCDRR reagents and other commodities'

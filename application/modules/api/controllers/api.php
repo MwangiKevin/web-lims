@@ -159,11 +159,13 @@ class api extends MY_Controller {
 	public function fcdrrs($id=NULL) {
 
 		$this->load->model("fcdrrs_m");	
+		$this->load->model("temp_fcdrrs_m");	
 
 		$method = $this->_detect_method();
 
 		if ($method=="post"){
-			echo json_encode($this->fcdrrs_m->create(),JSON_PRETTY_PRINT);
+			// echo json_encode($this->fcdrrs_m->create(),JSON_PRETTY_PRINT);
+			$this->temp_fcdrrs_m->create();
 		}
 
 		else if($method=="get"){
