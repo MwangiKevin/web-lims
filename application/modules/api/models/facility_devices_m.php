@@ -8,7 +8,42 @@ class facility_devices_m extends MY_Model{
 	}
 
 	public function create(){
+		$error = array();
+		
+		$request_body = file_get_contents('php://input');
+		
+		$facility_device = json_decode($request_body,true);
+		
+		$facility_device_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility_device'");
+		
+		$facility_device_ID = $county_table[0][Auto_increment];
+		
+		$sql = "INSERT INTO `facility_device`
+						(
+						`id`,
+						`facility_id`,
+						`device_id`,
+						`status`,
+						`deactivation_reason`,
+						`date_added`,
+						`date_removed`
+						)
+					VALUES
+						(
+						'$facility_device_ID',
+						'$facility_device[facility_id]',
+						'$facility_device[device_id]',
+						'$facility_device[status]',
+						'$facility_device[deactivation_reason]',
+						'$facility_device[date_added]',
+						'$facility_device[date_removed]'
+						)";
 
+		if(!$this->db->query($sql)){
+			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			return $error;
+		}
+		return $facility_device;
 	}
 
 	public function read($id){
@@ -62,11 +97,38 @@ class facility_devices_m extends MY_Model{
 	}
 
 	public function update($id){
+		// parse_str(file_get_contents('php://input'), $_PUT);
+		$request_fields = file_get_contents('php://input');
 
+		$facility_device = json_decode($request_fields, true);
+
+		$facility_dev_updated = R::getAll("UPDATE `facility_device` 
+								SET 
+									`name`='',
+									`name`='',
+									`name`='',
+									`name`='',
+									`name`='',
+									`name`='$name'
+								WHERE 
+									`id` = '$id'
+								");
+		return $facility_dev_updated;
 	}
 
 	public function remove($id){
 
+		$request_fac_dev = file_get_contents('php://input');
+
+		$facility_dev = json_decode($request_fac_dev, true);
+		
+		$facility_dev_deleted = R::getAll("DELETE FROM 
+												 `facility_device`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $facility_dev_deleted;
 	}
 
 }

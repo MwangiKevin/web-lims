@@ -8,7 +8,40 @@ class commodities_m extends MY_Model{
 	}
 
 	public function create(){
+		$error = array();
+		
+		$request_body = file_get_contents('php://input');
+		
+		$commodity = json_decode($request_body,true);
+		
+		$commodity_table =	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'commodity'"	);
+		
+		$commodity_ID = $commodity_table[0][Auto_increment];
+		
+		$sql = "INSERT INTO `commodity`
+							(
+							`id`,
+							`code`,
+							`name`,
+							`unit`,
+							`category_id`,
+							`reporting_status`
+							)
+						VALUES
+							(
+							'$commodity_ID',
+							'$commodity[code]',
+							'$commodity[name]',
+							'$commodity[unit]',
+							'$commodity[category_id]',
+							'$commodity[reporting_status]'
+							)";
 
+		if(!$this->db->query($sql)){
+			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
+			return $error;
+		}
+		return $commodity;
 	}
 
 	public function read($id=NULL){
@@ -85,11 +118,36 @@ class commodities_m extends MY_Model{
 	}
 
 	public function update($id){
+		// parse_str(file_get_contents('php://input'), $_PUT);
+		$request_fields = file_get_contents('php://input');
 
+		$commodity = json_decode($request_fields, true);
+
+		$commodity_updated = R::getAll("UPDATE `commodity` 
+								SET 
+									`name`='$name',
+									`name`='$name',
+									`name`='$name',
+									`name`='$name'
+								WHERE 
+									`id` = '$id'
+								");
+		return $commodity_updated;
 	}
 
 	public function remove($id){
 
+		$request_comm = file_get_contents('php://input');
+
+		$commodity = json_decode($request_comm, true);
+		
+		$commodity_deleted = R::getAll("DELETE FROM 
+												 `commodity`
+											WHERE 
+												`id` = '$id'
+											");
+		
+		return $commodity_deleted;
 	}
 
 }
