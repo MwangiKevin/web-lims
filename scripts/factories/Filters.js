@@ -1,5 +1,13 @@
 app.factory('Filters',['$http','$activityIndicator', function($http,$activityIndicator){
-	var Filters={};
+	var Filters=
+	{
+		dates:
+		{
+			start:null,
+			end:null
+		},
+		entity:{}
+	};
 	Filters.getEntities = function () {
 
 		$activityIndicator.startAnimating();
