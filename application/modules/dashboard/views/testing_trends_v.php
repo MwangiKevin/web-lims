@@ -17,22 +17,22 @@
 		width: 75%;
 	}
 </style>
-<h1>This should appear {{test_table.myname}} {{mydate}}</h1>
+<h1>This should appear {{test_table.myname}} {{cd4.mydate}}</h1>
 <div class="row">
 	<div class="ui blue segment" id="chart_container" >
-		<div id='top_chart_container'>
+		<div id='top_chart_container' >
 			<highchart id="testing_trends" config="testing_trends" width='' class="span"></highchart>
 		</div>
 		<div id="middle_chart_container">
-			<div id="middle_chart">
+			<div id="middle_chart" ng-controller="">
 				<highchart id="yearly_testing_trends" config="yearly_testing_trends" class="span10" style="float:left; width:40%"></highchart>
 			</div>
-			<div id="middle_chart">
+			<div id="middle_chart" ng-controller="">
 				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:40%"></highchart>
 			</div>
 		</div>
 
-		<div id='table_container'>
+		<div id='table_container' ng-controller="">
 			<hr/>
 			<table style = "border: 1px solid #DDD;vertical-align:center;width:100%;clear:both;" >
 				<thead class="even" style="background:#f0f0f0" >

@@ -214,6 +214,8 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
+	
 
 
 

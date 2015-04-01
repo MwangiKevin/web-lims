@@ -1,5 +1,5 @@
 app.controller('cd4_tests_table',['$scope', 'Filters',function($scope,Filters){
-	$scope.mydate = $filter('getDates');
+	$scope.mydate = "Oscar";
 	
 	// $scope.test_table = new function test_table(){
 		// var entity_filter = $filter('getEntities');
