@@ -12,7 +12,7 @@
       <i class="fa fa-file fa-sm icon"></i>FCDRR <i class="dropdown icon"></i>
       <div class="menu">
         <a  class="item" href="#fillFCDRR">Fill Monthly FCDRR</a>  
-        <a  class="item" href="#editFCDRR/6">Historical FCDRRs</a> 
+        <a  class="item" href="#FCDRRS">Historical FCDRRs</a> 
       </div>
     </div>
     <a href="#CD4DeviceUploads" class="item" ng-class="getActiveMenu('cd4DeviceUploads')"><i class="fa fa-upload fa-sm icon green"></i>Device Uploads</a>

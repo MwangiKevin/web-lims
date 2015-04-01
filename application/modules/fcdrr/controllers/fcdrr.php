@@ -27,6 +27,13 @@ class fcdrr extends MY_Controller {
 		$this->load->view("fcdrr_v",$data);
 
 	}
+	public function fcdrrs(){
+
+		
+
+		$this->load->view("fcdrrs_v",$data);
+
+	}
 	public function get_commodities_and_categories(){
 		/* call the commodities and print the data in JSON format */
 		
