@@ -49,19 +49,20 @@ class partners_m extends MY_Model{
 	}
 
 	public function update($id){
-		// parse_str(file_get_contents('php://input'), $_PUT);
+		
 		$request_fields = file_get_contents('php://input');
 
 		$partner = json_decode($request_fields, true);
 
 		$partner_updated = R::getAll("UPDATE `partner` 
 								SET 
-									`name`='',
-									`name`='',
-									`name`='$name'
+									`name`='$partner[name]',
+									`phone`='$partner[phone]',
+									`email`='$partner[email]'
 								WHERE 
 									`id` = '$id'
 								");
+
 		return $partner_updated;
 	}
 

@@ -93,27 +93,26 @@ class facilities_m extends MY_Model{
 	}
 
 	public function update($id){
-		// parse_str(file_get_contents('php://input'), $_PUT);
+		
 		$request_fields = file_get_contents('php://input');
 
 		$facility = json_decode($request_fields, true);
 
 		$facility_updated = R::getAll("UPDATE `facility` 
 								SET 
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`=''
+									`name`='$facility[name]',
+									`mfl_code`='$facility[mfl_code]',
+									`site_prefix`='$facility[site_prefix]',
+									`facility_type_id`='$facility[facility_type_id]',
+									`level`='$facility[level]',
+									`central_site_id`='$facility[central_site_id]',
+									`email`='$facility[email]',
+									`phone`='$facility[phone]',
+									`rollout_status`='$facility[rollout_status]'
 								WHERE 
 									`id` = '$id'
 								");
+
 		return $facility_updated;
 	}
 
