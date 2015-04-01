@@ -54,17 +54,15 @@ class commodity_categories_m extends MY_Model{
 	}
 
 	public function update($id){
-		echo 'null update';
-		// parse_str(file_get_contents('php://input'), $_PUT);
+		
 		$request_fields = file_get_contents('php://input');
 
 		$commodity_cat = json_decode($request_fields, true);
-		print_r($commodity_cat);
-		die();
+		
 		$commodity_cat_updated = R::getAll("UPDATE `commodity_category` 
 								SET 
-									`name`='$name',
-									`name`='$name'
+									`name`='$commodity_cat[name]',
+									`equipment_id`='$commodity_cat[equipment_id]'
 								WHERE 
 									`id` = '$id'
 								");

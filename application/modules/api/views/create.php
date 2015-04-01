@@ -13,13 +13,18 @@
     	//     json_string: JSON.stringify({name:"John", phone number:"+410000000"})
     	// });
     	var dataPath = {
-                name : "Chemistry",
-                equipment_id : "0"
-            
+                facility_id : "789",
+                device_id : "1",
+                status : "0",
+                deactivation_reason : "Disfunctional",
+                date_added : "2015-04-01",
+                date_removed : "0000-00-00",
+                serial_number : "1232"
         };
+        
         console.log(dataPath);
         $.ajax({
-            url  :'<?php echo base_url(); ?>api/commodity_categories',
+            url  :'<?php echo base_url(); ?>api/facility_devices/1',
             type    :'PUT',
             dataType:'jsonp',
             data    : JSON.stringify(dataPath),

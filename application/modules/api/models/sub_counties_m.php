@@ -50,19 +50,19 @@ class sub_counties_m extends MY_Model{
 	}
 
 	public function update($id){
-		// parse_str(file_get_contents('php://input'), $_PUT);
+		
 		$request_fields = file_get_contents('php://input');
 
 		$sub_county = json_decode($request_fields, true);
 
 		$sub_county_updated = R::getAll("UPDATE `sub_county` 
 								SET 
-									`name`='',
-									`name`='',
-									`name`='$name'
+									`name`='$sub_county[name]',
+									`status`='$sub_county[status]'
 								WHERE 
 									`id` = '$id'
 								");
+
 		return $sub_county_updated;
 	}
 

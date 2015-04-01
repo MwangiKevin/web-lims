@@ -97,23 +97,25 @@ class facility_devices_m extends MY_Model{
 	}
 
 	public function update($id){
-		// parse_str(file_get_contents('php://input'), $_PUT);
+		
 		$request_fields = file_get_contents('php://input');
 
 		$facility_device = json_decode($request_fields, true);
 
 		$facility_dev_updated = R::getAll("UPDATE `facility_device` 
 								SET 
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='',
-									`name`='$name'
+									`facility_id`='$facility_device[facility_id]',
+									`device_id`='$facility_device[device_id]',
+									`status`='$facility_device[status]',
+									`deactivation_reason`='$facility_device[deactivation_reason]',
+									`date_added`='$facility_device[date_added]',
+									`date_removed`='$facility_device[date_removed]',
+									`serial_number`='$facility_device[serial_number]'
 								WHERE 
 									`id` = '$id'
 								");
 		return $facility_dev_updated;
+
 	}
 
 	public function remove($id){
