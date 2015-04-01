@@ -17,7 +17,6 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 
 	initializeFilters();
 
-
 	function initializeFilters() {
 		Filters.getEntities()
 		.success(function (ents) {
@@ -34,6 +33,8 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 		.error(function (error) {
 			$scope.status = 'Unable to load Filters data: ' + error.message;
 		});
+
+		$.extend(Filters.entity, $scope.filters.entities.selected);
 	}
 
 	$scope.filters.clear = function() {

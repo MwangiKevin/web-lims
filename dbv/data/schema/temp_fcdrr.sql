@@ -1,4 +1,4 @@
-CREATE TABLE `fcdrr` (
+CREATE TABLE `temp_fcdrr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `facility_id` int(11) NOT NULL COMMENT 'FK to facility',
   `from_date` date NOT NULL,
@@ -19,6 +19,6 @@ CREATE TABLE `fcdrr` (
   `pead_bel_cl` int(11) DEFAULT NULL,
   `comments` varchar(200) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),  
-  UNIQUE KEY `facility_id` (`facility_id`,`from_date`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `facility_id` (`facility_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

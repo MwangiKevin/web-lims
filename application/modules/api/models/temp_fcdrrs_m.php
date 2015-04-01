@@ -1,6 +1,6 @@
 <?php
 
-class fcdrrs_m extends MY_Model{
+class temp_fcdrrs_m extends MY_Model{
 
 	function __construct() {
 
@@ -16,7 +16,7 @@ class fcdrrs_m extends MY_Model{
 
 		$this->db->trans_begin();
 
-		$fcdrr_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'fcdrr'"	);
+		$fcdrr_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'temp_fcdrr'"	);
 
 		$fcdrr_auto_id 		=	 $fcdrr['fcdrr_id'] =(int)	$fcdrr_st[0]["Auto_increment"];
 
@@ -41,55 +41,84 @@ class fcdrrs_m extends MY_Model{
 
 		$displayed_commodities 			= 	$fcdrr['displayed_commodities'];
 
-		$sql = "INSERT INTO `fcdrr` 
-			(
-				`id`, 
-				`facility_id`, 
-				`from_date`, 
-				`to_date`, 
-				`year`, 
-				`month`, 
-				`calibur_tests_adults`, 
-				`calibur_tests_pead`, 
-				`count_tests_adults`, 
-				`count_tests_pead`, 
-				`cyflow_tests_adults`, 
-				`cyflow_tests_pead`, 
-				`pima_tests`, 
-				`adults_bel_cl`, 
-				`pead_bel_cl`, 
-				`comments`
-			) 
-			VALUES
-			(
-				'$fcdrr_auto_id', 
-				'$facility_id', 
-				'$from_date', 
-				'$to_date', 
-				'$year', 
-				'$month', 
-				'$calibur_tests_adults', 
-				'$calibur_tests_pead', 
-				'$count_tests_adults', 
-				'$count_tests_pead', 
-				'$cyflow_tests_adults', 
-				'$cyflow_tests_pead', 
-				'$pima_tests', 
-				'$adults_bel_cl', 
-				'$pead_bel_cl', 
-				'$comments'
+		$fcdrr_exists_res = R::getAll("SELECT * FROM `temp_fcdrr` WHERE `facility_id` = '$facility_id'");
+		$sql="";
+		if((int)sizeof($fcdrr_exists_res)==0){
 
-			);";
+			$sql = "INSERT INTO `temp_fcdrr` 
+				(
+					`id`, 
+					`facility_id`, 
+					`from_date`, 
+					`to_date`, 
+					`year`, 
+					`month`, 
+					`calibur_tests_adults`, 
+					`calibur_tests_pead`, 
+					`count_tests_adults`, 
+					`count_tests_pead`, 
+					`cyflow_tests_adults`, 
+					`cyflow_tests_pead`, 
+					`pima_tests`, 
+					`adults_bel_cl`, 
+					`pead_bel_cl`, 
+					`comments`
+				) 
+				VALUES
+				(
+					'$fcdrr_auto_id', 
+					'$facility_id', 
+					'$from_date', 
+					'$to_date', 
+					'$year', 
+					'$month', 
+					'$calibur_tests_adults', 
+					'$calibur_tests_pead', 
+					'$count_tests_adults', 
+					'$count_tests_pead', 
+					'$cyflow_tests_adults', 
+					'$cyflow_tests_pead', 
+					'$pima_tests', 
+					'$adults_bel_cl', 
+					'$pead_bel_cl', 
+					'$comments'
+
+				);";
+			}else{
+
+				$fcdrr_auto_id = $fcdrr_exists_res[0]['id'];
+				$sql = "UPDATE  `temp_fcdrr` 
+					SET
+					`from_date` = '$from_date', 
+					`to_date` = '$to_date', 
+					`year` = '$year', 
+					`month` = '$month', 
+					`calibur_tests_adults` = '$calibur_tests_adults', 
+					`calibur_tests_pead` = '$calibur_tests_pead', 
+					`count_tests_adults` = '$count_tests_adults', 
+					`count_tests_pead` = '$count_tests_pead', 
+					`cyflow_tests_adults` = '$cyflow_tests_adults', 
+					`cyflow_tests_pead` = '$cyflow_tests_pead', 
+					`pima_tests` = '$pima_tests', 
+					`adults_bel_cl` = '$adults_bel_cl', 
+					`pead_bel_cl` = '$pead_bel_cl', 
+					`comments` = '$comments'
+
+					WHERE	`facility_id` = '$facility_id'
+
+					";				
+				$this->db->query("DELETE FROM `temp_fcdrr_commodity` WHERE  `temp_fcdrr_id` = '$fcdrr_auto_id'");	
+			}
 
 			if(!$this->db->query($sql)){
 				$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
-
+				// print_r($error);
 			}
 		foreach ($displayed_commodities as $key => $value) {
 
-			$comm_sql = "INSERT INTO `fcdrr_commodity`
+			$comm_sql = "INSERT INTO `temp_fcdrr_commodity`
 			(
-				`fcdrr_id`, 
+				`temp_fcdrr_id`, 
 				`beginning_bal`, 
 				`received_qty`, 
 				`lot_code`, 
@@ -143,15 +172,15 @@ class fcdrrs_m extends MY_Model{
 		$year = (int) $this->input->get("year");
 		$month = (int) $this->input->get("month");
 
-
-		$fcdrr_res = R::getAll("CALL `proc_get_fcdrrs`('$id','$facility','$year','$month')");
+		$fcdrr_res = R::getAll("CALL `proc_get_temp_fcdrrs`('$id','$facility')");
 		
 		if($id==NULL){
 
 			$fcdrr = $fcdrr_res;
 
 			foreach ($fcdrr as $key => $value) {
-				$fcdrr_commodities = R::getAll("CALL `proc_get_fcdrr_commodities`('','".$value['fcdrr_id']."')");
+
+				$fcdrr_commodities = R::getAll("CALL `proc_get_temp_fcdrr_commodities`('','".$value['temp_fcdrr_id']."')");
 				$fcdrr[$key]['commodities'] = $fcdrr_commodities;
 			}	
 
@@ -159,7 +188,7 @@ class fcdrrs_m extends MY_Model{
 
 			$fcdrr = $fcdrr_res[0];	
 			if($fcdrr_res[0]){
-				$fcdrr_commodities = R::getAll("CALL `proc_get_fcdrr_commodities`('','".$fcdrr['fcdrr_id']."')");
+				$fcdrr_commodities = R::getAll("CALL `proc_get_temp_fcdrr_commodities`('','".$fcdrr['temp_fcdrr_id']."')");
 				$fcdrr_facility = R::getAll("CALL `proc_get_facilities`('".$fcdrr_res[0]['facility_id']."')");
 				$fcdrr['commodities'] = $fcdrr_commodities;
 				$fcdrr['facility'] = $fcdrr_facility[0];
@@ -180,7 +209,7 @@ class fcdrrs_m extends MY_Model{
 
 		$this->db->trans_begin();
 
-		$fcdrr_id				= 	(int) $fcdrr['fcdrr_id'];
+		$temp_fcdrr_id				= 	(int) $fcdrr['temp_fcdrr_id'];
 		$calibur_tests_adults	= 	(int) $fcdrr['calibur_tests_adults'];
 		$calibur_tests_pead		= 	(int) $fcdrr['calibur_tests_pead'];
 		$count_tests_adults		= 	(int) $fcdrr['count_tests_adults'];
@@ -194,7 +223,7 @@ class fcdrrs_m extends MY_Model{
 
 		$displayed_commodities 			= 	$fcdrr['displayed_commodities'];
 
-		$sql = "UPDATE `fcdrr` 
+		$sql = "UPDATE `temp_fcdrr` 
 				SET 
 					`year` 					= '$year', 
 					`month` 				= '$month', 
@@ -209,7 +238,7 @@ class fcdrrs_m extends MY_Model{
 					`pead_bel_cl` 			= '$pead_bel_cl', 
 					`comments` 				= '$comments'
 
-					WHERE 	`id` = '$fcdrr_id' 
+					WHERE 	`id` = '$temp_fcdrr_id' 
 			 	
 				";
 
@@ -219,13 +248,13 @@ class fcdrrs_m extends MY_Model{
 		}
 		foreach ($displayed_commodities as $key => $value) {
 
-			$comm_exists_res	=	R::getAll(	"SELECT * FROM `fcdrr_commodity` WHERE 	`fcdrr_id`= '".$fcdrr_id."' AND `commodity_id` = '".$key."' ");
+			$comm_exists_res	=	R::getAll(	"SELECT * FROM `temp_fcdrr_commodity` WHERE 	`temp_fcdrr_id`= '".$temp_fcdrr_id."' AND `commodity_id` = '".$key."' ");
 			// echo sizeof($comm_exists_res);
 			if((int)sizeof($comm_exists_res)==0){
 
-				$comm_sql = "INSERT INTO `fcdrr_commodity`
+				$comm_sql = "INSERT INTO `temp_fcdrr_commodity`
 				(
-					`fcdrr_id`, 
+					`temp_fcdrr_id`, 
 					`beginning_bal`, 
 					`received_qty`, 
 					`lot_code`, 
@@ -239,7 +268,7 @@ class fcdrrs_m extends MY_Model{
 				)
 				VALUES(
 
-					'".$fcdrr_id."',
+					'".$temp_fcdrr_id."',
 					'".$value['beginning_bal']."',
 					'".$value['received_qty']."',
 					'".$value['lot_code']."',
@@ -259,7 +288,7 @@ class fcdrrs_m extends MY_Model{
 
 			}else{
 
-				$comm_sql = "UPDATE `fcdrr_commodity`
+				$comm_sql = "UPDATE `temp_fcdrr_commodity`
 				
 					SET 
 						`beginning_bal` 	= '".$value['beginning_bal']."',
@@ -273,7 +302,7 @@ class fcdrrs_m extends MY_Model{
 						`requested` 		= '".$value['requested']."'
 
 					WHERE 
-							`fcdrr_id` 			= '".$fcdrr_id."' AND 
+							`temp_fcdrr_id` 			= '".$temp_fcdrr_id."' AND 
 							`commodity_id` 		= '".$key."'
 				
 				";
