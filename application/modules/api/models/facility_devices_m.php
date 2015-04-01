@@ -103,16 +103,16 @@ class facility_devices_m extends MY_Model{
 		$facility_device = json_decode($request_fields, true);
 
 		$facility_dev_updated = R::getAll("UPDATE `facility_device` 
-								SET 
-									`facility_id`='$facility_device[facility_id]',
-									`device_id`='$facility_device[device_id]',
-									`status`='$facility_device[status]',
-									`deactivation_reason`='$facility_device[deactivation_reason]',
-									`date_added`='$facility_device[date_added]',
-									`date_removed`='$facility_device[date_removed]',
-									`serial_number`='$facility_device[serial_number]'
-								WHERE 
-									`id` = '$id'
+											SET 
+												`facility_id`='$facility_device[facility_id]',
+												`device_id`='$facility_device[device_id]',
+												`status`='$facility_device[status]',
+												`deactivation_reason`='$facility_device[deactivation_reason]',
+												`date_added`='$facility_device[date_added]',
+												`date_removed`='$facility_device[date_removed]',
+												`serial_number`='$facility_device[serial_number]'
+											WHERE 
+												`id` = '$id'
 								");
 		return $facility_dev_updated;
 
@@ -124,8 +124,9 @@ class facility_devices_m extends MY_Model{
 
 		$facility_dev = json_decode($request_fac_dev, true);
 		
-		$facility_dev_deleted = R::getAll("DELETE FROM 
-												 `facility_device`
+		$facility_dev_deleted = R::getAll("UPDATE `facility_device` 
+											SET 
+												`status`='$facility_device[status]'
 											WHERE 
 												`id` = '$id'
 											");

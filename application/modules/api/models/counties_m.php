@@ -64,9 +64,8 @@ class counties_m extends MY_Model{
 	}
 
 	public function remove($id){
-		$request_county = file_get_contents('php://input');
-
-		$county = json_decode($request_county, true);
+		// $request_county = file_get_contents('php://input');
+		// $county = json_decode($request_county, true);
 		
 		$county_deleted = R::getAll("DELETE FROM 
 												 `county`
