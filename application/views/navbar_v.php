@@ -6,7 +6,15 @@
     </a>
     <a href="#dashboard" class="brand item"><big>CD4 LIMS</big></a>
     <a href="#dashboard" class="item" ng-class="getActiveMenu('dashboard')"><i class="fa fa-dashboard fa-sm icon blue"></i>Dashboard</a>
-    <a href="#fillFCDRR" class="item" ng-class="getActiveMenu('fcdrr')"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>
+    <!-- <a href="#fillFCDRR" class="item" ng-class="getActiveMenu('fcdrr')"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>     -->
+
+    <div class="ui dropdown item" >
+      <i class="fa fa-file fa-sm icon"></i>FCDRR <i class="dropdown icon"></i>
+      <div class="menu">
+        <a  class="item" href="#fillFCDRR">Fill Monthly FCDRR</a>  
+        <a  class="item" href="#editFCDRR/6">Historical FCDRRs</a> 
+      </div>
+    </div>
     <a href="#CD4DeviceUploads" class="item" ng-class="getActiveMenu('cd4DeviceUploads')"><i class="fa fa-upload fa-sm icon green"></i>Device Uploads</a>
     <a href="#facilities" class="item" ng-class="getActiveMenu('facilities')"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
     <a href="#CD4Tests" class="item" ng-class="getActiveMenu('cd4Tests')"><i class="fa fa-tint fa-sm icon red"></i>CD4 Tests</a>
