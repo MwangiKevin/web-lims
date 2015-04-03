@@ -6,11 +6,15 @@ if(!defined("BASEPATH")) exit("No direct access to script allowed");
 */
 class uploads extends MY_Controller
 {
+	private $filename_entry;
+	private $filename_date;
 	
 	function __construct()
 	{
 		parent:: __construct();
 		$this->load->model('uploads_model');
+
+		
 	}
 
 	function index()
@@ -365,9 +369,9 @@ class uploads extends MY_Controller
 
 		        if(substr($entry, -4)==".csv" && $entry!="."&& $entry!=".."){
 
-		        	if($this-> server_upload_commit(realpath($root_folder."/".$entry)) ){
+		        	if($this-> server_upload_commit(realpath($root_folder."/".$entry),$entry) ){
 
-		      			$files_to_move[$i]["source"] 		= 	$root_folder."/".$entry;
+		      			$files_to_move[$i]["source"] 		= 	$root_folder."/".$entry;	
 					    $files_to_move[$i]["destination"]	= 	$uploaded_folder."/".$entry;
 
 					    $i++;
@@ -379,10 +383,9 @@ class uploads extends MY_Controller
 		
 		foreach ($files_to_move as $file) {
 
-			copy($file["source"] 	,$file["destination"]);            			
+			rename($file["source"] 	,$file["destination"]);            			
 					             			
 		}
-		echo 'new copy';  die;
 		$uploaded_new = false;
 
 		//$this->load->model('uploads_model');
@@ -457,12 +460,15 @@ class uploads extends MY_Controller
 
 	}
 
-	public function server_upload_commit($file){
+	public function server_upload_commit($file,$entry){
+
+		$this->filename_entry=$entry;
+		$this->filename_date=date("Y-m-d H:i:s", filemtime($file));
 
 		$dt 	=	$this->read_csv($file);
 		$data 	= 	$dt["upload_data"];
 
-		$this->uploader = 1;
+		$facility_pima_id_res[0]['facility_pima_id'] = 1;
 
 		if(!isset($data[0]["assay_name"]) || $data[0]["assay_name"]==""){
 			$this->error_file_upload($data);
@@ -480,11 +486,11 @@ class uploads extends MY_Controller
 
 		if( sizeof($data) > 0){
 
-			$pim_upl_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'pima_upload'"	);
-			$cd4_tst_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'cd4_test'"	);
+			$pim_raw_upl_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'pima_raw_upload'");
+			$pim_upl_st				=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'pima_upload'");
 
-			$pim_upl_auto_id 		=	(int)	$pim_upl_st[0]["Auto_increment"];
-			$cd4_tst_auto_id 		=	(int)	$cd4_tst_st[0]["Auto_increment"];
+			$pim_upl_raw_auto_id 		=	(int)	$pim_raw_upl_st[0]["Auto_increment"];
+			$pima_upload_id 			=	(int)	$pim_upl_st[0]["Auto_increment"];
 
 			$assay_type = $data[0]['assay_id'];
 
@@ -492,11 +498,12 @@ class uploads extends MY_Controller
 			$facility_pima_id_res 	=	R::getAll("SELECT 
 													fp.id as facility_pima_id, 
 													fe.id as facility_equipment_id, 
-													f.id as facility_id 
-												FROM facility_pima fp,facility_equipment fe, facility f WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id 
+													f.id as facility_id,
+													d.id as equipment_id,
+													fp.serial_num 
+												FROM facility_pima fp,facility_equipment fe, facility f,device d WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id AND fe.equipment_id=d.id 
 														AND fp.serial_num='$serial_number'  LIMIT 1");
-
-			//
+			
 			if(sizeof($facility_pima_id_res)>0) {
 
 				$facility_pima_id =$facility_pima_id_res[0]['facility_pima_id'];
@@ -506,13 +513,16 @@ class uploads extends MY_Controller
 
 				$this->message = "<div class='success'>Upload Successful </div>";				
 				$this->upload_status = true;
-				
-				$this->db->trans_begin();
-				$this->db->query("INSERT INTO `pima_upload` 
-										(`id`,`facility_pima_id`,`uploaded_by`) 
-										VALUES
-											('$pim_upl_auto_id','$facility_pima_id','".$this->uploader."')");
 
+				$this->db->query("INSERT INTO `pima_upload`(`id`,`upload_date`,`facility_pima_id`,`uploaded_by`,`file_date`)
+												VALUES
+												('".$pima_upload_id."',
+												 '".date("Y-m-d H:i:s")."',
+												 '".$facility_pima_id."',
+												 '1',
+												 '".$this->filename_date."')");
+
+				
 				foreach ($data as $row) {
 
 					//initialize 
@@ -564,72 +574,60 @@ class uploads extends MY_Controller
 					}
 
 					if( $assay_type	!=	3 ){
+						$this->db->query("INSERT INTO `pima_raw_upload`
+										(`id`,
+										`device_test_id`,
+										`device_serial`,
+										`assay_id`,
+										`assay_name`,
+										`sample_code`,
+										`error_message`,
+										`operator`,
+										`cd4_count`,
+										`result_date`,
+										`date`,
+										`start_time`,
+										`barcode`,
+										`expiry_date`,
+										`volume`,
+										`device`,
+										`reagent`,
+										`software_version`,
+										`export_error_message`,
+										`valid_test`,
+										`upload_file_name`,
+										`file_date`) 
+										VALUES
+										('$pim_upl_raw_auto_id',
+										 '".$row['test_id']."',
+										 '".$facility_pima_id_res[0]['serial_num']."',
+										 '".$row['assay_id']."',
+										 '".$row['assay_name']."',
+										 '".$row['sample']."',
+										 '".$error_message."',
+										 '".$row['operator']."',
+										 '".$row['cd3_cd4_value']."',
+										 '".$row['result_date']." ".$row['start_time'].":00',
+										 '".$row['result_date']."',
+										 '".$row['start_time'].":00',
+										 '$barcode',
+										 '$expiry_date',
+										 '$volume',
+										 '$device',
+										 '$reagent',
+										 '".$row['software_version']."',
+										 '".$error_message."',
+										 '".$validity."',
+										 '".$this->filename_entry."',
+										 '".$this->filename_date."')");
 
-						$this->db->query("INSERT INTO `cd4_test` 
-											(
-												`id`,
-												`cd4_count`,
-												`equipment_id`,
-												`facility_equipment_id`,
-												`facility_id`,
-												`result_date`,
-												`valid`
-											) 
-											VALUES
-												(
-													'$cd4_tst_auto_id',
-													'".$row['cd3_cd4_value']."',
-													'4',
-													'$facility_equipment_id',
-													'$facility_id',
-													'".$row['result_date']." ".$row['start_time'].":00',
-													'$validity'
-												)");
 
-						$this->db->query("INSERT INTO `pima_test` 
-											(
-												`cd4_test_id`,
-												`device_test_id`,
-												`pima_upload_id`,
-												`assay_id`,
-												`sample_code`,
-												`error_id`,										
-												`operator`,
-												`barcode`,
-												`expiry_date`,
-												`volume`,
-												`device`,
-												`reagent`,
-												`software_version`
-											) 
-											VALUES
-												(
-													'$cd4_tst_auto_id',
-													'".$row['test_id']."',
-													'$pim_upl_auto_id',
-													'".$row['assay_id']."',
-													'".$row['sample']."',
-													'$pima_error_id',
-													'".$row['operator']."',
-													'$barcode',
-													'$expiry_date',
-													'$volume',
-													'$device ',
-													'$reagent',
-													'".$row['software_version']."'
-												)");
 
 					}
-					$cd4_tst_auto_id++;
+					$error_message="";// unset any error message
+					$pim_upl_raw_auto_id++;
 
 					
-				}
-				if ($this->db->trans_status() === FALSE || $error===FALSE){
-				   $this->db->trans_rollback();
-				}
-				else{
-				    $this->db->trans_commit();			   
-
 				}
 
 			}else{
@@ -747,8 +745,10 @@ class uploads extends MY_Controller
 			$facility_pima_res 	=	R::getAll("SELECT 
 													fp.id as facility_pima_id, 
 													fe.id as facility_equipment_id, 
-													f.id as facility_id 
-												FROM facility_pima fp,facility_equipment fe, facility f WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id 
+													f.id as facility_id,
+													d.id as equipment_id,
+													fp.serial_num 
+												FROM facility_pima fp,facility_equipment fe, facility f,device d WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id AND fe.equipment_id=d.id 
 														AND fp.serial_num='$serial_number'  LIMIT 1");
 			if(sizeof($facility_pima_res)>0){
 
@@ -761,11 +761,11 @@ class uploads extends MY_Controller
 				$this->message = "<div class='success'>Upload Successful </div>";
 				$this->upload_status = true;
 				
-				$this->db->trans_begin();
+				//$this->db->trans_begin();
 				$this->db->query("INSERT INTO `pima_upload` 
 										(`id`,`facility_pima_id`,`uploaded_by`) 
 										VALUES
-											('$pim_upl_auto_id','$facility_pima_id','".$this->uploader."')");				
+											('$pim_upl_auto_id','$facility_pima_id','".$facility_pima_id_res[0]['facility_pima_id']."')");				
 				
 				foreach ($data as $row) {
 
@@ -851,12 +851,12 @@ class uploads extends MY_Controller
 					}
 
 				}
-				if ($this->db->trans_status() === FALSE || $error){
-				    $this->db->trans_rollback();
-				}
-				else{
-				    $this->db->trans_commit();
-				}				
+				// if ($this->db->trans_status() === FALSE || $error){
+				//     $this->db->trans_rollback();
+				// }
+				// else{
+				//     $this->db->trans_commit();
+				// }				
 
 			}else{
 
