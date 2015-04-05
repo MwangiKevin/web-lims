@@ -142,6 +142,11 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 
+	<!-- open scripts -->
+	<script type="text/javascript">
+		var base_url 		= '<?php echo base_url();?>';
+		var api_base_url 	= "<?php echo base_url('api');?>";
+	</script>
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
