@@ -54,8 +54,8 @@
 		<div class="ui segment">
 
 		</div>
-		<div class="ui segment">
-
+		<div class="ui segment">			
+			
 		</div>
 	</div>
 </div>

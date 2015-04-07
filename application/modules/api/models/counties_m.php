@@ -53,15 +53,13 @@ class counties_m extends MY_Model{
 	}
 
 	public function update($id){
-		// parse_str(file_get_contents('php://input'), $_PUT);
+		
 		$request_fields = file_get_contents('php://input');
 
 		$county = json_decode($request_fields, true);
 
-		$county_updated = R::getAll("UPDATE `county` 
-								SET `name`='$name'
-								WHERE `id` = '$id'
-								");
+		$county_updated = R::getAll("UPDATE `county` SET `name`='$county[name]'	WHERE `id` = '$id'");
+		
 		return $county_updated;
 	}
 

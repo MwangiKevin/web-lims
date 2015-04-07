@@ -177,6 +177,8 @@
 	<script src="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/restangular/dist/restangular.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation-rule.min.js');?>"></script>
 
 
 
@@ -201,6 +203,7 @@
 	<!--Controllers -->
 	<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/fcdrrsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/controllers/dashboard/summaryCtrl.js');?>"></script>

@@ -280,12 +280,17 @@ $(window).load(function(){
 	commodity_labels_();
 	header_width();
 
+	// try{
+
 	var waypoint = new Waypoint({
 		element: document.getElementById('scroll-to'),
 		handler: function(direction) {
 			stickY_(direction);
 		}
 	})
+	// }catch(err){
+
+	// }
 })
 
 $(window).resize(function(){

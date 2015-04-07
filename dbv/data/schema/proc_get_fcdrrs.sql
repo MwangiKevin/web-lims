@@ -7,6 +7,8 @@ BEGIN
         SET @QUERY =    " SELECT 
                                 `fcdrr`.`id`                       as  `fcdrr_id` ,
                                 `fcdrr`.`facility_id`              ,
+                                `f`.`mfl_code`                     as `facility_mfl_code`,
+                                `f`.`name`                         as `facility_name`,
                                 `fcdrr`.`from_date`                ,
                                 `fcdrr`.`to_date`                  ,
                                 `fcdrr`.`year`                     ,
@@ -23,6 +25,8 @@ BEGIN
                                 `fcdrr`.`comments`                 ,
                                 `fcdrr`.`timestamp`         
                             FROM `fcdrr`
+                                LEFT JOIN `facility` `f`
+                                ON `f`.`id` =  `fcdrr`.`facility_id`
 
                             WHERE 1 
                         ";
