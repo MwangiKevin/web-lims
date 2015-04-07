@@ -54,8 +54,8 @@ var app = angular
 	
 	.state('Dashboard.main',{
 		url: '',
-		templateUrl: 'dashboard/dashboard_summary',
-		controller:'dashboardSummaryCtrl'		
+		templateUrl: 'dashboard/testing_trends',
+		controller:'TestsTrendCtrl'		
 	})
 
 
