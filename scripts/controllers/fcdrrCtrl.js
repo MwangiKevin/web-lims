@@ -157,7 +157,7 @@ app.controller('fcdrrCtrl',
                 title: "Are you sure?",   
                 text: "This will permanently save the above FCDRR!",   
                 type: "info",
-                showCancelButton: true,   
+                showCancelButton: true,
                 confirmButtonColor: "#00b5ad",   
                 confirmButtonText: "Yes, Save it!",   
                 closeOnConfirm: false,
@@ -167,6 +167,7 @@ app.controller('fcdrrCtrl',
                     console.log(fcdrr);                    
                     swal("Saved!", "Your Report has been saved", "success");
                     $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
+                    // $state.transitionTo('FCDRRS');
                 },function(response){
                      console.log("Error with status code", response);
                       swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");
@@ -189,7 +190,7 @@ app.controller('fcdrrCtrl',
             function(){   
                 $scope.fcdrr.put().then(function(fcdrr){                 
                     swal("Saved!", "Your Report has been Updated", "success");
-                    $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
+                    $state.transitionTo('FCDRRS');
                 },function(response){
                      console.log("Error with status code", response);
                       swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");

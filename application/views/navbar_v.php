@@ -13,6 +13,7 @@
       <div class="menu">
         <a  class="item" href="#fillFCDRR">Fill Monthly FCDRR</a>  
         <a  class="item" href="#FCDRRS">Historical FCDRRs</a> 
+        <a  class="item" href="#Allocations">Commodity Allocations</a> 
       </div>
     </div>
     <a href="#CD4DeviceUploads" class="item" ng-class="getActiveMenu('cd4DeviceUploads')"><i class="fa fa-upload fa-sm icon green"></i>Device Uploads</a>
