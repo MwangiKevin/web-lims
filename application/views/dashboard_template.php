@@ -203,6 +203,7 @@
 	<!--Controllers -->
 	<script src="<?php echo base_url('scripts/controllers/dashboardCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/fcdrrCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/fcdrrsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/filtersCtrl.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/controllers/dashboard/summaryCtrl.js');?>"></script>

@@ -97,6 +97,22 @@ var app = angular
 			}
 		}
 	})
+	.state('FCDRRS',{ /* fcdrr page loaded here */
+		url: '/FCDRRS',
+		views:{
+			'main':{
+				templateUrl: 'fcdrr/fcdrrs',
+				controller: 'fcdrrsCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer'
+			}
+		}
+	})
 	.state('editFCDRR',{ /* fcdrr page loaded here */
 		url: '/editFCDRR/{id:int}',
 		views:{
