@@ -21,7 +21,7 @@
         var customOpts, el, opts, _formatted, _getPicker, _init, _validateMax, _validateMin;
         el = $(element);
         customOpts = $parse(attrs.dateRangePicker)($scope, {});
-        opts = angular.extend(dateRangePickerConfig, customOpts);
+        opts = angular.extend({}, dateRangePickerConfig, customOpts);
         _formatted = function(viewVal) {
           var f;
           f = function(date) {
@@ -30,7 +30,11 @@
             }
             return date.format(opts.format);
           };
-          return [f(viewVal.startDate), f(viewVal.endDate)].join(opts.separator);
+          if (opts.singleDatePicker) {
+            return f(viewVal.startDate);
+          } else {
+            return [f(viewVal.startDate), f(viewVal.endDate)].join(opts.separator);
+          }
         };
         _validateMin = function(min, start) {
           var valid;
@@ -141,11 +145,14 @@
           });
         }
         if (attrs.options) {
-          return $scope.$watch('opts', function(newOpts) {
+          $scope.$watch('opts', function(newOpts) {
             opts = angular.extend(opts, newOpts);
             return _init();
           });
         }
+        return $scope.$on('$destroy', function() {
+          return el.data('daterangepicker').remove();
+        });
       }
     };
   }]);

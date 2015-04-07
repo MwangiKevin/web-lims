@@ -1,10 +1,10 @@
 <div class="ui stackable page grid">
-	<div class="twelve wide column">
+	<div class="twelve wide column" cg-busy="promise">
 		<div style="" class="ui segment"> 
 
 			<button type="button" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
 				<i class="glyphicon glyphicon-plus">
-				</i> Add random item
+				</i> Add an item
 			</button>
 
 			<table st-table="displayedCollection" st-safe-src="facilitiesColl" class="ui table table-striped">
@@ -13,19 +13,21 @@
 						<th colspan="1"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
 					</tr>
 					<tr>
-						<th st-sort="firstName">Facility Name</th>
-						<th st-sort="lastName">MFL Code</th>
-						<th st-sort="lastName">County</th>
-						<th st-sort="birthDate">Sub-County</th>
-						<th st-sort="birthDate">Action</th>
+						<th st-sort="facility_name">Facility Name</th>
+						<th st-sort="facility_mfl_code">MFL Code</th>
+						<th st-sort="county_name">County</th>
+						<th st-sort="sub_county_name">Sub-County</th>
+						<th st-sort="devices">Devices</th>
+						<th st-sort="devices">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="row in displayedCollection">
-						<td>{{row.firstName}}</td>
-						<td>{{row.lastName}}</td>
-						<td>{{row.birthDate}}</td>
-						<td>{{row.balance}}</td>
+						<td>{{row.facility_name}}</td>
+						<td>{{row.facility_mfl_code}}</td>
+						<td>{{row.county_name}}</td>
+						<td>{{row.sub_county_name}}</td>
+						<td>{{row.devices.length}}</td>
 						<td>
 							<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
 								<i class="remove icon">
@@ -37,13 +39,11 @@
 				<tfoot>
 					<tr>
 						<td colspan="5" class="text-center">
-							<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="10"></div>
+							<center><div st-pagination=""  st-items-by-page="6" st-displayed-pages="10"></div></center>
 						</td>
 					</tr>
 				</tfoot>
-			</table>{{ }}
-
-
+			</table>
 		</div>
 	</div>
 	<div class="three wide column">
@@ -55,3 +55,8 @@
 		</div>
 	</div>
 </div>
+
+<style>
+
+</style>
+

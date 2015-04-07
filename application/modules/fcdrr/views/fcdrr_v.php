@@ -1,174 +1,339 @@
 <div style="margin-left:10px">
 	<div ui-view="filter" class="ui column segment grid" id="viewport">
 		<h3><center>FACILITY CONSUMPTION DATA REPORT & REQUEST(F-CDRR) FOR ART LABORATORY MONITORING REAGENTS</center></h3>
-		<form>
-		<div class="ui horizontal divider">Start</div>
-		<div class="ui stackable grid">
-			<div class="three wide column"><b>Facility:</b><div ng-model="fdcrr.head_info.facility"><center>A.I.C Kijabe Naivasha Medical Centre</center></div></div>
-			<div class="three wide column"><b ng-model="fdcrr.head_info.mfl">Facility MFL:</b> 15282</div>
-			<div class="three wide column"><b>Sub County:</b> Naivasha</div>
-			<div class="three wide column"><b>County:</b> Nakuru</div>
-			<div class="three wide column"><b>Affliation:</b> CHAK</div>
-		</div>
-		<hr />
-		<div class="ui stackable grid">
-			<div class="three wide column">REPORT OF THE PERIOD</div>
-			<div class="three wide column">
-				<select  class="ui dropdown" name="report_year" onchange="" required ng-model="fdcrr.head_info.report_year">
-					<option value="">* Select Year *</option>
-					<option value="<?php echo date('Y'); ?>"><?php echo date('Y'); ?></option>                 					
-				</select>
+		<form cg-busy="promise">
+			<div class="ui horizontal divider">Start</div>
+			<a class="ui teal ribbon label">Facility Details</a>
+			<div class="ui stackable grid">
+				<div class="six wide column"> <div class="ui horizontal label large">Facility (MFL Code):</div><b>{{ fcdrr.head_info.selected.facility.facility_name+'('+fcdrr.head_info.selected.facility.facility_mfl_code+')' }}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Sub County:</div><b>{{fcdrr.head_info.selected.facility.sub_county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">County:</div><b>{{fcdrr.head_info.selected.facility.county_name}}</b></div>
+				<div class="three wide column"> <div class="ui horizontal label large">Affiliation:</div><b>{{fcdrr.head_info.selected.facility.affiliation}}</b></div>
 			</div>
-			<div class="three wide column">
-				<select class="ui dropdown" name="report_month" ng-model="fdcrr.head_info.report_month">
-					<option value="">* Select Month *</option>
-					<option value="1">January</option>
-					<option value="2">February</option>
-					<option value="3">March</option>
-					<option value="4">April</option>
-					<option value="5">May</option>
-					<option value="6">June</option>
-					<option value="7">July</option>
-					<option value="8">August</option>
-					<option value="9">September</option>
-					<option value="10">October</option>
-					<option value="11">November</option>
-					<option value="12">December</option>                 					
-				</select>
-			</div>
-		</div>
-		<hr />
-		<div class="ui stackable grid">
-			<div class="three wide column">State the number of CD4 Tests conducted:-</div>
-			<div class="three wide column">
-				<div class="ui labeled input">
-					<div class="ui label">
-						Facs </br>Calibur:
-					</div>
-					<input placeholder="Paed Tests" type="text" ng-model="fcdrr.devicetests.facs_calibur.paed_tests" />
-					<input placeholder="Adult Tests" type="text" ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
-				</div>
-			</div>
-			<div class="three wide column">			
-				<div class="ui labeled input">
-					<div class="ui label">
-						Facs </br>Count:
-					</div>
-					<input placeholder="Paed Tests" type="text" ng-model="fcdrr.devicetests.facs_count.paed_tests" />
-					<input placeholder="Adult Tests" type="text" ng-model="fcdrr.devicetests.facs_count.adult_tests" />
-				</div>
-			</div>
-			<div class="three wide column">			
-				<div class="ui labeled input">
-					<div class="ui label">
-						Cyflow </br>Partec:
-					</div>
-					<input placeholder="Paed Tests" type="text" ng-model="fcdrr.devicetests.cyflow.paed_tests" />
-					<input placeholder="Adult Tests" type="text" ng-model="fcdrr.devicetests.cyflow.adult_tests" />
-				</div>
-			</div>
-			<div class="three wide column">
-				<div class="ui labeled input">
-					<div class="ui label">
-						Alere PIMA:
-					</div>
-					<input placeholder="" type="text" ng-model="fcdrr.devicetests.pima.pima_tests"/>
-				</div>
-			</div>
-		</div>
-		<hr />
-		<div class="ui stackable grid">
-			<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
-			<div class="three wide column" ng-controller="fcdrrCtrl">
-				<div class="ui input">
-					<input ng-model="total_cd4" placeholder="{{facs_calibur_paed -- facs_calibur_adult -- facs_count_paed -- facs_count_adult -- cyflow_paed -- cyflow_adult}}" type="text" readonly />
-					
-				</div>
-			</div>
-		</div>
-		<hr />
-		{{fcdrr}}
-		<table  class="ui celled striped structured table" >
-			<thead class="ui sticky" >
-				<tr style="width:98%">
-					<th  style="width:90em" rowspan="2">Commodity</th>
-					<th  style="width:10em" rowspan="2">Unit</th>
-					<th  style="width:30em" rowspan="2">Beginning Balance</th>
-					<th  style="width:30em" rowspan="2">Quantity Received <br/>From Warehouse(e.g Kemsa)</th>
-					<th  style="width:30em" rowspan="2"><center>Quantity Used</center></th>
-					<th  style="width:30em" rowspan="2"><center>Losses / Wastages &nbsp;</center></th>
-					<th   colspan="2">Adjustments<br/><i>Indicate if (+) or (-)</i></th>
-					<th  style="width:30em" rowspan="2"><center>End Of Month<br/>Physical Count</center></th>
-					<th  style="width:30em" rowspan="2"><center>Quantity<br />Requested</center></th>
-				</tr>
-				<tr>
-					<th style="width:30em" >Positive</th>
-					<th style="width:30em" >Negative</th>    
-				</tr>
-			</thead>
+			<hr />
+				<a class="ui teal ribbon label">Dates</a>
+			<div class="ui stackable grid ">
+				<div class="three wide column">REPORT OF THE PERIOD</div>
+				<div class="three wide column">
 
-			<tbody ng-repeat="commodity in the_commodities">
-				<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity.category_name}}</td></tr>	
-				
-				<tr ng-repeat="comod_cat in commodity.commodities">
+					<ui-select ng-click="getSelectableMonths()" ng-model="fcdrr.head_info.selected.dates.year" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+						<ui-select-match placeholder="Select a Year">{{$select.selected.label}}</ui-select-match>
+						<ui-select-choices repeat="year in selectableDates.years | filter: $select.search">
+							<span ng-bind-html="year.label | highlight: $select.search"></span>
+						</ui-select-choices>
+					</ui-select>
 
-					<td style="width:50em">{{comod_cat.name}}</td>
-					<td style="width:10em">{{comod_cat.unit}}</td>
-					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].beg_bal" name="" id="" type="text"  required/></div></td>
-					<td style="width:50em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].qty_receive" name="" id="" type="text"   required/></div></td>
-					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].qty_used" name="" id="" type="text"  required/></div></td>
-					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].losses" name="" id="" type="text"  required/></div></td>
-					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].positives" name="" id="" type="text"  required/></div></td>
-					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].negatives" name="" id="" type="text"  required/></div></td>
-					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].end_bal" name="" id="" type="text"  required value="" readonly/></div></td>
-					<td style="width:30em"><div class="ui input"><input ng-model="fcdrr.comodities[comod_cat.id].qty_request" name="" id="" type="text"  required/></td>
+				</div>
+				<div class="three wide column" ng-show="fcdrr.head_info.selected.dates.year">
 
-				</tr>
-			</tbody>
-		</table>
-		<hr />
-		<div class="sixteen wide column">	
-			<div class="ui form">
-				<div class="field">
-					<label>FCDRR Comments</label>
-					<textarea style="height:20px"></textarea>
+					<ui-select ng-model="fcdrr.head_info.selected.dates.month" theme="selectize" search-enabled="searchDisabled" ng-disabled="disabled" style="width: 150px;">
+						<ui-select-match placeholder="Select a Month">{{$select.selected.label}}</ui-select-match>
+						<ui-select-choices  repeat="month in selectableDates.months | filter: $select.search">
+							<span ng-bind-html="month.label | highlight: $select.search"></span>
+						</ui-select-choices>
+					</ui-select>
+
 				</div>
 			</div>
-		</div>
-		<div class="ui horizontal divider">END</div>
-		<div class="four wide column">
-			<div class="ui primary button">
-				Submit Commodity Report	
+			<hr />
+			<a class="ui teal ribbon label"><div>Device Tests</div></a>
+			<div class="ui stackable grid">
+				<div class="three wide column">STATE THE NUMBER OF CD4 TESTS CONDUCTED:</div>
+				<div class="three wide column">
+					<div class="ui labeled input">
+						<div class="ui label">
+							Facs </br>Calibur:
+						</div>
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.paed_tests"/>
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_calibur.adult_tests" />
+					</div>
+				</div>
+				<div class="three wide column">			
+					<div class="ui labeled input">
+						<div class="ui label">
+							Facs </br>Count:
+						</div>
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.paed_tests" />
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.facs_count.adult_tests" />
+					</div>
+				</div>
+				<div class="three wide column">			
+					<div class="ui labeled input">
+						<div class="ui label">
+							Cyflow </br>Partec:
+						</div>
+						<input placeholder="Paeds" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.paed_tests" />
+						<input placeholder="Adults" type="text" only-digits ng-model="fcdrr.devicetests.cyflow.adult_tests" />
+					</div>
+				</div>
+				<div class="three wide column">
+					<div class="ui labeled input">
+						<div class="ui label">
+							Alere </br>PIMA:
+						</div>
+						<input placeholder="Total Tests" type="text" only-digits ng-model="fcdrr.devicetests.pima.pima_tests"/>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="four wide column">
-			<div class="ui reset button">
-				Reset Form
+			<hr />
+			<a class="ui teal ribbon label " >Total Tests</a>
+			<div class="ui stackable grid" >
+				<div class="three wide column">TOTAL NUMBER OF CD4 TESTS DONE DURING THE MONTH(REPORTING PERIOD):</div>
+				<div class="three wide column" ng-controller="fcdrrCtrl">
+					<div class="ui input">
+						<input ng-model="total_cd4" placeholder="{{facs_calibur_paed -- facs_calibur_adult -- facs_count_paed -- facs_count_adult -- cyflow_paed -- cyflow_adult}}" type="text" readonly />
+
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="four wide column">
-			<div class="ui button">
-				Print	
+			<hr />
+			<pre>
+				{{fcdrr}}
+				{{selectableDates}}
+				{{facilities}}
+			</pre>
+
+			<hr />
+			<a class="ui teal ribbon label" id="scroll-to">Commodities/Consumables</a>
+			<table  class="ui celled striped structured table"   >
+				<thead class="ui sticky" >
+					<tr style="width:98%">
+						<th   id="h_commodity_name" rowspan="2"><center>Commodity</center></th>
+						<th   id="h_unit" rowspan="2"><center>Unit</center></th>
+						<th   id="h_beg_bal" rowspan="2"><center>Beginning Balance</center></th>
+						<th   id="h_quat_rec" rowspan="2"><center>Quantity Received <br/>From Warehouse(e.g Kemsa)</center></th>
+						<th   id="h_quant_used" rowspan="2"><center>Quantity Used</center></th>
+						<th   id="h_loss" rowspan="2"><center>Losses / Wastages </center></th>
+						<th   					colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</i></center></th>
+						<th   id="h_end_bal" rowspan="2"><center>End Of Month<br/>Physical Count</center></th>
+						<th   id="h_req" rowspan="2"><center>Quantity<br />Requested</center></th>
+					</tr>
+					<tr>
+						<th  id="h_adj_pos" ><center>Positive</center></th>
+						<th  id="h_adj_neg" ><center>Negative</center></th>    
+					</tr>
+				</thead>
+
+				<tbody ng-repeat="commodity_cat in commodities">
+					<tr ><td rowspan="1" colspan="10" style="background:#eeeeee;">{{commodity_cat.category_name}}</td></tr>	
+
+					<tr ng-repeat="commodity in commodity_cat.commodities">
+
+						<td style="width:50em"><label class="ui horizontal label commodity-label commodity-hide" style="width:8em">Commodity:</label><div class="ui input">{{commodity.name}}</div></td>
+						<td style="width:10em"><label class="ui horizontal label commodity-label commodity-hide" style="width:8em">Unit:</label><div class="ui input">{{commodity.unit}}</div></td>
+						<td style="width:30em">
+							<div class="item">
+								<label class="ui horizontal label commodity-label commodity-hide">Beginning Balance:</label>								
+								<div class="ui input">
+									<input only-digits ng-model="fcdrr.comodities[commodity.id].beg_bal" type="text"  required/>
+								</div>
+							</div>
+						</td>
+						<td style="width:50em">
+							<label class="ui horizontal label commodity-label commodity-hide">Quantity Received:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_receive" type="text"   required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Quantity Used:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_used" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Losses / Wastages:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].losses" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Positive Adjustment:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].positives" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Negative Adjustment:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].negatives" type="text"  required/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">End Balance:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].end_bal"  type="text"  readonly/>
+							</div>
+						</td>
+						<td style="width:30em">
+							<label class="ui horizontal label commodity-label commodity-hide">Quantity Requested:</label>
+							<div class="ui input">
+								<input only-digits ng-model="fcdrr.comodities[commodity.id].qty_request"  type="text"  required/>
+							</div>
+						</td>
+					</tr>
+				</tbody>				
+				<tfooter class="ui label" >
+					<tr style="width:98%">
+						<td id="f_commodity_name"   rowspan="2"><center>Commodity</center></td>
+						<td id="f_unit"   			rowspan="2"><center>Unit</center></td>
+						<td id="f_beg_bal"   		rowspan="2"><center>Beginning Balance</center></td>
+						<td id="f_quat_rec" 	   	rowspan="2"><center>Quantity Received <br/>From Warehouse(e.g Kemsa)</center></td>
+						<td id="f_quant_used"   	rowspan="2"><center>Quantity Used</center></td>
+						<td id="f_loss"   			rowspan="2"><center>Losses / Wastages</center></td>
+						<td   						colspan="2"><center>Adjustments<br/><i>Indicate if (+) or (-)</center></i></td>
+						<td id="f_end_bal"   		rowspan="2"><center>End Of Month<br/>Physical Count</center></td>
+						<td id="f_req"   			rowspan="2"><center>Quantity<br />Requested</center></td>
+					</tr>
+					<tr>
+						<td id="f_adj_pos"  ><center>Positive</center></td>
+						<td id="f_adj_neg"  ><center>Negative</center></td>    
+					</tr>
+				</tfooter>
+			</table>
+			<hr />
+			<a class="ui teal ribbon label">FCDRR Comments</a>
+			<div class="sixteen wide column">	
+				<div class="ui form">
+					<div class="field">
+						<textarea style="height:20px"></textarea>
+					</div>
+				</div>
 			</div>
-		</div>
+			<div class="ui horizontal divider">END</div> 
+			<div class="ui stackable grid">
+				<div class="five wide column">
+					<div class="ui primary button">
+						Submit Commodity Report	
+					</div>
+				</div>
+				<div class="five wide column">
+					<div class="ui active button">
+						Reset Form
+					</div>
+				</div>
+				<div class="five wide column">
+					<div class="ui teal button">
+						Print	
+					</div>
+				</div>
+			</div>
 		</form>
 	</div>
 </div>
 <script>
+
+
 $(window).scroll(function(){
-	var sticky = $('.sticky'),
-	scroll = $(window).scrollTop();
-	//console.log(scroll);
-	if (scroll >= 314) sticky.addClass('fixed');
-	else sticky.removeClass('fixed');
+	commodity_labels_();
+	header_width();	
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
+
 });
+$(window).load(function(){
+	commodity_labels_();
+	header_width();
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
+})
+
+$(window).resize(function(){
+	commodity_labels_();
+	header_width();
+
+	var waypoint = new Waypoint({
+		element: document.getElementById('scroll-to'),
+		handler: function(direction) {
+			stickY_(direction);
+		}
+	})
+});
+
+function header_width(){
+	$('#h_commodity_name').width($('#f_commodity_name').width());
+	$('#h_unit').width($('#f_unit').width());
+	$('#h_beg_bal').width($('#f_beg_bal').width());
+	$('#h_quat_rec').width($('#f_quat_rec').width());
+	$('#h_quant_used').width($('#f_quant_used').width());
+	$('#h_loss').width($('#f_loss').width());
+	$('#h_end_bal').width($('#f_end_bal').width());
+	$('#h_req').width($('#f_req').width());
+	$('#h_adj_pos').width($('#f_adj_pos').width());
+	$('#h_adj_neg').width($('#f_adj_neg').width());
+
+}
+
+function commodity_labels_(){	
+
+	var commodity_label = $('.commodity-label');
+	width = $(window).width();
+	if (width>691) {
+		commodity_label.addClass(' commodity-hide');
+		commodity_label.removeClass(' commodity-diplay');
+	}else{
+
+		commodity_label.removeClass(' commodity-hide');
+		commodity_label.addClass(' commodity-diplay');
+	}
+}
+
+function stickY_(direction){
+	var sticky = $('.sticky');
+	var commodity_label = $('.commodity-label');
+	width = $(window).width();
+
+	if ((width>691 )&& (direction == 'down')) {
+		sticky.addClass('fixed');
+	}
+	else {
+		sticky.removeClass('fixed');
+	}
+
+	if (width>691) {
+		commodity_label.addClass(' commodity-hide');
+		commodity_label.removeClass(' commodity-diplay');
+	}else{
+
+		commodity_label.removeClass(' commodity-hide');
+		commodity_label.addClass(' commodity-diplay');
+	}
+}
+
 </script>
 <style>
+.commodity-diplay{
+	display:auto !important;
+	width:15em;
+}
+.ui.labeled.input input {
+   padding-right: 0.1em !important; 
+   padding-left: 0.1em !important; 
+}
+.commodity-hide{
+	display:none !important;
+	width:15em;
+}
 .fixed {
-    position: fixed;
-    top:0; 
-    margin-top:45px; 
-    left:0;
-    width: 100%; }
-</style>
+	position: fixed;
+	top:0; 
+	margin-top:45px; 
+	left:0;
+	width: 100%; 	
+	padding-right: 67px;
+}
+.ui.labeled.input{
+	width:100%;
+}
+	</style>
 

@@ -15,7 +15,7 @@ picker.directive('dateRangePicker', ($compile, $timeout, $parse, dateRangePicker
     link: ($scope, element, attrs, modelCtrl) ->
         el = $(element)
         customOpts = $parse(attrs.dateRangePicker)($scope, {})
-        opts = angular.extend(dateRangePickerConfig, customOpts)
+        opts = angular.extend({}, dateRangePickerConfig, customOpts)
 
         _formatted = (viewVal) ->
             f = (date) ->
@@ -23,7 +23,10 @@ picker.directive('dateRangePicker', ($compile, $timeout, $parse, dateRangePicker
                     return moment(date).format(opts.format)
                 return date.format(opts.format)
 
-            [f(viewVal.startDate), f(viewVal.endDate)].join(opts.separator)
+            if opts.singleDatePicker
+                f(viewVal.startDate)
+            else
+                [f(viewVal.startDate), f(viewVal.endDate)].join(opts.separator)
 
         _validateMin = (min, start) ->
             min = moment(min)
@@ -140,4 +143,7 @@ picker.directive('dateRangePicker', ($compile, $timeout, $parse, dateRangePicker
                 opts = angular.extend(opts, newOpts)
                 _init()
             )
+
+        $scope.$on '$destroy', ->
+            el.data('daterangepicker').remove()
 )
