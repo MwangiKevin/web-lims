@@ -1,5 +1,4 @@
 app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
-	$scope.heading = "Turn Around Time"
 
 	$scope.toggleLoading = function () {
 		this.testing_trends.loading = !this.testing_trends.loading
@@ -66,6 +65,7 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
         },
         series: [{"name":"Above critical level","data":[0,0,6,13,23,19,15,48,179,128,22,26,13,8,8,276,871,743,752,1013,1053,1355,1158,1154,1575,1668,1931,2934,3618,130,180,191,1906,2718,2937,2646,3191,3462,4543,4821,5840,8769,5528,6137,9042,7987,5941,4791,4161,1290]},{"name":"Below critical level","data":[3,1,11,15,24,8,20,19,109,154,18,15,8,2,1,254,731,625,789,992,930,1093,1027,957,1450,1477,1693,2714,3347,122,129,189,1583,2154,2459,2308,3021,3057,4165,3965,4928,6421,4231,4694,6788,6386,4596,3609,3092,899],"color":"#caa6bb"}]      
 	}
+	
 	$scope.yearly_testing_trends = {
 		options: {
             chart: {
