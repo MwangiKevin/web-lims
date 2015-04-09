@@ -2,7 +2,9 @@
 if(!defined("BASEPATH")) exit("No direct access to script allowed");
 
 /**
-* 
+* This script has several functions used to upload test data from .csv files from PIMA devices into the database
+
+
 */
 class uploads extends MY_Controller
 {
@@ -357,6 +359,8 @@ class uploads extends MY_Controller
 			$last_upl = 0;
 		}
 
+		// set folder paths to fetch files and move them once test data has been uploaded
+
 		$root_folder 		= $this->config->item("pima_export");
 		$uploaded_folder 	= $this->config->item("pima_uploaded");
 
@@ -365,12 +369,13 @@ class uploads extends MY_Controller
 		$i=0;
 
 		if ($handle = opendir($root_folder)){
-		    while (false !== ($entry = readdir($handle))) {
+		    while (false !== ($entry = readdir($handle))) { // open root folder
 
 		        if(substr($entry, -4)==".csv" && $entry!="."&& $entry!=".."){
 
-		        	if($this-> server_upload_commit(realpath($root_folder."/".$entry),$entry) ){
+		        	if($this-> server_upload_commit(realpath($root_folder."/".$entry),$entry) ){ //upload tests data from files in root folder
 
+		        		// put files in array
 		      			$files_to_move[$i]["source"] 		= 	$root_folder."/".$entry;	
 					    $files_to_move[$i]["destination"]	= 	$uploaded_folder."/".$entry;
 
@@ -383,8 +388,8 @@ class uploads extends MY_Controller
 		
 		foreach ($files_to_move as $file) {
 
-			rename($file["source"] 	,$file["destination"]);            			
-					             			
+			rename($file["source"] 	,$file["destination"]); // moves files in array to different location           			
+					             			 
 		}
 		$uploaded_new = false;
 
@@ -462,20 +467,21 @@ class uploads extends MY_Controller
 
 	public function server_upload_commit($file,$entry){
 
+		//set file details
 		$this->filename_entry=$entry;
 		$this->filename_date=date("Y-m-d H:i:s", filemtime($file));
 
-		$dt 	=	$this->read_csv($file);
+		$dt 	=	$this->read_csv($file); //validate file and return test data from file
 		$data 	= 	$dt["upload_data"];
 
 		$facility_pima_id_res[0]['facility_pima_id'] = 1;
 
 		if(!isset($data[0]["assay_name"]) || $data[0]["assay_name"]==""){
-			$this->error_file_upload($data);
+			$this->error_file_upload($data); //upload errors
 		}else if($data[0]["assay_name"]=="PIMA BEADS"){
-			//$this->control_file_upload($data);
+			$this->control_file_upload($data); // upload control file data
 		}else if($data[0]["assay_name"]=="PIMA CD4"){	
-			$this->tests_file_upload($data);
+			$this->tests_file_upload($data);// upload tests
 		}
 		return $this->upload_status;
 	}
@@ -485,7 +491,7 @@ class uploads extends MY_Controller
 		$data = $this->trim_uploaded_tests($data);
 
 		if( sizeof($data) > 0){
-
+			//fetch next autoincrement value from 
 			$pim_raw_upl_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'pima_raw_upload'");
 			$pim_upl_st				=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'pima_upload'");
 
@@ -734,7 +740,7 @@ class uploads extends MY_Controller
 
 		if(sizeof($data) > 0) {
 
-			$pim_upl_st			=	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'pima_upload'"	);
+			$pim_upl_st			=	R::getAll( "SHOW TABLE STATUS WHERE `Name` = 'pima_upload'" );
 
 			$pim_upl_auto_id 		=	(int)	$pim_upl_st[0]["Auto_increment"];
 
@@ -762,10 +768,13 @@ class uploads extends MY_Controller
 				$this->upload_status = true;
 				
 				//$this->db->trans_begin();
-				$this->db->query("INSERT INTO `pima_upload` 
-										(`id`,`facility_pima_id`,`uploaded_by`) 
-										VALUES
-											('$pim_upl_auto_id','$facility_pima_id','".$facility_pima_id_res[0]['facility_pima_id']."')");				
+				$this->db->query("INSERT INTO `pima_upload`(`id`,`upload_date`,`facility_pima_id`,`uploaded_by`,`file_date`)
+												VALUES
+												('".$pima_upload_id."',
+												 '".date("Y-m-d H:i:s")."',
+												 '".$facility_pima_id."',
+												 '1',
+												 '".$this->filename_date."')");				
 				
 				foreach ($data as $row) {
 
@@ -849,14 +858,9 @@ class uploads extends MY_Controller
 												'".$row['result_date']." ".$row['start_time'].":00'
 										)");
 					}
-
+					$error_message="";// unset any error message
 				}
-				// if ($this->db->trans_status() === FALSE || $error){
-				//     $this->db->trans_rollback();
-				// }
-				// else{
-				//     $this->db->trans_commit();
-				// }				
+			
 
 			}else{
 
