@@ -1,15 +1,4 @@
---**********************************************************
---			APPROACH TWO
 
---**********************************************************
-
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_fcdrr_commodity_migration`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrr_commodity_migration` () 
-					BEGIN
-						SET @QUERY =    " 
 INSERT INTO `fcdrr_commodity` (`id`, `fcdrr_id`, `beginning_bal`, `received_qty`, `lot_code`, `qty_used`, `losses`, `adjustment_plus`, `adjustment_minus`, `end_bal`, `requested`, `reagent_id`) VALUES
 (162, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32),
 (161, 8, 10, 0, 0, 1, 0, 0, 0, 9, 0, 30),
@@ -22057,12 +22046,4 @@ INSERT INTO `fcdrr_commodity` (`id`, `fcdrr_id`, `beginning_bal`, `received_qty`
 (22917, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34),
 (22918, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 38),
 (22919, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39),
-(22920, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40)";
-
-
-        PREPARE stmt FROM @QUERY;
-        EXECUTE stmt;
-        SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+(22920, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40);

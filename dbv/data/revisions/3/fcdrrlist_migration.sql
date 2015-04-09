@@ -1,34 +1,4 @@
---****************************************************
---				Update procedure
---****************************************************
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_fcdrrlist_alter`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrrlist_alter` () 
-					BEGIN
-						SET @QUERY =    "ALTER TABLE  `fcdrr` ADD  `mfl_code` VARCHAR( 10 ) NOT NULL AFTER  `facility_id`
-
-										";
-
-
-        PREPARE stmt FROM @QUERY;
-        EXECUTE stmt;
-        SELECT @QUERY;
-    END$$
-
-DELIMITER ;
-
---****************************************************
---				Create procedure
---****************************************************
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_fcdrrlist_create`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrrlist_create` () 
-					BEGIN
-						SET @QUERY =    "CREATE TABLE IF NOT EXISTS `fcdrrlists` (
+CREATE TABLE IF NOT EXISTS `fcdrrlists` (
   `fcdrrlistID` int(11) NOT NULL AUTO_INCREMENT,
   `mflcode` varchar(10) NOT NULL,
   `fromdate` date NOT NULL,
@@ -600,8 +570,8 @@ INSERT INTO `fcdrrlists` (`fcdrrlistID`, `mflcode`, `fromdate`, `todate`, `calib
 (559, '13805', '2014-05-01', '2014-05-31', 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, '', '2014-06-11 19:59:31', 0),
 (560, '13805', '2014-05-01', '2014-05-31', 400, 0, 1, 800, 0, 1, 0, 0, 1, 0, 0, '', '2014-06-11 20:15:24', 1),
 (561, '14950', '2014-05-01', '2014-05-31', 0, 0, 0, 0, 0, 0, 0, 0, 0, 145, 1, 'none', '2014-06-12 05:43:47', 1),
-(562, '14652', '2014-05-01', '2014-05-31', 0, 0, 0, 0, 0, 0, 0, 233, 1, 0, 0, 'losses  due to prepared  samples  but machine  malfunctioned so no samples were run.								\r\n								\r\n								\r\n', '2014-06-12 06:09:42', 0),
-(563, '14652', '2014-05-01', '2014-05-31', 0, 0, 0, 0, 0, 0, 0, 233, 1, 0, 0, 'losses due to prepared  samples  but machine  malfunctioned so no samples were run.								\r\n								\r\n								\r\n', '2014-06-12 06:15:00', 1),
+(562, '14652', '2014-05-01', '2014-05-31', 0, 0, 0, 0, 0, 0, 0, 233, 1, 0, 0, 'losses  due to prepared  samples  but machine  malfunctioned so no samples were run.               \r\n                \r\n                \r\n', '2014-06-12 06:09:42', 0),
+(563, '14652', '2014-05-01', '2014-05-31', 0, 0, 0, 0, 0, 0, 0, 233, 1, 0, 0, 'losses due to prepared  samples  but machine  malfunctioned so no samples were run.                \r\n                \r\n                \r\n', '2014-06-12 06:15:00', 1),
 (564, '12303', '2014-05-01', '2014-05-31', 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 'The losses were as a result of the acquization problems with BD Facs count machine. there is a problem with your report submission system as it does not capture beginning balances from the previous monthly reports.this was also reported last month so please assist. that also explains the delay in submission of this month`s report.', '2014-06-12 07:20:33', 1),
 (565, '15204', '2014-05-01', '2014-05-31', 1250, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, '', '2014-06-12 09:06:07', 1),
 (566, '13833', '2014-05-01', '2014-05-31', 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 1, 'We have never received EDTA tubes for the last 2.5 years. Kindly supply us.', '2014-06-13 08:11:29', 1),
@@ -1770,90 +1740,36 @@ INSERT INTO `fcdrrlists` (`fcdrrlistID`, `mflcode`, `fromdate`, `todate`, `calib
 (1803, '16130', '2015-02-01', '2015-02-28', 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 1, '', '2015-03-18 09:24:39', 0),
 (1804, '16130', '2015-02-01', '2015-02-28', 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 1, '', '2015-03-18 09:29:37', 1),
 (1805, '15049', '2015-02-01', '2015-02-28', 0, 0, 0, 0, 0, 1, 155, 30, 1, 0, 0, 'LATE REPORTING DUE TO INTERNET TECHNICAL HITCH.', '2015-03-21 15:13:21', 1);
-										";
+                
+
+ALTER TABLE  `fcdrr` ADD  `mfl_code` VARCHAR( 10 ) NOT NULL AFTER  `facility_id`;
+
+ALTER TABLE `fcdrr` DROP `facility_id`;
+
+INSERT INTO `fcdrr`
+    (
+      SELECT
+        `fcdrrlistID` AS `id`,
+        `mflcode` AS `mfl_code`,
+        `fromdate` AS `from_date`,
+        `todate` AS `to_date`,
+        `caliburtestsadults` AS `calibur_tests_adults`,
+        `caliburtestspead` AS `calibur_tests_pead`,
+        `caliburs`,
+        `counttestsadults` AS `count_tests_adults`,
+        `counttestspead` AS `count_tests_pead`,
+        `counts`,
+        `cyflowtestsadults` AS `cyflow_tests_adults`,
+        `cyflowtestspead` AS `cyflow_tests_pead`,
+        `cyflows`,
+        `comments` AS `reagent_id`,
+        `today` AS `upload_timestamp`
+      FROM `fcdrrlists`
+    );
+
+ALTER TABLE  `fcdrr` ADD  `facility_id` VARCHAR( 10 ) NOT NULL AFTER  `id`;
 
 
-        PREPARE stmt FROM @QUERY;
-        EXECUTE stmt;
-        SELECT @QUERY;
-    END$$
+UPDATE `fcdrr` LEFT JOIN `facility` ON `facility`.`mfl_code` = `fcdrr`.`mfl_code` SET `fcdrr`.`facility_id` = `facility`.`id`;
 
-DELIMITER ;
-
---****************************************************
---				Insert procedure
---****************************************************
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_fcdrrlist_insert`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrrlist_insert` () 
-					BEGIN
-						SET @QUERY =    "INSERT INTO `fcdrr`
-										(
-											`id`,
-											`facility_id`,
-											`mfl_code`,
-											`from_date`,
-											`to_date`,
-											`calibur_tests_adults`,
-											`calibur_tests_pead`,
-											`caliburs`,
-											`count_tests_adults`,
-											`count_tests_pead`,
-											`counts`,
-											`cyflow_tests_adults`,
-											`cyflow_tests_pead`,
-											`cyflows`,
-											`reagent_id`,
-											`upload_timestamp`
-										)
-										VALUES
-										((
-											SELECT
-												`fcdrrlistID` AS `id`,
-												`mflcode` AS `mfl_code`,
-												`fromdate` AS `from_date`,
-												`todate` AS `to_date`,
-												`caliburtestsadults` AS `calibur_tests_adults`,
-												`caliburtestspead` AS `calibur_tests_pead`,
-												`caliburs`,
-												`counttestsadults` AS `count_tests_adults`,
-												`counttestspead` AS `count_tests_pead`,
-												`counts`,
-												`cyflowtestsadults` AS `cyflow_tests_adults`,
-												`cyflowtestspead` AS `cyflow_tests_pead`,
-												`cyflows`,
-												`comments` AS `reagent_id`,
-												`today` AS `upload_timestamp`
-											FROM `fcdrrlists`
-										))
-
-										";
-
-
-        PREPARE stmt FROM @QUERY;
-        EXECUTE stmt;
-        SELECT @QUERY;
-    END$$
-
-DELIMITER ;
-
---****************************************************
---				Delete procedure
---****************************************************\
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_fcdrrlist_delete`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrrlist_delete` () 
-					BEGIN
-						SET @QUERY =  "DROP TABLE fcdrrlists";
-
-
-        PREPARE stmt FROM @QUERY;
-        EXECUTE stmt;
-        SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+DROP TABLE fcdrrlists;

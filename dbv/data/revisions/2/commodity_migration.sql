@@ -1,17 +1,3 @@
---**********************************************************
---			APPROACH TWO
-
---**********************************************************
-
-
-
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_fcdrr_commodity_create`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrr_commodity_create` () 
-	BEGIN
-		SET @QUERY =    "
 CREATE TABLE IF NOT EXISTS `commodity_temp` (
   `commodityID` int(11) NOT NULL AUTO_INCREMENT,
   `fcdrrlistID` int(11) NOT NULL,
@@ -22096,64 +22082,80 @@ INSERT INTO `commodity_temp` (`commodityID`, `fcdrrlistID`, `beginningbal`, `rec
 (22917, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34),
 (22918, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 38),
 (22919, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39),
-(22920, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40)";
-
-	  	PREPARE stmt FROM @QUERY;
-	        EXECUTE stmt;
-	        SELECT @QUERY;
-    END$$
-DELIMITER ;
+(22920, 1805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40);
 
 
-DELIMITER $$
+INSERT INTO `fcdrr_commodity`
+    (
+      SELECT
+        `commodityID` AS `id`,
+        `fcdrrlistID` AS `fcdrr_id`,
+        `beginningbal` AS `beginning_bal`,
+        `receivedqty` AS `received_qty`,
+        `receivedlot` AS `lot_code`,
+        `qtyused` AS `qty_used`,
+        `losses`,
+        `adjustmentplus` AS `adjustment_plus`,
+        `adjustmentminus` AS `adjustment_minus`,
+        `endbal` AS `end_bal`,
+        `requested`,
+        `reagentID` AS `reagent_id`
+      FROM `commodity_temp`
+    );
 
-DROP PROCEDURE IF EXISTS `proc_fcdrr_commodity_insert`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrr_commodity_insert` () 
-	BEGIN
-		SET @QUERY =	"
-
-		INSERT INTO `fcdrr_commodity`
-		(
-			SELECT
-				`commodityID` AS `id`,
-				`fcdrrlistID` AS `fcdrr_id`,
-				`beginningbal` AS `beginning_bal`,
-				`receivedqty` AS `received_qty`,
-				`receivedlot` AS `lot_code`,
-				`qtyused` AS `qty_used`,
-				`losses`,
-				`adjustmentplus` AS `adjustment_plus`,
-				`adjustmentminus` AS `adjustment_minus`,
-				`endbal` AS `end_bal`,
-				`requested`,
-				`reagentID` AS `reagent_id`
-			FROM `commodity_temp`
-		)
-
-		";
-
-		  PREPARE stmt FROM @QUERY;
-		        EXECUTE stmt;
-		        SELECT @QUERY;
-    END$$
-DELIMITER ;
+DROP TABLE `commodity_temp`
+    
 
 
-DELIMITER $$
+-- DELIMITER $$
 
-DROP PROCEDURE IF EXISTS `proc_fcdrr_commodity_drop`$$
+-- DROP PROCEDURE IF EXISTS `proc_fcdrr_commodity_insert`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrr_commodity_drop` () 
-    BEGIN
-		SET @QUERY =    "DROP TABLE `commodity_temp`";
+-- CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrr_commodity_insert` () 
+--   BEGIN
+--     SET @QUERY =  "
 
-	  	PREPARE stmt FROM @QUERY;
-	        EXECUTE stmt;
-	        SELECT @QUERY;
-    END$$
+--     INSERT INTO `fcdrr_commodity`
+--     (
+--       SELECT
+--         `commodityID` AS `id`,
+--         `fcdrrlistID` AS `fcdrr_id`,
+--         `beginningbal` AS `beginning_bal`,
+--         `receivedqty` AS `received_qty`,
+--         `receivedlot` AS `lot_code`,
+--         `qtyused` AS `qty_used`,
+--         `losses`,
+--         `adjustmentplus` AS `adjustment_plus`,
+--         `adjustmentminus` AS `adjustment_minus`,
+--         `endbal` AS `end_bal`,
+--         `requested`,
+--         `reagentID` AS `reagent_id`
+--       FROM `commodity_temp`
+--     )
+    
+--     ";
 
-DELIMITER ;
+--       PREPARE stmt FROM @QUERY;
+--             EXECUTE stmt;
+--             SELECT @QUERY;
+--     END$$
+-- DELIMITER ;
+
+
+-- DELIMITER $$
+
+-- DROP PROCEDURE IF EXISTS `proc_fcdrr_commodity_drop`$$
+
+-- CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_fcdrr_commodity_drop` () 
+--     BEGIN
+--     SET @QUERY =    "DROP TABLE `commodity_temp`";
+
+--       PREPARE stmt FROM @QUERY;
+--           EXECUTE stmt;
+--           SELECT @QUERY;
+--     END$$
+
+-- DELIMITER ;
 
 
 
