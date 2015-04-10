@@ -143,10 +143,11 @@ class commodities_m extends MY_Model{
 
 		$commodity = json_decode($request_comm, true);
 		
-		$commodity_deleted = R::getAll("DELETE FROM 
-												 `commodity`
-											WHERE 
-												`id` = '$id'
+		$commodity_deleted = R::getAll("UPDATE `commodity` 
+								SET 
+									`status`='$commodity[status]'
+								WHERE 
+									`id` = '$id'
 											");
 		
 		return $commodity_deleted;
