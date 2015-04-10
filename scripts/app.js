@@ -76,8 +76,8 @@ var app = angular
 	
 	.state('Dashboard.main',{
 		url: '',
-		templateUrl: 'dashboard/dashboard_summary',
-		controller:'dashboardSummaryCtrl'		
+		templateUrl: 'dashboard/testing_trends',
+		controller:'TestsTrendCtrl'		
 	})
 
 
@@ -109,6 +109,22 @@ var app = angular
 			'main':{
 				templateUrl: 'fcdrr/fillFCDRR_view',
 				controller: 'fcdrrCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer'
+			}
+		}
+	})
+	.state('FCDRRS',{ /* fcdrr page loaded here */
+		url: '/FCDRRS',
+		views:{
+			'main':{
+				templateUrl: 'fcdrr/fcdrrs',
+				controller: 'fcdrrsCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

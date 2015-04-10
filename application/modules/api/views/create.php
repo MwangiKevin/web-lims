@@ -13,14 +13,13 @@
     	//     json_string: JSON.stringify({name:"John", phone number:"+410000000"})
     	// });
     	var dataPath = {
-                name : "Chemistry",
-                equipment_id : "0"
-            
+                status : "1"
         };
+        
         console.log(dataPath);
         $.ajax({
-            url  :'<?php echo base_url(); ?>api/commodity_categories',
-            type    :'PUT',
+            url  :'<?php echo base_url(); ?>api/facilities/130',
+            type    :'DELETE',
             dataType:'jsonp',
             data    : JSON.stringify(dataPath),
             contentType:"application/json",
