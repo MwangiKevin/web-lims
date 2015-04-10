@@ -118,20 +118,22 @@ class commodities_m extends MY_Model{
 	}
 
 	public function update($id){
-		// parse_str(file_get_contents('php://input'), $_PUT);
+		
 		$request_fields = file_get_contents('php://input');
 
 		$commodity = json_decode($request_fields, true);
 
 		$commodity_updated = R::getAll("UPDATE `commodity` 
 								SET 
-									`name`='$name',
-									`name`='$name',
-									`name`='$name',
-									`name`='$name'
+									`code`='$commodity[code]',
+									`name`='$commodity[name]',
+									`unit`='$commodity[unit]',
+									`category_id`='$commodity[category_id]',
+									`reporting_status`='$commodity[reporting_status]'
 								WHERE 
 									`id` = '$id'
 								");
+		
 		return $commodity_updated;
 	}
 
@@ -141,10 +143,11 @@ class commodities_m extends MY_Model{
 
 		$commodity = json_decode($request_comm, true);
 		
-		$commodity_deleted = R::getAll("DELETE FROM 
-												 `commodity`
-											WHERE 
-												`id` = '$id'
+		$commodity_deleted = R::getAll("UPDATE `commodity` 
+								SET 
+									`status`='$commodity[status]'
+								WHERE 
+									`id` = '$id'
 											");
 		
 		return $commodity_deleted;
