@@ -118,6 +118,27 @@
 
 	<div class="" >
 		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
+		<div class="ui one column stackable center aligned page grid">
+			<div class="column five wide">
+				<div class="ui form">
+					<div class="field">
+						<label for="username">Username: </label>
+						<div class="ui icon input">
+							<input type="text" placeholder="Username/email" name="username" id="username">
+							<i class="user icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label for="password">Password: </label>
+						<div class="ui icon input">
+							<input type="password" placeholder="Password" name="password" id="password">
+							<i class="lock icon"></i>
+						</div>
+					</div>
+					<input type="submit" name="submit" class="ui inverted blue button">
+				</div>
+			</div>
+		</div>
 
 		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
@@ -184,6 +205,7 @@
 	<script src="<?php echo base_url('assets/bower_components/restangular/dist/restangular.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation-rule.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-http-auth/src/http-auth-interceptor.js');?>"></script>
 
 
 
@@ -240,6 +262,7 @@
 
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
+	<script src="<?php echo base_url('scripts/directives/authDirective.js');?>"></script>
 
 	
 

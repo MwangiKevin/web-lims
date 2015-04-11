@@ -17,7 +17,8 @@ var app = angular
 	'cgNotify',
 	'restangular',
 	'validation', 
-	'validation.rule'
+	'validation.rule',
+    'http-auth-interceptor'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
