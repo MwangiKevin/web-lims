@@ -1,9 +1,12 @@
-  app.directive('authDirective', function() {
+  app.directive('authmain', function() {
+
     return {
-      restrict: 'C',
+      // restrict: 'C',
       link: function(scope, elem, attrs) {
         //once Angular is started, remove class:
-        elem.removeClass('waiting-for-angular');
+        // elem.removeClass('waiting-for-angular');
+
+        alert('inte');
         
         var login = elem.find('#login-holder');
         var main = elem.find('#content');

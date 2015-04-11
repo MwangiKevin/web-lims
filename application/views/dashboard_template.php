@@ -116,10 +116,11 @@
 	</div>
 	<!-- END: App-Loading Screen. -->
 
-	<div class="" >
+	<div>
+		<authmain>
 		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
-		<div class="ui one column stackable center aligned page grid">
-			<div class="column nine wide" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
+		<div class="ui one column stackable center aligned page grid" id="login-holder">
+			<div class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
 				<div class="ui form">
 					<div class="field">
 						<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
@@ -140,11 +141,12 @@
 				</div>
 			</div>
 		</div>
+		<div id = "content">			
+			<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
-		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
-
-		<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
-
+			<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
+		</div>
+		</authmain>
 	</div>
 	<div ui-view="footer" class=" ui column grid full"></div>
 
@@ -256,6 +258,7 @@
 	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
+	
 	<!--Chart factories -->
 	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js'); ?>"></script>
 
@@ -263,7 +266,7 @@
 
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
-	<script src="<?php echo base_url('scripts/directives/authDirective.js');?>"></script>
+	<script src="<?php echo base_url('scripts/directives/authmain.js');?>"></script>
 
 	
 
