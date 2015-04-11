@@ -119,9 +119,10 @@
 	<div class="" >
 		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
 		<div class="ui one column stackable center aligned page grid">
-			<div class="column five wide">
+			<div class="column nine wide" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
 				<div class="ui form">
 					<div class="field">
+						<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
 						<label for="username">Username: </label>
 						<div class="ui icon input">
 							<input type="text" placeholder="Username/email" name="username" id="username">
