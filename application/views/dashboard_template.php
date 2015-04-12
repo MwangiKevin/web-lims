@@ -118,34 +118,34 @@
 
 	<div>
 		<authmain>
-		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
-		<div class="ui one column stackable center aligned page grid" id="login-holder">
-			<div class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
-				<div class="ui form">
-					<div class="field">
-						<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
-						<label for="username">Username: </label>
-						<div class="ui icon input">
-							<input type="text" placeholder="Username/email" name="username" id="username">
-							<i class="user icon"></i>
+			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
+			<div class="ui one column stackable center aligned page grid" id="login-holder">
+				<div class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
+					<div class="ui form">
+						<div class="field">
+							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
+							<label for="username">Username: </label>
+							<div class="ui icon input">
+								<input type="text" placeholder="Username/email" name="username" id="username">
+								<i class="user icon"></i>
+							</div>
 						</div>
-					</div>
-					<div class="field">
-						<label for="password">Password: </label>
-						<div class="ui icon input">
-							<input type="password" placeholder="Password" name="password" id="password">
-							<i class="lock icon"></i>
+						<div class="field">
+							<label for="password">Password: </label>
+							<div class="ui icon input">
+								<input type="password" placeholder="Password" name="password" id="password">
+								<i class="lock icon"></i>
+							</div>
 						</div>
+						<input type="submit" name="submit" class="ui inverted blue button">
 					</div>
-					<input type="submit" name="submit" class="ui inverted blue button">
 				</div>
 			</div>
-		</div>
-		<div id = "content">			
-			<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
+			<div id = "content">			
+				<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
-			<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
-		</div>
+				<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
+			</div>
 		</authmain>
 	</div>
 	<div ui-view="footer" class=" ui column grid full"></div>
