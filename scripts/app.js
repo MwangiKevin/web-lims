@@ -22,8 +22,30 @@ var app = angular
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
 	$urlRouterProvider.otherwise('/');
-
+	
 	$stateProvider
+	
+	//LIMS Login	
+	.state('limsLogin',{
+		url: '/lims_login',	
+		views:{
+			'main':{
+				templateUrl: 'login/lims_login',
+				controller: 'limsLoginCtrl'
+			},
+			'navbar':{
+				templateUrl: 'login/nav_bar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
+
+	
 	.state('Dashboard',{
 		url: '/',		
 		abstract: true,
@@ -33,7 +55,7 @@ var app = angular
 				controller:'dashboardCtrl'
 			},
 			'navbar':{
-				templateUrl: 'dashboard/navbar',
+				templateUrl: 'login/navbar',
 				controller: 'navbarCtrl'
 			},
 			'filter':{
