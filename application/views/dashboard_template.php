@@ -208,6 +208,7 @@
 
 	<script src="<?php echo base_url('scripts/controllers/dashboard/summaryCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/dashboard/TestsTrendCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/dashboard/device_distributionCtrl.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/controllers/navbarCtrl.js');?>"></script>
 
@@ -215,7 +216,8 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
-
+	
+	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
 
 
 	<!--Factories, Services and providers -->
