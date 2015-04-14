@@ -215,6 +215,8 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
+	
 
 
 
@@ -223,9 +225,11 @@
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
-
+	<!--Chart factories -->
+	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js'); ?>"></script>
 
 	<!-- directives-->
 
