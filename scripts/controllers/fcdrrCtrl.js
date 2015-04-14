@@ -14,6 +14,9 @@ app.controller('fcdrrCtrl',
     'Restangular',
     function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
 
+
+        // $rootScope.$broadcast('event:auth-loginRequired');
+
         $scope.fcdrr_id = $stateParams.id;
 
         $scope.editState = function(){

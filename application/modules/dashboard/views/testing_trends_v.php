@@ -24,10 +24,10 @@
 			<highchart id="testing_trends" config="testing_trends" class="span"></highchart>
 		</div>
 		<div id="middle_chart_container">
-			<div id="middle_chart">
+			<div id="middle_chart" >
 				<highchart id="yearly_testing_trends" config="yearly_testing_trends" class="span10" style="float:left; width:40%"></highchart>
 			</div>
-			<div id="middle_chart">
+			<div id="middle_chart" >
 				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:40%"></highchart>
 			</div>
 		</div>

@@ -27,7 +27,7 @@ class login extends MY_Controller {
 	
 	public function authenticate(){
 		$username = $_POST['username'];
-		$password = $_POST['username'];
+		$password = $_POST['password'];
 				
 	 	if ($this->aauth->login($username, $password)){
             echo 'Logged in';
