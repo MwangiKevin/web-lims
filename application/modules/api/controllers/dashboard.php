@@ -63,7 +63,7 @@ class dashboard extends MY_Controller {
 	}
 
 	// equipment tests for this year [table]
-	function get_equipment_tests_thisyear($param1,$param2){
+	function get_equipment_tests_thisyear(){
 		$sql = "CALL proc_equipment_test_data";
 		$response = R::getAll($sql);
 
