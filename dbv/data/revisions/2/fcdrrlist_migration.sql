@@ -1749,10 +1749,12 @@ ALTER TABLE `fcdrr` DROP `facility_id`;
 INSERT INTO `fcdrr`
     (
       SELECT
-        `fcdrrlistID` AS `id`,
+        DISTINCT `fcdrrlistID` AS `id`,
         `mflcode` AS `mfl_code`,
         `fromdate` AS `from_date`,
         `todate` AS `to_date`,
+        YEAR(`fromdate`) AS `year`,
+        MONTH(`fromdate`) AS `month`,
         `caliburtestsadults` AS `calibur_tests_adults`,
         `caliburtestspead` AS `calibur_tests_pead`,
         `caliburs`,
@@ -1762,9 +1764,13 @@ INSERT INTO `fcdrr`
         `cyflowtestsadults` AS `cyflow_tests_adults`,
         `cyflowtestspead` AS `cyflow_tests_pead`,
         `cyflows`,
-        `comments` AS `reagent_id`,
-        `today` AS `upload_timestamp`
+        `pimatests` AS `pima_tests`,
+        NULL AS `adults_bel_cl`,
+        NULL AS `pead_bel_cl`,
+        `comments` AS `comments`,
+        `today` AS `timestamp`
       FROM `fcdrrlists`
+      WHERE `st`  = '1'
     );
 
 ALTER TABLE  `fcdrr` ADD  `facility_id` VARCHAR( 10 ) NOT NULL AFTER  `id`;
