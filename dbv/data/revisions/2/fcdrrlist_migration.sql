@@ -1749,7 +1749,7 @@ ALTER TABLE `fcdrr` DROP `facility_id`;
 INSERT INTO `fcdrr`
     (
       SELECT
-        DISTINCT `fcdrrlistID` AS `id`,
+        `fcdrrlistID` AS `id`,
         `mflcode` AS `mfl_code`,
         `fromdate` AS `from_date`,
         `todate` AS `to_date`,
@@ -1770,12 +1770,17 @@ INSERT INTO `fcdrr`
         `comments` AS `comments`,
         `today` AS `timestamp`
       FROM `fcdrrlists`
-      WHERE `st`  = '1'
+      WHERE `st`  = '1' AND mflcode IS NOT NULL AND mflcode != 0 AND fromdate != '1970-01-01' AND fromdate != '0000-00-00'
+      GROUP BY `mflcode`,`fromdate`
     );
 
 ALTER TABLE  `fcdrr` ADD  `facility_id` VARCHAR( 10 ) NOT NULL AFTER  `id`;
 
 
 UPDATE `fcdrr` LEFT JOIN `facility` ON `facility`.`mfl_code` = `fcdrr`.`mfl_code` SET `fcdrr`.`facility_id` = `facility`.`id`;
+
+DELETE FROM `fcdrr` WHERE `facility_id` = NULL OR `facility_id` = '';
+
+ALTER TABLE `fcdrr` DROP `mfl_code`;
 
 DROP TABLE fcdrrlists;
