@@ -71,11 +71,74 @@ class dashboard extends MY_Controller {
 	}
 
 	// expected reporting devices [area chart]
-	function get_expected_reporting_devices(){
-		$sql = "";
-		$response = R::getAll($sql);
+	
+	function get_expected_reporting_devices($param1,$param2,$year=2015){
+		//error_reporting(0);
+		$sql_devices_added = "CALL proc_expected_reporting_dev_array_added(".$param1.", ".$param2.")";
 
-		echo json_encode($response);
+		$sql_devices_removed = "CALL proc_expected_reporting_dev_array_removed(".$param1.", ".$param2.")";
+
+
+		$devices_added_assoc 	=	R::getAll($sql_devices_added);
+		$devices_removed_assoc 	=	R::getAll($sql_devices_removed);
+
+		$devices_added_array	=	array();	
+		$devices_removed_array	=	array();
+
+		$consolidated_array		=	array();
+
+		//initialize
+		$current_cummulative_added 		= 0;
+		$current_cummulative_removed 	= 0;
+
+		foreach ($devices_added_assoc as $value) {
+			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
+
+			if($curr_year< (int) $year){
+				$current_cummulative_added 		= (int) $value["cumulative"];
+			}
+		}
+		//echo 	$current_cummulative_added ;
+
+
+		foreach ($devices_removed_assoc as $value) {
+			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
+			if($curr_year< (int) $year){
+				$current_cummulative_removed 		= (int) $value["cumulative"];
+			}
+		}
+		//echo 	$current_cummulative_removed ;
+
+		//initialize
+		$devices_added_array[0]		=	$current_cummulative_added;	
+		$devices_removed_array[0]	=	$current_cummulative_removed;
+
+		for($i=0;$i<12;$i++){
+
+			foreach ($devices_added_assoc as $key => $added) {
+				if($added['yearmonth']==($year)."-".($i+1)){
+					$current_cummulative_added = (int) $added['cumulative'];
+				}				
+			}
+			foreach ($devices_removed_assoc as $key => $removed) {
+				if($removed['yearmonth']==($year)."-".($i+1)){
+					$current_cummulative_removed = (int) $removed['cumulative'];
+				}				
+			}
+
+			$devices_added_array[$i] = $current_cummulative_added;
+			$devices_removed_array[$i] = $current_cummulative_removed;
+			
+		}
+
+		for($i=0;$i<12;$i++){
+			$consolidated_array[$i] = (int)$devices_added_array[$i] - (int) $devices_removed_array[$i];
+		}
+
+		// return $consolidated_array;
+
+		echo json_encode($consolidated_array);
 	}
+
 
 }
