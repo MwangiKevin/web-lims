@@ -42,12 +42,18 @@ class dashboard extends MY_Controller {
 		$this->load->view("testing_trends_v");
 	}
 	public function devices(){
+		
 		echo "devices";
+		
 	}
 	public function map(){
+		
 		echo "map";
+		
 	}
 	public function fcdrr_reporting(){
+		
 		echo "fcdrr";
+		
 	}
 }
