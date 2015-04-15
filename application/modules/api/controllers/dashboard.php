@@ -35,4 +35,47 @@ class dashboard extends MY_Controller {
 
 		echo json_encode($response);
 	}
+
+// WEB-LIMS DEVICES
+
+	// get cd4 equipment [Pie Chart]
+	function get_cd4_equipment_pie($param1,$param2){
+		$sql = "CALL proc_equipment_pie()";
+		$response = R::getAll($sql);
+
+		echo json_encode($response);
+	}
+
+	// get cd4 equipment [Table]
+	function get_cd4_equipment_table(){
+		$sql = "";
+		$response = R::getAll($sql);
+
+		echo json_encode($response);
+	}
+
+	// equipment and tests [Pie Chart]
+	function get_equipment_tests_pie($param1,$param2){
+		$sql = "CALL proc_equipment_tests_pie()";
+		$response = R::getAll($sql);
+
+		echo json_encode($response);
+	}
+
+	// equipment tests for this year [table]
+	function get_equipment_tests_thisyear(){
+		$sql = "CALL proc_equipment_test_data";
+		$response = R::getAll($sql);
+
+		echo json_encode($response);
+	}
+
+	// expected reporting devices [area chart]
+	function get_expected_reporting_devices(){
+		$sql = "";
+		$response = R::getAll($sql);
+
+		echo json_encode($response);
+	}
+
 }
