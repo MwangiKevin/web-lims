@@ -17,13 +17,36 @@ var app = angular
 	'cgNotify',
 	'restangular',
 	'validation', 
-	'validation.rule'
+	'validation.rule',
+    'http-auth-interceptor'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
 	$urlRouterProvider.otherwise('/');
-
+	
 	$stateProvider
+	
+	//LIMS Login	
+	.state('limsLogin',{
+		url: '/lims_login',	
+		views:{
+			'main':{
+				templateUrl: 'login/lims_login',
+				controller: 'limsLoginCtrl'
+			},
+			'navbar':{
+				templateUrl: 'login/nav_bar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
+
+	
 	.state('Dashboard',{
 		url: '/',		
 		abstract: true,
@@ -33,7 +56,7 @@ var app = angular
 				controller:'dashboardCtrl'
 			},
 			'navbar':{
-				templateUrl: 'dashboard/navbar',
+				templateUrl: 'login/navbar',
 				controller: 'navbarCtrl'
 			},
 			'filter':{
@@ -54,8 +77,8 @@ var app = angular
 	
 	.state('Dashboard.main',{
 		url: '',
-		templateUrl: 'dashboard/dashboard_summary',
-		controller:'dashboardSummaryCtrl'		
+		templateUrl: 'dashboard/testing_trends',
+		controller:'TestsTrendCtrl'		
 	})
 
 

@@ -60,11 +60,11 @@ class commodity_categories_m extends MY_Model{
 		$commodity_cat = json_decode($request_fields, true);
 		
 		$commodity_cat_updated = R::getAll("UPDATE `commodity_category` 
-								SET 
-									`name`='$commodity_cat[name]',
-									`equipment_id`='$commodity_cat[equipment_id]'
-								WHERE 
-									`id` = '$id'
+											SET 
+												`name`='$commodity_cat[name]',
+												`equipment_id`='$commodity_cat[equipment_id]'
+											WHERE 
+												`id` = '$id'
 								");
 		return $commodity_cat_updated;
 	}
@@ -75,8 +75,9 @@ class commodity_categories_m extends MY_Model{
 
 		$commodity_cat = json_decode($request_comm_cat, true);
 		
-		$commodity_cat_deleted = R::getAll("DELETE FROM 
-												 `commodity_category`
+		$commodity_cat_deleted = R::getAll("UPDATE `commodity_category` 
+											SET 
+												`status`='$commodity_cat[status]'
 											WHERE 
 												`id` = '$id'
 											");

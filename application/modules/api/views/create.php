@@ -13,19 +13,13 @@
     	//     json_string: JSON.stringify({name:"John", phone number:"+410000000"})
     	// });
     	var dataPath = {
-                facility_id : "789",
-                device_id : "1",
-                status : "0",
-                deactivation_reason : "Disfunctional",
-                date_added : "2015-04-01",
-                date_removed : "0000-00-00",
-                serial_number : "1232"
+                status : "1"
         };
         
         console.log(dataPath);
         $.ajax({
-            url  :'<?php echo base_url(); ?>api/facility_devices/1',
-            type    :'PUT',
+            url  :'<?php echo base_url(); ?>api/facilities/130',
+            type    :'DELETE',
             dataType:'jsonp',
             data    : JSON.stringify(dataPath),
             contentType:"application/json",
