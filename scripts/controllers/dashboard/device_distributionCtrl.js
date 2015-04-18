@@ -85,7 +85,47 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	// $scope.cd4_equipment_pie();
 	$scope.cd4_equipment_pie = {
-		
+		 chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'CD4 Equipment'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+                ['Firefox',   45.0],
+                ['IE',       26.8],
+                {
+                    name: 'Chrome',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['Safari',    8.5],
+                ['Opera',     6.2],
+                ['Others',   0.7]
+            ]
+        }]
 	}
 	
 	//
@@ -109,8 +149,48 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//CD4 Equipment and Tests Pie
 	//
 	//$scope.cd4_equipment_tests_pie();
-	$scope.cd4_equipment_tests_pie = {
-		
+	$scope.equipment_tests_pie = {
+		chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'CD4 Tests & Equipment'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [
+                ['Firefox',   45.0],
+                ['IE',       26.8],
+                {
+                    name: 'Chrome',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['Safari',    8.5],
+                ['Opera',     6.2],
+                ['Others',   0.7]
+            ]
+        }]
 	}
 	
 	
@@ -135,7 +215,58 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	//$scope.expected_reporting_devices();
 	$scope.expected_reporting_devices =  {
-		
+		chart: { 
+            plotBackgroundColor: null,
+            plotBorderWidth: 2,
+            plotShadow: true,       
+            zoomType: 'x',
+            type: 'area',
+            height:250
+        },
+        title: {
+            text: 'Expected Reporting Devices (Year <?php echo $year;?>)',
+            x: -20 //center   
+        },
+        xAxis: {
+            categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+            labels: {
+                rotation: -45,
+                step : 0,
+                align: "right"
+            }
+        },
+        yAxis: {
+            title: {
+                text: '# Pima Devices'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        plotOptions: {
+            area: {
+                stacking: null,
+                lineColor: '#666666',
+                lineWidth: 1,                       
+                marker: {
+                    lineWidth: 0,
+                    lineColor: '#666666',
+                    radius: 0
+                }               
+            }            
+        },            
+        credits:{
+            enabled:false
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Devices',
+            crosshairs: [true,false],
+            //pointFormat: '<br/><br/>{series.name}: <div><b>{point.y}, </b><b>{series.data.percentage:.1f}%</b></div>'
+        },
+        series: [{"name":"Expected Reporting Devices","data":[3,4,7,12,16,19,20,24,26,31,38,40]},{"name":"Reported Devices","color":"#a4d53a","data":[null,null,null,null,null,null,null,null,null,null,null,null]}]            
 	}
 	
 	

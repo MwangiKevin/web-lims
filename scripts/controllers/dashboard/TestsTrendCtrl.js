@@ -5,7 +5,6 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 		this.tests_vs_errors_pie.loading = !this.tests_vs_errors_pie.loading
 		this.yearly_testing_trends.loading = !this.yearly_testing_trends.loading
 	}
-	
 	//
 	//
 	//TESTING TRENDS LAST 4 YEARS

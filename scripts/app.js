@@ -92,7 +92,8 @@ var app = angular
 	})
 	.state('Dashboard.devices',{
 		url: 'deviceDistribution',
-		templateUrl: 'dashboard/devices'		
+		templateUrl: 'dashboard/devices',
+		controller: 'device_distributionCtrl'		
 	})
 	.state('Dashboard.map',{
 		url: 'map',
