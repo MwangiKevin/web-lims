@@ -5,6 +5,7 @@
 	}
 	#middle_chart{
 		width:100%;
+		
 	}
 	#table_container{
 		padding:5%;
@@ -17,27 +18,26 @@
 		width: 75%;
 	}
 </style>
-<!-- <h1>This should appear {{test_table.myname}} {{cd4.mydate}}</h1> -->
 <div class="row">
 	<div class="ui blue segment" id="chart_container" >
-		<div id='top_chart_container' >
+		<div id='top_chart_container'>
 			<highchart id="testing_trends" config="testing_trends" class="span"></highchart>
 		</div>
 		<div id="middle_chart_container">
-			<div id="middle_chart" >
+			<div id="middle_chart">
 				<highchart id="yearly_testing_trends" config="yearly_testing_trends" class="span10" style="float:left; width:40%"></highchart>
 			</div>
-			<div id="middle_chart" >
-				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:40%"></highchart>
+			<div id="middle_chart">
+				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:45%"></highchart>
 			</div>
 		</div>
-
 		<div id='table_container'>
 			<hr/>
+			<h4 style="text-align: center;">CD4 Tests for the Year 2013</h4>
 			<table style = "border: 1px solid #DDD;vertical-align:center;width:100%;clear:both;" >
 				<thead class="even" style="background:#f0f0f0" >
 					<tr style = "border: 1px solid #DDD;" >
-						<td></td>
+						<th></th>
 						<th>Total Attempted</th>
 						<th>Valid tests</th>
 						<th>cd4 Above critical Level
@@ -52,62 +52,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr style = "border: 1px solid #DDD;" >
+					<tr style = "border: 1px solid #DDD;" ng-repeat="t_data in table_data">
 						<td style="background-color: #CCCCCC;"  >
-						<center>
-							Tests
-						</center></td>
+							<center>
+								{{t_data.title}}
+							</center>
+						</td>
 						<td style="background-color: #F6F6F6;;" >
-						<center>
-							46957
-						</center></td>
+							<center>
+								{{t_data.total}}
+							</center>
+						</td>
 						<td style="background-color: #F6F6F6;;" >
-						<center>
-							44248
-						</center></td>
+							<center>
+								{{t_data.vaild}}
+							</center>
+						</td>
 						<td style="background-color: #F6F6F6;;" >
-						<center>
-							24751
-						</center></td>
+							<center>
+								{{t_data.passed}}
+							</center>
+						</td>
 						<td style="background-color: #F6F6F6;;" >
-						<center>
-							19497
-						</center></td>
+							<center>
+								{{t_data.failed}}
+							</center>
+						</td>
 						<td style="background-color: #F6F6F6;;" >
-						<center>
-							2709
-						</center></td>
-					</tr>
-					<tr style = "border: 1px solid #DDD;" >
-						<td style="background-color: #CCCCCC;"  >
-						<center>
-							Percentages
-						</center></td>
-						<td style="background-color: #F6F6F6;;" ><center></center></td>
-						<td style="background-color: #F6F6F6;;" >
-						<center>
-							94.23%
-						</center></td>
-						<td style="background-color: #F6F6F6;;" >
-						<center>
-							52.71%
-						</center></td>
-						<td style="background-color: #F6F6F6;;" >
-						<center>
-							41.52%
-						</center></td>
-						<td style="background-color: #F6F6F6;;" >
-						<center>
-							5.77%
-						</center></td>
-					</tr>
-					<tr style = "border: 1px solid #DDD;" >
-						<td style="background-color: #CCCCCC;"  ></center></td>
-						<td style="background-color: #F6F6F6;;" ></center></td>
-						<td style="background-color: #F6F6F6;;" ></center></td>
-						<td style="background-color: #F6F6F6;;" ></center></td>
-						<td style="background-color: #F6F6F6;;" ></center></td>
-						<td style="background-color: #F6F6F6;;" ></center></td>
+							<center>
+								{{t_data.errors}}
+							</center>
+						</td>
 					</tr>
 				</tbody>
 			</table>
