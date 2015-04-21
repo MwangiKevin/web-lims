@@ -105,7 +105,7 @@
 			<div class="messaging">
 
 				<h1>
-					Please wait while <big>CD4 LIMS</big> app loads..
+					Please wait while <big>CD4 LIMS</big> loads..
 				</h1>
 				<div class="ui active inline loader"></div>
 			</div>
@@ -119,25 +119,25 @@
 	<div>
 		<authmain>
 			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
-			<div class="ui one column stackable center aligned page grid" id="login-holder">
-				<div class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
+			<div ng-controller="loginCtrl" class="ui one column stackable center aligned page grid" id="login-holder">
+				<div ng-show="false" class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
 					<div class="ui form">
 						<div class="field">
 							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
 							<label for="username">Username: </label>
 							<div class="ui icon input">
-								<input type="text" placeholder="Username/email" name="username" id="username">
+								<input type="text" placeholder="Username/email" name="username" id="username" ng-model="username">
 								<i class="user icon"></i>
 							</div>
 						</div>
 						<div class="field">
 							<label for="password">Password: </label>
 							<div class="ui icon input">
-								<input type="password" placeholder="Password" name="password" id="password">
+								<input type="password" placeholder="Password" name="password" id="password" ng-model="password">
 								<i class="lock icon"></i>
-							</div>
+							</div>{{username}}
 						</div>
-						<input type="submit" name="submit" class="ui inverted blue button">
+						<input type="submit" name="submit" class="ui inverted blue button" ng-click="submit()">
 					</div>
 				</div>
 			</div>
@@ -248,6 +248,7 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/loginCtrl.js');?>"></script>
 	
 
 
