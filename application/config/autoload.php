@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database','rb/rb','session','encrypt','PHPexcel/
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','form');
+$autoload['helper'] = array('url','form','file','path');
 
 
 /*

@@ -1,13 +1,13 @@
 <?php
-class MY_Model extends CI_Model{
 
-	public function __construct(){
+class dashboard_m extends MY_Model{
+
+	function __construct() {
+
 		parent::__construct();
-		ini_set('memory_limit', '-1');
 	}
 	
 	public function get_yearmonth_categories($from,$to){
-
 		$datemonth = array();
 		
 		$from_year        = (int) Date("Y",strtotime($from));
@@ -30,16 +30,6 @@ class MY_Model extends CI_Model{
 				}
 			}
 		}
-
-            //print_r($datemonth);
-
 		return $datemonth;
 	}
-	
-	
-	public function tester(){
-		return "Works";
-	}
-	
-	
 }

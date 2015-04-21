@@ -13,6 +13,7 @@ app.factory('Filters',['$http','$activityIndicator', function($http,$activityInd
 		$activityIndicator.startAnimating();
 		return $http.get('api/filters/entities').success(function(){$activityIndicator.stopAnimating()});
 	};
+	
 	Filters.getDates = function () {
 		
 		$activityIndicator.startAnimating();
@@ -24,6 +25,7 @@ app.factory('Filters',['$http','$activityIndicator', function($http,$activityInd
 		$activityIndicator.startAnimating();
 		return $http.get('api/filters/entities').success(function(){$activityIndicator.stopAnimating()});
 	};
+	
 	Filters.getSelectedDates = function () {
 		
 		$activityIndicator.startAnimating();

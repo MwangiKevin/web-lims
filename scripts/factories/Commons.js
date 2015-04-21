@@ -54,5 +54,14 @@ app.factory('Commons', ['$location',function($location){
 		}
 
 	};
+
+	Commons.getActiveSubmenuLV1 = function(name) {
+		if (name == Commons.activeSubmenuLV1) {
+			return "active shadowed"
+		} else {
+			return ""
+		}
+	}; 
+
 	return Commons;
 }])

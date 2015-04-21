@@ -1,14 +1,11 @@
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-
 class login extends MY_Controller {	
-
 	function __construct() {
 		parent::__construct();
 		$this->load->library("Aauth");		
 	}
-
 	public function index() {
 		$this->load->view('dashboard_template');
 	}
@@ -27,7 +24,7 @@ class login extends MY_Controller {
 	
 	public function authenticate(){
 		$username = $_POST['username'];
-		$password = $_POST['password'];
+		$password = $_POST['username'];
 				
 	 	if ($this->aauth->login($username, $password)){
             echo 'Logged in';
