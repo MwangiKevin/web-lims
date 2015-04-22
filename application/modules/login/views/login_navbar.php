@@ -1,4 +1,3 @@
-
 <div class="computer tablet only row">
   <div class="ui inverted fixed menu navbar page grid main-navbar pointing">
     <a href="" class="item down" style="width:50px">
@@ -66,8 +65,6 @@ $(document).ready(function(){
     e.preventDefault();
     $('.ui.vertical.menu.top').toggle();
   });
-
   $('.ui.dropdown').dropdown();
 });
 </script>
-

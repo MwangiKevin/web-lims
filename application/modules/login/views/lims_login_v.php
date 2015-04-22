@@ -44,7 +44,6 @@
 	.form-group{
 		padding:5%;
 	}
-
 </style>
 <div id="form-container">
 	<center>

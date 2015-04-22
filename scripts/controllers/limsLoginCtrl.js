@@ -33,4 +33,3 @@ app.controller('limsLoginCtrl',['$scope','Commons',function ($scope,Commons){
 		});	
     }
 }])
-
