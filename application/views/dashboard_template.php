@@ -120,7 +120,7 @@
 		<authmain>
 			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
 			<div ng-controller="loginCtrl" class="ui one column stackable center aligned page grid" id="login-holder">
-				<div ng-show="false" class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
+				<div ng-show="true" class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
 					<div class="ui form">
 						<div class="field">
 							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>

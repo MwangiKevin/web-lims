@@ -15,10 +15,14 @@ class auth extends MY_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
+		// show_error("432",401);
+
+		// $this->aauth->create_user('kevin@gmail.com','kevin','kevin1');
+
 		if ($this->aauth->login($username, $password)){
 			$details =	array(
 				'username' 		=>	$username,
-				'login_status' 	=>	'false',
+				'login_status' 	=>	'true',
 				'user'			=>	$this->aauth->get_user(),
 
 				);
@@ -26,6 +30,8 @@ class auth extends MY_Controller {
 			echo json_encode($details);
 
 		}else{
+			
+			http_response_code(401);
 			$details =	array(
 				'username' 	=>	$username,
 				'login_status' 	=>	'false',

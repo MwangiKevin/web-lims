@@ -48,6 +48,10 @@ class  MY_Controller  extends  MX_Controller {
 		return 'get';
 	}
 
+	protected function check_login_status(){
+		$this->load->library("Aauth");	
+
+	}
 	
 
 }
