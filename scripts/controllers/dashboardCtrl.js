@@ -5,7 +5,7 @@ app.controller('dashboardCtrl',['$scope','$timeout','ngProgress', 'Filters', 'Co
 	
 	$scope.getActiveSubmenuLV1 = Commons.getActiveSubmenuLV1;
 	$scope.getActiveSubmenuLV2 = Commons.getActiveSubmenuLV2;
-
+	
 
 
 	ngProgress.color('#FFD3D3');

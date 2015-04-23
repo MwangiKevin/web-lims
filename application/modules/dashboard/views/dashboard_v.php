@@ -68,9 +68,9 @@ $(".launch.button").mouseenter(function(){
 <div class="ui page site stackable grid" style="padding-top:20px">
 	<div class="three wide column" ng-show="commons.getMenuShowStatus()" style="margin:0px;padding:0px;">
 		<div class="ui vertical inverted  menu pointing left uncover visible" id="toc">
-			<a class="item" ng-class="getActiveSubmenuLV1('summary')" href="#summary">
+			<!-- <a class="item" ng-class="getActiveSubmenuLV1('summary')" href="#summary">
 				<b>Summary</b>
-			</a>
+			</a> -->
 			<a class="item" href="#testingTrends" ng-class="getActiveSubmenuLV1('testingTrends')">
 				<b>Testing Trends</b><i class="fa fa-line-chart " style="float:right"></i>
 			</a>
