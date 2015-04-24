@@ -38,32 +38,80 @@ class dashboard extends MY_Controller {
 
 // WEB-LIMS DEVICES
 
-	// get cd4 equipment [Pie Chart]
-	function get_cd4_equipment_pie($param1,$param2){
+
+	// Number of Devices per County [stacked]
+	function get_cd4_devices_perCounty($param1, $param2){
+		$sql = "";
+	}
+
+	// get cd4 devices [Pie Chart]
+	function get_cd4_devices_pie($param1,$param2){
 		$sql = "CALL proc_equipment_pie()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
 	}
 
-	// get cd4 equipment [Table]
-	function get_cd4_equipment_table(){
-		$sql = "";
+	// get cd4 Devices [Table]
+	function get_devices_table(){
+
+		$sql = "CALL proc_get_facility_devices()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
 	}
 
-	// equipment and tests [Pie Chart]
-	function get_equipment_tests_pie($param1,$param2){
+
+
+//...........................................................................................................
+	// get cd4 equipment [Table]....................ERASE
+	function get_cd4_equipment_table(){
+
+		$user_delimiter =$this->sql_user_delimiter($user_group_id,$user_filter_used);
+
+		$sql_eq  = "CALL proc_equipment_table_1(".$param1.",".$param2.")";
+
+		$sql_fac = "CALL proc_equipment_table_2(".$param1.",".$param2.")";
+
+
+
+		$equipment 			= R::getAll($sql_eq);
+		$fac_eq 		= R::getAll($sql_fac);
+		$eq_data 	=	array();
+
+		foreach ($equipment as $key => $value) {
+			$value['total'] 		=	0;
+			$value['functional'] 	=	0;
+			$value['broken_down'] 	=	0;
+			$value['obsolete'] 		=	0;
+
+			foreach ($fac_eq as $value1) {
+				if($value["id"]==$value1["equipment_id"]){					
+					$value['total'] 		=	$value1['total'] 	;
+					$value['functional'] 	=	$value1['functional'] ;
+					$value['broken_down'] 	=	$value1['broken_down'] ;
+					$value['obsolete'] 		=	$value1['obsolete'] 	;
+				}
+			}
+
+			$eq_data[$key] =	$value;
+		}
+
+		echo json_encode($eq_data);
+	}
+//............................................................................................................
+
+
+	// Devices and tests [Pie Chart]
+	function get_devices_tests_pie($param1,$param2){
 		$sql = "CALL proc_equipment_tests_pie()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
 	}
 
-	// equipment tests for this year [table]
-	function get_equipment_tests_thisyear(){
+	// Devices tests for this year [table]
+	function get_devices_tests_thisyear(){
 		$sql = "CALL proc_equipment_test_data";
 		$response = R::getAll($sql);
 
@@ -135,7 +183,6 @@ class dashboard extends MY_Controller {
 			$consolidated_array[$i] = (int)$devices_added_array[$i] - (int) $devices_removed_array[$i];
 		}
 
-		// return $consolidated_array;
 
 		echo json_encode($consolidated_array);
 	}
