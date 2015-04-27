@@ -1,12 +1,38 @@
-app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
-	$scope.heading = "Turn Around Time"
-
+app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function($scope,Filters,Commons,$http){
 	$scope.toggleLoading = function () {
+		
 		this.testing_trends.loading = !this.testing_trends.loading
 		this.tests_vs_errors_pie.loading = !this.tests_vs_errors_pie.loading
 		this.yearly_testing_trends.loading = !this.yearly_testing_trends.loading
 	}
+	//
+	//
+	//TESTING TRENDS LAST 4 YEARS
+	//
+	//
 	
+	//yAxis data line grpah[4yrs]
+	$scope.testing_trends_linegraph_series = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_testing_trends/0/0"			
+			)
+		.success(function(response){
+			$scope.testing_trends.series= response;
+		});	
+	}
+	$scope.testing_trends_linegraph_series();
+	
+	//categoreis for line graph xAxis [4yrs]
+	$scope.testing_trends_linegraph_categories =function(){
+ 		return $http.get(
+			Commons.baseURL+"api/dashboard/return_testing_trends_categories"			
+			)
+		.success(function(response){
+			$scope.testing_trends.xAxis.categories= response;
+		});
+	}
+	$scope.testing_trends_linegraph_categories();	
+	 
 	$scope.testing_trends = {
 		chart: {   
                 plotBackgroundColor: null,
@@ -25,7 +51,7 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
         //     x: -20
         // },
         xAxis: {
-            categories: ["Jan,2011","Feb,2011","Mar,2011","Apr,2011","May,2011","Jun,2011","Jul,2011","Aug,2011","Sep,2011","Oct,2011","Nov,2011","Dec,2011","Jan,2012","Feb,2012","Mar,2012","Apr,2012","May,2012","Jun,2012","Jul,2012","Aug,2012","Sep,2012","Oct,2012","Nov,2012","Dec,2012","Jan,2013","Feb,2013","Mar,2013","Apr,2013","May,2013","Jun,2013","Jul,2013","Aug,2013","Sep,2013","Oct,2013","Nov,2013","Dec,2013","Jan,2014","Feb,2014","Mar,2014","Apr,2014","May,2014","Jun,2014","Jul,2014","Aug,2014","Sep,2014","Oct,2014","Nov,2014","Dec,2014","Jan,2015","Feb,2015"],
+            categories: [],
             labels: {
                 rotation: -45,
                 step : 3,
@@ -64,8 +90,38 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
             crosshairs: [true,false],
             //pointFormat: '<br/><br/>{series.name}: <div><b>{point.y}, </b><b>{point.percentage:.1f}%</b></div>'
         },
-        series: [{"name":"Above critical level","data":[0,0,6,13,23,19,15,48,179,128,22,26,13,8,8,276,871,743,752,1013,1053,1355,1158,1154,1575,1668,1931,2934,3618,130,180,191,1906,2718,2937,2646,3191,3462,4543,4821,5840,8769,5528,6137,9042,7987,5941,4791,4161,1290]},{"name":"Below critical level","data":[3,1,11,15,24,8,20,19,109,154,18,15,8,2,1,254,731,625,789,992,930,1093,1027,957,1450,1477,1693,2714,3347,122,129,189,1583,2154,2459,2308,3021,3057,4165,3965,4928,6421,4231,4694,6788,6386,4596,3609,3092,899],"color":"#caa6bb"}]      
+        series: []  
 	}
+	
+	//
+	//
+	//YEAERLY TESTING TRENDS
+	//
+	//
+	
+	//xAxis yearlt testing trends column grpah categories
+	$scope.yearly_testing_trends_categories = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/return_yearly_testing_trends_categories"			
+			)
+		.success(function(response){
+			$scope.yearly_testing_trends.xAxis.categories= response;
+		});	
+	}
+	$scope.yearly_testing_trends_categories();
+	
+	//series yearly testing trends column graph
+	$scope.yearly_testing_trends_series = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/yearly_testing_trends/0/0"			
+			)
+		.success(function(response){
+			$scope.yearly_testing_trends.series = response;
+		});	
+	}
+	$scope.yearly_testing_trends_series();
+	
+	//chart definition
 	$scope.yearly_testing_trends = {
 		options: {
             chart: {
@@ -73,7 +129,7 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
             }
         },
         xAxis: {
-                categories: ["2011","2012","2013","2014","2015"]
+                categories: []
         },
         yAxis: {
             min: 0,
@@ -107,41 +163,157 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters',function($scope,Filters){
                     }
                 }
             },
-        series: [{"name":"Alere PIMA","data":[510,7941,24421,44248,0]},{"name":"BD Facs Calibur","data":[0,0,0,0,0]},{"name":"BD Facs Count","data":[0,0,0,0,0]},{"name":"Partec Cyflow","data":[0,0,0,0,0]}],
+        series: [],
         loading: false
 	}
 
+	//
+	//
+	//Tests vs Errors pie chart
+	//
+	//
+	
+	//series data tests_vs_errors_pie
+		// Build the data arrays
+    var testsData = [];
+    var testsTypeData = [];
+	$scope.tests_vs_errors_pie_data = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/test_errors_pie"			
+			)
+		.success(function(response){
+			data = response;
+			categories = ['Successful Tests','Unsuccessful Tests (Errors)'];
+			
+			console.log(categories);
+    		console.log(data);
+    		
+			// for (var i = 0; i < data.length; i++) {
+//     
+            // // add browser data
+            // testsData.push({
+                // name: categories[i],
+                // y: data[i].y,
+                // color: data[i].color
+            // });
+//     
+            // // add version data
+            // for (var j = 0; j < data[i].drilldown.data.length; j++) {
+                // var brightness = 0.2 - (j / data[i].drilldown.data.length) / 5 ;
+                // testsTypeData.push({
+                    // name: data[i].drilldown.categories[j],
+                    // y: data[i].drilldown.data[j],
+                    // color: Highcharts.Color(data[i].color).brighten(brightness).get()
+                // });
+            // }
+        // }
+		// $scope.tests_vs_errors_pie.series.data = response;
+			$scope.tests_vs_errors_pie.series[0].data = response;
+		});	
+	}
+	$scope.tests_vs_errors_pie_data();
+	//chart definition
 	$scope.tests_vs_errors_pie = {
-		chart: {
-            renderTo: 'container',
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
-        title: {
-            text: 'Tests & Errors'
-        },
-        subtitle: {
-            text: 'test subtitle'
-        },  
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            data: [
-                ['Unsuccessful Tests (Errors)',       14.0],
-                ['ABV Critical lvl',   12.0],
-                ['BLW Critical lvl',       12.0],
-                {
-                    name: 'Successful Tests',
-                    y: 10.8,
-                    sliced: true,
-                    selected: true
-                },
-                ['Errors',    8.5]
-            ]
-        }]
- 	
+		  chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Tests vs Errors'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Percentage',
+                size: '20',
+                data: []
+            }]
+		// chart: {
+            // plotBackgroundColor: null,
+            // plotBorderWidth: null,
+            // plotShadow: true, 
+            // type: 'pie',
+            // height: '195'
+        // },
+        // title: {
+            // text: 'Tests VS Errors'
+        // },
+        // yAxis: {
+            // title: {
+                // text: ''
+            // }
+        // },
+        // credits:{
+            // enabled:false
+        // }, 
+        // plotOptions: {
+            // pie: {
+                // shadow: false,
+                // center: ['50%', '50%'],
+                // showInLegend: true,
+                // allowPointSelect: true,
+                // cursor: 'pointer',
+                // dataLabels: {
+                    // enabled: false
+                // },
+            // }
+        // },
+        // tooltip: {
+            // valueSuffix: '',
+            // pointFormat: '<b>{series.name}</b>: <div><b>{point.y}, </b><br/>Percentage Share: <b>{point.percentage:.2f}%</b></div>'
+        // },
+        // series: [{
+            // name: '#',
+            // data: "Successful Tests, Unsuccessful Tests (Errors)",
+            // size: '100%',
+            // dataLabels: {
+                // formatter: function() {
+                    // return this.y > 0 ? this.point.name : null ;
+                // },
+                // color: 'white',
+                // distance: -30
+            // }
+        // }, {
+            // name: '#',
+            // data: testsTypeData,
+            // size: '230%',
+            // innerSize: '200%',
+            // dataLabels: {
+                // formatter: function() {
+                    // // display only if larger than 1
+                    // return this.y > 0 ? '<b>'+ this.point.name +':</b> '+ this.y +' ('+Math.round(this.percentage,2)+' %)'  : null;
+                // }
+            // }
+        // }]
 	}
 	
 	
+	//
+	//
+	//Tests table
+	//
+	//
+	$scope.critical_table = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_tests/0/0/0/0"			
+			)
+		.success(function(response){
+			$scope.table_data = response;
+			// alert($scope.table_data);
+		});	
+	}
+	$scope.critical_table();
 }])

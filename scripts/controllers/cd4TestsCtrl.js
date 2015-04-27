@@ -4,7 +4,8 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', function ($scope,Commons) {
     var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
     var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
     var id = 1;
-
+	
+	
     Commons.activeMenu = "cd4Tests";
 
     function generateRandomItem(id) {

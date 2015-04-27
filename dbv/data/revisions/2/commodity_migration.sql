@@ -22099,8 +22099,9 @@ INSERT INTO `fcdrr_commodity`
         `adjustmentminus` AS `adjustment_minus`,
         `endbal` AS `end_bal`,
         `requested`,
-        `reagentID` AS `reagent_id`
+        `reagentID` AS `commodity_id`
       FROM `commodity_temp`
+      GROUP BY `fcdrr_id`,``
     );
 
 DROP TABLE `commodity_temp`
