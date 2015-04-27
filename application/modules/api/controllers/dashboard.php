@@ -40,8 +40,12 @@ class dashboard extends MY_Controller {
 
 
 	// Number of Devices per County [stacked]
-	function get_cd4_devices_perCounty($param1, $param2){
-		$sql = "";
+	function get_cd4_devices_perCounty(){
+		$sql = "CALL get_devices_per_county";
+		$response = R::getAll($sql);
+		
+		echo json_encode($response);
+
 	}
 
 	// get cd4 devices [Pie Chart]
@@ -60,47 +64,6 @@ class dashboard extends MY_Controller {
 
 		echo json_encode($response);
 	}
-
-
-
-//...........................................................................................................
-	// get cd4 equipment [Table]....................ERASE
-	function get_cd4_equipment_table(){
-
-		$user_delimiter =$this->sql_user_delimiter($user_group_id,$user_filter_used);
-
-		$sql_eq  = "CALL proc_equipment_table_1(".$param1.",".$param2.")";
-
-		$sql_fac = "CALL proc_equipment_table_2(".$param1.",".$param2.")";
-
-
-
-		$equipment 			= R::getAll($sql_eq);
-		$fac_eq 		= R::getAll($sql_fac);
-		$eq_data 	=	array();
-
-		foreach ($equipment as $key => $value) {
-			$value['total'] 		=	0;
-			$value['functional'] 	=	0;
-			$value['broken_down'] 	=	0;
-			$value['obsolete'] 		=	0;
-
-			foreach ($fac_eq as $value1) {
-				if($value["id"]==$value1["equipment_id"]){					
-					$value['total'] 		=	$value1['total'] 	;
-					$value['functional'] 	=	$value1['functional'] ;
-					$value['broken_down'] 	=	$value1['broken_down'] ;
-					$value['obsolete'] 		=	$value1['obsolete'] 	;
-				}
-			}
-
-			$eq_data[$key] =	$value;
-		}
-
-		echo json_encode($eq_data);
-	}
-//............................................................................................................
-
 
 	// Devices and tests [Pie Chart]
 	function get_devices_tests_pie($param1,$param2){
@@ -147,8 +110,6 @@ class dashboard extends MY_Controller {
 			}
 		}
 		//echo 	$current_cummulative_added ;
-
-
 		foreach ($devices_removed_assoc as $value) {
 			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
 			if($curr_year< (int) $year){
@@ -182,7 +143,6 @@ class dashboard extends MY_Controller {
 		for($i=0;$i<12;$i++){
 			$consolidated_array[$i] = (int)$devices_added_array[$i] - (int) $devices_removed_array[$i];
 		}
-
 
 		echo json_encode($consolidated_array);
 	}
