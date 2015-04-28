@@ -138,8 +138,12 @@
 							</div>{{username}}
 						</div>
 						<input type="submit" name="submit" class="ui inverted blue button" ng-click="submit()">
-					</div>
-				</div>
+					</div>	
+					<div class="ui link list">						
+						<a class="item" href="#registration">Register</a>
+						<a class="item" href="#forgotPassword">Forgot Password</a>	
+					</div>			
+				</div>				
 			</div>
 			<div id = "content">			
 				<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>

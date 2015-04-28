@@ -1,22 +1,23 @@
-app.controller('registrationCtrl',['$scope',function ($scope){
-	  var registrationForm = $("#form");
+app.controller('registrationCtrl',['$scope','$http','Commons',function ($scope,$http,Commons){
+  var registrationForm = $("#form");
 
-      $scope.user = {};
-      $scope.loading = false;
+  $scope.user = {};
+  $scope.loading = false;
 
-      $scope.isInvalid = function () {
-        return !registrationForm.form('validate form');
-      };
+  $scope.isInvalid = function () {
+    return !registrationForm.form('validate form');
+  };
 
-      $scope.register = function () {
-        if (this.isInvalid()) {
-        	alert("sent");
-          return;
-        }
+  $scope.register = function () {
+    if (this.isInvalid()) {  
 
-        this.loading = true;
+    }else{
+      // alert('freee');
+      this.loading = true;
+      // console.log(this.user);
+      $http.post(Commons.baseURL+'api/registration/submit',{params:$scope.user});
+    }
 
-        console.log(this.user);
-      };
+  };
 }])
 

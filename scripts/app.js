@@ -78,7 +78,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'registration',
-				controller:'registrationCtrl'
+				controller:  'registrationCtrl'
 			},
 			'navbar':{
 				templateUrl: 'login/navbar',
