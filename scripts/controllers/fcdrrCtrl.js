@@ -16,9 +16,13 @@ app.controller('fcdrrCtrl',
     function($stateParams,$state, $rootScope,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
 
         $scope.allowed =  function(){
+            
             return $http.get("fcdrr/is_allowed");
         }
+
+
         $scope.is_allowed = $scope.allowed();
+
 
         $scope.fcdrr_id = $stateParams.id;
 

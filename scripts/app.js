@@ -72,6 +72,25 @@ var app = angular
 	})
 
 
+	.state('Registration',{
+		url: '/registration',		
+		abstract: false,
+		views:{
+			'main':{
+				templateUrl: 'registration',
+				controller:'registrationCtrl'
+			},
+			'navbar':{
+				templateUrl: 'login/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
 
 	//common routes
 	

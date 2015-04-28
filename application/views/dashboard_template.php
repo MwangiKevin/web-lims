@@ -250,6 +250,7 @@
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/loginCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/registrationCtrl.js');?>"></script>
 
 
 
