@@ -333,7 +333,7 @@ class uploads extends MY_Controller
 				$formatted_csv["title"] = $keys; 
 			}
 
-			$arr["sheet_data"] 	= $this 	-> 	makeTable($formatted_csv);
+			//$arr["sheet_data"] 	= $this 	-> 	makeTable($formatted_csv);
 			$arr["upload_data"] = $this		->	format_upload_data($data);
 
 
@@ -432,6 +432,9 @@ class uploads extends MY_Controller
 
 	private function format_upload_data($data){
 		
+		//print_r($data[1]);die;
+
+
 		$titles=array_keys($data[1]);
 		$titles_f=array();
 		$data_f=array();
@@ -501,19 +504,17 @@ class uploads extends MY_Controller
 			$assay_type = $data[0]['assay_id'];
 
 			$serial_number 			=	$data[0]['device_id'];
-			$facility_pima_id_res 	=	R::getAll("SELECT 
-													fp.id as facility_pima_id, 
-													fe.id as facility_equipment_id, 
-													f.id as facility_id,
-													d.id as equipment_id,
-													fp.serial_num 
-												FROM facility_pima fp,facility_equipment fe, facility f,device d WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id AND fe.equipment_id=d.id 
-														AND fp.serial_num='$serial_number'  LIMIT 1");
+			$facility_pima_id_res 	=	R::getAll("SELECT id as facility_device_id,
+														facility_id,
+														device_id,
+														serial_number
+														from facility_device 
+														where serial_number='$serial_number'  LIMIT 1");
 			
 			if(sizeof($facility_pima_id_res)>0) {
 
-				$facility_pima_id =$facility_pima_id_res[0]['facility_pima_id'];
-				$facility_equipment_id =$facility_pima_id_res[0]['facility_equipment_id'];
+				//$facility_pima_id =$facility_pima_id_res[0]['facility_pima_id'];
+				$facility_device_id =$facility_pima_id_res[0]['facility_device_id'];
 				$facility_id =$facility_pima_id_res[0]['facility_id'];
 				$error =	false;// initialize error
 
@@ -524,7 +525,7 @@ class uploads extends MY_Controller
 												VALUES
 												('".$pima_upload_id."',
 												 '".date("Y-m-d H:i:s")."',
-												 '".$facility_pima_id."',
+												 '".$facility_device_id."',
 												 '1',
 												 '".$this->filename_date."')");
 
@@ -606,7 +607,7 @@ class uploads extends MY_Controller
 										VALUES
 										('$pim_upl_raw_auto_id',
 										 '".$row['test_id']."',
-										 '".$facility_pima_id_res[0]['serial_num']."',
+										 '".$facility_pima_id_res[0]['serial_number']."',
 										 '".$row['assay_id']."',
 										 '".$row['assay_name']."',
 										 '".$row['sample']."',
@@ -630,6 +631,7 @@ class uploads extends MY_Controller
 
 
 					}
+					$validity=0;
 					$error_message="";// unset any error message
 					$pim_upl_raw_auto_id++;
 
@@ -748,18 +750,16 @@ class uploads extends MY_Controller
 			$assay_type = $data[0]['assay_id'];
 
 			$serial_number 			=	$data[0]['device_id'];
-			$facility_pima_res 	=	R::getAll("SELECT 
-													fp.id as facility_pima_id, 
-													fe.id as facility_equipment_id, 
-													f.id as facility_id,
-													d.id as equipment_id,
-													fp.serial_num 
-												FROM facility_pima fp,facility_equipment fe, facility f,device d WHERE fp.facility_equipment_id=fe.id AND fe.facility_id=f.id AND fe.equipment_id=d.id 
-														AND fp.serial_num='$serial_number'  LIMIT 1");
+			$facility_pima_res 	=	R::getAll("SELECT id as facility_device_id,
+														facility_id,
+														device_id,
+														serial_number
+														from facility_device 
+														where serial_number='$serial_number'  LIMIT 1");
 			if(sizeof($facility_pima_res)>0){
 
-				$facility_pima_id 		=	$facility_pima_res[0]['facility_pima_id'];
-				$facility_equipment_id 	=	$facility_pima_res[0]['facility_equipment_id'];
+				//$facility_pima_id 		=	$facility_pima_res[0]['facility_pima_id'];
+				$facility_device_id 	=	$facility_pima_res[0]['facility_device_id'];
 				$facility_id 			=	$facility_pima_res[0]['facility_id'];
 
 				$error =false;// initialize error
@@ -772,7 +772,7 @@ class uploads extends MY_Controller
 												VALUES
 												('".$pima_upload_id."',
 												 '".date("Y-m-d H:i:s")."',
-												 '".$facility_pima_id."',
+												 '".$facility_device_id."',
 												 '1',
 												 '".$this->filename_date."')");				
 				
@@ -838,7 +838,7 @@ class uploads extends MY_Controller
 											`device`,
 											`software_version`,
 											`cd4_count`,
-											`facility_equipment_id`,
+											`facility_device_id`,
 											`result_date`
 										) 
 										VALUES
@@ -854,7 +854,7 @@ class uploads extends MY_Controller
 												'$device ',
 												'".$row['software_version']."',
 												'".$row['cd3_cd4_value']."',
-												'$facility_equipment_id',
+												'$facility_device_id',
 												'".$row['result_date']." ".$row['start_time'].":00'
 										)");
 					}

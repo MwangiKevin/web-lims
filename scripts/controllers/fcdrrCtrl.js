@@ -1,5 +1,7 @@
 app.controller('fcdrrCtrl',
     [
+    '$stateParams',
+    '$state',
     '$scope',
     '$http',
     'ngProgress', 
@@ -9,128 +11,309 @@ app.controller('fcdrrCtrl',
     'API',
     'SweetAlert', 
     'notify',
-    function($scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify){
-
-	Commons.activeMenu = "fcdrr";
-
-    $scope.commodities=[];
-
-    $scope.facilities=[];  
-
-    $scope.status = false;
-    $scope.earliest_date = moment().subtract('month', 3).startOf('month');
-    $scope.months_back_reporting = 4;
-
-    $scope.promise=null;
+    'Restangular',
+    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
 
 
-// SweetAlert.swal("Here's a message");
-// SweetAlert.swal("Good job!", "You clicked the button!", "success");
+        // $rootScope.$broadcast('event:auth-loginRequired');
 
- // notify('Your notification message');
+        $scope.fcdrr_id = $stateParams.id;
 
-    $scope.selectableDates =
-    {
-        years:[],
-        months:[]
-    }
+        $scope.editState = function(){
+            if($stateParams.id>0){
+                return 'edit'
+            }else{
+                return 'new'
+            }
+        }
 
-    $scope.fcdrr={
-    	head_info:
-        {
-            selected:
-            {   
+        $scope.showMonth = function(){
+            var objDate = new Date($scope.fcdrr.from_date);
+            locale = "en-us",
+            month = objDate.toLocaleString(locale, { month: "long" });
+            return month; 
+        }
+        $scope.showYear = function(){
+            var objDate = new Date($scope.fcdrr.from_date);
+            locale = "en-us",
+            year = objDate.getFullYear();
+            return year; 
+        }
+
+        Commons.activeMenu = "fcdrr";
+
+        $scope.commodities=[];
+
+        $scope.facilities=[];  
+
+        $scope.status = false;
+        $scope.earliest_date = moment().subtract('month', 3).startOf('month');
+        $scope.months_back_reporting = 4;
+
+        $scope.promise=null;
+
+        $scope.selectableDates =       {
+            years:[],
+            months:[]
+        }
+        $scope.selected =       {
+            year:null,
+            month:null
+        }
+
+        $scope.fcdrr={
+
+            fcdrr_id:null,
+            facility_id:null,
+            from_date:null,
+            to_date:null,
+            year:null,
+            month:null,
+            facility:{},
+            calibur_tests_adults:null,
+            calibur_tests_pead:null,
+            count_tests_adults:null,
+            count_tests_pead:null,
+            cyflow_tests_adults:null,
+            cyflow_tests_pead:null,
+            pima_tests:null,
+            total_cd4:null,
+            adults_bel_cl:null,
+            pead_bel_cl:null,
+            commodities:{},
+            displayed_commodities:{},
+            comments:null
+
+        }
+        $scope.bind_dates = function(){
+            // $.extend($scope.fcdrr.month, $scope.selected.month.value);
+            // $.extend($scope.fcdrr.year, $scope.selected.year.value);
+            $scope.fcdrr.year   = $scope.selected.year.value;
+            $scope.fcdrr.month  = $scope.selected.month.value;
+        }
+
+        $scope.reset = function (){
+
+            $scope.fcdrr={
+
+                fcdrr_id:null,
+                facility_id:null,
+                from_date:null,
+                to_date:null,
+                year:null,
+                month:null,
                 facility:{},
-                dates:
-                {
-                    year:null,
-                    month:null
-                }
+                calibur_tests_adults:null,
+                calibur_tests_pead:null,
+                count_tests_adults:null,
+                count_tests_pead:null,
+                cyflow_tests_adults:null,
+                cyflow_tests_pead:null,
+                pima_tests:null,
+                total_cd4:null,
+                adults_bel_cl:null,
+                pead_bel_cl:null,
+                commodities:{},
+                displayed_commodities:{},
+                comments:null
+
             }
-        },
-        devicetests:{},
-        comodities:{}
-    }
+
+            getFacilities();
+            $scope.calculate_total();
+
+        }
+
+        $scope.calculate_total= function(){
+            $scope.fcdrr.total_cd4 = 0 ;
+
+            $scope.fcdrr.total_cd4 +=  isNaN(parseInt($scope.fcdrr.calibur_tests_adults))?      0 : parseInt($scope.fcdrr.calibur_tests_adults);
+            $scope.fcdrr.total_cd4 +=  isNaN(parseInt($scope.fcdrr.calibur_tests_pead))?        0 : parseInt($scope.fcdrr.calibur_tests_pead);
+            $scope.fcdrr.total_cd4 +=  isNaN(parseInt($scope.fcdrr.count_tests_adults))?        0 : parseInt($scope.fcdrr.count_tests_adults);
+            $scope.fcdrr.total_cd4 +=  isNaN(parseInt($scope.fcdrr.count_tests_pead))?          0 : parseInt($scope.fcdrr.count_tests_pead);
+            $scope.fcdrr.total_cd4 +=  isNaN(parseInt($scope.fcdrr.cyflow_tests_adults))?       0 : parseInt($scope.fcdrr.cyflow_tests_adults);
+            $scope.fcdrr.total_cd4 +=  isNaN(parseInt($scope.fcdrr.cyflow_tests_pead))?         0 : parseInt($scope.fcdrr.cyflow_tests_pead);
+            $scope.fcdrr.total_cd4 +=  isNaN(parseInt($scope.fcdrr.pima_tests))?                0 : parseInt($scope.fcdrr.pima_tests);
+        }
+
+        $scope.calculate_total();
+
+
+        $scope.baseFcdrrs = Restangular.all('fcdrrs');
+
+
+
+        $scope.save_fcdrr = function (){
+
+            if($scope.editState()=='new'){
+                $scope.post_fcdrr();
+            }else if($scope.editState()=='edit'){
+                $scope.put_fcdrr();
+            }
+
+        }
+
+        $scope.post_fcdrr  = function() {
+
+            swal(
+            {   
+                title: "Are you sure?",   
+                text: "This will permanently save the above FCDRR!",   
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#00b5ad",   
+                confirmButtonText: "Yes, Save it!",   
+                closeOnConfirm: false,
+            },
+            function(){    
+                $scope.baseFcdrrs.post($scope.fcdrr).then(function(fcdrr){
+                    console.log(fcdrr);                    
+                    swal("Saved!", "Your Report has been saved", "success");
+                    $state.transitionTo('editFCDRR',{id:fcdrr.fcdrr_id});
+                    // $state.transitionTo('FCDRRS');
+                },function(response){
+                     console.log("Error with status code", response);
+                      swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");
+                });
+            });
+        }
+
+
+        $scope.put_fcdrr  = function() {
+             swal(
+            {   
+                title: "Are you sure?",   
+                text: "This make changes to this exixting FCDRR!",   
+                type: "info",
+                showCancelButton: true,   
+                confirmButtonColor: "#00b5ad",   
+                confirmButtonText: "Yes, Save it!",   
+                closeOnConfirm: false,
+            },
+            function(){   
+                $scope.fcdrr.put().then(function(fcdrr){                 
+                    swal("Saved!", "Your Report has been Updated", "success");
+                    $state.transitionTo('FCDRRS');
+                },function(response){
+                     console.log("Error with status code", response);
+                      swal("Error!", "An Error was encountered. \n Your Report has not been saved", "error");
+                });
+            });
+        }
+
+        $scope.print = function (){
+            swal("Printing!", "Print!", "success");
+        }
 
 
 
 
 
-    /* Start of facility Details*/
+        /* Start of facility Details*/
 
-    function getFacilities() {
+        function getFacilities() {
 
-        $scope.promise = API.getFacilities()
-        .success(function (fac) {
-            $scope.facilities = fac;
-            $scope.fcdrr.head_info.selected.facility = $scope.facilities[0];  //this is just a test 
+            $scope.promise = API.getFacilities()
+            .success(function (fac) {
+                $scope.facilities = fac;
+            $scope.fcdrr.facility = $scope.facilities[221];  //this is just a test 
         })
-        .error(function (error) {
-            $scope.status = 'Unable to load customer data: ' + error.message;
+            .error(function (error) {
+                $scope.status = 'Unable to load customer data: ' + error.message;
+            });
+        }
+        getFacilities();
+
+        /* End of facility Details*/
+
+
+
+
+        /* Start of commodity Details*/
+
+        var baseCommodities = Restangular.all('commodities');
+        $activityIndicator.startAnimating();
+
+        $scope.promise =  baseCommodities.getList({fcdrr_format:true,reportingOnly:true}).then(function(com) {
+            $scope.commodities = com;
+            $activityIndicator.stopAnimating();
+        });   
+
+        $scope.promise =  baseCommodities.getList({fcdrr_format:false,reportingOnly:true}).then(function(com) {
+            $scope.fcdrr.commodities = com;
         });
-    }
-    getFacilities();
 
-    /* End of facility Details*/
 
+        /* End of commodity Details*/
 
 
 
-    /* Start of facility Details*/
-    function getCommodities() {
-    	$scope.promise = API.getCommodities('',true,true)
-    	.success(function (comm) {
-    		$scope.commodities = comm;            
-        })
-    	.error(function (error) {
-    		$scope.status = 'Unable to load customer data: ' + error.message;
-    	});
-    }
-    getCommodities();
+        /* Start of dates*/
+
+        $scope.getSelectableMonths =function () {
+
+            $scope.selectableDates.months=[];
 
 
-    /* End of facility Details*/
+            $scope.selected.month = null;
 
-
-
-    /* Start of dates*/
-
-    $scope.getSelectableMonths =function () {
-
-        $scope.selectableDates.months=[];
-
-
-        $scope.fcdrr.head_info.selected.dates.month = null;
-
-        nowNormalized = moment().startOf("month"), 
-        startDateNormalized = moment().subtract('month', $scope.months_back_reporting).startOf('month');
-        while (startDateNormalized.isBefore(nowNormalized) ) {
-            if ($scope.fcdrr.head_info.selected.dates.year && (startDateNormalized.format("YYYY")== $scope.fcdrr.head_info.selected.dates.year.value)){
-                $scope.selectableDates.months.push({label : startDateNormalized.format("MMMM"),value : startDateNormalized.format("MM")});
+            nowNormalized = moment().startOf("month"), 
+            startDateNormalized = moment().subtract('month', $scope.months_back_reporting).startOf('month');
+            while (startDateNormalized.isBefore(nowNormalized) ) {
+                if ($scope.selected.year && (startDateNormalized.format("YYYY")== $scope.selected.year.value)){
+                    $scope.selectableDates.months.push({label : startDateNormalized.format("MMMM"),value : startDateNormalized.format("MM")});
+                }
+                startDateNormalized.add("M", 1);
             }
-            startDateNormalized.add("M", 1);
-        }
-    }
-
-
-    $scope.getSelectableYears =function () {
-
-        nowNormalized = moment().startOf("month"), 
-        startDateNormalized = moment().subtract('month', $scope.months_back_reporting).startOf('month');
-
-        $scope.selectableDates.years.push({label : startDateNormalized.format("YYYY"),value : startDateNormalized.format("YYYY")});
-
-        if(startDateNormalized.format("YYYY")!=nowNormalized.format("YYYY")){
-            $scope.selectableDates.years.push({label : nowNormalized.format("YYYY"),value : nowNormalized.format("YYYY")});
         }
 
+
+        $scope.getSelectableYears = function () {
+
+            nowNormalized = moment().startOf("month"), 
+            startDateNormalized = moment().subtract('month', $scope.months_back_reporting).startOf('month');
+
+            $scope.selectableDates.years.push({label : startDateNormalized.format("YYYY"),value : startDateNormalized.format("YYYY")});
+
+            if(startDateNormalized.format("YYYY")!=nowNormalized.format("YYYY")){
+                $scope.selectableDates.years.push({label : nowNormalized.format("YYYY"),value : nowNormalized.format("YYYY")});
+            }
+
+            $scope.getSelectableMonths();
+
+        }
+
+        $scope.getSelectableYears();
         $scope.getSelectableMonths();
 
-    }
+        /* End of dates*/
 
-    $scope.getSelectableYears();
-    $scope.getSelectableMonths();
+        $scope.populateFcdrr = function(){
 
-    /* End of dates*/
+            if($stateParams.id>0){
 
-}])
+                var loaded_fcdrr = Restangular.one('fcdrrs',$stateParams.id);
+
+                loaded_fcdrr.get().then(function(fcdrr_load){
+                    $scope.fcdrr = fcdrr_load;
+                     $scope.calculate_total();
+                    $scope.populate_displayed_commodities();
+                })
+            }
+
+        }
+        $scope.validate_fcdrr = function(){
+
+        }
+        $scope.populate_displayed_commodities = function(){
+
+            $scope.fcdrr.displayed_commodities={};
+
+            for (i = 0; i < $scope.fcdrr.commodities.length; i++) { 
+                $scope.fcdrr.displayed_commodities[$scope.fcdrr.commodities[i].commodity_id]= $scope.fcdrr.commodities[i];
+            }
+        }
+
+        $scope.populateFcdrr();
+
+    }])

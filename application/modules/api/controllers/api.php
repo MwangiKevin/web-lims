@@ -9,9 +9,14 @@ class api extends MY_Controller {
 		parent::__construct();
 		
 		header('Content-Type: application/json; charset=utf-8');
+		// $this->output->enable_profiler(TRUE);
 	}
 	public function index(){
-		echo "null";
+		$api_info = array(
+					'version'	=> 	'0.0',
+					'base_url'	=>	base_url()
+			);
+		echo json_encode($api_info);
 	}
 
 	public function facilities($id=NULL) {
@@ -21,6 +26,7 @@ class api extends MY_Controller {
 		$method= $this->_detect_method();
 
 		if ($method=="post"){
+			echo "Arrived"; die();
 			echo json_encode($this->facilities_m->create(),JSON_PRETTY_PRINT);
 		}
 
@@ -42,6 +48,7 @@ class api extends MY_Controller {
 		$this->load->model("sub_counties_m");	
 
 		$method= $this->_detect_method();
+
 
 		if ($method=="post"){
 			echo json_encode($this->sub_counties_m->create(),JSON_PRETTY_PRINT);
@@ -65,7 +72,7 @@ class api extends MY_Controller {
 		$this->load->model("counties_m");	
 
 		$method = $this->_detect_method();
-
+		
 		if ($method=="post"){
 			echo json_encode($this->counties_m->create(),JSON_PRETTY_PRINT);
 		}
@@ -88,7 +95,7 @@ class api extends MY_Controller {
 		$this->load->model("partners_m");	
 
 		$method = $this->_detect_method();
-
+		
 		if ($method=="post"){
 			echo json_encode($this->partners_m->create(),JSON_PRETTY_PRINT);
 		}
@@ -155,11 +162,13 @@ class api extends MY_Controller {
 	public function fcdrrs($id=NULL) {
 
 		$this->load->model("fcdrrs_m");	
+		$this->load->model("temp_fcdrrs_m");	
 
 		$method = $this->_detect_method();
 
 		if ($method=="post"){
-			echo json_encode($this->fcdrrs_m->create(),JSON_PRETTY_PRINT);
+			// echo json_encode($this->fcdrrs_m->create(),JSON_PRETTY_PRINT);
+			$this->temp_fcdrrs_m->create();
 		}
 
 		else if($method=="get"){
@@ -172,6 +181,52 @@ class api extends MY_Controller {
 
 		else if ($method=="delete"){
 			echo json_encode($this->fcdrrs_m->remove($id),JSON_PRETTY_PRINT);
+		}
+	}
+
+	public function temp_fcdrrs($id=NULL) {
+
+		$this->load->model("temp_fcdrrs_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->temp_fcdrrs_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->temp_fcdrrs_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->temp_fcdrrs_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->temp_fcdrrs_m->remove($id),JSON_PRETTY_PRINT);
+		}
+	}
+
+	public function facility_devices($id=NULL) {
+
+		$this->load->model("facility_devices_m");	
+
+		$method = $this->_detect_method();
+
+		if ($method=="post"){
+			echo json_encode($this->facility_devices_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->facility_devices_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->facility_devices_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->facility_devices_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
 }
