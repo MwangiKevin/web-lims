@@ -17,8 +17,6 @@ class fcdrr_auto_email extends MY_Controller{
 
 		$this->load->library('mpdf/mpdf');// Load the mpdf library
 
-		$CHAI_team=array('brianhawi92@gmail.com','tngugi@clintonhealthaccess.org','mwangikevinn@gmail.com');
-
 		//calculate previous dates
 		if(date('m')==1)
 		{
@@ -90,73 +88,52 @@ class fcdrr_auto_email extends MY_Controller{
 			{
 				$e->getMessage();
 			}
+		}
 
-			/* Get Partner Emails and County Coordinators Emails and have them as recepients */
+		/* Prepare email configurations */
 
-			$county_receipients=array();
-			$partner_receipients=array();
-			$email_receipients=array();
+		$month_name=GetMonthName($previous_month);
+
+		$this->email->from('cd4system@gmail.com', 'CD4 Administrator');
 			
-			$county_coordinator_email=$this->send_mail_model->get_county_email($fcdrr_result['sub_county_id']);
+		$this->email->to($recepients); //send to specific receiver
+		$this->email->bcc($CHAI_team); //CHAI team
 
-			foreach($county_coordinator_email as $cemail)
-			{
-				$county_receipients[]=$cemail;
-			}
-			
-			$partner_email=$this->send_mail_model->get_partner_email($fcdrr_result['partner_id']);
+		$this->email->subject('CD4 FCDRR Commodity Reports for '.$month_name.' - '.$year.' '); //subject
+		
+		$this->email->message($message);// the message
 
-			foreach($partner_email as $pemail)
-			{
-				$partner_receipients[]=$pemail;
-			}
+		$file_counter=0;
+		$dir='c:/xampp/htdocs/web-lims/pdf_documents/'; //temporary directory
+		$dh = opendir($dir); //open the directory
 
-			$this->email->from('cd4system@gmail.com', 'CD4 Administrator');
+		/* loop and attach files */
+        while ($file = readdir($dh) ) 
+        {
+        	if(!is_dir($file) && strpos($file, '.pdf')>0) { 
 
-			$email_receipients=array_merge($partner_receipients,$county_receipients);
-				
-			$this->email->to($email_receipients); //send to specific receiver
-			$this->email->bcc($CHAI_team); //CHAI team
+        		$this->email->attach($file);//attach the pdf document // add fcdrr facility attachments
+        		$file_counter++;
+     		 }
+        }
+        closedir($dh);
 
-			$month_name=GetMonthName($previous_month);
-			$this->email->subject('CD4 FCDRR Commodity Reports for '.$month_name.' - '.$year.' '); //subject
-
-			$message="Good Day<br />Find attached the ".$file_counter."  FCDRR Reports For ART Lab Monitoring Reagents for ".$month_name." ".$year.".<br />
+		$message="Good Day<br />Find attached the ".$file_counter."  FCDRR Reports For ART Lab Monitoring Reagents for ".$month_name." ".$year.".<br />
 					Regards.
 					<br /><br />CD4 Support Team";
-			
-			$this->email->message($message);// the message
 
-			$this->email->attach($filename);//attach the pdf document // add fcdrr facility attachments
+		
+		if($this->email->send())//send email and check if the email was sent
+		{	
+			$this->email->clear(TRUE);//clear any attachments on the email
+			echo "FCDRR Email Alert has been sent!";
+		}
+		else 
+		{
+			show_error($this->email->print_debugger());//show error message
+		}
 
-			if($this->email->send())//send email and check if the email was sent
-			{	
-				$this->email->clear(TRUE);//clear any attachments on the email
-				echo "Email to ".$fcdrr_result['name']." supporting partners and county Coordinators has been sent <br />";
-			}
-			else 
-			{
-				show_error($this->email->print_debugger());//show error message
-			}
-
-
-		} //end foreach loop
-
-		// $file_counter=0;
-		// $dir='c:/xampp/htdocs/web-lims/pdf_documents/'; //temporary directory
-		// $dh = opendir($dir); //open the directory
-
-		// /* loop and attach files */
-	  //       while ($file = readdir($dh) ) 
-	  //       {
-	  //       	if(!is_dir($file) && strpos($file, '.pdf')>0) { 
-
-	        		
-	  //       		$file_counter++;
-	  //    		 }
-	  //       }
-	  //       closedir($dh);
-
+		
 	}
 
 }

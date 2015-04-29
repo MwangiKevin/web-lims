@@ -151,7 +151,7 @@ function get_fcdrr_content($fcdrr_list_result){
 		}
 
 		return $final_pdf_data;
-	
+	//}
 }/* End of function get_fcdrr() */
 
 function get_commodity_categories($facility_id,$fcdrr_id){
@@ -219,60 +219,6 @@ function get_commodity_usage_values($fcdrr_id,$commodity_id,$field){
 
 	return $value;
 }/* End of function get_commodity_usage(3 variables)*/
-
-
-	function get_partner_email($partner_name)//get the partner email address 
-	{
-		$sql="SELECT u.username,u.name,u.email 
-						FROM partner p,partner_user pu, v_facility_device_details vfd, aauth_users u
-					 	WHERE vfd.partner_name=p.name 
-					 	AND p.id=pu.partner_id 
-					 	AND pu.user_id=u.id 
-					 	AND vfd.partner_name='".$partner_name."' AND u.banned='0' GROUP BY u.email ";
-
-	 	$query=$this->db->query($sql);
-
-	 	if($query->num_rows()>0)
-	 	{
-	 		foreach($query->result_array() as $email)
-	 		{
-	 			$result[]=$email['email'];
-	 		}
-	 	}
-	 	else
-	 	{
- 			$result[]='brianhawi92@gmail.com';//admin email
-	 	}
-
-		return $result;		
-	}
-
-	function get_county_email($sub_county_id)//get the county coordinator email address 
-	{
-		$sql="SELECT u.name,u.email,vfd.county_id,vfd.county_name
-						FROM county_user cu,county c,v_facility_device_details vfd, aauth_users u
-						WHERE vfd.county_name=r.name
-						AND c.id=cu.county_id
-						AND c.user_id=u.id
-						AND vfd.sub_county_id='".$sub_county_id."' AND u.banned='0' GROUP BY u.email";
-
-		$query=$this->db->query($sql);
-
-	 	if($query->num_rows()>0)
-	 	{
-	 		foreach($query->result_array() as $email)
-	 		{
-	 			$result[]=$email['email'];
-	 		}
-	 	}
-	 	else
-	 	{
- 			$result[]='brianhawi92@gmail.com';
-	 	}
-
-		return $result;
-
-	}
 
 }
 ?>
