@@ -16,7 +16,9 @@ class registration extends MY_Controller {
 		
 		$new_user = json_decode($request_body,true)['params'];
 
-		if($this->aauth->create_user($new_user['email'],$new_user['password'],$new_user['email'].' '.$new_user['email'])){
+		// print_r($new_user);
+
+		if($this->aauth->create_user($new_user['email'],$new_user['password'],$new_user['givenname'].' '.$new_user['surname'])){
 			echo "user Created";
 		}else{
 			http_response_code(500);
