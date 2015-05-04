@@ -80,7 +80,7 @@ class fcdrr_auto_email extends MY_Controller{
 			$mpdf->WriteHTML($pdf_document);
 			try
 			{
-				$filename='c:/xampp/htdocs/web-lims/pdf_documents/'.$filename.'.pdf';
+				$filename='c:/xampp/htdocs/web-lims/pdf_documents/fcdrr_individual_monthly/'.$filename.'.pdf';
 
 				$mpdf->Output($filename,'F');
 			}
@@ -104,7 +104,7 @@ class fcdrr_auto_email extends MY_Controller{
 		$this->email->message($message);// the message
 
 		$file_counter=0;
-		$dir='c:/xampp/htdocs/web-lims/pdf_documents/'; //temporary directory
+		$dir='c:/xampp/htdocs/web-lims/pdf_documents/fcdrr_individual_monthly/'; //temporary directory
 		$dh = opendir($dir); //open the directory
 
 		/* loop and attach files */
