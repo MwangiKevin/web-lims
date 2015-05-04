@@ -7,22 +7,23 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_devices_per_county`()
 	BEGIN
 		
 
-			SELECT COUNT(`fd`.`id`) , `c`.`name` AS `devices_per_county`
+		SELECT COUNT(fd.id) AS "no of devices per county" , c.name AS county
 
-			FROM 	`device`.`d`,
-					`facility`.`f`,
-					`sub_county`.`sc` ,
-					`county`.`c`,
-					`facility_device`.`fd`
+			FROM 	device d,
+					facility f,
+					sub_county sc ,
+					county c,
+					facility_device fd
 
 			WHERE
 
-				`d`.`id` = `fd`.`device_id` 	AND
-				`f`.`id` = `fd`.`facility_id` 	AND
-				`f`.`sub_county_id` = `sc`.`id` AND
-				`sc`.`county_id` = `c`.`id`
+				d.id = fd.device_id 	AND
+				f.id = fd.facility_id 	AND
+				f.sub_county_id = sc.id AND
+				sc.county_id = c.id
 			GROUP BY
-				`c`.`id`;
+				c.id 
+			ORDER BY fd.id DESC;
 
 
 END $$
