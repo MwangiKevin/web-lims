@@ -1,8 +1,8 @@
 <?php
-
+/* This model has functions to fetch cd4 tests uploaded during a particular week */
 class alerts_model extends MY_Model{
 
-function weekly_uploads($last_monday,$last_sunday,$county,$partner,$facility,$receipient)//Weekly uploads
+function weekly_uploads($last_monday,$last_sunday,$county,$partner,$facility,$receipient)//This function get all cd4 tests uploaded during the week
 {
 	$pdf_data=array();
 	$total_number_of_records=0;
@@ -149,7 +149,7 @@ function weekly_uploads($last_monday,$last_sunday,$county,$partner,$facility,$re
 			{
 				if($value['facility_name']==NULL || $value['serial_number']==NULL)
 				{
-					//should i still pick these results despite them having no facility and equipment?
+
 				}
 				else
 				{
@@ -239,7 +239,7 @@ function tests_less_than500($from,$to,$facility)//tests less than 500 per month,
 	return $pdf_data;	
 }
 
-public function get_test_details($from,$to,$facility,$report_type)
+public function get_test_details($from,$to,$facility,$report_type)  // get all the cd4 tests based the date and the facility
 {
 	$sql="SELECT * FROM v_pima_tests_details";
 
@@ -265,7 +265,7 @@ public function get_test_details($from,$to,$facility,$report_type)
 	return $test_details;
 
 }
-public function get_count_test_details($from,$to,$facility)
+public function get_count_test_details($from,$to,$facility)// get all cumulative values of the cd4 tests based on the date and facility
 {
 	$sql_count="SELECT COUNT(test_id) AS total_tests,
 					SUM(CASE WHEN valid= '1'    THEN 1 ELSE 0 END) AS valid_tests,
@@ -324,7 +324,7 @@ function all_tests_done($from,$to,$facility) //monthly activity report
 	}
 	if($pdf_results!="")
 	{
-		foreach ($pdf_results as $value) 
+		foreach ($pdf_results as $value) // get all the details about a cd4 test
 		{
 			$string_unix="";
 			$string_unix=mysql_to_unix($value['date_test']);
@@ -367,7 +367,7 @@ function all_tests_done($from,$to,$facility) //monthly activity report
 
 	$pdf_data['table'].="</table>";
 
-	if($pdf_count!="")
+	if($pdf_count!="") // fetch the cumulative values
 	{
 		foreach($pdf_count as $test_count)
 		{
@@ -406,9 +406,9 @@ function upload_list($from,$to,$group_by_delimiter)// gets uploads grouped by fa
 					GROUP BY $group_by_delimiter
 					ORDER BY facility_name ASC ";
 
-	$res 	=	$this->db->query($sql);
+	$res 	=	R::getAll($sql);
 
-	return $result= $res->result_array();
+	return $res;
 }
 function get_partner_email($partner_id)//get the partner email address 
 {

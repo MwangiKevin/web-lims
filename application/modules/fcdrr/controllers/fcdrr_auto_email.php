@@ -52,85 +52,94 @@ class fcdrr_auto_email extends MY_Controller{
 
 		$fcdrr_list=$this->fcdrr_model->get_fcdrr_list($fromdate,$todate);
 
-		foreach($fcdrr_list->result_array() as $fcdrr_result)
-		{	
-			$final_pdf_data=$this->fcdrr_model->get_fcdrr_content($fcdrr_result);
 
-			$pdf_document=$css_styling.$header.$final_pdf_data;
+		if($fcdrr_list){
+			foreach($fcdrr_list->result_array() as $fcdrr_result)
+			{	
+				$final_pdf_data=$this->fcdrr_model->get_fcdrr_content($fcdrr_result);
 
-			$mpdf=new mPDF(); 
-			$mpdf->AddPage('', 'A4-L', 0, '', 15, 15, 16, 16, 9, 9, ''); 
-			$mpdf->SetDisplayMode('fullpage');
-			$mpdf->simpleTables = true;
+				$pdf_document=$css_styling.$header.$final_pdf_data;
 
-			$mpdf->SetDisplayMode('fullpage');
-			$mpdf->simpleTables = true;
+				$mpdf=new mPDF(); 
+				$mpdf->AddPage('', 'A4-L', 0, '', 15, 15, 16, 16, 9, 9, ''); 
+				$mpdf->SetDisplayMode('fullpage');
+				$mpdf->simpleTables = true;
 
-			$mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
-			$mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
-			//Generate pdf using mpdf
-			               
-	        $mpdf ->SetWatermarkText("Nascop",-5);
-	        $mpdf ->watermark_font = "sans-serif";
-	        $mpdf ->showWatermarkText = true;
-			$mpdf ->watermark_size="0.5";
+				$mpdf->SetDisplayMode('fullpage');
+				$mpdf->simpleTables = true;
 
-			$filename=str_replace('/','-', $fcdrr_result['name']);
+				$mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+				$mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+				//Generate pdf using mpdf
+				               
+		        $mpdf ->SetWatermarkText("Nascop",-5);
+		        $mpdf ->watermark_font = "sans-serif";
+		        $mpdf ->showWatermarkText = true;
+				$mpdf ->watermark_size="0.5";
 
-			$mpdf->WriteHTML($pdf_document);
-			try
-			{
-				$filename='c:/xampp/htdocs/web-lims/pdf_documents/fcdrr_individual_monthly/'.$filename.'.pdf';
+				$filename=str_replace('/','-', $fcdrr_result['name']);
 
-				$mpdf->Output($filename,'F');
-			}
-			catch(exception $e)
-			{
-				$e->getMessage();
-			}
-		}
+				$mpdf->WriteHTML($pdf_document);
+				try
+				{
+					$filename=$this->config->item('server_root').'pdf_documents/fcdrr_individual_monthly/'.$filename.'.pdf';
 
-		/* Prepare email configurations */
+					$mpdf->Output($filename,'F');
+				}
+				catch(exception $e)
+				{
+					$e->getMessage();
+				}
 
-		$month_name=GetMonthName($previous_month);
+				/* Prepare email configurations */
 
-		$this->email->from('cd4system@gmail.com', 'CD4 Administrator');
-			
-		$this->email->to($recepients); //send to specific receiver
-		$this->email->bcc($CHAI_team); //CHAI team
+				$month_name=GetMonthName($previous_month);
 
-		$this->email->subject('CD4 FCDRR Commodity Reports for '.$month_name.' - '.$year.' '); //subject
-		
-		$this->email->message($message);// the message
+				$this->email->from('cd4system@gmail.com', 'CD4 Administrator');
 
-		$file_counter=0;
-		$dir='c:/xampp/htdocs/web-lims/pdf_documents/fcdrr_individual_monthly/'; //temporary directory
-		$dh = opendir($dir); //open the directory
+				$this->email->subject('CD4 FCDRR Commodity Reports for '.$month_name.' - '.$year.' '); //subject
 
-		/* loop and attach files */
-        while ($file = readdir($dh) ) 
-        {
-        	if(!is_dir($file) && strpos($file, '.pdf')>0) { 
-
-        		$this->email->attach($file);//attach the pdf document // add fcdrr facility attachments
-        		$file_counter++;
-     		 }
-        }
-        closedir($dh);
-
-		$message="Good Day<br />Find attached the ".$file_counter."  FCDRR Reports For ART Lab Monitoring Reagents for ".$month_name." ".$year.".<br />
+				$message="Good Day<br />Find attached the FCDRR Report For ART Lab Monitoring Reagents for ".$fcdrr_result['name']." for the month of ".$month_name.", ".$year.".<br />
 					Regards.
 					<br /><br />CD4 Support Team";
 
-		
-		if($this->email->send())//send email and check if the email was sent
-		{	
-			$this->email->clear(TRUE);//clear any attachments on the email
-			echo "FCDRR Email Alert has been sent!";
+				$this->email->message($message);// the message
+
+				$county_coordinator_email=$this->fcdrr_model->get_county_email($fcdrr_result['sub_county_id']);
+
+				foreach($county_coordinator_email as $cemail)
+				{
+					$county_receipients[]=$cemail;
+				}
+				
+				$partner_email=$this->fcdrr_model->get_partner_email($fcdrr_result['partner_id']);
+
+				foreach($partner_email as $pemail)
+				{
+					$partner_receipients[]=$pemail;
+				}
+
+				$email_receipients=array_merge($partner_receipients,$county_receipients);
+
+				$this->email->to($email_receipients); //send to specific receiver
+				//$this->email->bcc($CHAI_team); //CHAI team
+
+				$this->email->attach($filename);
+
+				if($this->email->send())//send email and check if the email was sent
+				{	
+					$this->email->clear(TRUE);//clear any attachments on the email
+					echo "FCDRR Email Alert to '".$fcdrr_list["name"]."' has been sent! <br />";
+				}
+				else 
+				{
+					show_error($this->email->print_debugger());//show error message
+				}
+			}
 		}
-		else 
+		else
 		{
-			show_error($this->email->print_debugger());//show error message
+			
 		}
 
 		

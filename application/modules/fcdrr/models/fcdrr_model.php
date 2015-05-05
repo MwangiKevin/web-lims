@@ -48,7 +48,7 @@ function get_fcdrr_list($fromdate,$todate){
 
 	return $fcdrr_list_results;
 }
-
+/* Get the fcdrr content */
 function get_fcdrr_content($fcdrr_list_result){
 
 		$device_details=$this->db->query("SELECT * FROM v_device_details WHERE mfl_code='".$fcdrr_list_result['mfl_code']."' GROUP BY mfl_code");
@@ -111,7 +111,7 @@ function get_fcdrr_content($fcdrr_list_result){
 			$first_part_table.='</tr>';
 
 
-			/* Second Part of the table */
+			/* Second Part of the table: the commodities used the facilities */
 
 
 			$second_part_table='<tr>';
@@ -154,6 +154,7 @@ function get_fcdrr_content($fcdrr_list_result){
 	//}
 }/* End of function get_fcdrr() */
 
+/* Get the commodities used in that facility */
 function get_commodity_categories($facility_id,$fcdrr_id){
 
 	$commodity_category_results=$this->db->query("SELECT cc.id,
@@ -176,6 +177,7 @@ function get_commodity_categories($facility_id,$fcdrr_id){
 
 } /* End of function get_commodity_categories(2 variables) */
 
+/* Get the commodiities usage values */
 function get_actual_commodities($category_id,$fcdrr_id){
 
 	$commodities_results=$this->db->query("SELECT * FROM commodity where category_id='".$category_id."' ");
@@ -219,6 +221,61 @@ function get_commodity_usage_values($fcdrr_id,$commodity_id,$field){
 
 	return $value;
 }/* End of function get_commodity_usage(3 variables)*/
+
+function get_partner_email($partner_id)//get the partner email address 
+{
+	$sql="SELECT u.name,u.email 
+					FROM partner p,partner_user pu, v_facility_device_details vdp, aauth_users u
+				 	WHERE vdp.partner_name=p.name 
+				 	AND p.id=pu.partner_id 
+				 	AND pu.user_id=u.id 
+				 	AND vdp.partner_id='".$partner_id."' AND u.banned='0' GROUP BY u.email ";
+
+ 	$query=$this->db->query($sql);
+
+ 	if($query->num_rows()>0)
+ 	{
+ 		foreach($query->result_array() as $email)
+ 		{
+ 			$result[]=$email['email'];
+ 		}
+ 	}
+ 	else
+ 	{
+			$result[]='brianhawi92@gmail.com';//admin email
+ 	}
+
+	return $result;		
+}
+
+function get_county_email($sub_county_id)//get the county coordinator email address based on the sub_county_id
+{
+	$sql="SELECT u.username,u.name,u.email
+					FROM county_user cu,county c,sub_county sc,v_facility_device_details vfd, aauth_users u
+					WHERE vfd.county_name=c.name
+					AND c.id=cu.county_id
+					AND cu.user_id=u.id
+					AND sc.county_id=c.id
+					AND sc.id=vfd.sub_county_id
+					AND vdp.sub_county_id='".$sub_county_id."' AND u.banned='0' GROUP BY u.email";
+
+	$query=$this->db->query($sql);
+
+ 	if($query->num_rows()>0)
+ 	{
+ 		foreach($query->result_array() as $email)
+ 		{
+ 			$result[]=$email['email'];
+ 		}
+ 	}
+ 	else
+ 	{
+			$result[]='brianhawi92@gmail.com';
+ 	}
+
+	return $result;
+
+}
 
 }
 ?>
