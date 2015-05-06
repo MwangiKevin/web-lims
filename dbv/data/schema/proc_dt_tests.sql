@@ -22,10 +22,10 @@ BEGIN
         THEN
             SET @QUERY = @QUERY;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, ' WHERE  `cd4t`.`id` LIKE  '%search%'
-                                OR  `cd4t`.`patient_id` LIKE  '%search%'
-                                OR  `fc`.`name` LIKE  '%search%'
-                                OR  `cd4t`.`cd4_count` LIKE '%search%' ');
+            SET @QUERY = CONCAT(@QUERY, ' WHERE  `cd4t`.`id` LIKE  %search%
+                                OR  `cd4t`.`patient_id` LIKE  %search%
+                                OR  `fc`.`name` LIKE  %search%
+                                OR  `cd4t`.`cd4_count` LIKE %search% ');
         END IF;
 
         PREPARE stmt FROM @QUERY;

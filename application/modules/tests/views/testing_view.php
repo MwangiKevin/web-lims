@@ -13,7 +13,7 @@
 
 </head>
 <body>
-	<table id="test_table" class="display" cellspacing="0" width="1">
+	<!-- <table id="test_table" class="display" cellspacing="0" width="1">
 		<thead>
 			<tr>
 				<th>Test ID</th>
@@ -34,47 +34,70 @@
 		<tbody>
 		
 		</tbody> 
-	</table>
+	</table> -->
+	<table class="table table-bordered" id="tests_table" width="100%">
+						<thead>
+								<tr>
+									
+						            <th style="text-align: center" >Test ID</th>
+						            <th style="text-align: center" >Patient ID</th>
+						            <th style="text-align: center" >Facility</th>
+						            <th style="text-align: center" >CD4 Count</th>
+						           
+						         </tr>
+							</thead>
+							<tbody>
+								
+									       
+						<tr class="odd gradeX">
+						 
+						
+						<td style="text-align: center"> </td>
+						<td style="text-align: center"> </td>
+						<td style="text-align: center"> </td>
+						<td style="text-align: center">  </td>
+						 
+						 </tr>
+						            
+						
+						      
+						         
+								
+							</tbody>
+						</table>
 </body>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('#test_table').DataTable({
-			// processing:true,
-			serverSide: true,
-		    ajax : {
-		    	type: 'POST',
-		    	url: '<?php echo base_url();?>tests/test_unparametized'
-		    }
-		    
-		    // var oTable = $('#test_table').dataTable();
 
-		   
-    		
-		});
+$(document).ready(function(){
+	// $('#example').dataTable( {
+	// 	"processing":true,
+	// 	"serverSide":true,
+	// 	"sAjaxSource" : "tests/test_unparametized",
+	// 	"oLanguage": {
+	// 		"sLengthMenu": "Page length: _MENU_",
+	// 		"sSearch": "Filter",
+	// 		"sZeroRecords":"No records found"
+	// 	} 
+	// });
+$('#tests_table').dataTable({
+	serverSide: true,
+	processing: true,
+	ajax: {
+		type: 'POST',
+		url: 'tests/test_unparametized'
+	}
+	// sAjaxSource: 'tests/test_unparametized',
+	// oLanguage: {
+	// 	sLengthMenu: 'Page length: _MENU_',
+	// 	sSearch: 'Filter',
+	// 	sZeroRecords: 'No records found'
+	// }
+});
 
-		// var oTable = $('#test_table').dataTable();
-
-		// $.ajax({
-		// 	url: '<?php echo base_url();?>tests/test_unparametized',
-		// 	dataType: 'json',
-		// 	success: function(s){
-		// 		console.log(s);
-		// 		oTable.fnClearTable();
-		// 		for (var i = 0; i < s.length; i++) {
-		// 			oTable.fnAddData([
-		// 				s[i][0],
-		// 				s[i][1],
-		// 				s[i][2],
-		// 				s[i][3],
-		// 				]);
-		// 		}
-		// 	},
-		// 	error: function(e){
-		// 		console.log(e.responseText);
-		// 	}
-		// });
-		
-	});
+});
 </script>
 
+ 
+	
+</div>
 </html>

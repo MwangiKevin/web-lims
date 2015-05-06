@@ -26,18 +26,35 @@ class test_model extends MY_Model
 			$column = `cd4t`.`cd4_count`;
 		}
 
-		$serverSide_data = R::getAll("CALL `proc_dt_tests`('".$start."','".$length."','".$search."','".$column."')");
+		$serverSide_data = R::getAll("CALL `proc_dt_tests`('".$start."','".$length."','".$search."')");
+
+		$data = array();
+		$recordsTotal = 0;
+
+		foreach ($serverSide_data as $key => $value) {
+			$data[] = array(
+					$value['id'],
+					$value['patient_id'],
+					$value['name'],
+					$value['cd4_count'],
+				);
+			$recordsTotal++;
+		}
+
+		$json_reg = array(
+				"sEcho" => 1,
+				"iTotalRecords" => $recordsTotal,
+				"iTotalDisplayRecords" => $recordsTotal,
+				"aaData" => $data
+			);
 		
-		return $serverSide_data;
+		return $json_reg;
+		
 	}
 
-	function raw_ss_dt($length, $search, $order)
+	function raw_ss_dt()
 	{
-		$search_value = $search[value];
-		$order_column = $order[0][column];
-		$order_direction = $order[0][dir];
-
-
+		
 		$sql = "SELECT
 					`cd4t`.`id`,
 					`cd4t`.`patient_id`,
@@ -45,12 +62,31 @@ class test_model extends MY_Model
 					`cd4t`.`cd4_count`
 				FROM `cd4_test` `cd4t`
 					LEFT JOIN `facility` `fc`
-						ON `cd4t`.`facility_id` = `fc`.`id`
-				LIMIT $length";
+						ON `cd4t`.`facility_id` = `fc`.`id`";
 		
 		$serverSide_data = R::getAll($sql);
+
+		$data = array();
+		$recordsTotal = 0;
+
+		foreach ($serverSide_data as $key => $value) {
+			$data[] = array(
+					$value['id'],
+					$value['patient_id'],
+					$value['name'],
+					$value['cd4_count'],
+				);
+			$recordsTotal++;
+		}
+
+		$json_reg = array(
+				"sEcho" => 1,
+				"iTotalRecords" => $recordsTotal,
+				"iTotalDisplayRecords" => $recordsTotal,
+				"aaData" => $data
+			);
 		
-		return $serverSide_data;
+		return $json_reg;
 	}
 
 }

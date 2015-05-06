@@ -41,6 +41,12 @@ class tests extends MY_Controller {
 		
 		echo json_encode($serverSide_data, JSON_PRETTY_PRINT);
 	}
+	public function get_sql()
+	{
+		$data = $this->test_model->raw_ss_dt();
+
+		echo json_encode($data, JSON_PRETTY_PRINT);
+	}
 
 	
 }
