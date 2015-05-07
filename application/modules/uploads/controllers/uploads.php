@@ -583,6 +583,7 @@ class uploads extends MY_Controller
 					if( $assay_type	!=	3 ){
 						$this->db->query("INSERT INTO `pima_raw_upload`
 										(`id`,
+										`pima_upload_id`,
 										`device_test_id`,
 										`device_serial`,
 										`assay_id`,
@@ -606,6 +607,7 @@ class uploads extends MY_Controller
 										`file_date`) 
 										VALUES
 										('$pim_upl_raw_auto_id',
+										 '".$pima_upload_id."',
 										 '".$row['test_id']."',
 										 '".$facility_pima_id_res[0]['serial_number']."',
 										 '".$row['assay_id']."',
