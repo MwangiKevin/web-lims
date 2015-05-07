@@ -296,32 +296,43 @@ class dashboard extends MY_Controller {
 
 // WEB-LIMS DEVICES
 
-	// get cd4 equipment [Pie Chart]
-	function get_cd4_equipment_pie($param1,$param2){
+
+	// Number of Devices per County [stacked]
+	function get_cd4_devices_perCounty(){
+		$sql = "CALL get_devices_per_county";
+		$response = R::getAll($sql);
+		
+		echo json_encode($response);
+
+	}
+
+	// get cd4 devices [Pie Chart]
+	function get_cd4_devices_pie($param1,$param2){
 		$sql = "CALL proc_equipment_pie()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
 	}
 
-	// get cd4 equipment [Table]
-	function get_cd4_equipment_table(){
-		$sql = "";
+	// get cd4 Devices [Table]
+	function get_devices_table(){
+
+		$sql = "CALL proc_get_facility_devices()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
 	}
 
-	// equipment and tests [Pie Chart]
-	function get_equipment_tests_pie($param1,$param2){
+	// Devices and tests [Pie Chart]
+	function get_devices_tests_pie($param1,$param2){
 		$sql = "CALL proc_equipment_tests_pie()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
 	}
 
-	// equipment tests for this year [table]
-	function get_equipment_tests_thisyear(){
+	// Devices tests for this year [table]
+	function get_devices_tests_thisyear(){
 		$sql = "CALL proc_equipment_test_data";
 		$response = R::getAll($sql);
 
@@ -357,8 +368,6 @@ class dashboard extends MY_Controller {
 			}
 		}
 		//echo 	$current_cummulative_added ;
-
-
 		foreach ($devices_removed_assoc as $value) {
 			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
 			if($curr_year< (int) $year){
@@ -392,8 +401,6 @@ class dashboard extends MY_Controller {
 		for($i=0;$i<12;$i++){
 			$consolidated_array[$i] = (int)$devices_added_array[$i] - (int) $devices_removed_array[$i];
 		}
-
-		// return $consolidated_array;
 
 		echo json_encode($consolidated_array);
 	}
