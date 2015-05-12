@@ -52,7 +52,8 @@ BEGIN
         THEN
             SET @QUERY = @QUERY;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, ' AND `f`.`name` LIKE "%', search, '%"');
+            SET @QUERY = CONCAT(@QUERY, ' AND (`f`.`name` LIKE "%', search, '%"');
+            SET @QUERY = CONCAT(@QUERY, ' OR  `f`.`mfl_code` LIKE "%', search, '%")');
         END IF;
 
 

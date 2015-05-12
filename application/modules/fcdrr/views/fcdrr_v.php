@@ -5,20 +5,21 @@
 		<div class="ui horizontal divider">Start</div>
 		<a class="ui teal ribbon label">Facility Details</a>
 		<div class="ui stackable grid" ng-show="(editState()=='new')">
-			<div class="left floated left aligned six wide column">
-				<div class="ui horizontal label large">Select A Facility To Report For</div>
-
-
-				<ui-select ng-model="fcdrr.facility" theme="selectize" ng-disabled="disabled"  reset-search-input="false" style="width: 300px;">
-				    <ui-select-match placeholder="Type Facility Name...">{{$select.selected.facility_name +" ("+ $select.selected.facility_mfl_code +")"  }}</ui-select-match>
-				    <ui-select-choices repeat="address in facilities track by $index | limitTo:10" refresh="refreshAddresses($select.search)" refresh-delay="4">
-				      	<div ng-bind-html="address.facility_name | highlight: $select.search"></div>
-				      		<small>
-								email: {{entity.email}}
-								phone: <span ng-bind-html="''+entity.phone | highlight: $select.search"></span>
-							</small>
-				    </ui-select-choices>
-				  </ui-select>
+			<div class="left floated left aligned six wide column inline field">
+				Select A Facility To Report For:
+				<div class="ui input">
+					<ui-select ng-model="fcdrr.facility" theme="selectize" ng-disabled="disabled"  reset-search-input="false" style="width: 300px;">
+					    <ui-select-match placeholder="Type Facility Name or MFL Code...">{{$select.selected.facility_name}}</ui-select-match>
+					    <ui-select-choices repeat="fac in facilities track by $index | limitTo:10" refresh="refreshAddresses($select.search)" refresh-delay="4">
+					      	<div ng-bind-html="fac.facility_name | highlight: $select.search"></div>
+					      		<small>
+									<b>MFL Code</b>: <span ng-bind-html="''+fac.facility_mfl_code | highlight: $select.search"></span><br/>
+									email: {{fac.email}}
+									phone: <span ng-bind-html="''+fac.phone | highlight: $select.search"></span>
+								</small>
+					    </ui-select-choices>
+					</ui-select>
+				</div>
 			</div>
 		</div>
 		<div class="ui stackable grid">

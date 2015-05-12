@@ -160,7 +160,7 @@ class fcdrrs_m extends MY_Model{
 			$fcdrr = $fcdrr_res[0];	
 			if($fcdrr_res[0]){
 				$fcdrr_commodities = R::getAll("CALL `proc_get_fcdrr_commodities`('','".$fcdrr['fcdrr_id']."')");
-				$fcdrr_facility = R::getAll("CALL `proc_get_facilities`('".$fcdrr_res[0]['facility_id']."')");
+				$fcdrr_facility = R::getAll("CALL `proc_get_facilities`('".$fcdrr_res[0]['facility_id']."','','','')");
 				$fcdrr['commodities'] = $fcdrr_commodities;
 				$fcdrr['facility'] = $fcdrr_facility[0];
 			}
