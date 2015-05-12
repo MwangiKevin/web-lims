@@ -40,6 +40,4 @@ class MY_Model extends CI_Model{
 	public function tester(){
 		return "Works";
 	}
-	
-	
 }
