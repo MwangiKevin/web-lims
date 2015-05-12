@@ -206,23 +206,36 @@ app.controller('fcdrrCtrl',
         }
 
 
+        $scope.address = {};
+
+        $scope.refreshAddresses = function(search) {
+            var params = {address: search, sensor: false};
+            
+            var baseFacilities = Restangular.all('facilities');            
+
+            baseFacilities.getList({search:search,limit_items:6}).then(function(com) {
+                $scope.facilities = com;
+            });  
+
+            return  $scope.facilities ;
+          };
 
 
 
         /* Start of facility Details*/
 
-        function getFacilities() {
+        // function getFacilities() {
 
-            $scope.promise = API.getFacilities()
-            .success(function (fac) {
-                $scope.facilities = fac;
-            $scope.fcdrr.facility = $scope.facilities[221];  //this is just a test 
-        })
-            .error(function (error) {
-                $scope.status = 'Unable to load customer data: ' + error.message;
-            });
-        }
-        getFacilities();
+        //     $scope.promise = API.getFacilities()
+        //     .success(function (fac) {
+        //         $scope.facilities = fac;
+        //     $scope.fcdrr.facility = $scope.facilities[221];  //this is just a test 
+        // })
+        //     .error(function (error) {
+        //         $scope.status = 'Unable to load customer data: ' + error.message;
+        //     });
+        // }
+        // getFacilities();
 
         /* End of facility Details*/
 
