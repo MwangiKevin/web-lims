@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
  * @property Aauth $aauth Description
  * @version 1.0
  */
-class Example extends CI_Controller {
+class Example extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -86,10 +86,10 @@ class Example extends CI_Controller {
         // );
 
         echo '<br>---- error --- <br>';
-        echo $this->aauth->get_errors();
+        echo $this->aauth->print_errors();
 
         echo '<br>---- info --- <br>';
-        echo $this->aauth->get_infos();
+        echo $this->aauth->print_infos();
 
         echo "</pre>";
     }
