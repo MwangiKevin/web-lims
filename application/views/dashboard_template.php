@@ -264,8 +264,8 @@
 	<!--Factories, Services and providers -->
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
-	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/apiAuth.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js');?>"></script>
 

@@ -1,10 +1,16 @@
-app.factory('apiAuth', ['authService','$rootScope','$location','$http','$activityIndicator',function(authService,$rootScope,$location,$http,$activityIndicator){
+app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',function(authService,$rootScope,$http,$activityIndicator){
 	var apiAuth={};
 	apiAuth.baseURL= base_url;
 
 	apiAuth.checkLoginSt = function (){
 		return true;
 	}
+
+	apiAuth.requireNoLogin = function(){
+		
+		$rootScope.$broadcast('event:auth-loginNotRequired');		
+	}
+
 
 	apiAuth.checkLoginDetails = function (){
 		return {

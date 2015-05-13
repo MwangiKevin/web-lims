@@ -14,6 +14,13 @@ app.controller('fcdrrsCtrl',
     'Restangular',
     function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
 
+        
+        $scope.allowed =  function(){
+            
+            return $http.get("fcdrr/is_allowed");
+        }
+
+
         Commons.activeMenu = "fcdrrs";
 
         $scope.fcdrrsColl = [];

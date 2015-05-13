@@ -1,6 +1,6 @@
 app.controller('registrationCtrl',['$scope','$http','Commons',function ($scope,$http,Commons){
   var registrationForm = $("#form");
-
+  Commons.requireNoLogin();
   $scope.user = {};
   $scope.loading = false;
 

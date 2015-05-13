@@ -18,6 +18,10 @@
         scope.$on('event:auth-loginConfirmed', function() {
           main.show();
           login.slideUp('slow');
+        });   
+        scope.$on('event:auth-loginNotRequired', function() {
+          main.show();
+          login.slideUp('slow');
         });
       }
     }
