@@ -1,6 +1,7 @@
 app.controller('cd4DevicesCtrl', ['$scope','Commons','Restangular','$activityIndicator', function ($scope,Commons,Restangular,$activityIndicator) {
 
-
+    Commons.requireNoLogin();
+    
     Commons.activeMenu = "cd4Devices";
     $scope.facilitiesColl = [];
 
