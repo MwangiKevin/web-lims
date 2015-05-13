@@ -47,23 +47,50 @@ class Migrate_csv extends MY_Controller
 						$new_array[] = $data;
 						
 					}
-
-					$counter = 0;
-					$emptyEmailcnt = 0;
-					$emailcnt = 0;
 					
+					$counter = 0;
+					$emailcnt = 0;
+					$emptyEmailcnt = 0;
+					$cols = array();
+					$insert_data = array();
+					
+					//forech to replace the index keys with the name of the columns as provided by the csv
 					foreach ($new_array as $key => $value) {
-						 if($value[1] == NULL){
-						 	$emptyEmailcnt++;
-						 } else {
-						 	$insert_data[] = $value;
-						 	$emailcnt++;
-						 }
+						if ($key == 0) {
+							foreach ($value as $k => $v) {
+								$cols[] = strtolower($v);
+							}
+						} else {
+							foreach ($value as $k => $v) {
+								$insert_data[$counter][$cols[$k]] = $v;
+							}
+							$counter++;
+						}
 					}
-				    echo "<pre>";print_r($insert_data);
-				    echo $emailcnt." users have provided email addresses ".$emptyEmailcnt." users have not provided email addresses.";
-				    die();
-				
+					
+					//foreach to check if the email value is available and to create the user
+					foreach ($insert_data as $key => $value) {
+						if ($value[email] != ''){
+							if ($value[email] != 'NULL') {
+								// $new_data[] = $value;
+								$create = $this->aauth->create_user($value[email],'123456',$value[username]);
+								
+								$emailcnt++;
+							}
+								
+						} else {
+							$emptyEmailcnt++;
+						}
+				    	
+				    }
+				    
+				    if ($create)
+				    {
+						echo $emailcnt."Users added";
+						echo "<br />";
+					}
+					
+
 				fclose($handle);
 				print "Import successful";
 				

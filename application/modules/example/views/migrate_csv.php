@@ -7,6 +7,9 @@
 <div>
 	<form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>example/migrate_csv/uploadcsv">
 		<div>
+			<label>Please select a file from (<?php echo base_url().'csvs/user) '?> to add users</label>
+		</div>
+		<div>
 			<input type="file" name="upload" id="upload"/>
 		</div>
 		<div>
