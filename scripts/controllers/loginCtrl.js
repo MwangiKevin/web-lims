@@ -15,7 +15,7 @@ app.controller('loginCtrl',['$scope','Commons',function ($scope,Commons){
 			type: 'POST',
 			data:formData,
 			success:function(success){
-                alert(success);
+        
 			}
 		});	
     }

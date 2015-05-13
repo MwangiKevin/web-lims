@@ -10,11 +10,11 @@
 
 		$config['smtp_pass']    = 'pocpassword';
 
-		$config['charset']    = 'utf-8';
+		$config['charset']    	= 'utf-8';
 
-		$config['newline']    = "\r\n";
+		$config['newline']    	= "\r\n";
 		
-		$config['mailtype'] ="html";	
+		$config['mailtype'] 	=	"html";	
 
 
 ?>
