@@ -64,8 +64,11 @@ class facilities_m extends MY_Model{
 
 		$verbose = $this->input->get('verbose');
 		// $verbose = true;
+		$search = $this->input->get("search");
+		$limit_start = $this->input->get("limit_start");
+		$limit_items = $this->input->get("limit_items");
 
-		$facilities_res = R::getAll("CALL `proc_get_facilities`('$id')");
+		$facilities_res = R::getAll("CALL `proc_get_facilities`('$id','$search','$limit_start','$limit_items')");
 		
 		if($id==NULL){
 

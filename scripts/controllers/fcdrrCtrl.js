@@ -212,28 +212,17 @@ app.controller('fcdrrCtrl',
             swal("Printing!", "Print!", "success");
         }
 
+        $scope.baseFacilities = Restangular.all('facilities');    
 
+        $scope.refreshAddresses = function(search) {
+            var params = {address: search, sensor: false};                    
 
+            $scope.baseFacilities.getList({search:search,limit_items:6}).then(function(com) {
+                $scope.facilities = com;
+            });  
 
-
-        /* Start of facility Details*/
-
-        function getFacilities() {
-
-            $scope.promise = API.getFacilities()
-            .success(function (fac) {
-                $scope.facilities = fac;
-            $scope.fcdrr.facility = $scope.facilities[221];  //this is just a test 
-        })
-            .error(function (error) {
-                $scope.status = 'Unable to load customer data: ' + error.message;
-            });
-        }
-        getFacilities();
-
-        /* End of facility Details*/
-
-
+            return  $scope.facilities ;
+          };
 
 
         /* Start of commodity Details*/
@@ -303,7 +292,7 @@ app.controller('fcdrrCtrl',
 
                 loaded_fcdrr.get().then(function(fcdrr_load){
                     $scope.fcdrr = fcdrr_load;
-                     $scope.calculate_total();
+                    $scope.calculate_total();
                     $scope.populate_displayed_commodities();
                 })
             }
