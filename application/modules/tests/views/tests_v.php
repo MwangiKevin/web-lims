@@ -7,7 +7,7 @@
 				</i> Add random item
 			</button>
 
-			<table st-table="displayedCollection" st-safe-src="testsColl" class="ui table table-striped">
+			<!-- <table st-table="displayedCollection" st-safe-src="testsColl" class="ui table table-striped">
 				<thead>
 					<tr>
 						<th colspan="1"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
@@ -41,8 +41,31 @@
 						</td>
 					</tr>
 				</tfoot>
+			</table> -->
+			<table class="table table-bordered" id="tests_table" width="100%">
+				<thead>
+					<tr>
+						
+			            <th style="text-align: center" >Test ID</th>
+			            <th style="text-align: center" >Patient ID</th>
+			            <th style="text-align: center" >Facility</th>
+			            <th style="text-align: center" >CD4 Count</th>
+			           
+			         </tr>
+				</thead>
+				<tbody>
+									       
+					<tr class="odd gradeX">
+							
+					<td style="text-align: center"> </td>
+					<td style="text-align: center"> </td>
+					<td style="text-align: center"> </td>
+					<td style="text-align: center">  </td>
+					 
+					 </tr>
+				
+				</tbody>
 			</table>
-
 
 		</div>
 	</div>
@@ -55,3 +78,33 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	// $('#example').dataTable( {
+	// 	"processing":true,
+	// 	"serverSide":true,
+	// 	"sAjaxSource" : "tests/test_unparametized",
+	// 	"oLanguage": {
+	// 		"sLengthMenu": "Page length: _MENU_",
+	// 		"sSearch": "Filter",
+	// 		"sZeroRecords":"No records found"
+	// 	} 
+	// });
+$('#tests_table').dataTable({
+	serverSide: true,
+	processing: true,
+	ajax: {
+		type: 'POST',
+		url: 'tests/test_unparametized'
+	}
+	// sAjaxSource: 'tests/test_unparametized',
+	// oLanguage: {
+	// 	sLengthMenu: 'Page length: _MENU_',
+	// 	sSearch: 'Filter',
+	// 	sZeroRecords: 'No records found'
+	// }
+});
+
+});
+</script>
