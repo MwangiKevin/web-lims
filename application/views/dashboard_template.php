@@ -116,13 +116,37 @@
 	</div>
 	<!-- END: App-Loading Screen. -->
 
-	<div class="" >
-		<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
+	<div>
+		<authmain>
+			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
+			<div class="ui one column stackable center aligned page grid" id="login-holder">
+				<div class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
+					<div class="ui form">
+						<div class="field">
+							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
+							<label for="username">Username: </label>
+							<div class="ui icon input">
+								<input type="text" placeholder="Username/email" name="username" id="username">
+								<i class="user icon"></i>
+							</div>
+						</div>
+						<div class="field">
+							<label for="password">Password: </label>
+							<div class="ui icon input">
+								<input type="password" placeholder="Password" name="password" id="password">
+								<i class="lock icon"></i>
+							</div>
+						</div>
+						<input type="submit" name="submit" class="ui inverted blue button">
+					</div>
+				</div>
+			</div>
+			<div id = "content">			
+				<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
-		<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
-
-		<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
-
+				<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
+			</div>
+		</authmain>
 	</div>
 	<div ui-view="footer" class=" ui column grid full"></div>
 
@@ -142,6 +166,11 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 
+	<!-- open scripts -->
+	<script type="text/javascript">
+		var base_url 		= '<?php echo base_url();?>';
+		var api_base_url 	= "<?php echo base_url('api');?>";
+	</script>
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
@@ -179,6 +208,9 @@
 	<script src="<?php echo base_url('assets/bower_components/restangular/dist/restangular.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-validation/dist/angular-validation-rule.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-http-auth/src/http-auth-interceptor.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-cookie/angular-cookie.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ng-token-auth/dist/ng-token-auth.min.js');?>"></script>
 
 
 
@@ -216,23 +248,26 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
-	
 	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
-
 
 	<!--Factories, Services and providers -->
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/apiAuth.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/services/uploadSvc.js');?>"></script>
-
+	
+	<!--Chart factories -->
+	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js'); ?>"></script>
 
 	<!-- directives-->
 
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
+	<script src="<?php echo base_url('scripts/directives/authmain.js');?>"></script>
 
 	
 

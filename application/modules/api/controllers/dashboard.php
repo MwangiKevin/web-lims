@@ -102,7 +102,7 @@ class dashboard extends MY_Controller {
 		}
 		echo json_encode($categories);
 	}
-	
+
 	
 	//
 	//
@@ -128,6 +128,7 @@ class dashboard extends MY_Controller {
 		$categories = $this->get_yearly_testing_trends_categories();
 		echo json_encode($categories[0]);
 	}
+
 	public function yearly_testing_trends($user_group_id,$user_filter_used) {
 		$sql = "CALL proc_equipment_yearly_testing_trends_column(0,0)";
 		$sql1 = "CALL proc_sql_eq()";
@@ -151,6 +152,7 @@ class dashboard extends MY_Controller {
 					}
 				}
 			}
+
 
 			$data[$key] =	$row;
 		}
@@ -200,15 +202,6 @@ class dashboard extends MY_Controller {
 		// print_r($tests);
 		// echo "</pre>";die;
 	}
-
-	// for tests and errors [pie chart]
-	public function get_test_n_errors($param1, $param2){
-		$sql = "CALL proc_get_test_pie()";
-		$response = R::getAll($sql);
-
-		echo json_encode($response);
-	}
-
 	// for test for this year [table]
 	public function get_tests($user_group_id, $user_filter_used,$from,$to){
 		$from = '2014-02-27';
@@ -249,14 +242,72 @@ class dashboard extends MY_Controller {
 		// print_r($tests);
 		// echo "</pre>";die;
 		
-		echo json_encode($tests);
+		echo json_encode($tests);	
 	}
-
 	// for yearly testing trends [Column]
 	public function get_yearly_testing_trends($param1,$param2){
 		$sql = "CALL proc_error_yealy_trends()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
+	}
+	
+	// WEB-LIMS DEVICES
+
+
+	// Number of Devices per County [stacked]
+	function get_cd4_devices_perCounty(){
+		$sql = "CALL get_devices_per_county";
+		$response = R::getAll($sql);
+		
+		echo json_encode($response);
+
+	}
+
+	// get cd4 equipment [Pie Chart]
+	function get_cd4_devices_pie($user_group_id,$user_filter_used){
+		$user_group_id = 0;
+		$user_filter_used = 0;
+		$result = $this->dashboard_m->get_cd4_devices_pie($user_group_id,$user_filter_used);
+		echo json_encode($result);
+	}
+
+	// get cd4 equipment [Table]
+	function get_devices_table(){
+		$result = $this->dashboard_m->get_devices_table($user_group_id,$user_filter_id);
+		echo json_encode($result);
+	}
+
+	// for tests and errors [pie chart]
+	public function get_test_n_errors($param1, $param2){
+		$sql = "CALL proc_get_test_pie()";
+		$response = R::getAll($sql);
+
+		echo json_encode($response);
+	}
+	
+	// equipment and tests [Pie Chart]
+	function get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used){
+		$from = '2013-01-01';
+		$to = '2013-12-31';
+		$result = $this->dashboard_m->get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used);
+		echo json_encode($result);
+	}
+
+	// Devices tests for this year [table]
+	function get_devices_tests_table($from,$to,$user_group_id,$user_filter_used){
+		$from = '2013-01-01';
+		$to = '2013-12-31';
+		$result = $this->dashboard_m->get_devices_tests_table($from,$to,$user_group_id,$user_filter_used);
+		echo json_encode($result);
+	}
+
+	// expected reporting devices [area chart]
+	function get_expected_reporting_devices($user_group_id,$user_filter_used,$year=2015){
+		//error_reporting(0);
+		$results = $this->dashboard_m->get_expected_reporting_devices($user_group_id,$user_filter_used,$year);
+		$results = json_encode($results);
+		echo $results;
+
 	}
 }

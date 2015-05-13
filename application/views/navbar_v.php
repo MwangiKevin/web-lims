@@ -6,19 +6,22 @@
     </a>
     <a href="#dashboard" class="brand item"><big>CD4 LIMS</big></a>
     <a href="#dashboard" class="item" ng-class="getActiveMenu('dashboard')"><i class="fa fa-dashboard fa-sm icon blue"></i>Dashboard</a>
-    <!-- <a href="#fillFCDRR" class="item" ng-class="getActiveMenu('fcdrr')"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>     -->
-
     <div class="ui dropdown item" >
       <i class="fa fa-file fa-sm icon"></i>FCDRR <i class="dropdown icon"></i>
       <div class="menu">
         <a  class="item" href="#fillFCDRR">Fill Monthly FCDRR</a>  
         <a  class="item" href="#FCDRRS">Historical FCDRRs</a> 
+        <a  class="item" href="#Allocations">Commodity Allocations</a> 
       </div>
     </div>
-    <a href="#CD4DeviceUploads" class="item" ng-class="getActiveMenu('cd4DeviceUploads')"><i class="fa fa-upload fa-sm icon green"></i>Device Uploads</a>
-    <a href="#facilities" class="item" ng-class="getActiveMenu('facilities')"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
-    <a href="#CD4Tests" class="item" ng-class="getActiveMenu('cd4Tests')"><i class="fa fa-tint fa-sm icon red"></i>CD4 Tests</a>
-    <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
+    <a href="#CD4Tests" class="item" ng-class="getActiveMenu('cd4Tests')"><i class="fa fa-tint fa-sm icon red"></i>CD4 Tests</a>    
+    <div class="ui dropdown item" >
+      <i class="fa fa-hospital-o fa-sm icon"></i>Mapping <i class="dropdown icon"></i>
+      <div class="menu">
+        <a href="#facilities" class="item" ng-class="getActiveMenu('facilities')"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
+        <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
+      </div>
+    </div>
     <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a>
 
     <div class="right menu">
@@ -59,14 +62,27 @@
   </div>
   <div class="ui vertical navbar menu top" style="width:100%;padding:0;">
     <a href="#dashboard" class="item" ng-class="getActiveMenu('dashboard')"><i class="fa fa-dashboard fa-sm icon blue"></i>Dashboard</a>
-    <a href="#fillFCDRR" class="item" ng-class="getActiveMenu('fcdrr')"><i class="fa fa-file fa-sm icon"></i>FCDRR</a>
-    <a href="#CD4DeviceUploads" class="item" ng-class="getActiveMenu('cd4DeviceUploads')"><i class="fa fa-upload fa-sm icon green"></i>Device Uploads</a>
-    <a href="#facilities" class="item" ng-class="getActiveMenu('facilities')"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
+    <div class="ui  item" >
+      <i class=""></i>FCDRR <i class="dropdown icon"></i>
+      <div class="menu">
+        <a  class="item" href="#fillFCDRR">Fill Monthly FCDRR</a>  
+        <a  class="item" href="#FCDRRS">Historical FCDRRs</a> 
+        <a  class="item" href="#Allocations">Commodity Allocations</a> 
+      </div>
+    </div>
+    
     <a href="#CD4Tests" class="item" ng-class="getActiveMenu('cd4Tests')"><i class="fa fa-tint fa-sm icon red"></i>CD4 Tests</a>
-    <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
+    <div class="ui  item" >
+      <i class=""></i>Mapping <i class="dropdown icon"></i>
+      <div class="menu">
+        <a href="#facilities" class="item" ng-class="getActiveMenu('facilities')"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
+        <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
+      </div>
+    </div>
     <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a>
+
     <div class="ui item">
-      <div class="text">Actions</div>
+      <div class="text"class="dropdown icon">Actions</div>
       <div class="menu">
         <div class="item">Logout<i class="key icon " style="float:right"></i></div>
         <div class="item">Help<i class="help icon " style="float:right"></i></div>

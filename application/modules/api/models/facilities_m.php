@@ -121,8 +121,9 @@ class facilities_m extends MY_Model{
 
 		$facility = json_decode($request_fac, true);
 		
-		$facility_deleted = R::getAll("DELETE FROM 
-												 `facility`
+		$facility_deleted = R::getAll("UPDATE `facility` 
+											SET 
+												`status`='$facility[status]'
 											WHERE 
 												`id` = '$id'
 											");
