@@ -94,7 +94,7 @@ class fcdrr_auto_email extends MY_Controller{
 
 					$month_name=$this->GetMonthName($previous_month);
 
-					$this->email->from('cd4system@gmail.com', 'CD4 Administrator');
+					$this->email->from('cd4system@gmail.com', 'CD4 Notification');
 
 					$this->email->subject('CD4 FCDRR Commodity Reports for '.$month_name.' - '.$year.' '); //subject
 
