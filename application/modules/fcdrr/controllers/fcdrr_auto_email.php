@@ -92,17 +92,17 @@ class fcdrr_auto_email extends MY_Controller{
 
 					/* Prepare email configurations */
 
-					$month_name=$this->GetMonthName($previous_month);
+					//$month_name=$this->GetMonthName($previous_month);
 
-					$this->email->from('cd4system@gmail.com', 'CD4 Notification');
+					// $this->email->from('cd4system@gmail.com', 'CD4 Notification');
 
-					$this->email->subject('CD4 FCDRR Commodity Reports for '.$month_name.' - '.$year.' '); //subject
+					// $this->email->subject('CD4 FCDRR Commodity Reports for '.$month_name.' - '.$year.' '); //subject
 
-					$message="Good Day<br />Find attached the FCDRR Report For ART Lab Monitoring Reagents for ".$fcdrr_result['name']." for the month of ".$month_name.", ".$year.".<br />
-						Regards.
-						<br /><br />CD4 Support Team";
+					// $message="Good Day<br />Find attached the FCDRR Report For ART Lab Monitoring Reagents for ".$fcdrr_result['name']." for the month of ".$month_name.", ".$year.".<br />
+					// 	Regards.
+					// 	<br /><br />CD4 Support Team";
 
-					$this->email->message($message);// the message
+					//$this->email->message($message);// the message
 
 					// $county_coordinator_email=$this->fcdrr_model->get_county_email($fcdrr_result['sub_county_id']);
 
@@ -120,20 +120,26 @@ class fcdrr_auto_email extends MY_Controller{
 
 					// $email_receipients=array_merge($partner_receipients,$county_receipients);
 
+					// echo $fcdrr_result['name']."-----------------";
+					// echo "<pre>";
+					// print_r($email_receipients);
+					// echo "</pre>";
+					// echo "---------------------------------------";
+
 					//$this->email->to($email_receipients); //send to specific receiver
-					$this->email->to($CHAI_team); //CHAI team
+					// $this->email->to($CHAI_team); //CHAI team
 
-					$this->email->attach($filename);
+					// $this->email->attach($filename);
 
-					if($this->email->send())//send email and check if the email was sent
-					{	
-						$this->email->clear(TRUE);//clear any attachments on the email
-						echo "FCDRR Email Alert to '".$fcdrr_result["name"]."' has been sent! <br />";
-					}
-					else 
-					{
-						show_error($this->email->print_debugger());//show error message
-					}
+					// if($this->email->send())//send email and check if the email was sent
+					// {	
+					// 	$this->email->clear(TRUE);//clear any attachments on the email
+					// 	echo "FCDRR Email Alert to '".$fcdrr_result["name"]."' has been sent! <br />";
+					// }
+					// else 
+					// {
+					// 	show_error($this->email->print_debugger());//show error message
+					// }
 				}
 
 			} // end foreach

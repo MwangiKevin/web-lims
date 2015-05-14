@@ -51,7 +51,7 @@ function get_fcdrr_list($fromdate,$todate){
 /* Get the fcdrr content */
 function get_fcdrr_content($fcdrr_list_result){
 
-	$device_details=$this->db->query("SELECT * FROM v_device_details WHERE mfl_code='".$fcdrr_list_result['mfl_code']."' GROUP BY mfl_code");
+	$device_details=$this->db->query("call proc_fcdrr_devices_details('".$fcdrr_list_result['mfl_code']."')");
 	
 	if($device_details->num_rows()>0){
 			foreach($device_details->result_array() as $device_result)
@@ -150,7 +150,9 @@ function get_fcdrr_content($fcdrr_list_result){
 				$final_pdf_data=$first_part_table.$second_part_table;
 
 			}
-
+			$device_details->next_result();
+			$device_details->free_result();
+			
 			return $final_pdf_data;
 	}
 
@@ -159,11 +161,7 @@ function get_fcdrr_content($fcdrr_list_result){
 /* Get the commodities used in that facility */
 function get_commodity_categories($facility_id,$fcdrr_id){
 
-	$commodity_category_results=$this->db->query("SELECT cc.id,
-							 						cc.name,
-							 						cc.equipment_id
-							 						FROM commodity_category cc,  v_device_details vde 
-							 						WHERE (cc.equipment_id = vde.device_id OR cc.equipment_id =0) AND vde.facility_id ='$facility_id' GROUP BY cc.id");
+	$commodity_category_results=$this->db->query(" call proc_fcdrr_get_commodity_categories('".$facility_id."')");
 	$commodities_final_list="";
 
 	foreach($commodity_category_results->result_array() as $commodity_category)
@@ -175,6 +173,9 @@ function get_commodity_categories($facility_id,$fcdrr_id){
 		$commodities_final_list=$commodities_final_list.$cat_table.$commodities_list; //concatenate all the rows to join the table later
 	}
 
+	$commodity_category_results->next_result();
+	$commodity_category_results->free_result();
+	
 	return $commodities_final_list;
 
 } /* End of function get_commodity_categories(2 variables) */

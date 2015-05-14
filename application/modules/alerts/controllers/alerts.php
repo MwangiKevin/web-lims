@@ -22,8 +22,8 @@ function daemon_weekly_email()
 
 	// $last_monday=date('jS F Y',strtotime('last monday'));
 	// $last_sunday=date('jS F Y',strtotime('last sunday'));
-	$from='2015-02-23';
-	$to='2015-03-01';
+	$from='2015-02-09';
+	$to='2015-02-15';
 
 	$last_monday_date=date('Y-m-d',strtotime($from));//last monday
 	$last_sunday_date=date('Y-m-d',strtotime($to));//last sunday
@@ -163,7 +163,7 @@ function daemon_weekly_email()
 			$partner="";
 			$facility="";
 			$receipient="breakdown";
-			$pdf_data=$this->alerts_model->weekly_uploads($last_monday_date,$last_sunday_date,$results['county_id'],$partner,$facility,$receipient);
+			$pdf_data=$this->alerts_model->weekly_uploads($last_monday_date,$last_sunday_date,$results['county_name'],$partner,$facility,$receipient);
 			
 			$img=$this->config->item('server_root').'assets/images/nascop.jpg';// Nascop Logo
 
@@ -215,19 +215,19 @@ function daemon_weekly_email()
 			{
 				$e->getMessage();
 			}
-			$county_receipients=array();
+			// $county_receipients=array();
 			
-			$county_coordinator_email=$this->alerts_model->get_county_email($results['county_id']);
+			// $county_coordinator_email=$this->alerts_model->get_county_email($results['county_id']);
 
-			foreach($county_coordinator_email as $cemail)
-			{
-				$county_receipients[]=$cemail;
-			}
-			echo "...".$results['county_name'];
-			echo "<pre>";
-			print_r($county_receipients);
-			 echo "</pre>";
-			echo "<br />";
+			// foreach($county_coordinator_email as $cemail)
+			// {
+			// 	$county_receipients[]=$cemail;
+			// }
+			// echo "...".$results['county_name'];
+			// echo "<pre>";
+			// print_r($county_receipients);
+			//  echo "</pre>";
+			// echo "<br />";
 			/*|====================== County Cordinators Team Email =========================== |*/
 			// $this->email->from('cd4poc@gmail.com', 'CD4 PIMA Notification');
 			
@@ -323,19 +323,19 @@ function daemon_weekly_email()
 				$e->getMessage();
 			}
 
-			$partner_receipients=array();
+			// $partner_receipients=array();
 
-			$partner_email=$this->alerts_model->get_partner_email($results['partner_name']);
+			// $partner_email=$this->alerts_model->get_partner_email($results['partner_name']);
 
-			foreach($partner_email as $pemail)
-			{
-				$partner_receipients[]=$pemail;
-			}
-			echo "...".$results['partner_name']."...";
-			echo "<pre>";
-			print_r($partner_receipients);
-			echo "</pre>";
-			echo "...<br />";
+			// foreach($partner_email as $pemail)
+			// {
+			// 	$partner_receipients[]=$pemail;
+			// }
+			// echo "...".$results['partner_name']."...";
+			// echo "<pre>";
+			// print_r($partner_receipients);
+			// echo "</pre>";
+			// echo "...<br />";
 
 			/*|====================== Partners Team Email =========================== |*/
 			// $this->email->from('cd4poc@gmail.com', 'CD4 PIMA Notification');
