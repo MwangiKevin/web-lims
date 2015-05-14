@@ -51,9 +51,12 @@ class dashboard extends MY_Controller {
 
 	// get cd4 devices [Pie Chart]
 	function get_cd4_devices_pie($param1,$param2){
-		$sql = "CALL proc_equipment_pie()";
+		$sql = "CALL proc_equipment_pie(0,0)";
 		$response = R::getAll($sql);
 
+		// echo "<pre>" ; print($response);
+		// die();
+		
 		echo json_encode($response);
 	}
 
