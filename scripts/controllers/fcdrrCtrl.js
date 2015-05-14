@@ -2,6 +2,7 @@ app.controller('fcdrrCtrl',
     [
     '$stateParams',
     '$state',
+    '$rootScope',
     '$scope',
     '$http',
     'ngProgress', 
@@ -12,10 +13,16 @@ app.controller('fcdrrCtrl',
     'SweetAlert', 
     'notify',
     'Restangular',
-    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
+    function($stateParams,$state, $rootScope,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
+
+        $scope.allowed =  function(){
+            
+            return $http.get("fcdrr/is_allowed");
+        }
 
 
-        // $rootScope.$broadcast('event:auth-loginRequired');
+        $scope.is_allowed = $scope.allowed();
+
 
         $scope.fcdrr_id = $stateParams.id;
 

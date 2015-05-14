@@ -1,7 +1,4 @@
-<?php
-
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
   | -------------------------------------------------------------------
   |  Aauth Config
@@ -55,6 +52,11 @@ $config['aauth'] = array(
     //if it is true, the user will be banned temporary when he exceed the login 'try'
     'ddos_protection' => true,
 
+    'recaptcha_active' => false, 
+    'recaptcha_login_attempts' => 4,
+    'recaptcha_siteKey' => '', 
+    'recaptcha_secret' => '', 
+
     // login attempts time interval
     // default 20 times in one hour
     'max_login_attempt' => 10,
@@ -69,5 +71,5 @@ $config['aauth'] = array(
 );
 
 
-/* End of file autoload.php */
-/* Location: ./application/config/autoload.php */
+/* End of file aauth.php */
+/* Location: ./application/config/aauth.php */
