@@ -19,6 +19,10 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 		
 		$rootScope.$broadcast('event:auth-loginRequired');		
 	}
+	apiAuth.loginConfirmed = function(){
+		
+		$rootScope.$broadcast('event:auth-loginConfirmed');		
+	}
 
 
 	apiAuth.getLoginDetails = function (){
@@ -30,17 +34,15 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 		});	
 	}
 
-	apiAuth.login = function(usr,pwd){
-
-		params = {
-			usr: usr,
-			pwd: pwd
-		};		
+	apiAuth.login = function(usr,pwd){	
 		$activityIndicator.startAnimating();
 
 		return $http.post(
 			'api/auth/login',
-			{params: params}
+			{
+				username: usr,
+				password: pwd
+			}
 			)
 		.success(function(response){			
 			$activityIndicator.stopAnimating() 

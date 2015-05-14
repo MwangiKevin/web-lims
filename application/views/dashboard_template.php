@@ -133,9 +133,9 @@
 						<div class="field">
 							<label for="password">Password: </label>
 							<div class="ui icon input">
-								<input type="password" placeholder="Password" name="password" id="password" ng-model="password">
+								<input type="password" placeholder="Password" name="password" id="password" ng-model="password" ng-keyup="$event.keyCode == 13 && submit()">
 								<i class="lock icon"></i>
-							</div>{{username}}
+							</div>
 						</div>
 						<input type="submit" name="submit" class="ui inverted blue button" ng-click="submit()">
 					</div>	
