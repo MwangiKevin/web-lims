@@ -2,6 +2,11 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 	var apiAuth={};
 	apiAuth.baseURL= base_url;
 
+	$rootScope.session = {
+		user:null,
+		loggedIn: false
+	}
+
 	apiAuth.checkLoginSt = function (){
 		return true;
 	}
@@ -10,16 +15,19 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 		
 		$rootScope.$broadcast('event:auth-loginNotRequired');		
 	}
+	apiAuth.requireLogin = function(){
+		
+		$rootScope.$broadcast('event:auth-loginRequired');		
+	}
 
 
-	apiAuth.checkLoginDetails = function (){
-		return {
-			name		: 	'kevin Mwangi',
-			email		: 	'mwangikevinn@gmail.com',
-			phone		: 	'+254723016811',
-			user_type	: 	'1',
-			facility	: 	'7'
-		};
+	apiAuth.getLoginDetails = function (){
+		return $http.get(
+			'api/auth/get_session_details'
+			)
+		.success(function(response){
+
+		});	
 	}
 
 	apiAuth.login = function(usr,pwd){
@@ -34,15 +42,14 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 			'api/auth/login',
 			{params: params}
 			)
-		.success(function(response){
+		.success(function(response){			
 			$activityIndicator.stopAnimating() 
 		});
 	}
 
 	apiAuth.logout = function(){
 		return $http.post('api/auth/logout')
-		.succes
-		.s(function(response){
+		.success(function(response){
 			$activityIndicator.stopAnimating() 
 		})
 	}
