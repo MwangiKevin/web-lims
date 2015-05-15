@@ -20,5 +20,5 @@ CREATE TABLE `fcdrr` (
   `comments` varchar(200) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),  
-  UNIQUE KEY `facility_id` (`facility_id`,`from_date`)
+  UNIQUE KEY `facility_and_date` (`facility_id`,`from_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

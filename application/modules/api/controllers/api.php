@@ -12,8 +12,11 @@ class api extends MY_Controller {
 		// $this->output->enable_profiler(TRUE);
 	}
 	public function index(){
-		echo "null";
-		$this->load->view('create');
+		$api_info = array(
+					'version'	=> 	'0.0',
+					'base_url'	=>	base_url()
+			);
+		echo json_encode($api_info);
 	}
 
 	public function facilities($id=NULL) {
