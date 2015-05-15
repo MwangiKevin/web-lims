@@ -12,7 +12,8 @@ app.controller('fcdrrsCtrl',
     'SweetAlert', 
     'notify',
     'Restangular',
-    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
+    'apiAuth',
+    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth){
 
         
        // $scope.allowed =  function(){

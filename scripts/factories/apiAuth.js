@@ -1,4 +1,4 @@
-app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',function(authService,$rootScope,$http,$activityIndicator){
+app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator','$location','notify',function(authService,$rootScope,$http,$activityIndicator,$location,notify){
 	var apiAuth={};
 	apiAuth.baseURL= base_url;
 
@@ -13,20 +13,19 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 
 	apiAuth.requireNoLogin = function(){
 		
-		$rootScope.$broadcast('event:auth-loginNotRequired');		
+		$rootScope.$broadcast('event:auth-loginNotRequired');
 	}
 	apiAuth.requireLogin = function(){
-		
-		$rootScope.$broadcast('event:auth-loginRequired');		
+		return $http.get("api/auth/is_logged_in");
 	}
 	apiAuth.loginConfirmed = function(){
 		
-		$rootScope.$broadcast('event:auth-loginConfirmed');		
+		$rootScope.$broadcast('event:auth-loginConfirmed');
+		return apiAuth.getSessionDetails();
 	}
 
-
-	apiAuth.getLoginDetails = function (){
-		return $http.get(
+	apiAuth.getSessionDetails = $rootScope.getSessionDetails =  function (){
+		return  $http.get(
 			'api/auth/get_session_details'
 			)
 		.success(function(response){
@@ -44,15 +43,19 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 				password: pwd
 			}
 			)
-		.success(function(response){			
+		.success(function(response){
 			$activityIndicator.stopAnimating() 
+			notify({ message:'You have successfully logged in'} );
 		});
 	}
 
 	apiAuth.logout = function(){
 		return $http.post('api/auth/logout')
 		.success(function(response){
+			$location.path( "/dashboard" );
 			$activityIndicator.stopAnimating() 
+			notify({ message:'Your session was ended'} );
+
 		})
 	}
 
