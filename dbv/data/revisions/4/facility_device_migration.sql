@@ -1694,6 +1694,7 @@ INSERT INTO `facility_pima_temp` (`id`, `facility_equipment_id`, `serial_num`, `
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ALTER TABLE `facility_device` DROP IF EXISTS `mfl_code`;
 
 ALTER TABLE  `facility_device` ADD  `mfl_code` VARCHAR( 30 ) NOT NULL AFTER  `facility_id` ;
 

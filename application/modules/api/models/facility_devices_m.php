@@ -60,7 +60,7 @@ class facility_devices_m extends MY_Model{
 
 			if($verbose=='true'){
 				foreach ($fac_dev as $key => $value) {
-					$facility=R::getAll("CALL `proc_get_facilities`('".$value['facility_id']."')");
+					$facility=R::getAll("CALL `proc_get_facilities`('".$value['facility_id']."','','','')");
 
 					if(sizeof($facility)>0){
 						$fac_dev[$key]['assigned_to_facility'] = true;

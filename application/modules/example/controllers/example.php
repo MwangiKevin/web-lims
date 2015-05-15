@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
  * @property Aauth $aauth Description
  * @version 1.0
  */
-class Example extends CI_Controller {
+class Example extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -32,7 +32,7 @@ class Example extends CI_Controller {
 
         echo "<pre>";
 
-        // print_r(
+        print_r(
         //$this->aauth->is_admin()
         //$this->aauth->get_user()
         //$this->aauth->control_group("Mod")
@@ -63,33 +63,16 @@ class Example extends CI_Controller {
         //$this->aauth->delete_pm(6)
         //$this->aauth->set_as_read_pm(13)
         //$this->aauth->create_group('aa')
+         $this->aauth->create_perm('asdda')
+         //''
 
-        $this->aauth->create_perm('create_user');
-        $this->aauth->create_perm('edit_user');
-        $this->aauth->create_perm('remove_user');
-        $this->aauth->create_perm('add_device');
-        $this->aauth->create_perm('edit_device');
-        $this->aauth->create_perm('remove_device');
-        $this->aauth->create_perm('add_facility');
-        $this->aauth->create_perm('edit_facility');
-        $this->aauth->create_perm('remove_facility');
-        $this->aauth->create_perm('add_fcdrr');
-        $this->aauth->create_perm('edit_fcdrr');
-        $this->aauth->create_perm('remove_fcdrr');
-        $this->aauth->create_perm('generate_report');
-
-        $this->aauth->create_group('facility_users');
-        $this->aauth->create_group('county_level_users');
-        $this->aauth->create_group('partners');
-        $this->aauth->create_group('device_manufacturers');
-
-        // );
+        );
 
         echo '<br>---- error --- <br>';
-        echo $this->aauth->get_errors();
+        echo $this->aauth->print_errors();
 
         echo '<br>---- info --- <br>';
-        echo $this->aauth->get_infos();
+        echo $this->aauth->print_infos();
 
         echo "</pre>";
     }

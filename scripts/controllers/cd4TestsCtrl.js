@@ -1,5 +1,7 @@
 app.controller('cd4TestsCtrl', ['$scope','Commons', function ($scope,Commons) {
 
+    Commons.requireNoLogin();
+
     var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
     var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
     var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
