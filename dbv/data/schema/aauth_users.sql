@@ -1,6 +1,6 @@
-CREATE TABLE `aauth_users` (
+CREATE TABLE IF NOT EXISTS `aauth_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` text NOT NULL,
+  `email` varchar(50) NOT NULL,
   `pass` text NOT NULL,
   `name` text,
   `banned` int(11) DEFAULT '0',
@@ -14,5 +14,6 @@ CREATE TABLE `aauth_users` (
   `ip_address` text,
   `login_attempts` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
   KEY `id_index` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
