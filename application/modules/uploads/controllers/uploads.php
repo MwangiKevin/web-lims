@@ -94,6 +94,7 @@ class uploads extends MY_Controller
 						}
 						
 					}
+					
 					// $c=0;
 					// foreach ($insert_data as $key => $value) {
 					// 	if (($key != 'result_date')||($key != 'start_time')) {
