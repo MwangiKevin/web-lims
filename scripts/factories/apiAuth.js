@@ -1,4 +1,4 @@
-app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',function(authService,$rootScope,$http,$activityIndicator){
+app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator','$location','notify',function(authService,$rootScope,$http,$activityIndicator,$location,notify){
 	var apiAuth={};
 	apiAuth.baseURL= base_url;
 
@@ -22,6 +22,7 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 	apiAuth.loginConfirmed = function(){
 		
 		$rootScope.$broadcast('event:auth-loginConfirmed');		
+		return apiAuth.getLoginDetails();
 	}
 
 
@@ -46,13 +47,17 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 			)
 		.success(function(response){			
 			$activityIndicator.stopAnimating() 
+			notify({ message:'You have successfully logged in'} );
 		});
 	}
 
 	apiAuth.logout = function(){
 		return $http.post('api/auth/logout')
 		.success(function(response){
+			$location.path( "/dashboard" );
 			$activityIndicator.stopAnimating() 
+			notify({ message:'Your session was ended'} );
+
 		})
 	}
 

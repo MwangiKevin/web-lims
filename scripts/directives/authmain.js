@@ -13,7 +13,7 @@
         scope.$on('event:auth-loginRequired', function() {
           login.slideDown('slow', function() {           
             main.attr('style','display:none !important');
-            apiAuth.logout();
+            // apiAuth.logout();
           });
         });
         scope.$on('event:auth-loginConfirmed', function() {
