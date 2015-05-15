@@ -2,43 +2,40 @@ app.controller('navbarCtrl',
 	['$scope',	
 	'Commons',
 	'apiAuth',
-	'$rootScope',function($scope,Commons,apiAuth,$rootScope){
+	'$rootScope',
+	function($scope,Commons,apiAuth,$rootScope){
 
 	$scope.getActiveMenu = Commons.getActiveMenu;
-	$scope.menuName 	=	"";
 
-	$scope.sess= "";
-	$scope.sessionCheck = function(){	
+	$rootScope.sess 		= "";
+	$rootScope.menuName 	=	"";
+	$rootScope.sessionName 	= function(){	
 
-		$scope.menuName 	=	"";
+		$rootScope.menuName 	=	"";
 
-		apiAuth.getLoginDetails().success(function(data){
-			$scope.sess = data;
+		$rootScope.getSessionDetails().success(function(data){
+			$rootScope.sess= data;
 
 			if(data.loggedin){
-				$scope.menuName = data.name;
+				$rootScope.menuName= data.name;
 			}else{
-				$scope.menuName = "Action";			
+				$rootScope.menuName= "Action";			
 			}
 		})
 	}
 
-	$scope.sessionCheck();
-
-
+	$rootScope.sessionName();
 
 	$scope.login = function(){
 		apiAuth.requireLogin();		
-		$scope.sessionCheck();
+		$rootScope.getSessionDetails();
 	}
 
 	$scope.logout = function(){
 		
 		apiAuth.logout().success(function(data){
-			$scope.sessionCheck();
+			$rootScope.getSessionDetails();
 		});
 
 	}
-
-
 }])

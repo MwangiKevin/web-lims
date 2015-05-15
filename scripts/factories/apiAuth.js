@@ -13,21 +13,19 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 
 	apiAuth.requireNoLogin = function(){
 		
-		$rootScope.$broadcast('event:auth-loginNotRequired');		
+		$rootScope.$broadcast('event:auth-loginNotRequired');
 	}
 	apiAuth.requireLogin = function(){
-		
 		return $http.get("api/auth/is_logged_in");
 	}
 	apiAuth.loginConfirmed = function(){
 		
-		$rootScope.$broadcast('event:auth-loginConfirmed');		
-		return apiAuth.getLoginDetails();
+		$rootScope.$broadcast('event:auth-loginConfirmed');
+		return apiAuth.getSessionDetails();
 	}
 
-
-	apiAuth.getLoginDetails = function (){
-		return $http.get(
+	apiAuth.getSessionDetails = $rootScope.getSessionDetails =  function (){
+		return  $http.get(
 			'api/auth/get_session_details'
 			)
 		.success(function(response){
@@ -45,7 +43,7 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 				password: pwd
 			}
 			)
-		.success(function(response){			
+		.success(function(response){
 			$activityIndicator.stopAnimating() 
 			notify({ message:'You have successfully logged in'} );
 		});
