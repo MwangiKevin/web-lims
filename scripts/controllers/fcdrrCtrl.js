@@ -20,7 +20,6 @@ app.controller('fcdrrCtrl',
             
         //     return $http.get("fcdrr/is_allowed");
         // }
-        // $scope.is_allowed = $scope.allowed();
 
         apiAuth.requireLogin();
 
