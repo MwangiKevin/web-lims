@@ -56,10 +56,6 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 		})
 	}
 
-	apiAuth.publicAction = function (){
-
-
-	}
 
 	return apiAuth;
 }])

@@ -41,8 +41,8 @@
           <div class="item">Help<i class="help icon " style="float:right"></i></div>
           <div class="item" ng-show="sess.loggedin">My Profile<i class="user icon " style="float:right"></i></div>
           <div class="item" ng-show="sess.loggedin"><b>Change Password</b></div>
-          <div class="ui divider"></div>
-          <div class="item">About<i class="info icon " style="float:right"></i></div>
+          <div class="ui divider" ></div>
+          <div class="item" style:="width:300px">About <i class="info icon " style="float:right"></i></div>
         </div>
       </a>
     </div>
