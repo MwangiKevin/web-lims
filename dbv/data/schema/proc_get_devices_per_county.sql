@@ -22,9 +22,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_devices_per_county`()
 				f.sub_county_id = sc.id AND
 				sc.county_id = c.id
 			GROUP BY
-				c.id 
-			ORDER BY fd.id DESC;
-
+				c.id, fd.device_id;
 
 END $$
 
