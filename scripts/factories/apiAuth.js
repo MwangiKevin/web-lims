@@ -17,7 +17,7 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 	}
 	apiAuth.requireLogin = function(){
 		
-		$rootScope.$broadcast('event:auth-loginRequired');		
+		return $http.get("api/auth/is_logged_in");
 	}
 	apiAuth.loginConfirmed = function(){
 		

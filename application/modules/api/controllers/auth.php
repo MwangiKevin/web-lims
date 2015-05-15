@@ -58,4 +58,17 @@ class auth extends MY_Controller {
 
 	}
 
+
+	public function is_logged_in(){		
+	
+		if(!$this->session->userdata('loggedin')){
+			http_response_code(401);
+			$this->output->set_content_type('application/json')->set_output('false');
+		}else{
+
+			$this->output->set_content_type('application/json')->set_output('true');
+		}
+
+	}
+
 }
