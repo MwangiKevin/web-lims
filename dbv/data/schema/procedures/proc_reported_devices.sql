@@ -1,6 +1,5 @@
-DROP PROCEDURE IF EXISTS proc_reported_devices
-
-DELIMITER $$
+DROP PROCEDURE IF EXISTS `proc_reported_devices`;
+DELIMITER ;
 CREATE PROCEDURE proc_reported_devices(user_group_id int(11),user_filter_used int(11),year int(11))
 BEGIN
 	CASE `user_filter_used`
@@ -19,8 +18,8 @@ BEGIN
 						ON `pim_upl`.`id` = `pim_tst`.`pima_upload_id`
 				WHERE 1 
 				AND YEAR(`pim_upl`.`upload_date`) = `year`
-			)AS `t1`				
-		GROUP BY `t1`.`month` ;
+			)AS `t1`					
+		GROUP BY `t1`.`month`;
 	ELSE
 		CASE `user_group_id`
 		WHEN 3 THEN

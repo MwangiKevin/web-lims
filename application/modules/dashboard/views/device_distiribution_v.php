@@ -45,12 +45,12 @@
 		                </tr>
 		            </thead>
 		            <tbody>
-			            <tr style = "border: 1px solid #DDD;" >
-			                <td style="background-color: #CCCCCC;"  ><center><a href="">asd</a></center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdas</center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdasd</center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdsada</center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdasd</center></td>
+			            <tr style = "border: 1px solid #DDD;" ng-repeat="t_data in table_data" >
+			                <td style="background-color: #CCCCCC;"  ><center><a href="">{{t_data.equipment}}</a></center></td>
+			                <td style="background-color: #F6F6F6;;" ><center>{{t_data.total}}</center></td>
+			                <td style="background-color: #F6F6F6;;" ><center>{{t_data.functional}}</center></td>
+			                <td style="background-color: #F6F6F6;;" ><center>{{t_data.broken_down}}</center></td>
+			                <td style="background-color: #F6F6F6;;" ><center>{{t_data.obsolete}}</center></td>
 			            </tr>
 		            </tbody>
 		        </table>
@@ -69,19 +69,17 @@
 		            <thead class="even" style="background:#f0f0f0" >
 		                <tr>
 		                    <td>Device</td>
-		                    <td>Total</td>
-		                    <td>Functional</td>
-		                    <td>Broken down</td>
-		                    <td>Obsolete</td>
+		                    <td>Total Tests</td>
+		                    <td>Successful Tests</td>
+		                    <td>Errors</td>
 		                </tr>
 		            </thead>
 		            <tbody>
-			            <tr style = "border: 1px solid #DDD;" >
-			                <td style="background-color: #CCCCCC;"  ><center><a href="">asd</a></center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdas</center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdasd</center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdsada</center></td>
-			                <td style="background-color: #F6F6F6;;" ><center>asdasd</center></td>
+			            <tr style = "border: 1px solid #DDD;" ng-repeat="t_data in equipment_tests_data">
+			                <td style="background-color: #CCCCCC;"  ><center><a href="">{{t_data.name}}</a></center></td>
+			                <td style="background-color: #F6F6F6;;" ><center>{{t_data.count}}</center></td>
+			                <td style="background-color: #F6F6F6;;" ><center>{{t_data.valid}}</center></td>
+			                <td style="background-color: #F6F6F6;;" ><center>{{t_data.errors}}</center></td>
 			            </tr>
 		            </tbody>
 		        </table>
