@@ -150,7 +150,7 @@ function get_fcdrr_content($fcdrr_list_result){
 				$final_pdf_data=$first_part_table.$second_part_table;
 
 			}
-
+			
 			return $final_pdf_data;
 	}
 
@@ -159,11 +159,13 @@ function get_fcdrr_content($fcdrr_list_result){
 /* Get the commodities used in that facility */
 function get_commodity_categories($facility_id,$fcdrr_id){
 
-	$commodity_category_results=$this->db->query("SELECT cc.id,
-							 						cc.name,
-							 						cc.equipment_id
-							 						FROM commodity_category cc,  v_device_details vde 
-							 						WHERE (cc.equipment_id = vde.device_id OR cc.equipment_id =0) AND vde.facility_id ='$facility_id' GROUP BY cc.id");
+	$commodity_category_results=$this->db->query("SELECT 
+													cc.categoryID,
+													cc.name,
+													cc.equipmentType 
+													FROM commodity_category cc,  device_details vde 
+													WHERE (cc.equipment_id = vde.device_id OR cc.equipment_id=0 ) 
+													AND vde.facility_id ='$facility_id' GROUP BY cc.id");
 	$commodities_final_list="";
 
 	foreach($commodity_category_results->result_array() as $commodity_category)
@@ -174,7 +176,7 @@ function get_commodity_categories($facility_id,$fcdrr_id){
 
 		$commodities_final_list=$commodities_final_list.$cat_table.$commodities_list; //concatenate all the rows to join the table later
 	}
-
+	
 	return $commodities_final_list;
 
 } /* End of function get_commodity_categories(2 variables) */

@@ -13,15 +13,17 @@ app.controller('fcdrrCtrl',
     'SweetAlert', 
     'notify',
     'Restangular',
-    function($stateParams,$state, $rootScope,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular){
+    'apiAuth',
+    function($stateParams,$state, $rootScope,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth){
 
-        $scope.allowed =  function(){
+        // $scope.allowed =  function(){
             
-            return $http.get("fcdrr/is_allowed");
-        }
+        //     return $http.get("fcdrr/is_allowed");
+        // }
+
+        apiAuth.requireLogin();
 
 
-        $scope.is_allowed = $scope.allowed();
 
 
         $scope.fcdrr_id = $stateParams.id;

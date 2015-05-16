@@ -1,4 +1,4 @@
-app.controller('loginCtrl',['$scope','Commons', 'apiAuth',function ($scope,Commons,apiAuth){
+app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth',function ($scope,$rootScope,Commons,apiAuth){
     
    	$scope.username = "";
    	$scope.password = "";
@@ -9,17 +9,27 @@ app.controller('loginCtrl',['$scope','Commons', 'apiAuth',function ($scope,Commo
     	password = $scope.password;
     	
     	var formData = {username:username,password:password};
-		
+
      $.ajax({
        url:Commons.baseURL+"api/auth/login",
        type: 'POST',
        data:formData,
        success:function(success){
 
-       }
-     })
+      }
+    })
      .done(function( data, textStatus, jqXHR ){
         apiAuth.loginConfirmed();
+
+        $rootScope.getSessionDetails().success(function(data){
+          $rootScope.sess= data;
+
+          if(data.loggedin){
+            $rootScope.menuName= data.name;
+          }else{
+            $rootScope.menuName= "Action";      
+          }
+        })
      })
 
       .fail(function( jqXHR, textStatus, errorThrown ){
