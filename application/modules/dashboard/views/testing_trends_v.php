@@ -5,7 +5,6 @@
 	}
 	#middle_chart{
 		width:100%;
-		
 	}
 	#table_container{
 		padding:5%;

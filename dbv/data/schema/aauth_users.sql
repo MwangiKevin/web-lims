@@ -1,9 +1,9 @@
-CREATE TABLE IF NOT EXISTS `aauth_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) NOT NULL,
-  `pass` text NOT NULL,
-  `name` text,
-  `banned` int(11) DEFAULT '0',
+CREATE TABLE `aauth_users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `pass` varchar(50) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `banned` tinyint(1) DEFAULT '0',
   `last_login` datetime DEFAULT NULL,
   `last_activity` datetime DEFAULT NULL,
   `last_login_attempt` datetime DEFAULT NULL,
@@ -13,7 +13,5 @@ CREATE TABLE IF NOT EXISTS `aauth_users` (
   `verification_code` text,
   `ip_address` text,
   `login_attempts` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  KEY `id_index` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

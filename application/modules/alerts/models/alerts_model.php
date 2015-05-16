@@ -76,7 +76,7 @@ function weekly_uploads($last_monday,$last_sunday,$county,$partner,$facility,$re
 						SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`,
 						SUM(CASE WHEN `valid`= '1'  AND  `cd4_count` < 500 THEN 1 ELSE 0 END) AS `failed`,
 						SUM(CASE WHEN `valid`= '1'  AND  `cd4_count` >= 500 THEN 1 ELSE 0 END) AS `passed`
-					FROM `v_pima_uploads_details`
+					FROM `v_pima_upload_details`
 					WHERE `result_date` BETWEEN '".$last_monday."' AND '".$last_sunday."' ".$delimiter."
 					GROUP BY ".$group_by."
 					ORDER BY `facility_name` ASC";
@@ -247,11 +247,11 @@ public function get_test_details($from,$to,$facility,$report_type)  // get all t
 	{
 		if($report_type=="all") //for monthly activity report
 		{
-			$criteria =" AND facility_name='".$facility."' AND result_date like '".date('Y-m',strtotime($from))."-%' ";
+			$criteria =" WHERE facility_name='".$facility."' AND result_date like '".date('Y-m',strtotime($from))."-%' ";
 		}
 		else if($report_type=="tests_less_than500") // for monthly critical report
 		{
-			$criteria =" AND facility_name='".$facility."' AND valid='1' AND cd4_count < 500 AND result_date BETWEEN '".$from."' AND '".$to."' ";
+			$criteria =" WHERE facility_name='".$facility."' AND valid='1' AND cd4_count < 500 AND result_date BETWEEN '".$from."' AND '".$to."' ";
 		}
 		
 	}		
@@ -278,11 +278,11 @@ public function get_count_test_details($from,$to,$facility)// get all cumulative
 	{
 		if($report_type=="all") //for monthly activity report
 			{
-				$criteria =" AND facility_name='".$facility."' AND result_date like '".date('Y-m',strtotime($from))."-%' ";
+				$criteria =" WHERE facility_name='".$facility."' AND result_date like '".date('Y-m',strtotime($from))."-%' ";
 			}
 			else if($report_type=="tests_less_than500") // for monthly critical report
 			{
-				$criteria =" AND facility_name='".$facility."' AND valid='1' AND cd4_count < 500 AND result_date BETWEEN '".$from."' AND '".$to."' ";
+				$criteria =" WHERE facility_name='".$facility."' AND valid='1' AND cd4_count < 500 AND result_date BETWEEN '".$from."' AND '".$to."' ";
 			}
 	}	
 
@@ -391,13 +391,13 @@ function upload_list($from,$to,$group_by_delimiter)// gets uploads grouped by fa
 						upload_date,
 						serial_number,
 						facility_name,
-						COUNT(pima_test_id) AS total_tests,
+						COUNT(cd4_test_id) AS total_tests,
 						SUM(CASE WHEN valid= '1'    THEN 1 ELSE 0 END) AS valid_tests,
 						SUM(CASE WHEN valid= '0'    THEN 1 ELSE 0 END) AS errors,
 						SUM(CASE WHEN valid= '1'  AND  cd4_count < 500 THEN 1 ELSE 0 END) AS failed,
 						SUM(CASE WHEN valid= '1'  AND  cd4_count >= 500 THEN 1 ELSE 0 END) AS passed,
-						sub_couunty_name,
-						sub_couunty_id,
+						sub_county_name,
+						sub_county_id,
 						county_id,
 						county_name,
 						partner_name

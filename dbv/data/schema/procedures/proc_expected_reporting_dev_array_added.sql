@@ -50,7 +50,7 @@ BEGIN
 				`t1`.`rolledout`, 
 				SUM(`t2`.`rolledout`) AS `cumulative`
 			FROM
-(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
+				(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
              		`fac_eq`.`date_added`, 
 					MONTH(`fac_eq`.`date_added`) AS `month`,
 					COUNT(*) AS `rolledout` 
@@ -62,12 +62,10 @@ BEGIN
 					ON `eq`.`category`= `eq_cat`.`id`
 				LEFT JOIN `facility` `fac`
         			ON	`fac_eq`.`facility_id` = `fac`.`id`
- 				LEFT JOIN `partner` `par`
- 					ON `par`.`id` = `fac`.`partner_id`
 				WHERE `fac_eq`.`date_added` <> '0000-00-00'
 				AND `eq`.`id` = '4'
 				AND `fac_eq`.`status` <> '4' 
-				AND `par`.`id` = `user_filter_used`
+				AND `fac`.`partner_id` = `user_filter_used`
 				GROUP BY `yearmonth`) AS `t1`
 			INNER JOIN 
 				(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
@@ -82,12 +80,10 @@ BEGIN
 					ON `eq`.`category`= `eq_cat`.`id`
 				LEFT JOIN `facility` `fac`
 			        ON	`fac_eq`.`facility_id` = `fac`.`id`
-                 LEFT JOIN `partner` `par`
- 					ON `par`.`id` = `fac`.`partner_id`
 				WHERE `fac_eq`.`date_added` <> '0000-00-00'
 				AND `eq`.`id` = '4' 
 				AND `fac_eq`.`status` <> '4' 
-				AND `par`.`id` = `user_filter_used`
+				AND `fac`.`partner_id` = `user_filter_used`
 				GROUP BY `yearmonth`) AS `t2` 
 			ON `t1`.`date_added` >= `t2`.`date_added` 
 			GROUP BY `t1`.`date_added`;
@@ -101,51 +97,47 @@ BEGIN
 				`t1`.`rolledout`, 
 				SUM(`t2`.`rolledout`) AS `cumulative`
 			FROM
-(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
-             			`fac_eq`.`date_added`, 
-						MONTH(`fac_eq`.`date_added`) AS `month`,
-						COUNT(*) AS `rolledout`
- 			
-	            FROM `facility_equipment` `fac_eq`
+				(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
+					`fac_eq`.`date_added`, 
+					MONTH(`fac_eq`.`date_added`) AS `month`,
+					COUNT(*) AS `rolledout` 
+
+				FROM `facility_equipment` `fac_eq`
 	            LEFT JOIN `equipment` `eq`
-			        ON `fac_eq`.`equipment_id`= `eq`.`id`
+            		ON `fac_eq`.`equipment_id`= `eq`.`id`
 				LEFT JOIN `equipment_category` `eq_cat`
 					ON `eq`.`category`= `eq_cat`.`id`
 				LEFT JOIN `facility` `fac`
         			ON	`fac_eq`.`facility_id` = `fac`.`id`
-				LEFT JOIN `sub_county` `s_c`
-					ON `fac`.`sub_county_id` = `s_c`.`id`
-				LEFT JOIN `county` `cou`
-					ON `cou`.`id` = `s_c`.`county_id`
-				WHERE `fac_eq`.`date_added` <> '0000-00-00'
-				AND `eq`.`id` = '4' 
-				AND `fac_eq`.`status` <> '4' 
-				AND `cou`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t1`
-			INNER JOIN 
-			(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
-             			`fac_eq`.`date_added`, 
-						MONTH(`fac_eq`.`date_added`) AS `month`,
-						COUNT(*) AS `rolledout`
+				LEFT JOIN `sub_county` `dis`
+					ON `fac`.`sub_county_id` = `dis`.`id`
+			WHERE `fac_eq`.`date_added` <> '0000-00-00'
+			AND `eq`.`id` = '4'
+			AND `fac_eq`.`status` <> '4' 
+			AND `dis`.`county_id` = `user_filter_used`
+			GROUP BY `yearmonth`) AS `t1`
+		INNER JOIN 
+				(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
+             		`fac_eq`.`date_added`, 
+					MONTH(`fac_eq`.`date_added`) AS `month`,
+					COUNT(*) AS `rolledout`
  			
-	            FROM `facility_equipment` `fac_eq`
-	            LEFT JOIN `equipment` `eq`
-			        ON `fac_eq`.`equipment_id`= `eq`.`id`
-				LEFT JOIN `equipment_category` `eq_cat`
-					ON `eq`.`category`= `eq_cat`.`id`
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id`
-				LEFT JOIN `sub_county` `s_c`
-					ON `fac`.`sub_county_id` = `s_c`.`id`
-				LEFT JOIN `county` `cou`
-					ON `cou`.`id` = `s_c`.`county_id`
-				WHERE `fac_eq`.`date_added` <> '0000-00-00'
-				AND `eq`.`id` = '4' 
-				AND `fac_eq`.`status` <> '4' 
-				AND `cou`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t2` 
-			ON `t1`.`date_added` >= `t2`.`date_added` 
-			GROUP BY `t1`.`date_added`;
+            FROM `facility_equipment` `fac_eq`
+            LEFT JOIN `equipment` `eq`
+		        ON `fac_eq`.`equipment_id`= `eq`.`id`
+			LEFT JOIN `equipment_category` `eq_cat`
+				ON `eq`.`category`= `eq_cat`.`id`
+			LEFT JOIN `facility` `fac`
+        		ON	`fac_eq`.`facility_id` = `fac`.`id`
+			LEFT JOIN `sub_county` `dis`
+				ON `fac`.`sub_county_id` = `dis`.`id`
+			WHERE `fac_eq`.`date_added` <> '0000-00-00'
+			AND `eq`.`id` = '4' 
+			AND `fac_eq`.`status` <> '4' 
+			AND `dis`.`county_id` = `user_filter_used`
+			GROUP BY `yearmonth`) AS `t2` 
+		ON `t1`.`date_added` >= `t2`.`date_added` 
+		GROUP BY `t1`.`date_added`;
 			
 		WHEN 8 THEN
 			SELECT
@@ -167,12 +159,12 @@ BEGIN
 					ON `eq`.`category`= `eq_cat`.`id`
 				LEFT JOIN `facility` `fac`
 			        ON	`fac_eq`.`facility_id` = `fac`.`id`
-				LEFT JOIN `sub_county` `s_c`
-					ON `fac`.`sub_county_id` = `s_c`.`id`
+				LEFT JOIN `sub_county` `dis`
+					ON `fac`.`sub_county_id` = `dis`.`id`
 				WHERE `fac_eq`.`date_added` <> '0000-00-00'
 				AND `eq`.`id` = '4'
 				AND `fac_eq`.`status` <> '4' 
-				AND `s_c`.`id` = `user_filter_used`
+				AND `fac`.`sub_county_id` = `user_filter_used`
 				GROUP BY `yearmonth`) AS `t1` 
 			INNER JOIN 
 				(SELECT 	CONCAT(YEAR(`fac_eq`.`date_added`),'-',MONTH(`fac_eq`.`date_added`)) AS `yearmonth`,
@@ -187,13 +179,11 @@ BEGIN
 					ON `eq`.`category`= `eq_cat`.`id`
 				LEFT JOIN `facility` `fac`
 			        ON	`fac_eq`.`facility_id` = `fac`.`id`
-				LEFT JOIN `sub_county` `s_c`
-					ON `fac`.`sub_county_id` = `s_c`.`id`
 
 				WHERE `fac_eq`.`date_added` <> '0000-00-00'
 				AND `eq`.`id` = '4' 
 				AND `fac_eq`.`status` <> '4' 
-				AND `s_c`.`id` = `user_filter_used`
+				AND `fac`.`sub_county_id` = `user_filter_used`
 				GROUP BY `yearmonth`) AS `t2` 
 			ON `t1`.`date_added` >= `t2`.`date_added` 
 			group by `t1`.`date_added`;
@@ -249,6 +239,5 @@ BEGIN
 			group by `t1`.`date_added`;
 		END CASE;
 	END CASE;
-END;
-$$
+END;$$
 DELIMITER ;
