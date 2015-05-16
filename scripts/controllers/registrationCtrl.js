@@ -12,10 +12,16 @@ app.controller('registrationCtrl',['$scope','$http','Commons',function ($scope,$
     if (this.isInvalid()) {  
 
     }else{
-      // alert('freee');
       this.loading = true;
-      // console.log(this.user);
-      $http.post(Commons.baseURL+'api/registration/submit',{params:$scope.user});
+      $http.post(Commons.baseURL+'api/registration/submit',{params:$scope.user})
+      .success(function(response){
+        $location.path( "/dashboard" );        
+        swal("Registered!", "You have been successfully registered. \n Check your email to confirm your registration", "success");
+      }) 
+      .error(function(response){  
+        $scope.loading = false;
+        swal("Error!", "Something went wrong, Please try again ", "error");      
+      })
     }
 
   };
