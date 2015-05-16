@@ -97,64 +97,38 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Browser share',
-            data: [
-                ['Firefox',   45.0],
-                ['IE',       26.8],
-                {
-                    name: 'Chrome',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                },
-                ['Safari',    8.5],
-                ['Opera',     6.2],
-                ['Others',   0.7]
-            ]
-        }]
-	}
-	
-	//
-	//
-	//CD4 Equipment Table
-	//
-	//
-	$scope.cd4_equipment_table_data = function(){
-		return $http.get(
-			Commons.baseURL+"api/dashboard"			
-			)
-		.success(function(response){
-			$scope.table_data = response;
-		});	
-	}
-	//$scope.cd4_equipment_table_data();
-	
+            },
+        series: [{"name":"Alere PIMA","y":199,"sliced":true,"selected":true},{"name":"BD Facs Calibur","y":0,"sliced":false,"selected":false},{"name":"BD Facs Count","y":0,"sliced":false,"selected":false},{"name":"Partec Cyflow","y":0,"sliced":false,"selected":false}]
+	}	
 	
 	//
 	//
 	//CD4 Equipment and Tests Pie
 	//
-	//$scope.cd4_equipment_tests_pie();
+	$scope.equipment_tests_pie_data = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_expected_reporting_devices/0/0/0"			
+			)
+		.success(function(response){
+			$scope.equipment_tests_pie.series.data = response;
+			// console.log($scope.equipment_tests_pie.series[0].data);
+		});	
+	}
+	$scope.equipment_tests_pie_data();
 	$scope.equipment_tests_pie = {
 		chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
         title: {
             text: 'CD4 Tests & Equipment'
         },
@@ -162,57 +136,37 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
-            }
-        },
+            },
         series: [{
-            type: 'pie',
-            name: 'Browser share',
-            data: [
-                ['Firefox',   45.0],
-                ['IE',       26.8],
-                {
-                    name: 'Chrome',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                },
-                ['Safari',    8.5],
-                ['Opera',     6.2],
-                ['Others',   0.7]
-            ]
-        }]
+	                type: 'pie',
+	                name: 'Percentage',
+	                size: '20',
+	                data: []
+                }]
 	}
-	
-	
-	//
-	//
-	//CD$ Equipment and Tests Table
-	//
-	//
-	$scope.cd4_equipment_tests_table_data = function(){
-		return $http.get(
-			Commons.baseURL+"api/dashboard"			
-			)
-		.success(function(response){
-			$scope.table_data = response;
-		});	
-	}
-	//$scope.cd4_equipment_tests_table_data();
 	
 	//
 	//
 	//Expected Reporting Devices
 	//
+	$scope.expected_reporting_devices_data = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_expected_reporting_devices/0/0/0"			
+			)
+		.success(function(response){
+			//$scope.expected_reporting_devices.series = response;
+			// alert($scope.table_data);
+		});	
+	}
+	$scope.expected_reporting_devices_data();
 	//$scope.expected_reporting_devices();
 	$scope.expected_reporting_devices =  {
 		chart: { 
@@ -269,7 +223,38 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
         series: [{"name":"Expected Reporting Devices","data":[3,4,7,12,16,19,20,24,26,31,38,40]},{"name":"Reported Devices","color":"#a4d53a","data":[null,null,null,null,null,null,null,null,null,null,null,null]}]            
 	}
 	
+	//
+	//
+	//CD4 Equipment Table
+	//
+	//
+	$scope.cd4_equipment_table = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_devices_table/0/0"			
+			)
+		.success(function(response){
+			$scope.table_data = response;
+			// alert($scope.table_data);
+		});	
+	}
+	$scope.cd4_equipment_table();
 	
+	
+	//
+	//
+	//CD4 Equipment and Tests Table
+	//
+	//
+	$scope.cd4_equipment_tests_table = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_devices_tests_table/0/0/0/0"			
+			)
+		.success(function(response){
+			$scope.equipment_tests_data = response;
+			// alert($scope.table_data);
+		});	
+	}
+	$scope.cd4_equipment_tests_table();
 	
 	
 	

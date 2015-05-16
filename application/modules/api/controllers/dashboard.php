@@ -102,7 +102,7 @@ class dashboard extends MY_Controller {
 		}
 		echo json_encode($categories);
 	}
-	
+
 	
 	//
 	//
@@ -128,6 +128,7 @@ class dashboard extends MY_Controller {
 		$categories = $this->get_yearly_testing_trends_categories();
 		echo json_encode($categories[0]);
 	}
+
 	public function yearly_testing_trends($user_group_id,$user_filter_used) {
 		$sql = "CALL proc_equipment_yearly_testing_trends_column(0,0)";
 		$sql1 = "CALL proc_sql_eq()";
@@ -151,6 +152,7 @@ class dashboard extends MY_Controller {
 					}
 				}
 			}
+
 
 			$data[$key] =	$row;
 		}
@@ -181,41 +183,7 @@ class dashboard extends MY_Controller {
 		$total =	(int) $tst[0]["total"];
 		$errors =	(int) $tst[0]["errors"];
 		$valid =	(int) $tst[0]["valid"];
-
-
-		// $tests 	=				array(
-									// 0	=>	array(
-													// 'y'				=>	$valid,
-													// 'color'			=>	'#a4d53a',
-													// 'drilldown'		=>	array(
-																			// 'name'			=>	'Successful Tests',
-																			// 'color'			=>	'#a4d53a',
-																			// 'categories'	=>	array(
-																										// 0	=>	'abv critical lvl',
-																										// 1	=>	'blw critical lvl',
-																								// ),
-																			// 'data'			=>	array(
-																										// 0	=>	$passed,
-																										// 1	=>	$failed
-																								// )
-																		// )
-												// ),
-									// 1	=>	array(
-													// 'y'				=>	$errors,
-													// 'color'			=>	'#aa1919',
-													// 'drilldown'		=>	array(
-																			// 'name'			=>	'Unsuccessful Tests (Errors)',
-																			// 'color'			=>	'#aa1919',
-																			// 'categories'	=>	array(
-																										// 0	=>	'Errors'
-																								// ),
-																			// 'data'			=>	array(
-																										// 0	=>	$errors
-																								// )
-																		// )
-												// )
-								// );
-
+		
 		$tests = 
 				array(
 							array('Errors', $errors),
@@ -234,15 +202,6 @@ class dashboard extends MY_Controller {
 		// print_r($tests);
 		// echo "</pre>";die;
 	}
-
-	// for tests and errors [pie chart]
-	public function get_test_n_errors($param1, $param2){
-		$sql = "CALL proc_get_test_pie()";
-		$response = R::getAll($sql);
-
-		echo json_encode($response);
-	}
-
 	// for test for this year [table]
 	public function get_tests($user_group_id, $user_filter_used,$from,$to){
 		$from = '2014-02-27';
@@ -283,9 +242,8 @@ class dashboard extends MY_Controller {
 		// print_r($tests);
 		// echo "</pre>";die;
 		
-		echo json_encode($tests);
+		echo json_encode($tests);	
 	}
-
 	// for yearly testing trends [Column]
 	public function get_yearly_testing_trends($param1,$param2){
 		$sql = "CALL proc_error_yealy_trends()";
@@ -293,9 +251,8 @@ class dashboard extends MY_Controller {
 
 		echo json_encode($response);
 	}
-
-
-// WEB-LIMS DEVICES
+	
+	// WEB-LIMS DEVICES
 
 
 	// Number of Devices per County [stacked]
@@ -307,107 +264,50 @@ class dashboard extends MY_Controller {
 
 	}
 
-	// get cd4 devices [Pie Chart]
-	function get_cd4_devices_pie($param1,$param2){
-		$sql = "CALL proc_equipment_pie(0,0)";
-		$response = R::getAll($sql);
-
-		// echo "<pre>" ; print($response);
-		// die();
-		
-		echo json_encode($response);
+	// get cd4 equipment [Pie Chart]
+	function get_cd4_devices_pie($user_group_id,$user_filter_used){
+		$user_group_id = 0;
+		$user_filter_used = 0;
+		$result = $this->dashboard_m->get_cd4_devices_pie($user_group_id,$user_filter_used);
+		echo json_encode($result);
 	}
 
-	// get cd4 Devices [Table]
+	// get cd4 equipment [Table]
 	function get_devices_table(){
+		$result = $this->dashboard_m->get_devices_table($user_group_id,$user_filter_id);
+		echo json_encode($result);
+	}
 
-		$sql = "CALL proc_get_facility_devices()";
+	// for tests and errors [pie chart]
+	public function get_test_n_errors($param1, $param2){
+		$sql = "CALL proc_get_test_pie()";
 		$response = R::getAll($sql);
 
 		echo json_encode($response);
 	}
-
-	// Devices and tests [Pie Chart]
-	function get_devices_tests_pie($param1,$param2){
-		$sql = "CALL proc_equipment_tests_pie()";
-		$response = R::getAll($sql);
-
-		echo json_encode($response);
+	
+	// equipment and tests [Pie Chart]
+	function get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used){
+		$from = '2013-01-01';
+		$to = '2013-12-31';
+		$result = $this->dashboard_m->get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used);
+		echo json_encode($result);
 	}
 
 	// Devices tests for this year [table]
-	function get_devices_tests_thisyear(){
-		$sql = "CALL proc_equipment_test_data";
-		$response = R::getAll($sql);
-
-		echo json_encode($response);
+	function get_devices_tests_table($from,$to,$user_group_id,$user_filter_used){
+		$from = '2013-01-01';
+		$to = '2013-12-31';
+		$result = $this->dashboard_m->get_devices_tests_table($from,$to,$user_group_id,$user_filter_used);
+		echo json_encode($result);
 	}
 
 	// expected reporting devices [area chart]
-	
-	function get_expected_reporting_devices($param1,$param2,$year=2015){
+	function get_expected_reporting_devices($user_group_id,$user_filter_used,$year=2015){
 		//error_reporting(0);
-		$sql_devices_added = "CALL proc_expected_reporting_dev_array_added(".$param1.", ".$param2.")";
+		$results = $this->dashboard_m->get_expected_reporting_devices($user_group_id,$user_filter_used,$year);
+		$results = json_encode($results);
+		echo $results;
 
-		$sql_devices_removed = "CALL proc_expected_reporting_dev_array_removed(".$param1.", ".$param2.")";
-
-
-		$devices_added_assoc 	=	R::getAll($sql_devices_added);
-		$devices_removed_assoc 	=	R::getAll($sql_devices_removed);
-
-		$devices_added_array	=	array();	
-		$devices_removed_array	=	array();
-
-		$consolidated_array		=	array();
-
-		//initialize
-		$current_cummulative_added 		= 0;
-		$current_cummulative_removed 	= 0;
-
-		foreach ($devices_added_assoc as $value) {
-			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
-
-			if($curr_year< (int) $year){
-				$current_cummulative_added 		= (int) $value["cumulative"];
-			}
-		}
-		//echo 	$current_cummulative_added ;
-		foreach ($devices_removed_assoc as $value) {
-			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
-			if($curr_year< (int) $year){
-				$current_cummulative_removed 		= (int) $value["cumulative"];
-			}
-		}
-		//echo 	$current_cummulative_removed ;
-
-		//initialize
-		$devices_added_array[0]		=	$current_cummulative_added;	
-		$devices_removed_array[0]	=	$current_cummulative_removed;
-
-		for($i=0;$i<12;$i++){
-
-			foreach ($devices_added_assoc as $key => $added) {
-				if($added['yearmonth']==($year)."-".($i+1)){
-					$current_cummulative_added = (int) $added['cumulative'];
-				}				
-			}
-			foreach ($devices_removed_assoc as $key => $removed) {
-				if($removed['yearmonth']==($year)."-".($i+1)){
-					$current_cummulative_removed = (int) $removed['cumulative'];
-				}				
-			}
-
-			$devices_added_array[$i] = $current_cummulative_added;
-			$devices_removed_array[$i] = $current_cummulative_removed;
-			
-		}
-
-		for($i=0;$i<12;$i++){
-			$consolidated_array[$i] = (int)$devices_added_array[$i] - (int) $devices_removed_array[$i];
-		}
-
-		echo json_encode($consolidated_array);
 	}
-
-
 }
