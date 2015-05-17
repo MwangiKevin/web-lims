@@ -19,8 +19,6 @@
 
 <script>
     $('.ui.dropdown').dropdown();
-    //$( document ).tooltip();
-    $('.ui.accordion')
-  .accordion()
-;
+    $( document ).tooltip();
+    $('.ui.accordion').accordion();
 </script>

@@ -209,7 +209,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'tests',
-				controller:'cd4TestsCtrl'
+				// controller:'cd4TestsCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
