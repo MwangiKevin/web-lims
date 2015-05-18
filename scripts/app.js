@@ -18,7 +18,8 @@ var app = angular
 	'restangular',
 	'validation', 
 	'validation.rule',
-    'http-auth-interceptor'
+    'http-auth-interceptor',
+    'datatables'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -209,7 +210,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'tests',
-				// controller:'cd4TestsCtrl'
+				controller:'cd4TestsCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

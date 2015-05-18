@@ -217,7 +217,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-cookie/angular-cookie.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ng-token-auth/dist/ng-token-auth.min.js');?>"></script>
 	<script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.js"></script>
-
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/angular-datatables.min.js');?>"></script>
 
 
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>

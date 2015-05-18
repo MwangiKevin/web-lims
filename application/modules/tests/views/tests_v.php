@@ -4,7 +4,6 @@
 			<table class="table table-bordered" id="tests_table" width="100%">
 				<thead>
 					<tr>
-
 						<th style="text-align: center" >Test ID</th>
 						<th style="text-align: center" >Sample Code/Patient </th>
 						<th style="text-align: center" >Facility</th>
@@ -13,24 +12,17 @@
 					</tr>
 				</thead>
 				<tbody>
-
-
-					<tr class="odd gradeX">
-
-						
+					<tr class="odd gradeX">						
 						<td style="text-align: center"> </td>
 						<td style="text-align: center"> </td>
 						<td style="text-align: center"> </td>
 						<td style="text-align: center">  </td>
 
 					</tr>
-
-
-
-
-
 				</tbody>
 			</table>
+			<br/>
+			<table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover table table-bordered"></table>
 		</div>
 	</div>
 </div>
