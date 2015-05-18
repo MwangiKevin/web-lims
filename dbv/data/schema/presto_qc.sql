@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `presto_qc` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `run_id` varchar(100) NOT NULL,
   `run_date_time` datetime NOT NULL,
-  `operator` varchar(100) NOT NULL,
+  `operator` varchar(100) DEFAULT NULL COMMENT 'can have operator name or remain blank for self tests',,
   `reagent_lot_id` int(11) NOT NULL,
   `reagent_lot_exp` date NOT NULL,
   `patient_id` varchar(100) NOT NULL,
