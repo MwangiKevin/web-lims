@@ -17,13 +17,12 @@ var app = angular
 	'cgNotify',
 	'restangular',
 	'validation', 
-	'validation.rule',
-    'http-auth-interceptor'
+	'validation.rule'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
 	$urlRouterProvider.otherwise('/');
-	
+
 	$stateProvider
 	
 	//LIMS Login	
@@ -45,7 +44,6 @@ var app = angular
 			}
 		}
 	})
-
 	
 	.state('Dashboard',{
 		url: '/',		
@@ -56,7 +54,7 @@ var app = angular
 				controller:'dashboardCtrl'
 			},
 			'navbar':{
-				templateUrl: 'login/navbar',
+				templateUrl: 'dashboard/navbar',
 				controller: 'navbarCtrl'
 			},
 			'filter':{
@@ -77,8 +75,8 @@ var app = angular
 	
 	.state('Dashboard.main',{
 		url: '',
-		templateUrl: 'dashboard/testing_trends',
-		controller:'TestsTrendCtrl'		
+		templateUrl: 'dashboard/dashboard_summary',
+		controller:'dashboardSummaryCtrl'		
 	})
 
 
@@ -94,7 +92,8 @@ var app = angular
 	})
 	.state('Dashboard.devices',{
 		url: 'deviceDistribution',
-		templateUrl: 'dashboard/devices'		
+		templateUrl: 'dashboard/devices',
+		controller: 'device_distributionCtrl'		
 	})
 	.state('Dashboard.map',{
 		url: 'map',
