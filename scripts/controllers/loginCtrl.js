@@ -35,11 +35,6 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth',function 
       .fail(function( jqXHR, textStatus, errorThrown ){
         console.log(errorThrown);
       })
-
-      // apiAuth.login(username,password).success(function(){
-
-      //     alert('done');
-      // })
     }
 }])
 

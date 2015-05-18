@@ -126,7 +126,7 @@
 							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
 							<label for="username">Username: </label>
 							<div class="ui icon input">
-								<input type="text" placeholder="Username/email" name="username" id="username" ng-model="username">
+								<input type="text" placeholder="email" name="username" id="username" ng-model="username">
 								<i class="user icon"></i>
 							</div>
 						</div>
