@@ -216,7 +216,7 @@ app.controller('fcdrrCtrl',
 
         $scope.baseFacilities = Restangular.all('facilities');    
 
-        $scope.refreshAddresses = function(search) {
+        $scope.refreshFacilities = function(search) {
             var params = {address: search, sensor: false};                    
 
             $scope.baseFacilities.getList({search:search,limit_items:6}).then(function(com) {
