@@ -1,13 +1,13 @@
-userName,userGroupID,phone,email
+Name,userGroupID,phone,email
 admin,2,,mwangikevinn@gmail.com
-icap,1,2.54711E+11,NULL
+icap,1,2.55E+11,NULL
 nick,2,,kanikmu@yahoo.com
-tim,2,2.54725E+11,tngugi@clintonhealthaccess.org
+tim,2,2.55E+11,tngugi@clintonhealthaccess.org
 kemri,1,,NULL
 cdc,1,,NULL
-superAdmin,2,2.54719E+11,NULL
-onjathi,5,2.54701E+11,NULL
-judy,2,2.5472E+11,NULL
+superAdmin,2,2.55E+11,NULL
+onjathi,5,2.55E+11,NULL
+judy,2,2.55E+11,NULL
 mamo,5,,NULL
 Silvia,2,,skadima@clintonhealthaccess.org
 papamo,1,,papamo@mgickenya.org
@@ -56,161 +56,158 @@ abunu,1,,Abunu@aphiaplus-nc.org
 mmwangala,1,,MMwangala@aphiaplus-nc.org
 jkimaru,1,,josephk.kimaru@gmail.com
 mbaabuelitejoy,1,,mbaabuelitejoy@gmail.com
-System ,7,98342-91823,www.nascop.org
-hbowen,9,2.54722E+11,haronbowen@yahoo.com
-cbonde,3,2.54722E+11,cbonde@aphiarift.org
-jmilgo,9,2.54713E+11,milgoj@yahoo.com
-aliongov,9,2.54718E+11,aliongov@gmail.com
-bolonyi,9,2.54723E+11,bellectra@yahoo.com
-lkiptarus,9,2.54726E+11,kiptarusluka@yahoo.com
-enjau,9,2.54729E+11,eliudnjau@yahoo.com
-jokuthe,9,2.54725E+11,jemoh143@yahoo.com
-zhassan,9,2.54722E+11,halakheadam@yahoo.com
-jondigo,3,2.54737E+11,jondigo@mgickenya.org
-elemarkoko,9,2.54721E+11,esthersointa@yahoo.com
-fmawere,3,2.54721E+11,fmawere@aphiarift.org
-jmajani,9,2.54723E+11,majanjm5@yahoo.com
-langat,9,2.54722E+11,docherotich@yahoo.com
-ayebei,9,2.54723E+11,yebeia@yahoo.com
-dmtunji,9,2.54722E+11,mtunjidavid@yahoo.co.uk
-gmueni,9,2.54723E+11,gertrudemueni07@yahoo.com
-pleitore,3,2.54709E+11,pleitore@icapkenya.org
-angunda,9,2.54723E+11,alex.ngunda@yahoo.com
-mathman,9,2.54723E+11,mohamedathman54@yahoo.com
-fmbuvi,9,2.54723E+11,fredmbuvi@yahoo.com
-bwambua,9,"254724733204
+System Modem,7,98342-91823,www.nascop.org
+Haron Bowen,9,2.55E+11,haronbowen@yahoo.com
+Catherine Bonde,3,2.55E+11,cbonde@aphiarift.org
+Johana Milgo,9,2.55E+11,milgoj@yahoo.com
+Vincent T Atiolongo,9,2.55E+11,aliongov@gmail.com
+Betty Olonyi,9,2.55E+11,bellectra@yahoo.com
+Luka Kiptarus,9,2.55E+11,kiptarusluka@yahoo.com
+Eliud Njau Mbai,9,2.55E+11,eliudnjau@yahoo.com
+James Okuthe,9,2.55E+11,jemoh143@yahoo.com
+Adam Halake,9,2.55E+11,halakheadam@yahoo.com
+Joram Ondigo,3,2.55E+11,jondigo@mgickenya.org
+Esther Lemarkoko,9,2.55E+11,esthersointa@yahoo.com
+Florence Mawere,3,2.55E+11,fmawere@aphiarift.org
+Jonathan Majani,9,2.55E+11,majanjm5@yahoo.com
+Dr Langat,9,2.55E+11,docherotich@yahoo.com
+Alexander Yebei,9,2.55E+11,yebeia@yahoo.com
+Daniel Mtunji,9,2.55E+11,mtunjidavid@yahoo.co.uk
+Gertrude Mueni,9,2.55E+11,gertrudemueni07@yahoo.com
+Philip Leitore,3,2.55E+11,pleitore@icapkenya.org
+Alex M Ngunda,9,2.55E+11,alex.ngunda@yahoo.com
+Mohamed Athman,9,2.55E+11,mohamedathman54@yahoo.com
+Fredrick Mbuvi,9,2.55E+11,fredmbuvi@yahoo.com
+Bernadette Wambua,9,"254724733204
 ",bernawambua@yahoo.com
-sgituma,9,2.54721E+11,gitumasamson@yahoo.com
-migori,9,,wwlochieng@gmail.com
-jmihindo,9,2.54721E+11,joseph.mihindo@yahoo.com
-rkithuka,3,2.54723E+11,rkithuka@aphiarift.org
-plangat,9,2.5472E+11,langatpaul58@gmail.com
-skusero,9,2.54723E+11,stevenkusero80@gmail.com
-gorinda,9,2.54723E+11,gaceorina@gmail.com
-jkariuki,9,2.54729E+11,kariukijames80@gmail.com
-rlekaram,9,2.54722E+11,robertlekaram@yahoo.com
-sshushe,9,2.5473E+11,wakosaid@yahoo.com
-swako,9,2.5473E+11,tenga100@gmail.com
-dmurithi,9,2.54726E+11,danielmurithi@gmail.com
-pgathii,3,2.54721E+11,pgathii@aphiapluskamili.org
-howento,9,2.54724E+11,howento@yahoo.com
-mmwende,9,2.54727E+11,marymwende84@gmail.com
-tkyalo,3,2.54724E+11,tkyalo@pedaids.org
-jahmed,9,2.54722E+11,jafarali.ahmed@yahoo.com
-adugow,9,2.54722E+11,adugow@yahoo.com
-kwafula,5,2.54724E+11,kellern.wafula@alere.com
-bobwocha   ,9,,obwocha52@gmail.com 
-dkamau ,9,724708447,njedan50@gmail.com
-mloogos,3,724117885,Mloogos@fhi360.org
-pnjeru,9,725227833,peternjeru12@yahoo.com
-mmuriuki,9,725227833,muriuki@yahoo.com
-mndungu,3,734979581,msff-nairobi-pharma@paris.msf.org
-ejilo,9,725227833,eliasjilo@yahoo.com
-lwandolo,9,725451290,wwlochieng@gmail.com
-kabartonjo,9,725227833,cbonde@aphiarift.org
-embati,3,721856445,embati@aphiapluswesternkenya.org
-pmuchiri,9,2.54725E+11,paulthiari@yahoo.com
-admin,2,722334455,www.nascop.org
-cchemjor,9,2.54722E+11,chemjorcharly@yahoo.com
-amakokha,3,722112233,amakokha@kemri-ucsf.org
-lmahinda,9,0726 780 080,lilymahinda@gmail.com
-mwafula,9,,meldawafula@yahoo.com
-bkariuki,9,7211544240,beatrice60ke@yahoo.com
-plomurukai,9,0729 388699,plomurukai@yahoo.com
-mkmutua,9,714494578,mathewmutua65@yahoo.com
-jnwambua,9,727215908,josephnzomowambua@yahoo.co.uk
-smutiso,9,0734 631242,solomonmutiso@yahoo.com
-jniver,9,,jodyniver2005@gmail.com
-ckimaru,9,,kimaruchristopher@yahoo.com
-vwanyonyi,3,,vayowanyonyi@yahoo.com
-vochieng,3,,veeknee@ampathplus.or.ke
-mmaalim,3,,MMaalim@fhi360.org
-papamo,3,,papamo@mgickenya.org
-mnzaro,3,,mnzaro@pathfinder.org
-jabwao,3,,jabwao@chskenya.org
-ucsfcdc,3,,jkadima@kemri-ucsf.org
-jnjogu,3,,jnjogu20@gmail.com
-rlangat,3,,raphael.langat@usamru-k.org
-dcherotich,3,,Dorcas.Cherotich@usamru-k.org
-fonyango,3,,fonyango@aphiapluswesternkenya.org
-rcheserek,9,0711 835 052,rcheserek@ymail.com
-spulkol,9,0725 875 180,spulkol@yahoo.com
-gmochama,9,0722 790 754,georgemochama@gmail.com
-womoyo,9,0721 724 985,gaswill7@yahoo.com
-iomwenga,9,0711 591 107,qwamboka78@yahoo.com
-jcaswani,9,0720 494 325,pascowestern@yahoo.com
-ymohammed,9,0729 935 741,cascowajir@gmail.com
-pmutuku,9,0723 710 503,nthwao@gmail.com
-rmuraya,9,0722 287 414,rnjenga07@yahoo.com
-llotodo,9,0723 240 042,lokwialuk@yahoo.com
-ngarama,9,0722 718 174,ngalagarama@yahoo.com
-nahmed,9,0721 264 844,sheikhna67@gmail.com
-gngunu,9,0721 328 912,ngunucarol@yahoo.com
-dmunyi,9,0725 754 201,kavuvius@yahoo.com
-akemei,9,0722 803 673,amosk65@yahoo.com
-ifauz,9,0722 539 702,fauz03@yahoo.com
-fvuku,9,0722 977 573,felistuskisuuvuku@gmail.co.uk
-nmuindi,9,0722 573 240,nicholasmuindi@yahoo.com
-eowino,9,0720 888 878,elizaowino@gmail.com
-tmagomere,9,0724 899 016,theremago@yahoo.co.uk
+Samson Gituma,9,2.55E+11,gitumasamson@yahoo.com
+migoricounty,9,,wwlochieng@gmail.com
+Joseph Mihindo,9,2.55E+11,joseph.mihindo@yahoo.com
+Romeo Kithuka,3,2.55E+11,rkithuka@aphiarift.org
+Paul Langat,9,2.55E+11,langatpaul58@gmail.com
+Steven Kusero,9,2.55E+11,stevenkusero80@gmail.com
+Grace,9,2.55E+11,gaceorina@gmail.com
+James Kariuki,9,2.55E+11,kariukijames80@gmail.com
+Lekaram Robert,9,2.55E+11,robertlekaram@yahoo.com
+Said Shushe Wako,9,2.55E+11,wakosaid@yahoo.com
+Said Shushe Wako,9,2.55E+11,tenga100@gmail.com
+Daniel Murithi,9,2.55E+11,danielmurithi@gmail.com
+Paul Gathii,3,2.55E+11,pgathii@aphiapluskamili.org
+Owento Habakuk,9,2.55E+11,howento@yahoo.com
+Mary Mwende,9,2.55E+11,marymwende84@gmail.com
+Titus Kyalo,3,2.55E+11,tkyalo@pedaids.org
+Jafaralli S Ahmed,9,2.55E+11,jafarali.ahmed@yahoo.com
+Abukar Dugow,9,2.55E+11,adugow@yahoo.com
+Kellern Wafula,5,2.55E+11,kellern.wafula@alere.com
+Bernard Obwocha   ,9,,obwocha52@gmail.com 
+Daniel Kamau,9,724708447,njedan50@gmail.com
+Michael Loogos,3,724117885,Mloogos@fhi360.org
+Peter Njeru,9,725227833,peternjeru12@yahoo.com
+Moses Muriuki,9,725227833,muriuki@yahoo.com
+Mary Ndungu,3,734979581,msff-nairobi-pharma@paris.msf.org
+Elias Jilo ,9,725227833,eliasjilo@yahoo.com
+Levis Wandolo,9,725451290,wwlochieng@gmail.com
+Kabartonjo  Users,9,725227833,cbonde@aphiarift.org
+Eric  MBati,3,721856445,embati@aphiapluswesternkenya.org
+Paul Muchiri,9,2.55E+11,paulthiari@yahoo.com
+Test Admin,2,722334455,www.nascop.org
+Charles Chemjor,9,2.55E+11,chemjorcharly@yahoo.com
+A.Makokha,3,722112233,amakokha@kemri-ucsf.org
+Lilian Mahinda,9,0726 780 080,lilymahinda@gmail.com
+Melda Wafula,9,,meldawafula@yahoo.com
+Beatrice Karuki,9,7211544240,beatrice60ke@yahoo.com
+Peter Lomurukai,9,0729 388699,plomurukai@yahoo.com
+Mathew Kyalo Mutua,9,714494578,mathewmutua65@yahoo.com
+Joseph Nzomo Wambua,9,727215908,josephnzomowambua@yahoo.co.uk
+Solomon Mutiso,9,0734 631242,solomonmutiso@yahoo.com
+Judith Niver,9,,jodyniver2005@gmail.com
+Christopher Kimaru,9,,kimaruchristopher@yahoo.com
+Vayo Wanyonyi,3,,vayowanyonyi@yahoo.com
+Vincent Ochieng,3,,veeknee@ampathplus.or.ke
+Mohammed Maalim,3,,MMaalim@fhi360.org
+Philip Apamo,3,,papamo@mgickenya.org
+Moses Nzaro,3,,mnzaro@pathfinder.org
+John Abwao,3,,jabwao@chskenya.org
+UCSF CDC users,3,,jkadima@kemri-ucsf.org
+James Njogu,3,,jnjogu20@gmail.com
+Raphael Langat,3,,raphael.langat@usamru-k.org
+Dorcas Cherotich,3,,Dorcas.Cherotich@usamru-k.org
+Francis Onyango,3,,fonyango@aphiapluswesternkenya.org
+Richard Cheserek,9,0711 835 052,rcheserek@ymail.com
+Samuel Pulkol,9,0725 875 180,spulkol@yahoo.com
+George Mochama,9,0722 790 754,georgemochama@gmail.com
+Dr. Omoyo Willis,9,0721 724 985,gaswill7@yahoo.com
+Irene Omwenga,9,0711 591 107,qwamboka78@yahoo.com
+Dr. Aswani JCA,9,0720 494 325,pascowestern@yahoo.com
+Yusuf Mohammed,9,0729 935 741,cascowajir@gmail.com
+Dr. Mutuku PIUS,9,0723 710 503,nthwao@gmail.com
+Rosemary  Muraya,9,0722 287 414,rnjenga07@yahoo.com
+Lokwialuk Lotodo,9,0723 240 042,lokwialuk@yahoo.com
+Dr. Nimrod Garama,9,0722 718 174,ngalagarama@yahoo.com
+Noor S. Ahmed,9,0721 264 844,sheikhna67@gmail.com
+Dr. Ngunu Gituathi,9,0721 328 912,ngunucarol@yahoo.com
+Dr. Munyi Edward,9,0725 754 201,kavuvius@yahoo.com
+Amos Kemei,9,0722 803 673,amosk65@yahoo.com
+Ibrahim Fauz,9,0722 539 702,fauz03@yahoo.com
+Felistus Vuku,9,0722 977 573,felistuskisuuvuku@gmail.co.uk
+Nicholas Muindi,9,0722 573 240,nicholasmuindi@yahoo.com
+Eliza Owino,9,0720 888 878,elizaowino@gmail.com
+Theresia Magomere,9,0724 899 016,theremago@yahoo.co.uk
 ,0,,
-jmikilanyah,9,0729 928 393,josmurungi@yahoo.com
-agedi,9,0720 265 268,gedialhas@gmail.com
-rkuria,9,0720 809 500,mk2002ke@yahoo.com
-jkiruri,9,0722 295 460,jennykiruri@yahoo.com
-imjomba,9,0722 295 281,koshninno@yahoo.com
-jkurwa,9,0720 368 941,jamesnkirwa@yahoo.com
-fkigen,9,0710 418 112,kgfestus@gmail.com
-sulwenya,9,0722 217 393,sebulwenya@gmail.com
-ingere,9,0724 963 660,ngereisaac@gmail.com
-sdbrcha,9,0722 258 983,cascobaringo@yahoo.com
-ckamau,9,721426219,kamauck03@gmail.com
-rbwaley,9,0721 765 173,rbwaley@yahoo.com
-cokal,9,0722 941 507,charleokal@gmail.com
-hokutoyi,9,0722 373 055,hokutoyi@gmail.com
-mjorama,9,0723 948 371,muraya30@gmail.com
-jyiaile,9,0721 797 155,casconarok@gmail.com
-jmaiyo,9,0722 378 808,josphatmaiyo@yahoo.com
-cbarake,9,0727 294 526,cascokajiado@gmail.com
-blemarkat,9,0720 296 414,blemarkat@gmail.com
-bmakenzi,9,0722 328 739,bmakenzi01@yahoo.com
-akoech,9,0720 293 610,cascobomet3@gmail.com
-bbuyi,9,0725 771 999,batulajb@gmail.com
-habgudo,9,0723 657 449,halimaabgudo@yahoo.com
-klenai,9,0721 799 365,lenaijk10@gmail.com
-coggot,9,720847451,consolatamari@yahoo.com
-fbunu,9,0722 423 809,furtush@yahoo.com
-nmwenda,9,0721 101 586,nickmwenda@yahoo.com
-mmwangala,3,2547,MMwangala@aphiaplus-nc.org
-abunu,3,2547,Abunu@aphiaplus-nc.org
-"jjumanne
-",3,2547,JJumanne@pathfinder.org
-"jkarisa
-",3,2547,JKarisa@aphiaplus-nc.org
-"cakasera
-",3,2547,CAKasera@aphiaplus-nc.org
-okendo,3,2547,okendo@mgickenya.org
-kokikinagwi,3,2547,koki.kinagwi@aphiaplusimarisha.org
-fodhiambo,3,2547,Fodhiambo@mgickenya.org
-jmutugi,3,2547,jmutugi@aphiarift.org
-mlimo,3,2547,mlimo@ampathplus.or.ke
-cogada,2,2.54721E+11,ogadacaleb@yahoo.com
-nbowen,2,2.54723E+11,njebungeibowen@gmail.com
-mdowner,3,2547,mld8@cdc.gov 
-LVCT NBI,3,723602179,gkimathi@lvcthealth.org
-okinyi.everlyne,6,722532032,okinyi.everlyne@yahoo.com
-gichanalinet,6,727361522,gichanalinet@yahoo.com
-fotieno1,4,720304739,fotieno@kemri-ucs7.org
-magallo587,9,727387690,magallo587@gmail.com
-melissaotindo,6,726557495,mellissaotindo@ymail.com
-tom.okudo,6,728956881,tom.okudo@yahoo.com
-john.nyamo,6,726457261,john.nyamo@yahoo.com
-kollahomondi,6,729285585,kollahomondi@gmail.com
-ogeropeteromboga,6,724299102,ogeropeteromboga@gmail.com
-onyango,3,722408109,onyango@path.org
-johnso,6,721248618,johnso@gmail.com
-johnmageto62,6,726146419,johnmageto62@yahoo.com
-kaderoonani@yahoo.com,6,724467001,kaderoonani
-richardongeri,9,723939939,richardongeri@gmail.com
-fotieno,3,2547,fotieno@kemri-ucsf.org
-lwandolo_usf,3,725451290,lwandolo@kemri-ucsf.org
+Mikilanyah M. Joseph,9,0729 928 393,josmurungi@yahoo.com
+Abdi H. Gedi,9,0720 265 268,gedialhas@gmail.com
+Robert Kuria,9,0720 809 500,mk2002ke@yahoo.com
+Jennifer Kiruri,9,0722 295 460,jennykiruri@yahoo.com
+Innocent Mjomba,9,0722 295 281,koshninno@yahoo.com
+James N. Kurwa,9,0720 368 941,jamesnkirwa@yahoo.com
+Dr. Festus Kigen,9,0710 418 112,kgfestus@gmail.com
+Sebezia Ulwenya,9,0722 217 393,sebulwenya@gmail.com
+Dr. Ngere Isaac,9,0724 963 660,ngereisaac@gmail.com
+Sumukwo Dbrcha,9,0722 258 983,cascobaringo@yahoo.com
+Charles Kamau,9,721426219,kamauck03@gmail.com
+Richard Bwaley,9,0721 765 173,rbwaley@yahoo.com
+Dr. Okal Charles,9,0722 941 507,charleokal@gmail.com
+Herbert Okutoyi,9,0722 373 055,hokutoyi@gmail.com
+Dr. Muraya Jorama,9,0723 948 371,muraya30@gmail.com
+James Yiaile,9,0721 797 155,casconarok@gmail.com
+Josphat Maiyo,9,0722 378 808,josphatmaiyo@yahoo.com
+Claire N. Barake,9,0727 294 526,cascokajiado@gmail.com
+Bosco Lemarkat,9,0720 296 414,blemarkat@gmail.com
+Dr. Benard Makenzi,9,0722 328 739,bmakenzi01@yahoo.com
+Andrew Koech,9,0720 293 610,cascobomet3@gmail.com
+Batula J. Buyi,9,0725 771 999,batulajb@gmail.com
+Halima Abgudo,9,0723 657 449,halimaabgudo@yahoo.com
+Dr. Lenai J. K,9,0721 799 365,lenaijk10@gmail.com
+Dr. Consolata Oggot,9,720847451,consolatamari@yahoo.com
+Fatma Bunu,9,0722 423 809,furtush@yahoo.com
+Nicholas Mwenda,9,0721 101 586,nickmwenda@yahoo.com
+M Mwangala,3,2547,MMwangala@aphiaplus-nc.org
+Abunu,3,2547,Abunu@aphiaplus-nc.org
+J Jumanne,3,2547,JJumanne@pathfinder.org
+J Karisa,3,2547,JKarisa@aphiaplus-nc.org
+CAKasera,3,2547,CAKasera@aphiaplus-nc.org
+O kendo,3,2547,okendo@mgickenya.org
+Koki Kinagwi,3,2547,koki.kinagwi@aphiaplusimarisha.org
+Mr Odhiambo,3,2547,Fodhiambo@mgickenya.org
+Dr.Jamlick Mutugi,3,2547,jmutugi@aphiarift.org
+Monica Limo,3,2547,mlimo@ampathplus.or.ke
+Caleb Ogada,2,2.55E+11,ogadacaleb@yahoo.com
+Nancy Bowen,2,2.55E+11,njebungeibowen@gmail.com
+Marie Downer ,3,2547,mld8@cdc.gov 
+Liverpool VCT,3,723602179,gkimathi@lvcthealth.org
+Everlyne Okinyi,6,722532032,okinyi.everlyne@yahoo.com
+Linet Gichana,6,727361522,gichanalinet@yahoo.com
+Frankline Otieno,4,720304739,fotieno@kemri-ucs7.org
+Maureen Agallo,9,727387690,magallo587@gmail.com
+Melissa Z. Otieno,6,726557495,mellissaotindo@ymail.com
+Tom Okudo,6,728956881,tom.okudo@yahoo.com
+John Mwita,6,726457261,john.nyamo@yahoo.com
+Habbakkuk Omondi,6,729285585,kollahomondi@gmail.com
+Ogero Peter Omboga,6,724299102,ogeropeteromboga@gmail.com
+rancis Onyango,3,722408109,onyango@path.org
+John Owino,6,721248618,johnso@gmail.com
+John Mageto,6,726146419,johnmageto62@yahoo.com
+Kennedy Adero,6,724467001,kaderoonani
+Richard Ongeri,9,723939939,richardongeri@gmail.com
+Franklin Otieno,3,2547,fotieno@kemri-ucsf.org
+Levis Wandolo,3,725451290,lwandolo@kemri-ucsf.org
