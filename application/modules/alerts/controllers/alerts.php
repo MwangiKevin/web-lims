@@ -93,7 +93,7 @@ function daemon_weekly_email()
 			$filename='Weekly National Activity Report beginning '.$last_monday.' to '.$last_sunday;
 			$file=$this->config->item('server_root').'pdf_documents/weekly_national/'.$filename.'.pdf';
 
-			$generated_date=date('jS F Y, H:i');
+			$generated_date=date('jS F Y, H:i a');
 
 			$mpdf->SetFooter('Weekly National Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
@@ -192,7 +192,7 @@ function daemon_weekly_email()
 			$filename='Weekly Report for '.$results['county_name'].' beginning '.$last_monday.' to '.$last_sunday;
 			$file=$this->config->item('server_root').'pdf_documents/weekly_county/'.$filename.'.pdf';
 
-			$generated_date=date('jS F Y, H:i');
+			$generated_date=date('jS F Y, H:i a');
 
 			$mpdf->SetFooter('Weekly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
@@ -300,7 +300,7 @@ function daemon_weekly_email()
 			$filename='Weekly Report for '.$results['partner_name'].' beginning '.$last_monday.' to '.$last_sunday;
 			$file=$this->config->item('server_root').'pdf_documents/weekly_partner/'.$filename.'.pdf';
 
-			$generated_date=date('jS F Y, H:i');
+			$generated_date=date('jS F Y, H:i a');
 
 			$mpdf->SetFooter('Weekly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
@@ -481,7 +481,7 @@ function daemon_critical_monthly_email()
 		
 			$PDF_content.=$table_style.'<br />'.$pdf_results['table']; //place details in table
 
-			$generated_date=date('jS F Y, H:i');
+			$generated_date=date('jS F Y, H:i a');
 
 			$mpdf->SetFooter('Tests < 500cp/ml Monthly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
@@ -685,7 +685,7 @@ function daemon_monthly_activity_email()
 		
 			$PDF_content.=$table_style.'<br />'.$pdf_results['table']; //place details in table
 
-			$generated_date=date('jS F Y, H:i');
+			$generated_date=date('jS F Y, H:i a');
 
 			$mpdf->SetFooter('Monthly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
