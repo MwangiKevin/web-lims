@@ -8,6 +8,8 @@ class dashboard extends MY_Controller {
 
 		parent::__construct();
 		$this->load->model("dashboard_m");
+		
+		header('Content-Type: application/json; charset=utf-8');
 	}
 	
 	public function index(){
@@ -256,12 +258,11 @@ class dashboard extends MY_Controller {
 
 
 	// Number of Devices per County [stacked]
-	function get_cd4_devices_perCounty(){
-		$sql = "CALL get_devices_per_county";
-		$response = R::getAll($sql);
-		
-		echo json_encode($response);
-
+	public function get_cd4_devices_perCounty(){
+		$result = $this->dashboard_m->get_cd4_devices_perCounty();
+		// echo "<pre>";
+		// print_r($result);die;
+		echo json_encode($result);
 	}
 
 	// get cd4 equipment [Pie Chart]
@@ -306,8 +307,8 @@ class dashboard extends MY_Controller {
 	function get_expected_reporting_devices($user_group_id,$user_filter_used,$year=2015){
 		//error_reporting(0);
 		$results = $this->dashboard_m->get_expected_reporting_devices($user_group_id,$user_filter_used,$year);
-		$results = json_encode($results);
-		echo $results;
+		echo json_encode($results);
+		 
 
 	}
 }

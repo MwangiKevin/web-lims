@@ -3,7 +3,8 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 		
 		this.device_distribution_stack.loading = !this.device_distribution_stack.loading
 		this.cd4_equipment_pie.loading = !this.cd4_equipment_pie.loading
-		this.yearly_testing_trends.loading = !this.yearly_testing_trends.loading
+		this.equipment_tests_pie.loading = !this.equipment_tests_pie.loading
+		this.expected_reporting_devices.loading = !this.expected_reporting_devices.loading
 	}
 	
 	//
@@ -11,16 +12,38 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//Device Distribution Stacked Bar Graph
 	//
 	//
-	// $scope.device_distribution_stack();
+	$scope.device_distribution_stack_data = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_cd4_devices_perCounty"			
+			)
+		.success(function(response){
+			//$scope.cd4_equipment_pie.series[0].data = response;
+			 var category = [];
+			 var num_of_devices = [];
+			 
+			 var result = angular.fromJson(response);
+			 var count = 0;
+			 for (i in result) {
+			    if (result.hasOwnProperty(i)) {
+			        count++;
+			    }
+			    category.push(result[i].county);
+			    num_of_devices.push(result[i].no_per_county);
+			}
+			$scope.device_distribution_stack.xAxis.categories = category;
+			$scope.device_distribution_stack.series[0].data = num_of_devices; 
+		});	
+	}
+	$scope.device_distribution_stack_data();
 	$scope.device_distribution_stack = {
-		chart: {
+		        chart: {
             type: 'column'
         },
         title: {
             text: 'Stacked column chart'
         },
         xAxis: {
-            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+            categories: []
         },
         yAxis: {
             min: 0,
@@ -66,16 +89,19 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             }
         },
         series: [{
-            name: 'John',
-            data: [5, 3, 4, 7, 2]
-        }, {
-            name: 'Jane',
-            data: [2, 2, 3, 2, 1]
-        }, {
-            name: 'Joe',
-            data: [3, 4, 4, 2, 5]
+            data: []
         }]
+        // series: [{ //2,2,4,1,2,1,2,1,1,1,1,1,4,2,1,1,1,1,1,1,1,2,2,1,1,2,1,1,1,1,1,2,10,1,1  
+            // data: [5, 3, 4, 7, 2]
+        // }, {
+            // name: 'Jane',
+            // data: [2, 2, 3, 2, 1]
+        // }, {
+            // name: 'Joe',
+            // data: [3, 4, 4, 2, 5]
+        // }]
 	}
+	
 	
 	
 	//
@@ -83,9 +109,18 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//CD4 Equipment Pie
 	//
 	//
-	// $scope.cd4_equipment_pie();
+	$scope.equipment_pie_data = function(){
+		return $http.get(
+			Commons.baseURL+"api/dashboard/get_cd4_devices_pie/0/0"			
+			)
+		.success(function(response){
+			$scope.cd4_equipment_pie.series[0].data = response;
+			// console.log($scope.cd4_equipment_pie.series[0].data);
+		});	
+	}
+	$scope.equipment_pie_data();
 	$scope.cd4_equipment_pie = {
-		 chart: {
+		chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false
@@ -97,16 +132,20 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
         plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                 }
-            },
-        series: [{"name":"Alere PIMA","y":199,"sliced":true,"selected":true},{"name":"BD Facs Calibur","y":0,"sliced":false,"selected":false},{"name":"BD Facs Count","y":0,"sliced":false,"selected":false},{"name":"Partec Cyflow","y":0,"sliced":false,"selected":false}]
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: []
+        }]
 	}	
 	
 	//
@@ -115,10 +154,10 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.equipment_tests_pie_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_expected_reporting_devices/0/0/0"			
+			Commons.baseURL+"api/dashboard/get_devices_tests_pie/0/0/0/0"			
 			)
 		.success(function(response){
-			$scope.equipment_tests_pie.series.data = response;
+			$scope.equipment_tests_pie.series[0].data = response;
 			// console.log($scope.equipment_tests_pie.series[0].data);
 		});	
 	}
@@ -162,7 +201,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 			Commons.baseURL+"api/dashboard/get_expected_reporting_devices/0/0/0"			
 			)
 		.success(function(response){
-			//$scope.expected_reporting_devices.series = response;
+			$scope.expected_reporting_devices.series = response;
 			// alert($scope.table_data);
 		});	
 	}
@@ -220,7 +259,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             crosshairs: [true,false],
             //pointFormat: '<br/><br/>{series.name}: <div><b>{point.y}, </b><b>{series.data.percentage:.1f}%</b></div>'
         },
-        series: [{"name":"Expected Reporting Devices","data":[3,4,7,12,16,19,20,24,26,31,38,40]},{"name":"Reported Devices","color":"#a4d53a","data":[null,null,null,null,null,null,null,null,null,null,null,null]}]            
+        series: []            
 	}
 	
 	//

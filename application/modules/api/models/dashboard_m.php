@@ -155,12 +155,13 @@ class dashboard_m extends MY_Model{
 	public function get_expected_reporting_devices($user_group_id,$user_filter_used,$year){
 		$data["chart"][0]["name"] 	= 	"Expected Reporting Devices";
 		$data["chart"][0]["data"] 	= 	$this->expected_reporting_dev_array($user_group_id,$user_filter_used,$year);
-
 		$data["chart"][1]["name"] 	= 	"Reported Devices";
 		$data["chart"][1]["color"] 	= 	"#a4d53a";		
 
 	    $data["chart"][1]["data"] 	= 	$this->reported_devices($user_group_id, $user_filter_used,$year);
-		return $data;	
+		foreach ($data as $key => $value) {
+			return $value;
+		}
 	}
 	
 	private function expected_reporting_dev_array($user_group_id,$user_filter_used,$year){
@@ -235,7 +236,7 @@ class dashboard_m extends MY_Model{
 		// print_r($consolidated_array);
 		// echo "</pre>";
 		
-		//print_r($consolidated_array); die();
+		// print_r($consolidated_array); die();
 		return $consolidated_array;
 	}
 
@@ -277,6 +278,19 @@ class dashboard_m extends MY_Model{
 
 		return $reported_array;
 	}
+	
+	public function get_cd4_devices_perCounty(){
+		$sql = "CALL proc_get_devices_per_county";
+		$response = R::getAll($sql);
+		
+		foreach ($response as $key => $value) {
+			
+			$response[$key]['no_per_county'] = (int) $response[$key]['no_per_county'];
+			
+		}
+		return $response;	
+	}
+	
 	
 	
 	
