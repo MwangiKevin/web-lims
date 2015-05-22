@@ -51,6 +51,8 @@ function daemon_weekly_email()
 						table.data-table td, table th {padding: 4px;}
 						table.data-table td {border: none;border-left: 1px solid #DDD;border-right: 1px solid #DDD;height: 30px;margin: 0px;border-bottom: 1px solid #DDD;}
 					</style>';
+
+	$img=$this->config->item('server_root').'assets/images/nascop.jpg';// Nascop Logo
 	
 	$this->load->library('mpdf/mpdf');// Load the mpdf library
 
@@ -68,8 +70,6 @@ function daemon_weekly_email()
 			$county="";
 			$receipient="national";
 			$pdf_data=$this->alerts_model->weekly_uploads($last_monday_date,$last_sunday_date,$county,$partner,$results['facility_name'],$receipient);
-
-			$img=$this->config->item('server_root').'assets/images/nascop.jpg';// Nascop Logo
 
 			$PDF_document="<table width='53%' border='0' align='center'>";
 			$PDF_document.="<tr>";
@@ -93,6 +93,9 @@ function daemon_weekly_email()
 			$filename='Weekly National Activity Report beginning '.$last_monday.' to '.$last_sunday;
 			$file=$this->config->item('server_root').'pdf_documents/weekly_national/'.$filename.'.pdf';
 
+			$generated_date=date('jS F Y, H:i a');
+
+			$mpdf->SetFooter('Weekly National Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
 			$mpdf ->watermark_size="0.2";
 			$mpdf->showWatermarkText = true;//Water Mark set value
@@ -164,8 +167,6 @@ function daemon_weekly_email()
 			$facility="";
 			$receipient="breakdown";
 			$pdf_data=$this->alerts_model->weekly_uploads($last_monday_date,$last_sunday_date,$results['county_name'],$partner,$facility,$receipient);
-			
-			$img=$this->config->item('server_root').'assets/images/nascop.jpg';// Nascop Logo
 
 			$PDF_document="<table width='53%' border='0' align='center'>";
 			$PDF_document.="<tr>";
@@ -191,6 +192,9 @@ function daemon_weekly_email()
 			$filename='Weekly Report for '.$results['county_name'].' beginning '.$last_monday.' to '.$last_sunday;
 			$file=$this->config->item('server_root').'pdf_documents/weekly_county/'.$filename.'.pdf';
 
+			$generated_date=date('jS F Y, H:i a');
+
+			$mpdf->SetFooter('Weekly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
 			$mpdf ->watermark_size="0.2";
 			$mpdf->showWatermarkText = true;//Water Mark set value
@@ -272,8 +276,6 @@ function daemon_weekly_email()
 			$receipient="breakdown";
 			$pdf_data=$this->alerts_model->weekly_uploads($last_monday_date,$last_sunday_date,$county,$results['partner_name'],$facility,$receipient);
 
-			$img=$this->config->item('server_root').'img/nascop.jpg';// Nascop Logo
-
 			$PDF_document="<table width='53%' border='0' align='center'>";
 			$PDF_document.="<tr>";
 			$PDF_document.="<td><center><img style='vertical-align: top;' src='$img'/></center></td>";
@@ -298,6 +300,9 @@ function daemon_weekly_email()
 			$filename='Weekly Report for '.$results['partner_name'].' beginning '.$last_monday.' to '.$last_sunday;
 			$file=$this->config->item('server_root').'pdf_documents/weekly_partner/'.$filename.'.pdf';
 
+			$generated_date=date('jS F Y, H:i a');
+
+			$mpdf->SetFooter('Weekly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
 			$mpdf ->watermark_size="0.2";
 			$mpdf->showWatermarkText = true;//Water Mark set value
@@ -366,9 +371,9 @@ function daemon_weekly_email()
 	}
 
 
-	// delete_files($this->config->item('server_root').'pdf_documents/weekly_national/');//delete the files
-	// delete_files($this->config->item('server_root').'pdf_documents/weekly_county/');//delete the files
-	// delete_files($this->config->item('server_root').'pdf_documents/weekly_partner/');//delete the files
+	delete_files($this->config->item('server_root').'pdf_documents/weekly_national/');//delete the files
+	delete_files($this->config->item('server_root').'pdf_documents/weekly_county/');//delete the files
+	delete_files($this->config->item('server_root').'pdf_documents/weekly_partner/');//delete the files
 
 
 }/* Weekly Activity Alert function End */
@@ -399,7 +404,10 @@ function daemon_critical_monthly_email()
 		$end_month=$year.'-'.$month.'-'.$num_days;
 	}
 
-	
+	// $from_month='2015-02-01';
+	// $end_month='2015-02-28';
+	// $month=2;
+	// $year=2015;
 
 	$pdf_results="";
 	$email_receipients=array();
@@ -422,7 +430,7 @@ function daemon_critical_monthly_email()
 
 	$the_month=$this->GetMonthName($month);
 
-	$uploaded_facilities=$this->alerts_model->uploads_by_facility($from_month,$end_month);
+	$uploaded_facilities=$this->alerts_model->upload_list($from_month,$end_month,'facility_name');
 
 	$this->load->library('mpdf/mpdf');// Load the mpdf library
 
@@ -468,11 +476,14 @@ function daemon_critical_monthly_email()
 			$PDF_content.='<th bgcolor="#eb9316" style="color:#FFF;"># Tests < 500</th>';
 			$PDF_content.='<th bgcolor="#000066" style="color:#FFF;">Total Number of Tests</th>';
 			$PDF_content.='</tr>';
-			$PDF_content.='<tr><td align="center" style="width:50%;">'.$pdf_results['less_than350'].'</td>';
+			$PDF_content.='<tr><td align="center" style="width:50%;">'.$pdf_results['less_than500'].'</td>';
 			$PDF_content.='<td align="center" style="width:50%;">'.$pdf_results['count'].'</td></tr></table>';
 		
 			$PDF_content.=$table_style.'<br />'.$pdf_results['table']; //place details in table
 
+			$generated_date=date('jS F Y, H:i a');
+
+			$mpdf->SetFooter('Tests < 500cp/ml Monthly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
 			$mpdf ->watermark_size="0.2";
 			$mpdf->showWatermarkText = true;//Water Mark set value
@@ -492,62 +503,63 @@ function daemon_critical_monthly_email()
 			try
 			{
 				$mpdf->Output($file,'F'); //Save the pdf in the $file path
+
 			}
 			catch(exception $e)
 			{
 				$e->getMessage();
 			}
 			
-			$county_receipients=array();
-			$partner_receipients=array();
-			$email_receipients=array();
+			// $county_receipients=array();
+			// $partner_receipients=array();
+			// $email_receipients=array();
 			
-			$county_coordinator_email=$this->alerts_model->get_county_email($results['county_id']);
+			// $county_coordinator_email=$this->alerts_model->get_county_email($results['county_id']);
 
-			foreach($county_coordinator_email as $cemail)
-			{
-				$county_receipients[]=$cemail;
-			}
+			// foreach($county_coordinator_email as $cemail)
+			// {
+			// 	$county_receipients[]=$cemail;
+			// }
 			
-			$partner_email=$this->alerts_model->get_partner_email($results['partner_id']);
+			// $partner_email=$this->alerts_model->get_partner_email($results['partner_id']);
 
-			foreach($partner_email as $pemail)
-			{
-				$partner_receipients[]=$pemail;
-			}
+			// foreach($partner_email as $pemail)
+			// {
+			// 	$partner_receipients[]=$pemail;
+			// }
 
-			$email_receipients=array_merge($partner_receipients,$county_receipients);
+			// $email_receipients=array_merge($partner_receipients,$county_receipients);
 
-			echo $results['facility_name'];
-			echo "<pre>";
-			print_r($email_receipients);
-			echo "</pre>";
+			// echo $results['facility_name'];
+			// echo "<pre>";
+			// print_r($email_receipients);
+			// echo "</pre>";
 
-			$this->email->from('cd4poc@gmail.com', 'CD4 PIMA Notification');
-			$this->email->to($email_receipients);//send to specific receiver
-			$this->email->bcc($CHAI_team);//CHAI team
+			// $this->email->from('cd4poc@gmail.com', 'CD4 PIMA Notification');
+			// $this->email->to($email_receipients);//send to specific receiver
+			// $this->email->bcc($CHAI_team);//CHAI team
 			
-			$this->email->subject('Tests < 500 cp/ml Monthly Report'); //subject
-			$this->email->attach($file);//attach the facility pdf document
+			// $this->email->subject('Tests < 500 cp/ml Monthly Report'); //subject
+			// $this->email->attach($file);//attach the facility pdf document
 
-			$message="Hi.<br /><br />Please Find Attached the List of all patients with outcomes < 500cp/ml.
-								<br /><br />They require a Follow Up Viral Load Test & Initiation into treatment.
-								<br /><br />Many Thanks.
-								<br /><br />NB: You can access the system by following link below
-								<br /><br /><b>http://www.nascop.org/cd4Poc</b>
-								<br /><br />CD4 Support Team
-								<br /><br />Please do NOT reply to this message as it is sent from an unattended mailbox.";
+			// $message="Hi.<br /><br />Please Find Attached the List of all patients with outcomes < 500cp/ml.
+			// 					<br /><br />They require a Follow Up Viral Load Test & Initiation into treatment.
+			// 					<br /><br />Many Thanks.
+			// 					<br /><br />NB: You can access the system by following link below
+			// 					<br /><br /><b>http://www.nascop.org/cd4Poc</b>
+			// 					<br /><br />CD4 Support Team
+			// 					<br /><br />Please do NOT reply to this message as it is sent from an unattended mailbox.";
 
-			$this->email->message($message);// the message
+			// $this->email->message($message);// the message
 
-			if($this->email->send())//send email and check if the email was sent
-			{	
-				$this->email->clear(TRUE);//clear any attachments on the email
-			}
-			else 
-			{
-				show_error($this->email->print_debugger());//show error message
-			} 
+			// if($this->email->send())//send email and check if the email was sent
+			// {	
+			// 	$this->email->clear(TRUE);//clear any attachments on the email
+			// }
+			// else 
+			// {
+			// 	show_error($this->email->print_debugger());//show error message
+			// } 
 
 		}
 		
@@ -583,8 +595,10 @@ function daemon_monthly_activity_email()
 		$end_month=$year.'-'.$month.'-'.$num_days;
 	}
 
-	echo $from_month."<br />";
-	echo $end_month;die;
+	// $from_month='2015-02-01';
+	// $end_month='2015-02-28';
+	// $month=2;
+	// $year=2015;
 
 	$pdf_results="";
 	$email_receipients=array();
@@ -639,7 +653,7 @@ function daemon_monthly_activity_email()
 
 			//make a file name with the extension .pdf
 			$title_filename='Monthly Activity Report For '.$results['facility_name'].' - '.$the_month.','.$year;
-			$file=$this->config->item('server_root').'assets/monthly_activity/'.$title_filename.'.pdf';
+			$file=$this->config->item('server_root').'pdf_documents/monthly_activity/'.$title_filename.'.pdf';
 
 			//set the pdf content
 			$PDF_content.='<br /><table border="0" align="center">';
@@ -650,21 +664,30 @@ function daemon_monthly_activity_email()
 
 			$PDF_content.='<table width="880" border="0" align="center" class="data-table">';
 			$PDF_content.='<tr>';
-			$PDF_content.='<th bgcolor="#006600" style="color:#FFF;">Successful Tests Done</th>';
+			$PDF_content.='<th colspan="2" bgcolor="#006600" style="color:#FFF;">Successful Tests Done</th>';
+			$PDF_content.='<th colspan="1" bgcolor="#CC0000" style="color:#FFF;">Tests With Errors</th>';
+			$PDF_content.='<th colspan="1" bgcolor="#000066" style="color:#FFF;">Total Number of Tests</th>';
+			$PDF_content.='</tr>';
+
+			$PDF_content.='<tr>';
 			$PDF_content.='<th bgcolor="#eb9316" style="color:#FFF;">Tests < 500</th>';
 			$PDF_content.='<th bgcolor="#006600" style="color:#FFF;">Tests >= 500</th>';
-			$PDF_content.='<th bgcolor="#CC0000" style="color:#FFF;">Tests With Errors</th>';
-			$PDF_content.='<th bgcolor="#000066" style="color:#FFF;">Total Number of Tests</th>';
+			$PDF_content.='<th bgcolor="#666" rowspan="1"></th>';
+			$PDF_content.='<th bgcolor="#666" rowspan="1"></th>';
 			$PDF_content.='</tr>';
-			$PDF_content.='<tr><td align="center" style="width:24%;">'.$pdf_results['valid_tests'].'</td>';
-			$PDF_content.='<td align="center" style="width:24%;">'.$pdf_results['less_than350'].'</td>';
-			$PDF_content.='<td align="center" style="width:24%;">'.$pdf_results['greater_equal_to350'].'</td>';
+			 $PDF_content.='<tr>';
+			//$PDF_content.='<tr><td align="center" style="width:24%;">'.$pdf_results['valid_tests'].'</td>';
+			$PDF_content.='<td align="center" style="width:24%;">'.$pdf_results['less_than500'].'</td>';
+			$PDF_content.='<td align="center" style="width:24%;">'.$pdf_results['greater_equal_to500'].'</td>';
 			$PDF_content.='<td align="center" style="width:24%;">'.$pdf_results['errors'].'</td>';
 			$PDF_content.='<td align="center" style="width:24%;">'.$pdf_results['count'].'</td></tr>';
 			$PDF_content.='</table>';
 		
 			$PDF_content.=$table_style.'<br />'.$pdf_results['table']; //place details in table
 
+			$generated_date=date('jS F Y, H:i a');
+
+			$mpdf->SetFooter('Monthly Activity Report: Generated On '.$generated_date.' By CD4 LIMS --- Page {PAGENO}');
 			$mpdf->SetWatermarkText('NASCOP',0.09);//Water Mark Text
 			$mpdf ->watermark_size="0.2";
 			$mpdf->showWatermarkText = true;//Water Mark set value
@@ -684,6 +707,7 @@ function daemon_monthly_activity_email()
 			try
 			{
 				$mpdf->Output($file,'F'); //Save the pdf in the $file path
+				//echo $PDF_document.$PDF_content;die;
 
 			}
 			catch(exception $e)
@@ -691,56 +715,56 @@ function daemon_monthly_activity_email()
 				$e->getMessage();
 			}
 			
-			$county_receipients=array();
-			$partner_receipients=array();
-			$email_receipients=array();
+			// $county_receipients=array();
+			// $partner_receipients=array();
+			// $email_receipients=array();
 			
-			$county_coordinator_email=$this->alerts_model->get_county_email($results['county_id']);
+			// $county_coordinator_email=$this->alerts_model->get_county_email($results['county_id']);
 
-			foreach($county_coordinator_email as $cemail)
-			{
-				$county_receipients[]=$cemail;
-			}
+			// foreach($county_coordinator_email as $cemail)
+			// {
+			// 	$county_receipients[]=$cemail;
+			// }
 			
-			$partner_email=$this->alerts_model->get_partner_email($results['partner_id']);
+			// $partner_email=$this->alerts_model->get_partner_email($results['partner_id']);
 
-			foreach($partner_email as $pemail)
-			{
-				$partner_receipients[]=$pemail;
-			}
+			// foreach($partner_email as $pemail)
+			// {
+			// 	$partner_receipients[]=$pemail;
+			// }
 
-			$email_receipients=array_merge($partner_receipients,$county_receipients);
+			// $email_receipients=array_merge($partner_receipients,$county_receipients);
 
-			echo $results['facility_name'];
-			echo "<pre>";
-			print_r($email_receipients);
-			echo "</pre>";
+			// echo $results['facility_name'];
+			// echo "<pre>";
+			// print_r($email_receipients);
+			// echo "</pre>";
 
-			$this->email->from('cd4poc@gmail.com', 'CD4 PIMA Notification');
-			$this->email->to($email_receipients);//send to specific receiver
-			$this->email->bcc($CHAI_team);//CHAI team
+			// $this->email->from('cd4poc@gmail.com', 'CD4 PIMA Notification');
+			// $this->email->to($email_receipients);//send to specific receiver
+			// $this->email->bcc($CHAI_team);//CHAI team
 			
-			$this->email->subject('Monthly Report'); //subject
-			$this->email->attach($file);//attach the facility pdf document
+			// $this->email->subject('Monthly Report'); //subject
+			// $this->email->attach($file);//attach the facility pdf document
 
-			$message="Hi.<br /><br />Please Find Attached the summary for PIMA Test uploads for the month of ".$the_month."
-								<br /><br />
-								<br /><br />Many Thanks.
-								<br /><br />NB: You can access the system by following link below
-								<br /><br /><b>http://www.nascop.org/cd4Poc</b>
-								<br /><br />CD4 Support Team
-								<br /><br />Please do NOT reply to this message as it is sent from an unattended mailbox.";
+			// $message="Hi.<br /><br />Please Find Attached the summary for PIMA Test uploads for the month of ".$the_month."
+			// 					<br /><br />
+			// 					<br /><br />Many Thanks.
+			// 					<br /><br />NB: You can access the system by following link below
+			// 					<br /><br /><b>http://www.nascop.org/cd4Poc</b>
+			// 					<br /><br />CD4 Support Team
+			// 					<br /><br />Please do NOT reply to this message as it is sent from an unattended mailbox.";
 
-			$this->email->message($message);// the message
+			// $this->email->message($message);// the message
 
-			if($this->email->send())//send email and check if the email was sent
-			{	
-				$this->email->clear(TRUE);//clear any attachments on the email
-			}
-			else 
-			{
-				show_error($this->email->print_debugger());//show error message
-			} 
+			// if($this->email->send())//send email and check if the email was sent
+			// {	
+			// 	$this->email->clear(TRUE);//clear any attachments on the email
+			// }
+			// else 
+			// {
+			// 	show_error($this->email->print_debugger());//show error message
+			// } 
 
 		}
 	}
