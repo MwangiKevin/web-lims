@@ -1,5 +1,3 @@
-DELIMITER $$
-DROP PROCEDURE IF exists `proc_equipment_yearly_testing_trends_column`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_equipment_yearly_testing_trends_column`(user_group_id int(11),user_filter_used int(11))
 BEGIN
 	CASE `user_filter_used`
@@ -94,5 +92,4 @@ BEGIN
 			
 			END CASE;
 				END CASE;
-END$$
-DELIMITER ;
+END
