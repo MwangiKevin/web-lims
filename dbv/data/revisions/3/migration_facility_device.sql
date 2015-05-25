@@ -1,1 +1,0 @@
-ALTER TABLE  `facility_device` ADD  `printer_serial` VARCHAR( 30 ) NOT NULL ;
