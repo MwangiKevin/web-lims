@@ -1,5 +1,3 @@
-
-
 CREATE TABLE IF NOT EXISTS `facility_temp` (
   `AutoID` int(10) NOT NULL AUTO_INCREMENT,
   `MFLCode` varchar(25) DEFAULT NULL,
