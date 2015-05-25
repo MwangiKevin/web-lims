@@ -2,6 +2,7 @@
 	#chart_container{
 		width:100%;
 		padding: 5%;
+		border: solid;
 	}
 	#middle_chart{
 		width:100%;
@@ -22,6 +23,7 @@
 		<div id='top_chart_container'>
 			<highchart id="testing_trends" config="testing_trends" class="span"></highchart>
 		</div>
+		<div style="clear:both"><hr></div>
 		<div id="middle_chart_container">
 			<div id="middle_chart">
 				<highchart id="yearly_testing_trends" config="yearly_testing_trends" class="span10" style="float:left; width:40%"></highchart>

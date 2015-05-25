@@ -36,7 +36,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	}
 	$scope.device_distribution_stack_data();
 	$scope.device_distribution_stack = {
-		        chart: {
+        chart: {
             type: 'column'
         },
         title: {
@@ -91,19 +91,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
         series: [{
             data: []
         }]
-        // series: [{ //2,2,4,1,2,1,2,1,1,1,1,1,4,2,1,1,1,1,1,1,1,2,2,1,1,2,1,1,1,1,1,2,10,1,1  
-            // data: [5, 3, 4, 7, 2]
-        // }, {
-            // name: 'Jane',
-            // data: [2, 2, 3, 2, 1]
-        // }, {
-            // name: 'Joe',
-            // data: [3, 4, 4, 2, 5]
-        // }]
 	}
-	
-	
-	
 	//
 	//
 	//CD4 Equipment Pie
@@ -166,7 +154,8 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 		chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
-                plotShadow: false
+                plotShadow: false,
+                width: 50
             },
         title: {
             text: 'CD4 Tests & Equipment'
@@ -188,7 +177,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	                type: 'pie',
 	                name: 'Percentage',
 	                size: '20',
-	                data: []
+	                data: [{"name":"Alere PIMA","y":0,"sliced":false,"selected":false},{"name":"BD FACS Calibur","y":0,"sliced":false,"selected":false},{"name":"BD Facs Count","y":0,"sliced":false,"selected":false},{"name":"BD Facs Presto","y":0,"sliced":false,"selected":false},{"name":"Cyflow Partec ","y":0,"sliced":false,"selected":false}]
                 }]
 	}
 	
@@ -289,16 +278,8 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 			Commons.baseURL+"api/dashboard/get_devices_tests_table/0/0/0/0"			
 			)
 		.success(function(response){
-			$scope.equipment_tests_data = response;
-			// alert($scope.table_data);
+			$scope.equipment_tests_data = response			
 		});	
 	}
 	$scope.cd4_equipment_tests_table();
-	
-	
-	
-	
-	
-	
-	
 }])

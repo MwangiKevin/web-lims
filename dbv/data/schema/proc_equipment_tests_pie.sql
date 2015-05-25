@@ -1,6 +1,6 @@
 DROP PROCEDURE IF EXISTS `proc_equipment_tests_pie`;
 DELIMITER $$
-CREATE PROCEDURE proc_equipment_tests_pie(from_date date,to_date date,user_group_id int(11),user_filter_used int(11))
+CREATE PROCEDURE `proc_equipment_tests_pie`(from_date date,to_date date,user_group_id int(11),user_filter_used int(11))
 	BEGIN
 	CASE `user_filter_used`
 	WHEN 0 THEN
