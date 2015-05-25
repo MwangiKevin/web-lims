@@ -15,8 +15,8 @@ class tests extends MY_Controller {
 
 	public function index() {
 
-		// $this->load->view("tests_v");
-		$this->load->view("testing_view");
+		$this->load->view("tests_v");
+		// $this->load->view("testing_view");
 	}
 
 	function ss_procedure()

@@ -18,7 +18,8 @@ var app = angular
 	'restangular',
 	'validation', 
 	'validation.rule',
-    'http-auth-interceptor'
+    'http-auth-interceptor',
+    'datatables'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 

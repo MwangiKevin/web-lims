@@ -10,7 +10,7 @@
 				<div class="ui input">
 					<ui-select ng-model="fcdrr.facility" theme="selectize" ng-disabled="disabled"  reset-search-input="false" style="width: 300px;">
 					    <ui-select-match placeholder="Type Facility Name or MFL Code...">{{$select.selected.facility_name}}</ui-select-match>
-					    <ui-select-choices repeat="fac in facilities track by $index | limitTo:10" refresh="refreshAddresses($select.search)" refresh-delay="4">
+					    <ui-select-choices repeat="fac in facilities track by $index | limitTo:10" refresh="refreshFacilities($select.search)" refresh-delay="4">
 					      	<div ng-bind-html="fac.facility_name | highlight: $select.search"></div>
 					      		<small>
 									<b>MFL Code</b>: <span ng-bind-html="''+fac.facility_mfl_code | highlight: $select.search"></span><br/>

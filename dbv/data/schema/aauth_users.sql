@@ -1,7 +1,7 @@
 CREATE TABLE `aauth_users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
-  `pass` varchar(50) NOT NULL,
+  `pass` varchar(128) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `banned` tinyint(1) DEFAULT '0',
   `last_login` datetime DEFAULT NULL,

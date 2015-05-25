@@ -19,7 +19,7 @@ class test_model extends MY_Model
 		if ($order_column = 0) {
 			$column = `cd4t`.`id`;
 		}else if ($order_column = 1){
-			$column = `cd4t`.`patient_id`;
+			$column = `cd4t`.`sample`;
 		}else if ($order_column = 2){
 			$column = `fc`.`name`;
 		}else if ($order_column = 3){
@@ -28,13 +28,15 @@ class test_model extends MY_Model
 
 		$serverSide_data = R::getAll("CALL `proc_dt_tests`('".$start."','".$length."','".$search."')");
 
+		echo "CALL `proc_dt_tests`('".$start."','".$length."','".$search."')";
+
 		$data = array();
 		$recordsTotal = 0;
 
 		foreach ($serverSide_data as $key => $value) {
 			$data[] = array(
 					$value['id'],
-					$value['patient_id'],
+					$value['sample'],
 					$value['name'],
 					$value['cd4_count'],
 				);
@@ -57,12 +59,15 @@ class test_model extends MY_Model
 		
 		$sql = "SELECT
 					`cd4t`.`id`,
-					`cd4t`.`patient_id`,
+					`cd4t`.`sample`,
 					`fc`.`name`,
 					`cd4t`.`cd4_count`
 				FROM `cd4_test` `cd4t`
 					LEFT JOIN `facility` `fc`
-						ON `cd4t`.`facility_id` = `fc`.`id`";
+						ON `cd4t`.`facility_id` = `fc`.`id`
+
+							LIMIT 10
+						";
 		
 		$serverSide_data = R::getAll($sql);
 
@@ -72,7 +77,7 @@ class test_model extends MY_Model
 		foreach ($serverSide_data as $key => $value) {
 			$data[] = array(
 					$value['id'],
-					$value['patient_id'],
+					$value['sample'],
 					$value['name'],
 					$value['cd4_count'],
 				);

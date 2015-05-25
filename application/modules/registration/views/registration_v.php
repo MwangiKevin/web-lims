@@ -35,16 +35,16 @@
       </div>
     </div>
 
-    <div class="field">
+<!--     <div class="field">
       <label for="Username">Username</label>
       <div class="ui icon input">
         <input id="Username" placeholder="Username" type="text" ng-model="user.username">
         <i class="asterisk red icon"></i>
       </div>
-    </div>
+    </div> -->
 
     <div class="field">
-      <label for="Password">Password</label>
+      <label for="Password">Choose a Password</label>
       <div class="ui icon input">
         <input id="Password" type="password" ng-model="user.password">
         <i class="asterisk red icon"></i>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="field">
-      <label for="PasswordConfirm">Password Confirm</label>
+      <label for="PasswordConfirm">Confirm your Password </label>
       <input id="PasswordConfirm" type="password" ng-model="user.passwordConfirm">
     </div>
 
@@ -82,13 +82,13 @@
         prompt: 'Please enter your surname'
       }]
     },
-    username: {
-      identifier: 'Username',
-      rules: [{
-        type: 'empty',
-        prompt: 'Please enter a username'
-      }]
-    },
+    // username: {
+    //   identifier: 'Username',
+    //   rules: [{
+    //     type: 'empty',
+    //     prompt: 'Please enter a username'
+    //   }]
+    // },
     email: {
       identifier: 'Email',
       rules: [{

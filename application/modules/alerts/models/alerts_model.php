@@ -203,14 +203,12 @@ function tests_less_than500($from,$to,$facility)//tests less than 500 per month,
 	{
 		foreach ($pdf_results as $value) 
 		{
-			$string_unix="";
-			$string_unix=mysql_to_unix($value['result_date']);
 
 			$pdf_data['table'].='<tr>';
 			$pdf_data['table'].='<td style="width:3%">'.$i.'</td>';
 			$pdf_data['table'].='<td style="width:10%">'.$value['sample_code'].'</td>';
 			$pdf_data['table'].='<td style="width:20%"><center>'.$value['facility_name'].' - '.$value['serial_number'].'</center></td>';
-			$pdf_data['table'].='<td style="width:20%"><center>'.date('d-F-Y',strtotime($value['result_date'])).' - '.mdate($datestring,$string_unix).'</center></td>';
+			$pdf_data['table'].='<td style="width:20%"><center>'.date('d F Y, H:i a',strtotime($value['result_date'])).'</center></td>';
 			$pdf_data['table'].='<td style="width:10%"><center>'.$value['cd4_count'].'</center></td>';
 			$pdf_data['table'].='</tr>';
 
@@ -265,14 +263,14 @@ public function get_test_details($from,$to,$facility,$report_type)  // get all t
 	return $test_details;
 
 }
-public function get_count_test_details($from,$to,$facility)// get all cumulative values of the cd4 tests based on the date and facility
+public function get_count_test_details($from,$to,$facility,$report_type)// get all cumulative values of the cd4 tests based on the date and facility
 {
-	$sql_count="SELECT COUNT(test_id) AS total_tests,
+	$sql_count="SELECT COUNT(cd4_test_id) AS total_tests,
 					SUM(CASE WHEN valid= '1'    THEN 1 ELSE 0 END) AS valid_tests,
-					SUM(CASE WHEN valid= '0'    THEN 1 ELSE 0 END) AS `errors`,
+					SUM(CASE WHEN valid= '0'    THEN 1 ELSE 0 END) AS errors,
 					SUM(CASE WHEN valid= '1'  AND  cd4_count < 500 THEN 1 ELSE 0 END) AS failed,
 					SUM(CASE WHEN valid= '1'  AND  cd4_count >= 500 THEN 1 ELSE 0 END) AS passed
-					FROM v_pima_tests_only ";	
+					FROM v_pima_tests_details";	
 
 	if(!$facility=="")
 	{
@@ -280,12 +278,13 @@ public function get_count_test_details($from,$to,$facility)// get all cumulative
 			{
 				$criteria =" WHERE facility_name='".$facility."' AND result_date like '".date('Y-m',strtotime($from))."-%' ";
 			}
-			else if($report_type=="tests_less_than500") // for monthly critical report
+			else if($report_type=="tests_less_than500") // for monthly critical report and weekly reports
 			{
-				$criteria =" WHERE facility_name='".$facility."' AND valid='1' AND cd4_count < 500 AND result_date BETWEEN '".$from."' AND '".$to."' ";
+				$criteria =" WHERE facility_name='".$facility."' AND result_date BETWEEN '".$from."' AND '".$to."' ";
 			}
 	}	
 
+	//echo $sql_count.$criteria;die;
 	$test_details=R::getAll($sql_count.$criteria);
 
 	// echo $sql_count.$date_delimiter.$criteria;
@@ -296,8 +295,6 @@ public function get_count_test_details($from,$to,$facility)// get all cumulative
 }
 function all_tests_done($from,$to,$facility) //monthly activity report
 {
-	$datestring = "%h:%i %a";//set the timestamp
-
 	$pdf_results="";
 	$pdf_count="";
 	$pdf_data=array();
@@ -326,9 +323,6 @@ function all_tests_done($from,$to,$facility) //monthly activity report
 	{
 		foreach ($pdf_results as $value) // get all the details about a cd4 test
 		{
-			$string_unix="";
-			$string_unix=mysql_to_unix($value['date_test']);
-
 			if($value['valid']==1)
 			{
 
@@ -336,7 +330,7 @@ function all_tests_done($from,$to,$facility) //monthly activity report
 				$pdf_data['table'].='<td style="width:3%">'.$i.'</td>';
 				$pdf_data['table'].='<td style="width:10%;">'.$value['sample_code'].'</td>';
 				$pdf_data['table'].='<td style="width:20%;" ><center>'.$value['facility_name'].' - '.$value['serial_number'].'</center></td>';
-				$pdf_data['table'].='<td style="width:20%;"><center>'.date('d-F-Y',strtotime($value['date_test'])).' - '.mdate($datestring,$string_unix).'</center></td>';
+				$pdf_data['table'].='<td style="width:20%;"><center>'.date('d F Y, H:i a',strtotime($value['result_date'])).'</center></td>';
 				$pdf_data['table'].='<td style="width:10%;"><center>Successful</center></td>';
 				$pdf_data['table'].='<td style="width:10%;"><center>'.$value['cd4_count'].'</center></td>';
 				$pdf_data['table'].='</tr>';
@@ -347,7 +341,7 @@ function all_tests_done($from,$to,$facility) //monthly activity report
 				$pdf_data['table'].='<td style="width:3%">'.$i.'</td>';
 				$pdf_data['table'].='<td style="width:10%">'.$value['sample_code'].'</td>';
 				$pdf_data['table'].='<td style="width:25%"><center>'.$value['facility_name'].' - '.$value['serial_number'].'</center></td>';
-				$pdf_data['table'].='<td style="width:20%"><center>'.date('d-F-Y',strtotime($value['result_date'])).' - '.mdate($datestring,$string_unix).'</center></td>';
+				$pdf_data['table'].='<td style="width:20%"><center>'.date('d F Y, H:i a',strtotime($value['result_date'])).'</center></td>';
 				$pdf_data['table'].='<td style="width:10%"><center>Error</center></td>';
 				$pdf_data['table'].='<td style="width:10%"><center>'.$value['cd4_count'].'</center></td>';
 				$pdf_data['table'].='</tr>';
@@ -438,7 +432,7 @@ function get_partner_email($partner_id)//get the partner email address
 
 function get_county_email($county_id)//get the county coordinator email address 
 {
-	$sql="SELECT u.username,u.name,u.email
+	$sql="SELECT u.name,u.email
 					FROM county_user cu,county c,v_facility_device_details vdp, aauth_users u
 					WHERE vdp.county_name=c.name
 					AND c.id=cu.county_id

@@ -3,8 +3,6 @@ if(!defined("BASEPATH")) exit("No direct access to script allowed");
 
 /**
 * This script has several functions used to upload test data from .csv files from PIMA devices into the database
-
-
 */
 class uploads extends MY_Controller
 {

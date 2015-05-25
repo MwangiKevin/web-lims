@@ -13,28 +13,6 @@
 
 </head>
 <body>
-	<!-- <table id="test_table" class="display" cellspacing="0" width="1">
-		<thead>
-			<tr>
-				<th>Test ID</th>
-				<th>Patient ID</th>
-				<th>Facility Name</th>
-				<th>CD4 Count</th>
-			</tr>
-		</thead>
-
-		<tfoot>
-			<tr>
-				<th>Test ID</th>
-				<th>Patient ID</th>
-				<th>Facility Name</th>
-				<th>CD4 Count</th>
-			</tr>
-		</tfoot>
-		<tbody>
-		
-		</tbody> 
-	</table> -->
 	<table class="table table-bordered" id="tests_table" width="100%">
 						<thead>
 								<tr>
@@ -69,16 +47,6 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	// $('#example').dataTable( {
-	// 	"processing":true,
-	// 	"serverSide":true,
-	// 	"sAjaxSource" : "tests/test_unparametized",
-	// 	"oLanguage": {
-	// 		"sLengthMenu": "Page length: _MENU_",
-	// 		"sSearch": "Filter",
-	// 		"sZeroRecords":"No records found"
-	// 	} 
-	// });
 
 $("#tests_table").dataTable( {
 "bProcessing": true,

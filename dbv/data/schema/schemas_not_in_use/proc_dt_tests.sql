@@ -7,14 +7,14 @@ BEGIN
 
         SET @QUERY =    " SELECT
 								`cd4t`.`id`,
-								`cd4t`.`patient_id`,
+								`cd4t`.`sample`,
 								`fc`.`name`,
 								`cd4t`.`cd4_count`
 							FROM `cd4_test` `cd4t`
 								LEFT JOIN `facility` `fc`
 									ON `cd4t`.`facility_id` = `fc`.`id`
-                            limit ?,?
-                            ;
+                            
+                            
                         ";
 
 
@@ -22,11 +22,15 @@ BEGIN
         THEN
             SET @QUERY = @QUERY;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, ' WHERE  `cd4t`.`id` LIKE  %search%
-                                OR  `cd4t`.`patient_id` LIKE  %search%
-                                OR  `fc`.`name` LIKE  %search%
-                                OR  `cd4t`.`cd4_count` LIKE %search% ');
+            SET @QUERY = CONCAT(@QUERY, " WHERE  `cd4t`.`id` LIKE  '%",search,"%'
+                                OR  `cd4t`.`sample` LIKE  '%",search,"%'
+                                OR  `fc`.`name` LIKE  '%",search,"%'
+                                OR  `cd4t`.`cd4_count` LIKE '%",search,"%' "
+
+                                );
         END IF;
+
+        SET @QUERY = CONCAT(@QUERY," limit ?,?");
 
         PREPARE stmt FROM @QUERY;
         set @from = _from;
