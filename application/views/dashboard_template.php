@@ -118,7 +118,7 @@
 
 	<div>
 		<authmain>
-			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
+			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak="" ></div>
 			<div ng-controller="loginCtrl" class="ui one column stackable center aligned page grid" id="login-holder">
 				<div ng-show="true" class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
 					<div class="ui form">
@@ -161,7 +161,6 @@
 							<div class="ui icon input">
 								<input type="password" placeholder="Password" name="password" id="password" ng-model="password" ng-keyup="$event.keyCode == 13 && submit()">
 								<i class="lock icon"></i>
-								{{username}}
 							</div>
 						</div>
 						<input type="submit" name="submit" class="ui inverted blue button" ng-click="submit()">
