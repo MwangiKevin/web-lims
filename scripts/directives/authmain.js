@@ -1,4 +1,4 @@
-  app.directive('authmain', function() {
+  app.directive('authmain', ['apiAuth', function(apiAuth ) {
 
     return {
       // restrict: 'C',
@@ -13,12 +13,17 @@
         scope.$on('event:auth-loginRequired', function() {
           login.slideDown('slow', function() {           
             main.attr('style','display:none !important');
+            // apiAuth.logout();
           });
         });
         scope.$on('event:auth-loginConfirmed', function() {
           main.show();
           login.slideUp('slow');
+        });   
+        scope.$on('event:auth-loginNotRequired', function() {
+          main.show();
+          login.slideUp('slow');
         });
       }
     }
-  });
+  }]);

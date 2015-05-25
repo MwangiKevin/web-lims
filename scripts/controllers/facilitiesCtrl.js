@@ -1,5 +1,7 @@
 app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', function ($scope,Commons,Restangular,$activityIndicator ) {
 
+    Commons.requireNoLogin();
+
     Commons.activeMenu = "facilities";
 
     $scope.facilitiesColl = [];

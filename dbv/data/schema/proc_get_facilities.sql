@@ -2,7 +2,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `proc_get_facilities`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_facilities`(f_id int(2))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_facilities`(f_id int(2), search varchar(25), limit_start int(3), limit_items int(3))
 BEGIN
 
         SET @QUERY =    " SELECT 
@@ -46,6 +46,26 @@ BEGIN
         ELSE
             SET @QUERY = CONCAT(@QUERY, ' AND `f`.`id`=', f_id, '');
         END IF;
+
+
+        IF (search = ''|| search IS NULL)
+        THEN
+            SET @QUERY = @QUERY;
+        ELSE
+            SET @QUERY = CONCAT(@QUERY, ' AND (`f`.`name` LIKE "%', search, '%"');
+            SET @QUERY = CONCAT(@QUERY, ' OR  `f`.`mfl_code` LIKE "%', search, '%")');
+        END IF;
+
+
+        CASE 
+            WHEN (limit_start = 0 || limit_start = '') AND (limit_items <> 0 || limit_items <> '') 
+                THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT  0 ,  ', limit_items, ' ');
+            WHEN (limit_start <> 0 || limit_start <> '') AND (limit_items <> 0 || limit_items <> '')
+                THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT ',limit_start,' , ', limit_items, ' ');
+            ELSE
+                SET @QUERY = @QUERY;
+        END CASE;
+
 
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;

@@ -105,7 +105,7 @@
 			<div class="messaging">
 
 				<h1>
-					Please wait while <big>CD4 LIMS</big> app loads..
+					Please wait while <big>CD4 LIMS</big> loads..
 				</h1>
 				<div class="ui active inline loader"></div>
 			</div>
@@ -118,28 +118,58 @@
 
 	<div>
 		<authmain>
-			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak=""></div>
-			<div class="ui one column stackable center aligned page grid" id="login-holder">
-				<div class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
+			<div ui-view="navbar" ng-class="" class="ui grid" ng-cloak="" ></div>
+			<div ng-controller="loginCtrl" class="ui one column stackable center aligned page grid" id="login-holder">
+				<div ng-show="true" class="column nine wide" id="loginbox" style="background-color: #00b5ad;margin-top:35px;margin-bottom:35px;border-radius:0.2857rem;">
 					<div class="ui form">
 						<div class="field">
 							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
+						</div>
+						<div class="field">
+							<label for="username">Facility Login: </label>
+							<div class="ui icon input">								
+								<input type="checkbox" ng-model="facility_login">
+							</div>
+						</div>
+						<div ng-show="!facility_login" class="field">							
 							<label for="username">Username: </label>
 							<div class="ui icon input">
-								<input type="text" placeholder="Username/email" name="username" id="username">
+								<input type="text" placeholder="email" name="username" id="username" ng-model="username">
 								<i class="user icon"></i>
+							</div>
+						</div>
+						<div ng-show="facility_login" class="field">
+							<label for="username">Facility: </label>
+							<div class="ui icon input">
+								<div class="ui input">
+									<ui-select ng-model="selected.facility" theme="selectize" ng-disabled="disabled"  reset-search-input="false" style="min-width: 300px;">
+									    <ui-select-match placeholder="Type Facility Name or MFL Code...">{{$select.selected.facility_name}}</ui-select-match>
+									    <ui-select-choices repeat="fac in facilities track by $index | limitTo:10" refresh="refreshFacilities($select.search)" refresh-delay="4">
+									      	<div ng-bind-html="fac.facility_name | highlight: $select.search"></div>
+									      		<small>
+													<b>MFL Code</b>: <span ng-bind-html="''+fac.facility_mfl_code | highlight: $select.search"></span><br/>
+													email: {{fac.email}}
+													phone: <span ng-bind-html="''+fac.phone | highlight: $select.search"></span>
+												</small>
+									    </ui-select-choices>
+									</ui-select>
+								</div>
 							</div>
 						</div>
 						<div class="field">
 							<label for="password">Password: </label>
 							<div class="ui icon input">
-								<input type="password" placeholder="Password" name="password" id="password">
+								<input type="password" placeholder="Password" name="password" id="password" ng-model="password" ng-keyup="$event.keyCode == 13 && submit()">
 								<i class="lock icon"></i>
 							</div>
 						</div>
-						<input type="submit" name="submit" class="ui inverted blue button">
-					</div>
-				</div>
+						<input type="submit" name="submit" class="ui inverted blue button" ng-click="submit()">
+					</div>	
+					<div class="ui link list">						
+						<a class="item" href="#registration">Register</a>
+						<a class="item" href="#forgotPassword">Forgot Password</a>	
+					</div>			
+				</div>				
 			</div>
 			<div id = "content">			
 				<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
@@ -165,6 +195,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/ie9.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bower_components/datatables/media/css/jquery.dataTables.css">
 
 	<!-- open scripts -->
 	<script type="text/javascript">
@@ -211,7 +242,8 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-http-auth/src/http-auth-interceptor.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-cookie/angular-cookie.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ng-token-auth/dist/ng-token-auth.min.js');?>"></script>
-
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.js"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/angular-datatables.min.js');?>"></script>
 
 
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
@@ -249,12 +281,17 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/loginCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/registrationCtrl.js');?>"></script>
+
+
+
 
 	<!--Factories, Services and providers -->
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
-	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/apiAuth.js');?>"></script>
+	<script src="<?php echo base_url('scripts/factories/Commons.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/API.js');?>"></script>
 	<script src="<?php echo base_url('scripts/factories/charts/cd4_tests_table.js');?>"></script>
 

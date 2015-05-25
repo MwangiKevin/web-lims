@@ -26,7 +26,7 @@ class api extends MY_Controller {
 		$method= $this->_detect_method();
 
 		if ($method=="post"){
-			echo "Arrived"; die();
+			
 			echo json_encode($this->facilities_m->create(),JSON_PRETTY_PRINT);
 		}
 

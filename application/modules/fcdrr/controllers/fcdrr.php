@@ -10,9 +10,6 @@ class fcdrr extends MY_Controller {
 
 		parent::__construct();		
 
-        // $data['content_view'] = "fcdrr/fcdrr_v";
-        // $this->view_data['title'] = "FCDRR";
-
         $this->load->model('fcdrr_model');
 	}
 
@@ -20,10 +17,20 @@ class fcdrr extends MY_Controller {
 	
 	}
 
+	public function is_allowed(){		
+
+		$this->load->library("Aauth");	
+		if(!$this->aauth->is_allowed(1) || !is_admin()){
+			http_response_code(401);
+			$this->output->set_content_type('application/json')->set_output('false');
+		}else{
+
+			$this->output->set_content_type('application/json')->set_output('true');
+		}
+
+	}
+
 	public function fillFCDRR_view(){
-
-		
-
 		$this->load->view("fcdrr_v",$data);
 
 	}
@@ -38,7 +45,8 @@ class fcdrr extends MY_Controller {
 		/* call the commodities and print the data in JSON format */
 		
 		$data=$this->fcdrr_model->get_commodities();
-
 		$this->output->set_content_type('application/json')->set_output(json_encode($data,JSON_PRETTY_PRINT));
+
+
 	}
 }

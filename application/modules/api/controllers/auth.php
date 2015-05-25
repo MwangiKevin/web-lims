@@ -8,17 +8,25 @@ class auth extends MY_Controller {
 		parent::__construct();
 		
 		header('Content-Type: application/json; charset=utf-8');
-		$this->load->library("Aauth");		
 	}
 
-	function login(){
+	public function login(){
+
+
+		$this->load->library("Aauth");	
+
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
+
+		// $username = 'kevin@gmail.com';
+		// $password = 'kevin';
+		// show_error("432",401);
+		// $this->aauth->create_user('kevin@gmail.com','kevin','kevin1');
 
 		if ($this->aauth->login($username, $password)){
 			$details =	array(
 				'username' 		=>	$username,
-				'login_status' 	=>	'false',
+				'login_status' 	=>	true,
 				'user'			=>	$this->aauth->get_user(),
 
 				);
@@ -26,17 +34,42 @@ class auth extends MY_Controller {
 			echo json_encode($details);
 
 		}else{
+			
+			http_response_code(401);
 			$details =	array(
 				'username' 	=>	$username,
-				'login_status' 	=>	'false',
+				'login_status' 	=>	false,
+
+				'user'			=>	$this->aauth->get_user(),
 				);
 
 			echo json_encode($details);
 		}
 	}
 
-	function logout(){
-		$this->aauth->login();
+	public function logout(){
+
+		$this->load->library("Aauth");	
+		$this->aauth->logout();
+	}
+
+	public function get_session_details (){
+
+		echo json_encode($this->session->all_userdata());		
+
+	}
+
+
+	public function is_logged_in(){		
+	
+		if(!$this->session->userdata('loggedin')){
+			http_response_code(401);
+			$this->output->set_content_type('application/json')->set_output('false');
+		}else{
+
+			$this->output->set_content_type('application/json')->set_output('true');
+		}
+
 	}
 
 }

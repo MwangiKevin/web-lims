@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','rb/rb','session','encrypt','PHPexcel/Classes/PHPexcel','mpdf');
+$autoload['libraries'] = array('database','rb/rb','session','encrypt','PHPexcel/Classes/PHPexcel','mpdf','Aauth');
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database','rb/rb','session','encrypt','PHPexcel/
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','form','file','path');
+$autoload['helper'] = array('url','form','file','path','date');
 
 
 /*

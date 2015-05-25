@@ -1,4 +1,4 @@
-app.factory('Commons', ['$location',function($location){
+app.factory('Commons', ['$location','apiAuth',function($location,apiAuth){
 	var Commons={};
 	var activeMenu = "";
 	var activeSubmenuLV1 = "";
@@ -8,6 +8,12 @@ app.factory('Commons', ['$location',function($location){
 	Commons.title = '';
 	Commons.projectName='web-lims';
 
+	Commons.requireNoLogin = function(){
+
+		// $rootScope.$broadcast('event:auth-loginNotRequired');
+		apiAuth.requireNoLogin();
+	}
+
 	Commons.getActiveMenu = function (name) {
 		// console.log(name)
 		if(name == Commons.activeMenu){
@@ -15,7 +21,6 @@ app.factory('Commons', ['$location',function($location){
 		}else{
 			return ""
 		}
-
 	};
 	Commons.baseURL= base_url;
 	Commons.getActiveSubmenuLV1 = function (name) {
@@ -55,7 +60,6 @@ app.factory('Commons', ['$location',function($location){
 
 	};
 
-	Commons.baseURL = "http://127.0.0.1/web-lims/";
 	Commons.getActiveSubmenuLV1 = function(name) {
 		if (name == Commons.activeSubmenuLV1) {
 			return "active shadowed"

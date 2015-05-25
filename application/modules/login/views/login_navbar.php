@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 2fa63600b67df6977f14c778d858bd4760c6053d
 <div class="computer tablet only row">
   <div class="ui inverted fixed menu navbar page grid main-navbar pointing">
     <a href="" class="item down" style="width:50px">
@@ -69,14 +65,6 @@ $(document).ready(function(){
     e.preventDefault();
     $('.ui.vertical.menu.top').toggle();
   });
-<<<<<<< HEAD
   $('.ui.dropdown').dropdown();
 });
 </script>
-=======
-
-  $('.ui.dropdown').dropdown();
-});
-</script>
-
->>>>>>> 2fa63600b67df6977f14c778d858bd4760c6053d

@@ -17,12 +17,14 @@ var app = angular
 	'cgNotify',
 	'restangular',
 	'validation', 
-	'validation.rule'
+	'validation.rule',
+    'http-auth-interceptor',
+    'datatables'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
 	$urlRouterProvider.otherwise('/');
-
+	
 	$stateProvider
 	
 	//LIMS Login	
@@ -44,6 +46,7 @@ var app = angular
 			}
 		}
 	})
+
 	
 	.state('Dashboard',{
 		url: '/',		
@@ -54,7 +57,7 @@ var app = angular
 				controller:'dashboardCtrl'
 			},
 			'navbar':{
-				templateUrl: 'dashboard/navbar',
+				templateUrl: 'login/navbar',
 				controller: 'navbarCtrl'
 			},
 			'filter':{
@@ -70,13 +73,32 @@ var app = angular
 	})
 
 
+	.state('Registration',{
+		url: '/registration',		
+		abstract: false,
+		views:{
+			'main':{
+				templateUrl: 'registration',
+				controller:  'registrationCtrl'
+			},
+			'navbar':{
+				templateUrl: 'login/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
 
 	//common routes
 	
 	.state('Dashboard.main',{
 		url: '',
-		templateUrl: 'dashboard/dashboard_summary',
-		controller:'dashboardSummaryCtrl'		
+		templateUrl: 'dashboard/testing_trends',
+		controller:'TestsTrendCtrl'		
 	})
 
 
@@ -92,8 +114,7 @@ var app = angular
 	})
 	.state('Dashboard.devices',{
 		url: 'deviceDistribution',
-		templateUrl: 'dashboard/devices',
-		controller: 'device_distributionCtrl'		
+		templateUrl: 'dashboard/devices'		
 	})
 	.state('Dashboard.map',{
 		url: 'map',
