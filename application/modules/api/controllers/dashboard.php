@@ -191,23 +191,45 @@ class dashboard extends MY_Controller {
 		$errors =	(int) $tst[0]["errors"];
 		$valid =	(int) $tst[0]["valid"];
 		
-		$tests = 
-				array(
-							array('Errors', $errors),
-							array('Above Critical', $passed),
-							array('Below Critical', $failed)	
-						
-				);
-				
+		$tests 	=				array(
+									0	=>	array(
+													'y'				=>	$valid,
+													'color'			=>	'#a4d53a',
+													'drilldown'		=>	array(
+																			'name'			=>	'Successful Tests',
+																			'color'			=>	'#a4d53a',
+																			'categories'	=>	array(
+																										0	=>	'abv critical lvl',
+																										1	=>	'blw critical lvl',
+																								),
+																			'data'			=>	array(
+																										0	=>	$passed,
+																										1	=>	$failed
+																								)
+																		)
+												),
+									1	=>	array(
+													'y'				=>	$errors,
+													'color'			=>	'#aa1919',
+													'drilldown'		=>	array(
+																			'name'			=>	'Unsuccessful Tests (Errors)',
+																			'color'			=>	'#aa1919',
+																			'categories'	=>	array(
+																										0	=>	'Errors'
+																								),
+																			'data'			=>	array(
+																										0	=>	$errors
+																								)
+																		)
+												)
+								);
+		$categories		=		array('Successful Tests','Unsuccessful Tests (Errors)');
+		$tests_errors = [];		
 		$data["tests"]		=	$tests;
 		$data["categories"]	=	$categories;
+		array_push($test_errors,$data['tests'],$data['categories']);
 		
-		echo json_encode($tests);
-		
-		// $thiss =  json_encode($tests);
-		// echo "<pre>";
-		// print_r($tests);
-		// echo "</pre>";die;
+		echo json_encode($test_errors);
 	}
 	// for test for this year [table]
 	public function get_tests($user_group_id, $user_filter_used,$from,$to){
