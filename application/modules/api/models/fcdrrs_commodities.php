@@ -11,7 +11,7 @@ class fcdrrs_commodities extends MY_Model{
 
 	}
 
-	public function read($id=null,){		
+	public function read($id=NULL){		
 
 		$fcdrr = R::getAll("CALL `proc_get_fcdrr_commodities`('$id')");
 		

@@ -58,7 +58,7 @@ class facilities_m extends MY_Model{
 		return $facility;
 	}
 
-	public function read($id){
+	public function read($id=NULL){
 
 		$facilities = array();
 

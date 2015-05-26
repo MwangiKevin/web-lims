@@ -46,7 +46,7 @@ class facility_devices_m extends MY_Model{
 		return $facility_device;
 	}
 
-	public function read($id){
+	public function read($id=NULL){
 
 		$fac_dev = array();
 
