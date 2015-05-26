@@ -1,8 +1,5 @@
-DROP PROCEDURE IF EXISTS `proc_get_devices_per_county`;
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_devices_per_county`()
-
-	BEGIN
+BEGIN
 		
 
 		SELECT COUNT(fd.id) AS "no_per_county" , c.name AS county
@@ -22,6 +19,4 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_devices_per_county`()
 			GROUP BY
 				c.id, fd.device_id;
 
-END ;
-
-SHOW ERRORS;
+END

@@ -1,9 +1,5 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_get_county_details`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_get_county_details` (C_id int(11)) 
-			BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_county_details`(C_id int(11))
+BEGIN
 				SET @QUERY =    "SELECT 	
 
 									`cnt`.`id`,
@@ -38,6 +34,4 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_get_county_details` (C_id int
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;		
+    END

@@ -1,8 +1,4 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `web-lims`.`proc_get_commodities`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `web-lims`.`proc_get_commodities`(C_id int(11),reporting_status int(2))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_commodities`(C_id int(11),reporting_status int(2))
 BEGIN
 
 
@@ -34,6 +30,4 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+    END
