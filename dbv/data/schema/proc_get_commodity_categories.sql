@@ -1,7 +1,3 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_get_commodity_categories`$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_commodity_categories`(C_id int(2))
 BEGIN
 
@@ -24,6 +20,4 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+    END

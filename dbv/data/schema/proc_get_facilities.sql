@@ -1,7 +1,3 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_get_facilities`$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_facilities`(f_id int(2), search varchar(25), limit_start int(3), limit_items int(3))
 BEGIN
 
@@ -70,6 +66,4 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+    END

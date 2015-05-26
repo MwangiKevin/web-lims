@@ -46,10 +46,6 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
             text: 'Testing Trends (last 4 years)',
             x: -20 //center   
         },
-        // subtitle: {
-        //     text: 'Source: WorldClimate.com',
-        //     x: -20
-        // },
         xAxis: {
             categories: [],
             labels: {
@@ -88,7 +84,6 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
             shared: true,
             valueSuffix: ' Tests',
             crosshairs: [true,false],
-            //pointFormat: '<br/><br/>{series.name}: <div><b>{point.y}, </b><b>{point.percentage:.1f}%</b></div>'
         },
         series: []  
 	}
@@ -97,26 +92,15 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 	//
 	//YEAERLY TESTING TRENDS
 	//
-	//
-	
-	//xAxis yearlt testing trends column grpah categories
-	$scope.yearly_testing_trends_categories = function(){
-		return $http.get(
-			Commons.baseURL+"api/dashboard/return_yearly_testing_trends_categories"			
-			)
-		.success(function(response){
-			$scope.yearly_testing_trends.xAxis.categories= response;
-		});	
-	}
-	$scope.yearly_testing_trends_categories();
-	
+	//	
 	//series yearly testing trends column graph
 	$scope.yearly_testing_trends_series = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/yearly_testing_trends/0/0"			
+			Commons.baseURL+"api/dashboard/return_yearly_testing_trends_categories/0/0"			
 			)
 		.success(function(response){
-			$scope.yearly_testing_trends.series = response;
+			$scope.yearly_testing_trends.xAxis.categories= response[0];
+			$scope.yearly_testing_trends.series = response[1];
 		});	
 	}
 	$scope.yearly_testing_trends_series();
@@ -184,30 +168,6 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 		.success(function(response){
 			data = response;
 			categories = ['Successful Tests','Unsuccessful Tests (Errors)'];
-			
-			console.log(categories);
-    		console.log(data);
-    		
-			// for (var i = 0; i < data.length; i++) {
-//     
-            // // add browser data
-            // testsData.push({
-                // name: categories[i],
-                // y: data[i].y,
-                // color: data[i].color
-            // });
-//     
-            // // add version data
-            // for (var j = 0; j < data[i].drilldown.data.length; j++) {
-                // var brightness = 0.2 - (j / data[i].drilldown.data.length) / 5 ;
-                // testsTypeData.push({
-                    // name: data[i].drilldown.categories[j],
-                    // y: data[i].drilldown.data[j],
-                    // color: Highcharts.Color(data[i].color).brighten(brightness).get()
-                // });
-            // }
-        // }
-		// $scope.tests_vs_errors_pie.series.data = response;
 			$scope.tests_vs_errors_pie.series[0].data = response;
 		});	
 	}
@@ -241,63 +201,6 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
                 size: '20',
                 data: []
             }]
-		// chart: {
-            // plotBackgroundColor: null,
-            // plotBorderWidth: null,
-            // plotShadow: true, 
-            // type: 'pie',
-            // height: '195'
-        // },
-        // title: {
-            // text: 'Tests VS Errors'
-        // },
-        // yAxis: {
-            // title: {
-                // text: ''
-            // }
-        // },
-        // credits:{
-            // enabled:false
-        // }, 
-        // plotOptions: {
-            // pie: {
-                // shadow: false,
-                // center: ['50%', '50%'],
-                // showInLegend: true,
-                // allowPointSelect: true,
-                // cursor: 'pointer',
-                // dataLabels: {
-                    // enabled: false
-                // },
-            // }
-        // },
-        // tooltip: {
-            // valueSuffix: '',
-            // pointFormat: '<b>{series.name}</b>: <div><b>{point.y}, </b><br/>Percentage Share: <b>{point.percentage:.2f}%</b></div>'
-        // },
-        // series: [{
-            // name: '#',
-            // data: "Successful Tests, Unsuccessful Tests (Errors)",
-            // size: '100%',
-            // dataLabels: {
-                // formatter: function() {
-                    // return this.y > 0 ? this.point.name : null ;
-                // },
-                // color: 'white',
-                // distance: -30
-            // }
-        // }, {
-            // name: '#',
-            // data: testsTypeData,
-            // size: '230%',
-            // innerSize: '200%',
-            // dataLabels: {
-                // formatter: function() {
-                    // // display only if larger than 1
-                    // return this.y > 0 ? '<b>'+ this.point.name +':</b> '+ this.y +' ('+Math.round(this.percentage,2)+' %)'  : null;
-                // }
-            // }
-        // }]
 	}
 	
 	
