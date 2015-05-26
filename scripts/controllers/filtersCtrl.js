@@ -15,10 +15,10 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 	$scope.filters.dates.start = ''
 	$scope.filters.dates.end = ''
 
-	initializeFilters();
+	refreshFilters("");
 
-	function initializeFilters() {
-		Filters.getEntities()
+	function refreshFilters(search_term) {
+		Filters.getEntities(search_term)
 		.success(function (ents) {
 			$scope.filters.entities = ents;
 		})

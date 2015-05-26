@@ -37,7 +37,7 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 	<div class="left floated left aligned six wide column">
 		<ui-select ng-model="filters.entities.selected" theme="selectize" ng-disabled="disabled" style="min-width: 300px;">
 		<ui-select-match placeholder="Search Criteria to Filter by...">{{$select.selected.name +" ("+ $select.selected.type +")"  }}</ui-select-match>
-		<ui-select-choices group-by="'type'" repeat="entity in filters.entities | entityFilter: {name: $select.search, type: $select.search } | limitTo:10"  refresh-delay="2">
+		<ui-select-choices group-by="'type'" repeat="entity in filters.entities | limitTo:10"   refresh="refreshFilters($select.search)" refresh-delay="4" >
 		<div ng-bind-html="entity.name | highlight: $select.search"></div>
 		<small>
 			email: {{entity.email}}
