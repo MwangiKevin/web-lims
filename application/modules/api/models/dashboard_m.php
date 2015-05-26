@@ -35,7 +35,7 @@ class dashboard_m extends MY_Model{
 	
 	public function get_cd4_devices_pie($param1,$param2){
 		$sql = "CALL proc_sql_eq()";
-		$sql1 = "CALL proc_equipment_pie('".$param1."','".$param2."')";
+		$sql1 = "CALL proc_device_pie('".$param1."','".$param2."')";
 		
 		$equipment = R::getAll($sql);
 		$equipment_r = R::getAll($sql1);

@@ -270,7 +270,7 @@ class dashboard extends MY_Controller {
 		echo json_encode($result);
 	}
 
-	// get cd4 equipment [Pie Chart]
+	// get cd4 devices [Pie Chart]
 	function get_cd4_devices_pie($user_group_id,$user_filter_used){
 		$user_group_id = 0;
 		$user_filter_used = 0;

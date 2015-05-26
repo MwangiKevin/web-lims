@@ -1,6 +1,4 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_get_devices_per_county`$$
+DROP PROCEDURE IF EXISTS `proc_get_devices_per_county`;
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_devices_per_county`()
 
@@ -24,8 +22,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_devices_per_county`()
 			GROUP BY
 				c.id, fd.device_id;
 
-END $$
-
-DELIMITER ;
+END ;
 
 SHOW ERRORS;

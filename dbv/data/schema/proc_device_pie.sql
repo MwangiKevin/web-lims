@@ -1,5 +1,5 @@
-DELIMITER $$
-DROP PROCEDURE IF exists `proc_device_pie`$$
+DROP PROCEDURE IF exists `proc_device_pie`;
+
 CREATE PROCEDURE `proc_device_pie`(user_group_id int(11),user_filter_used int(11))
 	BEGIN
 	CASE `user_filter_used`
@@ -139,4 +139,3 @@ CREATE PROCEDURE `proc_device_pie`(user_group_id int(11),user_filter_used int(11
 		END CASE;
 	END CASE;
 END;
-DELIMITER ;
