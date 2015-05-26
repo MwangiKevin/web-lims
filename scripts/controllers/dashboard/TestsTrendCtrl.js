@@ -158,52 +158,59 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 	//
 	
 	//series data tests_vs_errors_pie
-		// Build the data arrays
-    var testsData = [];
-    var testsTypeData = [];
+    var data ="[";
 	$scope.tests_vs_errors_pie_data = function(){
 		return $http.get(
 			Commons.baseURL+"api/dashboard/test_errors_pie"			
 			)
 		.success(function(response){
-			data = response;
-			categories = ['Successful Tests','Unsuccessful Tests (Errors)'];
-			$scope.tests_vs_errors_pie.series[0].data = response;
+			console.log(response);
+			// for (var i = 0; i < response.length; i++) {
+// 						
+				// data += '["'+response[i].name +'",'+response[i].value+'],';
+			// }
+			// data = data.slice(1,-1);
+			// data = angular.toJson(response);
+			// console.log(data);
+			// console.log(data);	
+			
+			$scope.tests_vs_errors_pie.series[0].data = response
 		});	
 	}
 	$scope.tests_vs_errors_pie_data();
 	//chart definition
 	$scope.tests_vs_errors_pie = {
-		  chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'Tests vs Errors'
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
+		   chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Test vs Errors'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
                 }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Percentage',
-                size: '20',
-                data: []
-            }]
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [["failed",200],["passed",400],["total",45721],["errors",3678],["valid",42043]]
+        }]
 	}
-	
-	
+
 	//
 	//
 	//Tests table
