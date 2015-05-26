@@ -9,9 +9,11 @@ app.factory('Filters',['$http','$activityIndicator', function($http,$activityInd
 		entity:{}
 	};
 	Filters.getEntities = function () {
+
+		search_term="";
 		
 		$activityIndicator.startAnimating();
-		return $http.get('api/filters/entities').success(function(){$activityIndicator.stopAnimating()});
+		return $http.get('api/filters/entities',{params:{limit_items:3,search:search_term}}).success(function(){$activityIndicator.stopAnimating()});
 	};
 	
 	Filters.getDates = function () {

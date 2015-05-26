@@ -42,7 +42,13 @@ class partners_m extends MY_Model{
 	}
 
 	public function read($id=NULL){
-		$sub_couties_res = R::getAll("CALL proc_api_get_partners('$id')");
+
+
+		$search = $this->input->get("search");
+		$limit_start = $this->input->get("limit_start");
+		$limit_items = $this->input->get("limit_items");
+		
+		$sub_couties_res = R::getAll("CALL proc_api_get_partners('$id','$search','$limit_start','$limit_items')");
 				
 			return $sub_couties_res;	
 		
