@@ -46,13 +46,13 @@ class facility_devices_m extends MY_Model{
 		return $facility_device;
 	}
 
-	public function read($id){
+	public function read($id=NULL){
 
 		$fac_dev = array();
 
 		$verbose = $this->input->get('verbose');
 
-		$fac_dev_res = R::getAll("CALL `proc_get_facility_devices`('$id','')");
+		$fac_dev_res = R::getAll("CALL `proc_get_api_facility_devices`('$id','')");
 		
 		if($id==NULL){
 

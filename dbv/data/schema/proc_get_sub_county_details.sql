@@ -1,7 +1,5 @@
-DROP PROCEDURE IF EXISTS `proc_get_sub_county_details`;
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  proc_get_sub_county_details () 
-					BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_sub_county_details`()
+BEGIN
 						SELECT 
 
 							`sub`.`id`,
@@ -27,4 +25,4 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE  proc_get_sub_county_details ()
 
 						GROUP BY `sub`.`id`
 						ORDER BY `sub`.`name` ASC;
-					END;
+					END

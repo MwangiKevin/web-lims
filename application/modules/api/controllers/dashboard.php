@@ -8,6 +8,8 @@ class dashboard extends MY_Controller {
 
 		parent::__construct();
 		$this->load->model("dashboard_m");
+		
+		header('Content-Type: application/json; charset=utf-8');
 	}
 	
 	public function index(){
@@ -124,17 +126,21 @@ class dashboard extends MY_Controller {
 		return array($categories,$categories_initialize);
 	}
 	//returns data for xAxis (categories)
-	public function return_yearly_testing_trends_categories(){
+	public function return_yearly_testing_trends_categories($user_group_id,$user_filter_used){
 		$categories = $this->get_yearly_testing_trends_categories();
-		echo json_encode($categories[0]);
+		$data = $this->yearly_testing_trends($user_group_id,$user_filter_used);
+		
+		$consolidated_result = [];
+		array_push($consolidated_result,$categories[0],$data);
+		// print_r($consolidated_result);die;
+		echo json_encode($consolidated_result);
 	}
 
 	public function yearly_testing_trends($user_group_id,$user_filter_used) {
-		$sql = "CALL proc_equipment_yearly_testing_trends_column(0,0)";
+		$sql = "CALL proc_equipment_yearly_testing_trends_column('".$user_group_id."','".$user_filter_used."')";
 		$sql1 = "CALL proc_sql_eq()";
 		$equip_tst = R::getAll($sql);
 		$equipment = R::getAll($sql1);
-		
 		
 		$categories = $this->get_yearly_testing_trends_categories();
 		
@@ -158,8 +164,9 @@ class dashboard extends MY_Controller {
 		}
 		// echo "<pre>";
 		// print_r($data);
-		// echo "</pre>";die;
-		echo json_encode($data);
+		// echo "</pre>";
+		// echo json_encode($data);die;
+		return $data;
 	}
 	
 	//
@@ -178,29 +185,18 @@ class dashboard extends MY_Controller {
 		
 		$tst[0]["title"]= 'Tests';
 
-		$failed =	(int) $tst[0]["failed"];
-		$passed =	(int) $tst[0]["passed"];
-		$total =	(int) $tst[0]["total"];
-		$errors =	(int) $tst[0]["errors"];
-		$valid =	(int) $tst[0]["valid"];
+		$tests_errors =	array(
+				array('name'=>'failed','y'=>(int) $tst[0]["failed"]),
+				array('name'=>'passed','y'=>(int)(int) $tst[0]["passed"]),
+				array('name'=>'total','y'=>(int) $tst[0]["total"]),
+				array('name'=>'errors','y'=>(int) $tst[0]["errors"]),
+				array('name'=>'valid','y'=>(int) $tst[0]["valid"])
+			);
+		$categories		=		array('Successful Tests','Unsuccessful Tests (Errors)');
 		
-		$tests = 
-				array(
-							array('Errors', $errors),
-							array('Above Critical', $passed),
-							array('Below Critical', $failed)	
-						
-				);
-				
 		$data["tests"]		=	$tests;
 		$data["categories"]	=	$categories;
-		
-		echo json_encode($tests);
-		
-		// $thiss =  json_encode($tests);
-		// echo "<pre>";
-		// print_r($tests);
-		// echo "</pre>";die;
+		echo json_encode($tests_errors);
 	}
 	// for test for this year [table]
 	public function get_tests($user_group_id, $user_filter_used,$from,$to){
@@ -256,15 +252,14 @@ class dashboard extends MY_Controller {
 
 
 	// Number of Devices per County [stacked]
-	function get_cd4_devices_perCounty(){
-		$sql = "CALL get_devices_per_county";
-		$response = R::getAll($sql);
-		
-		echo json_encode($response);
-
+	public function get_cd4_devices_perCounty(){
+		$result = $this->dashboard_m->get_cd4_devices_perCounty();
+		// echo "<pre>";
+		// print_r($result);die;
+		echo json_encode($result);
 	}
 
-	// get cd4 equipment [Pie Chart]
+	// get cd4 devices [Pie Chart]
 	function get_cd4_devices_pie($user_group_id,$user_filter_used){
 		$user_group_id = 0;
 		$user_filter_used = 0;
@@ -278,13 +273,6 @@ class dashboard extends MY_Controller {
 		echo json_encode($result);
 	}
 
-	// for tests and errors [pie chart]
-	public function get_test_n_errors($param1, $param2){
-		$sql = "CALL proc_get_test_pie()";
-		$response = R::getAll($sql);
-
-		echo json_encode($response);
-	}
 	
 	// equipment and tests [Pie Chart]
 	function get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used){
@@ -303,11 +291,9 @@ class dashboard extends MY_Controller {
 	}
 
 	// expected reporting devices [area chart]
-	function get_expected_reporting_devices($user_group_id,$user_filter_used,$year=2015){
-		//error_reporting(0);
+	function get_expected_reporting_devices($user_group_id,$user_filter_used,$year='2015'){
+		// error_reporting(0);
 		$results = $this->dashboard_m->get_expected_reporting_devices($user_group_id,$user_filter_used,$year);
-		$results = json_encode($results);
-		echo $results;
-
+		echo json_encode($results);
 	}
 }

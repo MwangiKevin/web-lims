@@ -1,5 +1,3 @@
-DROP PROCEDURE IF exists `proc_get_facility_devices`;
-DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_facility_devices`(user_group_id int(11),user_filter_used int(11) )
 BEGIN
 		CASE `user_filter_used`
@@ -262,6 +260,4 @@ BEGIN
 				AND `fac`.`sub_county_id` = user_group_id;
             END CASE;
 		END CASE;		
-END;
-$$
-DELIMITER ;
+END

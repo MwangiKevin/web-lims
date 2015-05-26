@@ -1,7 +1,4 @@
-DROP PROCEDURE IF EXISTS `proc_reported_devices`
-
-DELIMITER $$
-CREATE PROCEDURE `proc_reported_devices`(user_group_id int(11),user_filter_used int(11),year int(11))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_reported_devices`(user_group_id int(11),user_filter_used int(11),year int(11))
 BEGIN
 	CASE `user_filter_used`
 	WHEN 0 THEN
@@ -120,6 +117,4 @@ BEGIN
 			
 		END CASE;
 	END CASE;
-END;
-$$
-DELIMITER ;
+END
