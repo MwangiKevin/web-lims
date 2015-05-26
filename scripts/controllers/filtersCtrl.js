@@ -15,9 +15,8 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 	$scope.filters.dates.start = ''
 	$scope.filters.dates.end = ''
 
-	refreshFilters("");
 
-	function refreshFilters(search_term) {
+	$scope.refreshFilters = function(search_term) {
 		Filters.getEntities(search_term)
 		.success(function (ents) {
 			$scope.filters.entities = ents;
@@ -36,6 +35,7 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 
 		$.extend(Filters.entity, $scope.filters.entities.selected);
 	}
+	$scope.refreshFilters("");
 
 	$scope.filters.clear = function() {
 		$scope.filters.entities.selected = undefined;
