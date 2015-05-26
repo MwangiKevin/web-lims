@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_county_details`(C_id int(11))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_counties`(C_id int(11))
 BEGIN
 				SET @QUERY =    "SELECT 	
 
@@ -10,10 +10,7 @@ BEGIN
 									`par_cnt`.`partner_id`,
 									`par`.`name`				AS `partner_name`,
 									`par`.`email`				AS `partner_email`,
-									`par`.`phone`				AS `partner_phone`,
-
-				                    '3' AS `filter_type`,
-						            `par`.`id`  AS `filter_id`
+									`par`.`phone`				AS `partner_phone`
 
 								FROM `county` `cnt`
 									LEFT OUTER JOIN `partner_counties` `par_cnt`
@@ -26,7 +23,7 @@ BEGIN
         THEN
             SET @QUERY = @QUERY;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, ' WHERE `sub`.`id`=', C_id, '');
+            SET @QUERY = CONCAT(@QUERY, ' WHERE `cnt`.`id`=', C_id, ' ');
         END IF;
 
 
@@ -35,4 +32,4 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END
+    END;

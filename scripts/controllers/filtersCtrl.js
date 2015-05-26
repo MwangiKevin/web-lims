@@ -18,13 +18,13 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 	initializeFilters();
 
 	function initializeFilters() {
-		// Filters.getEntities()
-		// .success(function (ents) {
-			// $scope.filters.entities = ents;
-		// })
-		// .error(function (error) {
-			// $scope.status = 'Unable to load Filters data: ' + error.message;
-		// });
+		Filters.getEntities()
+		.success(function (ents) {
+			$scope.filters.entities = ents;
+		})
+		.error(function (error) {
+			$scope.status = 'Unable to load Filters data: ' + error.message;
+		});
 
 		Filters.getDates()
 		.success(function (dates) {

@@ -26,9 +26,9 @@ class filters extends MY_Controller {
 		$this->load->model("partners_m");	
 
 		$facilities 	= $this->facilities_m	->	read();
-		// $sub_counties 	= $this->sub_counties_m	->	read();
-		// $counties 		= $this->counties_m	->	read();
-		// $partners 		= $this->partners_m	->	read();
+		$sub_counties 	= $this->sub_counties_m	->	read();
+		$counties 		= $this->counties_m		->	read();
+		$partners 		= $this->partners_m		->	read();
 
 		foreach ($facilities as $key => $value) {
 
@@ -39,6 +39,48 @@ class filters extends MY_Controller {
 					'type' 			=>	"Facilities",
 					'filter_type'	=>	1,
 					'filter_id'		=>	(int) $value['facility_id']
+				);	
+			array_push($entities, $item);
+		}
+
+
+		foreach ($sub_counties as $key => $value) {
+
+			$item = array(
+					'name' 			=>	$value['name'],
+					'email'			=>	"",
+					'phone' 		=>	"",
+					'type' 			=>	"Sub Counties",
+					'filter_type'	=>	2,
+					'filter_id'		=>	(int) $value['id']
+				);	
+			array_push($entities, $item);
+		}
+
+
+
+		foreach ($counties as $key => $value) {
+
+			$item = array(
+					'name' 			=>	$value['name'],
+					'email'			=>	"",
+					'phone' 		=>	"",
+					'type' 			=>	"Counties",
+					'filter_type'	=>	3,
+					'filter_id'		=>	(int) $value['id']
+				);	
+			array_push($entities, $item);
+		}
+
+		foreach ($partners as $key => $value) {
+
+			$item = array(
+					'name' 			=>	$value['name'],
+					'email'			=>	"",
+					'phone' 		=>	"",
+					'type' 			=>	"Partners",
+					'filter_type'	=>	4,
+					'filter_id'		=>	(int) $value['id']
 				);	
 			array_push($entities, $item);
 		}

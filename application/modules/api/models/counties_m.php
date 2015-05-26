@@ -40,7 +40,7 @@ class counties_m extends MY_Model{
 	}
 
 	public function read($id=NULL){
-		$couties_res = R::getAll("CALL proc_get_county_details('$id')");
+		$couties_res = R::getAll("CALL proc_api_get_counties('$id')");
 
 		if($id==NULL){
 
