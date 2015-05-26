@@ -44,7 +44,20 @@ class presto_uploads extends MY_Controller
         $file_type_array = explode(").", end($file_type_array));
         $file_type = current($file_type_array);
 
-	}
+        if(in_array($file_ext, $allowed)){
+				//Import uploaded file to Database
+				$handle = fopen($file_tmp, "r");
+
+					while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
+						$new_array[] = $data;
+						$new_data = array();
+											
+				    }
+				    $cols = array();
+				    $insert_data = array();
+				    $counter = 0;
+			    	
+
 
 
 }
