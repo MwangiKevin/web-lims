@@ -188,6 +188,7 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
         title: {
             text: 'Test vs Errors'
         },
+        
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
