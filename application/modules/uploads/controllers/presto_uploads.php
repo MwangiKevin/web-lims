@@ -53,10 +53,6 @@ class presto_uploads extends MY_Controller
 						$new_data = array();
 											
 				    }
-				    $cols = array();
-				    $insert_data = array();
-				    $counter = 0;
-			    	
 
 // ............. check for the header
 
