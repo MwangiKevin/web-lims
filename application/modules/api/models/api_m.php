@@ -55,6 +55,13 @@ class api_m extends MY_Model{
 		}
 		return $result;
 	}
+
+	public function get_tests_details($search,$start,$end)
+	{
+		$sql = "CALL `proc_dt_tests`('$search','$start','$end')";
+		$result = R::getAll($sql);
+		return $result;
+	}
 	
 	
 	
