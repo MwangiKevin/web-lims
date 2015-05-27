@@ -58,6 +58,32 @@ class presto_uploads extends MY_Controller
 				    $counter = 0;
 			    	
 
+// ............. check for the header
+
+				    	$header_one = "";
+				    	$header_two = "";
+				    	$header_three = "";
+				    	$header_four = "";
+
+						$search      = $header;
+						$lines       = file('sources.csv');
+						$line_number = false;
+
+						while (list($key, $line) = each($lines) and !$line_number) {
+
+						   $line_number = (strpos($line, $search) !== FALSE);
+
+						}
+
+						if($line_number){
+
+						   echo "Results found for " .$search;
+
+						}
+
+						else{
+						   echo "No results found for $search";
+						}
 
 
 }
