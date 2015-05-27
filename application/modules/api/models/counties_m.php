@@ -40,7 +40,12 @@ class counties_m extends MY_Model{
 	}
 
 	public function read($id=NULL){
-		$couties_res = R::getAll("CALL proc_get_county_details('$id')");
+
+		$search = $this->input->get("search");
+		$limit_start = $this->input->get("limit_start");
+		$limit_items = $this->input->get("limit_items");
+
+		$couties_res = R::getAll("CALL proc_api_get_counties('$id','$search','$limit_start','$limit_items')");
 
 		if($id==NULL){
 

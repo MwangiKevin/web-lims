@@ -1,5 +1,3 @@
-DROP PROCEDURE   IF exists `proc_equipment_test_table`;
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_equipment_test_table`(from_date date,to_date date,user_group_id int(11), user_filter_used int(11))
 BEGIN
 		CASE `user_filter_used`
@@ -162,4 +160,4 @@ BEGIN
 				ORDER BY `equipment_name` DESC;
 		END CASE;
 	END CASE;	
-END;
+END

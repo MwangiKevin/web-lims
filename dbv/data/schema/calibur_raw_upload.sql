@@ -26,7 +26,7 @@ CREATE TABLE `calibur_raw_upload` (
   `CD3CD4CD45TruCCD3CD4_lymph` float(10,2) DEFAULT NULL,
   `CD3CD4CD45TruCCD3CD4_abs_cnt` float(10,2) DEFAULT NULL,
   `CD3CD4CD45TruCCD45_abs_cnt` float(10,2) DEFAULT NULL,
-  `is_uploaded` int(2) DEFAULT 0,
+  `is_uploaded` int(2) DEFAULT '0',
   `upload_file_name` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sample_id` (`sample_id`,`case_number`,`facility_id`)

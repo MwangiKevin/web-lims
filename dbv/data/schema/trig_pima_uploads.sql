@@ -1,5 +1,3 @@
-DROP TRIGGER IF EXISTS `trig_pima_uploads`;
-
 CREATE DEFINER=`root`@`localhost` TRIGGER trig_pima_uploads AFTER INSERT ON pima_raw_upload
 FOR EACH ROW
   BEGIN
