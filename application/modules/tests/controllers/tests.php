@@ -14,21 +14,18 @@ class tests extends MY_Controller {
 
 	public function index() {
 
-		// $this->load->view("tests_v");
-		$this->load->view("testing_view");
+		$this->load->view("tests_v");
+		// $this->load->view("testing_view");
 	}
 
-	function ss_procedure()
+	public function get_tests()
 	{
-		$length = $this->input->post(length);
-		$search = $this->input->post(search);
-		$order = $this->input->post(order);
-		
-		$ss_dt = $this->test_model->ss_dt( $length, $search, $order );
-		print_r($ss_dt);
-		
-	}
+		$data = $this->api->tests();
+		$result = $this->test_model->raw_ss_dt($data);
 
+		echo json_encode($result, JSON_PRETTY_PRINT);
+	}
+	
 	function test_unparametized()
 	{
 		$length = $this->input->post(length);
@@ -40,13 +37,7 @@ class tests extends MY_Controller {
 		
 		echo json_encode($serverSide_data, JSON_PRETTY_PRINT);
 	}
-	public function get_tests()
-	{
-		$data = $this->api->tests();
-		$result = $this->test_model->raw_ss_dt($data);
-
-		echo json_encode($result, JSON_PRETTY_PRINT);
-	}
+	
 
 	
 }

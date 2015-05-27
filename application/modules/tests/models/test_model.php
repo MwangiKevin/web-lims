@@ -10,6 +10,33 @@ class test_model extends MY_Model
 	{
 		parent:: __construct();
 	}
+
+	function raw_ss_dt($serverSide_data)
+	{
+		
+		$data = array();
+		$recordsTotal = 0;
+
+		foreach ($serverSide_data as $key => $value) {
+			$data[] = array(
+					$value['id'],
+					$value['sample'],
+					$value['name'],
+					$value['cd4_count'],
+				);
+			$recordsTotal++;
+		}
+
+		$json_reg = array(
+				"sEcho" => 1,
+				"iTotalRecords" => $recordsTotal,
+				"iTotalDisplayRecords" => $recordsTotal,
+				"aaData" => $data
+			);
+		
+		return $json_reg;
+	}
+
 	function ss_dt( $start, $length, $search=NULL, $order )
 	{
 		$search_value = $search[value];
@@ -53,32 +80,5 @@ class test_model extends MY_Model
 		return $json_reg;
 		
 	}
-
-	function raw_ss_dt($serverSide_data)
-	{
-		
-		$data = array();
-		$recordsTotal = 0;
-
-		foreach ($serverSide_data as $key => $value) {
-			$data[] = array(
-					$value['id'],
-					$value['sample'],
-					$value['name'],
-					$value['cd4_count'],
-				);
-			$recordsTotal++;
-		}
-
-		$json_reg = array(
-				"sEcho" => 1,
-				"iTotalRecords" => $recordsTotal,
-				"iTotalDisplayRecords" => $recordsTotal,
-				"aaData" => $data
-			);
-		
-		return $json_reg;
-	}
-
 }
 ?>
