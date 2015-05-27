@@ -591,10 +591,10 @@ class Aauth {
 			$valid = FALSE;
 		}
 
-		if ( ! valid_email($email)){
-			$this->error($this->CI->lang->line('aauth_error_email_invalid'));
-			$valid = FALSE;
-		}
+		// if ( ! valid_email($email)){
+		// 	$this->error($this->CI->lang->line('aauth_error_email_invalid'));
+		// 	$valid = FALSE;
+		// }
 		if ( strlen($pass) < 5 OR strlen($pass) > $this->config_vars['max'] ){
 			$this->error($this->CI->lang->line('aauth_error_password_invalid'));
 			$valid = FALSE;
