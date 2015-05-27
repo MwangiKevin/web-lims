@@ -54,23 +54,9 @@ class test_model extends MY_Model
 		
 	}
 
-	function raw_ss_dt()
+	function raw_ss_dt($serverSide_data)
 	{
 		
-		$sql = "SELECT
-					`cd4t`.`id`,
-					`cd4t`.`sample`,
-					`fc`.`name`,
-					`cd4t`.`cd4_count`
-				FROM `cd4_test` `cd4t`
-					LEFT JOIN `facility` `fc`
-						ON `cd4t`.`facility_id` = `fc`.`id`
-
-							LIMIT 10
-						";
-		
-		$serverSide_data = R::getAll($sql);
-
 		$data = array();
 		$recordsTotal = 0;
 

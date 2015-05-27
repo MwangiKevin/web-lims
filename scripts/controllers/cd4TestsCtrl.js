@@ -3,7 +3,7 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 	.withOption('ajax', {
-		url: Commons.baseURL+'tests/get_sql',
+		url: Commons.baseURL+'tests/get_tests',
 		type: 'POST'
 	})	
 	.withDataProp('data')

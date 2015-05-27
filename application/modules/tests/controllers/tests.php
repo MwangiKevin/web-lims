@@ -9,14 +9,13 @@ class tests extends MY_Controller {
 	function __construct() {
 		parent:: __construct();
 		$this->load->model("test_model");
-		
-		
+		$this->load->module("api");
 	}
 
 	public function index() {
 
-		$this->load->view("tests_v");
-		// $this->load->view("testing_view");
+		// $this->load->view("tests_v");
+		$this->load->view("testing_view");
 	}
 
 	function ss_procedure()
@@ -41,11 +40,12 @@ class tests extends MY_Controller {
 		
 		echo json_encode($serverSide_data, JSON_PRETTY_PRINT);
 	}
-	public function get_sql()
+	public function get_tests()
 	{
-		$data = $this->test_model->raw_ss_dt();
+		$data = $this->api->tests();
+		$result = $this->test_model->raw_ss_dt($data);
 
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($result, JSON_PRETTY_PRINT);
 	}
 
 	

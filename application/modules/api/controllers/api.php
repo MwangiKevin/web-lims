@@ -229,4 +229,11 @@ class api extends MY_Controller {
 			echo json_encode($this->facility_devices_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
+
+	public function tests($start=NULL,$end=NULL,$seach=NULL)
+	{
+		$this->load->model("api_m");
+
+		return $this->api_m->get_tests_details($search,$start,$end);
+	}
 }
