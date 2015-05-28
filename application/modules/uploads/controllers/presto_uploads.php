@@ -63,11 +63,10 @@ class presto_uploads extends MY_Controller
 
 				    	$header_one = "Run ID";
 				    	$header_two = "";
-				    	$header_three = "";
-				    	$header_four = "";
 
 						$search      = $header;
 						$lines       = file('sources.csv');
+						$lines_		 = fopen('sources.csv','r' ); //atlternative
 						$line_number = false;
 
 						while (list($key, $line) = each($lines) and !$line_number) {
