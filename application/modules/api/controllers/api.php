@@ -230,10 +230,15 @@ class api extends MY_Controller {
 		}
 	}
 
-	public function tests($start=NULL,$end=NULL,$seach=NULL)
+	public function tests($id=NULL)
 	{
-		$this->load->model("api_m");
+		$this->load->model("tests_m");
 
-		return $this->api_m->get_tests_details($search,$start,$end);
+		$method = $this->_detect_method();
+
+		if ($method=="get"){
+			echo json_encode($this->tests_m->read($id),JSON_PRETTY_PRINT);
+		}
+
 	}
 }

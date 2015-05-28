@@ -40,4 +40,15 @@ class MY_Model extends CI_Model{
 	public function tester(){
 		return "Works";
 	}
+
+	protected function arr_to_dt_response($data,$draw,$total_records,$records_filtered){
+
+		return array(
+					'draw' 				=> 	$draw,
+					'recordsTotal' 		=> 	$total_records,
+					'recordsFiltered' 	=> 	$records_filtered,
+					'data' 				=> 	$data
+			);
+
+	}
 }

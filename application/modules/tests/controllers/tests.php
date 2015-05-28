@@ -8,8 +8,6 @@ class tests extends MY_Controller {
 
 	function __construct() {
 		parent:: __construct();
-		$this->load->model("test_model");
-		$this->load->module("api");
 	}
 
 	public function index() {
@@ -20,6 +18,8 @@ class tests extends MY_Controller {
 
 	public function get_tests()
 	{
+		$this->load->module("api");
+		$this->load->model("test_model");
 		$data = $this->api->tests();
 		$result = $this->test_model->raw_ss_dt($data);
 
