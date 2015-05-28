@@ -44,7 +44,42 @@ class presto_uploads extends MY_Controller
         $file_type_array = explode(").", end($file_type_array));
         $file_type = current($file_type_array);
 
-	}
+        if(in_array($file_ext, $allowed)){
+				//Import uploaded file to Database
+				$handle = fopen($file_tmp, "r");
+
+					while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
+						$new_array[] = $data;
+						$new_data = array();
+											
+				    }
+
+// ............. check for the header
+
+				    	$header_one = "";
+				    	$header_two = "";
+				    	$header_three = "";
+				    	$header_four = "";
+
+						$search      = $header;
+						$lines       = file('sources.csv');
+						$line_number = false;
+
+						while (list($key, $line) = each($lines) and !$line_number) {
+
+						   $line_number = (strpos($line, $search) !== FALSE);
+
+						}
+
+						if($line_number){
+
+						   echo "Results found for " .$search;
+
+						}
+
+						else{
+						   echo "No results found for $search";
+						}
 
 
 }
