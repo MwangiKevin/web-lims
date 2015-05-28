@@ -18,10 +18,6 @@ class auth extends MY_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
-		// $username = 'kevin@gmail.com';
-		// $password = 'kevin';
-		// show_error("432",401);
-		// $this->aauth->create_user('kevin@gmail.com','kevin','kevin1');
 
 		if ($this->aauth->login($username, $password)){
 			$details =	array(
