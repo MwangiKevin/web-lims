@@ -12,7 +12,7 @@ class presto_uploads extends MY_Controller
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('presto_uploads_model');
+		// $this->load->model('presto_uploads_model');
 	}
 
 	function index()
@@ -50,13 +50,18 @@ class presto_uploads extends MY_Controller
 
 					while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
 						$new_array[] = $data;
-						$new_data = array();
-											
 				    }
+
+
+				    echo "<pre>";print_r($new_array);
+				    die();
+
+
+				    // array search for run ID and get the value checking its key and set the values inside the key as headers
 
 // ............. check for the header
 
-				    	$header_one = "";
+				    	$header_one = "Run ID";
 				    	$header_two = "";
 				    	$header_three = "";
 				    	$header_four = "";
@@ -80,7 +85,8 @@ class presto_uploads extends MY_Controller
 						else{
 						   echo "No results found for $search";
 						}
-
+}
+}
 
 }
 
