@@ -51,7 +51,7 @@ $(document).ready(function(){
 $("#tests_table").dataTable( {
 "bProcessing": true,
 "bServerSide": true,
-'sAjaxSource': '<?php echo base_url();?>tests/get_sql',
+'sAjaxSource': '<?php echo base_url();?>tests/get_tests',
 "fnServerData": function ( sSource, aoData, fnCallback ) {
     $.ajax( {
         "dataType": 'json',
@@ -71,8 +71,6 @@ $("#tests_table").dataTable( {
     { "sName": "patient_id", "aTargets": [ 1 ] },
     { "sName": "name", "aTargets": [ 2 ] },
     { "sName": "cd4_count", "sWidth": "80px", "aTargets": [ 3 ] },
-    { "sName": "cellphone", "sWidth": "100px", "aTargets": [ 4 ] },
-    { "sName": "created", "sWidth": "120px", "aTargets": [ 5 ] },
     { "bSortable": false, "sName": "edit", "sWidth": "115px", "aTargets": [ 6 ] }
 ]
 });
