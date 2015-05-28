@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), _from int(3), _to int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN
 
         SET @QUERY =    "SELECT
@@ -48,10 +48,10 @@ BEGIN
         SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`id` ASC ');
 
         CASE 
-            WHEN (_from = 0 || _from = '') AND (_to <> 0 || _to <> '') AND  (get_count <> 'true')
-                THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT  0 ,  ', _to, ' ');
-            WHEN (_from <> 0 || _from <> '') AND (_to <> 0 || _to <> '') AND    (get_count <> 'true')
-                THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT ',_from,' , ', _to, ' ');
+            WHEN (limit_start = 0 || limit_start = '') AND (limit_items > 0 || limit_items <> '') AND  (get_count <> 'true')
+                THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT  0 ,  ', limit_items, ' ');
+            WHEN (limit_start > 0 || limit_start <> '') AND (limit_items > 0 || limit_items <> '') AND    (get_count <> 'true')
+                THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT ',limit_start,' , ', limit_items, ' ');
             ELSE
                 SET @QUERY = @QUERY;
         END CASE;
