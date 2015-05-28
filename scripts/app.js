@@ -21,7 +21,8 @@ var app = angular
     'http-auth-interceptor',
     'datatables', 
     'datatables.colvis', 
-    'datatables.tabletools'
+    'datatables.tabletools', 
+    'datatables.colreorder'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 

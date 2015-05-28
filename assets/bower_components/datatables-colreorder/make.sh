@@ -11,19 +11,19 @@ DT_BUILT="${DT_SRC}/built/DataTables"
 . $DT_SRC/build/include.sh
 
 # Copy CSS
-scss_compile css/dataTables.responsive.scss
 rsync -r css $OUT_DIR
+css_compress $OUT_DIR/css/dataTables.colReorder.css
 
 # Copy images
-#rsync -r images $OUT_DIR
+rsync -r images $OUT_DIR
 
 # Copy JS
 rsync -r js $OUT_DIR
-js_compress $OUT_DIR/js/dataTables.responsive.js
+js_compress $OUT_DIR/js/dataTables.colReorder.js
 
 # Copy and build examples
 rsync -r examples $OUT_DIR
-examples_process $OUT_DIR/examples
+examples_process $OUT_DIR
 
 # Readme and license
 cp Readme.md $OUT_DIR

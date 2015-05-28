@@ -17,6 +17,16 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
     // .withColVisStateChange(stateChange)
     .withColVisOption('aiExclude', [0,1])
 
+
+    .withOption('responsive', true)
+
+    .withColReorder()
+    // .withColReorderOrder([1, 0, 2])
+    .withColReorderOption('iFixedColumnsRight', 1)
+	// .withColReorderCallback(function() {
+	//         console.log('Columns order has been changed with: ' + this.fnOrder());
+	//     })
+
 	.withTableTools('assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
     .withTableToolsButtons([
             'copy',
