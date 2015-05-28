@@ -43,8 +43,14 @@ class MY_Model extends CI_Model{
 
 	protected function arr_to_dt_response($data,$draw,$total_records,$records_filtered){
 
+		foreach ($data as $key => $value) {
+			$data[$key]['DT_RowId'] = 'row_'.$value['id'];
+			$data[$key]['DT_RowData'] = array('pkey'=>$value['id']);
+		}
+
 		return array(
 					'draw' 				=> 	$draw,
+					'sEcho' 			=> 	$draw,
 					'recordsTotal' 		=> 	$total_records,
 					'recordsFiltered' 	=> 	$records_filtered,
 					'data' 				=> 	$data

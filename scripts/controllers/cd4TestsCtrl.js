@@ -16,7 +16,8 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 		DTColumnBuilder.newColumn('sample').withTitle('Sample/Patient ID'),
 		DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
 		DTColumnBuilder.newColumn('cd4_count').withTitle('CD4 Count'),
-		DTColumnBuilder.newColumn('cd4_count').withTitle('CD4 Count').notVisible()
+		DTColumnBuilder.newColumn('county_name').withTitle('County'),
+		DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county')
 	];
 
 }]);
