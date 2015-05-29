@@ -53,8 +53,7 @@ class presto_uploads extends MY_Controller
 				    }
 
 
-				    echo "<pre>";print_r($new_array);
-				    die();
+				    // echo "<pre>";print_r($new_array);
 
 
 				    // array search for run ID and get the value checking its key and set the values inside the key as headers
@@ -69,6 +68,32 @@ class presto_uploads extends MY_Controller
 						$search      = $header;
 						$lines       = file('sources.csv');
 						$line_number = false;
+
+						$header_1 = Array
+						(
+							'Run ID',
+							'Run Date/Time',
+							'Operator',
+							'Normal count',
+							'Low count',
+							'Passed?',
+							'Error Codes',
+							'',
+							'',
+							'',
+							'',
+							'',
+							'',
+							'',
+							'',
+							'',
+							''
+							);
+
+
+						echo array_search ($header_1,$new_array);
+
+				    die();
 
 						while (list($key, $line) = each($lines) and !$line_number) {
 
