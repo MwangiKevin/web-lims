@@ -12,7 +12,6 @@ class presto_uploads extends MY_Controller
 	function __construct()
 	{
 		parent:: __construct();
-		// $this->load->model('presto_uploads_model');
 	}
 
 	function index()
@@ -45,72 +44,33 @@ class presto_uploads extends MY_Controller
         $file_type = current($file_type_array);
 
         if(in_array($file_ext, $allowed)){
-				//Import uploaded file to Database
-				$handle = fopen($file_tmp, "r");
+		//Import uploaded file to Database
 
-					while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
-						$new_array[] = $data;
-				    }
+			$handle = fopen($file_tmp, "r");
 
+			while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
+				$new_array[] = $data;
+		    }
 
-				    // echo "<pre>";print_r($new_array);
+			    echo "<pre>";print_r($new_array);
 
+				$header_one = Array('Run ID','Run Date/Time','Operator','Normal count','Low count',
+					'Passed?','Error Codes','','','','','','','','','',''	);
 
-				    // array search for run ID and get the value checking its key and set the values inside the key as headers
+				$header_two = Array('Run ID','Run Date/Time','Operator','Reagent Lot ID','Reagent Lot Exp','Process Lot ID',
+					'Process Lot Exp','Level','Exp CD4 (Lwr)','Exp CD4 (Upr)','Exp %CD4 (Lwr)','Exp %CD4 (Upr)','Reagent QC P/F','CD4','%CD4','Passed?','Error Codes');
 
-// ............. check for the header
+				$header_three = Array('Run ID','Run Date/Time','Operator','Reagent Lot ID','Reagent Lot Exp','Process Lot ID',
+					'Process Lot Exp','Level','Exp Hb (Lwr)','Exp Hb (Upr)','Reagent QC P/F','Hb (g/dL)','Passed?','Error Codes','','',''	);
 
-				    	$header_one = "Run ID";
-				    	$header_two = "";
+				$header_four = Array('Run ID','Run Date/Time','Operator','Reagent Lot ID','Reagent Lot Exp','Patient ID',
+					'Inst QC Passed?','Reagent QC Passed?','CD4','%CD4','Hb','Error Codes','','','','','');
 
-						$search      = $header;
-						$lines       = file('sources.csv');
-						$lines_		 = fopen('sources.csv','r' ); //atlternative
-						$line_number = false;
+				echo array_search ($header_1,$new_array);
 
-						$header_1 = Array
-						(
-							'Run ID',
-							'Run Date/Time',
-							'Operator',
-							'Normal count',
-							'Low count',
-							'Passed?',
-							'Error Codes',
-							'',
-							'',
-							'',
-							'',
-							'',
-							'',
-							'',
-							'',
-							'',
-							''
-							);
-
-
-						echo array_search ($header_1,$new_array);
-
-				    die();
-
-						while (list($key, $line) = each($lines) and !$line_number) {
-
-						   $line_number = (strpos($line, $search) !== FALSE);
-
-						}
-
-						if($line_number){
-
-						   echo "Results found for " .$search;
-
-						}
-
-						else{
-						   echo "No results found for $search";
-						}
-}
-}
+			    die();
+		}
+	}
 
 }
 
