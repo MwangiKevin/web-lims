@@ -197,6 +197,12 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bower_components/datatables/media/css/jquery.dataTables.css">
 
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-tabletools/css/dataTables.tableTools.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-colvis/css/dataTables.colVis.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-responsive/css/dataTables.responsive.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-colreorder/css/dataTables.colReorder.css');?>">
+
+
 	<!-- open scripts -->
 	<script type="text/javascript">
 		var base_url 		= '<?php echo base_url();?>';
@@ -245,6 +251,14 @@
 	<script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.js"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/angular-datatables.min.js');?>"></script>
 
+	<script src="<?php echo base_url('assets/bower_components/datatables-tabletools/js/dataTables.tableTools.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/datatables-colvis/js/dataTables.colVis.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/datatables-responsive/js/dataTables.responsive.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/datatables-colreorder/js/dataTables.colReorder.js');?>"></script>
+	
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.min.js');?>"></script>
 
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>

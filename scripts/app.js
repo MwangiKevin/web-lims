@@ -19,7 +19,10 @@ var app = angular
 	'validation', 
 	'validation.rule',
     'http-auth-interceptor',
-    'datatables'
+    'datatables', 
+    'datatables.colvis', 
+    'datatables.tabletools', 
+    'datatables.colreorder'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
