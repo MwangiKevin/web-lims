@@ -52,10 +52,10 @@ class presto_uploads extends MY_Controller
 				$new_array[] = $data;
 		    }
 
-			    echo "<pre>";print_r($new_array);
+			    // echo "<pre>";print_r($new_array); die();
 
 				$header_one = Array('Run ID','Run Date/Time','Operator','Normal count','Low count',
-					'Passed?','Error Codes','','','','','','','','','',''	);
+					'Passed?','Error Codes','','','','','','','','','','');
 
 				$header_two = Array('Run ID','Run Date/Time','Operator','Reagent Lot ID','Reagent Lot Exp','Process Lot ID',
 					'Process Lot Exp','Level','Exp CD4 (Lwr)','Exp CD4 (Upr)','Exp %CD4 (Lwr)','Exp %CD4 (Upr)','Reagent QC P/F','CD4','%CD4','Passed?','Error Codes');
@@ -66,7 +66,17 @@ class presto_uploads extends MY_Controller
 				$header_four = Array('Run ID','Run Date/Time','Operator','Reagent Lot ID','Reagent Lot Exp','Patient ID',
 					'Inst QC Passed?','Reagent QC Passed?','CD4','%CD4','Hb','Error Codes','','','','','');
 
-				echo array_search ($header_1,$new_array);
+				// echo array_search ($header_one,$new_array);
+
+				for ($i=0; $i <4 ; $i++) { 
+
+					if (i==0) {
+						$array_to_search = $header_one;
+					}
+					echo array_search ($array_to_search,$new_array);
+
+					die();
+				}
 
 			    die();
 		}
