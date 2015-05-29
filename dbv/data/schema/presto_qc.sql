@@ -12,5 +12,6 @@ CREATE TABLE `presto_qc` (
   `%cd4` int(11) NOT NULL,
   `passed` int(11) NOT NULL,
   `error_codes` varchar(100) NOT NULL,
+  `serial_number` varchar(100) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
