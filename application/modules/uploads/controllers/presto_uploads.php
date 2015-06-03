@@ -68,18 +68,31 @@ class presto_uploads extends MY_Controller
 
 				// echo array_search ($header_one,$new_array);
 
+
+
 				for ($i=0; $i <4 ; $i++) { 
 
-					if (i==0) {
+					if ($i==0) {
 						$array_to_search = $header_one;
 					}
-					echo array_search ($array_to_search,$new_array);
+					elseif ($i==1) {
+						$array_to_search = $header_two;
+					}
+					elseif ($i==2) {
+						$array_to_search = $header_three;
+					}
+					elseif ($i==3) {
+						$array_to_search = $header_four;
+					}
+					echo array_search ($array_to_search,$new_array). ',';
 
-					die();
 				}
 
 			    die();
 		}
+
+
+
 	}
 
 }
