@@ -85,7 +85,6 @@ class presto_uploads extends MY_Controller
 						$array_to_search = $header_four;
 					}
 					echo array_search ($array_to_search,$new_array). ',';
-
 				}
 
 			    die();
