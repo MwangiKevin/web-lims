@@ -52,8 +52,6 @@ class presto_uploads extends MY_Controller
 				$new_array[] = $data;
 		    }
 
-			    // echo "<pre>";print_r($new_array); die();
-
 				$header_one = Array('Run ID','Run Date/Time','Operator','Normal count','Low count',
 					'Passed?','Error Codes','','','','','','','','','','');
 
@@ -66,8 +64,7 @@ class presto_uploads extends MY_Controller
 				$header_four = Array('Run ID','Run Date/Time','Operator','Reagent Lot ID','Reagent Lot Exp','Patient ID',
 					'Inst QC Passed?','Reagent QC Passed?','CD4','%CD4','Hb','Error Codes','','','','','');
 
-				// echo array_search ($header_one,$new_array);
-
+		
 
 
 				for ($i=0; $i <4 ; $i++) { 
@@ -84,7 +81,35 @@ class presto_uploads extends MY_Controller
 					elseif ($i==3) {
 						$array_to_search = $header_four;
 					}
-					echo array_search ($array_to_search,$new_array). ',';
+					// echo array_search ($array_to_search,$new_array). ',';
+
+				// echo	array_search($header_one,$new_array);
+
+				echo $controls_start = array_search($header_one,$new_array) +1;
+				echo $controls_end = $controls_start -(array_search($header_two,$new_array) -2);
+				$controls_arr = array_slice($new_array,$controls_start, $controls_end);
+				echo "<pre/>";
+
+				print_r($controls_arr);
+				die();
+
+
+					die();
+
+							 $this->db->insert_batch('test',$array_name);
+
+					// getting the values between the headers
+
+						$new_values = $header_one;
+						$new_values_ = $header_two;
+
+						// for ($new_values; $i < ; $i++) { 
+						// 		# code...
+						// 	}	
+
+						// echo $new_values;
+
+						// die();
 
 				}
 
