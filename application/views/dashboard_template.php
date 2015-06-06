@@ -225,7 +225,9 @@
 	<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/Chart.js/Chart.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-chart.js/dist/angular-chart.js');?>"></script>
-	<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts-all.js');?>"></script>
+	<script src="<?php echo base_url('assets/other/highcharts-themes/dist/highcharts-themes.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts/modules/drilldown.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
@@ -319,6 +321,10 @@
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/authmain.js');?>"></script>
+
+	<script>
+		 Highcharts.setTheme('future');
+	</script>
 
 	
 

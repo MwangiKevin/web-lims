@@ -175,7 +175,7 @@ class dashboard extends MY_Controller {
 	//
 	//
 	public function test_errors_pie(){
-		$from = '2014-09-27';
+		$from = '2014-02-27';
 		$to = '2015-02-24';
 		$user_group_id = 0;
 		$user_filter_used = 0;

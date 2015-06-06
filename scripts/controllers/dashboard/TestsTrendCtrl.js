@@ -24,26 +24,26 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 	
 	//categoreis for line graph xAxis [4yrs]
 	$scope.testing_trends_linegraph_categories =function(){
- 		return $http.get(
-			Commons.baseURL+"api/dashboard/return_testing_trends_categories"			
-			)
-		.success(function(response){
-			$scope.testing_trends.xAxis.categories= response;
-		});
-	}
-	$scope.testing_trends_linegraph_categories();	
-	 
-	$scope.testing_trends = {
-		chart: {   
-                plotBackgroundColor: null,
-                plotBorderWidth: 2,
-                plotShadow: true,    
-                zoomType: 'x',
-                type: 'area',
-                height:250
-        },
-        title: {
-            text: 'Testing Trends (last 4 years)',
+     return $http.get(
+         Commons.baseURL+"api/dashboard/return_testing_trends_categories"			
+         )
+     .success(function(response){
+         $scope.testing_trends.xAxis.categories= response;
+     });
+ }
+ $scope.testing_trends_linegraph_categories();	
+
+ $scope.testing_trends = {
+  chart: {   
+    plotBackgroundColor: null,
+    plotBorderWidth: 2,
+    plotShadow: true,    
+    zoomType: 'x',
+    type: 'area',
+    height:250
+},
+title: {
+    text: 'Testing Trends (last 4 years)',
             x: -20 //center   
         },
         xAxis: {
@@ -86,8 +86,8 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
             crosshairs: [true,false],
         },
         series: []  
-	}
-	
+    }
+
 	//
 	//
 	//YEAERLY TESTING TRENDS
@@ -113,7 +113,7 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
             }
         },
         xAxis: {
-                categories: []
+            categories: []
         },
         yAxis: {
             min: 0,
@@ -129,27 +129,27 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
             text: 'Yearly Testing Trends'
         },
         tooltip: {
-                formatter: function() {
-                    return '<b>'+ this.x +'</b><br/>'+
-                        this.series.name +': '+ this.y +'<br/>'+
-                        'Total: '+ this.point.stackTotal;
-                }
-            },
+            formatter: function() {
+                return '<b>'+ this.x +'</b><br/>'+
+                this.series.name +': '+ this.y +'<br/>'+
+                'Total: '+ this.point.stackTotal;
+            }
+        },
         plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: false,
-                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                        style: {
-                            textShadow: '0 0 3px black, 0 0 3px black'
-                        }
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: false,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black, 0 0 3px black'
                     }
                 }
-            },
+            }
+        },
         series: [],
         loading: false
-	}
+    }
 
 	//
 	//
@@ -159,59 +159,122 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 	
 	//series data tests_vs_errors_pie
     var data ="[";
-	$scope.tests_vs_errors_pie_data = function(){
-		return $http.get(
-			Commons.baseURL+"api/dashboard/test_errors_pie"			
-			)
-		.success(function(response){
-			console.log(response);
-			// for (var i = 0; i < response.length; i++) {
-// 						
-				// data += '["'+response[i].name +'",'+response[i].value+'],';
-			// }
-			// data = data.slice(1,-1);
-			// data = angular.toJson(response);
-			// console.log(data);
-			// console.log(data);	
-			
-			$scope.tests_vs_errors_pie.series[0].data = response
+    $scope.tests_vs_errors_pie_data = function(){
+      return $http.get(
+         Commons.baseURL+"api/dashboard/test_errors_pie"			
+         )
+      .success(function(response){
+
+			// $scope.tests_vs_errors_pie.series[0].data = response
 		});	
-	}
-	$scope.tests_vs_errors_pie_data();
+  }
+  $scope.tests_vs_errors_pie_data();
+
+
 	//chart definition
 	$scope.tests_vs_errors_pie = {
-		   chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
         title: {
-            text: 'Test vs Errors'
+            text: 'Number of offers by trend'
         },
-        
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        subtitle: {
+            text: 'My company'
         },
         plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
+            series: {
                 dataLabels: {
                     enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    format: '{point.name}: {point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+        },
+        options: {
+            chart: {
+                type: 'pie'
+            },
+            drilldown: {
+                series: [
+                {
+                    id: "Tests1", 
+                    name: "Tests1",
+                    data: [
+                    ["Offer1", 50], 
+                    ["Offer2", 30]
+                    ]
+                },
+                {
+                    id: "Tests", 
+                    name: "Tests",
+                    data: [
+                    {
+                        name: "Abv Critical Lv", 
+                        y :60,
+                        perc: 60
+                    }, 
+                    {
+                        name: "Bel Critical Lv", 
+                        y :400,
+                        perc: 40
+                    }
+                    ]
+                }
+                ]
+            },
+            legend: {
+                align: 'right',
+                x: -70,
+                verticalAlign: 'top',
+                y: 20,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}, {point.perc:.2f}%</b> of total<br/>'
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true,
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                        style: {
+                            textShadow: '0 0 3px black, 0 0 3px black'
+                        }
                     }
                 }
             }
         },
-        series: [{
-            type: 'pie',
-            name: 'tests',
-            data: [["failed",0],["passed",0],["total",0],["errors",0],["valid",0]]
-        }]
-	}
+        series: [
+        {
+            name: 'Tests VS Errors',
+            colorByPoint: true,
+            data: [
+            {
+                drilldown: "Errors",
+                name: "Errors",
+                visible: true,
+                y: 20,
+                perc: 10
+            },
+            {
+                drilldown: "Tests",
+                name: "Tests",
+                visible: true,
+                y: 180,
+                perc: 90
+            }
 
+            ]
+        }]
+    };
 	//
 	//
 	//Tests table

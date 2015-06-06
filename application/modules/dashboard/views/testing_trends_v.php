@@ -29,7 +29,7 @@
 				<highchart id="yearly_testing_trends" config="yearly_testing_trends" class="span10" style="float:left; width:40%"></highchart>
 			</div>
 			<div id="middle_chart">
-				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:45%"></highchart>
+				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:45%" data-theme='pastel'></highchart>
 			</div>
 		</div>
 		<div id='table_container'>
