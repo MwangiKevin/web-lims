@@ -66,7 +66,7 @@
 						</td>
 						<td style="background-color: #F6F6F6;;" >
 							<center>
-								{{t_data.vaild}}
+								{{t_data.valid}}
 							</center>
 						</td>
 						<td style="background-color: #F6F6F6;;" >

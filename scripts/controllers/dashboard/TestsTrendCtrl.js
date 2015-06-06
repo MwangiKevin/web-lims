@@ -207,8 +207,8 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
         },
         series: [{
             type: 'pie',
-            name: 'Browser share',
-            data: [["failed",200],["passed",400],["total",45721],["errors",3678],["valid",42043]]
+            name: 'tests',
+            data: [["failed",0],["passed",0],["total",0],["errors",0],["valid",0]]
         }]
 	}
 
@@ -223,7 +223,6 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 			)
 		.success(function(response){
 			$scope.table_data = response;
-			// alert($scope.table_data);
 		});	
 	}
 	$scope.critical_table();
