@@ -175,7 +175,7 @@ class dashboard extends MY_Controller {
 	//
 	//
 	public function test_errors_pie(){
-		$from = '2014-02-27';
+		$from = '2014-09-27';
 		$to = '2015-02-24';
 		$user_group_id = 0;
 		$user_filter_used = 0;
@@ -186,9 +186,9 @@ class dashboard extends MY_Controller {
 		$tst[0]["title"]= 'Tests';
 
 		$tests_errors =	array(
-				array('name'=>'failed','y'=>(int) $tst[0]["failed"]),
-				array('name'=>'passed','y'=>(int)(int) $tst[0]["passed"]),
-				array('name'=>'total','y'=>(int) $tst[0]["total"]),
+				// array('name'=>'failed','y'=>(int) $tst[0]["failed"]),
+				// array('name'=>'passed','y'=>(int)(int) $tst[0]["passed"]),
+				// array('name'=>'total','y'=>(int) $tst[0]["total"]),
 				array('name'=>'errors','y'=>(int) $tst[0]["errors"]),
 				array('name'=>'valid','y'=>(int) $tst[0]["valid"])
 			);
