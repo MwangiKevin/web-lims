@@ -1,4 +1,4 @@
-CREATE TABLE `presto_cd4_tests` (
+CREATE TABLE `presto_cd4_controls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `run_id` varchar(100) NOT NULL,
   `run_date_time` datetime NOT NULL,

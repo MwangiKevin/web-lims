@@ -64,10 +64,11 @@ class presto_uploads extends MY_Controller
 				$header_four = Array('Run ID','Run Date/Time','Operator','Reagent Lot ID','Reagent Lot Exp','Patient ID',
 					'Inst QC Passed?','Reagent QC Passed?','CD4','%CD4','Hb','Error Codes','','','','','');
 
-		
+				$cleaned_header_one = Array('run_id','run_date_time','operator','normal_count','low_count',
+					'passed','error_codes', 'serial_number');
 
 
-				for ($i=0; $i <4 ; $i++) { 
+				for ($i=0; $i <4 ; $i++) {
 
 					if ($i==0) {
 						$array_to_search = $header_one;
@@ -81,39 +82,41 @@ class presto_uploads extends MY_Controller
 					elseif ($i==3) {
 						$array_to_search = $header_four;
 					}
-					// echo array_search ($array_to_search,$new_array). ',';
 
-				// echo	array_search($header_one,$new_array);
+					echo $controls_start = array_search($header_one,$new_array) +1;
+					echo $controls_end = $controls_start -(array_search($header_two,$new_array) -2);
+					$header =  array_slice($new_array, 0, $controls_start);
+					foreach ($header as $key => $value) {
+						//loop through the inner array of header as $value
+						foreach ($value as $k => $v) {
+							if ($v == 'Instrument serial no:') {
+								$serial_key = $key;
+								$serial_number_key = $k + 1;
+							}
+						}
+						
+					}
 
-				echo $controls_start = array_search($header_one,$new_array) +1;
-				echo $controls_end = $controls_start -(array_search($header_two,$new_array) -2);
-				$controls_arr = array_slice($new_array,$controls_start, $controls_end);
-				echo "<pre/>";
-
-				print_r($controls_arr);
-				die();
-
-
-					die();
-
-							 $this->db->insert_batch('test',$array_name);
-
-					// getting the values between the headers
-
-						$new_values = $header_one;
-						$new_values_ = $header_two;
-
-						// for ($new_values; $i < ; $i++) { 
-						// 		# code...
-						// 	}	
-
-						// echo $new_values;
-
-						// die();
-
+					$controls_arr = array_slice($new_array,$controls_start, $controls_end);
+					$counter = 0;
+					foreach ($controls_arr as $control_arr) {
+						foreach ($control_arr as $key => $value) {
+							$number = $key+1;
+							if($number <= count($cleaned_header_one)){
+								if($cleaned_header_one[$key] !== 'serial_number'){
+									$insert_one[$counter][$cleaned_header_one[$key]] = $value;
+								}
+								else{
+									$insert_one[$counter][$cleaned_header_one[$key]] = $header[$serial_key][$serial_number_key];
+								}
+							}
+						}
+						$counter++;
+					}
 				}
+				
+				$query = $this->db->insert_batch('presto_cd4_controls', $insert_one);
 
-			    die();
 		}
 
 
