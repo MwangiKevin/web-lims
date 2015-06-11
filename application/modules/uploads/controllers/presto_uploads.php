@@ -147,6 +147,7 @@ class presto_uploads extends MY_Controller
 				$query = $this->db->insert_batch('presto_cd4_tests', $insert_one);
 
 					echo "<br/>"."presto_cd4_tests successfull inserted";
+					
 				$query_ = $this->db->insert_batch('presto_qc',$insert_two);
 
 					echo "<br/>"."presto_Qc successfull inserted";
