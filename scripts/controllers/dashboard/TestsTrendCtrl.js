@@ -165,7 +165,11 @@ title: {
          )
       .success(function(response){
 
-			// $scope.tests_vs_errors_pie.series[0].data = response
+            $scope.tests_vs_errors_pie.series[0].data[0].y = parseInt(response.errors);
+            $scope.tests_vs_errors_pie.series[0].data[1].y = parseInt(response.valid);
+
+            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].y = parseInt(response.passed);
+            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].y = parseInt(response.failed);
 		});	
   }
   $scope.tests_vs_errors_pie_data();
@@ -199,26 +203,18 @@ title: {
             drilldown: {
                 series: [
                 {
-                    id: "Tests1", 
-                    name: "Tests1",
-                    data: [
-                    ["Offer1", 50], 
-                    ["Offer2", 30]
-                    ]
-                },
-                {
                     id: "Tests", 
                     name: "Tests",
                     data: [
                     {
                         name: "Abv Critical Lv", 
-                        y :60,
-                        perc: 60
+                        y :0,
+                        perc: 0
                     }, 
                     {
                         name: "Bel Critical Lv", 
-                        y :400,
-                        perc: 40
+                        y :0,
+                        perc: 0
                     }
                     ]
                 }
@@ -261,15 +257,15 @@ title: {
                 drilldown: "Errors",
                 name: "Errors",
                 visible: true,
-                y: 20,
-                perc: 10
+                y: 0,
+                perc: 0
             },
             {
                 drilldown: "Tests",
                 name: "Tests",
                 visible: true,
-                y: 180,
-                perc: 90
+                y: 0,
+                perc: 0
             }
 
             ]
