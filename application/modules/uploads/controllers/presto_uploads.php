@@ -66,6 +66,9 @@ class presto_uploads extends MY_Controller
 
 				$cleaned_header_one = Array('run_id','run_date_time','operator','normal_count','low_count',
 					'passed','error_codes', 'serial_number');
+				//second batch of presto-data
+				$cleaned_header_two = Array('run_id','run_date_time','operator','reagent_lot_id','reagent_lot_exp','patient_id',
+					'inst_qc_passed','reagent_qc_passed','cd4','%cd4','passed','error_codes','serial_number');
 
 
 				for ($i=0; $i <4 ; $i++) {
@@ -83,8 +86,8 @@ class presto_uploads extends MY_Controller
 						$array_to_search = $header_four;
 					}
 
-					echo $controls_start = array_search($header_one,$new_array) +1;
-					echo $controls_end = $controls_start -(array_search($header_two,$new_array) -2);
+					$controls_start = array_search($header_one,$new_array) +1;
+					$controls_end = $controls_start -(array_search($header_two,$new_array) -2);
 					$header =  array_slice($new_array, 0, $controls_start);
 					foreach ($header as $key => $value) {
 						//loop through the inner array of header as $value
@@ -113,9 +116,40 @@ class presto_uploads extends MY_Controller
 						}
 						$counter++;
 					}
+
+//............... Qc DATA INSERTION......................................................................
+
+					$Qc_start = array_search($header_four, $new_array) +1;
+					$Qc_arr = array_slice($new_array, $Qc_start);
+
+					$insert_two = array();
+					$counter_ = 0;
+
+					//loop through the Qc_arr
+					foreach ($Qc_arr as $new_Qc_arr) {
+						foreach ($new_Qc_arr as $key => $value) {
+							$number = $key+1;
+
+							if($number <= count($cleaned_header_two)){
+								if($cleaned_header_two[$key] !== 'serial_number'){
+									$insert_two[$counter_][$cleaned_header_two[$key]] = $value;
+								}
+								else{
+									$insert_two[$counter_][$cleaned_header_two[$key]] = $header[$serial_key][$serial_number_key];
+								}
+							}
+						}
+						$counter_++;
+					}
+
 				}
 				
-				$query = $this->db->insert_batch('presto_cd4_controls', $insert_one);
+				$query = $this->db->insert_batch('presto_cd4_tests', $insert_one);
+
+					echo "<br/>"."presto_cd4_tests successfull inserted";
+				$query_ = $this->db->insert_batch('presto_qc',$insert_two);
+
+					echo "<br/>"."presto_Qc successfull inserted";
 
 		}
 
