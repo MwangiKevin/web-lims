@@ -181,7 +181,11 @@ class dashboard extends MY_Controller {
 		$user_filter_used = 0;
 		
 		$sql = "CALL proc_tests_errors_pie('".$from."','".$to."',".$user_group_id.",".$user_filter_used.")";
-		$tst 	=	R::getAll($sql);		
+		$tst 	=	R::getAll($sql);
+
+		foreach ($tst[0] as $key => $value) {
+					$tst[0][$key] = (int) $tst[0][$key];
+				}		
 	
 		echo json_encode($tst[0]);
 	}

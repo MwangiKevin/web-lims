@@ -158,7 +158,7 @@ title: {
 	//
 	
 	//series data tests_vs_errors_pie
-    var data ="[";
+    
     $scope.tests_vs_errors_pie_data = function(){
       return $http.get(
          Commons.baseURL+"api/dashboard/test_errors_pie"			
@@ -170,18 +170,34 @@ title: {
 
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].y = parseInt(response.passed);
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].y = parseInt(response.failed);
-		});	
+        });	
   }
-  $scope.tests_vs_errors_pie_data();
+  $scope.prepare_tests_vs_errors_pie = function(){
+
+    var data =  $scope.tests_vs_errors_pie_data()
+    .success(function(response){
+        if(response.total > 0){
+            $scope.tests_vs_errors_pie.series[0].data[0].perc = ((response.errors/response.total)*100).toFixed(2);
+            $scope.tests_vs_errors_pie.series[0].data[1].perc = ((response.valid/response.total)*100).toFixed(2);
+        
+
+            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].perc = ((response.passed/(response.failed + response.passed))*100).toFixed(2);
+            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].perc = ((response.failed/(response.failed + response.passed))*100).toFixed(2);
+
+        }
+    });  
+
+}
+$scope.prepare_tests_vs_errors_pie();
 
 
 	//chart definition
 	$scope.tests_vs_errors_pie = {
         title: {
-            text: 'Number of offers by trend'
+            text: 'Testing'
         },
         subtitle: {
-            text: 'My company'
+            text: 'Tests and Device Errors'
         },
         plotOptions: {
             series: {
@@ -190,11 +206,6 @@ title: {
                     format: '{point.name}: {point.y:.1f}%'
                 }
             }
-        },
-
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
         },
         options: {
             chart: {
@@ -207,14 +218,16 @@ title: {
                     name: "Tests",
                     data: [
                     {
-                        name: "Abv Critical Lv", 
+                        name: "Abv <br>500 CD4", 
                         y :0,
-                        perc: 0
+                        perc: 0,
+                        color: 'rgb(189, 238, 83)'
                     }, 
                     {
-                        name: "Bel Critical Lv", 
+                        name: "Bel <br>500 CD4", 
                         y :0,
-                        perc: 0
+                        perc: 0,
+                        color: 'rgb(139,0,139)'
                     }
                     ]
                 }
@@ -223,7 +236,7 @@ title: {
             legend: {
                 align: 'right',
                 x: -70,
-                verticalAlign: 'top',
+                verticalAlign: 'bottom',
                 y: 20,
                 floating: true,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
@@ -233,20 +246,21 @@ title: {
             },
             tooltip: {
                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}, {point.perc:.2f}%</b> of total<br/>'
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}, {point.percentage:.2f}%</b> of total<br/>'
+            },           
+            credits:{
+                enabled:false
             },
             plotOptions: {
-                column: {
-                    stacking: 'normal',
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
                     dataLabels: {
-                        enabled: true,
-                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                        style: {
-                            textShadow: '0 0 3px black, 0 0 3px black'
-                        }
-                    }
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
-            }
+            },
         },
         series: [
         {
@@ -258,14 +272,16 @@ title: {
                 name: "Errors",
                 visible: true,
                 y: 0,
-                perc: 0
+                perc: 0,
+                color: 'rgb(170, 25, 25)'
             },
             {
                 drilldown: "Tests",
                 name: "Tests",
                 visible: true,
                 y: 0,
-                perc: 0
+                perc: 0,
+                color: 'rgb(164, 213, 58)'
             }
 
             ]
