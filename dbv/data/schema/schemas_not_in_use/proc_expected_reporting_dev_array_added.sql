@@ -1,6 +1,6 @@
 DROP PROCEDURE IF EXISTS `proc_expected_reporting_dev_array_added`;
 DELIMITER $$
-CREATE PROCEDURE proc_expected_reporting_dev_array_added(user_group_id int(11),user_filter_used int(11))
+CREATE PROCEDURE `proc_expected_reporting_dev_array_added`(user_group_id int(11),user_filter_used int(11))
 BEGIN
 	CASE `user_filter_used`
 	WHEN 0 THEN

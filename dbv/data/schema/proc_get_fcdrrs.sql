@@ -1,7 +1,3 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_get_fcdrrs`$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_fcdrrs`(fcdrr_id int(11),facility_id int(11),year int(4),month int(2))
 BEGIN
         SET @QUERY =    " SELECT 
@@ -50,6 +46,4 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+    END

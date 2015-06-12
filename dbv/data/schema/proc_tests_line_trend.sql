@@ -1,7 +1,5 @@
-DROP PROCEDURE IF EXISTS `proc_tests_line_trend`;
-
-CREATE PROCEDURE  proc_tests_line_trend(user_group_id int(11),user_filter_used int(11), from_date date,to_date date) 
-						BEGIN	
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_tests_line_trend`(user_group_id int(11),user_filter_used int(11), from_date date,to_date date)
+BEGIN	
 							CASE `user_filter_used`
 							WHEN 0 THEN
 							
@@ -104,4 +102,4 @@ CREATE PROCEDURE  proc_tests_line_trend(user_group_id int(11),user_filter_used i
 									ORDER BY 	`result_date` DESC;
 								END CASE;
 							END CASE;
-						END;
+						END

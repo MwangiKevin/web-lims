@@ -20,7 +20,7 @@ class Migrate_csv extends MY_Controller
 	function uploadcsv()
 	{
 		if (isset($_FILES)) {
-			$file = $_FILES[upload];//has all info about uploaded files
+			$file = $_FILES['upload'];//has all info about uploaded files
 			
 			//file properties
             $file_name = $file['name'];
@@ -70,10 +70,11 @@ class Migrate_csv extends MY_Controller
 					
 					//foreach to check if the email value is available and to create the user
 					foreach ($insert_data as $key => $value) {
-						if ($value[email] != ''){
-							if ($value[email] != 'NULL') {
+						if ($value['email'] != ''){
+							if ($value['email'] != 'NULL') {
 								// $new_data[] = $value;
-								$create = $this->aauth->create_user($value[email],'123456',$value[username]);
+								// echo $value['email'];
+								$create = $this->aauth->create_user($value['email'],'123456',$value['name']);
 								
 								$emailcnt++;
 							}

@@ -1,8 +1,4 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `web-lims`.`proc_get_temp_fcdrrs`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `web-lims`.`proc_get_temp_fcdrrs`(fcdrr_id int(11),facility_id int(11))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_temp_fcdrrs`(fcdrr_id int(11),facility_id int(11))
 BEGIN
         SET @QUERY =    " SELECT 
                                 `temp_fcdrr`.`id`                       as  `temp_fcdrr_id` ,
@@ -49,6 +45,4 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+    END

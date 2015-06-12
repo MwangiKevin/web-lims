@@ -1,7 +1,3 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_get_fcdrr_commodities`$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_fcdrr_commodities`(id int(11),fcdrr_id int(11))
 BEGIN
         SET @QUERY =    " SELECT 
@@ -40,6 +36,4 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;
+    END
