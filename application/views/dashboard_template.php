@@ -228,7 +228,7 @@
 	<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts-all.js');?>"></script>
 	<script src="<?php echo base_url('assets/other/highcharts-themes/dist/highcharts-themes.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/highcharts/modules/drilldown.js');?>"></script>
-	<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
@@ -323,7 +323,20 @@
 	<script src="<?php echo base_url('scripts/directives/authmain.js');?>"></script>
 
 	<script>
-		 Highcharts.setTheme('future');
+
+
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.4).get('rgb')] // darken
+            ]
+        };
+    });
+
+    Highcharts.setTheme('base');
+
 	</script>
 
 	

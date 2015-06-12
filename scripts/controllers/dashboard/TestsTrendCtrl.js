@@ -1,4 +1,5 @@
 app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function($scope,Filters,Commons,$http){
+
 	$scope.toggleLoading = function () {
 		
 		this.testing_trends.loading = !this.testing_trends.loading
@@ -168,8 +169,9 @@ title: {
             $scope.tests_vs_errors_pie.series[0].data[0].y = parseInt(response.errors);
             $scope.tests_vs_errors_pie.series[0].data[1].y = parseInt(response.valid);
 
-            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].y = parseInt(response.passed);
-            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].y = parseInt(response.failed);
+            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].y = parseInt(response.passed);
+            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[2].y = parseInt(response.failed);
+            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].y = parseInt(response.errors);
         });	
   }
   $scope.prepare_tests_vs_errors_pie = function(){
@@ -177,17 +179,18 @@ title: {
     var data =  $scope.tests_vs_errors_pie_data()
     .success(function(response){
         if(response.total > 0){
-            $scope.tests_vs_errors_pie.series[0].data[0].perc = ((response.errors/response.total)*100).toFixed(2);
-            $scope.tests_vs_errors_pie.series[0].data[1].perc = ((response.valid/response.total)*100).toFixed(2);
+            // $scope.tests_vs_errors_pie.series[0].data[0].perc = ((response.errors/response.total)*100).toFixed(2);
+            // $scope.tests_vs_errors_pie.series[0].data[1].perc = ((response.valid/response.total)*100).toFixed(2);
         
 
-            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].perc = ((response.passed/(response.failed + response.passed))*100).toFixed(2);
-            $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].perc = ((response.failed/(response.failed + response.passed))*100).toFixed(2);
-
+            // $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].perc = ((response.passed/(response.failed + response.passed))*100).toFixed(2);
+            // $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].perc = ((response.failed/(response.failed + response.passed))*100).toFixed(2);
+           
         }
     });  
 
 }
+
 $scope.prepare_tests_vs_errors_pie();
 
 
@@ -218,16 +221,23 @@ $scope.prepare_tests_vs_errors_pie();
                     name: "Tests",
                     data: [
                     {
-                        name: "Abv <br>500 CD4", 
+                        name: "Errors", 
+                        visible: false,
                         y :0,
                         perc: 0,
-                        color: 'rgb(189, 238, 83)'
+                color: Highcharts.Color(Highcharts.getOptions().colors[5]).brighten(-0.2).get()
+                    },
+                    {
+                        name: "Abv 500 CD4", 
+                        y :0,
+                        perc: 0,
+                color: Highcharts.Color(Highcharts.getOptions().colors[2]).brighten(0.2).get()
                     }, 
                     {
-                        name: "Bel <br>500 CD4", 
+                        name: "Bel 500 CD4", 
                         y :0,
                         perc: 0,
-                        color: 'rgb(139,0,139)'
+                color: Highcharts.Color(Highcharts.getOptions().colors[2]).brighten(-0.2).get()
                     }
                     ]
                 }
@@ -235,7 +245,7 @@ $scope.prepare_tests_vs_errors_pie();
             },
             legend: {
                 align: 'right',
-                x: -70,
+                // x: -70,
                 verticalAlign: 'bottom',
                 y: 20,
                 floating: true,
@@ -273,7 +283,7 @@ $scope.prepare_tests_vs_errors_pie();
                 visible: true,
                 y: 0,
                 perc: 0,
-                color: 'rgb(170, 25, 25)'
+                color: Highcharts.getOptions().colors[5]
             },
             {
                 drilldown: "Tests",
@@ -281,7 +291,7 @@ $scope.prepare_tests_vs_errors_pie();
                 visible: true,
                 y: 0,
                 perc: 0,
-                color: 'rgb(164, 213, 58)'
+                color: Highcharts.getOptions().colors[2]
             }
 
             ]

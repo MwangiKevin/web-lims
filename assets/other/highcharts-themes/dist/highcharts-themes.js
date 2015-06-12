@@ -160,4 +160,8 @@
     }
   };
 
-}).call(this);
+});
+
+// Highcharts.setTheme('pastel');
+
+
