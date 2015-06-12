@@ -197,6 +197,12 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bower_components/datatables/media/css/jquery.dataTables.css">
 
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-tabletools/css/dataTables.tableTools.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-colvis/css/dataTables.colVis.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-responsive/css/dataTables.responsive.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-colreorder/css/dataTables.colReorder.css');?>">
+
+
 	<!-- open scripts -->
 	<script type="text/javascript">
 		var base_url 		= '<?php echo base_url();?>';
@@ -219,8 +225,10 @@
 	<script src="<?php echo base_url('assets/bower_components/moment/moment.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/Chart.js/Chart.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-chart.js/dist/angular-chart.js');?>"></script>
-	<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts.js');?>"></script>
-	<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts/highcharts-all.js');?>"></script>
+	<script src="<?php echo base_url('assets/other/highcharts-themes/dist/highcharts-themes.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts/modules/drilldown.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/highcharts-ng/dist/highcharts-ng.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ngActivityIndicator/ngActivityIndicator.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-animate/angular-animate.js');?>"></script>
@@ -245,6 +253,14 @@
 	<script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.js"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/angular-datatables.min.js');?>"></script>
 
+	<script src="<?php echo base_url('assets/bower_components/datatables-tabletools/js/dataTables.tableTools.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/datatables-colvis/js/dataTables.colVis.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/datatables-responsive/js/dataTables.responsive.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/datatables-colreorder/js/dataTables.colReorder.js');?>"></script>
+	
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.min.js');?>"></script>
 
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>
@@ -305,6 +321,23 @@
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/authmain.js');?>"></script>
+
+	<script>
+
+
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.4).get('rgb')] // darken
+            ]
+        };
+    });
+
+    Highcharts.setTheme('base');
+
+	</script>
 
 	
 

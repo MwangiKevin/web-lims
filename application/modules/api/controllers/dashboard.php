@@ -182,21 +182,12 @@ class dashboard extends MY_Controller {
 		
 		$sql = "CALL proc_tests_errors_pie('".$from."','".$to."',".$user_group_id.",".$user_filter_used.")";
 		$tst 	=	R::getAll($sql);
-		
-		$tst[0]["title"]= 'Tests';
 
-		$tests_errors =	array(
-				array('name'=>'failed','y'=>(int) $tst[0]["failed"]),
-				array('name'=>'passed','y'=>(int)(int) $tst[0]["passed"]),
-				array('name'=>'total','y'=>(int) $tst[0]["total"]),
-				array('name'=>'errors','y'=>(int) $tst[0]["errors"]),
-				array('name'=>'valid','y'=>(int) $tst[0]["valid"])
-			);
-		$categories		=		array('Successful Tests','Unsuccessful Tests (Errors)');
-		
-		$data["tests"]		=	$tests;
-		$data["categories"]	=	$categories;
-		echo json_encode($tests_errors);
+		foreach ($tst[0] as $key => $value) {
+					$tst[0][$key] = (int) $tst[0][$key];
+				}		
+	
+		echo json_encode($tst[0]);
 	}
 	// for test for this year [table]
 	public function get_tests($user_group_id, $user_filter_used,$from,$to){
