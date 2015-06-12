@@ -245,8 +245,6 @@ class dashboard extends MY_Controller {
 	// Number of Devices per County [stacked]
 	public function get_cd4_devices_perCounty(){
 		$result = $this->dashboard_m->get_cd4_devices_perCounty();
-		// echo "<pre>";
-		// print_r($result);die;
 		echo json_encode($result);
 	}
 
