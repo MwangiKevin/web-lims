@@ -1,4 +1,4 @@
-app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder', function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ) {
+app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
@@ -9,6 +9,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
     .withDataProp('data')
     .withOption('processing', true)
     .withOption('serverSide', true)
+    .withOption('scrollX', '100%')
     .withPaginationType('full_numbers')
 
 
@@ -44,7 +45,22 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         DTColumnBuilder.newColumn('county_name').withTitle('County'),
         DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible(),
         DTColumnBuilder.newColumn('partner_name').withTitle('Partner').notVisible(),
-        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site').notVisible(),
+        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site').notVisible(),        
+        DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
+                return '<button onClick="edit_facility('+data.facility_id+')">Edit</button><button onClick ="delete_facility('+data.facility_id+')" >Delete</button>';
+            }),
     ];
+    $scope.dtColumnDefs = [
+        // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
+    ];
+
+    edit_facility = function(id){
+        alert('edit'+id);
+    }
+
+    delete_facility = function(id){
+        alert('delete'+id);
+    }
+
 
 }]);
