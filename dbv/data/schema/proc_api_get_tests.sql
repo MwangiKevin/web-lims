@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), order_col int(11), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN
 
         SET @QUERY =    "SELECT
@@ -45,22 +45,17 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY, ' AND `cnt`.`name` LIKE "%', search, '%" OR `fc`.`name` LIKE "%', search, '%" OR `fc`.`mfl_code` LIKE "%', search, '%" OR `cd4t`.`sample` LIKE "%', search, '%"');
         END IF;
 
-        CASE 
-            WHEN (order_col = 0 || order_col = '')
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`id` ', order_dir, ' ');
-            WHEN (order_col = 1)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`sample` ', order_dir, ' ');
-            WHEN (order_col = 2)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `fc`.`name` ', order_dir, ' ');
-            WHEN (order_col = 3)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY  `cd4t`.`cd4_count` ', order_dir, ' ');
-            WHEN (order_col = 4)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cnt`.`name` ', order_dir, ' ');
-            WHEN (order_col = 5)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `sub`.`name` ', order_dir, ' ');
+        
+       CASE 
+            WHEN ((order_col = '' || order_col IS NULL) AND (get_count <> 'true'))
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `id`  asc ');
+
+            WHEN ((get_count <> 'true') AND order_col <> '' AND order_col IS NOT NULL)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY ', order_col ,' ', order_dir, ' ');
             ELSE
                 SET @QUERY = @QUERY;
-        END CASE;
+        END CASE; 
+
         
 
         CASE 
@@ -75,5 +70,5 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-        SHOW ERRORS;
+        -- SHOW ERRORS;
     END

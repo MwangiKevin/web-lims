@@ -70,7 +70,8 @@ class facilities_m extends MY_Model{
 		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
-		$draw;
+		
+		$draw;$order_col;$order_dir;
 
 
 		$total_records = 0;
