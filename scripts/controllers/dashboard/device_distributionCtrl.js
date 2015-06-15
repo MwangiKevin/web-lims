@@ -6,7 +6,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 		this.equipment_tests_pie.loading = !this.equipment_tests_pie.loading
 		this.expected_reporting_devices.loading = !this.expected_reporting_devices.loading
 	}
-	
+
 	//
 	//
 	//Device Distribution Stacked Bar Graph
