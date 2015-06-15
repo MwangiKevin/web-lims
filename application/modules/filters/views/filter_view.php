@@ -26,7 +26,9 @@ function(start, end) {
 	$('#fro').val(start.format('YYYY-MM-D') ).trigger('change');
 	$('#to').val(end.format('YYYY-MM-D') ).trigger('change');
 
-	angular.element('#filterNav').scope().bindDates(start.format('YYYY-MM-D'),end.format('YYYY-MM-D'));
+	angular.element('#filterNav').scope().$apply(function(){
+		angular.element('#filterNav').scope().bindDates(start.format('YYYY-MM-D'),end.format('YYYY-MM-D'));
+	})
 }
 );
 
@@ -53,8 +55,7 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 
 <div class="right floated right aligned six wide column">
 	<div class="blue ui buttons">
-		{{ filters.selected }}
-		{{ ss }}
+		<!-- {{ Filters}} -->
 		<div id="reportrange" class="ui button pull-right filterButton" style="">
 			<i class="fa fa-calendar fa-md"></i>
 			<span><?php echo 'January '.date("1, Y", strtotime('first day of this year')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>

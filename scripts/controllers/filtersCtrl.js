@@ -20,9 +20,37 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 		entity: []
 	};
 
-	$scope.$watch('filters.selected.dates', function(){
 
-		alert($scope.filters.selected.dates.start);
+	$rootScope.Filters = {
+
+				change : 0,
+				selected 	: 	{
+					dates 	: 	{
+						start : '',
+						end  : ''
+					},
+					entity:[]
+				}
+			};
+
+	$scope.$watch('filters.selected.dates.start', function(){
+
+		$rootScope.Filters.change += 1;
+		$rootScope.Filters.selected.dates.start = $scope.filters.selected.dates.start;
+
+    });
+
+	$scope.$watch('filters.selected.dates.end', function(){	
+
+		$rootScope.Filters.change += 1;			
+		$rootScope.Filters.selected.dates.end = $scope.filters.selected.dates.end;
+
+    });
+
+	$scope.$watch('filters.selected.entity', function(){	
+
+		$rootScope.Filters.change += 1;	
+		$rootScope.Filters.selected.entity = $scope.filters.selected.entity;
 
     });
 	
@@ -60,8 +88,6 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 		$scope.filters.selected.dates.end = en
 
 		$scope.ss = st;
-
-		alert($scope.filters.selected.dates.start);
 	}
 
 }])
