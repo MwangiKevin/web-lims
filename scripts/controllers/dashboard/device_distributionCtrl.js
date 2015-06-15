@@ -40,15 +40,20 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             type: 'column'
         },
         title: {
-            text: 'Stacked column chart'
+            text: 'Device Distribution'
         },
         xAxis: {
-            categories: []
+            categories: [],
+            labels: {
+                rotation: -45,
+                // step : 3,
+                align: "right"
+            }
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'Total fruit consumption'
+                text: 'No of devices'
             },
             stackLabels: {
                 enabled: true,
@@ -56,7 +61,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
                     fontWeight: 'bold',
                     color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
                 }
-            }
+            } 
         },
         legend: {
             align: 'right',
@@ -89,7 +94,9 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             }
         },
         series: [{
-            data: []
+            name:"Devices",
+            data: [],
+            type: "column",
         }]
 	}
 	//

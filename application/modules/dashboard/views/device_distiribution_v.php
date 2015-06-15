@@ -16,7 +16,7 @@
 		width:75%;
 	}
 	#top_chart_container{
-		width: 75%;
+		width: 100%;
 		overflow-y:auto;
 		overflow-x:auto;
 	}
