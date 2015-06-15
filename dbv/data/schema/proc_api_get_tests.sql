@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), col int(11), dir varchar(255), limit_start int(3), limit_items int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN
 
         SET @QUERY =    "SELECT
@@ -45,22 +45,17 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY, ' AND `cnt`.`name` LIKE "%', search, '%" OR `fc`.`name` LIKE "%', search, '%" OR `fc`.`mfl_code` LIKE "%', search, '%" OR `cd4t`.`sample` LIKE "%', search, '%"');
         END IF;
 
-        CASE 
-            WHEN (col = 0 || col = '')
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`id` ', dir, ' ');
-            WHEN (col = 1)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`sample` ', dir, ' ');
-            WHEN (col = 2)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `fc`.`name` ', dir, ' ');
-            WHEN (col = 3)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY  `cd4t`.`cd4_count` ', dir, ' ');
-            WHEN (col = 4)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cnt`.`name` ', dir, ' ');
-            WHEN (col = 5)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `sub`.`name` ', dir, ' ');
+        
+       CASE 
+            WHEN ((order_col = '' || order_col IS NULL) AND (get_count <> 'true'))
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `id`  asc ');
+
+            WHEN ((get_count <> 'true') AND order_col <> '' AND order_col IS NOT NULL)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY ', order_col ,' ', order_dir, ' ');
             ELSE
                 SET @QUERY = @QUERY;
-        END CASE;
+        END CASE; 
+
         
 
         CASE 
