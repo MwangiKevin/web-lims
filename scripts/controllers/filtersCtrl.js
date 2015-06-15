@@ -30,7 +30,10 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 						end  : ''
 					},
 					entity:[]
-				}
+				},
+				getFilterEntity 	: function(){return $rootScope.Filters.selected.entity},
+				getFilterStartDate 	: function(){return $rootScope.Filters.selected.dates.start},
+				getFilterEndDate 	: function(){return $rootScope.Filters.selected.dates.end}
 			};
 
 	$scope.$watch('filters.selected.dates.start', function(){
