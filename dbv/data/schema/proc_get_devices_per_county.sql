@@ -17,6 +17,8 @@ BEGIN
 				f.sub_county_id = sc.id AND
 				sc.county_id = c.id
 			GROUP BY
-				c.id, fd.device_id;
+				c.id, fd.device_id
+			ORDER BY COUNT(fd.id) DESC
+				;
 
 END
