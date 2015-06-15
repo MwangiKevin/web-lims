@@ -1,4 +1,4 @@
-app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$location,Filters){
+app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$rootScope,Filters){
 
 	$(".opensleft").hide();
 
@@ -14,6 +14,18 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 
 	$scope.filters.dates.start = ''
 	$scope.filters.dates.end = ''
+
+	$scope.filters.selected  = {
+		dates : {start:'',end:''},
+		entity: []
+	};
+
+	$scope.$watch('filters.selected.dates', function(){
+
+		alert($scope.filters.selected.dates.start);
+
+    });
+	
 
 
 	$scope.refreshFilters = function(search_term) {
@@ -33,7 +45,7 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 			$scope.status = 'Unable to load Filters data: ' + error.message;
 		});
 
-		$.extend(Filters.entity, $scope.filters.entities.selected);
+		// $.extend(Filters.entity, $scope.filters.entities.selected);
 	}
 	$scope.refreshFilters("");
 
@@ -44,11 +56,12 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 	};
 
 	$scope.bindDates = function(st,en){
-		$scope.filters.dates.start = st
-		$scope.filters.dates.end = en
+		$scope.filters.selected.dates.start = st
+		$scope.filters.selected.dates.end = en
 
-		Filters.dates.start = st
-		Filters.dates.end = en	
+		$scope.ss = st;
+
+		alert($scope.filters.selected.dates.start);
 	}
 
 }])
