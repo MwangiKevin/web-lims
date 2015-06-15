@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), col int(11), dir varchar(255), limit_start int(3), limit_items int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), order_col int(11), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN
 
         SET @QUERY =    "SELECT
@@ -46,18 +46,18 @@ BEGIN
         END IF;
 
         CASE 
-            WHEN (col = 0 || col = '')
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`id` ', dir, ' ');
-            WHEN (col = 1)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`sample` ', dir, ' ');
-            WHEN (col = 2)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `fc`.`name` ', dir, ' ');
-            WHEN (col = 3)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY  `cd4t`.`cd4_count` ', dir, ' ');
-            WHEN (col = 4)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cnt`.`name` ', dir, ' ');
-            WHEN (col = 5)
-                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `sub`.`name` ', dir, ' ');
+            WHEN (order_col = 0 || order_col = '')
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`id` ', order_dir, ' ');
+            WHEN (order_col = 1)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cd4t`.`sample` ', order_dir, ' ');
+            WHEN (order_col = 2)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `fc`.`name` ', order_dir, ' ');
+            WHEN (order_col = 3)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY  `cd4t`.`cd4_count` ', order_dir, ' ');
+            WHEN (order_col = 4)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `cnt`.`name` ', order_dir, ' ');
+            WHEN (order_col = 5)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `sub`.`name` ', order_dir, ' ');
             ELSE
                 SET @QUERY = @QUERY;
         END CASE;

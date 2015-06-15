@@ -19,6 +19,8 @@ class tests_m extends MY_Model{
 		$limit_items = $this->input->get("limit_items");
 		$draw;
 		
+		$order_dir = "desc";
+		
 
 		$total_records = 0;
 		$records_filtered = 0;

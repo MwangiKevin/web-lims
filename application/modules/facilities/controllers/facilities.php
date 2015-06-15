@@ -15,7 +15,7 @@ class facilities extends MY_Controller {
 	}
 
 	public function details() {
-		$this->load->view("uploads_v");
+		$this->load->view("view_facilities_v");
 	}
 
 }
