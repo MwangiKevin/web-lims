@@ -48,6 +48,11 @@ class presto_uploads extends MY_Controller
 
 			$handle = fopen($file_tmp, "r");
 
+			// get the files creation date
+			$file_time_date = date ("F d Y H:i:s.", filemtime($file_tmp));
+
+			echo "file creation date is:" . $file_time_date; die();
+
 			while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
 				$new_array[] = $data;
 		    }
