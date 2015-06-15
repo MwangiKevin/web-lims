@@ -52,7 +52,38 @@ class facility_devices_m extends MY_Model{
 
 		$verbose = $this->input->get('verbose');
 
-		$fac_dev_res = R::getAll("CALL `proc_get_api_facility_devices`('$id','')");
+		$is_datatable = $this->input->get("datatable");
+
+		$search = $this->input->get("search");
+		$order = $this->input->get("order");
+		$limit_start = $this->input->get("limit_start");
+		$limit_items = $this->input->get("limit_items");
+		
+		$draw;$order_col;$order_dir;
+
+
+		$total_records = 0;
+		$records_filtered = 0;
+
+		if($is_datatable){
+			$search = $search['value'];
+
+			$columns = $this->input->get("columns");
+
+			$order_col_index = $order[0]['column'];
+			$order_col = $columns[$order_col_index]['data'];
+			$order_dir = $order[0]['dir'];
+
+
+			$limit_start = $this->input->get("start");
+			$limit_items = $this->input->get("length");
+			$draw = $this->input->get("draw");
+
+			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_facility_devices`('$id','','','$order_col','$order_dir','','','true')")[0]['count'];
+			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
+		}
+
+		$fac_dev_res = R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
 		
 		if($id==NULL){
 
@@ -60,7 +91,7 @@ class facility_devices_m extends MY_Model{
 
 			if($verbose=='true'){
 				foreach ($fac_dev as $key => $value) {
-					$facility=R::getAll("CALL `proc_get_facilities`('".$value['facility_id']."','','','')");
+					$facility=R::getAll("CALL `proc_api_get_facilities`('".$value['facility_id']."','','','','','','')");
 
 					if(sizeof($facility)>0){
 						$fac_dev[$key]['assigned_to_facility'] = true;
@@ -79,7 +110,7 @@ class facility_devices_m extends MY_Model{
 			$fac_dev =  $fac_dev_res[0];
 
 			if(sizeof($fac_dev)>0){
-				$facility=R::getAll("CALL `proc_get_facilities`('".$fac_dev['facility_id']."')");
+				$facility=R::getAll("CALL `proc_get_facilities`('".$fac_dev['facility_id']."','','','','','','')");
 
 				if(sizeof($facility)>0){
 					$fac_dev['assigned_to_facility'] = true;
@@ -91,6 +122,15 @@ class facility_devices_m extends MY_Model{
 					$fac_dev['assigned_to_facility'] = false;
 				}
 			}	
+		}
+
+		
+		if($is_datatable){
+
+			$fac_dev = $this->arr_to_dt_response($fac_dev,$draw,$total_records,$records_filtered);
+
+
+		}else{
 		}
 
 		return $fac_dev;
