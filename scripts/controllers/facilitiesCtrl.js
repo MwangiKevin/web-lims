@@ -37,7 +37,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
             }
         ]);
     $scope.dtColumns = [
-        DTColumnBuilder.newColumn('facility_id').withTitle('facility ID').notVisible(),
+        DTColumnBuilder.newColumn('facility_id').withTitle('facility ID'),
         DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
         DTColumnBuilder.newColumn('facility_email').withTitle('Email'),
         DTColumnBuilder.newColumn('facility_phone').withTitle('Phone'),

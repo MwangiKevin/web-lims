@@ -94,8 +94,7 @@ class facilities_m extends MY_Model{
 			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_facilities`('$id','','$order_col','$order_dir','','','true')")[0]['count'];
 			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_facilities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
 		}
-
-
+ 
 		$facilities_res = R::getAll("CALL `proc_api_get_facilities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
 		
 		if($id==NULL){
