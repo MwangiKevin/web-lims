@@ -1,4 +1,4 @@
-app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http',function($scope,Filters,Commons,$http){
+app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$http',function($scope, $rootScope, Filters,Commons,$http){
 	$scope.toggleLoading = function () {
 		
 		this.device_distribution_stack.loading = !this.device_distribution_stack.loading
@@ -6,6 +6,27 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 		this.equipment_tests_pie.loading = !this.equipment_tests_pie.loading
 		this.expected_reporting_devices.loading = !this.expected_reporting_devices.loading
 	}
+	//	
+	//FILTER. Variables plus watch function
+	//
+	entity_type = '';
+	entity_id = '';
+	start_date = '';
+	end_date = '';
+	 $rootScope.$watch('Filters.change', function(){
+	 	entity_type = $rootScope.Filters.selected.entity.filter_type;//facility,partener..etc
+	 	entity_id = $rootScope.Filters.selected.entity.filter_id; 
+	 	start_date = $rootScope.Filters.selected.dates.start;
+	 	end_date = $rootScope.Filters.selected.dates.end;
+	 	
+	 	//redraw the charts
+	 	$scope.equipment_pie_data();
+	 	$scope.equipment_tests_pie_data();
+	 	$scope.expected_reporting_devices_data();
+	 	$scope.cd4_equipment_table();
+	 	$scope.cd4_equipment_tests_table();
+	});
+
 
 	//
 	//
@@ -106,8 +127,12 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.equipment_pie_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_cd4_devices_pie/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_cd4_devices_pie",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id
+				}
+			})
 		.success(function(response){
 			$scope.cd4_equipment_pie.series[0].data = response;
 			// console.log($scope.cd4_equipment_pie.series[0].data);
@@ -149,8 +174,14 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.equipment_tests_pie_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_devices_tests_pie/0/0/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_devices_tests_pie",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date,
+					endDate : end_date	
+				}
+			})
 		.success(function(response){
 			$scope.equipment_tests_pie.series[0].data = response;
 			// console.log($scope.equipment_tests_pie.series[0].data);
@@ -194,15 +225,19 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.expected_reporting_devices_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_expected_reporting_devices/0/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_expected_reporting_devices",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date
+				}
+			})
 		.success(function(response){
 			$scope.expected_reporting_devices.series = response;
-			// alert($scope.table_data);
+			//$scope.expected_reporting_devices.title.text = start_date;
 		});	
 	}
 	$scope.expected_reporting_devices_data();
-	//$scope.expected_reporting_devices();
 	$scope.expected_reporting_devices =  {
 		chart: { 
             plotBackgroundColor: null,
@@ -213,7 +248,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             height:250
         },
         title: {
-            text: 'Expected Reporting Devices (Year <?php echo $year;?>)',
+            text: 'Expected Reporting Devices',
             x: -20 //center   
         },
         xAxis: {
@@ -265,8 +300,12 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.cd4_equipment_table = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_devices_table/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_devices_table",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id
+				}
+			})
 		.success(function(response){
 			$scope.table_data = response;
 			// alert($scope.table_data);
@@ -282,8 +321,14 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.cd4_equipment_tests_table = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_devices_tests_table/0/0/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_devices_tests_table",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date,
+					endDate : end_date	
+				}
+			})
 		.success(function(response){
 			$scope.equipment_tests_data = response			
 		});	
