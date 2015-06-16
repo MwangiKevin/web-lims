@@ -41,8 +41,8 @@
 					<a class="section">Home</a>
 					<i class="right chevron icon divider"></i>
 					<a class="section">Dashboard</a>
-					<i class="right chevron icon divider"></i>
-					<div class="active section">Summary</div>
+					<!-- <i class="right chevron icon divider"></i>
+					<div class="active section">Summary</div> -->
 				</div>
 			</div>  
 		</div>
@@ -77,7 +77,7 @@ $(".launch.button").mouseenter(function(){
 			<a class="item" href="#deviceDistribution" ng-class="getActiveSubmenuLV1('deviceDistribution')">
 				<b>Device Distribution</b><i class="fa fa-medkit " style="float:right"></i>
 			</a>
-			<a class="item" href="#map" ng-class="getActiveSubmenuLV1('map')">
+			<!-- <a class="item" href="#map" ng-class="getActiveSubmenuLV1('map')">
 				<i class="map icon"></i> <b>Map</b>
 			</a>
 			<a class="item" href="#fcdrrReporting" ng-class="getActiveSubmenuLV1('fcdrrReporting')">
@@ -105,7 +105,7 @@ $(".launch.button").mouseenter(function(){
 						CD4 Suppression Level
 					</a>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
