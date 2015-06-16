@@ -1,5 +1,6 @@
 app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
 
+
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/facilities',
@@ -34,6 +35,13 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
                 'sExtends': 'collection',
                 'sButtonText': 'Save',
                 'aButtons': ['csv', 'xls', 'pdf']
+            },
+            {
+                'sExtends': 'text',
+                'sButtonText': '+ New Facility', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    window.location = "#/facilities/new";
+                }
             }
         ]);
     $scope.dtColumns = [
@@ -47,7 +55,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
         DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="delete_facility('+data.facility_id+')" >Delete</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
             }),
     ];
     $scope.dtColumnDefs = [
@@ -55,11 +63,11 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
     ];
 
     edit_facility = function(id){
-        alert('edit'+id);
+        window.location = "#/fcdrrs/edit/"+id;
     }
 
-    delete_facility = function(id){
-        alert('delete'+id);
+    remove_facility = function(id){
+        window.location = "#/facilities/remove/"+id;
     }
 
 
