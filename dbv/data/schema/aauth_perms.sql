@@ -1,7 +1,6 @@
 CREATE TABLE `aauth_perms` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
   `definition` text,
-  PRIMARY KEY (`id`),
-  KEY `id_index` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8

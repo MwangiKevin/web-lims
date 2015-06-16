@@ -1,7 +1,8 @@
 CREATE TABLE `pima_raw_upload` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pima_upload_id` int(15) NOT NULL,
   `device_test_id` int(11) NOT NULL,
-  `device_serial` int(11) NOT NULL,
+  `device_serial` varchar(30) NOT NULL,
   `assay_id` int(11) NOT NULL,
   `assay_name` varchar(15) NOT NULL,
   `sample_code` varchar(50) NOT NULL,
@@ -12,13 +13,15 @@ CREATE TABLE `pima_raw_upload` (
   `date` date NOT NULL,
   `start_time` time NOT NULL,
   `barcode` varchar(11) NOT NULL,
-  `expiry_date` date NOT NULL,  
+  `expiry_date` date NOT NULL,
   `volume` varchar(11) NOT NULL,
   `device` varchar(11) NOT NULL,
   `reagent` varchar(11) NOT NULL,
   `software_version` varchar(11) NOT NULL,
   `export_error_message` varchar(15) NOT NULL,
-  `is_uploaded` int(2) DEFAULT 0,
-  `upload_file_name` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `valid_test` int(2) DEFAULT '0',
+  `upload_file_name` varchar(100) DEFAULT NULL,
+  `file_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pima_upload_id` (`pima_upload_id`,`device_serial`,`sample_code`,`result_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Pima Test Raw uploads'

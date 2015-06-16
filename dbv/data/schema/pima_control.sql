@@ -11,7 +11,7 @@ CREATE TABLE `pima_control` (
   `device` int(11) NOT NULL,
   `software_version` varchar(50) NOT NULL,
   `cd4_count` int(11) NOT NULL,
-  `facility_equipment_id` int(11) NOT NULL COMMENT 'fk to facility_equipment',
+  `facility_device_id` int(11) NOT NULL COMMENT 'fk to facility_equipment',
   `result_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Pima Test uploads'

@@ -13,34 +13,13 @@ class dashboard extends MY_Controller {
 		
 		$this->load->view('dashboard_template');
 	}
+	public function footer() {
+		
+		$this->load->view('footer_v');
+	}
 
 	public function dashboard_view(){
 		$this->load->view("dashboard_v");
-	}
-
-	public function tests(){
-		echo "Test";	
-	}
-	public function tat(){
-		echo "tat";	
-	}
-	public function facilitiesTests(){
-		echo "facilitiesTests";	
-	}
-	public function labPerformance(){
-		echo "labPerformance";	
-	}
-	public function TBCoinf(){
-		echo "TBCoinf";	
-	}
-	public function VLSuppression(){
-		echo "VLSuppression";	
-	}
-	public function SampleType(){
-		echo "SampleType";	
-	}
-	public function BF(){
-		echo "BF";	
 	}
 
 	public function dashboard_item(){
@@ -51,5 +30,24 @@ class dashboard extends MY_Controller {
 	public function dashboard_item_singular(){
 
 		$this->load->view("dashboard_item_singular_v");
+	}
+
+	public function dashboard_summary(){
+
+		$this->load->view("dashboard_summary_v");
+	}
+
+	public function testing_trends(){
+
+		$this->load->view("testing_trends_v");
+	}
+	public function devices(){
+		$this ->load->view("device_distiribution_v");
+	}
+	public function map(){
+		echo "map";
+	}
+	public function fcdrr_reporting(){
+		echo "fcdrr";
 	}
 }
