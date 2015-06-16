@@ -43,11 +43,11 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         DTColumnBuilder.newColumn('facility_phone').withTitle('Phone'),
         DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
         DTColumnBuilder.newColumn('county_name').withTitle('County'),
-        DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible(),
-        DTColumnBuilder.newColumn('partner_name').withTitle('Partner').notVisible(),
-        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site').notVisible(),        
+        DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county'),
+        DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
+        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button onClick="edit_facility('+data.facility_id+')">Edit</button><button onClick ="delete_facility('+data.facility_id+')" >Delete</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="delete_facility('+data.facility_id+')" >Delete</button>';
             }),
     ];
     $scope.dtColumnDefs = [
