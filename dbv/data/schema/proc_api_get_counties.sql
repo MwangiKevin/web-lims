@@ -49,4 +49,5 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
+        SHOW ERRORS;
     END;

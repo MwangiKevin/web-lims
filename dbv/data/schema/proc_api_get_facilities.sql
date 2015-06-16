@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_facilities`(f_id int(2), search varchar(25), limit_start int(3), limit_items int(3))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_facilities`(f_id int(2), search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN
 
         SET @QUERY =    " SELECT 
@@ -36,6 +36,31 @@ BEGIN
                             WHERE 1 
                         ";
 
+
+        IF (get_count = 'true')
+        THEN
+            SET @QUERY =    "SELECT
+                                  COUNT(*) AS `count`
+                               FROM `facility` `f` 
+                                    LEFT JOIN `partner` `p`
+                                    ON `p`.`id`=`f`.`partner_id`
+                                    LEFT JOIN `sub_county` `sc` 
+                                    ON `sc`.`id`=`f`.`sub_county_id`
+                                        LEFT JOIN `county` `c`
+                                        ON `c`.`id`=`sc`.`county_id`
+                                    LEFT JOIN `facility` `central_site`
+                                    ON `central_site`.`id` = `f`.`central_site_id`
+                                    LEFT JOIN `facility_type` `ft`
+                                    ON `ft`.`id`=`f`.`facility_type_id`
+
+                                WHERE 1  
+                            ";
+        ELSE
+
+            SET @QUERY = @QUERY;
+        END IF;
+
+
         IF (f_id = 0 || f_id = '')
         THEN
             SET @QUERY = @QUERY;
@@ -48,15 +73,26 @@ BEGIN
         THEN
             SET @QUERY = @QUERY;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, ' AND (`f`.`name` LIKE "%', search, '%"');
-            SET @QUERY = CONCAT(@QUERY, ' OR  `f`.`mfl_code` LIKE "%', search, '%")');
+            SET @QUERY = CONCAT(@QUERY, ' AND (`f`.`name` LIKE "%', search, '%" ');
+            SET @QUERY = CONCAT(@QUERY, ' OR  `f`.`mfl_code` LIKE "%', search, '%") ');
         END IF;
 
-
         CASE 
-            WHEN (limit_start = 0 || limit_start = '') AND (limit_items <> 0 || limit_items <> '') 
+            WHEN ((order_col = '' || order_col IS NULL) AND (get_count <> 'true'))
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `facility_id`  asc ');
+
+            WHEN ((get_count <> 'true') AND order_col <> '' AND order_col IS NOT NULL)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY ', order_col ,' ', order_dir, ' ');
+            ELSE
+                SET @QUERY = @QUERY;
+        END CASE; 
+
+
+   
+        CASE 
+            WHEN (limit_start = 0 || limit_start = '') AND (limit_items > 0 || limit_items <> '') AND  (get_count <> 'true')
                 THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT  0 ,  ', limit_items, ' ');
-            WHEN (limit_start <> 0 || limit_start <> '') AND (limit_items <> 0 || limit_items <> '')
+            WHEN (limit_start > 0 || limit_start <> '') AND (limit_items > 0 || limit_items <> '') AND    (get_count <> 'true')
                 THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT ',limit_start,' , ', limit_items, ' ');
             ELSE
                 SET @QUERY = @QUERY;
@@ -66,4 +102,5 @@ BEGIN
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
+        SHOW ERRORS;
     END

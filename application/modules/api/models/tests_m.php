@@ -17,7 +17,9 @@ class tests_m extends MY_Model{
 		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
-		$draw;
+		$draw;$order_col;$order_dir;
+
+		$order_dir = "desc";
 		
 
 		$total_records = 0;
@@ -25,11 +27,18 @@ class tests_m extends MY_Model{
 
 		if($is_datatable){
 			$search = $search['value'];
-			$order_col = $order[0]['column'];
+
+			$columns = $this->input->get("columns");
+
+			$order_col_index = $order[0]['column'];
+			$order_col = $columns[$order_col_index]['data'];
 			$order_dir = $order[0]['dir'];
+
+
 			$limit_start = $this->input->get("start");
 			$limit_items = $this->input->get("length");
 			$draw = $this->input->get("draw");
+
 
 			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_tests`('$id','','$order_col','$order_dir','','','true')")[0]['count'];
 			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_tests`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
