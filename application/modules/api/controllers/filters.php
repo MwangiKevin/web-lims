@@ -10,61 +10,94 @@ class filters extends MY_Controller {
 
 		
 		header('Content-Type: application/json; charset=utf-8');
-		$this->load->model('api/api_m');
+		// $this->load->model('api/api_m');
 	}
 
 	public function index(){
 	}
 
 	public function entities(){
-		$entity_values = [];
-		$entities = $this->api_m->get_entities();
-		// print_r($entities);die;
-		$i = 0;
-		foreach ($entities as $key => $value) {
-			if($value['grp_type'] == 'Counties'){
-				$entity_values[$i]['name'] = $value['name'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type']; 
+		
+		$entities = array();
 
-			}else if($value['grp_type'] == 'Sub-Counties'){
-				$entity_values[$i]['name'] = $value['name'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type'];	
+		$this->load->model("facilities_m");	
+		$this->load->model("sub_counties_m");	
+		$this->load->model("counties_m");	
+		$this->load->model("partners_m");	
 
-			}else if($value['grp_type'] == 'Facilities'){
-				$entity_values[$i]['name'] = $value['facility_name'];
-				$entity_values[$i]['mfl_code'] = $value['facility_mfl_code'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type'];
+		$facilities 	= $this->facilities_m	->	read();
+		$sub_counties 	= $this->sub_counties_m	->	read();
+		$counties 		= $this->counties_m		->	read();
+		$partners 		= $this->partners_m		->	read();
 
-			}else if($value['grp_type'] == 'Implementing Partners'){
-				$entity_values[$i]['name'] = $value['name'];
-				$entity_values[$i]['email'] = 'null';
-				$entity_values[$i]['phone'] = 'null';
-				$entity_values[$i]['type'] = $value['grp_type'];
+		foreach ($facilities as $key => $value) {
 
-			}
-			$i++;
+			$item = array(
+					'name' 			=>	$value['facility_name'],
+					'email'			=>	$value['facility_email'],
+					'phone' 		=>	$value['facility_phone'],
+					'type' 			=>	"Facilities",
+					'filter_type'	=>	1,
+					'filter_id'		=>	(int) $value['facility_id']
+				);	
+			array_push($entities, $item);
 		}
-		echo json_encode($entity_values,JSON_PRETTY_PRINT);
-		return $entity_values;
 
-	
+
+		foreach ($sub_counties as $key => $value) {
+
+			$item = array(
+					'name' 			=>	$value['name'],
+					'email'			=>	"",
+					'phone' 		=>	"",
+					'type' 			=>	"Sub Counties",
+					'filter_type'	=>	2,
+					'filter_id'		=>	(int) $value['id']
+				);	
+			array_push($entities, $item);
+		}
+
+
+
+		foreach ($counties as $key => $value) {
+
+			$item = array(
+					'name' 			=>	$value['name'],
+					'email'			=>	"",
+					'phone' 		=>	"",
+					'type' 			=>	"Counties",
+					'filter_type'	=>	3,
+					'filter_id'		=>	(int) $value['id']
+				);	
+			array_push($entities, $item);
+		}
+
+		foreach ($partners as $key => $value) {
+
+			$item = array(
+					'name' 			=>	$value['name'],
+					'email'			=>	"",
+					'phone' 		=>	"",
+					'type' 			=>	"Partners",
+					'filter_type'	=>	4,
+					'filter_id'		=>	(int) $value['id']
+				);	
+			array_push($entities, $item);
+		}
+
+
+		echo json_encode($entities,JSON_PRETTY_PRINT);
+
 	}	
 
 	public function programs(){
 		$programs = array(
 			array('name'=>'Viral Load','initials'=>'VL'),
-			array('name'=>'Early Infant Diagnosis','initials'=>'EID')
+			array('name'=>'Early Infant Diagnosis','initials'=>'EID'),
+			array('name'=>'CD4','initials'=>'CD4')
 			);
 
 		echo json_encode($programs,JSON_PRETTY_PRINT);
-
-		return $programs;
 	}
 
 	public function dates(){

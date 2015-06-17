@@ -1,4 +1,4 @@
-app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$location,Filters){
+app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$rootScope,Filters){
 
 	$(".opensleft").hide();
 
@@ -15,16 +15,58 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 	$scope.filters.dates.start = ''
 	$scope.filters.dates.end = ''
 
-	initializeFilters();
+	$scope.filters.selected  = {
+		dates : {start:'',end:''},
+		entity: []
+	};
 
-	function initializeFilters() {
-		// Filters.getEntities()
-		// .success(function (ents) {
-			// $scope.filters.entities = ents;
-		// })
-		// .error(function (error) {
-			// $scope.status = 'Unable to load Filters data: ' + error.message;
-		// });
+
+	$rootScope.Filters = {
+
+				change : 0,
+				selected 	: 	{
+					dates 	: 	{
+						start : '',
+						end  : ''
+					},
+					entity:[]
+				},
+				getFilterEntity 	: function(){return $rootScope.Filters.selected.entity},
+				getFilterStartDate 	: function(){return $rootScope.Filters.selected.dates.start},
+				getFilterEndDate 	: function(){return $rootScope.Filters.selected.dates.end}
+			};
+
+	$scope.$watch('filters.selected.dates.start', function(){
+
+		$rootScope.Filters.change += 1;
+		$rootScope.Filters.selected.dates.start = $scope.filters.selected.dates.start;
+
+    });
+
+	$scope.$watch('filters.selected.dates.end', function(){	
+
+		$rootScope.Filters.change += 1;			
+		$rootScope.Filters.selected.dates.end = $scope.filters.selected.dates.end;
+
+    });
+
+	$scope.$watch('filters.selected.entity', function(){	
+
+		$rootScope.Filters.change += 1;	
+		$rootScope.Filters.selected.entity = $scope.filters.selected.entity;
+
+    });
+	
+
+
+	$scope.refreshFilters = function(search_term) {
+		Filters.getEntities(search_term)
+		.success(function (ents) {
+			$scope.filters.entities = ents;
+		})
+		.error(function (error) {
+			$scope.status = 'Unable to load Filters data: ' + error.message;
+		});
 
 		Filters.getDates()
 		.success(function (dates) {
@@ -34,8 +76,9 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 			$scope.status = 'Unable to load Filters data: ' + error.message;
 		});
 
-		$.extend(Filters.entity, $scope.filters.entities.selected);
+		// $.extend(Filters.entity, $scope.filters.entities.selected);
 	}
+	$scope.refreshFilters("");
 
 	$scope.filters.clear = function() {
 		$scope.filters.entities.selected = undefined;
@@ -44,11 +87,10 @@ app.controller('filtersCtrl',['$scope','$location', 'Filters', function($scope,$
 	};
 
 	$scope.bindDates = function(st,en){
-		$scope.filters.dates.start = st
-		$scope.filters.dates.end = en
+		$scope.filters.selected.dates.start = st
+		$scope.filters.selected.dates.end = en
 
-		Filters.dates.start = st
-		Filters.dates.end = en	
+		$scope.ss = st;
 	}
 
 }])

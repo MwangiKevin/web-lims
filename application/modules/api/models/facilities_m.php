@@ -58,17 +58,44 @@ class facilities_m extends MY_Model{
 		return $facility;
 	}
 
-	public function read($id){
+	public function read($id=NULL){
 
 		$facilities = array();
 
 		$verbose = $this->input->get('verbose');
-		// $verbose = true;
+
+		$is_datatable = $this->input->get("datatable");
+
 		$search = $this->input->get("search");
+		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
+		
+		$draw;$order_col;$order_dir;
 
-		$facilities_res = R::getAll("CALL `proc_get_facilities`('$id','$search','$limit_start','$limit_items')");
+
+		$total_records = 0;
+		$records_filtered = 0;
+
+		if($is_datatable){
+			$search = $search['value'];
+
+			$columns = $this->input->get("columns");
+
+			$order_col_index = $order[0]['column'];
+			$order_col = $columns[$order_col_index]['data'];
+			$order_dir = $order[0]['dir'];
+
+
+			$limit_start = $this->input->get("start");
+			$limit_items = $this->input->get("length");
+			$draw = $this->input->get("draw");
+
+			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_facilities`('$id','','$order_col','$order_dir','','','true')")[0]['count'];
+			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_facilities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
+		}
+ 
+		$facilities_res = R::getAll("CALL `proc_api_get_facilities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
 		
 		if($id==NULL){
 
@@ -77,7 +104,7 @@ class facilities_m extends MY_Model{
 			if($verbose=='true'){
 
 				foreach ($facilities as $key => $value) {
-					$facility_devices = R::getAll("CALL `proc_get_facility_devices`('','".$value['facility_id']."')");
+					$facility_devices = R::getAll("CALL `proc_api_get_facility_devices`('','".$value['facility_id']."','','','','','','')");
 					$facilities[$key]['devices'] = $facility_devices;
 				}	
 
@@ -87,9 +114,18 @@ class facilities_m extends MY_Model{
 
 			$facilities =  $facilities_res[0];	
 			if(sizeof($facilities)>0){
-				$facility_devices = R::getAll("CALL `proc_get_facility_devices`('','".$facilities['facility_id']."')");
+				$facility_devices = R::getAll("CALL `proc_api_get_facility_devices`('','".$facilities['facility_id']."','','','','','','')");
 				$facilities['devices'] = $facility_devices;
 			}
+		}
+
+
+		if($is_datatable){
+
+			$facilities = $this->arr_to_dt_response($facilities,$draw,$total_records,$records_filtered);
+
+
+		}else{
 		}
 
 		return $facilities;

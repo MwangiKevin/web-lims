@@ -2,6 +2,7 @@
 	#chart_container{
 		width:100%;
 		padding: 5%;
+		border: solid;
 	}
 	#middle_chart{
 		width:100%;
@@ -22,12 +23,13 @@
 		<div id='top_chart_container'>
 			<highchart id="testing_trends" config="testing_trends" class="span"></highchart>
 		</div>
+		<div style="clear:both"><hr></div>
 		<div id="middle_chart_container">
 			<div id="middle_chart">
 				<highchart id="yearly_testing_trends" config="yearly_testing_trends" class="span10" style="float:left; width:40%"></highchart>
 			</div>
 			<div id="middle_chart">
-				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:45%"></highchart>
+				<highchart id="tests_vs_errors_pie" config="tests_vs_errors_pie" class="span10" style="float:right; width:45%" data-theme='pastel'></highchart>
 			</div>
 		</div>
 		<div id='table_container'>
@@ -64,7 +66,7 @@
 						</td>
 						<td style="background-color: #F6F6F6;;" >
 							<center>
-								{{t_data.vaild}}
+								{{t_data.valid}}
 							</center>
 						</td>
 						<td style="background-color: #F6F6F6;;" >

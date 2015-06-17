@@ -1,9 +1,5 @@
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `proc_get_county_details`$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_get_county_details` (C_id int(11)) 
-			BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_county_details`(C_id int(11))
+BEGIN
 				SET @QUERY =    "SELECT 	
 
 									`cnt`.`id`,
@@ -24,9 +20,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_get_county_details` (C_id int
 									ON `cnt`.`id` = `par_cnt`.`county_id`
 										LEFT JOIN `partner` `par`
 										ON `par_cnt`.`partner_id`=`par`.`id`
-
-								GROUP BY `cnt`.`id`
-								ORDER BY `cnt`.`name` ASC";
+								";
   
         IF (C_id = 0 || C_id = '')
         THEN
@@ -35,9 +29,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE  `proc_get_county_details` (C_id int
             SET @QUERY = CONCAT(@QUERY, ' WHERE `sub`.`id`=', C_id, '');
         END IF;
 
+
+        SET @QUERY = CONCAT(@QUERY, ' GROUP BY `cnt`.`id` ORDER BY `cnt`.`name` ASC ');
+
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
         SELECT @QUERY;
-    END$$
-
-DELIMITER ;		
+    END

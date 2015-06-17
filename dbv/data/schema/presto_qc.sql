@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS `presto_qc` (
-`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `presto_qc` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `run_id` varchar(100) NOT NULL,
   `run_date_time` datetime NOT NULL,
   `operator` varchar(100) NOT NULL,
@@ -11,5 +11,8 @@ CREATE TABLE IF NOT EXISTS `presto_qc` (
   `cd4` int(11) NOT NULL,
   `%cd4` int(11) NOT NULL,
   `passed` int(11) NOT NULL,
-  `error_codes` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `error_codes` varchar(100) NOT NULL,
+  `serial_number` varchar(100) NOT NULL,
+  `file_date_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1

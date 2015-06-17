@@ -1421,7 +1421,37 @@ INSERT INTO `facility_temp` (`id`, `mflcode`, `name`, `district`, `type`, `level
 (6381, '13750', 'Mageta Dispensary', 115, NULL, 5, 1, '', 0, 1, '0000-00-00'),
 (6382, '14007', 'Oyamo Dispensary', 115, NULL, 1, 1, '', 0, 1, '0000-00-00'),
 (6383, '15876', 'Emuhaya District Hosptial', 168, NULL, 5, 1, '', 0, 1, '0000-00-00'),
-(6384, '15894', 'Hamisi Hospital', 65, NULL, 1, 1, '', 0, 1, '0000-00-00');
+(6384, '15894', 'Hamisi Hospital', 65, NULL, 1, 1, '', 0, 1, '0000-00-00'),
+(6385, '15587', 'Siongiroi Health Centre', 90, 1, 1, 1, NULL, 0, 1, '2015-04-16'),
+(6386, '15322', 'Ndanai Hospital', 129, 1, 5, 1, 'sotikmoh09@yahoo.com', 0, 1, '2015-04-16'),
+(6387, '14970', 'Ndanai Hospital', 183, 1, 5, 1, NULL, 0, 1, '2015-04-16'),
+(6388, '14767', 'Kapsowar (AIC) Hospital', 130, 1, 1, 1, NULL, 0, 1, '2015-04-16'),
+(6389, '14178', 'AIC Litein Mission Hospital', 72, 2, 1, 1, NULL, 0, 1, '2015-04-16'),
+(6390, '14897', 'Kipkelion Sub District Hospital', 165, 1, 5, 1, NULL, 0, 1, '2015-04-17'),
+(6391, '15761', 'Unilever Central Hospital', 75, 1, 5, 1, NULL, 0, 1, '2015-04-17'),
+(6392, '15064', 'Lokori (AIC) Health Centre', 242, 2, 5, 1, NULL, 0, 1, '2015-04-17'),
+(6393, '15064', 'Lokori (AIC) Health Centre', 242, 2, 5, 1, NULL, 0, 1, '2015-04-17'),
+(6394, '20076', 'Lorugum Medical Services Ltd', 50, 1, 5, 1, NULL, 0, 1, '2015-04-17'),
+(6395, '14623', 'Kabiyet Health Centre', 178, 1, 5, 1, NULL, 0, 1, '2015-04-17'),
+(6396, '14792', 'Kaptumo Sub-District Hospital', 185, 1, 5, 1, NULL, 0, 1, '2015-04-17'),
+(6397, '14704', 'Kapkangani Health Centre', 160, 0, 0, 1, NULL, 0, 1, '2015-04-17'),
+(6398, '14753', 'Kapsara District Hospital', 158, 0, 0, 1, NULL, 0, 1, '2015-04-17'),
+(6399, '14379', 'Cherangany Health Centre', 158, 0, 0, 1, NULL, 0, 1, '2015-04-17'),
+(6400, '15209', 'Moi''s Bridge Health Centre', 14, 0, 0, 1, NULL, 0, 1, '2015-04-17'),
+(6401, '15758', 'Uasin Gishu District Hospital', 74, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6402, '15002', 'Kurangurik Dispensary', 216, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6403, '16347', 'Burnt Forest Rhdc (Eldoret East)', 74, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6404, '12719', 'Runyenjes District Hospital', 28, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6405, '12777', 'Sultan Hamud Sub District Hospital', 73, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6406, '12547', 'Mtito andei Sub District', 20, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6407, '12795', 'Tharaka District Hospital', 224, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6408, '15325', 'Ndindika Health Centre', 285, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6409, '14432', 'Eldama Ravine District Hospital', 120, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6410, '15605', 'Sogoo Health Centre', 155, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6411, '15423', 'Ololulunga District Hospital', 155, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6412, '14453', 'Enabelbel Health Centre', 245, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6413, '15367', 'Ntulele Dispensary', 245, NULL, NULL, 1, NULL, 0, 1, '2015-04-17'),
+(6414, '14970', 'Koiwa Health Centre', 183, NULL, NULL, 1, NULL, 0, 1, '2015-04-17');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
@@ -1556,7 +1586,35 @@ INSERT INTO `facility_equipment_temp` (`id`, `facility_id`, `equipment_id`, `sta
 (80, 284, 4, 1, '', '2015-03-31 07:46:07', NULL),
 (81, 1893, 4, 1, '', '2015-03-31 07:46:56', NULL),
 (82, 295, 4, 1, '', '2015-03-31 07:47:32', NULL),
-(83, 216, 4, 1, '', '2015-03-31 07:48:37', NULL);
+(83, 216, 4, 1, '', '2015-03-31 07:48:37', NULL),
+(84, 6385, 4, 1, '', '2015-04-16 08:40:01', NULL),
+(85, 6386, 4, 1, '', '2015-04-16 09:11:40', NULL),
+(86, 6414, 4, 1, '', '2015-04-17 08:37:38', NULL),
+(87, 6388, 4, 1, '', '2015-04-17 08:38:17', NULL),
+(88, 6389, 4, 1, '', '2015-04-17 08:38:44', NULL),
+(89, 6390, 4, 1, '', '2015-04-17 08:39:09', NULL),
+(90, 6391, 4, 1, '', '2015-04-17 08:39:33', NULL),
+(91, 6392, 4, 1, '', '2015-04-17 08:39:55', NULL),
+(92, 6394, 4, 1, '', '2015-04-17 08:40:14', NULL),
+(93, 6395, 4, 1, '', '2015-04-17 08:40:36', NULL),
+(94, 6396, 4, 1, '', '2015-04-17 08:41:19', NULL),
+(95, 6397, 4, 1, '', '2015-04-17 08:41:33', NULL),
+(96, 6398, 4, 1, '', '2015-04-17 08:41:46', NULL),
+(97, 6399, 4, 1, '', '2015-04-17 08:42:06', NULL),
+(98, 6400, 4, 1, '', '2015-04-17 08:42:40', NULL),
+(99, 6401, 4, 1, '', '2015-04-17 08:42:40', NULL),
+(100, 6402, 4, 1, '', '2015-04-17 08:42:59', NULL),
+(101, 6403, 4, 1, '', '2015-04-17 08:43:28', NULL),
+(102, 6404, 4, 1, '', '2015-04-17 08:43:49', NULL),
+(103, 6405, 4, 1, '', '2015-04-17 08:44:13', NULL),
+(104, 6406, 4, 1, '', '2015-04-17 08:44:28', NULL),
+(105, 6408, 4, 1, '', '2015-04-17 08:45:18', NULL),
+(106, 6407, 4, 1, '', '2015-04-17 08:45:20', NULL),
+(107, 6409, 4, 1, '', '2015-04-17 08:46:33', NULL),
+(108, 6410, 4, 1, '', '2015-04-17 08:46:49', NULL),
+(109, 6411, 4, 1, '', '2015-04-17 08:47:13', NULL),
+(110, 6412, 4, 1, '', '2015-04-17 08:47:47', NULL),
+(111, 6413, 4, 1, '', '2015-04-17 08:48:11', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
@@ -1688,7 +1746,35 @@ INSERT INTO `facility_pima_temp` (`id`, `facility_equipment_id`, `serial_num`, `
 (93, 80, 'PIMA-D-006776', '005303'),
 (94, 81, 'PIMA-D-006689', '005670'),
 (95, 82, 'PIMA-D-006761', '005685'),
-(96, 83, 'PIMA-D-006688', '005636');
+(96, 83, 'PIMA-D-006688', '005636'),
+(97, 84, 'PIMA-D-006646', '5807'),
+(98, 85, 'PIMA-D-006785', '5703'),
+(99, 86, 'PIMA-D-006778', '5407'),
+(100, 87, 'PIMA-D-006767', '5698'),
+(101, 88, 'PIMA-D-006702', '5635'),
+(102, 89, 'PIMA-D-006805', '5340'),
+(103, 90, 'PIMA-D-006706', '5764'),
+(104, 91, 'PIMA-D-006766', '5380'),
+(105, 92, 'PIMA-D-006703', '5740'),
+(106, 93, 'PIMA-D-006789', '5730'),
+(107, 94, 'PIMA-D-006786', '5742'),
+(108, 95, 'PIMA-D-006653', '5695'),
+(109, 96, 'PIMA-D-006787', '5666'),
+(110, 97, 'PIMA-D-006783', '5396'),
+(111, 98, 'PIMA-D-006704', '5743'),
+(112, 99, 'PIMA-D-005807', '5595'),
+(113, 100, 'PIMA-D-006763', '5728'),
+(114, 101, 'PIMA-D-006701', '8680'),
+(115, 102, 'null', 'null'),
+(116, 103, 'null', 'null'),
+(117, 104, 'null', 'null'),
+(118, 105, 'null', 'null'),
+(119, 106, 'null', 'null'),
+(120, 107, 'PIMA-D-006791', 'null'),
+(121, 108, 'null', 'null'),
+(122, 109, 'null', 'null'),
+(123, 110, 'null', 'null'),
+(124, 111, 'null', 'null');
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
@@ -1696,7 +1782,7 @@ INSERT INTO `facility_pima_temp` (`id`, `facility_equipment_id`, `serial_num`, `
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 -- ALTER TABLE `facility_device` DROP IF EXISTS `mfl_code`;
 
-ALTER TABLE  `facility_device` ADD  `mfl_code` VARCHAR( 30 ) NOT NULL AFTER  `facility_id` ;
+-- ALTER TABLE  `facility_device` ADD  `mfl_code` VARCHAR( 30 ) NOT NULL AFTER  `facility_id` ;
 
 
 INSERT INTO `facility_device`
@@ -1704,8 +1790,7 @@ INSERT INTO `facility_device`
 	(
 		SELECT 
 			`fe`.`id`, 
-			`fe`.`facility_id`, 
-			`f`.`mflcode` AS `mfl_code`, 
+			`f`.`id`, 
 			`fe`.`equipment_id` AS `device_id`, 
 			`fe`.`status`, 
 			`fe`.`deactivation_reason`, 
@@ -1714,8 +1799,11 @@ INSERT INTO `facility_device`
 			`fp`.`serial_num` AS `serial_number`, 
 			`fp`.`printer_serial` 
 		FROM `facility_equipment_temp` `fe` 
-		LEFT JOIN `facility_temp` `f` 
-			ON `fe`.`facility_id` = `f`.`id` 
+		LEFT JOIN `facility_temp` `ft` 
+			ON `fe`.`facility_id` = `ft`.`id` 
+      LEFT JOIN `facility` f
+        ON f.mfl_code = ft.mflcode
+
 		LEFT JOIN `facility_pima_temp` `fp` 
 			ON `fe`.`id` = `fp`.`facility_equipment_id`
 	);

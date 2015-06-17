@@ -1,12 +1,11 @@
-DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_tests_errors_pie`(from_date date, to_date date, user_group_id int(11), user_filter_used int(11))
 BEGIN
 	CASE `user_filter_used`
 	WHEN 0 THEN
 		SELECT 
 			COUNT(*)AS `total`,
-			SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
-			SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
+			SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
+			SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
 			SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`,	
 			SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`
 			
@@ -21,8 +20,8 @@ BEGIN
 		
 			SELECT 
 				COUNT(*)AS `total`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
 				SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`,	
 				SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`
 				
@@ -38,8 +37,8 @@ BEGIN
 		
 			SELECT 
 				COUNT(*)AS `total`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
 				SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`,	
 				SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`
 				
@@ -58,8 +57,8 @@ BEGIN
 		
 			SELECT 
 				COUNT(*)AS `total`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
 				SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`,	
 				SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`
 				
@@ -75,8 +74,8 @@ BEGIN
 		WHEN 6 THEN
 			SELECT 
 				COUNT(*)AS `total`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
-				SUM(CASE WHEN `patient_age_group_id`='0' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,
+				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`= '1' AND `cd4_count` >= 500 THEN 1 ELSE 0 END ) AS `passed`,
 				SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`,	
 				SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`
 				
@@ -90,5 +89,4 @@ BEGIN
 			;
 		END CASE;
 	END CASE;	
-END$$
-DELIMITER ;
+END
