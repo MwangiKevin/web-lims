@@ -22,7 +22,7 @@
         <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
       </div>
     </div>
-    <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a>
+    <!-- <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a> -->
 
     <div class="right menu">
       <a href="" class="active item"> 
@@ -34,15 +34,15 @@
         </center>
       </a>
       <a class="ui dropdown item" style="width:190px">
-        <i class="user icon" ng-show="sess.loggedin"></i >{{ menuName}}<i class="dropdown icon"></i>
+        <i class="user icon" ng-show="sess.loggedin"></i >{{ menuName| limitTo :17}}<i class="dropdown icon"></i>
         <div class="menu" style="z-index:200">
           <div class="item" ng-show="!sess.loggedin" ng-click="login()">Login<i class="key icon " style="float:right"></i></div>
           <div class="item" ng-show="sess.loggedin" ng-click="logout()">Logout<i class="key icon " style="float:right"></i></div>
-          <div class="item">Help<i class="help icon " style="float:right"></i></div>
+         <!--  <div class="item">Help<i class="help icon " style="float:right"></i></div>
           <div class="item" ng-show="sess.loggedin">My Profile<i class="user icon " style="float:right"></i></div>
           <div class="item" ng-show="sess.loggedin"><b>Change Password</b></div>
           <div class="ui divider" ></div>
-          <div class="item" >About <i class="info icon " style="float:right"></i></div>
+          <div class="item" >About <i class="info icon " style="float:right"></i></div> -->
         </div>
       </a>
     </div>
@@ -80,17 +80,18 @@
         <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
       </div>
     </div>
-    <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a>
+    <!-- <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a> -->
 
     <div class="ui item">
       <div class="text"class="dropdown icon">Actions</div>
       <div class="menu">
-        <div class="item">Logout<i class="key icon " style="float:right"></i></div>
-        <div class="item">Help<i class="help icon " style="float:right"></i></div>
-        <div class="item">My Profile<i class="user icon " style="float:right"></i></div>
-        <div class="item"><b>Change Password</b></div>
-        <div class="ui divider"></div>
-        <div class="item">About<i class="info icon " style="float:right"></i></div>
+          <div class="item" ng-show="!sess.loggedin" ng-click="login()">Login<i class="key icon " style="float:right"></i></div>
+          <div class="item" ng-show="sess.loggedin" ng-click="logout()">Logout<i class="key icon " style="float:right"></i></div>
+         <!--  <div class="item">Help<i class="help icon " style="float:right"></i></div>
+          <div class="item" ng-show="sess.loggedin">My Profile<i class="user icon " style="float:right"></i></div>
+          <div class="item" ng-show="sess.loggedin"><b>Change Password</b></div>
+          <div class="ui divider" ></div>
+          <div class="item" >About <i class="info icon " style="float:right"></i></div> -->
       </div>
     </div>
   </div>

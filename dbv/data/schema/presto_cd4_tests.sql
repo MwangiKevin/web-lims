@@ -7,5 +7,7 @@ CREATE TABLE `presto_cd4_tests` (
   `low_count` int(11) NOT NULL,
   `passed` varchar(100) NOT NULL,
   `error_codes` varchar(100) NOT NULL,
+  `serial_number` varchar(100) NOT NULL,
+  `file_date_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

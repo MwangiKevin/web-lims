@@ -144,7 +144,7 @@ class Aauth {
 		* It was causing issues with special characters in passwords
 		* and returning FALSE even if the password matches.
 		*/
-		if( !valid_email($email) OR strlen($pass) < 5 OR strlen($pass) > $this->config_vars['max'] )
+		if( strlen($pass) < 5 OR strlen($pass) > $this->config_vars['max'] )
 		{
 			$this->error($this->CI->lang->line('aauth_error_login_failed'));
 			return FALSE;
@@ -591,10 +591,10 @@ class Aauth {
 			$valid = FALSE;
 		}
 
-		if ( ! valid_email($email)){
-			$this->error($this->CI->lang->line('aauth_error_email_invalid'));
-			$valid = FALSE;
-		}
+		// if ( ! valid_email($email)){
+		// 	$this->error($this->CI->lang->line('aauth_error_email_invalid'));
+		// 	$valid = FALSE;
+		// }
 		if ( strlen($pass) < 5 OR strlen($pass) > $this->config_vars['max'] ){
 			$this->error($this->CI->lang->line('aauth_error_password_invalid'));
 			$valid = FALSE;

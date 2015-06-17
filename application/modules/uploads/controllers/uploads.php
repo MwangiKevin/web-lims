@@ -48,7 +48,7 @@ class uploads extends MY_Controller
 				//Import uploaded file to Database
 				$handle = fopen($file_tmp, "r");
 
-					while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
+					while (($data = fgetcsv($handle, 0, ",")) !== FALSE) { //gets the data, separated with comma
 						$new_array[] = $data;
 						$new_data = array();
 											
@@ -60,7 +60,7 @@ class uploads extends MY_Controller
 						if ($key == 0) {
 							foreach ($value as $k => $v) {
 								if (($v != 'Result Date')&&($v != 'Start Time')) {
-									if ($v == 'CD3+CD4+ Value [cells/mm3]') {
+									if ($v == 'CD3+CD4+ Value [cells/mm3]') { // searching for the strings
 										$v = '`cd3+cd4+value(cell/mm3)`';
 									}
 									elseif ($v == 'ErrorMessage') {
@@ -106,7 +106,7 @@ class uploads extends MY_Controller
 					// 	# code...
 					// }
 					// die();
-				    $this->db->insert_batch('pima_export_data', $insert_data);
+				    $this->db->insert_batch('pima_export_data', $insert_data); //used to insert the data
 
 				fclose($handle);
 				print "Import successful";

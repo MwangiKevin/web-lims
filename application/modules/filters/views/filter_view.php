@@ -17,7 +17,7 @@ $('#reportrange').daterangepicker(
 	startDate: '<?php echo date("Y");?>-1-1',
 	endDate: '<?php echo date("Y-m-d");?>',
 	maxDate:'<?php echo date("Y-m-d");?>',
-	minDate:'2011-1-1',
+	minDate:'2012-1-1',
 	showWeekNumbers:true,
 	showDropdowns:true
 },
@@ -26,7 +26,9 @@ function(start, end) {
 	$('#fro').val(start.format('YYYY-MM-D') ).trigger('change');
 	$('#to').val(end.format('YYYY-MM-D') ).trigger('change');
 
-	angular.element('#filterNav').scope().bindDates(start.format('YYYY-MM-D'),end.format('YYYY-MM-D'));
+	angular.element('#filterNav').scope().$apply(function(){
+		angular.element('#filterNav').scope().bindDates(start.format('YYYY-MM-D'),end.format('YYYY-MM-D'));
+	})
 }
 );
 
@@ -35,7 +37,7 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 </script>
 <div class="ui right aligned stackable grid">
 	<div class="left floated left aligned six wide column">
-		<ui-select ng-model="filters.entities.selected" theme="selectize" ng-disabled="disabled" reset-search-input="false" style="min-width: 300px;">
+		<ui-select ng-model="filters.selected.entity" theme="selectize" ng-disabled="disabled" reset-search-input="false" style="min-width: 300px;">
 		<ui-select-match placeholder="Search Criteria to Filter by...">{{$select.selected.name +" ("+ $select.selected.type +")"  }}</ui-select-match>
 		<ui-select-choices group-by="'type'" repeat="entity in filters.entities track by $index| limitTo:12"   refresh="refreshFilters($select.search)" refresh-delay="3" >
 		<div ng-bind-html="entity.name | highlight: $select.search"></div>
@@ -46,13 +48,14 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 	</ui-select-choices>
 </ui-select>
 </div>
-
 <div class="left floated left aligned two wide column">
-	<div class="ui button blue"><i class="fa fa-undo fa-sm"></i> Reset</div>
+
+	<div class="ui button blue"><i class="fa fa-undo fa-sm"></i> Reset </div>
 </div>
 
 <div class="right floated right aligned six wide column">
 	<div class="blue ui buttons">
+		<!-- {{ Filters}} -->
 		<div id="reportrange" class="ui button pull-right filterButton" style="">
 			<i class="fa fa-calendar fa-md"></i>
 			<span><?php echo 'January '.date("1, Y", strtotime('first day of this year')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>
