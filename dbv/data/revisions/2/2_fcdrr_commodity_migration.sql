@@ -22101,7 +22101,8 @@ INSERT INTO `fcdrr_commodity`
         `requested`,
         `reagentID` AS `commodity_id`
       FROM `commodity_temp`
-      GROUP BY `fcdrr_id`,``
+      GROUP BY `fcdrr_id`,commodity_temp.`commodityID`
+      
     );
 
 DROP TABLE `commodity_temp`
