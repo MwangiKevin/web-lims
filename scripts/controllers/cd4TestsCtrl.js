@@ -39,8 +39,19 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 	$scope.dtColumns = [
 		DTColumnBuilder.newColumn('id').withTitle('Test ID'),
 		DTColumnBuilder.newColumn('sample').withTitle('Sample/Patient ID'),
-		DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
+		DTColumnBuilder.newColumn('result_date').withTitle('Date'),
 		DTColumnBuilder.newColumn('cd4_count').withTitle('CD4 Count'),
+		DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),        
+        DTColumnBuilder.newColumn('valid').withTitle('Action').renderWith(function(data, type, full, meta) {
+        	if(parseInt(data) == 0){
+                return 'Not Valid';
+            }else{
+            	 return 'Valid';
+
+            }
+            }),
+		DTColumnBuilder.newColumn('device_name').withTitle('Device'),
+		DTColumnBuilder.newColumn('device_serial_number').withTitle('Device Serial Num'),
 		DTColumnBuilder.newColumn('county_name').withTitle('County'),
 		DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible()
 	];
