@@ -1,4 +1,4 @@
-CREATE TABLE `presto_qc` (
+DROP TABLE IF EXISTS `presto_qc`; CREATE TABLE `presto_qc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `run_id` varchar(100) NOT NULL,
   `run_date_time` datetime NOT NULL,
