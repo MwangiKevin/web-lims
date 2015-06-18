@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` TRIGGER trig_presto_uploads AFTER INSERT ON presto_qc
+CREATE DEFINER=`root`@`localhost` TRIGGER trig_presto_uploads AFTER INSERT ON presto_cd4_tests
 FOR EACH ROW
   BEGIN
 	DECLARE cd4_test_id int(6);
