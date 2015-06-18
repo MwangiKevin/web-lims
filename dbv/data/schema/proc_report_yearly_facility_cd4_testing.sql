@@ -1,6 +1,5 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_report_yearly_facility_cd4_testing`(year int(11))
-
-	BEGIN
+BEGIN
 
         SET @Q1 = "	SELECT 
 										`f`.`mfl_code` 	AS `facility_mfl_code`,

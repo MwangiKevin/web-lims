@@ -124,4 +124,4 @@ BEGIN
         EXECUTE stmt;
         SELECT @QUERY;
         SHOW ERRORS;
-    END;
+    END
