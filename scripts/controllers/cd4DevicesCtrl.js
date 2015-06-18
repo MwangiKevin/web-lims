@@ -36,7 +36,7 @@ app.controller('cd4DevicesCtrl', ['$scope','Commons','Restangular','$activityInd
             }
         ]);
     $scope.dtColumns = [
-        DTColumnBuilder.newColumn('facility_device_id').withTitle('Device ID').notVisible(),
+        DTColumnBuilder.newColumn('facility_device_id').withTitle('Device #').notVisible(),
         DTColumnBuilder.newColumn('serial_number').withTitle('Serial Number'),
         DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
         DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),

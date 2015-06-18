@@ -45,7 +45,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
             }
         ]);
     $scope.dtColumns = [
-        DTColumnBuilder.newColumn('facility_id').withTitle('facility ID'),
+        DTColumnBuilder.newColumn('facility_id').withTitle('facility #'),
         DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
         DTColumnBuilder.newColumn('facility_email').withTitle('Email'),
         DTColumnBuilder.newColumn('facility_phone').withTitle('Phone'),
@@ -63,11 +63,11 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
     ];
 
     edit_facility = function(id){
-        window.location = "#/fcdrrs/edit/"+id;
+        window.location = "#/editFacility/"+id;
     }
 
     remove_facility = function(id){
-        window.location = "#/facilities/remove/"+id;
+        window.location = "#/removeFacility/"+id;
     }
 
 
