@@ -4,14 +4,26 @@ BEGIN
         SET @QUERY =    "SELECT
                             `cd4t`.`id`,
                             `cd4t`.`sample`,
+                            `cd4t`.`result_date`,
+                            `cd4t`.`facility_device_id`,
+                            `cd4t`.`valid`,
+                            `cd4t`.`timestamp`  AS 'test_timestamp',
+                            `cd4t`.`file_date_time` AS 'upload_date',
+                            `cd4t`.`cd4_count`,                            
+                            `fd`.`serial_number`AS `device_serial_number`,
+                            `fc`.`id`           AS `facility_id`,
                             `fc`.`name`         AS `facility_name`,
                             `sub`.`name`        AS `sub_county_name`,
+                            `sub`.`id`          AS `sub_county_id`,
                             `cnt`.`name`        AS `county_name`,
-                            `cd4t`.`cd4_count`
+                            `cnt`.`id`          AS `county_id`,
+                            `d`.`name`          AS `device_name`
                         FROM `cd4_test` `cd4t`
                         LEFT JOIN `facility` `fc` ON `cd4t`.`facility_id` = `fc`.`id`
                         LEFT JOIN `sub_county` `sub` ON `fc`.`sub_county_id` = `sub`.`id`
                         LEFT JOIN `county` `cnt` ON `sub`.`county_id` = `cnt`.`id`
+                        LEFT JOIN `facility_device` `fd` ON `fd`.`id` = `cd4t`.`facility_device_id`
+                            LEFT JOIN `device` `d` ON `d`.`id` = `fd`.`device_id`
                         WHERE 1   
                         ";
 
@@ -23,6 +35,8 @@ BEGIN
                             LEFT JOIN `facility` `fc` ON `cd4t`.`facility_id` = `fc`.`id`
                             LEFT JOIN `sub_county` `sub` ON `fc`.`sub_county_id` = `sub`.`id`
                             LEFT JOIN `county` `cnt` ON `sub`.`county_id` = `cnt`.`id`
+                            LEFT JOIN `facility_device` `fd` ON `fd`.`id` = `cd4t`.`facility_device_id`
+                                LEFT JOIN `device` `d` ON `d`.`id` = `fd`.`device_id`
                             WHERE 1   
                             ";
         ELSE
@@ -42,7 +56,7 @@ BEGIN
         THEN
             SET @QUERY = @QUERY;
         ELSE
-            SET @QUERY = CONCAT(@QUERY, ' AND `cnt`.`name` LIKE "%', search, '%" OR `fc`.`name` LIKE "%', search, '%" OR `fc`.`mfl_code` LIKE "%', search, '%" OR `cd4t`.`sample` LIKE "%', search, '%"');
+            SET @QUERY = CONCAT(@QUERY, ' AND (`cnt`.`name` LIKE "%', search, '%" OR `fc`.`name` LIKE "%', search, '%" OR `fc`.`mfl_code` LIKE "%', search, '%" OR `fd`.`serial_number` LIKE "%', search, '%" OR `cd4t`.`sample` LIKE "%', search, '%")');
         END IF;
 
         

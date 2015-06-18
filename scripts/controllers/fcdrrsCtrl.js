@@ -66,29 +66,19 @@ app.controller('fcdrrsCtrl',
         DTColumnBuilder.newColumn('fcdrr_id').withTitle('FCDRR #'),
         DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
         DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
-        DTColumnBuilder.newColumn(null).withTitle('Commodities reported for').notSortable().renderWith(function(data, type, full, meta) {
+        DTColumnBuilder.newColumn(null).withTitle('Commodities reported for').renderWith(function(data, type, full, meta) {
             return  data.commodities.length;
         }),
         DTColumnBuilder.newColumn('from_date').withTitle('Start Date'),
-        DTColumnBuilder.newColumn('to_date').withTitle('End Date')
-        // DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-        //         return '<button onClick="edit_facility('+data.facility_id+')">Edit</button><button onClick ="delete_facility('+data.facility_id+')" >Delete</button>';
-        //     }),
-    ];
-    $scope.dtColumnDefs = [
-        // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
+        DTColumnBuilder.newColumn('to_date').withTitle('End Date'),
+        DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
+                return '<button onClick="edit_fcdrr('+data.fcdrr_id+')">Edit</button>';
+            }),
     ];
 
-    edit_facility = function(id){
-        alert('edit'+id);
+    edit_fcdrr = function(id){        
+        window.location = "#/editFCDRR/"+id;
     }
-
-    delete_facility = function(id){
-        alert('delete'+id);
-    }
-
-
-
 
 
 
