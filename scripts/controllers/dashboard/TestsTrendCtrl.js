@@ -36,7 +36,7 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
 	
 	//yAxis data line grpah[4yrs]
 	$scope.testing_trends_linegraph_series = function(){
-		return $http.post(
+		return $http.get(
 			Commons.baseURL+"api/dashboard/get_testing_trends"	,
 			{
 				params:{
@@ -55,8 +55,14 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
 
 	//categoreis for line graph xAxis [4yrs]
 	$scope.testing_trends_linegraph_categories = function() {
-		return $http.get(Commons.baseURL + "api/dashboard/return_testing_trends_categories")
+		return $http.get(Commons.baseURL + "api/dashboard/return_testing_trends_categories",{
+			params:{
+				startDate : start_date,
+				endDate : end_date
+			}
+		})
 		.success(function(response) {
+			console.log(response);
 			$scope.testing_trends.xAxis.categories = response;
 		});
 	}
@@ -73,7 +79,7 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
     height:250
 },
 title: {
-    text: 'Testing Trends (last 4 years)',
+    text: 'Testing Trends',
             x: -20 //center   
         },
         xAxis: {

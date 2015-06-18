@@ -127,12 +127,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	//
 	$scope.equipment_pie_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_cd4_devices_pie",{
-				params:{
-					entityType : entity_type,
-					entityId : entity_id
-				}
-			})
+			Commons.baseURL+"api/dashboard/get_cd4_devices_pie")
 		.success(function(response){
 			$scope.cd4_equipment_pie.series[0].data = response;
 			// console.log($scope.cd4_equipment_pie.series[0].data);
@@ -196,7 +191,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
                 width: 50
             },
         title: {
-            text: 'CD4 Tests & Equipment'
+            text: '# of Tests per Equipment'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -213,7 +208,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
             },
         series: [{
 	                type: 'pie',
-	                name: 'Percentage',
+	                name: '# of Tests',
 	                size: '20',
 	                data: [{"name":"Alere PIMA","y":0,"sliced":false,"selected":false},{"name":"BD FACS Calibur","y":0,"sliced":false,"selected":false},{"name":"BD Facs Count","y":0,"sliced":false,"selected":false},{"name":"BD Facs Presto","y":0,"sliced":false,"selected":false},{"name":"Cyflow Partec ","y":0,"sliced":false,"selected":false}]
                 }]
@@ -248,7 +243,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
             height:250
         },
         title: {
-            text: 'Expected Reporting Devices',
+            text: 'Expected Reporting Devices (Yearly)',
             x: -20 //center   
         },
         xAxis: {

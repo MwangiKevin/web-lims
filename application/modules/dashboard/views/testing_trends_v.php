@@ -34,7 +34,7 @@
 		</div>
 		<div id='table_container'>
 			<hr/>
-			<h4 style="text-align: center;">CD4 Tests for the Year 2013</h4>
+			<h4 style="text-align: center;">CD4 Tests</h4>
 			<table style = "border: 1px solid #DDD;vertical-align:center;width:100%;clear:both;" >
 				<thead class="even" style="background:#f0f0f0" >
 					<tr style = "border: 1px solid #DDD;" >

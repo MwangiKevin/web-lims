@@ -1,211 +1,123 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_expected_reporting_dev_array_removed`(user_group_id int(11),user_filter_used int(11))
+DELIMITER $$
+DROP PROCEDURE if exists `proc_reported_devices`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_reported_devices`(user_group_id int(11),user_filter_used int(11),year int(11))
 BEGIN
 	CASE `user_filter_used`
 	WHEN 0 THEN
-		
-		SELECT
-			`t1`.`date_removed` as `rank_date`,
-			`t1`.`yearmonth`,
-			`t1`.`month`, 
-			`t1`.`removed`, 
-			SUM(`t2`.`removed`) AS `cumulative`
-		FROM
-			(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-				`date_removed`, 
-				MONTH(`date_removed`) AS `month`,
-				COUNT(*) AS `removed` 			
-			FROM `facility_equipment` `fac_eq`
-			LEFT JOIN `equipment` `eq`
-				ON `fac_eq`.`equipment_id`= `eq`.`id`	 
-			WHERE `date_removed` <> '0000-00-00'
-			AND `equipment_id` = '4' 
-			GROUP BY `yearmonth`) AS `t1` 
-		INNER JOIN 
-			(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-				`date_removed`, 
-				MONTH(`date_removed`) AS `month`,
-				COUNT(*) AS `removed` 			
-			FROM `facility_equipment` `fac_eq`
-            LEFT JOIN `equipment` `eq`
-            	ON `fac_eq`.`equipment_id`= `eq`.`id`
-			WHERE `date_removed` <> '0000-00-00'
-			AND `equipment_id` = '4' 
-			GROUP BY `yearmonth`) AS `t2` 
-			ON `t1`.`date_removed` >= `t2`.`date_removed` 							
-			group by `t1`.`date_removed`;
+		SELECT 
+			`t1`.`month`,
+			COUNT(`t1`.`facility_device_id`) AS `reported_devices`
+		FROM (
+				SELECT 
+					DISTINCT `tst`.`facility_device_id`,
+					MONTH(`pim_upl`.`upload_date`) AS `month`
+				FROM `cd4_test` `tst`
+					LEFT JOIN `pima_test` `pim_tst`
+					ON `pim_tst`.`cd4_test_id`=`tst`.`id`
+						LEFT JOIN `pima_upload` `pim_upl`
+						ON `pim_upl`.`id` = `pim_tst`.`pima_upload_id`
+				WHERE 1 
+				AND YEAR(`pim_upl`.`upload_date`) = `year`
+			)AS `t1`				
+		GROUP BY `t1`.`month`;
 	ELSE
 		CASE `user_group_id`
 		WHEN 3 THEN
+			SELECT 
+				`t1`.`month`,
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
+			FROM (
+					SELECT 
+						DISTINCT `tst`.`facility_device_id`,
+						MONTH(`pim_upl`.`upload_date`) AS `month`
+					FROM `cd4_test` `tst`
+						LEFT JOIN `pima_test` `pim_tst`
+						ON `pim_tst`.`cd4_test_id`=`tst`.`id`
+							LEFT JOIN `pima_upload` `pim_upl`
+							ON `pim_upl`.`id` = `pim_tst`.`pima_upload_id`
+                    	LEFT JOIN `facility` `f`
+	                	ON `f`.`id` = `tst`.`facility_id`
+					WHERE 1 
+					AND YEAR(`pim_upl`.`upload_date`) = `year`
+	                AND `f`.`partner_id` = `user_filter_used`
+				 )AS `t1`					
+			GROUP BY `t1`.`month`;
+			
+		WHEN 9 THEN 
 		
 			SELECT
-				`t1`.`date_removed` as `rank_date`,
-				`t1`.`yearmonth`,
-				`t1`.`month`, 
-				`t1`.`removed`, 
-				SUM(`t2`.`removed`) AS `cumulative`
-			FROM
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-					ON `fac_eq`.`equipment_id`= `eq`.`id`	
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id` 
-				LEFT JOIN `partner` `par`
-					ON `fac`.`partner_id` = `par`.`id`
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `par`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t1` 
-			INNER JOIN 
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-	            LEFT JOIN `equipment` `eq`
-	            	ON `fac_eq`.`equipment_id`= `eq`.`id`
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id`
-				LEFT JOIN `partner` `par`
-					ON `fac`.`partner_id` = `par`.`id`
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `par`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t2` 
-				ON `t1`.`date_removed` >= `t2`.`date_removed` 							
-				group by `t1`.`date_removed`;
-				
-		WHEN 9 THEN
-		
-			SELECT
-				`t1`.`date_removed` as `rank_date`,
-				`t1`.`yearmonth`,
-				`t1`.`month`, 
-				`t1`.`removed`, 
-				SUM(`t2`.`removed`) AS `cumulative`
-			FROM
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-					ON `fac_eq`.`equipment_id`= `eq`.`id`	
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id` 
-				LEFT JOIN `sub_county` `sub`
-					ON `fac`.`sub_county_id` = `sub`.`id`
-				LEFT JOIN `county` `cou`
-					ON `sub`.`county_id` = `cou`.`id`
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `cou`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t1` 
-			INNER JOIN 
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-	            LEFT JOIN `equipment` `eq`
-	            	ON `fac_eq`.`equipment_id`= `eq`.`id`
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id`
-				LEFT JOIN `sub_county` `sub`
-					ON `fac`.`sub_county_id` = `sub`.`id`
-				LEFT JOIN `county` `cou`
-					ON `sub`.`county_id` = `cou`.`id`
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `cou`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t2` 
-				ON `t1`.`date_removed` >= `t2`.`date_removed` 							
-				group by `t1`.`date_removed`;
-		
+				`t1`.`month`,
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
+			FROM 
+				(
+					SELECT 
+						DISTINCT `tst`.`facility_device_id`,
+						MONTH(`pim_upl`.`upload_date`) AS `month`
+					FROM `cd4_test` `tst`
+						LEFT JOIN `pima_test` `pim_tst`
+							ON `pim_tst`.`cd4_test_id`=`tst`.`id`
+						LEFT JOIN `pima_upload` `pim_upl`
+							ON `pim_upl`.`id` = `pim_tst`.`pima_upload_id`
+                		LEFT JOIN `facility` `f`
+							ON `f`.`id` = `tst`.`facility_id`
+						LEFT JOIN `sub_county` `sub`
+							ON `f`.`district_id` = `sub`.`id`
+						LEFT JOIN `county` `cou`
+							ON `cou`.`id` = `sub`.`county_id`
+				WHERE 1 
+				AND YEAR(`pim_upl`.`upload_date`) = `year`
+                AND `cou`.`id` = `user_filter_used`
+				)AS `t1`					
+			GROUP BY `t1`.`month`;
+			
 		WHEN 8 THEN
 		
 			SELECT
-				`t1`.`date_removed` as `rank_date`,
-				`t1`.`yearmonth`,
-				`t1`.`month`, 
-				`t1`.`removed`, 
-				SUM(`t2`.`removed`) AS `cumulative`
-			FROM
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-					ON `fac_eq`.`equipment_id`= `eq`.`id`	
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id` 
-				LEFT JOIN `sub_county` `sub`
-					ON `sub`.`id` = `fac`.`sub_county_id`
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `sub`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t1` 
-			INNER JOIN 
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-	            LEFT JOIN `equipment` `eq`
-	            	ON `fac_eq`.`equipment_id`= `eq`.`id`
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id` 
-				LEFT JOIN `sub_county` `sub`
-					ON `sub`.`id` = `fac`.`sub_county_id`
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `sub`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t2` 
-				ON `t1`.`date_removed` >= `t2`.`date_removed` 							
-				group by `t1`.`date_removed`;
-				
+				`t1`.`month`,
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
+			FROM 
+				(
+					SELECT 
+						DISTINCT `tst`.`facility_device_id`,
+						MONTH(`pim_upl`.`upload_date`) AS `month`
+					FROM `cd4_test` `tst`
+					LEFT JOIN `pima_test` `pim_tst`
+						ON `pim_tst`.`cd4_test_id`=`tst`.`id`
+					LEFT JOIN `pima_upload` `pim_upl`
+						ON `pim_upl`.`id` = `pim_tst`.`pima_upload_id`
+					LEFT JOIN `facility` `f`
+                    	ON `f`.`id` = `tst`.`facility_id`
+					LEFT JOIN `sub_county` `sub`
+						ON `sub`.`id` = `f`.`sub_county_id`
+				WHERE 1 
+				AND YEAR(`pim_upl`.`upload_date`) = `year`
+                AND `sub`.`id` = `user_filter_used`
+				)AS `t1`					
+			GROUP BY `t1`.`month`;
+			
 		WHEN 6 THEN
-		
 			SELECT
-				`t1`.`date_removed` as `rank_date`,
-				`t1`.`yearmonth`,
-				`t1`.`month`, 
-				`t1`.`removed`, 
-				SUM(`t2`.`removed`) AS `cumulative`
-			FROM
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-					ON `fac_eq`.`equipment_id`= `eq`.`id`	
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id` 
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `fac`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t1` 
-			INNER JOIN 
-				(SELECT 	CONCAT(YEAR(`date_removed`),'-',MONTH(`date_removed`)) AS `yearmonth`,
-					`date_removed`, 
-					MONTH(`date_removed`) AS `month`,
-					COUNT(*) AS `removed` 			
-				FROM `facility_equipment` `fac_eq`
-	            LEFT JOIN `equipment` `eq`
-	            	ON `fac_eq`.`equipment_id`= `eq`.`id`
-				LEFT JOIN `facility` `fac`
-        			ON	`fac_eq`.`facility_id` = `fac`.`id`
-				WHERE `date_removed` <> '0000-00-00'
-				AND `equipment_id` = '4' 
-				AND `fac`.`id` = `user_filter_used`
-				GROUP BY `yearmonth`) AS `t2` 
-				ON `t1`.`date_removed` >= `t2`.`date_removed` 							
-				group by `t1`.`date_removed`;
+				`t1`.`month`,
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
+			FROM 
+				(
+					SELECT 
+						DISTINCT `tst`.`facility_device_id`,
+						MONTH(`pim_upl`.`upload_date`) AS `month`
+					FROM `cd4_test` `tst`
+					LEFT JOIN `pima_test` `pim_tst`
+						ON `pim_tst`.`cd4_test_id`=`tst`.`id`
+					LEFT JOIN `pima_upload` `pim_upl`
+							ON `pim_upl`.`id` = `pim_tst`.`pima_upload_id`
+					LEFT JOIN `facility` `f`
+						ON `f`.`id` = `tst`.`facility_id`
+					WHERE 1 
+					AND YEAR(`pim_upl`.`upload_date`) = `year`
+					AND `f`.`id` = `user_filter_used`
+					)AS `t1`					
+			GROUP BY `t1`.`month`;
+			
 		END CASE;
 	END CASE;
-END
+END$$
+DELIMITER ;

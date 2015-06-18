@@ -33,7 +33,7 @@ class dashboard_m extends MY_Model{
 		return $datemonth;
 	}
 	
-	public function get_cd4_devices_pie($param1,$param2){
+	public function get_cd4_devices_pie(){
 		$sql = "CALL proc_sql_eq()";
 		$sql1 = "CALL proc_device_pie('".$param1."','".$param2."')";
 		
@@ -88,7 +88,7 @@ class dashboard_m extends MY_Model{
 
 			$eq_data[$key] =	$value;
 		}
-		//print_r($eq_data);
+		// print_r($eq_data);die;
 		return $eq_data;		
 	}
 	
@@ -124,7 +124,7 @@ class dashboard_m extends MY_Model{
 			}
 			
 			$data[$key] =	$row;
-		}			
+		}		
 		return $data;
 	}
 	
@@ -154,7 +154,7 @@ class dashboard_m extends MY_Model{
 
 			$data[$key] =	$value;
 		}		
-		
+				
 		return $data;			
 	}
 	
@@ -279,7 +279,7 @@ class dashboard_m extends MY_Model{
 		}
 
 		// echo "<pre>";
-		// print_r($reported_array);
+		// print_r($reported_array);die;
 
 		return $reported_array;
 	}
