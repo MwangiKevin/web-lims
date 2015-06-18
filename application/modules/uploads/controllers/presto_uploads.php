@@ -48,10 +48,9 @@ class presto_uploads extends MY_Controller
 
 			$handle = fopen($file_tmp, "r");
 
-			// get the files creation date
-			$file_time_date = date ("F d Y H:i:s.", filemtime($file_tmp));
+			// get the files creation date and save it in an array
+			$file_date_time = date ("Y-m-d H:i:s", filemtime($file_tmp));
 
-			echo "file creation date is:" . $file_time_date; die();
 
 			while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
 				$new_array[] = $data;
@@ -70,10 +69,10 @@ class presto_uploads extends MY_Controller
 					'Inst QC Passed?','Reagent QC Passed?','CD4','%CD4','Hb','Error Codes','','','','','');
 
 				$cleaned_header_one = Array('run_id','run_date_time','operator','normal_count','low_count',
-					'passed','error_codes', 'serial_number');
+					'passed','error_codes', 'serial_number','file_date_time');
 				//second batch of presto-data
 				$cleaned_header_two = Array('run_id','run_date_time','operator','reagent_lot_id','reagent_lot_exp','patient_id',
-					'inst_qc_passed','reagent_qc_passed','cd4','%cd4','passed','error_codes','serial_number');
+					'inst_qc_passed','reagent_qc_passed','cd4','%cd4','passed','error_codes','serial_number','file_date_time');
 
 
 				for ($i=0; $i <4 ; $i++) {
@@ -102,20 +101,22 @@ class presto_uploads extends MY_Controller
 								$serial_number_key = $k + 1;
 							}
 						}
-						
 					}
-
 					$controls_arr = array_slice($new_array,$controls_start, $controls_end);
 					$counter = 0;
 					foreach ($controls_arr as $control_arr) {
 						foreach ($control_arr as $key => $value) {
 							$number = $key+1;
+
 							if($number <= count($cleaned_header_one)){
-								if($cleaned_header_one[$key] !== 'serial_number'){
-									$insert_one[$counter][$cleaned_header_one[$key]] = $value;
+								if($cleaned_header_one[$key] == 'serial_number'){
+									$insert_one[$counter][$cleaned_header_one[$key]] = $header[$serial_key][$serial_number_key];
+								}
+								else if($cleaned_header_one[$key] == 'file_date_time'){
+									$insert_one[$counter][$cleaned_header_one[$key]] = $file_date_time;
 								}
 								else{
-									$insert_one[$counter][$cleaned_header_one[$key]] = $header[$serial_key][$serial_number_key];
+									$insert_one[$counter][$cleaned_header_one[$key]] = $value;
 								}
 							}
 						}
@@ -136,26 +137,31 @@ class presto_uploads extends MY_Controller
 							$number = $key+1;
 
 							if($number <= count($cleaned_header_two)){
-								if($cleaned_header_two[$key] !== 'serial_number'){
-									$insert_two[$counter_][$cleaned_header_two[$key]] = $value;
-								}
-								else{
+								if($cleaned_header_two[$key] == 'serial_number'){
 									$insert_two[$counter_][$cleaned_header_two[$key]] = $header[$serial_key][$serial_number_key];
 								}
+								else if($cleaned_header_two[$key] == 'file_date_time'){
+									$insert_two[$counter_][$cleaned_header_two[$key]] = $file_date_time;
+								}
+								else{
+									$insert_two[$counter_][$cleaned_header_two[$key]] = $value;
+								}
 							}
+
+
+
 						}
 						$counter_++;
 					}
-
 				}
 				
-				$query = $this->db->insert_batch('presto_cd4_tests', $insert_one);
-
-					echo "<br/>"."presto_cd4_tests successfull inserted";
-					
-				$query_ = $this->db->insert_batch('presto_qc',$insert_two);
+				$query = $this->db->insert_batch('presto_qc', $insert_one);
 
 					echo "<br/>"."presto_Qc successfull inserted";
+					
+				$query_ = $this->db->insert_batch('presto_cd4_tests',$insert_two);
+
+					echo "<br/>"."presto_cd4_tests successfull inserted";
 
 		}
 

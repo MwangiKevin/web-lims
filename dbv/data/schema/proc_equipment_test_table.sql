@@ -3,7 +3,7 @@ BEGIN
 		CASE `user_filter_used`
 		WHEN 0 THEN	
 			SELECT 
-				`eq`.`description` AS `equipment_name`,
+				`dev`.`name` AS `equipment_name`,
 				COUNT(*) as `count`,
 				SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`,							
 				SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`
@@ -16,12 +16,12 @@ BEGIN
 					ON `f`.`sub_county_id` = `s_c`.`id`
 						LEFT JOIN `county` `c`
 						ON `s_c`.`county_id` = `c`.`id`
-					LEFT JOIN `facility_equipment` `f_e`
-					ON `tst`.`facility_equipment_id`=`f_e`.`id`
-						LEFT JOIN `equipment` `eq`
-						ON `f_e`.`equipment_id` = `eq`.`id`
+					LEFT JOIN `facility_device` `fac_dev`
+					ON `tst`.`facility_device_id`=`fac_dev`.`id`
+						LEFT JOIN `device` `dev`
+						ON `fac_dev`.`device_id` = `dev`.`id`
 
-				WHERE `tst`.`result_date` BETWEEN from_date AND to_date
+				WHERE `tst`.`result_date` BETWEEN `from_date` AND `to_date`
 				AND `tst`.`result_date` <= CURDATE()
 
 			GROUP BY `equipment_name`
@@ -30,7 +30,7 @@ BEGIN
 			CASE `user_group_id`
 			WHEN 3 THEN	
 				SELECT 
-					`eq`.`description` AS `equipment_name`,
+					`dev`.`name` AS `equipment_name`,
 					COUNT(*) as `count`,
 					SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`,							
 					SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`
@@ -43,10 +43,10 @@ BEGIN
 					ON `f`.`sub_county_id` = `s_c`.`id`
 						LEFT JOIN `county` `c`
 						ON `s_c`.`county_id` = `c`.`id`
-					LEFT JOIN `facility_equipment` `f_e`
-					ON `tst`.`facility_equipment_id`=`f_e`.`id`
-						LEFT JOIN `equipment` `eq`
-						ON `f_e`.`equipment_id` = `eq`.`id`
+					LEFT JOIN `facility_device` `fac_dev`
+					ON `tst`.`facility_device_id`=`fac_dev`.`id`
+						LEFT JOIN `device` `dev`
+						ON `fac_dev`.`device_id` = `dev`.`id`
 
 					WHERE `tst`.`result_date` BETWEEN `from_date` AND `to_date`
                     AND `p`.`id` = `user_filter_used`
@@ -56,7 +56,7 @@ BEGIN
 			ORDER BY `equipment_name` DESC;
 			WHEN 6 THEN
 				SELECT 
-					`eq`.`description` AS `equipment_name`,
+					`dev`.`name` AS `equipment_name`,
 					COUNT(*) as `count`,
 					SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`,							
 					SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`
@@ -69,12 +69,12 @@ BEGIN
 						ON `f`.`sub_county_id` = `s_c`.`id`
 							LEFT JOIN `county` `c`
 							ON `s_c`.`county_id` = `c`.`id`
-						LEFT JOIN `facility_equipment` `f_e`
-						ON `tst`.`facility_equipment_id`=`f_e`.`id`
-							LEFT JOIN `equipment` `eq`
-							ON `f_e`.`equipment_id` = `eq`.`id`
+						LEFT JOIN `facility_device` `fac_dev`
+						ON `tst`.`facility_device_id`=`fac_dev`.`id`
+							LEFT JOIN `device` `dev`
+							ON `fac_dev`.`device_id` = `dev`.`id`
 
-					WHERE `tst`.`result_date` BETWEEN from_date AND to_date
+					WHERE `tst`.`result_date` BETWEEN `from_date` AND `to_date`
                     AND `f`.`id` = `user_filter_used`
 					AND `tst`.`result_date` <= CURDATE()
 
@@ -82,7 +82,7 @@ BEGIN
 				ORDER BY `equipment_name` DESC;
 			WHEN 8 THEN
 				SELECT 
-					`eq`.`description` AS `equipment_name`,
+					`dev`.`name` AS `equipment_name`,
 					COUNT(*) as `count`,
 					SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`,							
 					SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`
@@ -95,10 +95,10 @@ BEGIN
 						ON `f`.`sub_county_id` = `s_c`.`id`
 							LEFT JOIN `county` `c`
 							ON `s_c`.`county_id` = `c`.`id`
-						LEFT JOIN `facility_equipment` `f_e`
-						ON `tst`.`facility_equipment_id`=`f_e`.`id`
-							LEFT JOIN `equipment` `eq`
-							ON `f_e`.`equipment_id` = `eq`.`id`
+						LEFT JOIN `facility_device` `fac_dev`
+						ON `tst`.`facility_device_id`=`fac_dev`.`id`
+							LEFT JOIN `device` `dev`
+							ON `fac_dev`.`device_id` = `dev`.`id`
 
 					WHERE `tst`.`result_date` BETWEEN `from_date` AND `to_date`
                     AND `s_c`.`id` = `user_filter_used`
@@ -108,7 +108,7 @@ BEGIN
 				ORDER BY `equipment_name` DESC;
 			WHEN 9 THEN
 				SELECT 
-					`eq`.`description` AS `equipment_name`,
+					`dev`.`name` AS `equipment_name`,
 					COUNT(*) as `count`,
 					SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`,							
 					SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`
@@ -121,12 +121,12 @@ BEGIN
 						ON `f`.`sub_county_id` = `s_c`.`id`
 							LEFT JOIN `county` `c`
 							ON `s_c`.`county_id` = `c`.`id`
-						LEFT JOIN `facility_equipment` `f_e`
-						ON `tst`.`facility_equipment_id`=`f_e`.`id`
-							LEFT JOIN `equipment` `eq`
-							ON `f_e`.`equipment_id` = `eq`.`id`
+						LEFT JOIN `facility_device` `fac_dev`
+						ON `tst`.`facility_device_id`=`fac_dev`.`id`
+							LEFT JOIN `device` `dev`
+							ON `fac_dev`.`device_id` = `dev`.`id`
 
-					WHERE `tst`.`result_date` BETWEEN from_date AND to_date
+					WHERE `tst`.`result_date` BETWEEN `from_date` AND `to_date`
                     AND `c`.`id` = `user_filter_used`
 					AND `tst`.`result_date` <= CURDATE()
 
@@ -134,7 +134,7 @@ BEGIN
 				ORDER BY `equipment_name` DESC;
 			WHEN 12 THEN    
 				SELECT 
-					`eq`.`description` AS `equipment_name`,
+					`dev`.`name` AS `equipment_name`,
 					COUNT(*) as `count`,
 					SUM(CASE WHEN `valid`= '1'    THEN 1 ELSE 0 END) AS `valid`,							
 					SUM(CASE WHEN `valid`= '0'    THEN 1 ELSE 0 END) AS `errors`
@@ -147,13 +147,13 @@ BEGIN
 						ON `f`.`sub_county_id` = `s_c`.`id`
 							LEFT JOIN `county` `c`
 							ON `s_c`.`county_id` = `c`.`id`
-						LEFT JOIN `facility_equipment` `f_e`
-						ON `tst`.`facility_equipment_id`=`f_e`.`id`
-							LEFT JOIN `equipment` `eq`
-							ON `f_e`.`equipment_id` = `eq`.`id`
+						LEFT JOIN `facility_device` `fac_dev`
+						ON `tst`.`facility_device_id`=`fac_dev`.`id`
+							LEFT JOIN `device` `dev`
+							ON `fac_dev`.`device_id` = `dev`.`id`
 
-					WHERE `tst`.`result_date` BETWEEN from_date AND to_date
-                    AND `f_e`.`id` = `user_filter_used`
+					WHERE `tst`.`result_date` BETWEEN `from_date` AND `to_date`
+                    AND `fac_dev`.`id` = `user_filter_used`
 					AND `tst`.`result_date` <= CURDATE()
 
 				GROUP BY `equipment_name`

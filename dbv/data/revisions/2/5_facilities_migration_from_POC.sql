@@ -16,9 +16,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `cd4pockenya`
---
 
 -- --------------------------------------------------------
 
@@ -38,14 +35,50 @@ CREATE TABLE IF NOT EXISTS `facility_temp` (
   `partnerID` int(11) NOT NULL,
   `rolloutstatus` int(11) NOT NULL DEFAULT '0',
   `rolloutDate` date NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `MFLCode` (`mflcode`),
-  KEY `name` (`name`),
-  KEY `district` (`district`),
-  KEY `type` (`type`),
-  KEY `level` (`level`),
-  KEY `flag` (`flag`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6385 ;
+
+
+
+ALTER TABLE  `facility` ADD  `mfl_exists` VARCHAR( 30 )  NULL AFTER  `google_maps` ;
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` TRIGGER `trig_move_temp_facilities`   AFTER INSERT ON `facility_temp`
+    FOR EACH ROW 
+BEGIN
+
+  DECLARE mfl_exists varchar(10);
+  DECLARE a varchar(10);
+
+  SELECT 
+      mfl_code
+      INTO @mfl_exists
+      FROM facility f
+      WHERE f.mfl_code = NEW.mflcode 
+GROUP BY mfl_code
+      ;
+
+
+    -- IF @mfl IS NULL THEN
+         
+      INSERT INTO facility (name,mfl_code,sub_county_id,partner_id,email,rollout_status,rollout_date,mfl_exists)
+        VALUES (NEW.name,NEW.mflcode,NEW.district,NEW.partnerID,NEW.email,NEW.rolloutstatus,NEW.rolloutDate,@mfl_exists);
+
+        SET @mfl_exists = NULL;
+        
+      
+  --   ELSE
+
+  --     SET @a= 'do nothing';
+
+  -- END IF;
+
+
+END
+
+$$
+DELIMITER ;
 
 --
 -- Dumping data for table `facility_temp`
@@ -1371,7 +1404,7 @@ INSERT INTO `facility_temp` (`id`, `mflcode`, `name`, `district`, `type`, `level
 (1340, '11679', 'Mvita Dispensary', 16, 10, 1, 1, NULL, 13, 0, '0000-00-00'),
 (1341, '11239', 'Bamburi Dispensary ', 17, 1, 1, 1, NULL, 13, 0, '0000-00-00'),
 (1342, '11397', 'GK Prisons Dispensary (Shimo Bosrtal)', 16, 9, 1, 1, NULL, 0, 0, '0000-00-00'),
-(1343, '11395', 'GK Prison Health Centre (Shimo Main) 	', 16, 1, 1, 1, NULL, 13, 0, '0000-00-00'),
+(1343, '11395', 'GK Prison Health Centre (Shimo Main)   ', 16, 1, 1, 1, NULL, 13, 0, '0000-00-00'),
 (1344, '11861', 'Tudor District Hospital', 17, 1, 1, 1, NULL, 0, 0, '0000-00-00'),
 (1345, '12121212', 'KEMRI Alupe', 196, 1, 3, 1, 'jy_ndunda@yahoo.com', 23, 1, '2013-05-01'),
 (1346, '10973', 'Ruiru Sub-District Hospital', 113, 1, 0, 1, NULL, 4, 1, '0000-00-00'),
@@ -1458,357 +1491,29 @@ INSERT INTO `facility_temp` (`id`, `mflcode`, `name`, `district`, `type`, `level
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
--- phpMyAdmin SQL Dump
--- version 3.4.4
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Apr 09, 2015 at 05:53 PM
--- Server version: 5.1.41
--- PHP Version: 5.3.1
+-- INSERT INTO facility
+-- (
+--   SELECT 
+--     null      AS id,
+--     ft.name,
+--     ft.mflcode   AS mfl_code,
+--     null      AS site_prefix,
+--     ft.district  AS sub_county_id,
+--     ft.partnerID AS partner_id,
+--     null      AS facility_type_id,
+--     ft.level,
+--     null      AS central_site_id,
+--     ft.email,
+--     null      AS phone,
+--     ft.rolloutstatus   AS rollout_status,
+--     ft.rolloutDate  AS rollout_date,
+--     null as`google_maps`
+--   FROM `facility_temp` ft
+--   LEFT JOIN facility f
+--     ON f.mfl_code = ft.mflcode
+--   WHERE f.id IS NULL
+-- );
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `cd4pockenya`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `facility_equipment_temp`
---
-
-CREATE TABLE IF NOT EXISTS `facility_equipment_temp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `facility_id` int(11) NOT NULL,
-  `equipment_id` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1' COMMENT 'FK to equipmentstatus',
-  `deactivation_reason` varchar(50) NOT NULL,
-  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_removed` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `facility_id` (`facility_id`),
-  KEY `equipment_id` (`equipment_id`),
-  KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Equipment mapped to facilities' AUTO_INCREMENT=84 ;
-
---
--- Dumping data for table `facility_equipment_temp`
---
-
-INSERT INTO `facility_equipment_temp` (`id`, `facility_id`, `equipment_id`, `status`, `deactivation_reason`, `date_added`, `date_removed`) VALUES
-(1, 822, 4, 1, '', '2014-02-28 05:01:53', NULL),
-(2, 837, 4, 1, '', '2014-02-28 05:07:44', NULL),
-(3, 1019, 4, 1, '', '2014-02-28 07:19:11', NULL),
-(5, 1055, 4, 1, '', '2014-02-28 07:20:49', NULL),
-(6, 1143, 4, 1, '', '2014-02-28 07:21:18', NULL),
-(7, 307, 4, 1, '', '2014-02-28 07:22:31', NULL),
-(8, 1281, 4, 1, '', '2014-02-28 07:23:00', NULL),
-(9, 346, 4, 1, '', '2014-02-28 07:23:33', NULL),
-(10, 876, 4, 1, '', '2014-02-28 07:24:18', NULL),
-(11, 877, 4, 1, '', '2014-02-28 07:24:48', NULL),
-(12, 1086, 4, 1, '', '2014-02-28 07:25:27', NULL),
-(13, 885, 4, 1, '', '2014-02-28 07:25:59', NULL),
-(14, 222, 4, 1, '', '2014-02-28 07:26:46', NULL),
-(15, 373, 4, 1, '', '2014-02-28 07:28:08', NULL),
-(16, 462, 4, 1, '', '2014-02-28 07:29:05', NULL),
-(17, 377, 4, 1, '', '2014-02-28 07:30:34', NULL),
-(18, 286, 4, 1, '', '2014-02-28 07:31:31', NULL),
-(19, 274, 4, 1, '', '2014-02-28 07:33:05', NULL),
-(20, 380, 4, 1, '', '2014-02-28 07:33:49', NULL),
-(21, 379, 4, 1, '', '2014-02-28 07:34:30', NULL),
-(22, 400, 4, 1, '', '2014-02-28 07:35:06', NULL),
-(23, 340, 4, 1, '', '2014-02-28 07:35:46', NULL),
-(24, 739, 4, 1, '', '2014-02-28 07:36:23', NULL),
-(25, 957, 4, 1, '', '2014-02-28 07:37:45', NULL),
-(26, 981, 4, 1, '', '2014-02-28 07:38:19', NULL),
-(27, 986, 4, 1, '', '2014-02-28 07:39:07', NULL),
-(28, 962, 4, 1, '', '2014-02-28 07:39:43', NULL),
-(29, 784, 4, 1, '', '2014-02-28 07:40:09', NULL),
-(30, 16, 4, 1, '', '2014-02-28 07:42:08', NULL),
-(31, 992, 4, 1, '', '2014-02-28 07:43:12', NULL),
-(32, 255, 4, 1, '', '2014-02-28 07:45:08', NULL),
-(33, 299, 4, 1, '', '2014-02-28 07:45:49', NULL),
-(34, 1313, 4, 1, '', '2014-02-28 07:46:21', NULL),
-(35, 265, 4, 1, '', '2014-02-28 07:46:51', NULL),
-(36, 342, 4, 1, '', '2014-02-28 07:47:28', NULL),
-(37, 1170, 4, 1, '', '2014-02-28 07:48:34', NULL),
-(38, 1360, 4, 1, '', '2014-02-28 08:13:18', NULL),
-(39, 1358, 4, 1, '', '2014-02-28 08:15:15', NULL),
-(40, 620, 4, 1, '', '2014-02-28 08:16:02', NULL),
-(41, 1361, 4, 1, '', '2014-02-28 08:16:44', NULL),
-(42, 1359, 4, 1, '', '2014-02-28 08:17:31', NULL),
-(43, 1363, 4, 1, '', '2014-02-28 08:18:00', NULL),
-(44, 1362, 4, 1, '', '2014-02-28 08:50:46', NULL),
-(45, 654, 4, 1, '', '2014-03-28 07:04:47', NULL),
-(46, 667, 4, 1, '', '2014-03-28 07:05:51', NULL),
-(47, 659, 4, 0, 'For Repair', '2014-03-28 07:06:10', NULL),
-(48, 657, 4, 1, '', '2014-03-28 07:06:45', NULL),
-(49, 654, 4, 1, '', '2014-08-08 11:27:04', NULL),
-(50, 605, 4, 1, '', '2015-02-27 05:37:08', NULL),
-(51, 528, 4, 1, '', '2015-03-02 10:15:30', NULL),
-(52, 558, 4, 1, '', '2015-03-03 09:19:40', NULL),
-(53, 654, 4, 1, '', '2015-03-11 13:11:29', NULL),
-(54, 654, 4, 1, '', '2015-03-11 13:12:08', NULL),
-(55, 654, 4, 1, '', '2015-03-11 13:12:41', NULL),
-(56, 659, 4, 1, '', '2015-03-11 13:16:57', NULL),
-(57, 6364, 4, 1, '', '2015-03-30 06:27:20', NULL),
-(58, 6365, 4, 1, '', '2015-03-30 07:47:24', NULL),
-(59, 6366, 4, 1, '', '2015-03-30 07:50:19', NULL),
-(60, 6367, 4, 1, '', '2015-03-30 07:51:25', NULL),
-(61, 6368, 4, 1, '', '2015-03-30 08:00:54', NULL),
-(62, 6369, 4, 1, '', '2015-03-30 08:05:35', NULL),
-(63, 6370, 4, 1, '', '2015-03-30 08:09:11', NULL),
-(64, 6371, 4, 1, '', '2015-03-30 08:13:09', NULL),
-(65, 6372, 4, 1, '', '2015-03-30 08:14:23', NULL),
-(66, 6373, 4, 1, '', '2015-03-30 08:16:19', NULL),
-(67, 6374, 4, 1, '', '2015-03-30 08:18:51', NULL),
-(68, 6375, 4, 1, '', '2015-03-30 08:20:39', NULL),
-(69, 6376, 4, 1, '', '2015-03-30 08:21:22', NULL),
-(70, 6377, 4, 1, '', '2015-03-30 08:22:16', NULL),
-(71, 6378, 4, 1, '', '2015-03-30 08:22:58', NULL),
-(72, 6379, 4, 1, '', '2015-03-30 08:24:13', NULL),
-(73, 6380, 4, 1, '', '2015-03-30 08:24:31', NULL),
-(74, 6381, 4, 1, '', '2015-03-30 08:25:16', NULL),
-(75, 6382, 4, 1, '', '2015-03-30 08:26:09', NULL),
-(76, 6383, 4, 1, '', '2015-03-30 08:26:54', NULL),
-(77, 6384, 4, 1, '', '2015-03-30 08:27:20', NULL),
-(78, 238, 4, 1, '', '2015-03-31 07:44:57', NULL),
-(79, 252, 4, 1, '', '2015-03-31 07:45:36', NULL),
-(80, 284, 4, 1, '', '2015-03-31 07:46:07', NULL),
-(81, 1893, 4, 1, '', '2015-03-31 07:46:56', NULL),
-(82, 295, 4, 1, '', '2015-03-31 07:47:32', NULL),
-(83, 216, 4, 1, '', '2015-03-31 07:48:37', NULL),
-(84, 6385, 4, 1, '', '2015-04-16 08:40:01', NULL),
-(85, 6386, 4, 1, '', '2015-04-16 09:11:40', NULL),
-(86, 6414, 4, 1, '', '2015-04-17 08:37:38', NULL),
-(87, 6388, 4, 1, '', '2015-04-17 08:38:17', NULL),
-(88, 6389, 4, 1, '', '2015-04-17 08:38:44', NULL),
-(89, 6390, 4, 1, '', '2015-04-17 08:39:09', NULL),
-(90, 6391, 4, 1, '', '2015-04-17 08:39:33', NULL),
-(91, 6392, 4, 1, '', '2015-04-17 08:39:55', NULL),
-(92, 6394, 4, 1, '', '2015-04-17 08:40:14', NULL),
-(93, 6395, 4, 1, '', '2015-04-17 08:40:36', NULL),
-(94, 6396, 4, 1, '', '2015-04-17 08:41:19', NULL),
-(95, 6397, 4, 1, '', '2015-04-17 08:41:33', NULL),
-(96, 6398, 4, 1, '', '2015-04-17 08:41:46', NULL),
-(97, 6399, 4, 1, '', '2015-04-17 08:42:06', NULL),
-(98, 6400, 4, 1, '', '2015-04-17 08:42:40', NULL),
-(99, 6401, 4, 1, '', '2015-04-17 08:42:40', NULL),
-(100, 6402, 4, 1, '', '2015-04-17 08:42:59', NULL),
-(101, 6403, 4, 1, '', '2015-04-17 08:43:28', NULL),
-(102, 6404, 4, 1, '', '2015-04-17 08:43:49', NULL),
-(103, 6405, 4, 1, '', '2015-04-17 08:44:13', NULL),
-(104, 6406, 4, 1, '', '2015-04-17 08:44:28', NULL),
-(105, 6408, 4, 1, '', '2015-04-17 08:45:18', NULL),
-(106, 6407, 4, 1, '', '2015-04-17 08:45:20', NULL),
-(107, 6409, 4, 1, '', '2015-04-17 08:46:33', NULL),
-(108, 6410, 4, 1, '', '2015-04-17 08:46:49', NULL),
-(109, 6411, 4, 1, '', '2015-04-17 08:47:13', NULL),
-(110, 6412, 4, 1, '', '2015-04-17 08:47:47', NULL),
-(111, 6413, 4, 1, '', '2015-04-17 08:48:11', NULL);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-
--- phpMyAdmin SQL Dump
--- version 3.4.4
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Apr 09, 2015 at 05:54 PM
--- Server version: 5.1.41
--- PHP Version: 5.3.1
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `cd4pockenya`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `facility_pima_temp`
---
-
-CREATE TABLE IF NOT EXISTS `facility_pima_temp` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `facility_equipment_id` int(11) NOT NULL COMMENT 'FK to facility_equipment',
-  `serial_num` varchar(30) NOT NULL,
-  `printer_serial` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `facility_equipment_id` (`facility_equipment_id`),
-  KEY `serial_num` (`serial_num`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
-
---
--- Dumping data for table `facility_pima_temp`
---
-
-INSERT INTO `facility_pima_temp` (`id`, `facility_equipment_id`, `serial_num`, `printer_serial`) VALUES
-(14, 1, 'PIMA-D-002766', '0429'),
-(15, 2, 'PIMA-D-002774', '2193'),
-(17, 3, 'PIMA-D-002538', '2143'),
-(18, 5, 'PIMA-D-002534', '3958'),
-(19, 6, 'PIMA-D-002778', '1590'),
-(20, 7, 'PIMA-D-002409', '3883'),
-(21, 8, 'PIMA-D-002628', '211'),
-(22, 9, 'PIMA-D-002393', '3834'),
-(23, 10, 'PIMA-D-002597', '3823'),
-(24, 11, 'PIMA-D-002508', '2261'),
-(25, 12, 'PIMA-D-002772', '2166'),
-(26, 13, 'PIMA-D-002949', '60'),
-(27, 14, 'PIMA-D-003304', '1718'),
-(28, 15, 'PIMA-D-002950', '4001'),
-(29, 16, 'PIMA-D-002769', '0096'),
-(30, 17, 'PIMA-D-002598', '4541'),
-(31, 18, 'PIMA-D-003130', '2292'),
-(32, 19, 'PIMA-D-002494', '0625'),
-(33, 20, 'PIMA-D-002359', '2234'),
-(34, 21, 'PIMA-D-002655', '0658'),
-(35, 22, 'PIMA-D-002562', '2146'),
-(36, 23, 'PIMA-D-002965', '2170'),
-(37, 24, 'PIMA-D-002764', '4272'),
-(38, 25, 'PIMA-D-002946', '0654'),
-(39, 26, 'PIMA-D-003141', '1725'),
-(40, 27, 'PIMA-D-002593', '3999'),
-(41, 28, 'PIMA-D-002960', '1645'),
-(42, 29, 'PIMA-D-002608', '2151'),
-(43, 30, 'PIMA-D-003142', '3929'),
-(44, 31, 'PIMA-D-002629', '3995'),
-(45, 32, 'PIMA-D-002975', '226'),
-(46, 33, 'PIMA-D-003125', '176'),
-(47, 34, 'PIMA-D-002935', '0105'),
-(48, 35, 'PIMA-D-002901', '2152'),
-(49, 36, 'PIMA-D-002973', '2246'),
-(50, 37, 'PIMA-D-002773', '2253'),
-(51, 38, 'PIMA-D-002775', '2193'),
-(52, 39, 'PIMA-D-002617', '700'),
-(53, 40, 'PIMA-D-002977', '3935'),
-(54, 41, 'PIMA-D-002620', '2269'),
-(55, 42, 'PIMA-D-002618', '546'),
-(56, 43, 'PIMA-D-002933', '2174'),
-(57, 44, 'PIMA-D-002565', '2171'),
-(58, 45, 'PIMA-D-002910', '0'),
-(59, 46, 'PIMA-D-000328', '0'),
-(60, 47, 'PIMA-D-002899', '0'),
-(61, 48, 'PIMA-D-002818', '0'),
-(62, 49, 'PIMA-D-002785', '0'),
-(63, 50, 'PIMA-D-002151', '000271'),
-(64, 51, 'PIMA-D-002979', '005197'),
-(65, 52, 'PIMA-D-006649', '005759'),
-(66, 53, 'PIMA-D-002900', 'ward 3'),
-(67, 54, 'PIMA-D-002895', 'lab'),
-(68, 55, 'PIMA-D-002875', 'chest clinic'),
-(69, 56, 'PIMA-D-002821', 'rangwe'),
-(70, 57, 'PIMA-D-006662', '005639'),
-(71, 58, 'PIMA-D-006694', '5689'),
-(72, 59, 'PIMA-D-006764', '5475'),
-(73, 60, 'PIMA-D-006752', '5672'),
-(74, 61, 'PIMA-D-006772', '7749'),
-(75, 62, 'PIMA-D-006656', '5653'),
-(76, 63, 'PIMA-D-006779', '5366'),
-(77, 64, 'PIMA-D-0067755', '5411'),
-(78, 65, 'PIMA-D-006693', '5587'),
-(79, 66, 'PIMA-D-006692', '5688'),
-(80, 67, 'PIMA-D-006773', '5385'),
-(81, 68, 'PIMA-D-006695', '5805'),
-(82, 69, 'PIMA-D-006652', '5736'),
-(83, 70, 'PIMA-D-0066497', '5654'),
-(84, 71, 'PIMA-D-006657', '5658'),
-(85, 72, 'PIMA-D-006780', '5415'),
-(86, 73, 'PIMA-D-006690', '5651'),
-(87, 74, 'PIMA-D-006770', '5199'),
-(88, 75, 'PIMA-D-006765', '5449'),
-(89, 76, 'PIMA-D-006654', '5642'),
-(90, 77, 'PIMA-D-006769', '5435'),
-(91, 78, 'PIMA-D-006663', '005761'),
-(92, 79, 'PIMA-D-006768', '005310'),
-(93, 80, 'PIMA-D-006776', '005303'),
-(94, 81, 'PIMA-D-006689', '005670'),
-(95, 82, 'PIMA-D-006761', '005685'),
-(96, 83, 'PIMA-D-006688', '005636'),
-(97, 84, 'PIMA-D-006646', '5807'),
-(98, 85, 'PIMA-D-006785', '5703'),
-(99, 86, 'PIMA-D-006778', '5407'),
-(100, 87, 'PIMA-D-006767', '5698'),
-(101, 88, 'PIMA-D-006702', '5635'),
-(102, 89, 'PIMA-D-006805', '5340'),
-(103, 90, 'PIMA-D-006706', '5764'),
-(104, 91, 'PIMA-D-006766', '5380'),
-(105, 92, 'PIMA-D-006703', '5740'),
-(106, 93, 'PIMA-D-006789', '5730'),
-(107, 94, 'PIMA-D-006786', '5742'),
-(108, 95, 'PIMA-D-006653', '5695'),
-(109, 96, 'PIMA-D-006787', '5666'),
-(110, 97, 'PIMA-D-006783', '5396'),
-(111, 98, 'PIMA-D-006704', '5743'),
-(112, 99, 'PIMA-D-005807', '5595'),
-(113, 100, 'PIMA-D-006763', '5728'),
-(114, 101, 'PIMA-D-006701', '8680'),
-(115, 102, 'null', 'null'),
-(116, 103, 'null', 'null'),
-(117, 104, 'null', 'null'),
-(118, 105, 'null', 'null'),
-(119, 106, 'null', 'null'),
-(120, 107, 'PIMA-D-006791', 'null'),
-(121, 108, 'null', 'null'),
-(122, 109, 'null', 'null'),
-(123, 110, 'null', 'null'),
-(124, 111, 'null', 'null');
-
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
--- ALTER TABLE `facility_device` DROP IF EXISTS `mfl_code`;
-
--- ALTER TABLE  `facility_device` ADD  `mfl_code` VARCHAR( 30 ) NOT NULL AFTER  `facility_id` ;
-
-
-INSERT INTO `facility_device`
-
-	(
-		SELECT 
-			`fe`.`id`, 
-			`f`.`id`, 
-			`fe`.`equipment_id` AS `device_id`, 
-			`fe`.`status`, 
-			`fe`.`deactivation_reason`, 
-			`fe`.`date_added`, 
-			`fe`.`date_removed`, 
-			`fp`.`serial_num` AS `serial_number`, 
-			`fp`.`printer_serial` 
-		FROM `facility_equipment_temp` `fe` 
-		LEFT JOIN `facility_temp` `ft` 
-			ON `fe`.`facility_id` = `ft`.`id` 
-      LEFT JOIN `facility` f
-        ON f.mfl_code = ft.mflcode
-
-		LEFT JOIN `facility_pima_temp` `fp` 
-			ON `fe`.`id` = `fp`.`facility_equipment_id`
-	);
-
-
+DELETE FROM `facility` WHERE `facility`.`mfl_exists` IS NOT NULL;
+ALTER TABLE `facility` DROP `mfl_exists`;
 DROP TABLE IF EXISTS `facility_temp`;
-DROP TABLE IF EXISTS `facility_equipment_temp`;
-DROP TABLE IF EXISTS `facility_pima_temp`;

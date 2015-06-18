@@ -17,15 +17,27 @@ class dashboard extends MY_Controller {
 	}
 	
 	// for testing trends for last 4 years [line graph]	
-	public function get_testing_trends($user_group_id,$user_filter){
-		$today		=	Date("Y-m-d");
-		$this_year 	= 	(int)	Date("Y");
-		$beg_year	=	$this_year - 4;
-
-		$from		=	Date("$beg_year-1-1");
-		$to			=	$today;
+	public function get_testing_trends(){
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
 		
-		$sql = "CALL proc_tests_line_trend(0,0,'".$from."', '".$to."')";
+		if(empty($entity_type)){
+			$entity_type = 0;
+		}
+		if(empty($entity_id)){
+			$entity_id = 0;
+		}
+		if($start_date == ''){
+			$start_date = Date('Y-01-01');
+		}
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}
+		
+				 
+		$sql = "CALL proc_tests_line_trend('".$entity_type."','".$entity_id."','".$start_date."', '".$end_date."')";
 		$tests = R::getAll($sql);
 		
 		
@@ -34,7 +46,8 @@ class dashboard extends MY_Controller {
 		// echo "</pre>";
 		// die;
 	
-		$categories 	=	$this->get_testing_trends_categories();
+		$categories 	=	$this->get_testing_trends_categories($start_date,$end_date);
+		// echo "get_testing_trends Start Date ".$start_date;
 		// echo "<pre>";
 		// print_r($categories);
 		// echo "</pre>";
@@ -80,25 +93,28 @@ class dashboard extends MY_Controller {
 		
 		echo json_encode($series_data);
 	}	
-	public function get_testing_trends_categories(){
-		$today		=	Date("Y-m-d");
-		$this_year 	= 	(int)	Date("Y");
-		$beg_year	=	$this_year - 4;
-
-		$from		=	Date("$beg_year-1-1");
-		$to			=	$today;
-		
-		$categories 	=	$this->dashboard_m->get_yearmonth_categories($from,$to);
+	public function get_testing_trends_categories($start_date,$end_date){
+		$categories 	=	$this->dashboard_m->get_yearmonth_categories($start_date,$end_date);
 		
 		// echo "<pre>";
-		// print_r($cat2);
+		// print_r($categories);
 		// echo "</pre>"; 		
 		// die;
 	
 		return $categories;
 	}
 	public function return_testing_trends_categories(){
-		$categories = $this->get_testing_trends_categories();
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
+		
+		if(empty($start_date)){
+			$start_date = Date('Y-01-01');
+		}
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}
+		
+		$categories = $this->get_testing_trends_categories($start_date,$end_date);//2012-01-2
 		foreach ($categories as $key => $value) {
 			$categories[$key] = Date("M,Y", strtotime("".$value.'-1'));
 		}
@@ -111,7 +127,7 @@ class dashboard extends MY_Controller {
 	//YEARLY TESTING TRENDS COLUMN
 	//
 	//
-	//gets data for xAxis (categories)
+	
 	public function get_yearly_testing_trends_categories(){
 		$this_year 	= 	(int)	Date("Y");
 		$beg_year	=	$this_year - 4;
@@ -125,10 +141,13 @@ class dashboard extends MY_Controller {
 		}
 		return array($categories,$categories_initialize);
 	}
-	//returns data for xAxis (categories)
-	public function return_yearly_testing_trends_categories($user_group_id,$user_filter_used){
+	
+	public function return_yearly_testing_trends_categories(){
+		$entity_type = $this->input->get('entityType');
+		$entity_id = $this->input->get('entityId');
+		
 		$categories = $this->get_yearly_testing_trends_categories();
-		$data = $this->yearly_testing_trends($user_group_id,$user_filter_used);
+		$data = $this->yearly_testing_trends($entity_type,$entity_id);
 		
 		$consolidated_result = [];
 		array_push($consolidated_result,$categories[0],$data);
@@ -136,8 +155,8 @@ class dashboard extends MY_Controller {
 		echo json_encode($consolidated_result);
 	}
 
-	public function yearly_testing_trends($user_group_id,$user_filter_used) {
-		$sql = "CALL proc_equipment_yearly_testing_trends_column('".$user_group_id."','".$user_filter_used."')";
+	public function yearly_testing_trends($entity_type,$entity_id) {
+		$sql = "CALL proc_equipment_yearly_testing_trends_column('".$entity_type."','".$entity_id."')";
 		$sql1 = "CALL proc_sql_eq()";
 		$equip_tst = R::getAll($sql);
 		$equipment = R::getAll($sql1);
@@ -164,7 +183,7 @@ class dashboard extends MY_Controller {
 		}
 		// echo "<pre>";
 		// print_r($data);
-		// echo "</pre>";
+		// echo "</pre>";die;
 		// echo json_encode($data);die;
 		return $data;
 	}
@@ -175,12 +194,25 @@ class dashboard extends MY_Controller {
 	//
 	//
 	public function test_errors_pie(){
-		$from = '2014-02-27';
-		$to = '2015-02-24';
-		$user_group_id = 0;
-		$user_filter_used = 0;
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
+				
+		if(empty($entity_type)){
+			$entity_type = 0;
+		}
+		if(empty($entity_id)){
+			$entity_id = 0;
+		}
+		if(empty($start_date)){
+			$start_date = Date('Y-01-01');
+		}
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}
 		
-		$sql = "CALL proc_tests_errors_pie('".$from."','".$to."',".$user_group_id.",".$user_filter_used.")";
+		$sql = "CALL proc_tests_errors_pie('".$start_date."','".$end_date."',".$entity_type.",".$entity_id.")";
 		$tst 	=	R::getAll($sql);
 
 		foreach ($tst[0] as $key => $value) {
@@ -190,13 +222,26 @@ class dashboard extends MY_Controller {
 		echo json_encode($tst[0]);
 	}
 	// for test for this year [table]
-	public function get_tests($user_group_id, $user_filter_used,$from,$to){
-		$from = '2014-02-27';
-		$to = '2015-02-24';
-		$user_group_id = 0;
-		$user_filter_used = 0;
+	public function get_tests(){
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
 		
-		$sql = "CALL proc_tests_table(".$user_group_id.",".$user_filter_used.",'".$from."','".$to."')";
+		if(empty($entity_type)){
+			$entity_type = 0;
+		}
+		if(empty($entity_id)){
+			$entity_id = 0;
+		}
+		if(empty($start_date)){
+			$start_date = Date('Y-01-01');
+		}
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}
+		
+		$sql = "CALL proc_tests_table('".$entity_type."','".$entity_id."','".$start_date."','".$end_date."')";
 		$tests = R::getAll($sql); 
 		$tests[0]["title"]= 'Tests';
 
@@ -239,8 +284,9 @@ class dashboard extends MY_Controller {
 		echo json_encode($response);
 	}
 	
-	// WEB-LIMS DEVICES
-
+	
+	// WEB-LIMS DEVICE DISTRIBUTION
+    
 
 	// Number of Devices per County [stacked]
 	public function get_cd4_devices_perCounty(){
@@ -249,40 +295,95 @@ class dashboard extends MY_Controller {
 	}
 
 	// get cd4 devices [Pie Chart]
-	function get_cd4_devices_pie($user_group_id,$user_filter_used){
-		$user_group_id = 0;
-		$user_filter_used = 0;
-		$result = $this->dashboard_m->get_cd4_devices_pie($user_group_id,$user_filter_used);
+	function get_cd4_devices_pie(){	
+		$result = $this->dashboard_m->get_cd4_devices_pie();
 		echo json_encode($result);
 	}
 
 	// get cd4 equipment [Table]
 	function get_devices_table(){
-		$result = $this->dashboard_m->get_devices_table($user_group_id,$user_filter_id);
+		$entity_type = $this->input->post('entityType');
+		$entity_id = $this->input->post('entityId');
+		
+		if(empty($entity_type)){
+			$entity_type = 0;
+		}
+		if(empty($entity_id)){
+			$entity_id = 0;
+		}
+		
+		$result = $this->dashboard_m->get_devices_table($entity_type,$entity_id);
 		echo json_encode($result);
 	}
 
 	
 	// equipment and tests [Pie Chart]
-	function get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used){
-		$from = '2013-01-01';
-		$to = '2013-12-31';
-		$result = $this->dashboard_m->get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used);
+	function get_devices_tests_pie(){
+		$entity_type = $this -> input -> post('entityType');
+		$entity_id = $this -> input -> post('entityId');
+		$start_date = $this -> input -> post('startDate');
+		$end_date = $this -> input -> post('endDate');
+		
+		if(empty($entity_type)){
+			$entity_type = 0;
+		}
+		if(empty($entity_id)){
+			$entity_id = 0;
+		}
+		if(empty($start_date)){
+			$start_date = Date('Y-01-01');
+		}
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}
+		
+		$result = $this->dashboard_m->get_devices_tests_pie($start_date,$end_date,$entity_type,$entity_id);
 		echo json_encode($result);
 	}
 
 	// Devices tests for this year [table]
-	function get_devices_tests_table($from,$to,$user_group_id,$user_filter_used){
-		$from = '2013-01-01';
-		$to = '2013-12-31';
-		$result = $this->dashboard_m->get_devices_tests_table($from,$to,$user_group_id,$user_filter_used);
+	function get_devices_tests_table(){
+		$entity_type = $this -> input -> post('entityType');
+		$entity_id = $this -> input -> post('entityId');
+		$start_date = $this -> input -> post('startDate');
+		$end_date = $this -> input -> post('endDate');
+		
+		if(empty($entity_type)){
+			$entity_type = 0;
+		}
+		if(empty($entity_id)){
+			$entity_id = 0;
+		}
+		if(empty($start_date)){
+			$start_date = Date('Y-01-01');
+		}
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}
+		
+		$result = $this->dashboard_m->get_devices_tests_table($start_date,$end_date,$entity_type,$entity_id);
 		echo json_encode($result);
 	}
 
 	// expected reporting devices [area chart]
-	function get_expected_reporting_devices($user_group_id,$user_filter_used,$year='2015'){
-		// error_reporting(0);
-		$results = $this->dashboard_m->get_expected_reporting_devices($user_group_id,$user_filter_used,$year);
+	function get_expected_reporting_devices(){
+		$entity_type = $this -> input -> post('entityType');
+		$entity_id = $this -> input -> post('entityId');
+		$start_date = $this -> input -> post('startDate');
+		$year = strtok($start_date, '-');
+		
+		if(empty($entity_type)){
+			$entity_type = 0;
+		}
+		if(empty($entity_id)){
+			$entity_id = 0;
+		}
+		if(empty($start_date)){
+			$start_date = Date('Y');
+		}
+		
+
+		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$start_date);
 		echo json_encode($results);
 	}
 }

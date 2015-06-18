@@ -33,7 +33,7 @@ class dashboard_m extends MY_Model{
 		return $datemonth;
 	}
 	
-	public function get_cd4_devices_pie($param1,$param2){
+	public function get_cd4_devices_pie(){
 		$sql = "CALL proc_sql_eq()";
 		$sql1 = "CALL proc_device_pie('".$param1."','".$param2."')";
 		
@@ -62,9 +62,9 @@ class dashboard_m extends MY_Model{
 		return $dat;	
 	}
 	
-	public function get_devices_table($user_group_id,$user_filter_id){
+	public function get_devices_table($entity_type,$entity_id){
 		$sql = "CALL proc_sql_eq()";
-		$sql1 = "CALL proc_get_facility_devices('".$user_group_id."','".$user_filter_id."')";
+		$sql1 = "CALL proc_get_facility_devices('".$entity_type."','".$entity_id."')";
 				
 		$equipment = R::getAll($sql);
 		$fac_eq = R::getAll($sql1);
@@ -88,7 +88,7 @@ class dashboard_m extends MY_Model{
 
 			$eq_data[$key] =	$value;
 		}
-		//print_r($eq_data);
+		// print_r($eq_data);die;
 		return $eq_data;		
 	}
 	
@@ -124,13 +124,13 @@ class dashboard_m extends MY_Model{
 			}
 			
 			$data[$key] =	$row;
-		}			
+		}		
 		return $data;
 	}
 	
-	public function get_devices_tests_table($from,$to,$user_group_id,$user_filter_used){
+	public function get_devices_tests_table($start_date,$end_date,$entity_type,$entity_id){
 		$sql_eq = "CALL proc_sql_eq()";
-		$sql = "CALL proc_equipment_test_table('".$from."','".$to."','".$user_group_id."','".$user_filter_used."')";	
+		$sql = "CALL proc_equipment_test_table('".$start_date."','".$end_date."','".$entity_type."','".$entity_id."')";	
 		
 		$equipment = R::getAll($sql_eq);
 		$equip_tst = R::getAll($sql);				
@@ -154,17 +154,17 @@ class dashboard_m extends MY_Model{
 
 			$data[$key] =	$value;
 		}		
-		
+				
 		return $data;			
 	}
 	
-	public function get_expected_reporting_devices($user_group_id,$user_filter_used,$year){
+	public function get_expected_reporting_devices($entity_type,$entity_id,$year){
 		$data["chart"][0]["name"] 	= 	"Expected Reporting Devices";
-		$data["chart"][0]["data"] 	= 	$this->expected_reporting_dev_array($user_group_id,$user_filter_used,$year);
+		$data["chart"][0]["data"] 	= 	$this->expected_reporting_dev_array($entity_type,$entity_id,$year);
 		$data["chart"][1]["name"] 	= 	"Reported Devices";
 		$data["chart"][1]["color"] 	= 	"#a4d53a";		
 
-	    $data["chart"][1]["data"] 	= 	$this->reported_devices($user_group_id, $user_filter_used,$year);
+	    $data["chart"][1]["data"] 	= 	$this->reported_devices($entity_type, $entity_id,$year);
 		foreach ($data as $key => $value) {
 			return $value;
 		}
@@ -279,13 +279,13 @@ class dashboard_m extends MY_Model{
 		}
 
 		// echo "<pre>";
-		// print_r($reported_array);
+		// print_r($reported_array);die;
 
 		return $reported_array;
 	}
 	
 	public function get_cd4_devices_perCounty(){
-		$sql = "CALL proc_get_devices_per_county";
+		$sql = "CALL proc_get_devices_per_county()";
 		$response = R::getAll($sql);
 		
 		foreach ($response as $key => $value) {

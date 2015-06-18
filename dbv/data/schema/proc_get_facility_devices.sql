@@ -13,17 +13,14 @@ BEGIN
 		FROM 
 			(SELECT
 									
-									`fac_eq`.`id` 			AS `facility_equipment_id`,														
-									`eq_cat`.`id`			AS `equipment_category_id`,
-									`eq_cat`.`description` 	AS `equipment_category`,	
-									`eq`.`id` 				AS `equipment_id`,
-									`eq`.`description` 		AS `equipment`,
-									`fac_eq`.`status` 		AS `facility_equipment_status_id`,
-									`eq_st`.`description`	AS `facility_equipment_status`,
-									`fac_eq`.`deactivation_reason` ,															
-									`fac_eq`.`date_added` ,													
-									`fac_eq`.`date_removed`,																											
-									`fac_eq`.`serial_number`,
+									`fac_dev`.`id` 			AS `facility_equipment_id`,	
+									`dev`.`id` 				AS `equipment_id`,
+									`dev`.`name` 		AS `equipment`,
+									`fac_dev`.`status` 		AS `facility_equipment_status_id`,									
+									`fac_dev`.`deactivation_reason` ,															
+									`fac_dev`.`date_added` ,													
+									`fac_dev`.`date_removed`,																											
+									`fac_dev`.`serial_number`,
 									`fac`.`id` 				AS `facility_id`,
 									`fac`.`name` 			AS `facility_name`,
 									`fac`.`email` 			AS `facility_email`,
@@ -39,13 +36,12 @@ BEGIN
 									`par`.`email`			AS `partner_email`,
 									`par`.`phone`			AS `partner_phone`
 
-								FROM `facility_equipment` `fac_eq`
-									LEFT JOIN `equipment` `eq`
-									ON `fac_eq`.`equipment_id`= `eq`.`id`
-										LEFT JOIN `equipment_category` `eq_cat`
-										ON `eq`.`category`= `eq_cat`.`id`
+								FROM `facility_device` `fac_dev`
+									LEFT JOIN `device` `dev`
+									ON `fac_dev`.`device_id`= `dev`.`id`
+									
 									LEFT JOIN `facility` `fac`
-									ON	`fac_eq`.`facility_id` = `fac`.`id`
+									ON	`fac_dev`.`facility_id` = `fac`.`id`
 										LEFT JOIN `sub_county` `sub`
 										ON `fac`.`sub_county_id` = `sub`.`id`
 											LEFT JOIN `county` `cou`
@@ -54,29 +50,24 @@ BEGIN
 												ON `cou`.`id` = `par_cou`.`county_id`
 													LEFT JOIN `partner` `par`
 													ON `par_cou`.`partner_id`=`par`.`id`
-									LEFT JOIN `equipment_status` `eq_st`
-									ON `fac_eq`.`status`=`eq_st`.`id`	
+			 	
 			) `eq`
-
-			WHERE `equipment_category_id`= '1'
 		GROUP BY `eq`.`equipment_id`
 		ORDER BY `equipment` ASC;
+        
         ELSE				
 			CASE `user_group_id`
 			WHEN 3 THEN
             SELECT
 				
-				`fac_eq`.`id` 			AS `facility_equipment_id`,														
-				`eq_cat`.`id`			AS `equipment_category_id`,
-				`eq_cat`.`description` 	AS `equipment_category`,	
-				`eq`.`id` 				AS `equipment_id`,
-				`eq`.`description` 		AS `equipment`,
-				`fac_eq`.`status` 		AS `facility_equipment_status_id`,
-				`eq_st`.`description`	AS `facility_equipment_status`,
-				`fac_eq`.`deactivation_reason` ,															
-				`fac_eq`.`date_added` ,													
-				`fac_eq`.`date_removed`,																											
-				`fac_eq`.`serial_number`,
+				`fac_dev`.`id` 			AS `facility_equipment_id`,														
+				`dev`.`id` 				AS `equipment_id`,
+				`dev`.`name` 		AS `equipment`,
+				`fac_dev`.`status` 		AS `facility_equipment_status_id`,
+				`fac_dev`.`deactivation_reason` ,															
+				`fac_dev`.`date_added` ,													
+				`fac_dev`.`date_removed`,																											
+				`fac_dev`.`serial_number`,
 				`fac`.`id` 				AS `facility_id`,
 				`fac`.`name` 			AS `facility_name`,
 				`fac`.`email` 			AS `facility_email`,
@@ -92,13 +83,11 @@ BEGIN
 				`par`.`email`			AS `partner_email`,
 				`par`.`phone`			AS `partner_phone`
 
-			FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-				ON `fac_eq`.`equipment_id`= `eq`.`id`
-					LEFT JOIN `equipment_category` `eq_cat`
-					ON `eq`.`category`= `eq_cat`.`id`
+			FROM `facility_device` `fac_dev`
+				LEFT JOIN `device` `dev`
+				ON `fac_dev`.`device_id`= `dev`.`id`
 				LEFT JOIN `facility` `fac`
-				ON	`fac_eq`.`facility_id` = `fac`.`id`
+				ON	`fac_dev`.`facility_id` = `fac`.`id`
 					LEFT JOIN `sub_county` `sub`
 					ON `fac`.`sub_county_id` = `sub`.`id`
 						LEFT JOIN `county` `cou`
@@ -107,25 +96,20 @@ BEGIN
 							ON `cou`.`id` = `par_cou`.`county_id`
 								LEFT JOIN `partner` `par`
 								ON `par_cou`.`partner_id`=`par`.`id`
-				LEFT JOIN `equipment_status` `eq_st`
-				ON `fac_eq`.`status`=`eq_st`.`id`
 				WHERE 1
 				AND `par_cou`.`partner_id` = user_group_id;
             	
 			WHEN 6 THEN
             SELECT
 				
-				`fac_eq`.`id` 			AS `facility_equipment_id`,														
-				`eq_cat`.`id`			AS `equipment_category_id`,
-				`eq_cat`.`description` 	AS `equipment_category`,	
-				`eq`.`id` 				AS `equipment_id`,
-				`eq`.`description` 		AS `equipment`,
-				`fac_eq`.`status` 		AS `facility_equipment_status_id`,
-				`eq_st`.`description`	AS `facility_equipment_status`,
-				`fac_eq`.`deactivation_reason` ,															
-				`fac_eq`.`date_added` ,													
-				`fac_eq`.`date_removed`,																											
-				`fac_eq`.`serial_number`,
+				`fac_dev`.`id` 			AS `facility_equipment_id`,														
+				`dev`.`id` 				AS `equipment_id`,
+				`dev`.`name` 		AS `equipment`,
+				`fac_dev`.`status` 		AS `facility_equipment_status_id`,
+				`fac_dev`.`deactivation_reason` ,															
+				`fac_dev`.`date_added` ,													
+				`fac_dev`.`date_removed`,																											
+				`fac_dev`.`serial_number`,
 				`fac`.`id` 				AS `facility_id`,
 				`fac`.`name` 			AS `facility_name`,
 				`fac`.`email` 			AS `facility_email`,
@@ -141,13 +125,11 @@ BEGIN
 				`par`.`email`			AS `partner_email`,
 				`par`.`phone`			AS `partner_phone`
 
-			FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-				ON `fac_eq`.`equipment_id`= `eq`.`id`
-					LEFT JOIN `equipment_category` `eq_cat`
-					ON `eq`.`category`= `eq_cat`.`id`
+			FROM `facility_device` `fac_dev`
+				LEFT JOIN `device` `dev`
+				ON `fac_dev`.`device_id`= `dev`.`id`
 				LEFT JOIN `facility` `fac`
-				ON	`fac_eq`.`facility_id` = `fac`.`id`
+				ON	`fac_dev`.`facility_id` = `fac`.`id`
 					LEFT JOIN `sub_county` `sub`
 					ON `fac`.`sub_county_id` = `sub`.`id`
 						LEFT JOIN `county` `cou`
@@ -156,25 +138,20 @@ BEGIN
 							ON `cou`.`id` = `par_cou`.`county_id`
 								LEFT JOIN `partner` `par`
 								ON `par_cou`.`partner_id`=`par`.`id`
-				LEFT JOIN `equipment_status` `eq_st`
-				ON `fac_eq`.`status`=`eq_st`.`id`
 				WHERE 1
 				AND `fac`.`id` = user_group_id;
 				
 			WHEN 9 THEN  
             SELECT
 				
-				`fac_eq`.`id` 			AS `facility_equipment_id`,														
-				`eq_cat`.`id`			AS `equipment_category_id`,
-				`eq_cat`.`description` 	AS `equipment_category`,	
-				`eq`.`id` 				AS `equipment_id`,
-				`eq`.`description` 		AS `equipment`,
-				`fac_eq`.`status` 		AS `facility_equipment_status_id`,
-				`eq_st`.`description`	AS `facility_equipment_status`,
-				`fac_eq`.`deactivation_reason` ,															
-				`fac_eq`.`date_added` ,													
-				`fac_eq`.`date_removed`,																											
-				`fac_eq`.`serial_number`,
+				`fac_dev`.`id` 			AS `facility_equipment_id`,														
+				`dev`.`id` 				AS `equipment_id`,
+				`dev`.`name` 		AS `equipment`,
+				`fac_dev`.`status` 		AS `facility_equipment_status_id`,
+				`fac_dev`.`deactivation_reason` ,															
+				`fac_dev`.`date_added` ,													
+				`fac_dev`.`date_removed`,																											
+				`fac_dev`.`serial_number`,
 				`fac`.`id` 				AS `facility_id`,
 				`fac`.`name` 			AS `facility_name`,
 				`fac`.`email` 			AS `facility_email`,
@@ -190,13 +167,11 @@ BEGIN
 				`par`.`email`			AS `partner_email`,
 				`par`.`phone`			AS `partner_phone`
 
-			FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-				ON `fac_eq`.`equipment_id`= `eq`.`id`
-					LEFT JOIN `equipment_category` `eq_cat`
-					ON `eq`.`category`= `eq_cat`.`id`
+			FROM `facility_device` `fac_dev`
+				LEFT JOIN `device` `dev`
+				ON `fac_dev`.`device_id`= `dev`.`id`
 				LEFT JOIN `facility` `fac`
-				ON	`fac_eq`.`facility_id` = `fac`.`id`
+				ON	`fac_dev`.`facility_id` = `fac`.`id`
 					LEFT JOIN `sub_county` `sub`
 					ON `fac`.`sub_county_id` = `sub`.`id`
 						LEFT JOIN `county` `cou`
@@ -205,25 +180,20 @@ BEGIN
 							ON `cou`.`id` = `par_cou`.`county_id`
 								LEFT JOIN `partner` `par`
 								ON `par_cou`.`partner_id`=`par`.`id`
-				LEFT JOIN `equipment_status` `eq_st`
-				ON `fac_eq`.`status`=`eq_st`.`id`
 				WHERE 1
 				AND `sub`.`county_id` = user_group_id;
 				
 			WHEN 8 THEN
             SELECT
 				
-				`fac_eq`.`id` 			AS `facility_equipment_id`,														
-				`eq_cat`.`id`			AS `equipment_category_id`,
-				`eq_cat`.`description` 	AS `equipment_category`,	
-				`eq`.`id` 				AS `equipment_id`,
-				`eq`.`description` 		AS `equipment`,
-				`fac_eq`.`status` 		AS `facility_equipment_status_id`,
-				`eq_st`.`description`	AS `facility_equipment_status`,
-				`fac_eq`.`deactivation_reason` ,															
-				`fac_eq`.`date_added` ,													
-				`fac_eq`.`date_removed`,																											
-				`fac_eq`.`serial_number`,
+				`fac_dev`.`id` 			AS `facility_equipment_id`,														
+				`dev`.`id` 				AS `equipment_id`,
+				`dev`.`name` 		AS `equipment`,
+				`fac_dev`.`status` 		AS `facility_equipment_status_id`,
+				`fac_dev`.`deactivation_reason` ,															
+				`fac_dev`.`date_added` ,													
+				`fac_dev`.`date_removed`,																											
+				`fac_dev`.`serial_number`,
 				`fac`.`id` 				AS `facility_id`,
 				`fac`.`name` 			AS `facility_name`,
 				`fac`.`email` 			AS `facility_email`,
@@ -239,13 +209,11 @@ BEGIN
 				`par`.`email`			AS `partner_email`,
 				`par`.`phone`			AS `partner_phone`
 
-			FROM `facility_equipment` `fac_eq`
-				LEFT JOIN `equipment` `eq`
-				ON `fac_eq`.`equipment_id`= `eq`.`id`
-					LEFT JOIN `equipment_category` `eq_cat`
-					ON `eq`.`category`= `eq_cat`.`id`
+			FROM `facility_device` `fac_dev`
+				LEFT JOIN `device` `dev`
+				ON `fac_dev`.`device_id`= `dev`.`id`
 				LEFT JOIN `facility` `fac`
-				ON	`fac_eq`.`facility_id` = `fac`.`id`
+				ON	`fac_dev`.`facility_id` = `fac`.`id`
 					LEFT JOIN `sub_county` `sub`
 					ON `fac`.`sub_county_id` = `sub`.`id`
 						LEFT JOIN `county` `cou`
@@ -254,8 +222,6 @@ BEGIN
 							ON `cou`.`id` = `par_cou`.`county_id`
 								LEFT JOIN `partner` `par`
 								ON `par_cou`.`partner_id`=`par`.`id`
-				LEFT JOIN `equipment_status` `eq_st`
-				ON `fac_eq`.`status`=`eq_st`.`id`
 				WHERE 1
 				AND `fac`.`sub_county_id` = user_group_id;
             END CASE;

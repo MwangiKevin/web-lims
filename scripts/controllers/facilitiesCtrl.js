@@ -1,5 +1,6 @@
 app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
 
+
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/facilities',
@@ -34,20 +35,27 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
                 'sExtends': 'collection',
                 'sButtonText': 'Save',
                 'aButtons': ['csv', 'xls', 'pdf']
+            },
+            {
+                'sExtends': 'text',
+                'sButtonText': '+ New Facility', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    window.location = "#/facilities/new";
+                }
             }
         ]);
     $scope.dtColumns = [
-        DTColumnBuilder.newColumn('facility_id').withTitle('facility ID').notVisible(),
+        DTColumnBuilder.newColumn('facility_id').withTitle('facility #'),
         DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
         DTColumnBuilder.newColumn('facility_email').withTitle('Email'),
         DTColumnBuilder.newColumn('facility_phone').withTitle('Phone'),
         DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
         DTColumnBuilder.newColumn('county_name').withTitle('County'),
-        DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible(),
-        DTColumnBuilder.newColumn('partner_name').withTitle('Partner').notVisible(),
-        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site').notVisible(),        
+        DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county'),
+        DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
+        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button onClick="edit_facility('+data.facility_id+')">Edit</button><button onClick ="delete_facility('+data.facility_id+')" >Delete</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
             }),
     ];
     $scope.dtColumnDefs = [
@@ -55,11 +63,11 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
     ];
 
     edit_facility = function(id){
-        alert('edit'+id);
+        window.location = "#/editFacility/"+id;
     }
 
-    delete_facility = function(id){
-        alert('delete'+id);
+    remove_facility = function(id){
+        window.location = "#/removeFacility/"+id;
     }
 
 

@@ -10,5 +10,6 @@ CREATE TABLE `cd4_test` (
   `valid` int(11) NOT NULL DEFAULT '1' COMMENT '1 for true 0 for false',
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `file_date_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cd4_count` (`cd4_count`,`sample`,`device_id`,`result_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

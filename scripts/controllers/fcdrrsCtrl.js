@@ -13,50 +13,74 @@ app.controller('fcdrrsCtrl',
     'notify',
     'Restangular',
     'apiAuth',
-    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth){
-
-        
-       // $scope.allowed =  function(){
-            
-        //     return $http.get("fcdrr/is_allowed");
-        // }
-
-        apiAuth.requireLogin();
-
-        
-
-        Commons.activeMenu = "fcdrrs";
-
-        $scope.fcdrrsColl = [];
-
-        $scope.promise=null;
-
-        var baseFcdrrs = Restangular.all('fcdrrs');
-        $activityIndicator.startAnimating();
-
-        $scope.promise =  baseFcdrrs.getList({verbose:true}).then(function(fc) {
-            $scope.fcdrrsColl = fc;
-            $activityIndicator.stopAnimating();
-        });
-        $scope.fcdrrsColl = baseFcdrrs;
+    'DTOptionsBuilder',
+    'DTColumnBuilder',
+    'DTColumnDefBuilder',
+    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth, DTOptionsBuilder, DTColumnBuilder,DTColumnDefBuilder){
 
 
-        //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
-        $scope.displayedCollection = [].concat($scope.fcdrrsColl);
 
-        //add to the real data holder
-        $scope.addFacility = function addFacility(fc) {
-            $scope.fcdrrsColl.push(fc);
-            id++;
-        };
+    apiAuth.requireLogin();      
 
-        //remove to the real data holder
-        $scope.removeItem = function removeItem(row) {
-            var index = $scope.fcdrrsColl.indexOf(row);
-            if (index !== -1) {
-                $scope.fcdrrsColl.splice(index, 1);
+    Commons.activeMenu = "fcdrrs";
+
+
+
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+    .withOption('ajax', {
+        url: Commons.baseURL+'api/fcdrrs',
+        data:{datatable:true,verbose:true},
+        type: 'GET'
+    })  
+    .withDataProp('data')
+    .withOption('processing', true)
+    .withOption('serverSide', true)
+    .withOption('scrollX', '100%')
+    .withPaginationType('full_numbers')
+
+
+    .withColVis()
+    // .withColVisStateChange(stateChange)
+    .withColVisOption('aiExclude', [1])
+
+
+    .withOption('responsive', true)
+
+    .withColReorder()
+    // .withColReorderOrder([1, 0, 2])
+    .withColReorderOption('iFixedColumnsRight', 1)
+    // .withColReorderCallback(function() {
+    //         console.log('Columns order has been changed with: ' + this.fnOrder());
+    //     })
+
+    .withTableTools('assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+    .withTableToolsButtons([
+            'copy',
+            'print', {
+                'sExtends': 'collection',
+                'sButtonText': 'Save',
+                'aButtons': ['csv', 'xls', 'pdf']
             }
-        }
+        ]);
+    $scope.dtColumns = [
+        DTColumnBuilder.newColumn('fcdrr_id').withTitle('FCDRR #'),
+        DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
+        DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
+        DTColumnBuilder.newColumn(null).withTitle('Commodities reported for').renderWith(function(data, type, full, meta) {
+            return  data.commodities.length;
+        }),
+        DTColumnBuilder.newColumn('from_date').withTitle('Start Date'),
+        DTColumnBuilder.newColumn('to_date').withTitle('End Date'),
+        DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
+                return '<button onClick="edit_fcdrr('+data.fcdrr_id+')">Edit</button>';
+            }),
+    ];
+
+    edit_fcdrr = function(id){        
+        window.location = "#/editFCDRR/"+id;
+    }
+
+
 
 
     }])

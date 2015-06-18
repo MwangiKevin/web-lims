@@ -4,10 +4,10 @@ BEGIN
 	WHEN 0 THEN
 		SELECT 
 			`t1`.`month`,
-			COUNT(`t1`.`facility_equipment_id`) AS `reported_devices`
+			COUNT(`t1`.`facility_device_id`) AS `reported_devices`
 		FROM (
 				SELECT 
-					DISTINCT `tst`.`facility_equipment_id`,
+					DISTINCT `tst`.`facility_device_id`,
 					MONTH(`pim_upl`.`upload_date`) AS `month`
 				FROM `cd4_test` `tst`
 					LEFT JOIN `pima_test` `pim_tst`
@@ -17,16 +17,16 @@ BEGIN
 				WHERE 1 
 				AND YEAR(`pim_upl`.`upload_date`) = `year`
 			)AS `t1`				
-		GROUP BY `t1`.`month` ;
+		GROUP BY `t1`.`month`;
 	ELSE
 		CASE `user_group_id`
 		WHEN 3 THEN
 			SELECT 
 				`t1`.`month`,
-				COUNT(`t1`.`facility_equipment_id`) AS `reported_devices`
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
 			FROM (
 					SELECT 
-						DISTINCT `tst`.`facility_equipment_id`,
+						DISTINCT `tst`.`facility_device_id`,
 						MONTH(`pim_upl`.`upload_date`) AS `month`
 					FROM `cd4_test` `tst`
 						LEFT JOIN `pima_test` `pim_tst`
@@ -45,11 +45,11 @@ BEGIN
 		
 			SELECT
 				`t1`.`month`,
-				COUNT(`t1`.`facility_equipment_id`) AS `reported_devices`
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
 			FROM 
 				(
 					SELECT 
-						DISTINCT `tst`.`facility_equipment_id`,
+						DISTINCT `tst`.`facility_device_id`,
 						MONTH(`pim_upl`.`upload_date`) AS `month`
 					FROM `cd4_test` `tst`
 						LEFT JOIN `pima_test` `pim_tst`
@@ -72,11 +72,11 @@ BEGIN
 		
 			SELECT
 				`t1`.`month`,
-				COUNT(`t1`.`facility_equipment_id`) AS `reported_devices`
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
 			FROM 
 				(
 					SELECT 
-						DISTINCT `tst`.`facility_equipment_id`,
+						DISTINCT `tst`.`facility_device_id`,
 						MONTH(`pim_upl`.`upload_date`) AS `month`
 					FROM `cd4_test` `tst`
 					LEFT JOIN `pima_test` `pim_tst`
@@ -96,11 +96,11 @@ BEGIN
 		WHEN 6 THEN
 			SELECT
 				`t1`.`month`,
-				COUNT(`t1`.`facility_equipment_id`) AS `reported_devices`
+				COUNT(`t1`.`facility_device_id`) AS `reported_devices`
 			FROM 
 				(
 					SELECT 
-						DISTINCT `tst`.`facility_equipment_id`,
+						DISTINCT `tst`.`facility_device_id`,
 						MONTH(`pim_upl`.`upload_date`) AS `month`
 					FROM `cd4_test` `tst`
 					LEFT JOIN `pima_test` `pim_tst`
