@@ -37,7 +37,7 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
             }
         ]);
 	$scope.dtColumns = [
-		DTColumnBuilder.newColumn('id').withTitle('Test ID'),
+		DTColumnBuilder.newColumn('id').withTitle('Test #'),
 		DTColumnBuilder.newColumn('sample').withTitle('Sample/Patient ID'),
 		DTColumnBuilder.newColumn('result_date').withTitle('Date'),
 		DTColumnBuilder.newColumn('cd4_count').withTitle('CD4 Count'),
