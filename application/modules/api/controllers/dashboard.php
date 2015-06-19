@@ -343,10 +343,10 @@ class dashboard extends MY_Controller {
 
 	// Devices tests for this year [table]
 	function get_devices_tests_table(){
-		$entity_type = $this -> input -> post('entityType');
-		$entity_id = $this -> input -> post('entityId');
-		$start_date = $this -> input -> post('startDate');
-		$end_date = $this -> input -> post('endDate');
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
 		
 		if(empty($entity_type)){
 			$entity_type = 0;
@@ -360,6 +360,8 @@ class dashboard extends MY_Controller {
 		if(empty($end_date)){
 			$end_date = Date('Y-m-d');
 		}
+
+		
 		
 		$result = $this->dashboard_m->get_devices_tests_table($start_date,$end_date,$entity_type,$entity_id);
 		echo json_encode($result);

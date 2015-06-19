@@ -17,16 +17,22 @@ class dashboard_m extends MY_Model{
 
 		for($y=$from_year; $y <= $to_year;$y++){
 			for($m=1;($m <= 12);$m++){
-				if( $y==$from_year ){
+
+				if(($y==$from_year)&&($y==$to_year)){
+					if(($m>=$from_month)&&($m<=$to_month)){
+						$datemonth[] = $y."-".$m;
+					}
+				}
+				elseif($y==$from_year ){
 					if($m>=$from_month ){
 						$datemonth[] = $y."-".$m;
 					}
-				}elseif( $y==$to_year ){
+				}elseif($y==$to_year){
 					if($m<=$to_month ){
 						$datemonth[] = $y."-".$m;
 					}
 				}else{
-					$datemonth[] = $y."-".$m;
+					 $datemonth[] = $y."-".$m;
 				}
 			}
 		}
