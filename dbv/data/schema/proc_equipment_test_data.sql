@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_equipment_test_table`(from_date date,to_date date,filter_type int(11), filter_id int(11))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_equipment_test_data`(from_date date,to_date date,filter_type int(11), filter_id int(11))
 BEGIN
 
 	DECLARE Q1 varchar(500);
