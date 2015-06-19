@@ -153,6 +153,14 @@ class presto_uploads extends MY_Controller
 					}
 				}
 // changing the date format of the value runtimedate in Insert two
+				foreach ($insert_one as $key => $value) {
+					if($value){
+						$old_time = $value['run_date_time'];
+						$new_date = date('Y-m-d H:i:s',strtotime($old_time));
+	 					$insert_one[$key]['run_date_time']=$new_date;
+					}
+				}
+// changing the date format of the value runtimedate in Insert two
 				foreach ($insert_two as $key => $value) {
 					if($value){
 						$old_time = $value['run_date_time'];
@@ -160,18 +168,11 @@ class presto_uploads extends MY_Controller
 	 					$insert_two[$key]['run_date_time']=$new_date;
 					}
 				}
+// changing the date format of the value runtimedate in Insert one		
 
-				// echo "<pre>";
-				// print_r($insert_two);die;
-
-
-// changing the date format of the value runtimedate in Insert one				
-				// $query = $this->db->insert_batch('presto_qc', $insert_one);
+				$query = $this->db->insert_batch('presto_qc', $insert_one);
 
 					echo "<br/>"."presto_Qc successfull inserted<pre/>";
-// print_r($insert_two);
-
-
 					
 				$query_ = $this->db->insert_batch('presto_cd4_test',$insert_two);
 
