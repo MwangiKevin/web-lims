@@ -296,14 +296,18 @@ class dashboard extends MY_Controller {
 
 	// get cd4 devices [Pie Chart]
 	function get_cd4_devices_pie(){	
-		$result = $this->dashboard_m->get_cd4_devices_pie();
+
+		$entity_type = $this->input->get('entityType');
+		$entity_id = $this->input->get('entityId');
+
+		$result = $this->dashboard_m->get_cd4_devices_pie($entity_type,$entity_id);
 		echo json_encode($result);
 	}
 
 	// get cd4 equipment [Table]
 	function get_devices_table(){
-		$entity_type = $this->input->post('entityType');
-		$entity_id = $this->input->post('entityId');
+		$entity_type = $this->input->get('entityType');
+		$entity_id = $this->input->get('entityId');
 		
 		if(empty($entity_type)){
 			$entity_type = 0;

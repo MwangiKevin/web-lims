@@ -142,7 +142,14 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	//
 	$scope.equipment_pie_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_cd4_devices_pie")
+			Commons.baseURL+"api/dashboard/get_cd4_devices_pie",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id
+				}
+			}
+
+			)
 		.success(function(response){
 			$scope.cd4_equipment_pie.series[0].data = response;
 			$scope.cd4_equipment_pie.loading = false;

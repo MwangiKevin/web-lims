@@ -39,9 +39,9 @@ class dashboard_m extends MY_Model{
 		return $datemonth;
 	}
 	
-	public function get_cd4_devices_pie(){
+	public function get_cd4_devices_pie($entity_type,$entity_id){
 		$sql = "CALL proc_sql_eq()";
-		$sql1 = "CALL proc_device_pie('".$param1."','".$param2."')";
+		$sql1 = "CALL proc_get_facility_devices_agg('".$entity_type."','".$entity_id."')";
 		
 		$equipment = R::getAll($sql);
 		$equipment_r = R::getAll($sql1);
@@ -70,7 +70,7 @@ class dashboard_m extends MY_Model{
 	
 	public function get_devices_table($entity_type,$entity_id){
 		$sql = "CALL proc_sql_eq()";
-		$sql1 = "CALL proc_get_facility_devices('".$entity_type."','".$entity_id."')";
+		$sql1 = "CALL proc_get_facility_devices_agg('".$entity_type."','".$entity_id."')";
 				
 		$equipment = R::getAll($sql);
 		$fac_eq = R::getAll($sql1);
