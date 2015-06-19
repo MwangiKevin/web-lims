@@ -100,7 +100,7 @@ class dashboard_m extends MY_Model{
 	
 	public function get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used){
 		$sql_eq = "CALL proc_sql_eq()";
-		$sql = "CALL proc_equipment_test_data('".$from."','".$to."','".$user_group_id."','".$user_filter_used."')";
+		$sql = "CALL proc_device_test_data('".$from."','".$to."','".$user_group_id."','".$user_filter_used."')";
 		$equipment 			= R::getAll($sql_eq);
 		$equip_tst =	R::getAll($sql);
 		// echo "<pre> $equip_tst<br/>";
@@ -136,7 +136,7 @@ class dashboard_m extends MY_Model{
 	
 	public function get_devices_tests_table($start_date,$end_date,$entity_type,$entity_id){
 		$sql_eq = "CALL proc_sql_eq()";
-		$sql = "CALL proc_equipment_test_data('".$start_date."','".$end_date."','".$entity_type."','".$entity_id."')";	
+		$sql = "CALL proc_device_test_data('".$start_date."','".$end_date."','".$entity_type."','".$entity_id."')";	
 		
 		$equipment = R::getAll($sql_eq);
 		$equip_tst = R::getAll($sql);				
