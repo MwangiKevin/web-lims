@@ -157,6 +157,7 @@ class fcdrrs_m extends MY_Model{
 
 		if($is_datatable){
 			$search = $search['value'];
+			$search = addslashes($search);
 
 			$columns = $this->input->get("columns");
 
@@ -172,6 +173,7 @@ class fcdrrs_m extends MY_Model{
 			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','','$order_col','$order_dir','','','true')")[0]['count'];
 			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
 		}
+		$search = addslashes($search);
 
 		$fcdrr_res = R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
 		
