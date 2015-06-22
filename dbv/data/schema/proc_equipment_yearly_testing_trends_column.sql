@@ -17,7 +17,7 @@ BEGIN
 			ORDER BY `d`.`name` ASC;
 		ELSE	
 			CASE `user_group_id`
-			WHEN 3 THEN
+			WHEN 4 THEN
 			
 				SELECT 
 					`d`.`name` AS `equipment_name`,
@@ -35,7 +35,7 @@ BEGIN
 				GROUP BY `d`.`name`,`year` 
 			ORDER BY `d`.`name` ASC;
 				
-			WHEN 9 THEN
+			WHEN 3 THEN
 			
 				SELECT 
 					`dev`.`name` AS `equipment_name`,
@@ -55,7 +55,7 @@ BEGIN
 				GROUP BY `dev`.`name`,`year` 
 				ORDER BY `dev`.`name` ASC;
 				
-			WHEN 8 THEN
+			WHEN 2 THEN
 				SELECT 
 					`dev`.`name` AS `equipment_name`,
 					YEAR(`c_t`.`result_date`) AS `year`,
@@ -73,7 +73,7 @@ BEGIN
 					AND `district_id` = `user_filter_used`
 				GROUP BY `dev`.`name`,`year` 
 				ORDER BY `dev`.`name` ASC;
-			WHEN 6 THEN
+			WHEN 1 THEN
 				SELECT 
 					`d`.`name` AS `equipment_name`,
 					YEAR(`c_t`.`result_date`) AS `year`,
