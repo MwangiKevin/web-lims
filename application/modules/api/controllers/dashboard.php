@@ -373,9 +373,9 @@ class dashboard extends MY_Controller {
 
 	// expected reporting devices [area chart]
 	function get_expected_reporting_devices(){
-		$entity_type = $this -> input -> post('entityType');
-		$entity_id = $this -> input -> post('entityId');
-		$start_date = $this -> input -> post('startDate');
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
 		$year = strtok($start_date, '-');
 		
 		if(empty($entity_type)){
