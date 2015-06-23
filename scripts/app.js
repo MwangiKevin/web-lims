@@ -209,6 +209,57 @@ var app = angular
 			}
 		}
 	})
+	
+	.state('EditFacility',{
+		url: '/editFacility/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'editFacility',
+				// controller:'editFacilityCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer'
+			}
+		}
+	})
+	
+	.state('ViewFacility',{
+		url: '/viewFacility/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'viewFacility',
+				// controller:'viewFacilityCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer'
+			}
+		}
+	})
+	
+	.state('newFacility',{
+		url: '/newFacility',
+		views:{
+			'main':{
+				// templateUrl: 'newFacility',
+				// controller:'newFacilityCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer'
+			}
+		}
+	})
 	.state('CD4Tests',{
 		url: '/CD4Tests',
 		views:{
@@ -231,6 +282,54 @@ var app = angular
 			'main':{
 				templateUrl: 'devices',
 				controller:'cd4DevicesCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('editCD4Device',{
+		url: '/editCD4Device/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'editDevice',
+				// controller:'editCD4DeviceCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('viewCD4Device',{
+		url: '/viewCD4Device/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'viewDevice',
+				// controller:'viewCD4DeviceCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('newCD4Device',{
+		url: '/newCD4Device',
+		views:{
+			'main':{
+				// templateUrl: 'newDevice',
+				// controller:'newCD4DeviceCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
