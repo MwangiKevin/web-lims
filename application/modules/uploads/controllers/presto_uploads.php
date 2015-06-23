@@ -179,12 +179,6 @@ class presto_uploads extends MY_Controller
 					echo "<br/>"."presto_cd4_tests successfull inserted";
 
 		}
-
-
-
 	}
-
 }
-
-
 ?>
