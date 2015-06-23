@@ -66,8 +66,7 @@ class facility_devices_m extends MY_Model{
 		$records_filtered = 0;
 
 		if($is_datatable){
-			$search = $search['value'];			
-			$search = addslashes($search);
+			$search = $search['value'];
 
 			$columns = $this->input->get("columns");
 
@@ -83,8 +82,6 @@ class facility_devices_m extends MY_Model{
 			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_facility_devices`('$id','','','$order_col','$order_dir','','','true')")[0]['count'];
 			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
 		}
-
-		$search = addslashes($search);
 
 		$fac_dev_res = R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
 		

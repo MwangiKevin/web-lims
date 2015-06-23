@@ -127,6 +127,7 @@ class facilities_m extends MY_Model{
 
 			$facilities = $this->arr_to_dt_response($facilities,$draw,$total_records,$records_filtered);
 
+
 		}else{
 		}
 

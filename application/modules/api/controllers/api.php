@@ -21,7 +21,7 @@ class api extends MY_Controller {
 							'search',
 							'order',
 							'verbose',
-							'datatable'
+							'is_datatable'
 						)
 			);
 		echo json_encode($api_info);
