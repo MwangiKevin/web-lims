@@ -17,25 +17,31 @@ class dashboard_m extends MY_Model{
 
 		for($y=$from_year; $y <= $to_year;$y++){
 			for($m=1;($m <= 12);$m++){
-				if( $y==$from_year ){
+
+				if(($y==$from_year)&&($y==$to_year)){
+					if(($m>=$from_month)&&($m<=$to_month)){
+						$datemonth[] = $y."-".$m;
+					}
+				}
+				elseif($y==$from_year ){
 					if($m>=$from_month ){
 						$datemonth[] = $y."-".$m;
 					}
-				}elseif( $y==$to_year ){
+				}elseif($y==$to_year){
 					if($m<=$to_month ){
 						$datemonth[] = $y."-".$m;
 					}
 				}else{
-					$datemonth[] = $y."-".$m;
+					 $datemonth[] = $y."-".$m;
 				}
 			}
 		}
 		return $datemonth;
 	}
 	
-	public function get_cd4_devices_pie(){
+	public function get_cd4_devices_pie($entity_type,$entity_id){
 		$sql = "CALL proc_sql_eq()";
-		$sql1 = "CALL proc_device_pie('".$param1."','".$param2."')";
+		$sql1 = "CALL proc_get_facility_devices_agg('".$entity_type."','".$entity_id."')";
 		
 		$equipment = R::getAll($sql);
 		$equipment_r = R::getAll($sql1);
@@ -64,7 +70,7 @@ class dashboard_m extends MY_Model{
 	
 	public function get_devices_table($entity_type,$entity_id){
 		$sql = "CALL proc_sql_eq()";
-		$sql1 = "CALL proc_get_facility_devices('".$entity_type."','".$entity_id."')";
+		$sql1 = "CALL proc_get_facility_devices_agg('".$entity_type."','".$entity_id."')";
 				
 		$equipment = R::getAll($sql);
 		$fac_eq = R::getAll($sql1);
@@ -94,7 +100,7 @@ class dashboard_m extends MY_Model{
 	
 	public function get_devices_tests_pie($from,$to,$user_group_id,$user_filter_used){
 		$sql_eq = "CALL proc_sql_eq()";
-		$sql = "CALL proc_equipment_tests_pie('".$from."','".$to."','".$user_group_id."','".$user_filter_used."')";
+		$sql = "CALL proc_device_test_data('".$from."','".$to."','".$user_group_id."','".$user_filter_used."')";
 		$equipment 			= R::getAll($sql_eq);
 		$equip_tst =	R::getAll($sql);
 		// echo "<pre> $equip_tst<br/>";
@@ -130,7 +136,7 @@ class dashboard_m extends MY_Model{
 	
 	public function get_devices_tests_table($start_date,$end_date,$entity_type,$entity_id){
 		$sql_eq = "CALL proc_sql_eq()";
-		$sql = "CALL proc_equipment_test_table('".$start_date."','".$end_date."','".$entity_type."','".$entity_id."')";	
+		$sql = "CALL proc_device_test_data('".$start_date."','".$end_date."','".$entity_type."','".$entity_id."')";	
 		
 		$equipment = R::getAll($sql_eq);
 		$equip_tst = R::getAll($sql);				

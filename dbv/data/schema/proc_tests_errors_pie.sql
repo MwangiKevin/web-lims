@@ -16,7 +16,7 @@ BEGIN
 		;
 	ELSE
 		CASE `user_group_id`
-		WHEN 3 THEN
+		WHEN 4 THEN
 		
 			SELECT 
 				COUNT(*)AS `total`,
@@ -33,7 +33,7 @@ BEGIN
 			AND `partner_id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
-		WHEN 9 THEN
+		WHEN 3 THEN
 		
 			SELECT 
 				COUNT(*)AS `total`,
@@ -53,7 +53,7 @@ BEGIN
 			AND `result_date` <= CURDATE()
 			;
 			
-		WHEN 8 THEN
+		WHEN 2 THEN
 		
 			SELECT 
 				COUNT(*)AS `total`,
@@ -71,7 +71,7 @@ BEGIN
 			AND `result_date` <= CURDATE()
 			;
 			
-		WHEN 6 THEN
+		WHEN 1 THEN
 			SELECT 
 				COUNT(*)AS `total`,
 				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,

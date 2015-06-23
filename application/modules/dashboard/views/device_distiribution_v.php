@@ -36,7 +36,7 @@
 		</div>
 		<div style="float:right; width: 50%;">
 			<h4>CD4 Equipment</h4>
-			<table style = "border: 1px solid #DDD;" class="span10">
+			<table style = "border: 1px solid #DDD;" class="span10" ng-class="{true: 'active', false: 'disabled'}[table_data.loading]">
 	            <thead class="even" style="background:#f0f0f0" >
 	                <tr>
 	                    <td>Device</td>
@@ -65,7 +65,7 @@
 		</div>
 		<div style="float:right; width: 50%;">
 			<h4># of Tests Per Equipment</h4>
-			<table style = "border: 1px solid #DDD;" class="span10">
+			<table style = "border: 1px solid #DDD;" class="span10" ng-class="{true: 'active', false: 'disabled'}[equipment_tests_data.loading]">
 	            <thead class="even" style="background:#f0f0f0" >
 	                <tr>
 	                    <td>Device</td>

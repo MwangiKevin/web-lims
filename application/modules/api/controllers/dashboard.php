@@ -296,14 +296,18 @@ class dashboard extends MY_Controller {
 
 	// get cd4 devices [Pie Chart]
 	function get_cd4_devices_pie(){	
-		$result = $this->dashboard_m->get_cd4_devices_pie();
+
+		$entity_type = $this->input->get('entityType');
+		$entity_id = $this->input->get('entityId');
+
+		$result = $this->dashboard_m->get_cd4_devices_pie($entity_type,$entity_id);
 		echo json_encode($result);
 	}
 
 	// get cd4 equipment [Table]
 	function get_devices_table(){
-		$entity_type = $this->input->post('entityType');
-		$entity_id = $this->input->post('entityId');
+		$entity_type = $this->input->get('entityType');
+		$entity_id = $this->input->get('entityId');
 		
 		if(empty($entity_type)){
 			$entity_type = 0;
@@ -319,10 +323,10 @@ class dashboard extends MY_Controller {
 	
 	// equipment and tests [Pie Chart]
 	function get_devices_tests_pie(){
-		$entity_type = $this -> input -> post('entityType');
-		$entity_id = $this -> input -> post('entityId');
-		$start_date = $this -> input -> post('startDate');
-		$end_date = $this -> input -> post('endDate');
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
 		
 		if(empty($entity_type)){
 			$entity_type = 0;
@@ -343,10 +347,10 @@ class dashboard extends MY_Controller {
 
 	// Devices tests for this year [table]
 	function get_devices_tests_table(){
-		$entity_type = $this -> input -> post('entityType');
-		$entity_id = $this -> input -> post('entityId');
-		$start_date = $this -> input -> post('startDate');
-		$end_date = $this -> input -> post('endDate');
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
 		
 		if(empty($entity_type)){
 			$entity_type = 0;
@@ -360,6 +364,8 @@ class dashboard extends MY_Controller {
 		if(empty($end_date)){
 			$end_date = Date('Y-m-d');
 		}
+
+		
 		
 		$result = $this->dashboard_m->get_devices_tests_table($start_date,$end_date,$entity_type,$entity_id);
 		echo json_encode($result);
@@ -367,10 +373,11 @@ class dashboard extends MY_Controller {
 
 	// expected reporting devices [area chart]
 	function get_expected_reporting_devices(){
-		$entity_type = $this -> input -> post('entityType');
-		$entity_id = $this -> input -> post('entityId');
-		$start_date = $this -> input -> post('startDate');
-		$year = strtok($start_date, '-');
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
+		$year = Date( 'Y',strtotime($start_date));
 		
 		if(empty($entity_type)){
 			$entity_type = 0;
@@ -383,7 +390,7 @@ class dashboard extends MY_Controller {
 		}
 		
 
-		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$start_date);
+		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$year);
 		echo json_encode($results);
 	}
 }

@@ -26,7 +26,7 @@ FOR EACH ROW
 
 
 
-	INSERT INTO cd4_test(id,cd4_count,patient_age_group_id,sample,device_id,facility_device_id,facility_id,run_date_time,valid,timestamp,file_date_time)
+	INSERT INTO cd4_test(id,cd4_count,patient_age_group_id,sample,device_id,facility_device_id,facility_id,result_date,valid,timestamp,file_date_time)
 						values(@cd4_test_id,NEW.cd4,3,NEW.patient_id,@the_device_id,@facility_device_id,@facility_id,NEW.run_date_time,@valid,NOW(),NEW.file_date_time);
 
 END

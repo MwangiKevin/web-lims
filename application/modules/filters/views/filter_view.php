@@ -55,7 +55,7 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 
 <div class="right floated right aligned six wide column">
 	<div class="blue ui buttons">
-		{{ Filters}}
+		<!-- {{ Filters}} -->
 		<div id="reportrange" class="ui button pull-right filterButton" style="">
 			<i class="fa fa-calendar fa-md"></i>
 			<span><?php echo 'January '.date("1, Y", strtotime('first day of this year')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>

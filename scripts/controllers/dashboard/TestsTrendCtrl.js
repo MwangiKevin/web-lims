@@ -13,7 +13,8 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
 	entity_id = '';
 	start_date = '';
 	end_date = '';
-	 $rootScope.$watch('Filters.change', function(){
+	 $rootScope.$watch('Filters.change_tst', function(){
+        $scope.toggleLoading();
 	 	entity_type = $rootScope.Filters.selected.entity.filter_type;//facility,partener..etc
 	 	entity_id = $rootScope.Filters.selected.entity.filter_id; 
 	 	start_date = $rootScope.Filters.selected.dates.start;
@@ -26,7 +27,13 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
 	 	$scope.yearly_testing_trends_series();
 	 	$scope.critical_table();
 	 	$scope.tests_vs_errors_pie_data()
+
 	});
+
+
+
+
+
 	
 	//
 	//
@@ -48,6 +55,7 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
 			})
 		.success(function(response){
 			$scope.testing_trends.series= response;
+            $scope.testing_trends.loading = false;
 		});	
 	}
 	$scope.testing_trends_linegraph_series();
@@ -62,7 +70,6 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
 			}
 		})
 		.success(function(response) {
-			console.log(response);
 			$scope.testing_trends.xAxis.categories = response;
 		});
 	}
@@ -86,7 +93,7 @@ title: {
             categories: [],
             labels: {
                 rotation: -45,
-                step : 3,
+                // step : 3,
                 align: "right"
             }
         },
@@ -142,6 +149,7 @@ title: {
 		.success(function(response){
 			$scope.yearly_testing_trends.xAxis.categories= response[0];
 			$scope.yearly_testing_trends.series = response[1];
+            $scope.yearly_testing_trends.loading = false;
 		});	
 	}
 	$scope.yearly_testing_trends_series();
@@ -218,6 +226,7 @@ title: {
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].y = parseInt(response.passed);
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[2].y = parseInt(response.failed);
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].y = parseInt(response.errors);
+            $scope.tests_vs_errors_pie.loading = false;
         });	
   }
   $scope.prepare_tests_vs_errors_pie = function(){
@@ -247,14 +256,6 @@ $scope.prepare_tests_vs_errors_pie();
         },
         subtitle: {
             text: 'Tests and Device Errors'
-        },
-        plotOptions: {
-            series: {
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}: {point.y:.1f}%'
-                }
-            }
         },
         options: {
             chart: {
@@ -298,11 +299,11 @@ $scope.prepare_tests_vs_errors_pie();
                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
                 borderColor: '#CCC',
                 borderWidth: 1,
-                shadow: false
+                shadow: true
             },
             tooltip: {
                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}, {point.percentage:.2f}%</b> of total<br/>'
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}, {point.percentage:.2f}%</b> of total<br/>'
             },           
             credits:{
                 enabled:false
