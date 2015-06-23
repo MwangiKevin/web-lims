@@ -128,7 +128,7 @@ class facility_devices_m extends MY_Model{
 		}
 
 		
-		if($is_datatable){
+		if($is_datatable && $id==NULL){
 
 			$fac_dev = $this->arr_to_dt_response($fac_dev,$draw,$total_records,$records_filtered);
 

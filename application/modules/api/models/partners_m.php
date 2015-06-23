@@ -90,13 +90,11 @@ class partners_m extends MY_Model{
 			$partners =  $partners_res[0];
 		}
 
-		if($is_datatable){
+		if($is_datatable && $id==NULL){
 
 			$partners = $this->arr_to_dt_response($partners,$draw,$total_records,$records_filtered);
 
-		}else{
 		}
-
 		
 		return $partners;	
 		
