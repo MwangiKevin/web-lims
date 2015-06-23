@@ -355,5 +355,133 @@ var app = angular
 			}
 		}
 	})
+	.state('commodities',{
+		url: '/commodities',
+		views:{
+			'main':{
+				// templateUrl: 'commodities',
+				// controller:'commoditiesCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('newCommodity',{
+		url: '/newCommodity',
+		views:{
+			'main':{
+				// templateUrl: 'newCommodity',
+				// controller:'newCommodityCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('editCommodity',{
+		url: '/editCommodity/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'editCommodity',
+				// controller:'editCommodityCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('viewCommodity',{
+		url: '/viewCommodity/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'viewCommodity',
+				// controller:'viewCommodityCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('partners',{
+		url: '/partners',
+		views:{
+			'main':{
+				// templateUrl: 'partners',
+				// controller:'partnersCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('newPartner',{
+		url: '/newPartner',
+		views:{
+			'main':{
+				// templateUrl: 'newPartner',
+				// controller:'newPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('editPartner',{
+		url: '/editPartner/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'editPartner',
+				// controller:'editPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('viewPartner',{
+		url: '/viewPartner/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'viewPartner',
+				// controller:'viewPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
 
 }])
