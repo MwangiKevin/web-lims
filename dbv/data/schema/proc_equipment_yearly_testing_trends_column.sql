@@ -44,14 +44,14 @@ BEGIN
 					SUM(CASE WHEN `c_t`.`valid`= '1'    THEN 1 ELSE 0 END) AS `valid`			
 				FROM `device` `dev`
 					LEFT JOIN `cd4_test` `c_t`
-					ON `c_t`.`device_id` = `e`.`id`
+					ON `c_t`.`device_id` = `dev`.`id`
 					LEFT JOIN `facility` `f`
 					ON `c_t`.`facility_id` = `f`.`id`
-					LEFT JOIN `district` `d`
-					ON `d`.`id` = `f`.`district_id`
+					LEFT JOIN `sub_county` `s_c`
+					ON `s_c`.`id` = `f`.`sub_county_id`
 				WHERE 1
 					AND `c_t`.`result_date`<= CURDATE()
-					AND `region_id` = `user_filter_used`
+					AND `county_id` = `user_filter_used`
 				GROUP BY `dev`.`name`,`year` 
 				ORDER BY `dev`.`name` ASC;
 				
@@ -63,14 +63,14 @@ BEGIN
 					SUM(CASE WHEN `c_t`.`valid`= '1'    THEN 1 ELSE 0 END) AS `valid`			
 				FROM `device` `dev`
 					LEFT JOIN `cd4_test` `c_t`
-					ON `c_t`.`equipment_id` = `dev`.`id`
+					ON `c_t`.`device_id` = `dev`.`id`
 					LEFT JOIN `facility` `f`
 					ON `c_t`.`facility_id` = `f`.`id`
-					LEFT JOIN `district` `d`
-					ON `d`.`id` = `f`.`district_id`
+					LEFT JOIN `sub_county` `s_c`
+					ON `s_c`.`id` = `f`.`sub_county_id`
 				WHERE 1
 					AND `c_t`.`result_date`<= CURDATE()
-					AND `district_id` = `user_filter_used`
+					AND `sub_county_id` = `user_filter_used`
 				GROUP BY `dev`.`name`,`year` 
 				ORDER BY `dev`.`name` ASC;
 			WHEN 1 THEN
