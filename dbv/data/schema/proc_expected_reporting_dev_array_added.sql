@@ -39,7 +39,7 @@ BEGIN
 		
 	ELSE
 		CASE `user_group_id`
-		WHEN 3 THEN
+		WHEN 4 THEN
 		
 			SELECT
 				`t1`.`date_added` as `rank_date`,
@@ -86,7 +86,7 @@ BEGIN
 			ON `t1`.`date_added` >= `t2`.`date_added` 
 			GROUP BY `t1`.`date_added`;
 		
-		WHEN 9 THEN
+		WHEN 8 THEN
 		
 			SELECT
 				`t1`.`date_added` as `rank_date`,
@@ -137,7 +137,7 @@ BEGIN
 			ON `t1`.`date_added` >= `t2`.`date_added` 
 			GROUP BY `t1`.`date_added`;
 			
-		WHEN 8 THEN
+		WHEN 2 THEN
 			SELECT
 				`t1`.`date_added` as `rank_date`,
 				`t1`.`yearmonth`,
@@ -184,7 +184,7 @@ BEGIN
 			ON `t1`.`date_added` >= `t2`.`date_added` 
 			group by `t1`.`date_added`;
 			
-		WHEN 6 THEN
+		WHEN 1 THEN
 		
 			SELECT
 				`t1`.`date_added` as `rank_date`,

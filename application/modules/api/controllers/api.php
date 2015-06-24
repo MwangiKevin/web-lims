@@ -13,8 +13,16 @@ class api extends MY_Controller {
 	}
 	public function index(){
 		$api_info = array(
-					'version'	=> 	'0.0',
-					'base_url'	=>	base_url()
+					'version'	=> 	'1.0',
+					'base_url'	=>	base_url(),
+					'get_options'=> array(
+							'limit_start',
+							'limit_items',
+							'search',
+							'order',
+							'verbose',
+							'datatable'
+						)
 			);
 		echo json_encode($api_info);
 	}

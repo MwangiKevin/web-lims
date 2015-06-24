@@ -18,13 +18,9 @@ app.controller('fcdrrsCtrl',
     'DTColumnDefBuilder',
     function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth, DTOptionsBuilder, DTColumnBuilder,DTColumnDefBuilder){
 
-
-
     apiAuth.requireLogin();      
 
     Commons.activeMenu = "fcdrrs";
-
-
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
@@ -37,7 +33,6 @@ app.controller('fcdrrsCtrl',
     .withOption('serverSide', true)
     .withOption('scrollX', '100%')
     .withPaginationType('full_numbers')
-
 
     .withColVis()
     // .withColVisStateChange(stateChange)
@@ -75,12 +70,7 @@ app.controller('fcdrrsCtrl',
                 return '<button onClick="edit_fcdrr('+data.fcdrr_id+')">Edit</button>';
             }),
     ];
-
     edit_fcdrr = function(id){        
         window.location = "#/editFCDRR/"+id;
     }
-
-
-
-
-    }])
+}])

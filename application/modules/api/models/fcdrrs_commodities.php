@@ -31,15 +31,6 @@ class fcdrrs_commodities extends MY_Model{
 
 		$fcdrr = R::getAll("UPDATE `fcdrr_commodities` 
 								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
-								SET `name`='$name', 
 
 								");
 		

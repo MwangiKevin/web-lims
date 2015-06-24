@@ -16,7 +16,7 @@ BEGIN
 		;
 	ELSE
 		CASE `user_group_id`
-		WHEN 3 THEN
+		WHEN 4 THEN
 		
 			SELECT 
 				COUNT(*)AS `total`,
@@ -33,7 +33,7 @@ BEGIN
 			AND `partner_id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
-		WHEN 9 THEN
+		WHEN 3 THEN
 		
 			SELECT 
 				COUNT(*)AS `total`,
@@ -45,15 +45,15 @@ BEGIN
 			FROM `cd4_test` `tst`
 			LEFT JOIN `facility` `f`
 				ON `tst`.`facility_id` = `f`.`id`
-			LEFT JOIN `district` `d`
-				ON `f`.`district_id` = `d`.`id`
+			LEFT JOIN `sub_county` `s_c`
+				ON `f`.`sub_county_id` = `s_c`.`id`
 			
 			WHERE `result_date` BETWEEN `from_date` AND `to_date`
-			AND `d`.`region_id` = `user_filter_used`
+			AND `s_c`.`county_id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
 			
-		WHEN 8 THEN
+		WHEN 2 THEN
 		
 			SELECT 
 				COUNT(*)AS `total`,
@@ -67,11 +67,11 @@ BEGIN
 				ON `tst`.`facility_id` = `f`.`id`
 						
 			WHERE `result_date` BETWEEN `from_date` AND `from_date`
-			AND `f`.`district_id` = `user_filter_used`
+			AND `f`.`sub_county_id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
 			
-		WHEN 6 THEN
+		WHEN 1 THEN
 			SELECT 
 				COUNT(*)AS `total`,
 				SUM(CASE WHEN `patient_age_group_id`='3' AND `valid`='1' AND `cd4_count`< 500 THEN 1 ELSE 0 END) AS `failed`,

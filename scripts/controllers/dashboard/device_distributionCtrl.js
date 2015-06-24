@@ -276,7 +276,8 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 				params:{
 					entityType : entity_type,
 					entityId : entity_id,
-					startDate : start_date
+					startDate : start_date,
+					endDate : end_date	
 				}
 			})
 		.success(function(response){

@@ -373,10 +373,11 @@ class dashboard extends MY_Controller {
 
 	// expected reporting devices [area chart]
 	function get_expected_reporting_devices(){
-		$entity_type = $this -> input -> post('entityType');
-		$entity_id = $this -> input -> post('entityId');
-		$start_date = $this -> input -> post('startDate');
-		$year = strtok($start_date, '-');
+		$entity_type = $this -> input -> get('entityType');
+		$entity_id = $this -> input -> get('entityId');
+		$start_date = $this -> input -> get('startDate');
+		$end_date = $this -> input -> get('endDate');
+		$year = Date( 'Y',strtotime($start_date));
 		
 		if(empty($entity_type)){
 			$entity_type = 0;
@@ -389,7 +390,7 @@ class dashboard extends MY_Controller {
 		}
 		
 
-		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$start_date);
+		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$year);
 		echo json_encode($results);
 	}
 }

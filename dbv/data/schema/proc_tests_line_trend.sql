@@ -20,7 +20,7 @@ BEGIN
 								
 							ELSE
 								CASE `user_group_id`
-								WHEN 3 THEN
+								WHEN 4 THEN
 									SELECT
 										COUNT(*) AS `total`,
 										MONTH(`c_t`.`result_date`) AS `month`,
@@ -39,7 +39,7 @@ BEGIN
 									AND `c_t`.`result_date` <= CURDATE() 
 									GROUP BY 	`yearmonth`
 									ORDER BY 	`c_t`.`result_date` DESC;
-								WHEN 6 THEN
+								WHEN 1 THEN
 									SELECT
 										COUNT(*) AS `total`,
 										MONTH(`c_t`.`result_date`) AS `month`,
@@ -56,7 +56,7 @@ BEGIN
 									AND `c_t`.`result_date` <= CURDATE() 
 									GROUP BY 	`yearmonth`
 									ORDER BY 	`c_t`.`result_date` DESC;
-								WHEN 8 THEN
+								WHEN 2 THEN
 									SELECT
 										COUNT(*) AS `total`,
 										MONTH(`c_t`.`result_date`) AS `month`,
@@ -77,7 +77,7 @@ BEGIN
 									AND `c_t`.`result_date` <= CURDATE()
 									GROUP BY 	`yearmonth`
 									ORDER BY 	`c_t`.`result_date` DESC;
-								WHEN 9 THEN
+								WHEN 3 THEN
 									SELECT
 										COUNT(*) AS `total`,
 										MONTH(`c_t`.`result_date`) AS `month`,
