@@ -5,39 +5,7 @@ class dashboard_m extends MY_Model{
 	function __construct() {
 
 		parent::__construct();
-	}
-	
-	public function get_yearmonth_categories($from,$to){
-		$datemonth = array();
-		
-		$from_year        = (int) Date("Y",strtotime($from));
-		$from_month       = (int) Date("m",strtotime($from));
-		$to_year          = (int) Date("Y",strtotime($to));
-		$to_month         = (int) Date("m",strtotime($to));
-
-		for($y=$from_year; $y <= $to_year;$y++){
-			for($m=1;($m <= 12);$m++){
-
-				if(($y==$from_year)&&($y==$to_year)){
-					if(($m>=$from_month)&&($m<=$to_month)){
-						$datemonth[] = $y."-".$m;
-					}
-				}
-				elseif($y==$from_year ){
-					if($m>=$from_month ){
-						$datemonth[] = $y."-".$m;
-					}
-				}elseif($y==$to_year){
-					if($m<=$to_month ){
-						$datemonth[] = $y."-".$m;
-					}
-				}else{
-					 $datemonth[] = $y."-".$m;
-				}
-			}
-		}
-		return $datemonth;
-	}
+	}		
 	
 	public function get_cd4_devices_pie($entity_type,$entity_id){
 		$sql = "CALL proc_sql_eq()";
@@ -164,20 +132,22 @@ class dashboard_m extends MY_Model{
 		return $data;			
 	}
 	
-	public function get_expected_reporting_devices($entity_type,$entity_id,$year){
-		$data["chart"][0]["name"] 	= 	"Expected Reporting Devices";
-		$data["chart"][0]["data"] 	= 	$this->expected_reporting_dev_array($entity_type,$entity_id,$year);
-		$data["chart"][1]["name"] 	= 	"Reported Devices";
-		$data["chart"][1]["color"] 	= 	"#a4d53a";		
+	public function get_expected_reporting_devices($entity_type,$entity_id,$start_date,$end_date){
 
-	    $data["chart"][1]["data"] 	= 	$this->reported_devices($entity_type, $entity_id,$year);
-		foreach ($data as $key => $value) {
-			return $value;
-		}
+		// echo $start_date.' --'.$end_date;
+		$data["categories"] 	= 	$this->get_yearmonth_categories_wordly($start_date,$end_date);	
+		$data["series"][0]["name"] 	= 	"Expected Reporting Devices";
+		$data["series"][0]["data"] 	= 	$this->expected_reporting_dev_array($entity_type,$entity_id,$start_date,$end_date);
+		$data["series"][1]["name"] 	= 	"Reported Devices";
+		$data["series"][1]["color"] 	= 	"#a4d53a";			
+
+	    // $data["chart"][1]["data"] 	= 	$this->reported_devices($entity_type, $entity_id,$start_date,$end_date);
+		
+		return $data;
 	}
 	
-	private function expected_reporting_dev_array($user_group_id,$user_filter_used,$year){
-		//error_reporting(0);
+	private function expected_reporting_dev_array($user_group_id,$user_filter_used,$start_date,$end_date){
+
 		$sql_added = "CALL proc_expected_reporting_dev_array_added(".$user_group_id.", ".$user_filter_used.")";
 
 		$sql_removed = "CALL proc_expected_reporting_dev_array_removed(".$user_group_id.", ".$user_filter_used.")";
@@ -185,70 +155,70 @@ class dashboard_m extends MY_Model{
 		$devices_added_assoc 	=	R::getAll($sql_added);
 		$devices_removed_assoc 	=	R::getAll($sql_removed);
 
-		$devices_added_array	=	array();	
-		$devices_removed_array	=	array();
+		$start_year 		= (int) Date( 'Y',strtotime($start_date));
+		$end_year 			= (int) Date( 'Y',strtotime($end_date));
+		$start_month 		= (int) Date( 'm',strtotime($start_date));
+		$end_month 			= (int) Date( 'm',strtotime($end_date));
 
-		$consolidated_array		=	array();
+		$added_arr = array();
+		$removed_arr = array();
+		$consolidated_arr = array();
 
-		//initialize
-		$current_cummulative_added 		= 0;
-		$current_cummulative_removed 	= 0;
+		//initializing
 
-		//assisgn $current_cummulative_added and $current_cummulative_removed to last years ending
-		//print_r($devices_added_assoc);die();
-		//print_r($devices_removed_assoc);die();
-		foreach ($devices_added_assoc as $value) {
-			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
+		for ($y=$start_year; $y <= $end_year ; $y++) { 
+			
+			for ($m=1; $m <= 12 ; $m++) { 
 
-			if($curr_year< (int) $year){
-				//echo $curr_year."  ".$year."  ".$value["cumulative"]."<br/>" ;				
-				$current_cummulative_added 		= (int) $value["cumulative"];
+				if(($end_year == $start_year) && ($m>=$start_month)&&($m<=$end_month)){
+					$added_arr[$y.'-'.$m] = 0;
+					$removed_arr[$y.'-'.$m] = 0;				
+					
+				}else if(($end_year != $start_year)&&($start_year == $y) && ($m>=$start_month)){
+					$added_arr[$y.'-'.$m] = 0;
+					$removed_arr[$y.'-'.$m] = 0; 	
+					
+				}else if(($end_year != $start_year)&&($end_year == $y) && ($m<=$end_month)){
+					$added_arr[$y.'-'.$m] = 0;
+					$removed_arr[$y.'-'.$m] = 0; 	
+					
+				}else if(($end_year != $y)&&($start_year != $y)){
+					$added_arr[$y.'-'.$m] = 0;
+					$removed_arr[$y.'-'.$m] = 0;						
+				}
+				
 			}
 		}
-		//echo 	$current_cummulative_added ;
 
-
-		foreach ($devices_removed_assoc as $value) {
-			$curr_year = (int) Date("Y",strtotime($value["rank_date"]));
-			if($curr_year< (int) $year){
-				//echo $curr_year."  ".$year."  ".$value["cumulative"]."<br/>" ;				
-				$current_cummulative_removed 		= (int) $value["cumulative"];
-			}
+		$added_placeholder = 0;
+		foreach ($added_arr as $key => $value) {
+			foreach ($devices_added_assoc as $key1 => $value1) {
+				if($key == $value1['yearmonth']){
+					$added_placeholder = (int) $value1['cumulative'] ;
+				}				
+			}			
+			$added_arr[$key] = $added_placeholder;
 		}
-		//echo 	$current_cummulative_removed ;
 
-		//initialize
-		$devices_added_array[0]		=	$current_cummulative_added;	
-		$devices_removed_array[0]	=	$current_cummulative_removed;
-
-		for($i=0;$i<12;$i++){
-
-			foreach ($devices_added_assoc as $key => $added) {
-				if($added['yearmonth']==($year)."-".($i+1)){
-					$current_cummulative_added = (int) $added['cumulative'];
+		$removed_placeholder = 0;
+		foreach ($removed_arr as $key => $value) {
+			foreach ($devices_removed_assoc as $key1 => $value1) {
+				if($key == $value1['yearmonth']){
+					$removed_placeholder = (int) $value1['cumulative'] ;
 				}				
-			}
-			foreach ($devices_removed_assoc as $key => $removed) {
-				if($removed['yearmonth']==($year)."-".($i+1)){
-					$current_cummulative_removed = (int) $removed['cumulative'];
-				}				
-			}
+			}			
+			$removed_arr[$key] = $removed_placeholder;
+		}
 
-			$devices_added_array[$i] = $current_cummulative_added;
-			$devices_removed_array[$i] = $current_cummulative_removed;
+
+		foreach ($added_arr as $key => $value) {
+
+			$consolidated_arr[]= $value - $removed_arr[$key];
 			
 		}
+		// print_r($consolidated_arr);
 
-		for($i=0;$i<12;$i++){
-			$consolidated_array[$i] = (int)$devices_added_array[$i] - (int) $devices_removed_array[$i];
-		}
-
-		// echo "<pre>";
-		// print_r($consolidated_array);
-		// echo "</pre>";
-		
-		// print_r($consolidated_array); die();
-		return $consolidated_array;
+		return $consolidated_arr;
 	}
 
 	private function reported_devices($user_group_id,$user_filter_used, $year){
