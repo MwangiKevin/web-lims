@@ -139,9 +139,8 @@ class dashboard_m extends MY_Model{
 		$data["series"][0]["name"] 	= 	"Expected Reporting Devices";
 		$data["series"][0]["data"] 	= 	$this->expected_reporting_dev_array($entity_type,$entity_id,$start_date,$end_date);
 		$data["series"][1]["name"] 	= 	"Reported Devices";
-		$data["series"][1]["color"] 	= 	"#a4d53a";			
-
-	    // $data["chart"][1]["data"] 	= 	$this->reported_devices($entity_type, $entity_id,$start_date,$end_date);
+		$data["series"][1]["color"] 	= 	"#a4d53a";
+		$data["series"][1]["data"] 	= 	$this->reported_devices($entity_type, $entity_id,$start_date,$end_date);
 		
 		return $data;
 	}
@@ -221,43 +220,55 @@ class dashboard_m extends MY_Model{
 		return $consolidated_arr;
 	}
 
-	private function reported_devices($user_group_id,$user_filter_used, $year){
+	private function reported_devices($user_group_id,$user_filter_used, $start_date,$end_date){
 		
-		$sql = "CALL proc_reported_devices(".$user_group_id.",".$user_filter_used.",".$year.")";
-		$res = R::getAll($sql);
-		// print_r($res);die();
+		$sql = "CALL proc_reported_devices(".$user_group_id.",".$user_filter_used.",'".$start_date."','".$end_date."')";
+		$reported_assoc = R::getAll($sql);
 		$reported_array = array(); 
-		for($i=0;$i<12;$i++){
 
-			$reported_array[$i] = 0; 
-		}
+		$result = array(); 
 
-		for($i=0;$i<12;$i++){
+		$start_year 		= (int) Date( 'Y',strtotime($start_date));
+		$end_year 			= (int) Date( 'Y',strtotime($end_date));
+		$start_month 		= (int) Date( 'm',strtotime($start_date));
+		$end_month 			= (int) Date( 'm',strtotime($end_date));
 
-			foreach ($res as $key => $value) {
+		//initializing
 
-				if($value["month"]==($i+1)){					
+		for ($y=$start_year; $y <= $end_year ; $y++) { 
+			
+			for ($m=1; $m <= 12 ; $m++) { 
+
+				if(($end_year == $start_year) && ($m>=$start_month)&&($m<=$end_month)){
+					$reported_array[$y.'-'.$m] = 0;				
 					
-					$reported_array[$i] = (int) $value["reported_devices"]; 
-
+				}else if(($end_year != $start_year)&&($start_year == $y) && ($m>=$start_month)){
+					$reported_array[$y.'-'.$m] = 0; 	
+					
+				}else if(($end_year != $start_year)&&($end_year == $y) && ($m<=$end_month)){
+					$reported_array[$y.'-'.$m] = 0; 	
+					
+				}else if(($end_year != $y)&&($start_year != $y)){
+					$reported_array[$y.'-'.$m] = 0;						
 				}
+				
 			}
 		}
 
-
-		for($i=11;$i>=0;$i--){
-			if($reported_array[$i] == 0 ){
-				$reported_array[$i] = null; 
-			}
-			else{
-				break;
-			}
+		$reported_placeholder = 0;
+		foreach ($reported_array as $key => $value) {
+			foreach ($reported_assoc as $key1 => $value1) {
+				if($key == $value1['yearmonth']){
+					$reported_placeholder = (int) $value1['count'] ;
+				}				
+			}			
+			$reported_array[$key] = $reported_placeholder;
 		}
 
-		// echo "<pre>";
-		// print_r($reported_array);die;
-
-		return $reported_array;
+		foreach ($reported_array as $key => $value) {
+			$result[]=$value;
+		}
+		return $result;
 	}
 	
 	public function get_cd4_devices_perCounty(){
