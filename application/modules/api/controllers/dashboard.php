@@ -390,7 +390,7 @@ class dashboard extends MY_Controller {
 		}
 		
 
-		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$year);
+		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$start_date,$end_date);
 		echo json_encode($results);
 	}
 }

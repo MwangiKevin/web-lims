@@ -7,7 +7,6 @@ class MY_Model extends CI_Model{
 	}
 	
 	public function get_yearmonth_categories($from,$to){
-
 		$datemonth = array();
 		
 		$from_year        = (int) Date("Y",strtotime($from));
@@ -17,24 +16,45 @@ class MY_Model extends CI_Model{
 
 		for($y=$from_year; $y <= $to_year;$y++){
 			for($m=1;($m <= 12);$m++){
-				if( $y==$from_year ){
+
+				if(($y==$from_year)&&($y==$to_year)){
+					if(($m>=$from_month)&&($m<=$to_month)){
+						$datemonth[] = $y."-".$m;
+					}
+				}
+				elseif($y==$from_year ){
 					if($m>=$from_month ){
 						$datemonth[] = $y."-".$m;
 					}
-				}elseif( $y==$to_year ){
+				}elseif($y==$to_year){
 					if($m<=$to_month ){
 						$datemonth[] = $y."-".$m;
 					}
 				}else{
-					$datemonth[] = $y."-".$m;
+					 $datemonth[] = $y."-".$m;
 				}
 			}
 		}
-
-            //print_r($datemonth);
-
 		return $datemonth;
 	}
+
+	public function get_yearmonth_categories_wordly($start_date=null,$end_date=null){
+
+		if(empty($start_date)){
+			$start_date = Date('Y-01-01');
+		}
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}
+		
+		$categories = $this->get_yearmonth_categories($start_date,$end_date);//2012-01-2
+		foreach ($categories as $key => $value) {
+			$categories[$key] = Date("M,Y", strtotime("".$value.'-1'));
+		}
+		return $categories;
+	}
+
+	
 	
 	
 	public function tester(){
