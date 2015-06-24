@@ -212,7 +212,7 @@ class dashboard extends MY_Controller {
 			$end_date = Date('Y-m-d');
 		}
 		
-		$sql = "CALL proc_tests_errors_pie('".$start_date."','".$end_date."',".$entity_type.",".$entity_id.")";
+		echo $sql = "CALL proc_tests_errors_pie('".$start_date."','".$end_date."',".$entity_type.",".$entity_id.")";
 		$tst 	=	R::getAll($sql);
 
 		foreach ($tst[0] as $key => $value) {

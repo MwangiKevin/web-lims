@@ -45,11 +45,11 @@ BEGIN
 			FROM `cd4_test` `tst`
 			LEFT JOIN `facility` `f`
 				ON `tst`.`facility_id` = `f`.`id`
-			LEFT JOIN `district` `d`
-				ON `f`.`district_id` = `d`.`id`
+			LEFT JOIN `sub_county` `s_c`
+				ON `f`.`sub_county_id` = `s_c`.`id`
 			
 			WHERE `result_date` BETWEEN `from_date` AND `to_date`
-			AND `d`.`region_id` = `user_filter_used`
+			AND `s_c`.`county_id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
 			
@@ -67,7 +67,7 @@ BEGIN
 				ON `tst`.`facility_id` = `f`.`id`
 						
 			WHERE `result_date` BETWEEN `from_date` AND `from_date`
-			AND `f`.`district_id` = `user_filter_used`
+			AND `f`.`sub_county_id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
 			
