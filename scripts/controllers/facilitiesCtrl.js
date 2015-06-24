@@ -40,7 +40,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
                 'sExtends': 'text',
                 'sButtonText': '+ New Facility', 
                 'fnClick'   : function ( nButton, oConfig, oFlash ) {
-                    window.location = "#/facilities/new";
+                    window.location = "#/newFacility";
                 }
             }
         ]);
@@ -64,6 +64,9 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
 
     edit_facility = function(id){
         window.location = "#/editFacility/"+id;
+    }
+    view_facility = function(id){
+        window.location = "#/viewFacility/"+id;
     }
 
     remove_facility = function(id){
