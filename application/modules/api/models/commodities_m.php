@@ -55,7 +55,46 @@ class commodities_m extends MY_Model{
 			$reporting_status = 1;
 		}
 
-		$comodities_res = R::getAll("CALL `proc_get_commodities`('$id','$reporting_status')");
+
+
+
+		$verbose = $this->input->get('verbose');
+
+		$is_datatable = $this->input->get("datatable");
+
+		$search = $this->input->get("search");
+		$order = $this->input->get("order");
+		$limit_start = $this->input->get("limit_start");
+		$limit_items = $this->input->get("limit_items");
+		
+		$draw;$order_col;$order_dir;
+
+
+		$total_records = 0;
+		$records_filtered = 0;
+
+		if($is_datatable){
+			$search = $search['value'];
+			$search = addslashes($search);
+
+			$columns = $this->input->get("columns");
+
+			$order_col_index = $order[0]['column'];
+			$order_col = $columns[$order_col_index]['data'];
+			$order_dir = $order[0]['dir'];
+
+
+			$limit_start = $this->input->get("start");
+			$limit_items = $this->input->get("length");
+			$draw = $this->input->get("draw");
+
+			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_commodities`('$id','','$order_col','$order_dir','','','true','$reporting_status')")[0]['count'];
+			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_commodities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','true','$reporting_status')")[0]['count'];
+		}
+
+		$search = addslashes($search);
+
+		$comodities_res = R::getAll("CALL `proc_api_get_commodities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','false','$reporting_status')");
 
 		if($this->input->get('fcdrr_format') && $this->input->get('fcdrr_format')!='false'){
 
@@ -107,13 +146,21 @@ class commodities_m extends MY_Model{
 
 
 		if($id==NULL){
-
-			return $commodities;	
+		//do nothing	
 
 		}else{
 
-			return $commodities[0];	
+			$commodities = $commodities[0];	
 		}
+
+
+		if($is_datatable && $id==NULL){
+
+			$commodities = $this->arr_to_dt_response($commodities,$draw,$total_records,$records_filtered);
+
+		}
+
+		return $commodities;
 
 	}
 
