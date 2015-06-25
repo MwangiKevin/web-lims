@@ -4,7 +4,7 @@ if(!defined("BASEPATH")) exit("No direct access to script allowed");
 /**
 * This script has functions used to upload data from .exp files from facs_calibur devices into the database
 */
-class facs_calibur_uploads extends MY_Controller
+class facs_calibur extends MY_Controller
 {
 	private $filename_entry;
 	private $filename_date;
@@ -16,12 +16,11 @@ class facs_calibur_uploads extends MY_Controller
 
 	function index()
 	{
-		$this->load->view('facs_calibur_uploads_view');
+		$this->load->view('facs_calibur_view');
 
 	}
 
 // .exp upload script
-
 	function upload_facs_calibur_exp()
 	{
 		$file = $_FILES[upload];//has all info about uploaded files  
@@ -47,3 +46,6 @@ class facs_calibur_uploads extends MY_Controller
 		//Import uploaded file to Database
 
 			$handle = fopen($file_tmp, "r");
+		}
+	}
+}
