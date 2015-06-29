@@ -18,4 +18,10 @@ class devices extends MY_Controller {
 		$this->load->view("uploads_v");
 	}
 
+	/* Load the edit device view */
+	public function editFacilityDevices(){
+
+		$this->load->view('editFacilityDevices_v',$data);
+	}
+
 }

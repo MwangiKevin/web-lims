@@ -86,7 +86,7 @@ BEGIN
 			ON `t1`.`date_added` >= `t2`.`date_added` 
 			GROUP BY `t1`.`date_added`;
 		
-		WHEN 8 THEN
+		WHEN 3 THEN
 		
 			SELECT
 				`t1`.`date_added` as `rank_date`,

@@ -18,4 +18,9 @@ class facilities extends MY_Controller {
 		$this->load->view("view_facilities_v");
 	}
 
+	/* Load the edit facilities view */
+	public function edit_facilities(){
+		$this->load->view("edit_facilities_v",$data);
+	}
+
 }

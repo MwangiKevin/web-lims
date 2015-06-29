@@ -1,6 +1,6 @@
-app.controller('fcdrrsCtrl',
-    [
-    '$stateParams',
+app.controller('partnersCtrl',
+	[
+	'$stateParams',
     '$state',
     '$scope',
     '$http',
@@ -17,14 +17,16 @@ app.controller('fcdrrsCtrl',
     'DTColumnBuilder',
     'DTColumnDefBuilder',
     function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth, DTOptionsBuilder, DTColumnBuilder,DTColumnDefBuilder){
+     
+    apiAuth.requireLogin();
 
-    apiAuth.requireLogin();      
+    // Commons.activeMenu = "partners";
 
-    Commons.activeMenu = "fcdrrs";
+    $scope.partner_id = $stateParams.id;
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
-        url: Commons.baseURL+'api/fcdrrs',
+        url: Commons.baseURL+'api/partners',
         data:{datatable:true,verbose:true},
         type: 'GET'
     })  
@@ -33,6 +35,7 @@ app.controller('fcdrrsCtrl',
     .withOption('serverSide', true)
     .withOption('scrollX', '100%')
     .withPaginationType('full_numbers')
+
 
     .withColVis()
     // .withColVisStateChange(stateChange)
@@ -55,22 +58,28 @@ app.controller('fcdrrsCtrl',
                 'sExtends': 'collection',
                 'sButtonText': 'Save',
                 'aButtons': ['csv', 'xls', 'pdf']
+            },
+            {
+                'sExtends': 'text',
+                'sButtonText': '+ New Partner', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    window.location = "#/newPartner";
+                }
             }
         ]);
     $scope.dtColumns = [
-        DTColumnBuilder.newColumn('fcdrr_id').withTitle('FCDRR #'),
-        DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
-        DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
-        DTColumnBuilder.newColumn(null).withTitle('Commodities reported for').renderWith(function(data, type, full, meta) {
-            return  data.commodities.length;
-        }),
-        DTColumnBuilder.newColumn('from_date').withTitle('Start Date'),
-        DTColumnBuilder.newColumn('to_date').withTitle('End Date'),
+        DTColumnBuilder.newColumn('id').withTitle('Partner #'),
+        DTColumnBuilder.newColumn('name').withTitle('Partner Name'),
+        DTColumnBuilder.newColumn('partner_phone').withTitle('Phone'),
+        DTColumnBuilder.newColumn('partner_email').withTitle('Email'),
         DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
-                return '<button onClick="edit_fcdrr('+data.fcdrr_id+')">Edit</button>';
+                return '<button ng-show="sess.loggedin" onClick="edit_partner('+data.id+')">Edit</button>';
             }),
     ];
-    edit_fcdrr = function(id){        
-        window.location = "#/editFCDRR/"+id;
+
+    edit_partner = function(id){
+    	window.location = "#/editPartner/"+id;
     }
-}])
+
+
+}]);
