@@ -281,7 +281,8 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 				}
 			})
 		.success(function(response){
-			$scope.expected_reporting_devices.series = response;
+			$scope.expected_reporting_devices.xAxis.categories = response.categories;
+			$scope.expected_reporting_devices.series = response.series;
 			$scope.expected_reporting_devices.loading = false;
 		});	
 	}
@@ -300,7 +301,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
             x: -20 //center   
         },
         xAxis: {
-            categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+            categories: [],
             labels: {
                 rotation: -45,
                 step : 0,
