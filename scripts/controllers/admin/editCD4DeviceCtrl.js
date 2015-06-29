@@ -1,4 +1,4 @@
-app.controller('editFacilityCtrl',
+app.controller('editCD4DeviceCtrl',
 	[
 	'$stateParams',
     '$state',
@@ -18,24 +18,20 @@ app.controller('editFacilityCtrl',
     apiAuth.requireLogin();
 
     $scope.facility_id = $stateParams.id;
-    // $scope.promise = null;
 
-    // $scope.baseFacilities = Restangular.all('facilities');
-
-        $scope.backFacilities = function(){
-            window.location = "#/facilities";
+    $scope.backDevices = function(){
+            window.location = "#/CD4Devices";
         }
 
-        $scope.populateFacility_details = function() {
+    $scope.populateDevice_details = function() {
             if ($stateParams.id > 0) {
-                var loaded_facility = Restangular.one('facilities', $stateParams.id);
-                loaded_facility.get().then(function(facility_load) {
-                   $scope.facility_detail = facility_load;
+                var loaded_facility_device = Restangular.one('facility_devices', $stateParams.id);
+                loaded_facility_device.get().then(function(facility_device_load) {
+                   $scope.facility_dev_detail = facility_device_load;
                 })
             }
         }
-
-       $scope.populateCounties = function() {
+    $scope.populateCounties = function() {
             if ($stateParams.id > 0) {
                 var loaded_counties = Restangular.all('counties');
                 loaded_counties.getList().then(function(county_load) {
@@ -52,11 +48,19 @@ app.controller('editFacilityCtrl',
                 })
             }
         }
+    $scope.populatePartners = function() {
+            if ($stateParams.id > 0) {
+                var loaded_partners = Restangular.all('partners');
+                loaded_partners.getList().then(function(partners) {
+                   $scope.partners = partners;
+                })
+            }
+        }
+
+    $scope.populateDevice_details();
+    $scope.populateCounties();
+    $scope.populateSubcounties();
+    $scope.populatePartners();
 
 
-         $scope.populateFacility_details();
-         $scope.populateCounties();
-         $scope.populateSubcounties();
-
-    
-}]);
+    }]);
