@@ -12,7 +12,7 @@ class facs_calibur extends MY_Controller
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->library('PHPExcel/IOFactory');
+		$this->load->library('excel');
 	}
 
 	function index()
@@ -43,16 +43,16 @@ class facs_calibur extends MY_Controller
         $file_type = current($file_type_array);
 
         if(in_array($file_ext, $allowed)){
-		//Import uploaded file to Database
+		// Import uploaded file to Database
 
 				// get the files creation date and save it in an array
 				$file_date_time = date ("Y-m-d H:i:s", filemtime($file_tmp));
 
 
 				//read file from path
-				$objPHPExcel = PHPExcel_IOFactory::load($file);
+				$objPHPExcel = PHPExcel_IOFactory::load($file_name);die;
 				//get only the Cell Collection
-				$cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+				/*$cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
 				//extract to a PHP readable array format
 				foreach ($cell_collection as $cell) {
 				    $column = $objPHPExcel->getActiveSheet()->getCell($cell)->getColumn();
@@ -70,7 +70,7 @@ class facs_calibur extends MY_Controller
 				$data['values'] = $arr_data;
 
 				echo "<pre>";
-				print_r($arr_data); die();
+				print_r($arr_data); die();*/
 
 		}
 
