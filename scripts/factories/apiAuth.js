@@ -52,7 +52,7 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 	apiAuth.logout = function(){
 		return $http.post('api/auth/logout')
 		.success(function(response){
-			$location.path( "/dashboard" );
+			$location.path( "/logout" );
 			$activityIndicator.stopAnimating() 
 			notify({ message:'Your session was ended'} );
 
