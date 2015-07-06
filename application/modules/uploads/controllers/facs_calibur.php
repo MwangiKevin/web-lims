@@ -36,7 +36,7 @@ class facs_calibur extends MY_Controller
         $file_ext = end($file_ext);
 
         //allowed exp file types
-        $allowed = array('exp', 'EXP');
+        $allowed = array('exp','EXP','xls','XLS','xlsx','XLSX');
 
         $file_type_array = explode("(", $file_name);
         $file_type_array = explode(").", end($file_type_array));
@@ -47,8 +47,6 @@ class facs_calibur extends MY_Controller
 
 				// get the files creation date and save it in an array
 				$file_date_time = date ("Y-m-d H:i:s", filemtime($file_tmp));
-
-
 				//read file from path
 				$objPHPExcel = PHPExcel_IOFactory::load($file_name);die;
 				//get only the Cell Collection
