@@ -71,6 +71,10 @@ class facs_calibur extends MY_Controller
 				print_r($arr_data); die();*/
 
 		}
+		else{
+			echo "Wrong file format. Upload again";
+			$this->load->view('facs_calibur_view');
+		}
 
 	}
 }
