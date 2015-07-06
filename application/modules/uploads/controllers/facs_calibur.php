@@ -47,7 +47,6 @@ class facs_calibur extends MY_Controller
 
         if(in_array($file_ext, $allowed)){
 		// Import uploaded file to Database
-		//read file from path
 
 		$excelReader = PHPExcel_IOFactory::createReader('Excel2007');
 		$excelReader->setReadDataOnly(true);
