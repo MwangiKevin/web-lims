@@ -20,7 +20,7 @@ app.controller('partnersCtrl',
      
     apiAuth.requireLogin();
 
-    Commons.activeMenu = "partners";
+    // Commons.activeMenu = "partners";
 
     $scope.partner_id = $stateParams.id;
 
@@ -58,17 +58,28 @@ app.controller('partnersCtrl',
                 'sExtends': 'collection',
                 'sButtonText': 'Save',
                 'aButtons': ['csv', 'xls', 'pdf']
+            },
+            {
+                'sExtends': 'text',
+                'sButtonText': '+ New Partner', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    window.location = "#/newPartner";
+                }
             }
         ]);
     $scope.dtColumns = [
-        DTColumnBuilder.newColumn('id').withTitle('#'),
+        DTColumnBuilder.newColumn('id').withTitle('Partner #'),
         DTColumnBuilder.newColumn('name').withTitle('Partner Name'),
-        DTColumnBuilder.newColumn('phone').withTitle('Phone'),
-        DTColumnBuilder.newColumn('email').withTitle('Email'),
+        DTColumnBuilder.newColumn('partner_phone').withTitle('Phone'),
+        DTColumnBuilder.newColumn('partner_email').withTitle('Email'),
         DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
-                return '<button onClick="edit_fcdrr('+data.partner_id+')">Edit</button>';
+                return '<button ng-show="sess.loggedin" onClick="edit_partner('+data.id+')">Edit</button>';
             }),
     ];
 
+    edit_partner = function(id){
+    	window.location = "#/editPartner/"+id;
+    }
 
-}]) 
+
+}]);

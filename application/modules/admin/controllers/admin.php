@@ -9,4 +9,11 @@ class admin extends MY_Controller {
 		$this->load->view("partners_v");
 
 	}
+
+	function editPartner(){
+
+		$this->load->view('editPartner_v');
+	}
+
+	
 }

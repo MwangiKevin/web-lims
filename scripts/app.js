@@ -96,6 +96,26 @@ var app = angular
 		}
 	})
 
+	.state('Logout',{
+		url: '/logout',		
+		abstract: false,
+		views:{
+			'main':{
+				templateUrl: 'login/logout',
+				controller:  'logoutCtrl'
+			},
+			// 'navbar':{
+			// 	templateUrl: 'login/logout',
+			// 	controller: 'navbarCtrl'
+			// },
+			// 'footer':{
+			// 	templateUrl: 'dashboard/footer',
+			// 	controller: ['$scope', function($scope){
+			// 	}]
+			// }
+		}
+	})
+
 	//common routes
 	
 	.state('Dashboard.main',{
@@ -214,8 +234,8 @@ var app = angular
 		url: '/editFacility/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'editFacility',
-				// controller:'editFacilityCtrl'
+				templateUrl: 'facilities/edit_facilities',
+				controller:'editFacilityCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -296,8 +316,8 @@ var app = angular
 		url: '/editCD4Device/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'editDevice',
-				// controller:'editCD4DeviceCtrl'
+				templateUrl: 'devices/editFacilityDevices',
+				controller:'editCD4DeviceCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -423,8 +443,8 @@ var app = angular
 		url: '/partners',
 		views:{
 			'main':{
-				// templateUrl: 'partners',
-				// controller:'partnersCtrl'
+				templateUrl: 'admin',
+				controller:'partnersCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -455,8 +475,8 @@ var app = angular
 		url: '/editPartner/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'editPartner',
-				// controller:'editPartnerCtrl'
+				templateUrl: 'admin/editPartner',
+				controller:'editPartnerCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
