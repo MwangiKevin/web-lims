@@ -248,8 +248,8 @@ var app = angular
 		url: '/newFacility',
 		views:{
 			'main':{
-				// templateUrl: 'newFacility',
-				// controller:'newFacilityCtrl'
+				templateUrl: 'facilities/newFacility',
+				controller:'newFacilityCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
