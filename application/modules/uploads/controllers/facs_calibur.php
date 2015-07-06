@@ -12,7 +12,7 @@ class facs_calibur extends MY_Controller
 	function __construct()
 	{
 		parent:: __construct();
-		$this->load->library('excel');
+		$this->load->library('PHPExcel/Classes/PHPExcel');
 	}
 
 	function index()
@@ -49,7 +49,11 @@ class facs_calibur extends MY_Controller
 		// Import uploaded file to Database
 		//read file from path
 
-		$objPHPExcel = PHPExcel_IOFactory::load($file_name);die;
+		$excelReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$excelReader->setReadDataOnly(true);
+		$objPHPExcel = PHPExcel_IOFactory::load($file_tmp);
+
+		// die;
 		//get only the Cell Collection
 		$cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
 		//extract to a PHP readable array format
