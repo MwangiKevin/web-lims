@@ -38,6 +38,13 @@ app.controller('newFacilityCtrl',
         })
     }
 
+    $scope.populateFtypes = function() { // fetch all facility types and populate them in the facility types model
+        var loaded_ftypes = Restangular.all('facility_types');
+        loaded_ftypes.getList().then(function(ftypes) {
+           $scope.facility_types = ftypes;
+        })
+    }
+
     $scope.populateCentralSites = function() { // fetch all facilities and populate them in the central sites model
         var loaded_central_sites = Restangular.all('facilities');
         loaded_central_sites.getList().then(function(list_central_sites) {
@@ -66,10 +73,15 @@ app.controller('newFacilityCtrl',
            $scope.facility_detail.central_site_id = $scope.selected.central.facility_id; 
     }
 
+    $scope.ftype_change = function(){ // assign the facility model a facility type id
+           $scope.facility_detail.facility_type_id = $scope.selected.ftype.id; 
+    }
+
 
     // run functions defined
     $scope.populatePartners(); 
     $scope.populateSubcounties();
     $scope.populateCentralSites();
+    $scope.populateFtypes();
 
 }])
