@@ -20,7 +20,7 @@
 		    </div>
 		    <div class="field">
 	        	<div class="ui horizontal label large ">Phone</div><div class="field"></div>
-		      	<input type="text" value="{{ facility_detail.facility_email }}">
+		      	<input type="text" value="{{ facility_detail.facility_phone }}">
 		    </div>
 		</div>
 
