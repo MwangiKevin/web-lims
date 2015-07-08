@@ -13,6 +13,8 @@ class facilities_m extends MY_Model{
 		$request_body = file_get_contents('php://input');
 		
 		$facility = json_decode($request_body,true);
+
+		print_r($facility);die;
 		
 		$facility_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility'");
 		

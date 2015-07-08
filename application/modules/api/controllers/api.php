@@ -249,4 +249,18 @@ class api extends MY_Controller {
 		}
 
 	}
+
+	public function facility_type($id=NULL)
+	{
+		$this->load->model("api_m");
+
+		$method = $this->_detect_method();
+
+		if ($method=="get"){
+			echo json_encode($this->api_m->get_facility_types($id),JSON_PRETTY_PRINT);
+		}
+
+	}
+
+	
 }
