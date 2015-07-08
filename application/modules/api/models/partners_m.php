@@ -114,6 +114,14 @@ class partners_m extends MY_Model{
 								WHERE 
 									`id` = '$id'
 								");
+		// echo $partner_updated = "UPDATE `partner` 
+		// 						SET 
+		// 							`name`='$partner[name]',
+		// 							`phone`='$partner[phone]',
+		// 							`email`='$partner[email]'
+		// 						WHERE 
+		// 							`id` = '$id'
+		// 						"; die;
 
 		return $partner_updated;
 	}
