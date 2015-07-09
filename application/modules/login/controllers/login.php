@@ -31,5 +31,8 @@ class login extends MY_Controller {
         }else{
             echo 'Invalid username password combination';
 		}
+	}	
+	public function logout(){
+		$this->load->view('logout_v');
 	}
 }

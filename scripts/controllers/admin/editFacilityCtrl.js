@@ -35,11 +35,15 @@ app.controller('editFacilityCtrl',
             }
         }
 
-       $scope.populateCounties = function() {
+       $scope.populateCounty = function(id) {
             if ($stateParams.id > 0) {
-                var loaded_counties = Restangular.all('counties');
-                loaded_counties.getList().then(function(county_load) {
-                   $scope.counties = county_load;
+                var loaded_county = Restangular.one('counties',id);
+                loaded_county.get().then(function(county_load) {
+                   $scope.county = county_load;
+
+                   $scope.facility_detail.county_id = $scope.county.id;
+                   $scope.facility_detail.county_name = $scope.county.region_name;
+
                 })
             }
         }
@@ -53,10 +57,23 @@ app.controller('editFacilityCtrl',
             }
         }
 
+        $scope.populatePartners = function() {
+            if ($stateParams.id > 0) {
+                var loaded_partners = Restangular.all('partners');
+                loaded_partners.getList().then(function(partners) {
+                   $scope.partners = partners;
+                })
+            }
+        }
+
+        $scope.sub_county_change =function(id){
+            $scope.populateCounty(id);
+        }
+
 
          $scope.populateFacility_details();
-         $scope.populateCounties();
          $scope.populateSubcounties();
+         $scope.populatePartners();
 
     
 }]);

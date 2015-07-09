@@ -96,6 +96,26 @@ var app = angular
 		}
 	})
 
+	.state('Logout',{
+		url: '/logout',		
+		abstract: false,
+		views:{
+			'main':{
+				templateUrl: 'login/logout',
+				controller:  'logoutCtrl'
+			},
+			// 'navbar':{
+			// 	templateUrl: 'login/logout',
+			// 	controller: 'navbarCtrl'
+			// },
+			// 'footer':{
+			// 	templateUrl: 'dashboard/footer',
+			// 	controller: ['$scope', function($scope){
+			// 	}]
+			// }
+		}
+	})
+
 	//common routes
 	
 	.state('Dashboard.main',{
@@ -248,8 +268,8 @@ var app = angular
 		url: '/newFacility',
 		views:{
 			'main':{
-				// templateUrl: 'newFacility',
-				// controller:'newFacilityCtrl'
+				templateUrl: 'facilities/newFacility',
+				controller:'newFacilityCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
