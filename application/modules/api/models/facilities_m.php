@@ -13,12 +13,6 @@ class facilities_m extends MY_Model{
 		$request_body = file_get_contents('php://input');
 		
 		$facility = json_decode($request_body,true);
-
-		echo "<pre>";
-
-		print_r($facility);die;
-
-		echo "</pre>";
 		
 		$facility_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility'");
 		
@@ -53,7 +47,7 @@ class facilities_m extends MY_Model{
 							'$facility[email]',
 							'$facility[phone]',
 							'$facility[rollout_status]'
-							)";
+							)"; 
 		
 
 		if(!$this->db->query($sql)){
@@ -144,24 +138,23 @@ class facilities_m extends MY_Model{
 
 		$facility = json_decode($request_fields, true);
 
-		$facility_updated = "UPDATE `facility` 
-										SET 
-											`name`='$facility[facility_name]',
-											`mfl_code`='$facility[facility_mfl_code]',
-											`site_prefix`='$facility[facility_site_prefix]',
-											`sub_county_id`='$facility[facility_sub_county_id]',
-											`facility_type_id`='$facility[facility_type_id]',
-											`level`='$facility[facility_level]',
-											`central_site_id`='$facility[central_site_id]',
-											`email`='$facility[facility_email]',
-											`phone`='$facility[facility_phone]',
-											`partner_id`='$facility[partner_id]',
-											`rollout_status`='$facility[facility_rollout_status]'
-										WHERE 
-											`id` = '$id'";
-		echo $facility_updated;
+		$facility_updated = R::getAll("UPDATE `facility` 
+												SET 
+													`name`='$facility[facility_name]',
+													`mfl_code`='$facility[facility_mfl_code]',
+													`site_prefix`='$facility[facility_site_prefix]',
+													`sub_county_id`='$facility[facility_sub_county_id]',
+													`facility_type_id`='$facility[facility_type_id]',
+													`level`='$facility[facility_level]',
+													`central_site_id`='$facility[central_site_id]',
+													`email`='$facility[facility_email]',
+													`phone`='$facility[facility_phone]',
+													`partner_id`='$facility[facility_partner_id]',
+													`rollout_status`='$facility[facility_rollout_status]'
+												WHERE 
+													`id` = '$id'");
 
-		//return $facility_updated;
+		return $facility_updated;
 	}
 
 	public function remove($id){
@@ -171,7 +164,7 @@ class facilities_m extends MY_Model{
 		
 		$facility_deleted = R::getAll("UPDATE `facility` 
 											SET 
-												`status`='$facility[status]'
+												`rollout_status`='$facility[rollout_status]'
 											WHERE 
 												`id` = '$id'
 											");

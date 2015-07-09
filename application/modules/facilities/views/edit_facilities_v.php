@@ -70,11 +70,21 @@
                             <small><span ng-bind-html="ftype.description | highlight: $select.search"></span></small>
                     </ui-select-choices>
                 </ui-select>
-            </div><div class="field"></div>
+            </div>
+            <div class="field">
+            	<div class="ui horizontal label large "> Rollout Status </div><div class="field"></div>
+            	<ui-select on-select="roll_outchange()" ng-model="selected.rollout" theme="selectize" >
+                    <ui-select-match placeholder="{{ facility_detail.status }}"> {{ $select.selected.name }}</ui-select-match>
+                        <ui-select-choices  repeat="choice in rollouts | filter: $select.search">
+                            <div ng-bind-html="choice.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
         </div>
 	  	<div class="ui primary button" ng-click="put_facility()"> Save Details </div>
 		<button class="ui button" ng-click="backFacilities()"> Back To Facilities </button>
-		{{ facility_detail }}
+		
 		<div style="height:150px"></div>
+		
 </form>
 </div>
