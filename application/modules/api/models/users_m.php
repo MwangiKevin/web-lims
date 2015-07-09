@@ -118,26 +118,12 @@ class users_m extends MY_Model{
 		
 		$request_fields = file_get_contents('php://input');
 
-		$facility = json_decode($request_fields, true);
+		$user = json_decode($request_fields, true);
 
-		$facility_updated = "UPDATE `facility` 
-										SET 
-											`name`='$facility[facility_name]',
-											`mfl_code`='$facility[facility_mfl_code]',
-											`site_prefix`='$facility[facility_site_prefix]',
-											`sub_county_id`='$facility[facility_sub_county_id]',
-											`facility_type_id`='$facility[facility_type_id]',
-											`level`='$facility[facility_level]',
-											`central_site_id`='$facility[central_site_id]',
-											`email`='$facility[facility_email]',
-											`phone`='$facility[facility_phone]',
-											`partner_id`='$facility[partner_id]',
-											`rollout_status`='$facility[facility_rollout_status]'
-										WHERE 
-											`id` = '$id'";
-		echo $facility_updated;
-
-		//return $facility_updated;
+		if(!is_null($id)){
+			$this->aauth->update_user($id, $user['email'],$user['pass'], $user['user_name']);
+		}
+	
 	}
 
 	public function remove($id){
