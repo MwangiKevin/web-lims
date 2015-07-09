@@ -87,9 +87,20 @@ class sub_counties_m extends MY_Model{
 
 			$sub_counties =  $sub_counties_res;	
 
+			if($verbose=='true'){
+
+				foreach ($sub_counties as $key => $value) {
+					$sub_counties[$key]['filter_type'] = 2;
+					$sub_counties[$key]['filter_id'] = $sub_counties[$key]['id'];
+				}
+			}
+
 		}else{
 
 			$sub_counties =  $sub_counties_res[0];	
+
+			$sub_counties['filter_type'] = 2;
+			$sub_counties['filter_id'] = $sub_counties['sub_county_id'];
 		}
 
 		if($is_datatable && $id==NULL){

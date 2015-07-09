@@ -115,6 +115,9 @@ class facilities_m extends MY_Model{
 				foreach ($facilities as $key => $value) {
 					$facility_devices = R::getAll("CALL `proc_api_get_facility_devices`('','".$value['facility_id']."','','','','','','')");
 					$facilities[$key]['devices'] = $facility_devices;
+
+					$facilities[$key]['filter_type'] = 1;
+					$facilities[$key]['filter_id'] = $facilities[$key]['id'];
 				}	
 
 			}
@@ -125,6 +128,9 @@ class facilities_m extends MY_Model{
 			if(sizeof($facilities)>0){
 				$facility_devices = R::getAll("CALL `proc_api_get_facility_devices`('','".$facilities['facility_id']."','','','','','','')");
 				$facilities['devices'] = $facility_devices;
+
+				$facilities['filter_type'] = 4;
+				$facilities['filter_id'] = $facilities[$key]['facility_id'];
 			}
 		}
 

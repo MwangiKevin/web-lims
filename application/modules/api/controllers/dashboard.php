@@ -386,9 +386,11 @@ class dashboard extends MY_Controller {
 			$entity_id = 0;
 		}
 		if(empty($start_date)){
-			$start_date = Date('Y');
+			$start_date = Date('Y-1-1');
 		}
-		
+		if(empty($end_date)){
+			$end_date = Date('Y-m-d');
+		}		
 
 		$results = $this->dashboard_m->get_expected_reporting_devices($entity_type,$entity_id,$start_date,$end_date);
 		echo json_encode($results);

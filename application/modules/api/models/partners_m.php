@@ -85,9 +85,20 @@ class partners_m extends MY_Model{
 
 			$partners =  $partners_res;	
 
+			if($verbose=='true'){
+				foreach ($partners as $key => $value) {
+
+					$partners[$key]['filter_type'] = 4;
+					$partners[$key]['filter_id'] = $partners[$key]['id'];
+				}	
+			}
+
 		}else{
 
 			$partners =  $partners_res[0];
+
+			$partners['filter_type'] = 4;
+			$partners['filter_id'] = $partners['partner_id'];
 		}
 
 		if($is_datatable && $id==NULL){
