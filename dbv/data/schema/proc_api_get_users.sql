@@ -4,6 +4,7 @@ BEGIN
                                 `u`.`id`,
                                 `u`.`id` AS `user_id`,
                                 `u`.`name` AS `user_name`,
+                                `u`.`email`,
                                 `u`.`banned`,
                                 `u`.`last_login`,
                                 `u`.`last_activity`
