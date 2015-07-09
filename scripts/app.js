@@ -502,6 +502,69 @@ var app = angular
 				templateUrl: 'dashboard/footer',
 			}
 		}
+	}).state('users',{
+		url: '/users',
+		views:{
+			'main':{
+				templateUrl: 'users',
+				controller:'usersCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('newUser',{
+		url: '/newUser',
+		views:{
+			'main':{
+				// templateUrl: 'newUser',
+				// controller:'newPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('editUser',{
+		url: '/editUser/{id:int}',
+		views:{
+			'main':{
+				templateUrl: 'users/edit',
+				controller:'editPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('viewUser',{
+		url: '/viewUser/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'viewPartner',
+				// controller:'viewPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
 	})
 
 }])

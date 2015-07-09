@@ -308,6 +308,8 @@
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editPartnerCtrl.js');?>"></script>
 
+	<script src="<?php echo base_url('scripts/controllers/usersCtrl.js');?>"></script>
+
 
 
 
