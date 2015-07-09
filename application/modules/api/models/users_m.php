@@ -77,6 +77,16 @@ class users_m extends MY_Model{
 				$users[$key]['user_groups']  = (array) $this->aauth->get_user_groups($users[$key]['id']);
 				$users[$key]['linked_entity_id']  = (int) $this->aauth->get_user_var("linked_entity_id",$users[$key]['id']);
 
+				if($users[$key]['default_user_group']['group_id']== 4){
+
+					$mfl = $users[$key]['email'];
+
+					$f_email =  R::getAll("SELECT f.email FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl'")[0]['id'];
+
+					$users[$key]['email'] = $f_email;
+
+				}
+
 			}
 
 		}else{
@@ -89,8 +99,18 @@ class users_m extends MY_Model{
 				$users['user_groups']  = (array) $this->aauth->get_user_groups($users['id']);
 				$users['linked_entity_id']  = (int) $this->aauth->get_user_var("linked_entity_id",$users['id']);
 
-				if($users['default_user_group']['group_id']== 4 OR $users['default_user_group']['group_id']== 3){
+				if($users['default_user_group']['group_id']== 3) {
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
+				}
+				else if($users['default_user_group']['group_id']== 4 ){
+					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
+
+					$mfl = $users['email'];
+
+					$f_email =  R::getAll("SELECT f.email FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl'")[0]['id'];
+
+					$users['email'] = $f_email;
+
 				}
 				else if($users['default_user_group']['group_id']== 6){
 					$users['linked_entity'] = $this->sub_counties_m->read($users['linked_entity_id']);
