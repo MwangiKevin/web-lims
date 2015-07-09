@@ -54,9 +54,6 @@ class MY_Model extends CI_Model{
 		return $categories;
 	}
 
-	
-	
-	
 	public function tester(){
 		return "Works";
 	}
@@ -75,6 +72,20 @@ class MY_Model extends CI_Model{
 					'recordsFiltered' 	=> 	$records_filtered,
 					'data' 				=> 	$data
 			);
+
+	}
+
+	protected function api_get_users( 	
+										$id = NULL , 
+										$search = NULL, 
+										$order_col = NULL , 
+										$order_dir = NULL, 
+										$limit_start = NULL , 
+										$limit_items = NULL, 
+										$if_get_count = NULL
+									){
+
+		return R::getAll("CALL `proc_api_get_users`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','$if_get_count')");
 
 	}
 }
