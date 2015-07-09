@@ -250,7 +250,7 @@ class api extends MY_Controller {
 
 	}
 
-	public function facility_type($id=NULL)
+	public function facility_types($id=NULL)
 	{
 		$this->load->model("api_m");
 

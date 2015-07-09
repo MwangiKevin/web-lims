@@ -65,8 +65,9 @@
                 <div class="ui horizontal label large "> Facility Type  </div><div class="field"></div>
                 <ui-select on-select="ftype_change()" ng-model="selected.ftype" theme="selectize" >
                     <ui-select-match placeholder="Select a Facility Type"> {{ $select.selected.name }}</ui-select-match>
-                        <ui-select-choices  repeat="partner in partners | filter: $select.search">
-                            <span ng-bind-html="partner.name | highlight: $select.search"></span>
+                        <ui-select-choices  repeat="ftype in facility_types | filter: $select.search">
+                            <div ng-bind-html="ftype.initials | highlight: $select.search"></div>
+                            <small><span ng-bind-html="ftype.description | highlight: $select.search"></span></small>
                     </ui-select-choices>
                 </ui-select>
             </div><div class="field"></div>
@@ -74,6 +75,6 @@
         <div class="ui primary button"> Save Details </div>
         <button class="ui button" ng-click="backFacilities()"> Back To Facilities </button>
         {{ facility_detail }}
-        <div style="height:50px"></div>
+        <div style="height:150px"></div>
 </form>
 </div>
