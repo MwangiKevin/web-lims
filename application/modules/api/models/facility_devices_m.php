@@ -105,6 +105,9 @@ class facility_devices_m extends MY_Model{
 
 						$fac_dev[$key]['assigned_to_facility'] = false;
 					}
+
+					$fac_dev[$key]['filter_type'] = 5;
+					$fac_dev[$key]['filter_id'] = $fac_dev[$key]['id'];
 				}
 			}
 
@@ -125,6 +128,9 @@ class facility_devices_m extends MY_Model{
 					$fac_dev['assigned_to_facility'] = false;
 				}
 			}	
+
+			$fac_dev['filter_type'] = 5;
+			$fac_dev['filter_id'] = $fac_dev['id'];
 		}
 
 		

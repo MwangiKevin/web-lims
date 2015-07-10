@@ -68,4 +68,8 @@ class auth extends MY_Controller {
 
 	}
 
+	public function get_user_var($id=null){
+			echo json_encode($this->aauth->get_user_var("linked_entity_id",$id));
+	}
+
 }

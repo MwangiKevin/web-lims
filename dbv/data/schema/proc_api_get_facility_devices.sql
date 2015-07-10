@@ -1,6 +1,7 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_facility_devices`(id int(11),fac_id int(11),search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN
         SET @QUERY =    " SELECT 
+                                `f_d`.`id`                          AS  `id`,
                                 `dev`.`name`                        AS  `device_name`,
                                 `f_d`.`id`                          AS  `facility_device_id`,
                                 `f_d`.`facility_id`                 AS  `facility_id`,

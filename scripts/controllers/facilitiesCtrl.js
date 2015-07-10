@@ -55,7 +55,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
         DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
             }),
     ];
     $scope.dtColumnDefs = [
@@ -69,8 +69,25 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         window.location = "#/viewFacility/"+id;
     }
 
-    remove_facility = function(id){
-        window.location = "#/removeFacility/"+id;
+    remove_facility = function(id){ // Deactivate Facility
+        //window.location = "#/removeFacility/"+id;
+        swal({
+            title: "Are you sure?",
+            text: "This will mean device will not be rolled out to this facility",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#00b5ad",
+            confirmButtonText: "Yes, Deactivate it!",
+            closeOnConfirm: false,
+        }, function() {
+            $scope.partner.delete().then(function(partner) {
+                swal("Saved!", "Your Changes Have Been Updated", "success");
+                $state.transitionTo('partners');
+            }, function(response) {
+                console.log("Error with status code", response);
+                swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");
+            });
+        });
     }
 
 
