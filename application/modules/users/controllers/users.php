@@ -24,7 +24,7 @@ class users extends MY_Controller {
 	}
 
 	/* Load the new user view */
-	public function new(){
+	public function new_user(){
 		$this->load->view("new_user_v");
 	}
 
