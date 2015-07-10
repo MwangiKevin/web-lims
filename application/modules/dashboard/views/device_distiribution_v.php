@@ -16,7 +16,7 @@
 		width:75%;
 	}
 	#top_chart_container{
-		width: 75%;
+		width: 100%;
 		overflow-y:auto;
 		overflow-x:auto;
 	}
@@ -36,7 +36,7 @@
 		</div>
 		<div style="float:right; width: 50%;">
 			<h4>CD4 Equipment</h4>
-			<table style = "border: 1px solid #DDD;" class="span10">
+			<table style = "border: 1px solid #DDD;" class="span10" ng-class="{true: 'active', false: 'disabled'}[table_data.loading]">
 	            <thead class="even" style="background:#f0f0f0" >
 	                <tr>
 	                    <td>Device</td>
@@ -64,8 +64,8 @@
 			<highchart id="equipment_tests_pie" config="equipment_tests_pie" class="span10"></highchart>
 		</div>
 		<div style="float:right; width: 50%;">
-			<h4>CD4 Tests Equipment</h4>
-			<table style = "border: 1px solid #DDD;" class="span10">
+			<h4># of Tests Per Equipment</h4>
+			<table style = "border: 1px solid #DDD;" class="span10" ng-class="{true: 'active', false: 'disabled'}[equipment_tests_data.loading]">
 	            <thead class="even" style="background:#f0f0f0" >
 	                <tr>
 	                    <td>Device</td>
@@ -76,7 +76,7 @@
 	            </thead>
 	            <tbody>
 		            <tr style = "border: 1px solid #DDD;" ng-repeat="t_data in equipment_tests_data">
-		                <td style="background-color: #CCCCCC;"  ><center><a href="">{{t_data.name}}</a></center></td>
+		                <td style="background-color: #CCCCCC;"  ><center><a href="">{{t_data.equipment}}</a></center></td>
 		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.count}}</center></td>
 		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.valid}}</center></td>
 		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.errors}}</center></td>

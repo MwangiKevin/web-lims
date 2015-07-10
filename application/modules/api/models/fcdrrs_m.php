@@ -143,8 +143,39 @@ class fcdrrs_m extends MY_Model{
 		$year = (int) $this->input->get("year");
 		$month = (int) $this->input->get("month");
 
+		$is_datatable = $this->input->get("datatable");
 
-		$fcdrr_res = R::getAll("CALL `proc_get_fcdrrs`('$id','$facility','$year','$month')");
+		$search = $this->input->get("search");
+		$order = $this->input->get("order");
+		$limit_start = $this->input->get("limit_start");
+		$limit_items = $this->input->get("limit_items");
+		
+		$draw;$order_col;$order_dir;
+
+		$total_records = 0;
+		$records_filtered = 0;
+
+		if($is_datatable){
+			$search = $search['value'];
+			$search = addslashes($search);
+
+			$columns = $this->input->get("columns");
+
+			$order_col_index = $order[0]['column'];
+			$order_col = $columns[$order_col_index]['data'];
+			$order_dir = $order[0]['dir'];
+
+
+			$limit_start = $this->input->get("start");
+			$limit_items = $this->input->get("length");
+			$draw = $this->input->get("draw");
+
+			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','','$order_col','$order_dir','','','true')")[0]['count'];
+			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
+		}
+		$search = addslashes($search);
+
+		$fcdrr_res = R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
 		
 		if($id==NULL){
 
@@ -160,10 +191,19 @@ class fcdrrs_m extends MY_Model{
 			$fcdrr = $fcdrr_res[0];	
 			if($fcdrr_res[0]){
 				$fcdrr_commodities = R::getAll("CALL `proc_get_fcdrr_commodities`('','".$fcdrr['fcdrr_id']."')");
-				$fcdrr_facility = R::getAll("CALL `proc_get_facilities`('".$fcdrr_res[0]['facility_id']."','','','')");
+				$fcdrr_facility = R::getAll("CALL `proc_api_get_facilities`('".$fcdrr_res[0]['facility_id']."','','','','','','')");
 				$fcdrr['commodities'] = $fcdrr_commodities;
 				$fcdrr['facility'] = $fcdrr_facility[0];
 			}
+		}
+
+
+		if($is_datatable){
+
+			$fcdrr = $this->arr_to_dt_response($fcdrr,$draw,$total_records,$records_filtered);
+
+
+		}else{
 		}
 
 		return $fcdrr;

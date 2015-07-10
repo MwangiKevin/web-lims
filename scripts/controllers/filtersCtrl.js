@@ -23,13 +23,14 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 
 	$rootScope.Filters = {
 
-				change : 0,
+				change_tst : 0,
+				change_dev : 0,
 				selected 	: 	{
 					dates 	: 	{
 						start : '',
 						end  : ''
 					},
-					entity:[]
+					entity:{filter_type:0,filter_id:0}
 				},
 				getFilterEntity 	: function(){return $rootScope.Filters.selected.entity},
 				getFilterStartDate 	: function(){return $rootScope.Filters.selected.dates.start},
@@ -37,22 +38,25 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 			};
 
 	$scope.$watch('filters.selected.dates.start', function(){
-
-		$rootScope.Filters.change += 1;
+		
+		$rootScope.Filters.change_tst += 1;
+		$rootScope.Filters.change_dev += 1;
 		$rootScope.Filters.selected.dates.start = $scope.filters.selected.dates.start;
 
     });
 
 	$scope.$watch('filters.selected.dates.end', function(){	
 
-		$rootScope.Filters.change += 1;			
+		$rootScope.Filters.change_tst += 1;		
+		$rootScope.Filters.change_dev += 1;	
 		$rootScope.Filters.selected.dates.end = $scope.filters.selected.dates.end;
 
     });
 
 	$scope.$watch('filters.selected.entity', function(){	
 
-		$rootScope.Filters.change += 1;	
+		$rootScope.Filters.change_tst += 1;	
+		$rootScope.Filters.change_dev += 1;
 		$rootScope.Filters.selected.entity = $scope.filters.selected.entity;
 
     });

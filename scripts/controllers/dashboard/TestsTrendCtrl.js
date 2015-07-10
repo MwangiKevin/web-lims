@@ -1,4 +1,4 @@
-app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function($scope,Filters,Commons,$http){
+app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$http',function($scope,$rootScope,Filters,Commons,$http){
 
 	$scope.toggleLoading = function () {
 		
@@ -6,6 +6,35 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 		this.tests_vs_errors_pie.loading = !this.tests_vs_errors_pie.loading
 		this.yearly_testing_trends.loading = !this.yearly_testing_trends.loading
 	}
+	//	
+	//FILTER. Variables plus watch function
+	//
+	entity_type = '';
+	entity_id = '';
+	start_date = '';
+	end_date = '';
+	 $rootScope.$watch('Filters.change_tst', function(){
+        $scope.toggleLoading();
+	 	entity_type = $rootScope.Filters.selected.entity.filter_type;//facility,partener..etc
+	 	entity_id = $rootScope.Filters.selected.entity.filter_id; 
+	 	start_date = $rootScope.Filters.selected.dates.start;
+	 	end_date = $rootScope.Filters.selected.dates.end;
+	 	
+	 	//redraw the charts
+	 	$scope.testing_trends_linegraph_series();//yAxis
+	 	$scope.testing_trends_linegraph_categories();//xAxis
+	 	
+	 	$scope.yearly_testing_trends_series();
+	 	$scope.critical_table();
+	 	$scope.tests_vs_errors_pie_data()
+
+	});
+
+
+
+
+
+	
 	//
 	//
 	//TESTING TRENDS LAST 4 YEARS
@@ -15,24 +44,37 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
 	//yAxis data line grpah[4yrs]
 	$scope.testing_trends_linegraph_series = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_testing_trends/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_testing_trends"	,
+			{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date,
+					endDate : end_date					
+				}
+			})
 		.success(function(response){
 			$scope.testing_trends.series= response;
+            $scope.testing_trends.loading = false;
 		});	
 	}
 	$scope.testing_trends_linegraph_series();
 	
+
 	//categoreis for line graph xAxis [4yrs]
-	$scope.testing_trends_linegraph_categories =function(){
-     return $http.get(
-         Commons.baseURL+"api/dashboard/return_testing_trends_categories"			
-         )
-     .success(function(response){
-         $scope.testing_trends.xAxis.categories= response;
-     });
- }
- $scope.testing_trends_linegraph_categories();	
+	$scope.testing_trends_linegraph_categories = function() {
+		return $http.get(Commons.baseURL + "api/dashboard/return_testing_trends_categories",{
+			params:{
+				startDate : start_date,
+				endDate : end_date
+			}
+		})
+		.success(function(response) {
+			$scope.testing_trends.xAxis.categories = response;
+		});
+	}
+	$scope.testing_trends_linegraph_categories();
+
 
  $scope.testing_trends = {
   chart: {   
@@ -44,14 +86,14 @@ app.controller('TestsTrendCtrl',['$scope', 'Filters', 'Commons','$http',function
     height:250
 },
 title: {
-    text: 'Testing Trends (last 4 years)',
+    text: 'Testing Trends',
             x: -20 //center   
         },
         xAxis: {
             categories: [],
             labels: {
                 rotation: -45,
-                step : 3,
+                // step : 3,
                 align: "right"
             }
         },
@@ -97,11 +139,17 @@ title: {
 	//series yearly testing trends column graph
 	$scope.yearly_testing_trends_series = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/return_yearly_testing_trends_categories/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/return_yearly_testing_trends_categories",
+			{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id				
+				}
+			})
 		.success(function(response){
 			$scope.yearly_testing_trends.xAxis.categories= response[0];
 			$scope.yearly_testing_trends.series = response[1];
+            $scope.yearly_testing_trends.loading = false;
 		});	
 	}
 	$scope.yearly_testing_trends_series();
@@ -162,8 +210,14 @@ title: {
     
     $scope.tests_vs_errors_pie_data = function(){
       return $http.get(
-         Commons.baseURL+"api/dashboard/test_errors_pie"			
-         )
+         Commons.baseURL+"api/dashboard/test_errors_pie",{
+         	params:{
+         		entityType : entity_type,
+				entityId : entity_id,
+				startDate : start_date,
+				endDate : end_date	
+         	}	
+         })
       .success(function(response){
 
             $scope.tests_vs_errors_pie.series[0].data[0].y = parseInt(response.errors);
@@ -172,6 +226,7 @@ title: {
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[1].y = parseInt(response.passed);
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[2].y = parseInt(response.failed);
             $scope.tests_vs_errors_pie.options.drilldown.series[0].data[0].y = parseInt(response.errors);
+            $scope.tests_vs_errors_pie.loading = false;
         });	
   }
   $scope.prepare_tests_vs_errors_pie = function(){
@@ -201,14 +256,6 @@ $scope.prepare_tests_vs_errors_pie();
         },
         subtitle: {
             text: 'Tests and Device Errors'
-        },
-        plotOptions: {
-            series: {
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}: {point.y:.1f}%'
-                }
-            }
         },
         options: {
             chart: {
@@ -252,11 +299,11 @@ $scope.prepare_tests_vs_errors_pie();
                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
                 borderColor: '#CCC',
                 borderWidth: 1,
-                shadow: false
+                shadow: true
             },
             tooltip: {
                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}, {point.percentage:.2f}%</b> of total<br/>'
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}, {point.percentage:.2f}%</b> of total<br/>'
             },           
             credits:{
                 enabled:false
@@ -304,8 +351,14 @@ $scope.prepare_tests_vs_errors_pie();
 	//
 	$scope.critical_table = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_tests/0/0/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_tests",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date,
+					endDate : end_date	
+				}	
+			})
 		.success(function(response){
 			$scope.table_data = response;
 		});	

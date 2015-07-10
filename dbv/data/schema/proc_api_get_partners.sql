@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_partners`(P_id int(11),search varchar(25), limit_start int(3), limit_items int(3))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_partners`(P_id int(11),search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN 
 	SET @QUERY =    "SELECT 
 							`par`.`id`,
@@ -10,6 +10,18 @@ BEGIN
 						FROM `partner` `par`
                         WHERE 1 
 						";
+
+        IF (get_count = 'true')
+        THEN
+            SET @QUERY =    "SELECT
+                                  COUNT(*) AS `count`
+                                FROM `partner` `par`
+                                WHERE 1 
+                            ";
+        ELSE
+
+            SET @QUERY = @QUERY;
+        END IF;
 
         IF (P_id = 0 || P_id = '')
         THEN
@@ -26,18 +38,29 @@ BEGIN
         END IF;
 
 
-        SET @QUERY = CONCAT(@QUERY, ' GROUP BY `par`.`id` ORDER BY `par`.`name` ASC ');
+        -- SET @QUERY = CONCAT(@QUERY, ' GROUP BY `par`.`id` ');
 
         CASE 
-            WHEN (limit_start = 0 || limit_start = '') AND (limit_items <> 0 || limit_items <> '') 
+            WHEN ((order_col = '' || order_col IS NULL) AND (get_count <> 'true'))
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY `par`.`name`  asc ');
+
+            WHEN ((get_count <> 'true') AND order_col <> '' AND order_col IS NOT NULL)
+                THEN SET @QUERY = CONCAT(@QUERY, ' ORDER BY ', order_col ,' ', order_dir, ' ');
+            ELSE
+                SET @QUERY = @QUERY;
+        END CASE; 
+
+   
+        CASE 
+            WHEN (limit_start = 0 || limit_start = '') AND (limit_items > 0 || limit_items <> '') AND  (get_count <> 'true')
                 THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT  0 ,  ', limit_items, ' ');
-            WHEN (limit_start <> 0 || limit_start <> '') AND (limit_items <> 0 || limit_items <> '')
+            WHEN (limit_start > 0 || limit_start <> '') AND (limit_items > 0 || limit_items <> '') AND    (get_count <> 'true')
                 THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT ',limit_start,' , ', limit_items, ' ');
             ELSE
                 SET @QUERY = @QUERY;
         END CASE;
-
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
-        SELECT @QUERY;
-    END;
+        -- SELECT @QUERY;
+        -- SHOW ERRORS;
+    END

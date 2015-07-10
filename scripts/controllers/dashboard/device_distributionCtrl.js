@@ -1,11 +1,46 @@
-app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http',function($scope,Filters,Commons,$http){
+app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$http',function($scope, $rootScope, Filters,Commons,$http){
+	
+
+	$scope.table_data ={loading:true};
+	$scope.equipment_tests_data ={loading:true};
+
 	$scope.toggleLoading = function () {
 		
 		this.device_distribution_stack.loading = !this.device_distribution_stack.loading
 		this.cd4_equipment_pie.loading = !this.cd4_equipment_pie.loading
 		this.equipment_tests_pie.loading = !this.equipment_tests_pie.loading
 		this.expected_reporting_devices.loading = !this.expected_reporting_devices.loading
+		$scope.table_data.loading		=	!$scope.table_data.loading;
+		$scope.equipment_tests_data.loading 	=	!$scope.equipment_tests_data.loading;
 	}
+
+	
+	//	
+	//FILTER. Variables plus watch function
+	//
+	entity_type = '';
+	entity_id = '';
+	start_date = '';
+	end_date = '';
+
+
+	 $rootScope.$watch('Filters.change_dev', function(){
+	 	entity_type = $rootScope.Filters.selected.entity.filter_type;//facility,partener..etc
+	 	entity_id = $rootScope.Filters.selected.entity.filter_id; 
+	 	start_date = $rootScope.Filters.selected.dates.start;
+	 	end_date = $rootScope.Filters.selected.dates.end;
+	 	
+	 	//redraw the charts
+	 	$scope.device_distribution_stack_data();
+	 	$scope.equipment_pie_data();
+	 	$scope.equipment_tests_pie_data();
+	 	$scope.expected_reporting_devices_data();
+	 	$scope.cd4_equipment_table();
+	 	$scope.cd4_equipment_tests_table();
+
+	 	$scope.toggleLoading();
+	});
+
 
 	//
 	//
@@ -32,6 +67,7 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 			}
 			$scope.device_distribution_stack.xAxis.categories = category;
 			$scope.device_distribution_stack.series[0].data = num_of_devices; 
+			$scope.device_distribution_stack.loading =false;
 		});	
 	}
 	$scope.device_distribution_stack_data();
@@ -40,15 +76,20 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             type: 'column'
         },
         title: {
-            text: 'Stacked column chart'
+            text: 'Device Distribution'
         },
         xAxis: {
-            categories: []
+            categories: [],
+            labels: {
+                rotation: -45,
+                // step : 3,
+                align: "right"
+            }
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'Total fruit consumption'
+                text: 'No of devices'
             },
             stackLabels: {
                 enabled: true,
@@ -56,18 +97,18 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
                     fontWeight: 'bold',
                     color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
                 }
-            }
+            } 
         },
         legend: {
             align: 'right',
-            x: -30,
+            // x: -30,
             verticalAlign: 'top',
-            y: 25,
-            floating: true,
+            // y: 25,
+            floating: false,
             backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
             borderColor: '#CCC',
             borderWidth: 1,
-            shadow: false
+            shadow: true
         },
         tooltip: {
             formatter: function () {
@@ -89,7 +130,9 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             }
         },
         series: [{
-            data: []
+            name:"Devices",
+            data: [],
+            type: "column",
         }]
 	}
 	//
@@ -99,11 +142,17 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.equipment_pie_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_cd4_devices_pie/0/0"			
+			Commons.baseURL+"api/dashboard/get_cd4_devices_pie",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id
+				}
+			}
+
 			)
 		.success(function(response){
 			$scope.cd4_equipment_pie.series[0].data = response;
-			// console.log($scope.cd4_equipment_pie.series[0].data);
+			$scope.cd4_equipment_pie.loading = false;
 		});	
 	}
 	$scope.equipment_pie_data();
@@ -111,27 +160,45 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 		chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
-            plotShadow: false
+                plotShadow: true
         },
         title: {
             text: 'CD4 Equipment'
+        },         
+        credits:{
+            enabled:false
         },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        options: {
+	        plotOptions: {
+	            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                showInLegend: true
+	            }
+	        }, 
+	        tooltip: {
+	            pointFormat: '{series.name}: <b>{point.y},<b>{point.percentage:.1f}%</b>'
+	        },  
+	      	legend: {
+	            align: 'right',
+	            // x: -70,
+	            verticalAlign: 'bottom',
+	            // y: 20,
+	            floating: true,
+	            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+	            borderColor: '#CCC',
+	            borderWidth: 1,
+	            shadow: true
+	        }
         },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                }
-            }
-        },
+       
         series: [{
             type: 'pie',
-            name: 'Browser share',
+            size: '20',
+            name: '# Devices',
             data: []
         }]
 	}	
@@ -142,11 +209,17 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.equipment_tests_pie_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_devices_tests_pie/0/0/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_devices_tests_pie",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date,
+					endDate : end_date	
+				}
+			})
 		.success(function(response){
 			$scope.equipment_tests_pie.series[0].data = response;
-			// console.log($scope.equipment_tests_pie.series[0].data);
+			$scope.equipment_tests_pie.loading = false;
 		});	
 	}
 	$scope.equipment_tests_pie_data();
@@ -154,28 +227,40 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 		chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
-                plotShadow: false,
-                width: 50
+                plotShadow: true,
             },
         title: {
-            text: 'CD4 Tests & Equipment'
+            text: '# of Tests per Equipment'
         },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        options: {
+	        plotOptions: {
+	            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                showInLegend: true
+	            }
+	        }, 
+	        tooltip: {
+	            pointFormat: '{series.name}: <b>{point.y},<b>{point.percentage:.1f}%</b>'
+	        },
+	      	legend: {
+	            align: 'right',
+	            // x: -70,
+	            verticalAlign: 'bottom',
+	            // y: 20,
+	            floating: true,
+	            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+	            borderColor: '#CCC',
+	            borderWidth: 1,
+	            shadow: true
+	        }
         },
-        plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
-            },
         series: [{
 	                type: 'pie',
-	                name: 'Percentage',
+	                name: '# of Tests',
 	                size: '20',
 	                data: [{"name":"Alere PIMA","y":0,"sliced":false,"selected":false},{"name":"BD FACS Calibur","y":0,"sliced":false,"selected":false},{"name":"BD Facs Count","y":0,"sliced":false,"selected":false},{"name":"BD Facs Presto","y":0,"sliced":false,"selected":false},{"name":"Cyflow Partec ","y":0,"sliced":false,"selected":false}]
                 }]
@@ -187,15 +272,21 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.expected_reporting_devices_data = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_expected_reporting_devices/0/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_expected_reporting_devices",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date,
+					endDate : end_date	
+				}
+			})
 		.success(function(response){
-			$scope.expected_reporting_devices.series = response;
-			// alert($scope.table_data);
+			$scope.expected_reporting_devices.xAxis.categories = response.categories;
+			$scope.expected_reporting_devices.series = response.series;
+			$scope.expected_reporting_devices.loading = false;
 		});	
 	}
 	$scope.expected_reporting_devices_data();
-	//$scope.expected_reporting_devices();
 	$scope.expected_reporting_devices =  {
 		chart: { 
             plotBackgroundColor: null,
@@ -206,11 +297,11 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
             height:250
         },
         title: {
-            text: 'Expected Reporting Devices (Year <?php echo $year;?>)',
+            text: 'Expected Reporting Devices (Yearly)',
             x: -20 //center   
         },
         xAxis: {
-            categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+            categories: [],
             labels: {
                 rotation: -45,
                 step : 0,
@@ -258,11 +349,15 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.cd4_equipment_table = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_devices_table/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_devices_table",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id
+				}
+			})
 		.success(function(response){
 			$scope.table_data = response;
-			// alert($scope.table_data);
+			$scope.table_data.loading = false;
 		});	
 	}
 	$scope.cd4_equipment_table();
@@ -275,10 +370,17 @@ app.controller('device_distributionCtrl',['$scope', 'Filters', 'Commons','$http'
 	//
 	$scope.cd4_equipment_tests_table = function(){
 		return $http.get(
-			Commons.baseURL+"api/dashboard/get_devices_tests_table/0/0/0/0"			
-			)
+			Commons.baseURL+"api/dashboard/get_devices_tests_table",{
+				params:{
+					entityType : entity_type,
+					entityId : entity_id,
+					startDate : start_date,
+					endDate : end_date	
+				}
+			})
 		.success(function(response){
-			$scope.equipment_tests_data = response			
+			$scope.equipment_tests_data = response;	
+			$scope.equipment_tests_data.loading = false;
 		});	
 	}
 	$scope.cd4_equipment_tests_table();

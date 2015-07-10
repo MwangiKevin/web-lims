@@ -9,6 +9,20 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 	})	
 	.withDataProp('data')
 	.withOption('processing', true)
+	.withOption('createdRow', function( row, data, index){
+		 if ( data.valid ==1 ) {
+		 	$('td:eq(5)', row).css("color","blue");
+         }else{
+         	$('td:eq(5)', row).css("color","red");
+         	$('td:eq(3)', row).html("unavailable");
+         }
+
+		 if ( data.valid ==1 && data.cd4_count >= 500) {
+		 	$('td:eq(3)', row).css("color","green");
+         }else if (data.valid ==1 && data.cd4_count < 500){
+         	$('td:eq(3)', row).css("color","red");
+         }
+	})
 	.withOption('serverSide', true)
 	.withPaginationType('full_numbers')
 
@@ -37,10 +51,21 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
             }
         ]);
 	$scope.dtColumns = [
-		DTColumnBuilder.newColumn('id').withTitle('Test ID'),
+		DTColumnBuilder.newColumn('id').withTitle('Test #'),
 		DTColumnBuilder.newColumn('sample').withTitle('Sample/Patient ID'),
-		DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
+		DTColumnBuilder.newColumn('result_date').withTitle('Date'),
 		DTColumnBuilder.newColumn('cd4_count').withTitle('CD4 Count'),
+		DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),        
+        DTColumnBuilder.newColumn('valid').withTitle('Action').renderWith(function(data, type, full, meta) {
+        	if(parseInt(data) == 0){
+                return 'Error';
+            }else{
+            	 return 'Valid Test';
+
+            }
+            }),
+		DTColumnBuilder.newColumn('device_name').withTitle('Device'),
+		DTColumnBuilder.newColumn('device_serial_number').withTitle('Device Serial Num'),
 		DTColumnBuilder.newColumn('county_name').withTitle('County'),
 		DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible()
 	];

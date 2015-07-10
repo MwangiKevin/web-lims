@@ -1,37 +1,77 @@
-app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', function ($scope,Commons,Restangular,$activityIndicator ) {
-
-    Commons.requireNoLogin();
-
-    Commons.activeMenu = "facilities";
-
-    $scope.facilitiesColl = [];
-
-    $scope.promise=null;
-    
-    var baseFacilities = Restangular.all('facilities');
-    $activityIndicator.startAnimating();
-    
-    $scope.promise =  baseFacilities.getList({verbose:true}).then(function(fac) {
-        $scope.facilitiesColl = fac;
-        $activityIndicator.stopAnimating();
-    });
-    $scope.facilitiesColl = baseFacilities;
+app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
 
 
-    //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
-    $scope.displayedCollection = [].concat($scope.facilitiesColl);
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+    .withOption('ajax', {
+        url: Commons.baseURL+'api/facilities',
+        data:{datatable:true,verbose:true},
+        type: 'GET'
+    })  
+    .withDataProp('data')
+    .withOption('processing', true)
+    .withOption('serverSide', true)
+    .withOption('scrollX', '100%')
+    .withPaginationType('full_numbers')
 
-    //add to the real data holder
-    $scope.addFacility = function addFacility(fac) {
-        $scope.facilitiesColl.push(fac);
-        id++;
-    };
 
-    //remove to the real data holder
-    $scope.removeItem = function removeItem(row) {
-        var index = $scope.facilitiesColl.indexOf(row);
-        if (index !== -1) {
-            $scope.facilitiesColl.splice(index, 1);
-        }
+    .withColVis()
+    // .withColVisStateChange(stateChange)
+    .withColVisOption('aiExclude', [1])
+
+
+    .withOption('responsive', true)
+
+    .withColReorder()
+    // .withColReorderOrder([1, 0, 2])
+    .withColReorderOption('iFixedColumnsRight', 1)
+    // .withColReorderCallback(function() {
+    //         console.log('Columns order has been changed with: ' + this.fnOrder());
+    //     })
+
+    .withTableTools('assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+    .withTableToolsButtons([
+            'copy',
+            'print', {
+                'sExtends': 'collection',
+                'sButtonText': 'Save',
+                'aButtons': ['csv', 'xls', 'pdf']
+            },
+            {
+                'sExtends': 'text',
+                'sButtonText': '+ New Facility', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    window.location = "#/newFacility";
+                }
+            }
+        ]);
+    $scope.dtColumns = [
+        DTColumnBuilder.newColumn('facility_id').withTitle('facility #'),
+        DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
+        DTColumnBuilder.newColumn('facility_email').withTitle('Email'),
+        DTColumnBuilder.newColumn('facility_phone').withTitle('Phone'),
+        DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
+        DTColumnBuilder.newColumn('county_name').withTitle('County'),
+        DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county'),
+        DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
+        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
+        DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
+            }),
+    ];
+    $scope.dtColumnDefs = [
+        // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
+    ];
+
+    edit_facility = function(id){
+        window.location = "#/editFacility/"+id;
     }
+    view_facility = function(id){
+        window.location = "#/viewFacility/"+id;
+    }
+
+    remove_facility = function(id){
+        window.location = "#/removeFacility/"+id;
+    }
+
+
 }]);

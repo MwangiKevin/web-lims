@@ -17,7 +17,7 @@ BEGIN
 			ORDER BY `d`.`name` ASC;
 		ELSE	
 			CASE `user_group_id`
-			WHEN 3 THEN
+			WHEN 4 THEN
 			
 				SELECT 
 					`d`.`name` AS `equipment_name`,
@@ -35,7 +35,7 @@ BEGIN
 				GROUP BY `d`.`name`,`year` 
 			ORDER BY `d`.`name` ASC;
 				
-			WHEN 9 THEN
+			WHEN 3 THEN
 			
 				SELECT 
 					`dev`.`name` AS `equipment_name`,
@@ -44,18 +44,18 @@ BEGIN
 					SUM(CASE WHEN `c_t`.`valid`= '1'    THEN 1 ELSE 0 END) AS `valid`			
 				FROM `device` `dev`
 					LEFT JOIN `cd4_test` `c_t`
-					ON `c_t`.`device_id` = `e`.`id`
+					ON `c_t`.`device_id` = `dev`.`id`
 					LEFT JOIN `facility` `f`
 					ON `c_t`.`facility_id` = `f`.`id`
-					LEFT JOIN `district` `d`
-					ON `d`.`id` = `f`.`district_id`
+					LEFT JOIN `sub_county` `s_c`
+					ON `s_c`.`id` = `f`.`sub_county_id`
 				WHERE 1
 					AND `c_t`.`result_date`<= CURDATE()
-					AND `region_id` = `user_filter_used`
+					AND `county_id` = `user_filter_used`
 				GROUP BY `dev`.`name`,`year` 
 				ORDER BY `dev`.`name` ASC;
 				
-			WHEN 8 THEN
+			WHEN 2 THEN
 				SELECT 
 					`dev`.`name` AS `equipment_name`,
 					YEAR(`c_t`.`result_date`) AS `year`,
@@ -63,17 +63,17 @@ BEGIN
 					SUM(CASE WHEN `c_t`.`valid`= '1'    THEN 1 ELSE 0 END) AS `valid`			
 				FROM `device` `dev`
 					LEFT JOIN `cd4_test` `c_t`
-					ON `c_t`.`equipment_id` = `dev`.`id`
+					ON `c_t`.`device_id` = `dev`.`id`
 					LEFT JOIN `facility` `f`
 					ON `c_t`.`facility_id` = `f`.`id`
-					LEFT JOIN `district` `d`
-					ON `d`.`id` = `f`.`district_id`
+					LEFT JOIN `sub_county` `s_c`
+					ON `s_c`.`id` = `f`.`sub_county_id`
 				WHERE 1
 					AND `c_t`.`result_date`<= CURDATE()
-					AND `district_id` = `user_filter_used`
+					AND `sub_county_id` = `user_filter_used`
 				GROUP BY `dev`.`name`,`year` 
 				ORDER BY `dev`.`name` ASC;
-			WHEN 6 THEN
+			WHEN 1 THEN
 				SELECT 
 					`d`.`name` AS `equipment_name`,
 					YEAR(`c_t`.`result_date`) AS `year`,

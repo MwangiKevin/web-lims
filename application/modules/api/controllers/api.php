@@ -13,8 +13,16 @@ class api extends MY_Controller {
 	}
 	public function index(){
 		$api_info = array(
-					'version'	=> 	'0.0',
-					'base_url'	=>	base_url()
+					'version'	=> 	'1.0',
+					'base_url'	=>	base_url(),
+					'get_options'=> array(
+							'limit_start',
+							'limit_items',
+							'search',
+							'order',
+							'verbose',
+							'datatable'
+						)
 			);
 		echo json_encode($api_info);
 	}
@@ -241,4 +249,18 @@ class api extends MY_Controller {
 		}
 
 	}
+
+	public function facility_type($id=NULL)
+	{
+		$this->load->model("api_m");
+
+		$method = $this->_detect_method();
+
+		if ($method=="get"){
+			echo json_encode($this->api_m->get_facility_types($id),JSON_PRETTY_PRINT);
+		}
+
+	}
+
+	
 }

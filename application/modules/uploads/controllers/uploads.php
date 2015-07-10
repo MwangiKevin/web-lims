@@ -520,6 +520,8 @@ class uploads extends MY_Controller
 				$this->message = "<div class='success'>Upload Successful </div>";				
 				$this->upload_status = true;
 
+				// echo "IM here";
+
 				$this->db->query("INSERT INTO `pima_upload`(`id`,`upload_date`,`facility_pima_id`,`uploaded_by`,`file_date`)
 												VALUES
 												('".$pima_upload_id."',
@@ -527,6 +529,8 @@ class uploads extends MY_Controller
 												 '".$facility_device_id."',
 												 '1',
 												 '".$this->filename_date."')");
+
+				// echo "IM here 2";
 
 				
 				foreach ($data as $row) {
@@ -580,6 +584,7 @@ class uploads extends MY_Controller
 					}
 
 					if( $assay_type	!=	3 ){
+						try{
 						$this->db->query("INSERT INTO `pima_raw_upload`
 										(`id`,
 										`pima_upload_id`,
@@ -629,7 +634,9 @@ class uploads extends MY_Controller
 										 '".$this->filename_entry."',
 										 '".$this->filename_date."')");
 
+					}catch (Exception $e){
 
+					}
 
 					}
 					$validity=0;
@@ -768,7 +775,7 @@ class uploads extends MY_Controller
 				$this->message = "<div class='success'>Upload Successful </div>";
 				$this->upload_status = true;
 				
-				//$this->db->trans_begin();
+				$this->db->trans_begin();
 				$this->db->query("INSERT INTO `pima_upload`(`id`,`upload_date`,`facility_pima_id`,`uploaded_by`,`file_date`)
 												VALUES
 												('".$pima_upload_id."',

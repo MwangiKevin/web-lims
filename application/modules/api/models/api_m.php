@@ -2,6 +2,12 @@
 
 class api_m extends MY_Model{
 	
+	public function get_facility_types(){
+		 $sql 	=	"CALL proc_get_facility_types()";
+		 $result = R::getAll($sql);
+		 return $result;
+	}
+
 	public function get_county_details(){
 		 $sql 	=	"CALL proc_get_county_details()";
 		 $result = R::getAll($sql);
