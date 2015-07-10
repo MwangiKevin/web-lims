@@ -9,6 +9,20 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 	})	
 	.withDataProp('data')
 	.withOption('processing', true)
+	.withOption('createdRow', function( row, data, index){
+		 if ( data.valid ==1 ) {
+		 	$('td:eq(5)', row).css("color","blue");
+         }else{
+         	$('td:eq(5)', row).css("color","red");
+         	$('td:eq(3)', row).html("unavailable");
+         }
+
+		 if ( data.valid ==1 && data.cd4_count >= 500) {
+		 	$('td:eq(3)', row).css("color","green");
+         }else if (data.valid ==1 && data.cd4_count < 500){
+         	$('td:eq(3)', row).css("color","red");
+         }
+	})
 	.withOption('serverSide', true)
 	.withPaginationType('full_numbers')
 
@@ -44,9 +58,9 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 		DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),        
         DTColumnBuilder.newColumn('valid').withTitle('Action').renderWith(function(data, type, full, meta) {
         	if(parseInt(data) == 0){
-                return 'Not Valid';
+                return 'Error';
             }else{
-            	 return 'Valid';
+            	 return 'Valid Test';
 
             }
             }),
