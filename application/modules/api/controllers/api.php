@@ -250,7 +250,7 @@ class api extends MY_Controller {
 
 	}
 
-	public function facility_type($id=NULL)
+	public function facility_types($id=NULL)
 	{
 		$this->load->model("api_m");
 
@@ -260,6 +260,30 @@ class api extends MY_Controller {
 			echo json_encode($this->api_m->get_facility_types($id),JSON_PRETTY_PRINT);
 		}
 
+	}
+
+	public function users($id=NULL) {
+
+		$this->load->model("users_m");	
+
+		$method= $this->_detect_method();
+
+		if ($method=="post"){
+			
+			echo json_encode($this->users_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->users_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->users_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->users_m->remove($id),JSON_PRETTY_PRINT);
+		}
 	}
 
 	

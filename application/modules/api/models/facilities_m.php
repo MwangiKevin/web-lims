@@ -13,8 +13,6 @@ class facilities_m extends MY_Model{
 		$request_body = file_get_contents('php://input');
 		
 		$facility = json_decode($request_body,true);
-
-		print_r($facility);die;
 		
 		$facility_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility'");
 		
@@ -49,7 +47,7 @@ class facilities_m extends MY_Model{
 							'$facility[email]',
 							'$facility[phone]',
 							'$facility[rollout_status]'
-							)";
+							)"; 
 		
 
 		if(!$this->db->query($sql)){
@@ -111,6 +109,9 @@ class facilities_m extends MY_Model{
 				foreach ($facilities as $key => $value) {
 					$facility_devices = R::getAll("CALL `proc_api_get_facility_devices`('','".$value['facility_id']."','','','','','','')");
 					$facilities[$key]['devices'] = $facility_devices;
+
+					$facilities[$key]['filter_type'] = 1;
+					$facilities[$key]['filter_id'] = $facilities[$key]['id'];
 				}	
 
 			}
@@ -121,6 +122,9 @@ class facilities_m extends MY_Model{
 			if(sizeof($facilities)>0){
 				$facility_devices = R::getAll("CALL `proc_api_get_facility_devices`('','".$facilities['facility_id']."','','','','','','')");
 				$facilities['devices'] = $facility_devices;
+
+				$facilities['filter_type'] = 4;
+				$facilities['filter_id'] = $facilities[$key]['facility_id'];
 			}
 		}
 
@@ -134,26 +138,27 @@ class facilities_m extends MY_Model{
 		return $facilities;
 	}
 
-	public function update($id){
+	public function update($id=NULL){
 		
 		$request_fields = file_get_contents('php://input');
 
 		$facility = json_decode($request_fields, true);
 
 		$facility_updated = R::getAll("UPDATE `facility` 
-								SET 
-									`name`='$facility[name]',
-									`mfl_code`='$facility[mfl_code]',
-									`site_prefix`='$facility[site_prefix]',
-									`facility_type_id`='$facility[facility_type_id]',
-									`level`='$facility[level]',
-									`central_site_id`='$facility[central_site_id]',
-									`email`='$facility[email]',
-									`phone`='$facility[phone]',
-									`rollout_status`='$facility[rollout_status]'
-								WHERE 
-									`id` = '$id'
-								");
+												SET 
+													`name`='$facility[facility_name]',
+													`mfl_code`='$facility[facility_mfl_code]',
+													`site_prefix`='$facility[facility_site_prefix]',
+													`sub_county_id`='$facility[facility_sub_county_id]',
+													`facility_type_id`='$facility[facility_type_id]',
+													`level`='$facility[facility_level]',
+													`central_site_id`='$facility[central_site_id]',
+													`email`='$facility[facility_email]',
+													`phone`='$facility[facility_phone]',
+													`partner_id`='$facility[facility_partner_id]',
+													`rollout_status`='$facility[facility_rollout_status]'
+												WHERE 
+													`id` = '$id'");
 
 		return $facility_updated;
 	}
@@ -165,7 +170,7 @@ class facilities_m extends MY_Model{
 		
 		$facility_deleted = R::getAll("UPDATE `facility` 
 											SET 
-												`status`='$facility[status]'
+												`rollout_status`='$facility[rollout_status]'
 											WHERE 
 												`id` = '$id'
 											");

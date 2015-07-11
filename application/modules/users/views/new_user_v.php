@@ -64,24 +64,15 @@
             <div class="field">
                 <div class="ui horizontal label large "> Facility Type  </div><div class="field"></div>
                 <ui-select on-select="ftype_change()" ng-model="selected.ftype" theme="selectize" >
-                    <ui-select-match placeholder="Select a Facility Type"> {{ $select.selected.initials }}</ui-select-match>
+                    <ui-select-match placeholder="Select a Facility Type"> {{ $select.selected.name }}</ui-select-match>
                         <ui-select-choices  repeat="ftype in facility_types | filter: $select.search">
                             <div ng-bind-html="ftype.initials | highlight: $select.search"></div>
                             <small><span ng-bind-html="ftype.description | highlight: $select.search"></span></small>
                     </ui-select-choices>
                 </ui-select>
-            </div>
-            <div class="field">
-                <div class="ui horizontal label large "> Rollout Status </div><div class="field"></div>
-                <ui-select on-select="roll_outchange()" ng-model="selected.rollout" theme="selectize" >
-                    <ui-select-match placeholder="Rollout Facility ?"> {{ $select.selected.name }}</ui-select-match>
-                        <ui-select-choices  repeat="choice in rollouts | filter: $select.search">
-                            <div ng-bind-html="choice.name | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select>
-            </div>
+            </div><div class="field"></div>
         </div>
-        <div class="ui primary button" ng-click="save_facility()"> Save Details </div>
+        <div class="ui primary button"> Save Details </div>
         <button class="ui button" ng-click="backFacilities()"> Back To Facilities </button>
         {{ facility_detail }}
         <div style="height:150px"></div>

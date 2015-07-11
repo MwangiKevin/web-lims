@@ -69,8 +69,25 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         window.location = "#/viewFacility/"+id;
     }
 
-    remove_facility = function(id){
-        window.location = "#/removeFacility/"+id;
+    remove_facility = function(id){ // Deactivate Facility
+        //window.location = "#/removeFacility/"+id;
+        swal({
+            title: "Are you sure?",
+            text: "This will mean device will not be rolled out to this facility",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#00b5ad",
+            confirmButtonText: "Yes, Deactivate it!",
+            closeOnConfirm: false,
+        }, function() {
+            $scope.partner.delete().then(function(partner) {
+                swal("Saved!", "Your Changes Have Been Updated", "success");
+                $state.transitionTo('partners');
+            }, function(response) {
+                console.log("Error with status code", response);
+                swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");
+            });
+        });
     }
 
 

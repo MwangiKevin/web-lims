@@ -2,6 +2,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_facilities`(f_id int(2
 BEGIN
 
         SET @QUERY =    " SELECT 
+                                `f`.`id`,
                                 `f`.`id`                    as `facility_id`,
                                 `f`.`name`                  as `facility_name`,
                                 `f`.`mfl_code`              as `facility_mfl_code`,
@@ -16,11 +17,13 @@ BEGIN
                                 `f`.`rollout_status`        as `facility_rollout_status`,
                                 `f`.`rollout_date`          as `facility_rollout_date`,
                                 `f`.`google_maps`           as `facility_google_maps`,
+                                `p`.`id`                    as `partner_id`,
                                 `p`.`name`                  as `partner_name`,
                                 `sc`.`name`                 as `sub_county_name`,
                                 `c`.`name`                  as `county_name`,
+                                `central_site`.`id`         as `central_site_id`,
                                 `central_site`.`name`       as `central_site_name`,
-                                `ft`.`initials`             as `affiliation`
+                                `ft`.`initials`             as `affiliation
                             FROM `facility` `f` 
                                 LEFT JOIN `partner` `p`
                                 ON `p`.`id`=`f`.`partner_id`

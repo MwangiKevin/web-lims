@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dashboard" style="width:100%">
+<html ng-app="dashboard" style="width:100%;font-size:0.77em;">
 
 <head ui-view="head">    
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -307,6 +307,8 @@
 
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editPartnerCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/usersCtrl.js');?>"></script>
 
 
 

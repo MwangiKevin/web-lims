@@ -21,6 +21,7 @@
         <a href="#facilities" class="item" ng-class="getActiveMenu('facilities')"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
         <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
         <a href="#partners"   class="item" ng-class="getActiveMenu('partners')" ng-show="sess.loggedin"><i class="fa fa-users fa-sm icon blue"></i>Partners</a>
+        <a href="#users"    class="item" ng-class="getActiveMenu('users')" ng-show="sess.loggedin"><i class="fa fa-users fa-sm icon blue"></i>Users</a>
       </div>
     </div>
     <!-- <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a> -->
@@ -80,6 +81,7 @@
         <a href="#facilities" class="item" ng-class="getActiveMenu('facilities')"><i class="fa fa-hospital-o fa-sm icon yellow"></i>Facilities</a>
         <a href="#CD4Devices" class="item" ng-class="getActiveMenu('cd4Devices')"><i class="fa fa-medkit fa-sm icon pink"></i>CD4 Devices</a>
         <a href="#partners"   class="item" ng-class="getActiveMenu('partners')" ng-show="sess.loggedin"><i class="fa fa-users fa-sm icon blue"></i>Partners</a>
+        <a href="#users"    class="item" ng-class="getActiveMenu('users')" ng-show="sess.loggedin"><i class="fa fa-users fa-sm icon blue"></i>Users</a>
       </div>
     </div>
     <!-- <a href="#Reports" class="item" ng-class="getActiveMenu('reports')"><i class="fa fa-file-o fa-sm icon "></i>Reports</a> -->
