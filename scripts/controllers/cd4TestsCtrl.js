@@ -10,6 +10,13 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 	.withDataProp('data')
 	.withOption('processing', true)
 	.withOption('createdRow', function( row, data, index){
+
+		//adding links to device serial.
+		//
+		var sr = "<a href='#editCD4Device/"+data.facility_device_id+"'>" +data.device_serial_number +"</a>";
+		
+		$('td:eq(7)', row).html(sr);
+
 		 if ( data.valid ==1 ) {
 		 	$('td:eq(5)', row).css("color","blue");
          }else{
