@@ -14,7 +14,7 @@
         <a  class="item" href="#Allocations">Commodity Allocations</a> 
       </div>
     </div>
-    <a href="#CD4Tests" class="item" ng-class="getActiveMenu('cd4Tests')"><i class="fa fa-tint fa-sm icon red"></i>CD4 Tests</a>    
+    <a href="#CD4Tests" class="item" ng-class="getActiveMenu('cd4Tests')"><i class="fa fa-tint fa-sm icon red"></i>CD4 Tests </a> 
     <div class="ui dropdown item" >
       <i class="fa fa-hospital-o fa-sm icon"></i>Mapping <i class="dropdown icon"></i>
       <div class="menu">

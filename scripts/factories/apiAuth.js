@@ -2,10 +2,14 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 	var apiAuth={};
 	apiAuth.baseURL= base_url;
 
-	$rootScope.session = {
-		user:null,
-		loggedIn: false
-	}
+	// $rootScope.session = {
+	// 	user:null,
+	// 	loggedIn: false,
+	// 	filter:{
+	//         filter_type: 0,
+	//         filter_id: 0
+	//     }
+	// }
 
 	apiAuth.checkLoginSt = function (){
 		return true;
@@ -58,7 +62,5 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 
 		})
 	}
-
-
 	return apiAuth;
 }])
