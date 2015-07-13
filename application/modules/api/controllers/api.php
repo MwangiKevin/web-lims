@@ -257,7 +257,19 @@ class api extends MY_Controller {
 		$method = $this->_detect_method();
 
 		if ($method=="get"){
-			echo json_encode($this->api_m->get_facility_types($id),JSON_PRETTY_PRINT);
+			echo json_encode($this->api_m->get_facility_types(),JSON_PRETTY_PRINT);
+		}
+
+	}
+
+	public function device_types($id=NULL)
+	{
+		$this->load->model("api_m");
+
+		$method = $this->_detect_method();
+
+		if ($method=="get"){
+			echo json_encode($this->api_m->get_device_types(),JSON_PRETTY_PRINT);
 		}
 
 	}

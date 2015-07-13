@@ -9,30 +9,32 @@
 			<div class="two fields">
 		        <div class="field">
 		        	<div class="ui horizontal label large">Device Serial Number</div><div class="field"></div>
-		          	<input type="text" value="{{ facility_dev_detail.serial_number }}">
+		          	<input type="text" ng-model="facility_dev_detail.serial_number" value="{{ facility_dev_detail.serial_number }}">
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large">Device Type</div><div class="field"></div>
-		          	<input type="text" value="{{ facility_dev_detail.device_name }}">
+		        	<ui-select on-select="dev_type_change()" ng-model="selected.device_type" theme="selectize">
+	                    <ui-select-match placeholder="{{ facility_dev_detail.device_name }}"> {{ $select.selected.name }}</ui-select-match>
+	                        <ui-select-choices  repeat="device_type in device_types | filter: $select.search">
+	                            <span ng-bind-html="device_type.name | highlight: $select.search"></span>
+	                    </ui-select-choices>
+            		</ui-select>
 		        </div>
 	    	</div>
 	    	<div class="two fields">
 			    <div class="field">
 		        	<div class="ui horizontal label large">Date Added</div><div class="field"></div>
-		      		<input type="text" value="{{ facility_dev_detail.date_added }}">
+		      		<input type="text" ng-model="facility_dev_detail.date_added" value="{{ facility_dev_detail.date_added }}">
 			    </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large">Roll Out Date</div><div class="field"></div>
-			      	<input type="text" value="{{ facility_dev_detail.facility_rollout_date }}">
+			      	<input type="text" ng-model="facility_dev_detail.facility_rollout_date" value="{{ facility_dev_detail.facility_rollout_date }}">
 			    </div>
 			</div>
 			<div class="two fields">
 			    <div class="field">
 		      		<div class="ui horizontal label large">Roll Out Status</div>
 		      		<input type="checkbox" ng-model="check_roll">
-		      		<!-- <div class="ui toggle checkbox">
-					    <input type="checkbox" ng-model="check_roll">  
-					</div> -->
 					<div class="field"></div>
 			    </div>
 			    <div class="field">
@@ -43,20 +45,17 @@
 		</div>
 		<hr />
 		<div class="ui stackable grid">
-			<div class="ui pink horizontal label big">Facility Details</div><div class="field"></div>
+			<div class="ui pink horizontal label big">Facility Details</div>
+			<div class="ui blue small message">Change the facility name to change other facility details respectively for this device</div><div class="field"></div>
 			<div class="two fields">
 		        <div class="field">
 		          <div class="ui horizontal label large">Facility Name</div><div class="field"></div>
-		          <!-- <div class="ui selection dropdown search" > -->
-				        <input type="hidden" name="sub-county">
-				       <!--  <i class="dropdown icon"></i> -->
-				        <select ng-model="facility" ng-change="facility_change(facility.facility_id)" ng-options="facility as facility.facility_name for facility in facilities">
-					        	<option value="">{{ facility_dev_detail.facility_name }}</option>
-				        </select>
-				        <!-- <div class="menu" ng-model="facilitya" ng-change="getDe()">
-				          <div class="item" ng-repeat="facility in facilities" data-value="{{ facility.facility_id }}" >{{ facility.facility_name }}</div>
-				        </div> -->
-			      	<!-- </div> -->
+				        <ui-select on-select="facility_change()" ng-model="selected.facility" theme="selectize">
+		                    <ui-select-match placeholder="{{ facility_dev_detail.facility_name }}"> {{ $select.selected.facility_name }}</ui-select-match>
+		                        <ui-select-choices  repeat="facility in facilities | filter: $select.search">
+		                            <span ng-bind-html="facility.facility_name | highlight: $select.search"></span>
+		                    </ui-select-choices>
+            			</ui-select>
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large">MFL Code</div><div class="field"></div>
@@ -79,6 +78,10 @@
 		        	<div class="ui horizontal label large"> Partner </div><div class="field"></div>
 		      		<input type="text" readonly value="{{ facility_dev_detail.partner_name }}">
 			    </div>
+			    <div class="field">
+		        	<div class="ui horizontal label large"> Central Site </div><div class="field"></div>
+		      		<input type="text" readonly value="{{ facility_dev_detail.central_site_name }}">
+			    </div>
 			</div>
 			<div class="field"></div><hr />
 			<div class="field">
@@ -86,8 +89,8 @@
 				<button class="ui button" ng-click="backDevices()"> Back To Devices </button>
 			</div>
 		
-		<div style="height:50px">
-
+		<div style="height:100px">
+				{{ facility_dev_detail }}
 		</div>
 	</div>
 </form>
