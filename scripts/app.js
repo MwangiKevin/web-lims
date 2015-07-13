@@ -22,7 +22,8 @@ var app = angular
     'datatables', 
     'datatables.colvis', 
     'datatables.tabletools', 
-    'datatables.colreorder'
+    'datatables.colreorder',
+    'ngStorage'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 

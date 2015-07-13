@@ -261,6 +261,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ngstorage/ngStorage.min.js');?>"></script>
 
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>
