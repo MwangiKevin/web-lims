@@ -1,10 +1,10 @@
-app.controller('cd4TestsCtrl', ['$scope','$rootScope','Commons', 'DTOptionsBuilder','DTColumnBuilder', function ($scope,$rootScope,Commons,DTOptionsBuilder,DTColumnBuilder) {
+app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumnBuilder', function ($scope,Commons,DTOptionsBuilder,DTColumnBuilder) {
 
 
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 	.withOption('ajax', {
 		url: Commons.baseURL+'api/tests',
-		data:{datatable:true,filter_type:$rootScope.sess.user.id},
+		data:{datatable:true},
 		type: 'GET'
 	})	
 	.withDataProp('data')
