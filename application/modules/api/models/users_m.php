@@ -99,7 +99,13 @@ class users_m extends MY_Model{
 				$users['user_groups']  = (array) $this->aauth->get_user_groups($users['id']);
 				$users['linked_entity_id']  = (int) $this->aauth->get_user_var("linked_entity_id",$users['id']);
 
-				if($users['default_user_group']['group_id']== 3) {
+				if($users['default_user_group']['group_id']== 2) {
+					$users['linked_entity'] = array(
+							        "filter_type"=> 0,
+							        "filter_id"=> 0
+						);
+				}	
+				else if($users['default_user_group']['group_id']== 3) {
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
 				}
 				else if($users['default_user_group']['group_id']== 4 ){
@@ -120,6 +126,12 @@ class users_m extends MY_Model{
 				}
 				else if($users['default_user_group']['group_id']== 7){
 					$users['linked_entity'] = $this->partners_m->read($users['linked_entity_id']);
+				}
+				else{
+					$users['linked_entity'] = array(
+							        "filter_type"=> -1,
+							        "filter_id"=> -1
+						);
 				}
 			}
 

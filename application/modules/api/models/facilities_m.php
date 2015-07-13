@@ -111,7 +111,7 @@ class facilities_m extends MY_Model{
 					$facilities[$key]['devices'] = $facility_devices;
 
 					$facilities[$key]['filter_type'] = 1;
-					$facilities[$key]['filter_id'] = $facilities[$key]['id'];
+					$facilities[$key]['filter_id'] = (int) $facilities[$key]['id'];
 				}	
 
 			}
@@ -124,7 +124,7 @@ class facilities_m extends MY_Model{
 				$facilities['devices'] = $facility_devices;
 
 				$facilities['filter_type'] = 4;
-				$facilities['filter_id'] = $facilities[$key]['facility_id'];
+				$facilities['filter_id'] = (int) $facilities['id'];
 			}
 		}
 
