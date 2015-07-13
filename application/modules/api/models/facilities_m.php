@@ -92,13 +92,13 @@ class facilities_m extends MY_Model{
 			$limit_items = $this->input->get("length");
 			$draw = $this->input->get("draw");
 
-			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_facilities`('$id','','$order_col','$order_dir','','','true')")[0]['count'];
-			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_facilities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
+			$total_records 		= 	(int)	$this->api_get_facilities($id,'',$order_col,$order_dir,'','','true')[0]['count'];
+			$records_filtered 	=	(int) 	$this->api_get_facilities($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'true')[0]['count'];
 		}
 
 		$search = addslashes($search);
  
-		$facilities_res = R::getAll("CALL `proc_api_get_facilities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
+		$facilities_res = $this->api_get_facilities($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false');
 		
 		if($id==NULL){
 

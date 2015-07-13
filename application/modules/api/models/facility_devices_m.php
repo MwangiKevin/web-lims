@@ -94,7 +94,7 @@ class facility_devices_m extends MY_Model{
 
 			if($verbose=='true'){
 				foreach ($fac_dev as $key => $value) {
-					$facility=R::getAll("CALL `proc_api_get_facilities`('".$value['facility_id']."','','','','','','')");
+					$facility= $this->api_get_facilities($value['facility_id']);
 
 					if(sizeof($facility)>0){
 						$fac_dev[$key]['assigned_to_facility'] = true;
@@ -116,7 +116,7 @@ class facility_devices_m extends MY_Model{
 			$fac_dev =  $fac_dev_res[0];
 
 			if(sizeof($fac_dev)>0){
-				$facility=R::getAll("CALL `proc_api_get_facilities`('".$fac_dev['facility_id']."','','','','','','')");
+				$facility= $this->api_get_facilities($fac_dev['facility_id']);
 
 				if(sizeof($facility)>0){
 					$fac_dev['assigned_to_facility'] = true;

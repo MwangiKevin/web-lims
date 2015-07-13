@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_facilities`(f_id int(2), search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_facilities`(f_id int(2), search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10),filter_type int(11),filter_id int(11))
 BEGIN
 
         SET @QUERY =    " SELECT 
@@ -23,7 +23,7 @@ BEGIN
                                 `c`.`name`                  as `county_name`,
                                 `central_site`.`id`         as `central_site_id`,
                                 `central_site`.`name`       as `central_site_name`,
-                                `ft`.`initials`             as `affiliation
+                                `ft`.`initials`             as `affiliation`
                             FROM `facility` `f` 
                                 LEFT JOIN `partner` `p`
                                 ON `p`.`id`=`f`.`partner_id`
@@ -79,6 +79,20 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY, ' AND (`f`.`name` LIKE "%', search, '%" ');
             SET @QUERY = CONCAT(@QUERY, ' OR  `f`.`mfl_code` LIKE "%', search, '%") ');
         END IF;
+
+
+        CASE 
+            WHEN (filter_type = 1 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `f`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 2 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `sc`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 3 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `c`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 4 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `p`.`id` = '",`filter_id`,"' ");
+            ELSE
+                SET @QUERY = @QUERY;
+        END CASE;
 
         CASE 
             WHEN ((order_col = '' || order_col IS NULL) AND (get_count <> 'true'))
