@@ -70,6 +70,9 @@ class facilities_m extends MY_Model{
 		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
+
+		$filter_type = (int) $this->input->get("filter_type");
+		$filter_id 	 = (int) $this->input->get("filter_id");
 		
 		$draw;$order_col;$order_dir;
 
@@ -92,13 +95,13 @@ class facilities_m extends MY_Model{
 			$limit_items = $this->input->get("length");
 			$draw = $this->input->get("draw");
 
-			$total_records 		= 	(int)	$this->api_get_facilities($id,'',$order_col,$order_dir,'','','true')[0]['count'];
-			$records_filtered 	=	(int) 	$this->api_get_facilities($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'true')[0]['count'];
+			$total_records 		= 	(int)	$this->api_get_facilities($id,'',$order_col,$order_dir,'','','true',$filter_type,$filter_id )[0]['count'];
+			$records_filtered 	=	(int) 	$this->api_get_facilities($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'true',$filter_type,$filter_id)[0]['count'];
 		}
 
 		$search = addslashes($search);
  
-		$facilities_res = $this->api_get_facilities($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false');
+		$facilities_res = $this->api_get_facilities($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id);
 		
 		if($id==NULL){
 
@@ -123,7 +126,7 @@ class facilities_m extends MY_Model{
 				$facility_devices = R::getAll("CALL `proc_api_get_facility_devices`('','".$facilities['facility_id']."','','','','','','')");
 				$facilities['devices'] = $facility_devices;
 
-				$facilities['filter_type'] = 4;
+				$facilities['filter_type'] = 1;
 				$facilities['filter_id'] = (int) $facilities['id'];
 			}
 		}

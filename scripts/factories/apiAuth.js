@@ -36,6 +36,25 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 
 		});	
 	}
+	apiAuth.getFilterType = $rootScope.getFilterType =  function (){
+		$http.get(
+			'api/auth/get_filter_type'
+			)
+		.success(function(response){
+			// return response.user.linked_entity.filter_type;
+		});	
+	}
+	apiAuth.getFilterId = $rootScope.getFilterId =  function (){
+		var r=0;
+		$http.get(
+			'api/auth/get_filter_id'
+			)
+		.success(function(response){
+			r=  response;
+		});	
+
+		return r;
+	}
 
 	apiAuth.login = function(usr,pwd){	
 		$activityIndicator.startAnimating();

@@ -152,16 +152,26 @@ app.controller('fcdrrCtrl', ['$stateParams', '$state', '$rootScope', '$scope', '
     }
     $scope.baseFacilities = Restangular.all('facilities');
     $scope.refreshFacilities = function(search) {
-        var params = {
-            address: search,
-            sensor: false
-        };
-        $scope.baseFacilities.getList({
-            search: search,
-            limit_items: 6
-        }).then(function(com) {
-            $scope.facilities = com;
-        });
+
+        var sess = {};
+
+        $rootScope.getSessionDetails().then(function(res){
+
+            console.log(res);
+
+            sess = res.data;
+            $scope.baseFacilities.getList({
+                search: search,
+                limit_items: 6,
+                filter_type:sess.user.linked_entity.filter_type,
+                filter_id:sess.user.linked_entity.filter_id
+            }).then(function(com) {
+                $scope.facilities = com;
+            });
+
+        })
+
+      
         return $scope.facilities;
     };
     var baseCommodities = Restangular.all('commodities');
