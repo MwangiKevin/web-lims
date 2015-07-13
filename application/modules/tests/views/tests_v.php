@@ -4,4 +4,4 @@
 			<table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover table table-bordered"></table>
 		</div>
 	</div>
-</div>
+</div>{{sess}}

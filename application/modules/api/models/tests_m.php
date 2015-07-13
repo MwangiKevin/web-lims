@@ -17,6 +17,10 @@ class tests_m extends MY_Model{
 		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
+
+		$filter_type = (int) $this->input->get("filter_type");
+		$filter_id 	 = (int) $this->input->get("filter_id");
+		
 		$draw;$order_col;$order_dir;
 
 		$order_dir = "desc";
@@ -41,14 +45,14 @@ class tests_m extends MY_Model{
 			$draw = $this->input->get("draw");
 
 
-			$total_records 		= 	(int)	$this->api_get_tests($id,'',$order_col,$order_dir,'','','true')[0]['count'];
-			$records_filtered 	=	(int) 	$this->api_get_tests($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'true')[0]['count'];
+			$total_records 		= 	(int)	$this->api_get_tests($id,'',$order_col,$order_dir,'','','true',$filter_type,$filter_id )[0]['count'];
+			$records_filtered 	=	(int) 	$this->api_get_tests($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'true',$filter_type,$filter_id )[0]['count'];
 		}
 
 
 		$search = addslashes($search);		
 
-		$tests_res = $this->api_get_tests($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false');
+		$tests_res = $this->api_get_tests($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id );
 
 		if($is_datatable){
 

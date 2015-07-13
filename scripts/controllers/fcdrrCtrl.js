@@ -156,8 +156,7 @@ app.controller('fcdrrCtrl', ['$stateParams', '$state', '$rootScope', '$scope', '
         var sess = {};
 
         $rootScope.getSessionDetails().then(function(res){
-
-            console.log(res);
+;
 
             sess = res.data;
             $scope.baseFacilities.getList({
