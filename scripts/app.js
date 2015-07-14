@@ -328,8 +328,8 @@ var app = angular
 		url: '/newCD4Device',
 		views:{
 			'main':{
-				// templateUrl: 'newDevice',
-				// controller:'newCD4DeviceCtrl'
+				templateUrl: 'devices/new_CD4_device',
+				controller:'newCD4DeviceCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

@@ -1,6 +1,6 @@
 app.controller('editCD4DeviceCtrl',
 	[
-	'$stateParams',
+	 '$stateParams',
     '$state',
     '$scope',
     '$http',
@@ -31,7 +31,7 @@ app.controller('editCD4DeviceCtrl',
                 loaded_facility_device.get().then(function(facility_device_load) {
                    $scope.facility_dev_detail = facility_device_load;
 
-                   if($scope.facility_dev_detail.facility_rollout_status ==1){
+                   if($scope.facility_dev_detail.facility_rollout_status == 1 && $scope.facility_dev_detail.status == 1){
 
                         $scope.check_roll = true;
                    }
@@ -44,6 +44,12 @@ app.controller('editCD4DeviceCtrl',
 
     $scope.$watch('check_roll', function(){
             $scope.deact_reason = !$scope.check_roll;
+
+            // if($scope.deact_reason === true){
+            //     $scope.facility_dev_detail.status = 0;
+            // }else{
+            //     $scope.facility_dev_detail.status = 1;
+            // }
         }, true );
 
     $scope.facility_change = function (id){
@@ -89,6 +95,26 @@ app.controller('editCD4DeviceCtrl',
                    $scope.device_types = dev_types;
                 })
             }
+    }
+
+    $scope.save_facility_device = function(){
+        swal({
+            title: "Are you sure?",
+            text: "This makes changes to this device details",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#00b5ad",
+            confirmButtonText: "Yes, Save it!",
+            closeOnConfirm: false,
+        }, function() {
+            $scope.facility_dev_detail.put().then(function(facility_dev_detail) {
+                swal("Saved!", "Your Changes for this device Have Been Updated", "success");
+                //$state.transitionTo('CD4Devices');
+            }, function(response) {
+                console.log("Error with status code", response);
+                swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");
+            });
+        });
     }
 
     $scope.populateDevice_details();
