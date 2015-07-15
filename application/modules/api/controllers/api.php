@@ -234,7 +234,8 @@ class api extends MY_Controller {
 		}
 
 		else if ($method=="delete"){
-			echo json_encode($this->facility_devices_m->remove($id),JSON_PRETTY_PRINT);
+			echo $this->facility_devices_m->remove($id);
+			//echo json_encode($this->facility_devices_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
 

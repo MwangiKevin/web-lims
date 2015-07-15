@@ -53,10 +53,8 @@ app.controller('cd4DevicesCtrl', ['$scope','Commons','Restangular','$activityInd
         DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible(),
         DTColumnBuilder.newColumn('partner_name').withTitle('Partner').notVisible(),     
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_device('+data.facility_device_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_device('+data.facility_id+')" >Remove</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_device('+data.facility_device_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="remove_device('+data.facility_device_id+')" >Remove</button>';
             }),
-
-
     ];
 
 
@@ -66,8 +64,25 @@ app.controller('cd4DevicesCtrl', ['$scope','Commons','Restangular','$activityInd
     view_device = function(id){
         window.location = "#/viewCD4Device/"+id;
     }
-    remove_device = function(id){
-        window.location = "#/removeCD4Device/"+id;
+    remove_device = function(id,serial_number){
+        //window.location = "#/removeCD4Device/"+id;
+        swal({
+            title: "Are you sure?",
+            text: "This will Deactivate this device.",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#00b5ad",
+            confirmButtonText: "Yes, Deactivate it!",
+            closeOnConfirm: false,
+        }, function() {
+            Restangular.one("facility_devices", id).remove().then(function() {
+                swal("Saved!", "The CD4 Device has been successfully Deactivated \n The reason is 'Quick Deactivation'. You can change this by editing details of the device ", "success");
+                $state.transitionTo('CD4Devices');
+            }, function(response) {
+                console.log("Error with status code", response);
+                swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");
+            });
+        });
     }
 
 }]);

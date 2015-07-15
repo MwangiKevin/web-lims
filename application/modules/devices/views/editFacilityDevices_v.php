@@ -23,24 +23,25 @@
 	    	</div>
 	    	<div class="two fields">
 			    <div class="field">
-		        	<div class="ui horizontal label large">Date Added</div><div class="field"></div>
+		        	<div class="ui horizontal label large">Date Added {{ facility_dev_detail.date_added }}</div><div class="field"></div>
 		      		<input type="text" ng-model="facility_dev_detail.date_added" value="{{ facility_dev_detail.date_added }}">
 			    </div>
 			    <div class="field">
-		        	<div class="ui horizontal label large">Roll Out Date</div><div class="field"></div>
-			      	<input type="text" ng-model="facility_dev_detail.facility_rollout_date" value="{{ facility_dev_detail.facility_rollout_date }}">
+			    	<div class="ui horizontal label large">Roll Out Device? (Tick to roll out / Untick to not roll out device)</div><div class="field"></div>
+		      		<input type="checkbox" ng-model="check_roll">
+					<div class="field"></div>
+		        	<!-- <div class="ui horizontal label large">Roll Out Date</div><div class="field"></div>
+			      	<input type="text" ng-model="facility_dev_detail.facility_rollout_date" value="{{ facility_dev_detail.facility_rollout_date }}"> -->
 			    </div>
 			</div>
 			<div class="two fields">
 			    <div class="field">
-		      		<div class="ui horizontal label large">Roll Out Status</div>
-		      		<input type="checkbox" ng-model="check_roll">
-					<div class="field"></div>
-			    </div>
-			    <div class="field">
-		        	<div class="ui horizontal label large" id="der" >Deactivation Reason</div><div class="field"></div>
+		      		<div class="ui horizontal label large" id="der">Deactivation Reason</div><div class="field"></div>
 			      	<input type="text" ng-show="deact_reason" value="{{ facility_dev_detail.deactivation_reason }}">
 			    </div>
+			    <!-- <div class="field">
+		        	
+			    </div> -->
 			</div>
 		</div>
 		<hr />

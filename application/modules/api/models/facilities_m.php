@@ -164,7 +164,7 @@ class facilities_m extends MY_Model{
 		
 		$facility_deleted = R::getAll("UPDATE `facility` 
 											SET 
-												`rollout_status`='$facility[rollout_status]'
+												`rollout_status`='0'
 											WHERE 
 												`id` = '$id'
 											");

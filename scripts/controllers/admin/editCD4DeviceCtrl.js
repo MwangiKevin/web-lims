@@ -13,7 +13,8 @@ app.controller('editCD4DeviceCtrl',
     'notify',
     'Restangular',
     'apiAuth',
-    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth){
+    '$filter',
+    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth,$filter){
      
     apiAuth.requireLogin();
 

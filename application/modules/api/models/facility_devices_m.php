@@ -16,7 +16,7 @@ class facility_devices_m extends MY_Model{
 		
 		$facility_device_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility_device'");
 		
-		$facility_device_ID = $county_table[0][Auto_increment];
+		$facility_device_ID = $facility_device_table[0][Auto_increment];
 		
 		$sql = "INSERT INTO `facility_device`
 						(
@@ -140,6 +140,7 @@ class facility_devices_m extends MY_Model{
 		}
 
 		$fac_dev['id'] = $fac_dev['facility_device_id'];
+		$fac_dev['date_added'] = date('Y-m-d',strtotime($fac_dev['date_added']));
 
 		// echo "<pre>";
 		// print_r($fac_dev);
@@ -189,7 +190,7 @@ class facility_devices_m extends MY_Model{
 		
 		$facility_dev_deleted = R::getAll("UPDATE `facility_device` 
 											SET 
-												`status`='$facility_device[status]'
+												`status`='0'
 											WHERE 
 												`id` = '$id'
 											");

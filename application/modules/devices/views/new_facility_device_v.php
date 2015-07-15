@@ -24,23 +24,24 @@
 	    	<div class="two fields">
 			    <div class="field">
 		        	<div class="ui horizontal label large">Date Added</div><div class="field"></div>
-		      		<input type="text" ng-model="facility_dev_detail.date_added">
+		      		<input type="text" readonly value="{{ dateAsString }}" >
 			    </div>
 			    <div class="field">
-		        	<div class="ui horizontal label large">Roll Out Date</div><div class="field"></div>
-			      	<input type="text" ng-model="facility_dev_detail.facility_rollout_date">
+		        	<!-- <div class="ui horizontal label large">Roll Out Date</div><div class="field"></div>
+			      	<input type="text" ng-model="facility_dev_detail.facility_rollout_date"> -->
+			      	<div class="ui horizontal label large">Roll Out Device ? (Tick to roll out / Untick to not roll out device)</div><div class="field"></div>
+		      		<input type="checkbox" ng-model="check_roll">
+					<div class="field"></div>
 			    </div>
 			</div>
 			<div class="two fields">
 			    <div class="field">
-		      		<div class="ui horizontal label large">Roll Out Status</div>
-		      		<input type="checkbox" ng-model="check_roll">
-					<div class="field"></div>
+		      		<div class="ui horizontal label large" id="der" >Deactivation Reason</div><div class="field"></div>
+			      	<input type="text" ng-show="deact_reason" ng-model="facility_dev_detail.deactivation_reason">
 			    </div>
-			    <div class="field">
-		        	<div class="ui horizontal label large" id="der" >Deactivation Reason</div><div class="field"></div>
-			      	<input type="text" ng-show="deact_reason" >
-			    </div>
+			    <!-- <div class="field">
+		        	
+			    </div> -->
 			</div>
 		</div>
 		<hr />
@@ -85,12 +86,12 @@
 			</div>
 			<div class="field"></div><hr />
 			<div class="field">
-				<div class="ui primary button" ng-click="save_facility_device()"> Save Details</div>
+				<div class="ui primary button" ng-click="save_new_device()"> Save Details</div>
 				<button class="ui button" ng-click="backDevices()"> Back To Devices </button>
 			</div>
 		
 		<div style="height:100px">
-				{{ facility_dev_detail }}
+
 		</div>
 	</div>
 </form>
