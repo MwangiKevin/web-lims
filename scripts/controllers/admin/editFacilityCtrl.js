@@ -128,7 +128,7 @@ app.controller('editFacilityCtrl',
         }, function() {
             $scope.facility_detail.put().then(function(facility_detail) {
                 swal("Saved!", "Your Changes Have Been Updated", "success");
-               // $state.transitionTo('Facilities');
+                $state.transitionTo('Facilities');
             }, function(response) {
                 console.log("Error with status code", response);
                 swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");

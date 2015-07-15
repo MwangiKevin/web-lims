@@ -87,7 +87,7 @@ class facility_devices_m extends MY_Model{
 		$search = addslashes($search);
 
 		$fac_dev_res = R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
-		
+
 		if($id==NULL){
 
 			$fac_dev =  $fac_dev_res;	
@@ -116,8 +116,15 @@ class facility_devices_m extends MY_Model{
 			$fac_dev =  $fac_dev_res[0];
 
 			if(sizeof($fac_dev)>0){
+<<<<<<< HEAD
 				$facility= $this->api_get_facilities($fac_dev['facility_id']);
 
+=======
+				$facility=R::getAll("CALL `proc_api_get_facilities`('".$fac_dev['facility_id']."','','','','','','')");
+		// 		echo "<pre>";
+		// print_r($facility);
+		// echo "</pre>";
+>>>>>>> hawi/develop
 				if(sizeof($facility)>0){
 					$fac_dev['assigned_to_facility'] = true;
 					foreach ($facility[0] as $fac_key => $value1) {
@@ -127,6 +134,7 @@ class facility_devices_m extends MY_Model{
 
 					$fac_dev['assigned_to_facility'] = false;
 				}
+
 			}	
 
 			$fac_dev['filter_type'] = 5;
@@ -142,6 +150,11 @@ class facility_devices_m extends MY_Model{
 		}else{
 		}
 
+		$fac_dev['id'] = $fac_dev['facility_device_id'];
+
+		// echo "<pre>";
+		// print_r($fac_dev);
+		// echo "</pre>";die;
 		return $fac_dev;
 	}
 
@@ -151,7 +164,19 @@ class facility_devices_m extends MY_Model{
 
 		$facility_device = json_decode($request_fields, true);
 
-		$facility_dev_updated = R::getAll("UPDATE `facility_device` 
+		// $facility_dev_updated = R::getAll("UPDATE `facility_device` 
+		// 									SET 
+		// 										`facility_id`='$facility_device[facility_id]',
+		// 										`device_id`='$facility_device[device_id]',
+		// 										`status`='$facility_device[status]',
+		// 										`deactivation_reason`='$facility_device[deactivation_reason]',
+		// 										`date_added`='$facility_device[date_added]',
+		// 										`date_removed`='$facility_device[date_removed]',
+		// 										`serial_number`='$facility_device[serial_number]'
+		// 									WHERE 
+		// 										`id` = '$id'
+		// 						");
+		$facility_dev_updated = "UPDATE `facility_device` 
 											SET 
 												`facility_id`='$facility_device[facility_id]',
 												`device_id`='$facility_device[device_id]',
@@ -162,8 +187,8 @@ class facility_devices_m extends MY_Model{
 												`serial_number`='$facility_device[serial_number]'
 											WHERE 
 												`id` = '$id'
-								");
-		return $facility_dev_updated;
+								";
+		echo $facility_dev_updated;die;
 
 	}
 
