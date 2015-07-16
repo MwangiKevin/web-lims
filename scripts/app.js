@@ -22,7 +22,8 @@ var app = angular
     'datatables', 
     'datatables.colvis', 
     'datatables.tabletools', 
-    'datatables.colreorder'
+    'datatables.colreorder',
+    'ngStorage'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -93,6 +94,26 @@ var app = angular
 				controller: ['$scope', function($scope){
 				}]
 			}
+		}
+	})
+
+	.state('Logout',{
+		url: '/logout',		
+		abstract: false,
+		views:{
+			'main':{
+				templateUrl: 'login/logout',
+				controller:  'logoutCtrl'
+			},
+			// 'navbar':{
+			// 	templateUrl: 'login/logout',
+			// 	controller: 'navbarCtrl'
+			// },
+			// 'footer':{
+			// 	templateUrl: 'dashboard/footer',
+			// 	controller: ['$scope', function($scope){
+			// 	}]
+			// }
 		}
 	})
 
@@ -469,6 +490,69 @@ var app = angular
 	})
 	.state('viewPartner',{
 		url: '/viewPartner/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'viewPartner',
+				// controller:'viewPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	}).state('users',{
+		url: '/users',
+		views:{
+			'main':{
+				templateUrl: 'users',
+				controller:'usersCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('newUser',{
+		url: '/newUser',
+		views:{
+			'main':{
+				// templateUrl: 'newUser',
+				// controller:'newPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('editUser',{
+		url: '/editUser/{id:int}',
+		views:{
+			'main':{
+				templateUrl: 'users/edit',
+				controller:'editPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('viewUser',{
+		url: '/viewUser/{id:int}',
 		views:{
 			'main':{
 				// templateUrl: 'viewPartner',

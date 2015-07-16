@@ -26,6 +26,10 @@ class auth extends MY_Controller {
 				'user'			=>	$this->aauth->get_user(),
 
 				);
+			$user  = (array) $this->aauth->get_user();
+			$user_id = (int) $user['id'];
+			$this->load->model('users_m');
+			$this->session->set_userdata("user", $this->users_m->read($user_id));
 
 			echo json_encode($details);
 
@@ -38,6 +42,12 @@ class auth extends MY_Controller {
 
 				'user'			=>	$this->aauth->get_user(),
 				);
+
+			$user = array(
+					"filter_type" => -1,
+					"filter_id"=>-1
+				);
+			$this->session->set_userdata("user", $user);
 
 			echo json_encode($details);
 		}
@@ -55,7 +65,6 @@ class auth extends MY_Controller {
 
 	}
 
-
 	public function is_logged_in(){		
 	
 		if(!$this->session->userdata('loggedin')){
@@ -66,6 +75,23 @@ class auth extends MY_Controller {
 			$this->output->set_content_type('application/json')->set_output('true');
 		}
 
+	}
+
+	public function get_user_var($id=null){
+			echo json_encode($this->aauth->get_user_var("linked_entity_id",$id));
+	}
+	public function get_currentuser(){
+			echo json_encode($this->aauth->get_user($id));
+			
+	}
+	public function get_filter_type(){
+		
+		echo (int) $filter_type;
+			
+	}
+	public function get_filter_id(){
+		echo (int) $filter_id;
+			
 	}
 
 }

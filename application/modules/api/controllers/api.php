@@ -275,5 +275,29 @@ class api extends MY_Controller {
 
 	}
 
+	public function users($id=NULL) {
+
+		$this->load->model("users_m");	
+
+		$method= $this->_detect_method();
+
+		if ($method=="post"){
+			
+			echo json_encode($this->users_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->users_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->users_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->users_m->remove($id),JSON_PRETTY_PRINT);
+		}
+	}
+
 	
 }

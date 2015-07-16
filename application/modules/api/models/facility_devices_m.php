@@ -94,7 +94,7 @@ class facility_devices_m extends MY_Model{
 
 			if($verbose=='true'){
 				foreach ($fac_dev as $key => $value) {
-					$facility=R::getAll("CALL `proc_api_get_facilities`('".$value['facility_id']."','','','','','','')");
+					$facility= $this->api_get_facilities($value['facility_id']);
 
 					if(sizeof($facility)>0){
 						$fac_dev[$key]['assigned_to_facility'] = true;
@@ -105,6 +105,9 @@ class facility_devices_m extends MY_Model{
 
 						$fac_dev[$key]['assigned_to_facility'] = false;
 					}
+
+					$fac_dev[$key]['filter_type'] = 5;
+					$fac_dev[$key]['filter_id'] = $fac_dev[$key]['id'];
 				}
 			}
 
@@ -113,10 +116,15 @@ class facility_devices_m extends MY_Model{
 			$fac_dev =  $fac_dev_res[0];
 
 			if(sizeof($fac_dev)>0){
+<<<<<<< HEAD
+				$facility= $this->api_get_facilities($fac_dev['facility_id']);
+
+=======
 				$facility=R::getAll("CALL `proc_api_get_facilities`('".$fac_dev['facility_id']."','','','','','','')");
 		// 		echo "<pre>";
 		// print_r($facility);
 		// echo "</pre>";
+>>>>>>> hawi/develop
 				if(sizeof($facility)>0){
 					$fac_dev['assigned_to_facility'] = true;
 					foreach ($facility[0] as $fac_key => $value1) {
@@ -128,6 +136,9 @@ class facility_devices_m extends MY_Model{
 				}
 
 			}	
+
+			$fac_dev['filter_type'] = 5;
+			$fac_dev['filter_id'] = $fac_dev['id'];
 		}
 
 		

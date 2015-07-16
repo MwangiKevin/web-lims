@@ -2,10 +2,14 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 	var apiAuth={};
 	apiAuth.baseURL= base_url;
 
-	$rootScope.session = {
-		user:null,
-		loggedIn: false
-	}
+	// $rootScope.session = {
+	// 	user:null,
+	// 	loggedIn: false,
+	// 	filter:{
+	//         filter_type: 0,
+	//         filter_id: 0
+	//     }
+	// }
 
 	apiAuth.checkLoginSt = function (){
 		return true;
@@ -32,6 +36,25 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 
 		});	
 	}
+	apiAuth.getFilterType = $rootScope.getFilterType =  function (){
+		$http.get(
+			'api/auth/get_filter_type'
+			)
+		.success(function(response){
+			// return response.user.linked_entity.filter_type;
+		});	
+	}
+	apiAuth.getFilterId = $rootScope.getFilterId =  function (){
+		var r=0;
+		$http.get(
+			'api/auth/get_filter_id'
+			)
+		.success(function(response){
+			r=  response;
+		});	
+
+		return r;
+	}
 
 	apiAuth.login = function(usr,pwd){	
 		$activityIndicator.startAnimating();
@@ -52,13 +75,11 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 	apiAuth.logout = function(){
 		return $http.post('api/auth/logout')
 		.success(function(response){
-			$location.path( "/dashboard" );
+			$location.path( "/logout" );
 			$activityIndicator.stopAnimating() 
 			notify({ message:'Your session was ended'} );
 
 		})
 	}
-
-
 	return apiAuth;
 }])

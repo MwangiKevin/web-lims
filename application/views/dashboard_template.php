@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dashboard" style="width:100%">
+<html ng-app="dashboard" style="width:100%;font-size:0.77em;">
 
 <head ui-view="head">    
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -261,6 +261,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ngstorage/ngStorage.min.js');?>"></script>
 
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>
@@ -299,6 +300,7 @@
 	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/loginCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/registrationCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 
 	<script src="<?php echo base_url('scripts/controllers/admin/newFacilityCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editFacilityCtrl.js');?>"></script>
@@ -307,6 +309,8 @@
 
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editPartnerCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/usersCtrl.js');?>"></script>
 
 
 

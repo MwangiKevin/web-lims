@@ -85,9 +85,22 @@ class counties_m extends MY_Model{
 
 			$counties =  $counties_res;	
 
+			if($verbose=='true'){
+
+				foreach ($counties as $key => $value) {
+
+					$counties[$key]['filter_type'] = 3;
+					$counties[$key]['filter_id'] = $counties[$key]['id'];
+				}	
+
+			}
+
 		}else{
 
 			$counties =  $counties_res[0];	
+
+			$counties['filter_type'] = 3;
+			$counties['filter_id'] = $counties['id'];
 		}
 
 		if($is_datatable && $id==NULL){

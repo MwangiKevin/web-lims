@@ -1,5 +1,3 @@
-
-
 <script type="text/javascript">
 $('#reportrange').daterangepicker(
 {
@@ -38,21 +36,24 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 <div class="ui right aligned stackable grid">
 	<div class="left floated left aligned six wide column">
 		<ui-select ng-model="filters.selected.entity" theme="selectize" ng-disabled="disabled" reset-search-input="false" style="min-width: 300px;">
-		<ui-select-match placeholder="Search Criteria to Filter by...">{{$select.selected.name +" ("+ $select.selected.type +")"  }}</ui-select-match>
-		<ui-select-choices group-by="'type'" repeat="entity in filters.entities track by $index| limitTo:12"   refresh="refreshFilters($select.search)" refresh-delay="3" >
-		<div ng-bind-html="entity.name | highlight: $select.search"></div>
-		<small>
-			email: {{entity.email}}
-			phone: <span ng-bind-html="''+entity.phone | highlight: $select.search"></span>
-		</small>
-	</ui-select-choices>
-</ui-select>
-</div>
-<div class="left floated left aligned two wide column">
-
-	<div class="ui button blue"><i class="fa fa-undo fa-sm"></i> Reset </div>
-</div>
-
+			<ui-select-match placeholder="Search Criteria to Filter by...">
+				<div ng-show="(filters.selected.entity.filter_type == 0 )?false:true " style="float:left;">{{$select.selected.name +" ("+ $select.selected.type +")"  }}</div>
+				<button style="padding-bottom: 3px;padding-top: 3px;padding-left: 3px;padding-right: 3px;float:right;" ng-show="(filters.selected.entity.filter_type == 0 )?false:true " class="ui button blue" ng-click="filters.clear($event)">
+					<i class="fa fa-remove fa-sm"></i>
+				</button>
+			</ui-select-match>
+			<ui-select-choices group-by="'type'" repeat="entity in filters.entities track by $index| limitTo:12"   refresh="refreshFilters($select.search)" refresh-delay="3" >
+				<div ng-bind-html="entity.name | highlight: $select.search"></div>
+				<small>
+					email: {{entity.email}}
+					phone: <span ng-bind-html="''+entity.phone | highlight: $select.search"></span>
+				</small>
+			</ui-select-choices>
+		</ui-select>
+	</div>
+<!-- <div class="left floated left aligned two wide column">
+	<button class="ui button blue" ng-click="filters.clear($event)"><i class="fa fa-remove fa-sm"></i></button>
+</div> -->
 <div class="right floated right aligned six wide column">
 	<div class="blue ui buttons">
 		<!-- {{ Filters}} -->
@@ -62,7 +63,6 @@ $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
 		</div>
 	</div>
 </div>
-
 </div>
 <style>
 

@@ -12,6 +12,7 @@ class facs_calibur extends MY_Controller
 	function __construct()
 	{
 		parent:: __construct();
+		$this->load->library('PHPExcel/Classes/PHPExcel');
 	}
 
 	function index()
@@ -34,18 +35,50 @@ class facs_calibur extends MY_Controller
         $file_ext = explode(".", $file_name);
         $file_ext = end($file_ext);
 
-        //allowed facs calibur file types
-        $allowed = array('exp', 'EXP');
+        //allowed exp file types
+        $allowed = array('exp','EXP','xls','XLS','xlsx','XLSX');
 
-        //exp type (CD4/BEADS/UNKNOWN etc.)
         $file_type_array = explode("(", $file_name);
         $file_type_array = explode(").", end($file_type_array));
         $file_type = current($file_type_array);
 
-        if(in_array($file_ext, $allowed)){
-		//Import uploaded file to Database
+        // get the files creation date and save it in an array
+		$file_date_time = date ("Y-m-d H:i:s", filemtime($file_tmp));				
 
-			$handle = fopen($file_tmp, "r");
+        if(in_array($file_ext, $allowed)){
+		// Import uploaded file to Database
+
+		$excelReader = PHPExcel_IOFactory::createReader('Excel2007');
+		$excelReader->setReadDataOnly(true);
+		$objPHPExcel = PHPExcel_IOFactory::load($file_tmp);
+
+		// die;
+		//get only the Cell Collection
+		$cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
+		//extract to a PHP readable array format
+			foreach ($cell_collection as $cell) {
+			    $column = $objPHPExcel->getActiveSheet()->getCell($cell)->getColumn();
+			    $row = $objPHPExcel->getActiveSheet()->getCell($cell)->getRow();
+			    $data_value = $objPHPExcel->getActiveSheet()->getCell($cell)->getValue();
+			    //header will/should be in row 1 only. of course this can be modified to suit your need.
+			    if ($row == 1) {
+			        $header[$row][$column] = $data_value;
+			    } else {
+			        $arr_data[$row][$column] = $data_value;
+			    }
+			}
+				//send the data in an array format
+				$data['header'] = $header;
+				$data['values'] = $arr_data;
+
+				echo "<pre>";
+				print_r($arr_data); die();
+
 		}
+		else{
+			echo "Wrong file format. Upload again";
+			$this->load->view('facs_calibur_view');
+		}
+
 	}
 }
