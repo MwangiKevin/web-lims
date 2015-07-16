@@ -1,3 +1,54 @@
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<style type="text/css">
+		.dropdown-menu {
+	  position: absolute;
+	  /*top: 100%;*/
+	  left: 0;
+	  z-index: 1000;
+	  /*display: none;*/
+	  float: left;
+	  min-width: 160px;
+	  padding: 5px 0;
+	  margin: 2px 0 0;
+	  list-style: none;
+	  font-size: 14px;
+	  background-color: #fff;
+	  /*border: 1px solid #ccc;*/
+	  border: 1px solid rgba(0,0,0,.15);
+	  border-radius: 4px;
+	 /* -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);*/
+	  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	  background-clip: padding-box;
+}
+
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  background-image: 
+}
+
+.btn-default {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+
+</style>
 <div class="ui segment">
   <h3><center><div class="ui pink horizontal label big"> CD4 Device: </div> {{ facility_dev_detail.serial_number }}</center></h3>
 </div>
@@ -24,7 +75,7 @@
 	    	<div class="two fields">
 			    <div class="field">
 		        	<div class="ui horizontal label large">Date Added {{ facility_dev_detail.date_added }}</div><div class="field"></div>
-		      		<input type="text" ng-model="facility_dev_detail.date_added" value="{{ facility_dev_detail.date_added }}">
+		      		<input type="text" ng-click="open($event)" datepicker-popup="{{format}}" ng-model="facility_dev_detail.date_added" is-open="opened" datepicker-options="dateOptions" custom-class="getDayClass(date, mode)" ng-required="true" close-text="Close" />
 			    </div>
 			    <div class="field">
 			    	<div class="ui horizontal label large">Roll Out Device? (Tick to roll out / Untick to not roll out device)</div><div class="field"></div>
@@ -91,7 +142,7 @@
 			</div>
 		
 		<div style="height:100px">
-				{{ facility_dev_detail }}
+				<!-- {{ facility_dev_detail }} -->
 		</div>
 	</div>
 </form>
