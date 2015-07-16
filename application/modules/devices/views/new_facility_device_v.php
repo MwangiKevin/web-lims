@@ -1,5 +1,5 @@
 <div class="ui segment">
-  <h3><center><div class="ui pink horizontal label big"> CD4 Device: </div> {{ facility_dev_detail.serial_number }}</center></h3>
+  <h3><center><div class="ui pink horizontal label big"> New CD4 Device </div></center></h3>
 </div>
 
 <div class="ui segment">
@@ -9,12 +9,12 @@
 			<div class="two fields">
 		        <div class="field">
 		        	<div class="ui horizontal label large">Device Serial Number</div><div class="field"></div>
-		          	<input type="text" ng-model="facility_dev_detail.serial_number" value="{{ facility_dev_detail.serial_number }}">
+		          	<input type="text" ng-model="facility_dev_detail.serial_number">
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large">Device Type</div><div class="field"></div>
 		        	<ui-select on-select="dev_type_change()" ng-model="selected.device_type" theme="selectize">
-	                    <ui-select-match placeholder="{{ facility_dev_detail.device_name }}"> {{ $select.selected.name }}</ui-select-match>
+	                    <ui-select-match placeholder="Select Device Type"> {{ $select.selected.name }}</ui-select-match>
 	                        <ui-select-choices  repeat="device_type in device_types | filter: $select.search">
 	                            <span ng-bind-html="device_type.name | highlight: $select.search"></span>
 	                    </ui-select-choices>
@@ -24,11 +24,11 @@
 	    	<div class="two fields">
 			    <div class="field">
 		        	<div class="ui horizontal label large">Date Added</div><div class="field"></div>
-		      		<input type="text" ng-model="facility_dev_detail.date_added" value="{{ facility_dev_detail.date_added }}">
+		      		<input type="text" ng-model="facility_dev_detail.date_added">
 			    </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large">Roll Out Date</div><div class="field"></div>
-			      	<input type="text" ng-model="facility_dev_detail.facility_rollout_date" value="{{ facility_dev_detail.facility_rollout_date }}">
+			      	<input type="text" ng-model="facility_dev_detail.facility_rollout_date">
 			    </div>
 			</div>
 			<div class="two fields">
@@ -39,7 +39,7 @@
 			    </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large" id="der" >Deactivation Reason</div><div class="field"></div>
-			      	<input type="text" ng-show="deact_reason" value="{{ facility_dev_detail.deactivation_reason }}">
+			      	<input type="text" ng-show="deact_reason" >
 			    </div>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 		        <div class="field">
 		          <div class="ui horizontal label large">Facility Name</div><div class="field"></div>
 				        <ui-select on-select="facility_change()" ng-model="selected.facility" theme="selectize">
-		                    <ui-select-match placeholder="{{ facility_dev_detail.facility_name }}"> {{ $select.selected.facility_name }}</ui-select-match>
+		                    <ui-select-match placeholder="Select Facility"> {{ $select.selected.facility_name }}</ui-select-match>
 		                        <ui-select-choices  repeat="facility in facilities | filter: $select.search">
 		                            <span ng-bind-html="facility.facility_name | highlight: $select.search"></span>
 		                    </ui-select-choices>
@@ -59,28 +59,28 @@
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large">MFL Code</div><div class="field"></div>
-		          	<input type="text" readonly value="{{ facility_dev_detail.facility_mfl_code }}">
+		          	<input type="text" readonly ng-model="facility_dev_detail.facility_mfl_code">
 		        </div>
 	    	</div>
 			<div class="two fields">
 			    <div class="field">
 		        	<div class="ui horizontal label large"> Sub County</div><div class="field"></div>
-		      		<input type="text" readonly value="{{ facility_dev_detail.sub_county_name }}">
+		      		<input type="text" readonly ng-model="facility_dev_detail.sub_county_name">
 		    	</div>
 		    	<div class="field">
 	        		<div class="ui horizontal label large"> County </div><div class="field"></div>
-			    	<input type="text" readonly value="{{ facility_dev_detail.county_name }}">
+			    	<input type="text" readonly ng-model="facility_dev_detail.county_name">
 		    	</div>
 			</div>
 
 			<div class="two fields">
 			    <div class="field">
 		        	<div class="ui horizontal label large"> Partner </div><div class="field"></div>
-		      		<input type="text" readonly value="{{ facility_dev_detail.partner_name }}">
+		      		<input type="text" readonly ng-model="facility_dev_detail.partner_name">
 			    </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large"> Central Site </div><div class="field"></div>
-		      		<input type="text" readonly value="{{ facility_dev_detail.central_site_name }}">
+		      		<input type="text" readonly ng-model="facility_dev_detail.central_site_name">
 			    </div>
 			</div>
 			<div class="field"></div><hr />

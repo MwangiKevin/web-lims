@@ -1,4 +1,4 @@
-app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
+app.controller('facilitiesCtrl', ['$scope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
 
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -73,16 +73,16 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         //window.location = "#/removeFacility/"+id;
         swal({
             title: "Are you sure?",
-            text: "This will mean device will not be rolled out to this facility",
+            text: "This will mean devices will not be rolled out to this facility",
             type: "info",
             showCancelButton: true,
             confirmButtonColor: "#00b5ad",
             confirmButtonText: "Yes, Deactivate it!",
             closeOnConfirm: false,
         }, function() {
-            $scope.partner.delete().then(function(partner) {
-                swal("Saved!", "Your Changes Have Been Updated", "success");
-                $state.transitionTo('partners');
+            Restangular.one("facilities", id).remove().then(function() {
+                swal("Saved!", "The Facility has been successfully Deactivated", "success");
+                $state.transitionTo('Facilities');
             }, function(response) {
                 console.log("Error with status code", response);
                 swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");

@@ -1,7 +1,7 @@
 <div class="ui segment">
   <h3><center><div class="ui yellow horizontal label big ">Facility Details: </div> {{facility_detail.facility_name}}</center></h3>
 </div>
-<div class="ui segment"><!-- <div ng-repeat="subc in sub_counties">{{subc.name}}</div> -->
+<div class="ui segment">
 	<form class="ui form">
 	    <div class="two fields">
 	        <div class="field">

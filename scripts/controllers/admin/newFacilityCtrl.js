@@ -18,7 +18,6 @@ app.controller('newFacilityCtrl',
     apiAuth.requireLogin(); // This function is run to check if the user has logged in
 
     $scope.selected = {}; // used for the drop down boxes when user selects a value
-    $scope.county = {};
 
     $scope.baseFacilities = Restangular.all('facilities');
 
