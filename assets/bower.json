@@ -99,7 +99,8 @@
     "waypoints": "~3.1.1",
     "webfont-opensans": "*",
     "angularjs-toaster": "~0.4.10",
-    "ng-token-auth": "~0.0.24"
+    "ng-token-auth": "~0.0.24",
+    "angular-ui-date": "~0.0.8"
   },
   "resolutions": {
     "angular": "~1.3"

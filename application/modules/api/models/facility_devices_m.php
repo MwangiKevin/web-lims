@@ -15,6 +15,10 @@ class facility_devices_m extends MY_Model{
 		$facility_device = json_decode($request_body,true);
 		
 		$facility_device_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility_device'");
+
+		$date = date('H:i:s');
+
+		$facility_device[date_added] = $facility_device[date_added].' '.$date;
 		
 		$facility_device_ID = $facility_device_table[0][Auto_increment];
 		
@@ -43,7 +47,7 @@ class facility_devices_m extends MY_Model{
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
 			return $error;
 		}
-		return $facility_device;
+		//return $facility_device;
 	}
 
 	public function read($id=NULL){
@@ -145,7 +149,9 @@ class facility_devices_m extends MY_Model{
 		}
 
 		$fac_dev['id'] = $fac_dev['facility_device_id'];
+		$fac_dev['original_date_added'] = $fac_dev['date_added'];
 		$fac_dev['date_added'] = date('Y-m-d',strtotime($fac_dev['date_added']));
+		
 
 		// echo "<pre>";
 		// print_r($fac_dev);
@@ -159,19 +165,16 @@ class facility_devices_m extends MY_Model{
 
 		$facility_device = json_decode($request_fields, true);
 
-		// $facility_dev_updated = R::getAll("UPDATE `facility_device` 
-		// 									SET 
-		// 										`facility_id`='$facility_device[facility_id]',
-		// 										`device_id`='$facility_device[device_id]',
-		// 										`status`='$facility_device[status]',
-		// 										`deactivation_reason`='$facility_device[deactivation_reason]',
-		// 										`date_added`='$facility_device[date_added]',
-		// 										`date_removed`='$facility_device[date_removed]',
-		// 										`serial_number`='$facility_device[serial_number]'
-		// 									WHERE 
-		// 										`id` = '$id'
-		// 						");
-		$facility_dev_updated = "UPDATE `facility_device` 
+		$date_compare = date('Y-m-d',strtotime($facility_device['date_added']));
+
+		if($facility_device[date_added]==$date_compare){
+			$original_time = date('H:i:s',strtotime($facility_device[original_date_added]));
+			$facility_device[date_added] = $facility_device[date_added].' '.$original_time;
+		}else{
+			$current_time = date('H:i:s');
+			$facility_device[date_added] = $facility_device[date_added].' '.$current_time;
+		}
+		$facility_dev_updated = R::getAll("UPDATE `facility_device` 
 											SET 
 												`facility_id`='$facility_device[facility_id]',
 												`device_id`='$facility_device[device_id]',
@@ -182,9 +185,21 @@ class facility_devices_m extends MY_Model{
 												`serial_number`='$facility_device[serial_number]'
 											WHERE 
 												`id` = '$id'
-								";
-		echo $facility_dev_updated;die;
-
+								");
+		// $facility_dev_updated = "UPDATE `facility_device` 
+		// 									SET 
+		// 										`facility_id`='$facility_device[facility_id]',
+		// 										`device_id`='$facility_device[device_id]',
+		// 										`status`='$facility_device[status]',
+		// 										`deactivation_reason`='$facility_device[deactivation_reason]',
+		// 										`date_added`='$facility_device[date_added]',
+		// 										`date_removed`='$facility_device[date_removed]',
+		// 										`serial_number`='$facility_device[serial_number]'
+		// 									WHERE 
+		// 										`id` = '$id'
+		// 						";
+		//echo $facility_dev_updated;die;
+		return $facility_dev_updated;
 	}
 
 	public function remove($id){

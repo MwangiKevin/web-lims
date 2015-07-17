@@ -1,3 +1,52 @@
+<style type="text/css">
+		.dropdown-menu {
+	  position: absolute;
+	  /*top: 100%;*/
+	  left: 0;
+	  z-index: 1000;
+	  /*display: none;*/
+	  float: left;
+	  min-width: 160px;
+	  padding: 5px 0;
+	  margin: 2px 0 0;
+	  list-style: none;
+	  font-size: 14px;
+	  background-color: #fff;
+	  /*border: 1px solid #ccc;*/
+	  border: 1px solid rgba(0,0,0,.15);
+	  border-radius: 4px;
+	 /* -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);*/
+	  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	  background-clip: padding-box;
+}
+
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  background-image: 
+}
+
+.btn-default {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+
+</style>
 <div class="ui segment">
   <h3><center><div class="ui pink horizontal label big"> New CD4 Device </div></center></h3>
 </div>

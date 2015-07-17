@@ -196,7 +196,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bower_components/datatables/media/css/jquery.dataTables.css">
-
+	<link rel="stylesheet" href="<?php //echo base_url('assets/bower_components/jquery-ui/themes/smoothness/jquery-ui.css')?>" >
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-tabletools/css/dataTables.tableTools.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-colvis/css/dataTables.colVis.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-responsive/css/dataTables.responsive.css');?>">
@@ -211,6 +211,7 @@
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
+	<script src="<?php //echo base_url('assets/bower_components/jquery-ui/jquery-ui.min.js')?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/semantic/dist/semantic.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular/angular.min.js');?>"></script>
@@ -263,7 +264,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ngstorage/ngStorage.min.js');?>"></script>
 
-	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')?>"></script>
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>
 	
 

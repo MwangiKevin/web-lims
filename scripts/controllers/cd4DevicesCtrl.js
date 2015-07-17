@@ -64,7 +64,7 @@ app.controller('cd4DevicesCtrl', ['$scope','Commons','Restangular','$activityInd
     view_device = function(id){
         window.location = "#/viewCD4Device/"+id;
     }
-    remove_device = function(id,serial_number){
+    remove_device = function(id){
         //window.location = "#/removeCD4Device/"+id;
         swal({
             title: "Are you sure?",
