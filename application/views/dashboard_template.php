@@ -306,6 +306,7 @@
 	<script src="<?php echo base_url('scripts/controllers/admin/newCD4DeviceCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editCD4DeviceCtrl.js');?>"></script>
 
+	<script src="<?php echo base_url('scripts/controllers/admin/newPartnerCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editPartnerCtrl.js');?>"></script>
 
