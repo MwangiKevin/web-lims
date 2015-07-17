@@ -1,11 +1,16 @@
-app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restangular',function ($scope,$rootScope,Commons,apiAuth,Restangular){
+app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restangular','$localStorage','$sessionStorage', function ($scope,$rootScope,Commons,apiAuth,Restangular,$localStorage,$sessionStorage){
     
    	$scope.username = "";
    	$scope.password = "";
     
     $scope.selected = {
               facility:[]
-    } 
+    }    
+    $rootScope.$storage = $localStorage.$default({
+        filter_type : 0,
+        filter_id   : 0,
+        user:[]       
+    });
 
     $scope.submit = function (){
     	username = $scope.username;
@@ -17,11 +22,11 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restang
        url:Commons.baseURL+"api/auth/login",
        type: 'POST',
        data:formData,
-       success:function(success){
+       success:function(res){
 
       }
     })
-     .done(function( data, textStatus, jqXHR ){
+    .done(function( data, textStatus, jqXHR ){
         apiAuth.loginConfirmed();
 
         $rootScope.getSessionDetails().success(function(data){
@@ -43,8 +48,7 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restang
     $scope.facilities=[]; 
      
 
-    $scope.baseFacilities = Restangular.all('facilities');    
-
+    $scope.baseFacilities = Restangular.all('facilities'); 
     $scope.refreshFacilities = function(search) {
       var params = {address: search, sensor: false};                    
 
@@ -54,7 +58,6 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restang
 
       return  $scope.facilities ;
     };
-
     $scope.$watch('selected.facility',function(){
 
       if($scope.facility_login){
@@ -63,7 +66,6 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restang
       }
 
     });
-
     $scope.$watch('facility_login',function(){      
       $scope.username = "";
       $scope.selected = {

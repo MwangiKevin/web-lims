@@ -116,15 +116,9 @@ class facility_devices_m extends MY_Model{
 			$fac_dev =  $fac_dev_res[0];
 
 			if(sizeof($fac_dev)>0){
-<<<<<<< HEAD
 				$facility= $this->api_get_facilities($fac_dev['facility_id']);
 
-=======
-				$facility=R::getAll("CALL `proc_api_get_facilities`('".$fac_dev['facility_id']."','','','','','','')");
-		// 		echo "<pre>";
-		// print_r($facility);
-		// echo "</pre>";
->>>>>>> hawi/develop
+
 				if(sizeof($facility)>0){
 					$fac_dev['assigned_to_facility'] = true;
 					foreach ($facility[0] as $fac_key => $value1) {

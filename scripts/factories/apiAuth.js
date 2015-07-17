@@ -1,38 +1,37 @@
-app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator','$location','notify',function(authService,$rootScope,$http,$activityIndicator,$location,notify){
+app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator','$location','notify','$localStorage','$sessionStorage',function(authService,$rootScope,$http,$activityIndicator,$location,notify$localStorage,$sessionStorage){
 	var apiAuth={};
 	apiAuth.baseURL= base_url;
-
-	// $rootScope.session = {
-	// 	user:null,
-	// 	loggedIn: false,
-	// 	filter:{
-	//         filter_type: 0,
-	//         filter_id: 0
-	//     }
-	// }
 
 	apiAuth.checkLoginSt = function (){
 		return true;
 	}
 
-	apiAuth.requireNoLogin = function(){
-		
+	apiAuth.requireNoLogin = function(){		
 		$rootScope.$broadcast('event:auth-loginNotRequired');
 	}
 	apiAuth.requireLogin = function(){
 		return $http.get("api/auth/is_logged_in");
 	}
-	apiAuth.loginConfirmed = function(){
-		
+	apiAuth.loginConfirmed = function(){		
 		$rootScope.$broadcast('event:auth-loginConfirmed');
 		return apiAuth.getSessionDetails();
 	}
-
 	apiAuth.getSessionDetails = $rootScope.getSessionDetails =  function (){
 		return  $http.get(
 			'api/auth/get_session_details'
 			)
 		.success(function(response){
+			// console.log(response);
+			if(response.loggedin){
+
+				$rootScope.$storage.filter_type = response.user.linked_entity.filter_type;
+				$rootScope.$storage.filter_id 	= response.user.linked_entity.filter_id;
+
+			}else{
+				$rootScope.$storage.filter_type	=	0;
+				$rootScope.$storage.filter_id 	=	0;
+			}
+
 
 		});	
 	}
@@ -55,7 +54,6 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 
 		return r;
 	}
-
 	apiAuth.login = function(usr,pwd){	
 		$activityIndicator.startAnimating();
 
@@ -71,7 +69,6 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 			$activityIndicator.stopAnimating() 
 		});
 	}
-
 	apiAuth.logout = function(){
 		return $http.post('api/auth/logout')
 		.success(function(response){

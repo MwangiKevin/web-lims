@@ -5,8 +5,7 @@ if (!defined('BASEPATH'))
 class auth extends MY_Controller {	
 	function __construct() {
 
-		parent::__construct();
-		
+		parent::__construct();		
 		header('Content-Type: application/json; charset=utf-8');
 	}
 
@@ -24,8 +23,7 @@ class auth extends MY_Controller {
 				'username' 		=>	$username,
 				'login_status' 	=>	true,
 				'user'			=>	$this->aauth->get_user(),
-
-				);
+			);
 			$user  = (array) $this->aauth->get_user();
 			$user_id = (int) $user['id'];
 			$this->load->model('users_m');
@@ -33,13 +31,11 @@ class auth extends MY_Controller {
 
 			echo json_encode($details);
 
-		}else{
-			
+		}else{			
 			http_response_code(401);
 			$details =	array(
 				'username' 	=>	$username,
 				'login_status' 	=>	false,
-
 				'user'			=>	$this->aauth->get_user(),
 				);
 
