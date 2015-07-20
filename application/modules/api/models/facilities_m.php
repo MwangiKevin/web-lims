@@ -110,7 +110,7 @@ class facilities_m extends MY_Model{
 			if($verbose=='true'){
 
 				foreach ($facilities as $key => $value) {
-					$facility_devices = $this->api_get_facility_devices('','','','','','','','',1,$value['facility_id']);
+					$facility_devices = $this->api_get_facility_devices('','','','','','','',1,$value['facility_id']);
 					$facilities[$key]['devices'] = $facility_devices;
 
 					$facilities[$key]['filter_type'] = 1;
@@ -123,7 +123,7 @@ class facilities_m extends MY_Model{
 
 			$facilities =  $facilities_res[0];	
 			if(sizeof($facilities)>0){
-				$facility_devices = $this->api_get_facility_devices('','','','','','','','',1,$facilities['facility_id']);
+				$facility_devices = $this->api_get_facility_devices('','','','','','','',1,$facilities['facility_id']);
 				$facilities['devices'] = $facility_devices;
 
 				$facilities['filter_type'] = 1;
