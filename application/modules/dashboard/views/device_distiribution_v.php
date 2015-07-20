@@ -1,12 +1,9 @@
 <div id="row">
 	<div class="ui blue segment" id="chart_container" >
 		<div class="ui grid">
-			<div class="ten wide column">
+			<div class="fifteen wide column">
 				<highchart id="device_distribution_stack" config="device_distribution_stack" class="span"></highchart>
 			</div>
-			<div class="four wide column">
-		  		<highchart id="expected_reporting_devices" config="expected_reporting_devices" class="span"></highchart>
-		  	</div>
 		</div>
 		<hr />
 		<div class="ui grid">
@@ -25,12 +22,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td> {{table_data[0].equipment}} </td>
-							<td> {{table_data[0].total}} </td>
-							<td> {{table_data[0].functional}} </td>
-							<td> {{table_data[0].broken_down}} </td>
-							<td> {{table_data[0].obsolete}} </td>
+						<tr ng-repeat="td in table_data">
+							<td> {{td.equipment}} </td>
+							<td> {{td.total}} </td>
+							<td> {{td.functional}} </td>
+							<td> {{td.broken_down}} </td>
+							<td> {{td.obsolete}} </td>
 						</tr>
 					</tbody>
 				</table>
@@ -54,11 +51,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td> {{equipment_tests_data[0].equipment}} </td>
-							<td> {{equipment_tests_data[0].count}} </td>
-							<td> {{equipment_tests_data[0].valid}} </td>
-							<td> {{equipment_tests_data[0].errors}} </td>
+						<tr ng-repeat="td in equipment_tests_data">
+							<td> {{td.equipment}} </td>
+							<td> {{td.count}} </td>
+							<td> {{td.valid}} </td>
+							<td> {{td.errors}} </td>
 						</tr>
 					</tbody>
 				</table>
@@ -66,6 +63,11 @@
 			<div class="four wide column">
 				<highchart id="equipment_tests_pie" config="equipment_tests_pie" class="span10"></highchart>
 			</div>				
+		</div>
+		<div class="ui grid">
+			<div class="fifteen wide column">
+		  		<highchart id="expected_reporting_devices" config="expected_reporting_devices" class="span"></highchart>
+		  	</div>
 		</div>
 </div>
 <div style="clear:both; height: 10px;"></div>

@@ -76,7 +76,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	        chart: {
 	            type: 'column',
 	            borderWidth:2,
-	            width:550,
+	            width:900,
 	            height:250
            }
         },
@@ -109,7 +109,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
             // x: -30,
             verticalAlign: 'top',
             // y: 25,
-            floating: false,
+            floating: true,
             backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
             borderColor: '#CCC',
             borderWidth: 1,
@@ -174,7 +174,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	            plotBorderWidth: null,
 	            plotShadow: true,
 	            marginTop:0,
-	            height:250,
+	            height:210,
 	            width:350,
 	            borderWidth:2	            
 	        },
@@ -241,7 +241,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
                 plotShadow: true,
                 marginTop:0,
                 width:350,
-                height:250,
+                height:210,
                 borderWidth:2
             },
 	        plotOptions: {
@@ -307,6 +307,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	            zoomType: 'x',
 	            type: 'area',
 	            height:250,
+	            width:900,
 	            borderWidth: '2'
 	           }
         },
@@ -335,7 +336,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
         plotOptions: {
             area: {
                 stacking: null,
-                lineColor: '#666666',
+                lineColor: '#515151',
                 lineWidth: 1,                       
                 marker: {
                     lineWidth: 0,
