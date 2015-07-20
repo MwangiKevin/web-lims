@@ -1,5 +1,5 @@
 <br/>
-<button ng-click= "alert()">reload</button>
+<!-- <button ng-click= "alert()">reload</button> -->
 <div class="ui stackable page grid">
 	<div class="sixteen wide column">
 		<div style="" class="ui segment"> 

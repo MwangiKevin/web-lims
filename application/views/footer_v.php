@@ -2,7 +2,7 @@
 	<div class="ui right aligned grid">
 		<div class="right floated left aligned two wide column">
 			&copy NASCOP <?php echo Date("Y")?>
-			{{$storage.filter_type}}
+			<!-- {{$storage.filter_type}} -->
 		</div>
 	</div>
 </div>
