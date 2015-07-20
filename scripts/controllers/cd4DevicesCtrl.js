@@ -1,5 +1,5 @@
-app.controller('cd4DevicesCtrl', ['$scope','$rootScope','Commons','Restangular','$activityIndicator','DTOptionsBuilder','DTColumnBuilder',  function ($scope,$rootScope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder) {
-
+app.controller('cd4DevicesCtrl', ['$scope','$rootScope','Commons','Restangular','$activityIndicator','DTOptionsBuilder','DTColumnBuilder','apiAuth',  function ($scope,$rootScope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder,apiAuth) {
+    apiAuth.requireLogin();
  $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/facility_devices',
