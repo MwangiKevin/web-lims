@@ -48,7 +48,6 @@ class facilities_m extends MY_Model{
 							'$facility[phone]',
 							'$facility[rollout_status]'
 							)"; 
-		
 
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
