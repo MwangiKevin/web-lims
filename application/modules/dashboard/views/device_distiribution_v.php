@@ -1,95 +1,74 @@
-<style>
-	#chart_container{
-		width:100%;
-		padding: 5%;
-		border:solid;
-	}
-	#middle_chart{
-		width:100%;
-		
-	}
-	#table_container{
-		padding:5%;
-		clear:both;
-	}
-	#middle_chart_container{
-		width:75%;
-	}
-	#top_chart_container{
-		width: 100%;
-		overflow-y:auto;
-		overflow-x:auto;
-	}
-	#bottom_chart_container{
-		width: 75%;
-	}
-</style>
-
 <div id="row">
 	<div class="ui blue segment" id="chart_container" >
-		<div id='top_chart_container'>
-			<highchart id="device_distribution_stack" config="device_distribution_stack" class="span"></highchart>
+		<div class="ui grid">
+			<div class="fifteen wide column">
+				<highchart id="device_distribution_stack" config="device_distribution_stack" class="span"></highchart>
+			</div>
 		</div>
-		<hr />
-		<div style="float:left; width: 30%;">
-			<highchart id="cd4_equipment_pie" config="cd4_equipment_pie" class="span10"></highchart>
+		<div style="clear:both"><hr></div>
+		<div class="ui grid">
+			<div class="ten wide column">
+				<h4>CD4 Equipment</h4>
+				{{t_data}}
+				<table class="ui celled table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Device</th>
+		                    <th>Total</th>
+		                    <th>Functional</th>
+		                    <th>Broken down</th>
+		                    <th>Obsolete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="td in table_data">
+							<td> {{td.equipment}} </td>
+							<td> {{td.total}} </td>
+							<td> {{td.functional}} </td>
+							<td> {{td.broken_down}} </td>
+							<td> {{td.obsolete}} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="four wide column">
+				<highchart id="cd4_equipment_pie" config="cd4_equipment_pie" class="span10"></highchart>
+		  	</div>
 		</div>
-		<div style="float:right; width: 50%;">
-			<h4>CD4 Equipment</h4>
-			<table style = "border: 1px solid #DDD;" class="span10" ng-class="{true: 'active', false: 'disabled'}[table_data.loading]">
-	            <thead class="even" style="background:#f0f0f0" >
-	                <tr>
-	                    <td>Device</td>
-	                    <td>Total</td>
-	                    <td>Functional</td>
-	                    <td>Broken down</td>
-	                    <td>Obsolete</td>
-	                </tr>
-	            </thead>
-	            <tbody>
-		            <tr style = "border: 1px solid #DDD;" ng-repeat="t_data in table_data" >
-		                <td style="background-color: #CCCCCC;"  ><center><a href="">{{t_data.equipment}}</a></center></td>
-		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.total}}</center></td>
-		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.functional}}</center></td>
-		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.broken_down}}</center></td>
-		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.obsolete}}</center></td>
-		            </tr>
-	            </tbody>
-	       </table>
+		<div style="clear:both"><hr></div>		
+		<div class="ui grid">
+			<div class="ten wide column">
+				<h4># of Tests Per Equipment</h4>
+				<table class="ui celled table">
+					<thead>
+						<tr>
+							<th>Device</th>
+	                    	<th>Total Tests</th>
+	                    	<th>Functional</th>
+	                    	<th>Broken down</th>
+	                    	<th>Obsolete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="td in equipment_tests_data">
+							<td> {{td.equipment}} </td>
+							<td> {{td.count}} </td>
+							<td> {{td.valid}} </td>
+							<td> {{td.errors}} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="four wide column">
+				<highchart id="equipment_tests_pie" config="equipment_tests_pie" class="span10"></highchart>
+			</div>				
 		</div>
-		<div style="clear:both;">
-			<hr />
+		<div style="clear:both"><hr></div>
+		<div class="ui grid">
+			<div class="fifteen wide column">
+		  		<highchart id="expected_reporting_devices" config="expected_reporting_devices" class="span"></highchart>
+		  	</div>
 		</div>
-		<div style="float:left; width: 30%;">
-			<highchart id="equipment_tests_pie" config="equipment_tests_pie" class="span10"></highchart>
-		</div>
-		<div style="float:right; width: 50%;">
-			<h4># of Tests Per Equipment</h4>
-			<table style = "border: 1px solid #DDD;" class="span10" ng-class="{true: 'active', false: 'disabled'}[equipment_tests_data.loading]">
-	            <thead class="even" style="background:#f0f0f0" >
-	                <tr>
-	                    <td>Device</td>
-	                    <td>Total Tests</td>
-	                    <td>Successful Tests</td>
-	                    <td>Errors</td>
-	                </tr>
-	            </thead>
-	            <tbody>
-		            <tr style = "border: 1px solid #DDD;" ng-repeat="t_data in equipment_tests_data">
-		                <td style="background-color: #CCCCCC;"  ><center><a href="">{{t_data.equipment}}</a></center></td>
-		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.count}}</center></td>
-		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.valid}}</center></td>
-		                <td style="background-color: #F6F6F6;;" ><center>{{t_data.errors}}</center></td>
-		            </tr>
-	            </tbody>
-	        </table>
-		</div>
-		<div style="clear:both;">
-			<hr />
-		</div>
-		<!-- Expected Reporting Devices -->
-		<div id="bottom_chart_container">
-			<highchart id="expected_reporting_devices" config="expected_reporting_devices" class="span"></highchart>
-		</div>
-		
 </div>
+<div style="clear:both; height: 10px;"></div>

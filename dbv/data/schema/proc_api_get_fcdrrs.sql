@@ -1,6 +1,7 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_fcdrrs`(fcdrr_id int(11),facility_id int(11),yr int(4),mnth int(2),search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
 BEGIN
         SET @QUERY =    " SELECT 
+                                `fcdrr`.`id`                       as  `id` ,
                                 `fcdrr`.`id`                       as  `fcdrr_id` ,
                                 `fcdrr`.`facility_id`              ,
                                 `f`.`mfl_code`                     as `facility_mfl_code`,

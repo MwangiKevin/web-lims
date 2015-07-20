@@ -22,7 +22,9 @@ var app = angular
     'datatables', 
     'datatables.colvis', 
     'datatables.tabletools', 
-    'datatables.colreorder'
+    'datatables.colreorder',
+    'ngStorage',
+    'ui.bootstrap'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -268,8 +270,8 @@ var app = angular
 		url: '/newFacility',
 		views:{
 			'main':{
-				// templateUrl: 'newFacility',
-				// controller:'newFacilityCtrl'
+				templateUrl: 'facilities/newFacility',
+				controller:'newFacilityCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -348,8 +350,8 @@ var app = angular
 		url: '/newCD4Device',
 		views:{
 			'main':{
-				// templateUrl: 'newDevice',
-				// controller:'newCD4DeviceCtrl'
+				templateUrl: 'devices/new_CD4_device',
+				controller:'newCD4DeviceCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -459,8 +461,8 @@ var app = angular
 		url: '/newPartner',
 		views:{
 			'main':{
-				// templateUrl: 'newPartner',
-				// controller:'newPartnerCtrl'
+				templateUrl: 'admin/newPartner',
+				controller:'newPartnerCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -489,6 +491,69 @@ var app = angular
 	})
 	.state('viewPartner',{
 		url: '/viewPartner/{id:int}',
+		views:{
+			'main':{
+				// templateUrl: 'viewPartner',
+				// controller:'viewPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	}).state('users',{
+		url: '/users',
+		views:{
+			'main':{
+				templateUrl: 'users',
+				controller:'usersCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('newUser',{
+		url: '/newUser',
+		views:{
+			'main':{
+				// templateUrl: 'newUser',
+				// controller:'newPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('editUser',{
+		url: '/editUser/{id:int}',
+		views:{
+			'main':{
+				templateUrl: 'users/edit',
+				controller:'editPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('viewUser',{
+		url: '/viewUser/{id:int}',
 		views:{
 			'main':{
 				// templateUrl: 'viewPartner',

@@ -234,7 +234,8 @@ class api extends MY_Controller {
 		}
 
 		else if ($method=="delete"){
-			echo json_encode($this->facility_devices_m->remove($id),JSON_PRETTY_PRINT);
+			echo $this->facility_devices_m->remove($id);
+			//echo json_encode($this->facility_devices_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
 
@@ -249,4 +250,54 @@ class api extends MY_Controller {
 		}
 
 	}
+
+	public function facility_types($id=NULL)
+	{
+		$this->load->model("api_m");
+
+		$method = $this->_detect_method();
+
+		if ($method=="get"){
+			echo json_encode($this->api_m->get_facility_types(),JSON_PRETTY_PRINT);
+		}
+
+	}
+
+	public function device_types($id=NULL)
+	{
+		$this->load->model("api_m");
+
+		$method = $this->_detect_method();
+
+		if ($method=="get"){
+			echo json_encode($this->api_m->get_device_types(),JSON_PRETTY_PRINT);
+		}
+
+	}
+
+	public function users($id=NULL) {
+
+		$this->load->model("users_m");	
+
+		$method= $this->_detect_method();
+
+		if ($method=="post"){
+			
+			echo json_encode($this->users_m->create(),JSON_PRETTY_PRINT);
+		}
+
+		else if($method=="get"){
+			echo json_encode($this->users_m->read($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="put"){
+			echo json_encode($this->users_m->update($id),JSON_PRETTY_PRINT);
+		}
+
+		else if ($method=="delete"){
+			echo json_encode($this->users_m->remove($id),JSON_PRETTY_PRINT);
+		}
+	}
+
+	
 }

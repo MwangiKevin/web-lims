@@ -17,7 +17,7 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 
 	$scope.filters.selected  = {
 		dates : {start:'',end:''},
-		entity: []
+		entity: {filter_type:0,filter_id:0}
 	};
 
 
@@ -84,10 +84,10 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 	}
 	$scope.refreshFilters("");
 
-	$scope.filters.clear = function() {
-		$scope.filters.entities.selected = undefined;
-
-		Filters.entities.selected = undefined;
+	$scope.filters.clear = function($event) {
+		$event.stopPropagation(); 
+		$scope.filters.selected.entity = {filter_type:0,filter_id:0};
+		// Filters.entities.selected = undefined;
 	};
 
 	$scope.bindDates = function(st,en){

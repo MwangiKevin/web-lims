@@ -34,19 +34,19 @@
 		</div>  
 	</div>  
 
-	<div class="nine wide column" style="margin:0px;padding:0px;">  
+	<!-- <div class="nine wide column" style="margin:0px;padding:0px;">  
 		<div class="ui grid right " style="">
 			<div class="ui segment">
 				<div class="ui large breadcrumb">
 					<a class="section">Home</a>
 					<i class="right chevron icon divider"></i>
-					<a class="section">Dashboard</a>
+					<a class="section">Dashboard</a> -->
 					<!-- <i class="right chevron icon divider"></i>
 					<div class="active section">Summary</div> -->
-				</div>
+				<!-- </div>
 			</div>  
 		</div>
-	</div>
+	</div> -->
 
 	<div style="margin:0px;padding:0px;" class="three wide column">
 		<h1 style="float:right;margin-bottom: 0px;margin-top: 0px;" class="ui inverted">{{commons.getTitle()}}</h1>

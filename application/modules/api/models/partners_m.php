@@ -14,7 +14,7 @@ class partners_m extends MY_Model{
 		
 		$partner = json_decode($request_body,true);
 		
-		$partner_table =	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'partner'"	);
+		$partner_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'partner'");
 		
 		$partner_ID = $partner_table[0][Auto_increment];
 		
@@ -85,9 +85,20 @@ class partners_m extends MY_Model{
 
 			$partners =  $partners_res;	
 
+			if($verbose=='true'){
+				foreach ($partners as $key => $value) {
+
+					$partners[$key]['filter_type'] = 4;
+					$partners[$key]['filter_id'] = $partners[$key]['id'];
+				}	
+			}
+
 		}else{
 
 			$partners =  $partners_res[0];
+
+			$partners['filter_type'] = 4;
+			$partners['filter_id'] = $partners['partner_id'];
 		}
 
 		if($is_datatable && $id==NULL){
@@ -114,6 +125,14 @@ class partners_m extends MY_Model{
 								WHERE 
 									`id` = '$id'
 								");
+		// echo $partner_updated = "UPDATE `partner` 
+		// 						SET 
+		// 							`name`='$partner[name]',
+		// 							`phone`='$partner[phone]',
+		// 							`email`='$partner[email]'
+		// 						WHERE 
+		// 							`id` = '$id'
+		// 						"; die;
 
 		return $partner_updated;
 	}
@@ -123,13 +142,13 @@ class partners_m extends MY_Model{
 
 		// $partner = json_decode($request_partner, true);
 		
-		$partner_deleted = R::getAll("DELETE FROM 
-												 `partner`
-											WHERE 
-												`id` = '$id'
-											");
+		// $partner_deleted = R::getAll("DELETE FROM 
+		// 										 `partner`
+		// 									WHERE 
+		// 										`id` = '$id'
+		// 									");
 		
-		return $partner_deleted;
+		//return $partner_deleted;
 	}
 
 }

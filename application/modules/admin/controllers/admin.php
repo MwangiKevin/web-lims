@@ -15,5 +15,12 @@ class admin extends MY_Controller {
 		$this->load->view('editPartner_v');
 	}
 
+	function newPartner(){
+
+		$this->load->view('new_partner_v');
+	}
+
+
+
 	
 }
