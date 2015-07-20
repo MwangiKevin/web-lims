@@ -1,6 +1,6 @@
-app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,$rootScope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
+app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','apiAuth', function ($scope,$rootScope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder,apiAuth ) {
 
-
+    apiAuth.requireLogin();
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/facilities',
