@@ -1,12 +1,12 @@
 <div class="ui segment">
-  <h3><center><div class="ui blue horizontal label big ">New Partner Details</div></center></h3>
+  <h3><center><div class="ui blue horizontal label big ">New Partner Details</div> (Fields marked with <i class="asterisk red icon"></i> are Required)</center></h3>
 </div>
 
 <div class="ui segment">
 	<form class="ui form">
 	    <div class="two fields">
 	        <div class="field">
-	          <div class="ui horizontal label large "> Partner Name </div><div class="field"></div>
+	          <div class="ui horizontal label large "> Partner Name <i class="asterisk red icon"></i></div><div class="field"></div>
 	          <input type="text" ng-model="partner.name">
 	        </div>
 	        <div class="field">
