@@ -23,6 +23,8 @@ app.controller('newCD4DeviceCtrl',
 
     $scope.baseCD4Devices = Restangular.all('facility_devices'); // to make posting possible
 
+    var new_cd4_form = $("#new_cd4");
+
     $scope.populateDevice_types = function() { // get all the device types and populate the U.I
         var loaded_device_types = Restangular.all('device_types');
         loaded_device_types.getList().then(function(dev_types) {
@@ -76,34 +78,40 @@ app.controller('newCD4DeviceCtrl',
         })
     }
 
+    $scope.isInvalid = function () {
+            return !new_cd4_form.form('validate form');
+    };
+
     $scope.save_new_device = function(){ // save the new CD4 device
-        if(!$scope.facility_dev_detail.deactivation_reason ==''){
-            $scope.facility_dev_detail.date_removed = $scope.dateAsString; // set today's date if deactivation reason is entered
-            $scope.facility_dev_detail.status = 0;
-        }else{
-            $scope.facility_dev_detail.status = 1;
-            $scope.facility_dev_detail.date_removed = '';
-        }
 
-        $scope.facility_dev_detail.date_added = $scope.dateAsString; //assign date to data being sent
+            if(!$scope.facility_dev_detail.deactivation_reason ==''){
+                $scope.facility_dev_detail.date_removed = $scope.dateAsString; // set today's date if deactivation reason is entered
+                $scope.facility_dev_detail.status = 0;
+            }else{
+                $scope.facility_dev_detail.status = 1;
+                $scope.facility_dev_detail.date_removed = '';
+            }
 
-        swal({
-            title: "Are you sure?",
-            text: "Do you want to save this device "+$scope.facility_dev_detail.serial_number+"",
-            type: "info",
-            showCancelButton: true,
-            confirmButtonColor: "#00b5ad",
-            confirmButtonText: "Yes, Save it!",
-            closeOnConfirm: false,
-        }, function() {
-            $scope.baseCD4Devices.post($scope.facility_dev_detail).then(function(facility_dev_detail) {
-                swal("Saved!", $scope.facility_dev_detail.serial_number+" has been saved as a new CD4 device", "success");
-                //$state.transitionTo('CD4Devices');
-            }, function(response) {
-                console.log("Error with status code", response);
-                swal("Error!", "An Error was encountered. \n Your device has not been saved", "error");
+            $scope.facility_dev_detail.date_added = $scope.dateAsString; //assign date to data being sent
+
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to save this device "+$scope.facility_dev_detail.serial_number+"",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#00b5ad",
+                confirmButtonText: "Yes, Save it!",
+                closeOnConfirm: false,
+            }, function() {
+                $scope.baseCD4Devices.post($scope.facility_dev_detail).then(function(facility_dev_detail) {
+                    swal("Saved!", $scope.facility_dev_detail.serial_number+" has been saved as a new CD4 device", "success");
+                    //$state.transitionTo('CD4Devices');
+                }, function(response) {
+                    console.log("Error with status code", response);
+                    swal("Error!", "An Error was encountered. \n Your device has not been saved", "error");
+                });
             });
-        });
+        
     }
 
     // run functions to populate U.I

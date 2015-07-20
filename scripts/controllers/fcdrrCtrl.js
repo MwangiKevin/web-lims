@@ -162,8 +162,8 @@ app.controller('fcdrrCtrl', ['$stateParams', '$state', '$rootScope', '$scope', '
             $scope.baseFacilities.getList({
                 search: search,
                 limit_items: 6,
-                filter_type:sess.user.linked_entity.filter_type,
-                filter_id:sess.user.linked_entity.filter_id
+               filter_type :$rootScope.$storage.filter_type, 
+               filter_id: $rootScope.$storage.filter_id
             }).then(function(com) {
                 $scope.facilities = com;
             });
@@ -236,4 +236,8 @@ app.controller('fcdrrCtrl', ['$stateParams', '$state', '$rootScope', '$scope', '
         }
     }
     $scope.populateFcdrr();
+
+    $scope.$watch('$storage.filter_id', function() {
+        $scope.refreshFacilities();
+    });
 }])

@@ -30,35 +30,35 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr ng-repeat="td in table_data">
 							<td>
 								<center>
-									{{table_data[0].title}}
+									{{td.title}}
 								</center>
 							</td>
 							<td>
 								<center>
-									{{table_data[0].total}}
+									{{td.total}}
 								</center>
 							</td>
 							<td>
 								<center>
-									{{table_data[0].valid}}
+									{{td.valid}}
 								</center>
 							</td>
 							<td>
 								<center>
-									{{table_data[0].passed}}
+									{{td.passed}}
 								</center>
 							</td>
 							<td>
 								<center>
-									{{table_data[0].failed}}
+									{{td.failed}}
 								</center>
 							</td>
 							<td>
 								<center>
-									{{table_data[0].errors}}
+									{{td.errors}}
 								</center>
 							</td>
 						</tr>

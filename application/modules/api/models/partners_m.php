@@ -14,7 +14,7 @@ class partners_m extends MY_Model{
 		
 		$partner = json_decode($request_body,true);
 		
-		$partner_table =	R::getAll(	"SHOW TABLE STATUS WHERE `Name` = 'partner'"	);
+		$partner_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'partner'");
 		
 		$partner_ID = $partner_table[0][Auto_increment];
 		
@@ -142,13 +142,13 @@ class partners_m extends MY_Model{
 
 		// $partner = json_decode($request_partner, true);
 		
-		$partner_deleted = R::getAll("DELETE FROM 
-												 `partner`
-											WHERE 
-												`id` = '$id'
-											");
+		// $partner_deleted = R::getAll("DELETE FROM 
+		// 										 `partner`
+		// 									WHERE 
+		// 										`id` = '$id'
+		// 									");
 		
-		return $partner_deleted;
+		//return $partner_deleted;
 	}
 
 }

@@ -122,7 +122,6 @@ class MY_Model extends CI_Model{
 	}
 	protected function api_get_facility_devices( 	
 										$id = NULL , 
-										$f_id = NULL , 
 										$search = NULL, 
 										$order_col = NULL , 
 										$order_dir = NULL, 
@@ -133,7 +132,7 @@ class MY_Model extends CI_Model{
 										$filter_id = 0 
 									){
 
-		return R::getAll("CALL `proc_api_get_facility_devices`('$id','$f_id','$search','$order_col','$order_dir','$limit_start','$limit_items','$if_get_count','$filter_type','$filter_id')");
+		return R::getAll("CALL `proc_api_get_facility_devices`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','$if_get_count','$filter_type','$filter_id')");
 
 	}
 }

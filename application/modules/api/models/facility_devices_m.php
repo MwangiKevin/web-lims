@@ -85,13 +85,13 @@ class facility_devices_m extends MY_Model{
 			$limit_items = $this->input->get("length");
 			$draw = $this->input->get("draw");
 
-			$total_records 		= 	(int)	$this->api_get_facility_devices($id,'','',$order_col,$order_dir,'','','true',$filter_type,$filter_id )[0]['count'];
-			$records_filtered 	=	(int) 	$this->api_get_facility_devices($id,'',$search,$order_col,$order_dir,$limit_start,$limit_items,'true',$filter_type,$filter_id)[0]['count'];
+			$total_records 		= 	(int)	$this->api_get_facility_devices($id,'',$order_col,$order_dir,'','','true',$filter_type,$filter_id )[0]['count'];
+			$records_filtered 	=	(int) 	$this->api_get_facility_devices($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'true',$filter_type,$filter_id)[0]['count'];
 		}
 
 		$search = addslashes($search);
 	
-		$fac_dev_res = $this->api_get_facility_devices($id,'',$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id);
+		$fac_dev_res = $this->api_get_facility_devices($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id);
 	
 		if($id==NULL){
 

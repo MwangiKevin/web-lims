@@ -461,8 +461,8 @@ var app = angular
 		url: '/newPartner',
 		views:{
 			'main':{
-				// templateUrl: 'newPartner',
-				// controller:'newPartnerCtrl'
+				templateUrl: 'admin/newPartner',
+				controller:'newPartnerCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

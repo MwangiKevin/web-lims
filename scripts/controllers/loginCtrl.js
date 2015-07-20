@@ -6,7 +6,7 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restang
     $scope.selected = {
               facility:[]
     }    
-    $rootScope.$storage = $localStorage.$default({
+    $rootScope.$storage= $rootScope.store = $localStorage.$default({
         filter_type : 0,
         filter_id   : 0,
         user:[]       
