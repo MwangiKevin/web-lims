@@ -1,10 +1,11 @@
-app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumnBuilder', function ($scope,Commons,DTOptionsBuilder,DTColumnBuilder) {
+app.controller('cd4TestsCtrl', ['$scope','$rootScope','Commons', 'DTOptionsBuilder','DTColumnBuilder','apiAuth', function ($scope,$rootScope,Commons,DTOptionsBuilder,DTColumnBuilder,apiAuth) {
 
+	apiAuth.requireLogin();
 
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 	.withOption('ajax', {
 		url: Commons.baseURL+'api/tests',
-		data:{datatable:true},
+		data:{datatable:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
 		type: 'GET'
 	})	
 	.withDataProp('data')
@@ -80,5 +81,8 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 		DTColumnBuilder.newColumn('county_name').withTitle('County'),
 		DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible()
 	];
+
+
+
 
 }]);

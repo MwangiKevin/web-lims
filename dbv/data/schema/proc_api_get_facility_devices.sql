@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_facility_devices`(id int(11),fac_id int(11),search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_facility_devices`(id int(11),fac_id int(11),search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10),filter_type int(11),filter_id int(11))
 BEGIN
         SET @QUERY =    " SELECT 
                                 `f_d`.`id`                          AS  `id`,
@@ -94,6 +94,20 @@ BEGIN
         END IF;
 
 
+        CASE 
+            WHEN (filter_type = 1 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `f`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 2 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `sc`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 3 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `c`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 4 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `p`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 5 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `f_d`.`id` = '",`filter_id`,"' ");
+            ELSE
+                SET @QUERY = @QUERY;
+        END CASE;
 
 
         CASE 

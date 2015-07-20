@@ -1,10 +1,10 @@
-app.controller('facilitiesCtrl', ['$scope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
+app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,$rootScope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
 
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/facilities',
-        data:{datatable:true,verbose:true},
+        data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
         type: 'GET'
     })  
     .withDataProp('data')

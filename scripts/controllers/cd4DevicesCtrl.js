@@ -1,9 +1,9 @@
-app.controller('cd4DevicesCtrl', ['$scope','Commons','Restangular','$activityIndicator','DTOptionsBuilder','DTColumnBuilder',  function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder) {
+app.controller('cd4DevicesCtrl', ['$scope','$rootScope','Commons','Restangular','$activityIndicator','DTOptionsBuilder','DTColumnBuilder',  function ($scope,$rootScope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder) {
 
  $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/facility_devices',
-        data:{datatable:true,verbose:true},
+        data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
         type: 'GET'
     })  
     .withDataProp('data')

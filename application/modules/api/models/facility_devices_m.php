@@ -62,9 +62,11 @@ class facility_devices_m extends MY_Model{
 		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
+
+		$filter_type = (int) $this->input->get("filter_type");
+		$filter_id 	 = (int) $this->input->get("filter_id");
 		
 		$draw;$order_col;$order_dir;
-
 
 		$total_records = 0;
 		$records_filtered = 0;
@@ -79,19 +81,18 @@ class facility_devices_m extends MY_Model{
 			$order_col = $columns[$order_col_index]['data'];
 			$order_dir = $order[0]['dir'];
 
-
 			$limit_start = $this->input->get("start");
 			$limit_items = $this->input->get("length");
 			$draw = $this->input->get("draw");
 
-			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_facility_devices`('$id','','','$order_col','$order_dir','','','true')")[0]['count'];
-			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
+			$total_records 		= 	(int)	$this->api_get_facility_devices($id,'','',$order_col,$order_dir,'','','true',$filter_type,$filter_id )[0]['count'];
+			$records_filtered 	=	(int) 	$this->api_get_facility_devices($id,'',$search,$order_col,$order_dir,$limit_start,$limit_items,'true',$filter_type,$filter_id)[0]['count'];
 		}
 
 		$search = addslashes($search);
-
-		$fac_dev_res = R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
-
+	
+		$fac_dev_res = $this->api_get_facility_devices($id,'',$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id);
+	
 		if($id==NULL){
 
 			$fac_dev =  $fac_dev_res;	
@@ -132,7 +133,6 @@ class facility_devices_m extends MY_Model{
 
 					$fac_dev['assigned_to_facility'] = false;
 				}
-
 			}	
 
 			$fac_dev['filter_type'] = 5;
