@@ -149,6 +149,9 @@ class fcdrrs_m extends MY_Model{
 		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
+
+		$filter_type = (int) $this->input->get("filter_type");
+		$filter_id 	 = (int) $this->input->get("filter_id");
 		
 		$draw;$order_col;$order_dir;
 
@@ -170,12 +173,13 @@ class fcdrrs_m extends MY_Model{
 			$limit_items = $this->input->get("length");
 			$draw = $this->input->get("draw");
 
-			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','','$order_col','$order_dir','','','true')")[0]['count'];
-			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
+			$total_records 		= 	(int)	$this->api_get_fcdrrs($id,$facility,$year,$month,'',$order_col,$order_dir,'','','true',$filter_type,$filter_id )[0]['count'];
+			$records_filtered 	=	(int) 	$this->api_get_fcdrrs($id,$facility,$year,$month,$search,$order_col,$order_dir,$limit_start,$limit_items,'true',$filter_type,$filter_id)[0]['count'];
+		
 		}
 		$search = addslashes($search);
 
-		$fcdrr_res = R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
+		$fcdrr_res = $this->api_get_fcdrrs($id,$facility,$year,$month,$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id);
 		
 		if($id==NULL){
 
