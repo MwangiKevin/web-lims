@@ -30,9 +30,27 @@ app.controller('editUserCtrl',
             var loaded_partner = Restangular.one('users', $stateParams.id);
             loaded_partner.get().then(function(user) {
                $scope.user = user;
+
+                if($scope.user.banned == 0){
+                    $scope.banned = false;
+                }
+                else{
+                    $scope.banned = true;
+                }
             })
         }
     }
+
+    $scope.$watch('banned', function(){
+       
+       if($scope.banned){            
+            $scope.user.banned = 1;
+       }else{
+
+            $scope.user.banned = 0;
+       }
+            
+    }, true );
 
     $scope.put_partner = function() {
         swal({
