@@ -541,7 +541,7 @@ var app = angular
 		views:{
 			'main':{
 				templateUrl: 'users/edit',
-				controller:'editPartnerCtrl'
+				controller:'editUserCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

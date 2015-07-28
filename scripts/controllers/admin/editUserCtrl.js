@@ -1,4 +1,4 @@
-app.controller('editPartnerCtrl',
+app.controller('editUserCtrl',
 	[
 	'$stateParams',
     '$state',
@@ -17,50 +17,36 @@ app.controller('editPartnerCtrl',
      
     apiAuth.requireLogin();
 
-    $scope.partner_id = $stateParams.id;
+    $scope.user_id = $stateParams.id;
 
-    // $scope.editState = function() {
-    //     if ($stateParams.id > 0) {
-    //         return 'edit'
-    //     } else {
-    //         return 'new'
-    //     }
-    // }
+    $scope.bac_users = function(){
+        window.location = "#/users";
+    }
 
-    $scope.backPartners = function(){
-            window.location = "#/partners";
+    $scope.user = {};
+
+    $scope.populateUser = function() {
+        if ($stateParams.id > 0) {
+            var loaded_partner = Restangular.one('users', $stateParams.id);
+            loaded_partner.get().then(function(user) {
+               $scope.user = user;
+            })
         }
-
-    $scope.populatePartner = function() {
-            if ($stateParams.id > 0) {
-                var loaded_partner = Restangular.one('partners', $stateParams.id);
-                loaded_partner.get().then(function(partner) {
-                   $scope.partner = partner;
-                })
-            }
-        }
-
-    // $scope.save_partner = function() {
-    //     if ($scope.editState() == 'new') {
-    //         $scope.post_partner();
-    //     } else if ($scope.editState() == 'edit') {
-    //         $scope.put_fcdrr();
-    //     }
-    // }
+    }
 
     $scope.put_partner = function() {
         swal({
             title: "Are you sure?",
-            text: "This makes changes to this Partner",
+            text: "This makes changes to this User",
             type: "info",
             showCancelButton: true,
             confirmButtonColor: "#00b5ad",
             confirmButtonText: "Yes, Save it!",
             closeOnConfirm: false,
         }, function() {
-            $scope.partner.put().then(function(partner) {
+            $scope.user.put().then(function(user) {
                 swal("Saved!", "Your Changes Have Been Updated", "success");
-                $state.transitionTo('partners');
+                $state.transitionTo('users');
             }, function(response) {
                 console.log("Error with status code", response);
                 swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");
@@ -68,6 +54,6 @@ app.controller('editPartnerCtrl',
         });
     }
 
-    $scope.populatePartner();
+    $scope.populateUser();
 
     }]);
