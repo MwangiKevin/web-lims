@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_fcdrrs`(fcdrr_id int(11),facility_id int(11),yr int(4),mnth int(2),search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_fcdrrs`(fcdrr_id int(11),facility_id int(11),yr int(4),mnth int(2),search varchar(25), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10),filter_type int(11),filter_id int(11))
 BEGIN
         SET @QUERY =    " SELECT 
                                 `fcdrr`.`id`                       as  `id` ,
@@ -24,6 +24,12 @@ BEGIN
                             FROM `fcdrr`
                                 LEFT JOIN `facility` `f`
                                 ON `f`.`id` =  `fcdrr`.`facility_id`
+                                    LEFT JOIN `partner` `p`
+                                    ON `p`.`id`=`f`.`partner_id`
+                                        LEFT JOIN `sub_county` `sc` 
+                                        ON `sc`.`id`=`f`.`sub_county_id`
+                                            LEFT JOIN `county` `c`
+                                            ON `c`.`id`=`sc`.`county_id`
 
                             WHERE 1 
                         ";
@@ -31,8 +37,14 @@ BEGIN
         THEN        SET @QUERY =    " SELECT 
                                           COUNT(*) AS `count`
                                     FROM `fcdrr`
-                                        LEFT JOIN `facility` `f`
-                                        ON `f`.`id` =  `fcdrr`.`facility_id`
+                                            LEFT JOIN `facility` `f`
+                                            ON `f`.`id` =  `fcdrr`.`facility_id`
+                                                LEFT JOIN `partner` `p`
+                                                ON `p`.`id`=`f`.`partner_id`
+                                                    LEFT JOIN `sub_county` `sc` 
+                                                    ON `sc`.`id`=`f`.`sub_county_id`
+                                                        LEFT JOIN `county` `c`
+                                                        ON `c`.`id`=`sc`.`county_id`
 
                                     WHERE 1 
                                 ";
@@ -67,6 +79,18 @@ BEGIN
         END IF;
 
 
+        CASE 
+            WHEN (filter_type = 1 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `f`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 2 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `sc`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 3 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `c`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 4 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `p`.`id` = '",`filter_id`,"' ");
+            ELSE
+                SET @QUERY = @QUERY;
+        END CASE;
 
         CASE 
             WHEN ((order_col = '' || order_col IS NULL) AND (get_count <> 'true'))

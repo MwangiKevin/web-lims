@@ -104,6 +104,24 @@ class MY_Model extends CI_Model{
 		return R::getAll("CALL `proc_api_get_facilities`('$id','$search','$order_col','$order_dir','$limit_start','$limit_items','$if_get_count','$filter_type','$filter_id')");
 
 	}
+	protected function api_get_fcdrrs( 	
+										$id = NULL , 
+										$facility= NULL,
+										$year= NULL,
+										$month= NULL,
+										$search = NULL, 
+										$order_col = NULL , 
+										$order_dir = NULL, 
+										$limit_start = NULL , 
+										$limit_items = NULL, 
+										$if_get_count = NULL,
+										$filter_type= 0,
+										$filter_id = 0 
+									){
+
+		return R::getAll("CALL `proc_api_get_fcdrrs`('$id','$facility','$year','$month','$search','$order_col','$order_dir','$limit_start','$limit_items','$if_get_count','$filter_type','$filter_id')");
+
+	}
 
 	protected function api_get_tests( 	
 										$id = NULL , 
