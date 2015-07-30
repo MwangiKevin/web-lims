@@ -175,6 +175,7 @@
 				<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
 				<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
+				<div style="height:150px"></div> 
 			</div>
 		</authmain>
 	</div>

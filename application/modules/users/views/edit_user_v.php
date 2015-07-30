@@ -11,15 +11,15 @@
 		          <input type="text" ng-model="user.user_name" >
 		        </div>
 		        <div class="field">
-		        	<div class="ui horizontal label large ">E-mail Address</div><div class="field"></div>
-		          	<input type="text" ng-model="user.email" >
-		        </div>
-		        <div class="field">
 		        	<div class="ui horizontal label large ">Group</div><div class="field"></div>
 		          	<select ng-model="user.default_user_group.group_id" convert-to-number>		          		
 					  	<!-- <option value="0">*Choose one option*</option> -->
 					  	<option ng-repeat ="group in user_groups" value="{{group.id}}">{{group.name}}</option>
 					</select>
+		        </div>
+		        <div class="field">
+		        	<div class="ui horizontal label large ">E-mail Address</div><div class="field"></div>
+		          	<input type="text" ng-model="user.email" >
 		        </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large ">Phone</div><div class="field"></div>
@@ -62,12 +62,9 @@
   	</div>
   	<div class="sixteen wide column"> 
   	<div class="ui segment">
-	  	<div class="ui primary button" ng-click="put_user()"> Save Details </div>
+	  	<div class="ui primary button" ng-click="put_user()"> Update Details </div>
 		<button class="ui button" ng-click="back_users()"> Back To Facilities </button>
-		<pre/>{{user}}<pre/>
-		<br/>{{user_groups}}
-		<br/><br/><br/>{{model}}
-	</div>
-	<div style="height:150px"></div> 	
+		<div style="height:50px"></div> 
+	</div>	
   </div>
 </div>
