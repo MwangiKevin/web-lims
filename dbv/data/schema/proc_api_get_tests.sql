@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_api_get_tests`( T_id int(11),search varchar(255), order_col varchar(35), order_dir varchar(10), limit_start int(3), limit_items int(3),get_count varchar(10),filter_type int(11),filter_id int(11))
 BEGIN
 
         SET @QUERY =    "SELECT
@@ -59,6 +59,20 @@ BEGIN
             SET @QUERY = CONCAT(@QUERY, ' AND (`cnt`.`name` LIKE "%', search, '%" OR `fc`.`name` LIKE "%', search, '%" OR `fc`.`mfl_code` LIKE "%', search, '%" OR `fd`.`serial_number` LIKE "%', search, '%" OR `cd4t`.`sample` LIKE "%', search, '%")');
         END IF;
 
+        CASE 
+            WHEN (filter_type = 1 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `cd4t`.`facility_id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 2 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `sub`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 3 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `cnt`.`id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 4 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `fc`.`partner_id` = '",`filter_id`,"' ");
+            WHEN (filter_type = 5 ) 
+                THEN    SET @QUERY   = CONCAT(@QUERY," AND `cd4t`.`facility_device_id` = '",`filter_id`,"' ");
+            ELSE
+                SET @QUERY = @QUERY;
+        END CASE;
         
        CASE 
             WHEN ((order_col = '' || order_col IS NULL) AND (get_count <> 'true'))
@@ -69,6 +83,7 @@ BEGIN
             ELSE
                 SET @QUERY = @QUERY;
         END CASE; 
+
 
         
 
@@ -83,6 +98,6 @@ BEGIN
 
         PREPARE stmt FROM @QUERY;
         EXECUTE stmt;
-        SELECT @QUERY;
-        SHOW ERRORS;
+        -- SELECT @QUERY;
+        -- SHOW ERRORS;
     END

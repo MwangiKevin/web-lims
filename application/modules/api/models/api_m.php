@@ -8,6 +8,12 @@ class api_m extends MY_Model{
 		 return $result;
 	}
 
+	public function get_device_types(){
+		 $sql 	=	"CALL proc_get_device_types()";
+		 $result = R::getAll($sql);
+		 return $result;
+	}
+
 	public function get_county_details(){
 		 $sql 	=	"CALL proc_get_county_details()";
 		 $result = R::getAll($sql);

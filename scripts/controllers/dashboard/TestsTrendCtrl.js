@@ -76,59 +76,59 @@ app.controller('TestsTrendCtrl',['$scope', '$rootScope', 'Filters', 'Commons','$
 	$scope.testing_trends_linegraph_categories();
 
 
- $scope.testing_trends = {
-  chart: {   
-    plotBackgroundColor: null,
-    plotBorderWidth: 2,
-    plotShadow: true,    
-    zoomType: 'x',
-    type: 'area',
-    height:250
-},
-title: {
-    text: 'Testing Trends',
-            x: -20 //center   
-        },
-        xAxis: {
-            categories: [],
-            labels: {
-                rotation: -45,
-                // step : 3,
-                align: "right"
+ 	$scope.testing_trends = {
+	  	options: {
+            chart: {
+                type: 'line',
+                width:550,
+                height:350,
+                borderWidth:'2'                
             }
         },
-        yAxis: {
-            gridLineWidth: 2,
-            title: {
-                text: '# Tests'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
+        title: {
+	    	text: 'Testing Trends',
+	        x: -20 //center   
         },
+        xAxis: {
+	        categories: [],
+	        labels: {
+	            rotation: -45,
+	            // step : 3,
+	            align: "right"
+	        }
+	    },
+	    yAxis: {
+	        gridLineWidth: 2,
+	        title: {
+	            text: '# Tests'
+	        },
+	        plotLines: [{
+	            value: 0,
+	            width: 1,
+	            color: '#808080'
+	        }]
+	    },
         plotOptions: {
-            area: {
-                stacking: 'percentage',
-                lineColor: '#666666',
-                lineWidth: 1,
-                marker: {
-                    lineWidth: 0,
-                    lineColor: '#666666',
-                    radius: 0
-                }                
-            }            
-        },            
-        credits:{
-            enabled:false
-        },
-        tooltip: {
-            shared: true,
-            valueSuffix: ' Tests',
-            crosshairs: [true,false],
-        },
-        series: []  
+	        area: {
+	            stacking: 'percentage',
+	            lineColor: '#666666',
+	            lineWidth: 1,
+	            marker: {
+	                lineWidth: 0,
+	                lineColor: '#666666',
+	                radius: 0
+	            }                
+	        }            
+	    },            
+	    credits:{
+	        enabled:false
+	    },
+	    tooltip: {
+	        shared: true,
+	        valueSuffix: ' Tests',
+	        crosshairs: [true,false],
+	    },
+	    series: []  
     }
 
 	//
@@ -158,7 +158,10 @@ title: {
 	$scope.yearly_testing_trends = {
 		options: {
             chart: {
-                type: 'column'
+                type: 'column',
+                height:350,
+                width:350,
+                borderWidth: '2'
             }
         },
         xAxis: {
@@ -170,10 +173,6 @@ title: {
                 text: ' # Tests'
             }
         },
-        
-        series: [{
-            data: [10, 15, 12, 8, 7]
-        }],
         title: {
             text: 'Yearly Testing Trends'
         },
@@ -194,7 +193,7 @@ title: {
                         textShadow: '0 0 3px black, 0 0 3px black'
                     }
                 }
-            }
+            },
         },
         series: [],
         loading: false
@@ -259,7 +258,10 @@ $scope.prepare_tests_vs_errors_pie();
         },
         options: {
             chart: {
-                type: 'pie'
+                type: 'pie',
+                width:350,
+                height:250,
+                borderWidth:'2'
             },
             drilldown: {
                 series: [
@@ -294,7 +296,7 @@ $scope.prepare_tests_vs_errors_pie();
                 align: 'right',
                 // x: -70,
                 verticalAlign: 'bottom',
-                y: 20,
+                y: 0,
                 floating: true,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
                 borderColor: '#CCC',
@@ -360,7 +362,7 @@ $scope.prepare_tests_vs_errors_pie();
 				}	
 			})
 		.success(function(response){
-			$scope.table_data = response;
+			$scope.table_data = response;			
 		});	
 	}
 	$scope.critical_table();

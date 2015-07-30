@@ -3,6 +3,7 @@ app.controller('fcdrrsCtrl',
     '$stateParams',
     '$state',
     '$scope',
+    '$rootScope',
     '$http',
     'ngProgress', 
     'Filters', 
@@ -16,7 +17,7 @@ app.controller('fcdrrsCtrl',
     'DTOptionsBuilder',
     'DTColumnBuilder',
     'DTColumnDefBuilder',
-    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth, DTOptionsBuilder, DTColumnBuilder,DTColumnDefBuilder){
+    function($stateParams,$state,$scope,$rootScope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth, DTOptionsBuilder, DTColumnBuilder,DTColumnDefBuilder){
 
     apiAuth.requireLogin();      
 
@@ -25,7 +26,7 @@ app.controller('fcdrrsCtrl',
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/fcdrrs',
-        data:{datatable:true,verbose:true},
+        data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
         type: 'GET'
     })  
     .withDataProp('data')

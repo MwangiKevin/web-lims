@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dashboard" style="width:100%">
+<html ng-app="dashboard" style="width:100%;font-size:0.77em;">
 
 <head ui-view="head">    
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -175,6 +175,7 @@
 				<div ui-view="filter" id="filterNav" class="ui column segment grid filter" ng-cloak=""></div>
 
 				<main ui-view="main" class="ui column  grid " ng-cloak="" style="width:100%" ></main>
+				<div style="height:150px"></div> 
 			</div>
 		</authmain>
 	</div>
@@ -196,7 +197,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bower_components/datatables/media/css/jquery.dataTables.css">
-
+	<link rel="stylesheet" href="<?php //echo base_url('assets/bower_components/jquery-ui/themes/smoothness/jquery-ui.css')?>" >
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-tabletools/css/dataTables.tableTools.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-colvis/css/dataTables.colVis.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables-responsive/css/dataTables.responsive.css');?>">
@@ -211,6 +212,7 @@
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
+	<script src="<?php //echo base_url('assets/bower_components/jquery-ui/jquery-ui.min.js')?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/semantic/dist/semantic.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular/angular.min.js');?>"></script>
@@ -261,8 +263,9 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/ngstorage/ngStorage.min.js');?>"></script>
 
-	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')?>"></script>
 	<script src="<?php //echo base_url('assets/bower_components/angular-form-for/dist/form-for.bootstrap-templates.js');?>"></script>
 	
 
@@ -303,10 +306,20 @@
 
 	<script src="<?php echo base_url('scripts/controllers/admin/newFacilityCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editFacilityCtrl.js');?>"></script>
-	<script src="<?php echo base_url('scripts/controllers/admin/editCD4DeviceCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/admin/viewFacilityCtrl.js');?>"></script>
 
+	<script src="<?php echo base_url('scripts/controllers/admin/editUserCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/admin/newCD4DeviceCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/admin/editCD4DeviceCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/admin/viewDeviceCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/admin/newPartnerCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/editPartnerCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/admin/viewPartnerCtrl.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/controllers/usersCtrl.js');?>"></script>
 
 
 

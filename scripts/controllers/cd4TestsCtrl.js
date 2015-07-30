@@ -1,14 +1,40 @@
-app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumnBuilder', function ($scope,Commons,DTOptionsBuilder,DTColumnBuilder) {
+app.controller('cd4TestsCtrl', ['$scope','$rootScope','Commons', 'DTOptionsBuilder','DTColumnBuilder','apiAuth', function ($scope,$rootScope,Commons,DTOptionsBuilder,DTColumnBuilder,apiAuth) {
 
+	apiAuth.requireLogin();
 
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 	.withOption('ajax', {
 		url: Commons.baseURL+'api/tests',
-		data:{datatable:true},
+		data:{datatable:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
 		type: 'GET'
 	})	
 	.withDataProp('data')
 	.withOption('processing', true)
+	.withOption('createdRow', function( row, data, index){
+
+		//adding links to device serial.
+		var sr = "<a href='#editCD4Device/"+data.facility_device_id+"'>" +data.device_serial_number +"</a>";
+		
+		$('td:eq(7)', row).html(sr);
+
+		//adding links to facilities.		
+		var sr = "<a href='#editFacility/"+data.facility_id+"'>" +data.facility_name +"</a>";
+		
+		$('td:eq(4)', row).html(sr);
+
+		 if ( data.valid ==1 ) {
+		 	$('td:eq(5)', row).css("color","blue");
+         }else{
+         	$('td:eq(5)', row).css("color","red");
+         	$('td:eq(3)', row).html("unavailable");
+         }
+
+		 if ( data.valid ==1 && data.cd4_count >= 500) {
+		 	$('td:eq(3)', row).css("color","green");
+         }else if (data.valid ==1 && data.cd4_count < 500){
+         	$('td:eq(3)', row).css("color","red");
+         }
+	})
 	.withOption('serverSide', true)
 	.withPaginationType('full_numbers')
 
@@ -44,9 +70,9 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 		DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),        
         DTColumnBuilder.newColumn('valid').withTitle('Action').renderWith(function(data, type, full, meta) {
         	if(parseInt(data) == 0){
-                return 'Not Valid';
+                return 'Error';
             }else{
-            	 return 'Valid';
+            	 return 'Valid Test';
 
             }
             }),
@@ -55,5 +81,8 @@ app.controller('cd4TestsCtrl', ['$scope','Commons', 'DTOptionsBuilder','DTColumn
 		DTColumnBuilder.newColumn('county_name').withTitle('County'),
 		DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible()
 	];
+
+
+
 
 }]);

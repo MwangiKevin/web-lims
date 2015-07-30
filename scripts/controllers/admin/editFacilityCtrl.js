@@ -20,7 +20,7 @@ app.controller('editFacilityCtrl',
     $scope.facility_id = $stateParams.id;
     // $scope.promise = null;
 
-    $scope.selected = {}; // used for the drop down boxes when user selects a value
+     $scope.selected = {}; // used for the drop down boxes when user selects a value
 
     $scope.backFacilities = function(){
         window.location = "#/facilities";
@@ -31,6 +31,12 @@ app.controller('editFacilityCtrl',
             var loaded_facility = Restangular.one('facilities', $stateParams.id);
             loaded_facility.get().then(function(facility_load) {
                $scope.facility_detail = facility_load;
+
+               if($scope.facility_detail.facility_rollout_status == 1){
+                $scope.facility_detail.status = 'Yes';
+               }else{
+                 $scope.facility_detail.status = 'No';
+               }
 
             })
         }
@@ -81,6 +87,10 @@ app.controller('editFacilityCtrl',
         }
     }
 
+    $scope.populateRollout = function(){
+        $scope.rollouts = [{'id': 1,'name' : 'Yes'},{'id':0,'name' : 'No' }];
+    }
+
     $scope.sub_county_change = function(){ // assign the facility model a county id when the suer select a sub county
         
         $scope.facility_detail.facility_sub_county_id = $scope.selected.sub_county.id;
@@ -89,8 +99,8 @@ app.controller('editFacilityCtrl',
     }
 
     $scope.partner_change = function(){ // assign the facility model a partner id
-            $scope.facility_detail.partner_id = $scope.selected.partner.id;
-            //$scope.facility_detail.partner_name = $scope.selected.partner.name;
+            $scope.facility_detail.facility_partner_id = $scope.selected.partner.id;
+            $scope.facility_detail.partner_name = $scope.selected.partner.name;
              
     }
 
@@ -102,9 +112,11 @@ app.controller('editFacilityCtrl',
     $scope.ftype_change = function(){ // assign the facility model a facility type id
            $scope.facility_detail.facility_type_id = $scope.selected.ftype.id; 
     }
+    $scope.roll_outchange = function(){
+            $scope.facility_detail.facility_rollout_status  = $scope.selected.rollout.id;
+    }
 
     $scope.put_facility = function() {
-        // $scope.HouseBasket.concat(data);
         swal({
             title: "Are you sure?",
             text: "This makes changes to this facility details",
@@ -116,7 +128,7 @@ app.controller('editFacilityCtrl',
         }, function() {
             $scope.facility_detail.put().then(function(facility_detail) {
                 swal("Saved!", "Your Changes Have Been Updated", "success");
-               // $state.transitionTo('Facilities');
+                $state.transitionTo('Facilities');
             }, function(response) {
                 console.log("Error with status code", response);
                 swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");
@@ -125,10 +137,9 @@ app.controller('editFacilityCtrl',
 
     }
 
-
-
     // run functions defined
     $scope.populateFacility_details();
+    $scope.populateRollout();
     $scope.populateSubcounties();
     $scope.populatePartners();
     $scope.populateFtypes();

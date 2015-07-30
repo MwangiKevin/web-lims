@@ -152,16 +152,25 @@ app.controller('fcdrrCtrl', ['$stateParams', '$state', '$rootScope', '$scope', '
     }
     $scope.baseFacilities = Restangular.all('facilities');
     $scope.refreshFacilities = function(search) {
-        var params = {
-            address: search,
-            sensor: false
-        };
-        $scope.baseFacilities.getList({
-            search: search,
-            limit_items: 6
-        }).then(function(com) {
-            $scope.facilities = com;
-        });
+
+        var sess = {};
+
+        $rootScope.getSessionDetails().then(function(res){
+;
+
+            sess = res.data;
+            $scope.baseFacilities.getList({
+                search: search,
+                limit_items: 6,
+               filter_type :$rootScope.$storage.filter_type, 
+               filter_id: $rootScope.$storage.filter_id
+            }).then(function(com) {
+                $scope.facilities = com;
+            });
+
+        })
+
+      
         return $scope.facilities;
     };
     var baseCommodities = Restangular.all('commodities');
@@ -227,4 +236,8 @@ app.controller('fcdrrCtrl', ['$stateParams', '$state', '$rootScope', '$scope', '
         }
     }
     $scope.populateFcdrr();
+
+    $scope.$watch('$storage.filter_id', function() {
+        $scope.refreshFacilities();
+    });
 }])

@@ -17,7 +17,7 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 
 	$scope.filters.selected  = {
 		dates : {start:'',end:''},
-		entity: []
+		entity: {filter_type:0,filter_id:0}
 	};
 
 
@@ -60,8 +60,6 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 		$rootScope.Filters.selected.entity = $scope.filters.selected.entity;
 
     });
-	
-
 
 	$scope.refreshFilters = function(search_term) {
 		Filters.getEntities(search_term)
@@ -79,15 +77,12 @@ app.controller('filtersCtrl',['$scope','$rootScope','Filters', function($scope,$
 		.error(function (error) {
 			$scope.status = 'Unable to load Filters data: ' + error.message;
 		});
-
-		// $.extend(Filters.entity, $scope.filters.entities.selected);
 	}
 	$scope.refreshFilters("");
 
-	$scope.filters.clear = function() {
-		$scope.filters.entities.selected = undefined;
-
-		Filters.entities.selected = undefined;
+	$scope.filters.clear = function($event) {
+		$event.stopPropagation(); 
+		$scope.filters.selected.entity = {filter_type:0,filter_id:0};
 	};
 
 	$scope.bindDates = function(st,en){

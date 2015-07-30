@@ -1,10 +1,10 @@
-app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder', function ($scope,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder ) {
+app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','apiAuth', function ($scope,$rootScope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder,apiAuth ) {
 
-
+    apiAuth.requireLogin();
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     .withOption('ajax', {
         url: Commons.baseURL+'api/facilities',
-        data:{datatable:true,verbose:true},
+        data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
         type: 'GET'
     })  
     .withDataProp('data')
@@ -55,7 +55,7 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
         DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="view_facility('+data.facility_id+')">View</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
             }),
     ];
     $scope.dtColumnDefs = [
@@ -69,8 +69,25 @@ app.controller('facilitiesCtrl', ['$scope','Commons', 'Restangular', '$activityI
         window.location = "#/viewFacility/"+id;
     }
 
-    remove_facility = function(id){
-        window.location = "#/removeFacility/"+id;
+    remove_facility = function(id){ // Deactivate Facility
+        //window.location = "#/removeFacility/"+id;
+        swal({
+            title: "Are you sure?",
+            text: "This will mean devices will not be rolled out to this facility",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#00b5ad",
+            confirmButtonText: "Yes, Deactivate it!",
+            closeOnConfirm: false,
+        }, function() {
+            Restangular.one("facilities", id).remove().then(function() {
+                swal("Saved!", "The Facility has been successfully Deactivated", "success");
+                $state.transitionTo('Facilities');
+            }, function(response) {
+                console.log("Error with status code", response);
+                swal("Error!", "An Error was encountered. \n Your changes have not been made ", "error");
+            });
+        });
     }
 
 

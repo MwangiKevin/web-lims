@@ -72,8 +72,13 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	}
 	$scope.device_distribution_stack_data();
 	$scope.device_distribution_stack = {
-        chart: {
-            type: 'column'
+		options: {
+	        chart: {
+	            type: 'column',
+	            borderWidth:2,
+	            width:900,
+	            height:250
+           }
         },
         title: {
             text: 'Device Distribution'
@@ -104,7 +109,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
             // x: -30,
             verticalAlign: 'top',
             // y: 25,
-            floating: false,
+            floating: true,
             backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
             borderColor: '#CCC',
             borderWidth: 1,
@@ -157,18 +162,22 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	}
 	$scope.equipment_pie_data();
 	$scope.cd4_equipment_pie = {
-		chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-                plotShadow: true
-        },
         title: {
-            text: 'CD4 Equipment'
+            text: 'CD4 Equipment',
         },         
         credits:{
             enabled:false
         },
         options: {
+        	chart: {
+	            plotBackgroundColor: null,
+	            plotBorderWidth: null,
+	            plotShadow: true,
+	            marginTop:0,
+	            height:210,
+	            width:350,
+	            borderWidth:2	            
+	        },
 	        plotOptions: {
 	            pie: {
 	                allowPointSelect: true,
@@ -183,11 +192,9 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	            pointFormat: '{series.name}: <b>{point.y},<b>{point.percentage:.1f}%</b>'
 	        },  
 	      	legend: {
-	            align: 'right',
-	            // x: -70,
 	            verticalAlign: 'bottom',
-	            // y: 20,
 	            floating: true,
+	            y: 10,
 	            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 	            borderColor: '#CCC',
 	            borderWidth: 1,
@@ -197,7 +204,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
        
         series: [{
             type: 'pie',
-            size: '20',
+            size: '10',
             name: '# Devices',
             data: []
         }]
@@ -224,15 +231,19 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	}
 	$scope.equipment_tests_pie_data();
 	$scope.equipment_tests_pie = {
-		chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: true,
-            },
         title: {
             text: '# of Tests per Equipment'
         },
         options: {
+        	chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: true,
+                marginTop:0,
+                width:350,
+                height:210,
+                borderWidth:2
+            },
 	        plotOptions: {
 	            pie: {
 	                allowPointSelect: true,
@@ -240,17 +251,18 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	                dataLabels: {
 	                    enabled: false
 	                },
-	                showInLegend: true
+	                showInLegend: true,
+	                borderWidth:2
 	            }
 	        }, 
 	        tooltip: {
 	            pointFormat: '{series.name}: <b>{point.y},<b>{point.percentage:.1f}%</b>'
 	        },
 	      	legend: {
-	            align: 'right',
+	            // align: 'right',
 	            // x: -70,
 	            verticalAlign: 'bottom',
-	            // y: 20,
+	            y: 10,
 	            floating: true,
 	            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
 	            borderColor: '#CCC',
@@ -259,11 +271,11 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	        }
         },
         series: [{
-	                type: 'pie',
-	                name: '# of Tests',
-	                size: '20',
-	                data: [{"name":"Alere PIMA","y":0,"sliced":false,"selected":false},{"name":"BD FACS Calibur","y":0,"sliced":false,"selected":false},{"name":"BD Facs Count","y":0,"sliced":false,"selected":false},{"name":"BD Facs Presto","y":0,"sliced":false,"selected":false},{"name":"Cyflow Partec ","y":0,"sliced":false,"selected":false}]
-                }]
+            type: 'pie',
+            name: '# of Tests',
+            size: '10',
+            data: [{"name":"Alere PIMA","y":0,"sliced":false,"selected":false},{"name":"BD FACS Calibur","y":0,"sliced":false,"selected":false},{"name":"BD Facs Count","y":0,"sliced":false,"selected":false},{"name":"BD Facs Presto","y":0,"sliced":false,"selected":false},{"name":"Cyflow Partec ","y":0,"sliced":false,"selected":false}]
+        }]
 	}
 	
 	//
@@ -288,13 +300,16 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
 	}
 	$scope.expected_reporting_devices_data();
 	$scope.expected_reporting_devices =  {
-		chart: { 
-            plotBackgroundColor: null,
-            plotBorderWidth: 2,
-            plotShadow: true,       
-            zoomType: 'x',
-            type: 'area',
-            height:250
+		options: {
+			chart: { 
+	            plotBackgroundColor: null,
+	            plotShadow: true,       
+	            zoomType: 'x',
+	            type: 'area',
+	            height:250,
+	            width:900,
+	            borderWidth: '2'
+	           }
         },
         title: {
             text: 'Expected Reporting Devices (Yearly)',
@@ -321,7 +336,7 @@ app.controller('device_distributionCtrl',['$scope', '$rootScope', 'Filters', 'Co
         plotOptions: {
             area: {
                 stacking: null,
-                lineColor: '#666666',
+                lineColor: '#515151',
                 lineWidth: 1,                       
                 marker: {
                     lineWidth: 0,

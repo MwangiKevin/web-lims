@@ -22,7 +22,9 @@ var app = angular
     'datatables', 
     'datatables.colvis', 
     'datatables.tabletools', 
-    'datatables.colreorder'
+    'datatables.colreorder',
+    'ngStorage',
+    'ui.bootstrap'
 	])
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 
@@ -251,8 +253,8 @@ var app = angular
 		url: '/viewFacility/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'viewFacility',
-				// controller:'viewFacilityCtrl'
+				templateUrl: 'facilities/view_facility_details',
+				controller:'viewFacilityCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -332,8 +334,8 @@ var app = angular
 		url: '/viewCD4Device/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'viewDevice',
-				// controller:'viewCD4DeviceCtrl'
+				templateUrl: 'devices/viewDevice',
+				controller:'viewDeviceCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -348,8 +350,8 @@ var app = angular
 		url: '/newCD4Device',
 		views:{
 			'main':{
-				// templateUrl: 'newDevice',
-				// controller:'newCD4DeviceCtrl'
+				templateUrl: 'devices/new_facility_device',
+				controller:'newCD4DeviceCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -443,7 +445,7 @@ var app = angular
 		url: '/partners',
 		views:{
 			'main':{
-				templateUrl: 'admin',
+				templateUrl: 'partners',
 				controller:'partnersCtrl'
 			},
 			'navbar':{
@@ -459,8 +461,8 @@ var app = angular
 		url: '/newPartner',
 		views:{
 			'main':{
-				// templateUrl: 'newPartner',
-				// controller:'newPartnerCtrl'
+				templateUrl: 'partners/newPartner',
+				controller:'newPartnerCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -475,7 +477,7 @@ var app = angular
 		url: '/editPartner/{id:int}',
 		views:{
 			'main':{
-				templateUrl: 'admin/editPartner',
+				templateUrl: 'partners/editPartner',
 				controller:'editPartnerCtrl'
 			},
 			'navbar':{
@@ -489,6 +491,69 @@ var app = angular
 	})
 	.state('viewPartner',{
 		url: '/viewPartner/{id:int}',
+		views:{
+			'main':{
+				templateUrl: 'partners/viewPartner',
+				controller:'viewPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	}).state('users',{
+		url: '/users',
+		views:{
+			'main':{
+				templateUrl: 'users',
+				controller:'usersCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('newUser',{
+		url: '/newUser',
+		views:{
+			'main':{
+				// templateUrl: 'newUser',
+				// controller:'newPartnerCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('editUser',{
+		url: '/editUser/{id:int}',
+		views:{
+			'main':{
+				templateUrl: 'users/edit',
+				controller:'editUserCtrl'
+			},
+			'navbar':{
+				templateUrl: 'dashboard/navbar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+			}
+		}
+	})
+	.state('viewUser',{
+		url: '/viewUser/{id:int}',
 		views:{
 			'main':{
 				// templateUrl: 'viewPartner',

@@ -107,9 +107,6 @@ class counties_m extends MY_Model{
 
 			$counties = $this->arr_to_dt_response($counties,$draw,$total_records,$records_filtered);
 
-			$counties['filter_type'] = 2;
-			$counties['filter_id'] = $counties[$key]['id'];
-
 		}
 
 		return $counties;

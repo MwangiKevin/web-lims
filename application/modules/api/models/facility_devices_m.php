@@ -15,8 +15,12 @@ class facility_devices_m extends MY_Model{
 		$facility_device = json_decode($request_body,true);
 		
 		$facility_device_table =	R::getAll("SHOW TABLE STATUS WHERE `Name` = 'facility_device'");
+
+		$date = date('H:i:s');
+
+		$facility_device[date_added] = $facility_device[date_added].' '.$date;
 		
-		$facility_device_ID = $county_table[0][Auto_increment];
+		$facility_device_ID = $facility_device_table[0][Auto_increment];
 		
 		$sql = "INSERT INTO `facility_device`
 						(
@@ -39,11 +43,13 @@ class facility_devices_m extends MY_Model{
 						'$facility_device[date_removed]'
 						)";
 
+		echo $sql;die;
+
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
 			return $error;
 		}
-		return $facility_device;
+		//return $facility_device;
 	}
 
 	public function read($id=NULL){
@@ -58,9 +64,11 @@ class facility_devices_m extends MY_Model{
 		$order = $this->input->get("order");
 		$limit_start = $this->input->get("limit_start");
 		$limit_items = $this->input->get("limit_items");
+
+		$filter_type = (int) $this->input->get("filter_type");
+		$filter_id 	 = (int) $this->input->get("filter_id");
 		
 		$draw;$order_col;$order_dir;
-
 
 		$total_records = 0;
 		$records_filtered = 0;
@@ -75,26 +83,25 @@ class facility_devices_m extends MY_Model{
 			$order_col = $columns[$order_col_index]['data'];
 			$order_dir = $order[0]['dir'];
 
-
 			$limit_start = $this->input->get("start");
 			$limit_items = $this->input->get("length");
 			$draw = $this->input->get("draw");
 
-			$total_records 		= 	(int)	R::getAll("CALL `proc_api_get_facility_devices`('$id','','','$order_col','$order_dir','','','true')")[0]['count'];
-			$records_filtered 	=	(int) 	R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','true')")[0]['count'];
+			$total_records 		= 	(int)	$this->api_get_facility_devices($id,'',$order_col,$order_dir,'','','true',$filter_type,$filter_id )[0]['count'];
+			$records_filtered 	=	(int) 	$this->api_get_facility_devices($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'true',$filter_type,$filter_id)[0]['count'];
 		}
 
 		$search = addslashes($search);
-
-		$fac_dev_res = R::getAll("CALL `proc_api_get_facility_devices`('$id','','$search','$order_col','$order_dir','$limit_start','$limit_items','false')");
-		
+	
+		$fac_dev_res = $this->api_get_facility_devices($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id);
+	
 		if($id==NULL){
 
 			$fac_dev =  $fac_dev_res;	
 
 			if($verbose=='true'){
 				foreach ($fac_dev as $key => $value) {
-					$facility=R::getAll("CALL `proc_api_get_facilities`('".$value['facility_id']."','','','','','','')");
+					$facility= $this->api_get_facilities($value['facility_id']);
 
 					if(sizeof($facility)>0){
 						$fac_dev[$key]['assigned_to_facility'] = true;
@@ -116,7 +123,8 @@ class facility_devices_m extends MY_Model{
 			$fac_dev =  $fac_dev_res[0];
 
 			if(sizeof($fac_dev)>0){
-				$facility=R::getAll("CALL `proc_api_get_facilities`('".$fac_dev['facility_id']."','','','','','','')");
+				$facility= $this->api_get_facilities($fac_dev['facility_id']);
+
 
 				if(sizeof($facility)>0){
 					$fac_dev['assigned_to_facility'] = true;
@@ -142,6 +150,14 @@ class facility_devices_m extends MY_Model{
 		}else{
 		}
 
+		$fac_dev['id'] = $fac_dev['facility_device_id'];
+		$fac_dev['original_date_added'] = $fac_dev['date_added'];
+		$fac_dev['date_added'] = date('Y-m-d',strtotime($fac_dev['date_added']));
+		
+
+		// echo "<pre>";
+		// print_r($fac_dev);
+		// echo "</pre>";die;
 		return $fac_dev;
 	}
 
@@ -151,6 +167,15 @@ class facility_devices_m extends MY_Model{
 
 		$facility_device = json_decode($request_fields, true);
 
+		$date_compare = date('Y-m-d',strtotime($facility_device['date_added']));
+
+		if($facility_device[date_added]==$date_compare){
+			$original_time = date('H:i:s',strtotime($facility_device[original_date_added]));
+			$facility_device[date_added] = $facility_device[date_added].' '.$original_time;
+		}else{
+			$current_time = date('H:i:s');
+			$facility_device[date_added] = $facility_device[date_added].' '.$current_time;
+		}
 		$facility_dev_updated = R::getAll("UPDATE `facility_device` 
 											SET 
 												`facility_id`='$facility_device[facility_id]',
@@ -163,8 +188,20 @@ class facility_devices_m extends MY_Model{
 											WHERE 
 												`id` = '$id'
 								");
+		// $facility_dev_updated = "UPDATE `facility_device` 
+		// 									SET 
+		// 										`facility_id`='$facility_device[facility_id]',
+		// 										`device_id`='$facility_device[device_id]',
+		// 										`status`='$facility_device[status]',
+		// 										`deactivation_reason`='$facility_device[deactivation_reason]',
+		// 										`date_added`='$facility_device[date_added]',
+		// 										`date_removed`='$facility_device[date_removed]',
+		// 										`serial_number`='$facility_device[serial_number]'
+		// 									WHERE 
+		// 										`id` = '$id'
+		// 						";
+		//echo $facility_dev_updated;die;
 		return $facility_dev_updated;
-
 	}
 
 	public function remove($id){
@@ -175,7 +212,7 @@ class facility_devices_m extends MY_Model{
 		
 		$facility_dev_deleted = R::getAll("UPDATE `facility_device` 
 											SET 
-												`status`='$facility_device[status]'
+												`status`='0'
 											WHERE 
 												`id` = '$id'
 											");
