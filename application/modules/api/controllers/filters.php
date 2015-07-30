@@ -90,6 +90,30 @@ class filters extends MY_Controller {
 
 	}	
 
+	public function get_selected_entity(){
+
+		$entity = array();
+
+		$this->load->model("facilities_m");
+		$this->load->model("sub_counties_m");
+		$this->load->model("counties_m");
+		$this->load->model("partners_m");
+
+		$filter_type = (int) $this->input->get("filter_type");
+		$filter_id 	 = (int) $this->input->get("filter_id");
+
+		if($filter_type == 1){
+			echo json_encode($this->facilities_m->read($filter_id),JSON_PRETTY_PRINT);
+		}elseif($filter_type == 2){
+			echo json_encode($this->sub_counties_m->read($filter_id),JSON_PRETTY_PRINT);
+		}elseif($filter_type == 3){
+			echo json_encode($this->counties_m->read($filter_id),JSON_PRETTY_PRINT);
+		}elseif($filter_type == 4){
+			echo json_encode($this->partners_m->read($filter_id),JSON_PRETTY_PRINT);
+		}
+
+	}
+
 	public function programs(){
 		$programs = array(
 			array('name'=>'Viral Load','initials'=>'VL'),
