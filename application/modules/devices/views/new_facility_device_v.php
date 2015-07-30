@@ -146,16 +146,5 @@
 </form>
 </div>
 <script type="text/javascript">
-// (function ($) {
-//         $('.ui.form').form({
-//             serial_number: {
-//                     identifier: 'serial',
-//                     rules: [{
-//                         type: 'empty',
-//                         prompt: 'Please enter the device serial number'
-//                   }]
-//             }
-//         });
-// }(jQuery));
 
 </script>

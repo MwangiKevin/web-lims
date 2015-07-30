@@ -73,12 +73,15 @@ app.controller('partnersCtrl',
         DTColumnBuilder.newColumn('partner_phone').withTitle('Phone'),
         DTColumnBuilder.newColumn('partner_email').withTitle('Email'),
         DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
-                return '<button ng-show="sess.loggedin" onClick="edit_partner('+data.id+')">Edit</button>';
+                return '<button ng-show="sess.loggedin" onClick="edit_partner('+data.id+')">Edit</button>&nbsp&nbsp<button ng-show="sess.loggedin" onClick="view_partner('+data.id+')">View</button>';
             }),
     ];
 
     edit_partner = function(id){
     	window.location = "#/editPartner/"+id;
+    }
+    view_partner = function(id){
+        window.location = "#/viewPartner/"+id;
     }
 
 

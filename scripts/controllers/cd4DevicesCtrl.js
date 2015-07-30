@@ -53,7 +53,7 @@ app.controller('cd4DevicesCtrl', ['$scope','$rootScope','Commons','Restangular',
         DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county').notVisible(),
         DTColumnBuilder.newColumn('partner_name').withTitle('Partner').notVisible(),     
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_device('+data.facility_device_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="remove_device('+data.facility_device_id+')" >Remove</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_device('+data.facility_device_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="view_device('+data.facility_device_id+')">View</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="remove_device('+data.facility_device_id+')" >Remove</button>';
             }),
     ];
 

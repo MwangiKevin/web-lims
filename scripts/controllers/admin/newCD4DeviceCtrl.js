@@ -78,9 +78,9 @@ app.controller('newCD4DeviceCtrl',
         })
     }
 
-    $scope.isInvalid = function () {
-            return !new_cd4_form.form('validate form');
-    };
+    // $scope.isInvalid = function () {
+    //         return !new_cd4_form.form('validate form');
+    // };
 
     $scope.save_new_device = function(){ // save the new CD4 device
 
@@ -111,8 +111,7 @@ app.controller('newCD4DeviceCtrl',
                     swal("Error!", "An Error was encountered. \n Your device has not been saved", "error");
                 });
             });
-        
-    }
+        }
 
     // run functions to populate U.I
     $scope.populateFacilities();

@@ -1,63 +1,38 @@
-<style type="text/css">
-	#top_chart_container{
-		width: 75%;
-	}
-</style>
 <div class="ui segment">
-  <h3><center><div class="ui yellow horizontal label big ">View Facility Statistics</div></center></h3>
+  <h3><center><div class="ui pink horizontal label big ">View Device Statistics</div></center></h3>
 </div>
 
 <div class="ui segment">
-	<h3>{{ facility_detail.facility_name }}</h3>
-	<table class="ui yellow table">
+	<h3>{{ facility_dev_detail.serial_number }}</h3>
+	<table class="ui pink table">
 		<thead>
 		    <tr>
+			    <th>Facility Operating In</th>
 			    <th>MFL Code</th>
 			    <th>Email</th>
 			    <th>Phone</th>
 			    <th>Sub County</th>
 			    <th>County</th>
-			    <th>Partner</th>
-			    <th>Central Site</th>
 			    <th>Facility Type</th>
 			    <th>Rollout Status ?</th>
 		  	</tr>
 		</thead>
 	  	<tbody>
 		    <tr>
-		      	<td>{{ facility_detail.facility_mfl_code }}</td>
-		      	<td>{{ facility_detail.facility_email }}</td>
-		      	<td>{{ facility_detail.facility_phone }}</td>
-		      	<td>{{ facility_detail.sub_county_name }}</td>
-		      	<td>{{ facility_detail.county_name }}</td>
-		      	<td>{{ facility_detail.partner_name }}</td>
-		      	<td>{{ facility_detail.central_site_name }}</td>
-		      	<td>{{ facility_detail.affiliation }}</td>
-		      	<td>{{ facility_detail.status }}</td>
+		      	<td>{{ facility_dev_detail.facility_name }}</td>
+		      	<td>{{ facility_dev_detail.facility_mfl_code }}</td>
+		      	<td>{{ facility_dev_detail.facility_email }}</td>
+		      	<td>{{ facility_dev_detail.facility_phone }}</td>
+		      	<td>{{ facility_dev_detail.sub_county_name }}</td>
+		      	<td>{{ facility_dev_detail.county_name }}</td>
+		      	<td>{{ facility_dev_detail.affiliation }}</td>
+		      	<td>{{ facility_dev_detail.facility_rollout_status }}</td>
 		    </tr>
 	  	</tbody>
 	</table>
-	
-	<table class="ui yellow table">
-		<thead>
-		    <tr>
-			    <th>Device Type</th>
-			    <th>Device Serial Number</th>
-			    <th>Roll Out Status</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="facility_devs in facility_detail.devices">
-				<td>{{ facility_devs.device_name }}</td>
-				<td>{{ facility_devs.serial_number }}</td>
-				<td ng-if="facility_devs.facility_rollout_status == 1">{{ 'Yes' }}</td>
-				<td ng-if="facility_devs.facility_rollout_status == 0">{{ 'No' }}</td>
-			</tr>
-		</tbody>
-	</table>
 
 	<h4 class="ui horizontal divider header"><i class="fa fa-tint fa-sm icon red"></i> CD4 Tests</h4>
-			<table style = "vertical-align:center;width:100%;clear:both;"  class="ui yellow table">
+			<table style = "vertical-align:center;width:100%;clear:both;"  class="ui pink table">
 				<thead class="even" style="background:#f0f0f0" >
 					<tr style = "border: 1px solid #DDD;" >
 						<th></th>
