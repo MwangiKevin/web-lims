@@ -20,6 +20,7 @@ app.controller('editUserCtrl',
     $scope.user_id = $stateParams.id;
 
     $scope.entities = [{ name: '', email:'',phone:'', type: '' }];
+    $scope.user_groups=[];
 
     $scope.back_users = function(){
         window.location = "#/users";
@@ -73,9 +74,7 @@ app.controller('editUserCtrl',
             });
         });
     }
-
     $scope.populate_user();
-
 
     $scope.refreshEntities = function(search_term) {
         Filters.getEntities(search_term)
@@ -87,5 +86,22 @@ app.controller('editUserCtrl',
         });       
     }
     $scope.refreshEntities("");
+
+    $scope.clear_entity = function($event) {
+        $event.stopPropagation(); 
+        $scope.user.linked_entity = {filter_type:0,filter_id:0};
+    };
+
+    $scope.get_user_groups= function (){
+        $http.get(base_url+'api/auth/list_groups')
+          .success(function(data, status, headers, config) {
+
+            $scope.user_groups = data;
+
+          });
+    }
+        
+    $scope.get_user_groups();
+
 
 }]);

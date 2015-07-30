@@ -145,12 +145,10 @@ class users_m extends MY_Model{
 					$users['linked_entity'] = array(
 							        "filter_type"=> -1,
 							        "filter_id"=> -1
-						);
-					
+						);					
 					$users['phone']  = (string) $this->aauth->get_user_var('linked_entity_id',$f_id,$users['id']);
 				}
 			}
-
 		}
 
 		if($is_datatable && $id==NULL){

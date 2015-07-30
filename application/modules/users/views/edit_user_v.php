@@ -14,6 +14,13 @@
 		        	<div class="ui horizontal label large ">E-mail Address</div><div class="field"></div>
 		          	<input type="text" ng-model="user.email" >
 		        </div>
+		        <div class="field">
+		        	<div class="ui horizontal label large ">Group</div><div class="field"></div>
+		          	<select ng-model="user.default_user_group.group_id" convert-to-number>		          		
+					  	<!-- <option value="0">*Choose one option*</option> -->
+					  	<option ng-repeat ="group in user_groups" value="{{group.id}}">{{group.name}}</option>
+					</select>
+		        </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large ">Phone</div><div class="field"></div>
 			      	<input type="text" ng-model="user.phone" >
@@ -35,8 +42,8 @@
 		          	<div class="left floated left aligned six wide column">
 						<ui-select ng-model="user.linked_entity" theme="selectize" ng-disabled="disabled" reset-search-input="false" style="min-width: 500px;">
 							<ui-select-match placeholder="Search For entity to link to">
-								<div ng-show="(entity.filter_type == 0 )?false:true " style="float:left;">{{user.linked_entity.name}}</div>
-								<button style="padding-bottom: 3px;padding-top: 3px;padding-left: 3px;padding-right: 3px;float:right;" ng-show="(entity.filter_type == 0 )?false:true " class="ui button blue" ng-click="clear_entity($event)">
+								<div ng-show="(user.linked_entity.filter_type == 0 )?false:true " style="float:left;">{{user.linked_entity.name}}</div>
+								<button style="padding-bottom: 3px;padding-top: 3px;padding-left: 3px;padding-right: 3px;float:right;" ng-show="(user.linked_entity.filter_type == 0 )?false:true " class="ui button blue" ng-click="clear_entity($event)">
 									<i class="fa fa-remove fa-sm"></i>
 								</button>
 							</ui-select-match>
@@ -58,6 +65,8 @@
 	  	<div class="ui primary button" ng-click="put_user()"> Save Details </div>
 		<button class="ui button" ng-click="back_users()"> Back To Facilities </button>
 		<pre/>{{user}}<pre/>
+		<br/>{{user_groups}}
+		<br/><br/><br/>{{model}}
 	</div>
 	<div style="height:150px"></div> 	
   </div>

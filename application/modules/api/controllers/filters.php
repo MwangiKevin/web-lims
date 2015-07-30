@@ -111,7 +111,6 @@ class filters extends MY_Controller {
 		}elseif($filter_type == 4){
 			echo json_encode($this->partners_m->read($filter_id),JSON_PRETTY_PRINT);
 		}
-
 	}
 
 	public function programs(){
