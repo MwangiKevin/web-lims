@@ -19,14 +19,6 @@ app.controller('editPartnerCtrl',
 
     $scope.partner_id = $stateParams.id;
 
-    // $scope.editState = function() {
-    //     if ($stateParams.id > 0) {
-    //         return 'edit'
-    //     } else {
-    //         return 'new'
-    //     }
-    // }
-
     $scope.backPartners = function(){
             window.location = "#/partners";
         }

@@ -14,7 +14,8 @@ class facilities extends MY_Controller {
 		$this->load->view("facilities_v");
 	}
 
-	public function details() {
+	/* view facilities Statistics & details */
+	public function view_facility_details() {
 		$this->load->view("view_facilities_v");
 	}
 

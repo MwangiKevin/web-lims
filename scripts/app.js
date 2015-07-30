@@ -232,8 +232,8 @@ var app = angular
 		url: '/viewFacility/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'viewFacility',
-				// controller:'viewFacilityCtrl'
+				templateUrl: 'facilities/view_facility_details',
+				controller:'viewFacilityCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -313,8 +313,8 @@ var app = angular
 		url: '/viewCD4Device/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'viewDevice',
-				// controller:'viewCD4DeviceCtrl'
+				templateUrl: 'devices/viewDevice',
+				controller:'viewDeviceCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',
@@ -329,7 +329,7 @@ var app = angular
 		url: '/newCD4Device',
 		views:{
 			'main':{
-				templateUrl: 'devices/new_CD4_device',
+				templateUrl: 'devices/new_facility_device',
 				controller:'newCD4DeviceCtrl'
 			},
 			'navbar':{
@@ -424,7 +424,7 @@ var app = angular
 		url: '/partners',
 		views:{
 			'main':{
-				templateUrl: 'admin',
+				templateUrl: 'partners',
 				controller:'partnersCtrl'
 			},
 			'navbar':{
@@ -440,7 +440,7 @@ var app = angular
 		url: '/newPartner',
 		views:{
 			'main':{
-				templateUrl: 'admin/newPartner',
+				templateUrl: 'partners/newPartner',
 				controller:'newPartnerCtrl'
 			},
 			'navbar':{
@@ -456,7 +456,7 @@ var app = angular
 		url: '/editPartner/{id:int}',
 		views:{
 			'main':{
-				templateUrl: 'admin/editPartner',
+				templateUrl: 'partners/editPartner',
 				controller:'editPartnerCtrl'
 			},
 			'navbar':{
@@ -472,8 +472,8 @@ var app = angular
 		url: '/viewPartner/{id:int}',
 		views:{
 			'main':{
-				// templateUrl: 'viewPartner',
-				// controller:'viewPartnerCtrl'
+				templateUrl: 'partners/viewPartner',
+				controller:'viewPartnerCtrl'
 			},
 			'navbar':{
 				templateUrl: 'dashboard/navbar',

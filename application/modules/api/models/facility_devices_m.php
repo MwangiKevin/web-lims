@@ -43,6 +43,8 @@ class facility_devices_m extends MY_Model{
 						'$facility_device[date_removed]'
 						)";
 
+		echo $sql;die;
+
 		if(!$this->db->query($sql)){
 			$error = array('error' => array('message'=>$this->db->_error_message(),'no'=>$this->db->_error_number() ));
 			return $error;
