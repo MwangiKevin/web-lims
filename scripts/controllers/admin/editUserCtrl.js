@@ -19,13 +19,15 @@ app.controller('editUserCtrl',
 
     $scope.user_id = $stateParams.id;
 
-    $scope.bac_users = function(){
+    $scope.entities = [{ name: '', email:'',phone:'', type: '' }];
+
+    $scope.back_users = function(){
         window.location = "#/users";
     }
 
     $scope.user = {};
 
-    $scope.populateUser = function() {
+    $scope.populate_user = function() {
         if ($stateParams.id > 0) {
             var loaded_partner = Restangular.one('users', $stateParams.id);
             loaded_partner.get().then(function(user) {
@@ -52,7 +54,7 @@ app.controller('editUserCtrl',
             
     }, true );
 
-    $scope.put_partner = function() {
+    $scope.put_user = function() {
         swal({
             title: "Are you sure?",
             text: "This makes changes to this User",
@@ -72,6 +74,18 @@ app.controller('editUserCtrl',
         });
     }
 
-    $scope.populateUser();
+    $scope.populate_user();
 
-    }]);
+
+    $scope.refreshEntities = function(search_term) {
+        Filters.getEntities(search_term)
+        .success(function (ents) {
+            $scope.entities = ents;
+        })
+        .error(function (error) {
+            $scope.status = 'Unable to load Filters data: ' + error.message;
+        });       
+    }
+    $scope.refreshEntities("");
+
+}]);
