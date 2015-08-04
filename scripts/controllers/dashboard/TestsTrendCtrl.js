@@ -362,9 +362,7 @@ $scope.prepare_tests_vs_errors_pie();
 				}	
 			})
 		.success(function(response){
-			$scope.table_data = response;
-			console.log($scope.table_data);
-			
+			$scope.table_data = response;			
 		});	
 	}
 	$scope.critical_table();

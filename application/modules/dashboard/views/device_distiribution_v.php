@@ -13,7 +13,6 @@
 				<table class="ui celled table">
 					<thead>
 						<tr>
-							<th></th>
 							<th>Device</th>
 		                    <th>Total</th>
 		                    <th>Functional</th>
@@ -27,7 +26,7 @@
 							<td> {{td.total}} </td>
 							<td> {{td.functional}} </td>
 							<td> {{td.broken_down}} </td>
-							<td> {{td.obsolete}} </td>
+							<td> {{td.obsolete}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -45,9 +44,8 @@
 						<tr>
 							<th>Device</th>
 	                    	<th>Total Tests</th>
-	                    	<th>Functional</th>
-	                    	<th>Broken down</th>
-	                    	<th>Obsolete</th>
+	                    	<th>Valid</th>
+	                    	<th>errors</th>
 						</tr>
 					</thead>
 					<tbody>

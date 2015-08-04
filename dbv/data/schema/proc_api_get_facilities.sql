@@ -3,6 +3,7 @@ BEGIN
 
         SET @QUERY =    " SELECT 
                                 `f`.`id`,
+                                `f`.`name`                  as `name`,
                                 `f`.`id`                    as `facility_id`,
                                 `f`.`name`                  as `facility_name`,
                                 `f`.`mfl_code`              as `facility_mfl_code`,

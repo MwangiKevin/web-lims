@@ -4,23 +4,6 @@ if (!defined('BASEPATH'))
 
 class admin extends MY_Controller {
 
-	public function index(){
-
-		$this->load->view("partners_v");
-
-	}
-
-	function editPartner(){
-
-		$this->load->view('editPartner_v');
-	}
-
-	function newPartner(){
-
-		$this->load->view('new_partner_v');
-	}
-
-
-
 	
 }
+?>

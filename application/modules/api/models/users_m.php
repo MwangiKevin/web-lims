@@ -58,11 +58,11 @@ class users_m extends MY_Model{
 		$search = addslashes($search);
 
 
-		$counties_res = $this->api_get_users($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false');
+		$users_res = $this->api_get_users($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false');
 
 		if($id==NULL){
 
-			$users =  $counties_res;	
+			$users =  $users_res;	
 
 			foreach ($users as $key => $value) {
 				// $this->aauth->add_member($users[$key]['id'],'facility_default');
@@ -77,27 +77,35 @@ class users_m extends MY_Model{
 				$users[$key]['user_groups']  = (array) $this->aauth->get_user_groups($users[$key]['id']);
 				$users[$key]['linked_entity_id']  = (int) $this->aauth->get_user_var("linked_entity_id",$users[$key]['id']);
 
+				$users[$key]['banned']  = (int) $users[$key]['banned'];
+
 				if($users[$key]['default_user_group']['group_id']== 4){
 
 					$mfl = $users[$key]['email'];
 
-					$f_email =  R::getAll("SELECT f.email FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl'")[0]['id'];
+					$fac_res =  R::getAll("SELECT f.email,f.phone FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl'")[0];
 
-					$users[$key]['email'] = $f_email;
+					$users[$key]['email'] = $fac_res['email'];
 
+					$users[$key]['phone'] = (string) $fac_res['phone'];
+
+				}else{
+					$users[$key]['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users[$key]['id']);
 				}
 
 			}
 
 		}else{
 
-			$users =  $counties_res[0];	
+			$users =  $users_res[0];	
 
 			if(!is_null($users['id'])){	
 
 				$users['default_user_group']  = (array) $this->aauth->get_user_groups($users['id'])[0];
 				$users['user_groups']  = (array) $this->aauth->get_user_groups($users['id']);
 				$users['linked_entity_id']  = (int) $this->aauth->get_user_var("linked_entity_id",$users['id']);
+
+				$users['banned']  = (int) $users['banned'];
 
 				if($users['default_user_group']['group_id']== 2) {
 					$users['linked_entity'] = array(
@@ -107,34 +115,40 @@ class users_m extends MY_Model{
 				}	
 				else if($users['default_user_group']['group_id']== 3) {
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 4 ){
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
 
 					$mfl = $users['email'];
+					
+					$fac_res =  R::getAll("SELECT f.email,f.phone FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl'")[0];
 
-					$f_email =  R::getAll("SELECT f.email FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl'")[0]['id'];
+					$users[$key]['email'] = $fac_res['email'];
 
-					$users['email'] = $f_email;
+					$users[$key]['phone'] = (string) $fac_res['phone'];
 
 				}
 				else if($users['default_user_group']['group_id']== 6){
 					$users['linked_entity'] = $this->sub_counties_m->read($users['linked_entity_id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 5){
 					$users['linked_entity'] = $this->counties_m->read($users['linked_entity_id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 7){
 					$users['linked_entity'] = $this->partners_m->read($users['linked_entity_id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else{
 					$users['linked_entity'] = array(
 							        "filter_type"=> -1,
 							        "filter_id"=> -1
-						);
+						);					
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 			}
-
 		}
 
 		if($is_datatable && $id==NULL){

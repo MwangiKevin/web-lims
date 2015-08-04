@@ -55,7 +55,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
         DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
         DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
         DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
+                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="view_facility('+data.facility_id+')">View</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
             }),
     ];
     $scope.dtColumnDefs = [

@@ -74,20 +74,25 @@ class auth extends MY_Controller {
 	}
 
 	public function get_user_var($id=null){
-			echo json_encode($this->aauth->get_user_var("linked_entity_id",$id));
+		echo json_encode($this->aauth->get_user_var("linked_entity_id",$id));
 	}
 	public function get_currentuser(){
-			echo json_encode($this->aauth->get_user($id));
+		echo json_encode($this->aauth->get_user($id));
 			
 	}
-	public function get_filter_type(){
-		
-		echo (int) $filter_type;
-			
+	public function get_filter_type(){		
+		echo (int) $filter_type;			
 	}
 	public function get_filter_id(){
-		echo (int) $filter_id;
-			
+		echo (int) $filter_id;			
+	}
+
+	public function get_user_groups($id=NULL){
+		echo json_encode($this->aauth->get_user_groups($id));			
+	}
+
+	public function list_groups($id=NULL){
+		echo json_encode($this->aauth->list_groups($id));			
 	}
 
 }
