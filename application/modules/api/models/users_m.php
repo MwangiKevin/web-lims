@@ -90,7 +90,7 @@ class users_m extends MY_Model{
 					$users[$key]['phone'] = (string) $fac_res['phone'];
 
 				}else{
-					$users[$key]['phone']  = (string) $this->aauth->get_user_var('linked_entity_id',$f_id,$users[$key]['id']);
+					$users[$key]['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users[$key]['id']);
 				}
 
 			}
@@ -115,7 +115,7 @@ class users_m extends MY_Model{
 				}	
 				else if($users['default_user_group']['group_id']== 3) {
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('linked_entity_id',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 4 ){
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
@@ -131,22 +131,22 @@ class users_m extends MY_Model{
 				}
 				else if($users['default_user_group']['group_id']== 6){
 					$users['linked_entity'] = $this->sub_counties_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('linked_entity_id',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 5){
 					$users['linked_entity'] = $this->counties_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('linked_entity_id',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 7){
 					$users['linked_entity'] = $this->partners_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('linked_entity_id',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 				else{
 					$users['linked_entity'] = array(
 							        "filter_type"=> -1,
 							        "filter_id"=> -1
 						);					
-					$users['phone']  = (string) $this->aauth->get_user_var('linked_entity_id',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
 				}
 			}
 		}
