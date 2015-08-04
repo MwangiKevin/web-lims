@@ -62,7 +62,8 @@
   	</div>
   	<div class="sixteen wide column"> 
   	<div class="ui segment">
-  		<pre>{{user}}</pre>
+  		<!-- <pre>{{sess.user.default_user_group}}</pre> -->
+  		<!-- <pre>{{user}}</pre> -->
 	  	<div class="ui primary button" ng-click="put_user()"> Update Details </div>
 		<button class="ui button" ng-click="back_users()"> Back To Users </button>
 		<div style="height:50px"></div> 
