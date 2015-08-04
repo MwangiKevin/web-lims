@@ -71,6 +71,7 @@ app.controller('usersCtrl',
         DTColumnBuilder.newColumn('id').withTitle('User #'),
         DTColumnBuilder.newColumn('user_name').withTitle('Name'),
         DTColumnBuilder.newColumn('email').withTitle('E-mail'),
+        DTColumnBuilder.newColumn('phone').withTitle('Phone').notSortable(),
         DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
                 return '<button ng-show="sess.loggedin" onClick="edit_user('+data.id+')">Edit</button><button ng-show="sess.loggedin" onClick="reset_password('+data.id+')">Reset Password</button><button ng-show="sess.loggedin" onClick="Set_password_to('+data.id+')">Set password to</button><button ng-show="sess.loggedin" onClick="ban_user('+data.id+')">Ban User</button>';
             }),
