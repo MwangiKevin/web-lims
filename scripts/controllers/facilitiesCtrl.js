@@ -8,6 +8,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
         type: 'GET'
     })  
     .withDataProp('data')
+    .withOption('stateSave', true)
     .withOption('processing', true)
     .withOption('serverSide', true)
     .withOption('scrollX', '100%')
@@ -41,6 +42,10 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
                 'sButtonText': '+ New Facility', 
                 'fnClick'   : function ( nButton, oConfig, oFlash ) {
                     window.location = "#/newFacility";
+                },
+                'sButtonText': 'Reload', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    reloadData();
                 }
             }
         ]);
@@ -61,6 +66,11 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     $scope.dtColumnDefs = [
         // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
     ];
+
+    function reloadData() {
+        var resetPaging = false;
+        $scope.dtInstance.reloadData(null, resetPaging);
+    }
 
     edit_facility = function(id){
         window.location = "#/editFacility/"+id;
