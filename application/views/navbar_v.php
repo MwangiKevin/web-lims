@@ -40,10 +40,10 @@
         <div class="menu" style="z-index:200">
           <div class="item" ng-show="!sess.loggedin" ng-click="login()">Login<i class="key icon " style="float:right"></i></div>
           <div class="item" ng-show="sess.loggedin" ng-click="logout()">Logout<i class="key icon " style="float:right"></i></div>
-         <!--  <div class="item">Help<i class="help icon " style="float:right"></i></div>
-          <div class="item" ng-show="sess.loggedin">My Profile<i class="user icon " style="float:right"></i></div>
-          <div class="item" ng-show="sess.loggedin"><b>Change Password</b></div>
-          <div class="ui divider" ></div>
+          <!--<div class="item">Help<i class="help icon " style="float:right"></i></div>
+          <div class="item" ng-show="sess.loggedin">My Profile<i class="user icon " style="float:right"></i></div>-->
+          <div class="item" ng-click="change_pass()" ng-show="sess.loggedin"><b>Change Password</b></div>
+          <!-- <div class="ui divider" ></div>
           <div class="item" >About <i class="info icon " style="float:right"></i></div> -->
         </div>
       </a>
@@ -91,10 +91,10 @@
       <div class="menu">
           <div class="item" ng-show="!sess.loggedin" ng-click="login()">Login<i class="key icon " style="float:right"></i></div>
           <div class="item" ng-show="sess.loggedin" ng-click="logout()">Logout<i class="key icon " style="float:right"></i></div>
-         <!--  <div class="item">Help<i class="help icon " style="float:right"></i></div>
-          <div class="item" ng-show="sess.loggedin">My Profile<i class="user icon " style="float:right"></i></div>
-          <div class="item" ng-show="sess.loggedin"><b>Change Password</b></div>
-          <div class="ui divider" ></div>
+         <!--<div class="item">Help<i class="help icon " style="float:right"></i></div>
+          <div class="item" ng-show="sess.loggedin">My Profile<i class="user icon " style="float:right"></i></div>-->
+          <div class="item" ng-click="change_pass()" ng-show="sess.loggedin"><b>Change Password</b></div>
+          <!-- <div class="ui divider" ></div>
           <div class="item" >About <i class="info icon " style="float:right"></i></div> -->
       </div>
     </div>

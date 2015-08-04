@@ -124,7 +124,8 @@
 					<div class="ui form">
 						<div class="field">
 							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
-						</div>
+						</div>						
+						<div class="ui teal message">Note: The default password is "123456"</div>
 						<div class="field">
 							<label for="username">Facility Login: </label>
 							<div class="ui icon input">								
@@ -140,7 +141,7 @@
 						</div>
 						<div ng-show="facility_login" class="field">
 							<label for="username">Facility: </label>
-							<div class="ui icon input">
+							<div class="ui icon input">								
 								<div class="ui input">
 									<ui-select ng-model="selected.facility" theme="selectize" ng-disabled="disabled"  reset-search-input="false" style="min-width: 300px;">
 									    <ui-select-match placeholder="Type Facility Name or MFL Code...">{{$select.selected.facility_name}}</ui-select-match>
