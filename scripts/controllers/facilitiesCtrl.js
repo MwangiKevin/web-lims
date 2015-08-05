@@ -2,32 +2,15 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
 
     apiAuth.requireLogin();
 
-    // $scope.filter={
-    //     type :$rootScope.$storage.filter_type,
-    //     id:$rootScope.$storage.filter_id
-    // }
-    $rootScope.getFilterType = function(){
-        return $rootScope.$storage.filter_type;
-    }
-    $rootScope.getFilterId = function(){
-        return $rootScope.$storage.filter_id;
-    }
-
     $scope.dtOptions = DTOptionsBuilder.newOptions()
-    // .withOption('ajax', {
-    //     url: Commons.baseURL+'api/facilities',
-    //     data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
-    //     type: 'GET'
-    // })  
     .withSource({
         url: Commons.baseURL+'api/facilities',
-        data:{datatable:true,verbose:true,filter_type :$rootScope.getFilterType, filter_id: $rootScope.getFilterId},
+        data:{datatable:true,verbose:true,filter_type :$rootScope.getFilterType(), filter_id: $rootScope.getFilterId()},
         type: 'GET'
     })
-    // .fromSource('api/facilities')
     .withDataProp('data')
     // .withOption('stateSave', true)
-    .withOption('processing', true)
+    // .withOption('processing', true)
     .withOption('serverSide', true)
     .withOption('scrollX', '100%')
     .withPaginationType('full_numbers')
@@ -87,11 +70,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     $scope.dtInstance = {};
 
     reloadFacilities =function () {
-        // console.log($scope.dtInstance);
-        $scope.filter={
-            type :$rootScope.$storage.filter_type,
-            id:$rootScope.$storage.filter_id
-        }
+        console.log($scope.dtInstance);    
         var resetPaging = false;
         $scope.dtInstance.reloadData(callback, resetPaging);
         // $scope.dtInstance.rerender();
