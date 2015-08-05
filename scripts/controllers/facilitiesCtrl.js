@@ -2,6 +2,17 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
 
     apiAuth.requireLogin();
 
+    // $scope.filter={
+    //     type :$rootScope.$storage.filter_type,
+    //     id:$rootScope.$storage.filter_id
+    // }
+    $rootScope.getFilterType = function(){
+        return $rootScope.$storage.filter_type;
+    }
+    $rootScope.getFilterId = function(){
+        return $rootScope.$storage.filter_id;
+    }
+
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     // .withOption('ajax', {
     //     url: Commons.baseURL+'api/facilities',
@@ -10,7 +21,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     // })  
     .withSource({
         url: Commons.baseURL+'api/facilities',
-        data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
+        data:{datatable:true,verbose:true,filter_type :$rootScope.getFilterType, filter_id: $rootScope.getFilterId},
         type: 'GET'
     })
     // .fromSource('api/facilities')
@@ -52,7 +63,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
                 },
                 'sButtonText': 'Reload', 
                 'fnClick'   : function ( nButton, oConfig, oFlash ) {
-                    reloadData();
+                    reloadFacilities();
                 }
             }
         ]);
@@ -75,13 +86,18 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     ];
     $scope.dtInstance = {};
 
-    function reloadData() {
-        console.log($scope.dtInstance);
+    reloadFacilities =function () {
+        // console.log($scope.dtInstance);
+        $scope.filter={
+            type :$rootScope.$storage.filter_type,
+            id:$rootScope.$storage.filter_id
+        }
         var resetPaging = false;
         $scope.dtInstance.reloadData(callback, resetPaging);
+        // $scope.dtInstance.rerender();
     }
     function callback(json) {
-        console.log(json);
+        // console.log(json);
     }
 
     edit_facility = function(id){
@@ -111,6 +127,11 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
             });
         });
     }
+
+    $rootScope.$watch('sess.loggedin',function(){
+        // alert("loggedin");
+        reloadFacilities();
+    })
 
 
 }]);
