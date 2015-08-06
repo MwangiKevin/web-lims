@@ -870,7 +870,7 @@ then you use it as a standard decoder like this:
 
 ```javascript
 var Bike = restmod.model('/bikes').mix({
-	createdAt: {decode:'date_parse'}
+	createdAt: {decode: 'date_parse' }
 });
 ```
 
@@ -914,7 +914,7 @@ var Bike = restmod.model('/bikes').mix({
 
 ### Explicit attribute mapping
 
-You can explicitly tell restmod to map a given server attribute to one of the model's attributs:
+You can explicitly tell restmod to map a given server attribute to one of the model's attributes:
 
 ```javascript
 var Bike = restmod.model('/bikes').mix({
@@ -929,6 +929,51 @@ You can define volatile attributes, volatile attributes will be deleted from rec
 ```javascript
 var User = restmod.model('/users').mix({
 	password: { volatile: true } // make password volatile
+});
+```
+
+### Nested properties
+
+Sometimes you will need to specify behaviour for nested properties, this is done the same ways as with regular properties using the `.` symbol.
+
+Given the following json response:
+
+```json
+{
+	"id": 1,
+	"serialNo": {
+		"issued": '2014-05-05'
+	}
+}
+```
+
+You can add a date decoder for the `issued` property using:
+
+```javascript
+var Bike = restmod.model('/bikes').mix({
+	'serialNo.issued': { decode: 'date_parse' }
+});
+```
+
+If the nested property is inside an array, you can reffer to it using the `[]` symbols.
+
+So if the json response looks like this:
+
+```json
+{
+	"id": 1,
+	"tags": [
+		{ name: 'endurow', weight: 20 },
+		{ name: 'offroad', weight: 5 }
+	]
+}
+```
+
+You can add a mapping for the `weight` property to the `size` property using:
+
+```javascript
+var Bike = restmod.model('/bikes').mix({
+	'tags[].size': { map: 'weight' }
 });
 ```
 
@@ -1090,4 +1135,24 @@ Some links:
 REST api designs guidelines: https://github.com/interagent/http-api-design
 REST json api standard: http://jsonapi.org
 
-[Authors and Contributors](https://github.com/platanus/angular-restmod/blob/master/authors.md)
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+Check [CONTRIBUTORS](https://github.com/platanus/angular-restmod/blob/master/CONTRIBUTE.md) for more details
+
+## Credits
+
+Thank you [contributors](https://github.com/platanus/angular-restmod/graphs/contributors)!
+
+<img src="http://platan.us/gravatar_with_text.png" alt="Platanus" width="250"/>
+
+angular-restmod is maintained by [platanus](http://platan.us).
+
+## License
+
+Guides is © 2014 platanus, spa. It is free software and may be redistributed under the terms specified in the LICENSE file.
