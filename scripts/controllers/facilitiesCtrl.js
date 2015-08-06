@@ -1,14 +1,16 @@
-app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','apiAuth', function ($scope,$rootScope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder,apiAuth ) {
+app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Restangular', '$activityIndicator', 'DTOptionsBuilder','DTColumnBuilder','DTColumnDefBuilder','DTInstances','apiAuth', function ($scope,$rootScope,$state,Commons,Restangular,$activityIndicator,DTOptionsBuilder,DTColumnBuilder ,DTColumnDefBuilder,DTInstances,apiAuth ) {
 
     apiAuth.requireLogin();
+
     $scope.dtOptions = DTOptionsBuilder.newOptions()
-    .withOption('ajax', {
+    .withSource({
         url: Commons.baseURL+'api/facilities',
-        data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
+        data:{datatable:true,verbose:true,filter_type :$rootScope.getFilterType(), filter_id: $rootScope.getFilterId()},
         type: 'GET'
-    })  
+    })
     .withDataProp('data')
-    .withOption('processing', true)
+    // .withOption('stateSave', true)
+    // .withOption('processing', true)
     .withOption('serverSide', true)
     .withOption('scrollX', '100%')
     .withPaginationType('full_numbers')
@@ -16,7 +18,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
 
     .withColVis()
     // .withColVisStateChange(stateChange)
-    .withColVisOption('aiExclude', [1])
+    .withColVisOption('aiExclude', [1,2,3,4,5])
 
 
     .withOption('responsive', true)
@@ -41,6 +43,10 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
                 'sButtonText': '+ New Facility', 
                 'fnClick'   : function ( nButton, oConfig, oFlash ) {
                     window.location = "#/newFacility";
+                },
+                'sButtonText': 'Reload', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    reloadFacilities();
                 }
             }
         ]);
@@ -61,6 +67,17 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     $scope.dtColumnDefs = [
         // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
     ];
+    $scope.dtInstance = {};
+
+    reloadFacilities =function () {
+        console.log($scope.dtInstance);    
+        var resetPaging = false;
+        $scope.dtInstance.reloadData(callback, resetPaging);
+        // $scope.dtInstance.rerender();
+    }
+    function callback(json) {
+        // console.log(json);
+    }
 
     edit_facility = function(id){
         window.location = "#/editFacility/"+id;
@@ -89,6 +106,11 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
             });
         });
     }
+
+    $rootScope.$watch('sess.loggedin',function(){
+        // alert("loggedin");
+        reloadFacilities();
+    })
 
 
 }]);
