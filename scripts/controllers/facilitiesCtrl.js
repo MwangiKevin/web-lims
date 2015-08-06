@@ -10,7 +10,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     })
     .withDataProp('data')
     // .withOption('stateSave', true)
-    // .withOption('processing', true)
+    .withOption('processing', true)
     .withOption('serverSide', true)
     .withOption('scrollX', '100%')
     .withPaginationType('full_numbers')
@@ -46,6 +46,8 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
                 },
                 'sButtonText': 'Reload', 
                 'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    
+                    $state.reload();
                     reloadFacilities();
                 }
             }
@@ -108,7 +110,8 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     }
 
     $rootScope.$watch('sess.loggedin',function(){
-        // alert("loggedin");
+
+        // $state.reload();
         reloadFacilities();
     })
 

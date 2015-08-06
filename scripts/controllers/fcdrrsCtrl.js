@@ -22,14 +22,18 @@ app.controller('fcdrrsCtrl',
     apiAuth.requireLogin();      
 
     Commons.activeMenu = "fcdrrs";
+    function get_ajax_source(){
+            return {
+            url: Commons.baseURL+'api/fcdrrs',
+            data:{datatable:true,verbose:true,filter_type :$rootScope.getFilterType(), filter_id: $rootScope.getFilterId()},
+            type: 'GET'
+        }
+    }
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
-    .withOption('ajax', {
-        url: Commons.baseURL+'api/fcdrrs',
-        data:{datatable:true,verbose:true,filter_type :$rootScope.$storage.filter_type, filter_id: $rootScope.$storage.filter_id},
-        type: 'GET'
-    })  
-    .withDataProp('data')
+    .withSource(get_ajax_source())
+    .withDataProp('data')    
+    .withOption('stateSave', false)
     .withOption('processing', true)
     .withOption('serverSide', true)
     .withOption('scrollX', '100%')
@@ -56,6 +60,14 @@ app.controller('fcdrrsCtrl',
                 'sExtends': 'collection',
                 'sButtonText': 'Save',
                 'aButtons': ['csv', 'xls', 'pdf']
+            },
+            {
+                'sExtends': 'text',             
+                'sButtonText': 'Reload', 
+                'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                    // $state.reload();
+                    reloadFcdrrs();
+                }
             }
         ]);
     $scope.dtColumns = [
@@ -71,7 +83,29 @@ app.controller('fcdrrsCtrl',
                 return '<button onClick="edit_fcdrr('+data.fcdrr_id+')">Edit</button>';
             }),
     ];
+
+    $scope.dtInstance = {};
+
+    reloadFcdrrs = function () {
+        console.log($scope.dtInstance);    
+        // alert($rootScope.getFilterType())
+        var resetPaging = true;
+        $scope.dtInstance.reloadData(callback, resetPaging);
+        $scope.dtInstance.rerender();
+    }
+
+    function callback(json) {
+        // console.log(json);
+    }
+
     edit_fcdrr = function(id){        
         window.location = "#/editFCDRR/"+id;
     }
+
+    $rootScope.$watch('sess.loggedin',function(){
+
+        // $state.reload();
+        reloadFcdrrs();
+    })
+
 }])
