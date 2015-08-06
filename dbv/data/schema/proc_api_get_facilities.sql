@@ -108,10 +108,12 @@ BEGIN
 
    
         CASE 
-            WHEN (limit_start = 0 || limit_start = '') AND (limit_items > 0 || limit_items <> '') AND  (get_count <> 'true')
+            WHEN (limit_start = 0 || limit_start = '') AND (limit_items > 0 || limit_items <> '') AND  (get_count <> 'true') AND  (filter_type <> -1)
                 THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT  0 ,  ', limit_items, ' ');
-            WHEN (limit_start > 0 || limit_start <> '') AND (limit_items > 0 || limit_items <> '') AND    (get_count <> 'true')
+            WHEN (limit_start > 0 || limit_start <> '') AND (limit_items > 0 || limit_items <> '') AND    (get_count <> 'true') AND  (filter_type <> -1)
                 THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT ',limit_start,' , ', limit_items, ' ');
+            WHEN  (filter_type = -1)
+                THEN SET @QUERY = CONCAT(@QUERY, ' LIMIT  0  ');
             ELSE
                 SET @QUERY = @QUERY;
         END CASE;
