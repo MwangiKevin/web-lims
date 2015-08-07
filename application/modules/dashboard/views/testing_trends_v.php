@@ -21,11 +21,11 @@
 							<th>cd4 Above critical Level
 							<br/>
 							<br/>
-							(350 cells/mm for adults)</th>
+							(500 cells/mm for adults)</th>
 							<th>cd4 Below critical Level
 							<br/>
 							<br/>
-							(25% for peadiatrics)</th>
+							<!-- (25% for peadiatrics) --></th>
 							<th>Unsuccessful Tests</th>
 						</tr>
 					</thead>
