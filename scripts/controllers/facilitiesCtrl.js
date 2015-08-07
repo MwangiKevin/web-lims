@@ -5,6 +5,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
 
+    $scope.dtInstance = {};
 
     $scope.build = function(){
         $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -76,12 +77,12 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
             // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
         ];
 
-        $scope.dtInstance = {};
+        // $scope.dtInstance = {};
     }
     $scope.build();
 
     reloadFacilities =function () {
-        // console.log($scope.dtInstance);          
+        console.log($scope.dtInstance);          
         $scope.build();  
         var resetPaging = false;
         $scope.dtInstance.reloadData(callback, resetPaging);
