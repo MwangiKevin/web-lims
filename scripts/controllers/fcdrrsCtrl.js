@@ -86,7 +86,7 @@ app.controller('fcdrrsCtrl',
     $scope.dtInstance = {};
 
     reloadFcdrrs = function () {
-        console.log($scope.dtInstance);     
+        // console.log($scope.dtInstance);     
         $scope.build();
         var resetPaging = true;
         $scope.dtInstance.reloadData(callback, resetPaging);

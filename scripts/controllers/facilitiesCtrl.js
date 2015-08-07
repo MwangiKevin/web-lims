@@ -2,77 +2,87 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
 
     apiAuth.requireLogin();
 
+
     $scope.dtOptions = DTOptionsBuilder.newOptions()
-    .withSource({
-        url: Commons.baseURL+'api/facilities',
-        data:{datatable:true,verbose:true,filter_type :$rootScope.getFilterType(), filter_id: $rootScope.getFilterId()},
-        type: 'GET'
-    })
-    .withDataProp('data')
-    // .withOption('stateSave', true)
-    .withOption('processing', true)
-    .withOption('serverSide', true)
-    .withOption('scrollX', '100%')
-    .withPaginationType('full_numbers')
 
 
-    .withColVis()
-    // .withColVisStateChange(stateChange)
-    .withColVisOption('aiExclude', [1,2,3,4,5])
+    $scope.build = function(){
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+        .withSource({
+            url: Commons.baseURL+'api/facilities',
+            data:{datatable:true,verbose:true,filter_type :$rootScope.getFilterType(), filter_id: $rootScope.getFilterId()},
+            type: 'GET'
+        })
+        .withDataProp('data')
+        // .withOption('stateSave', true)
+        // .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withOption('scrollX', '100%')
+        .withPaginationType('full_numbers')
 
 
-    .withOption('responsive', true)
+        .withColVis()
+        // .withColVisStateChange(stateChange)
+        .withColVisOption('aiExclude', [1,2,3,4,5])
 
-    .withColReorder()
-    // .withColReorderOrder([1, 0, 2])
-    .withColReorderOption('iFixedColumnsRight', 1)
-    // .withColReorderCallback(function() {
-    //         console.log('Columns order has been changed with: ' + this.fnOrder());
-    //     })
 
-    .withTableTools('assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
-    .withTableToolsButtons([
-            'copy',
-            'print', {
-                'sExtends': 'collection',
-                'sButtonText': 'Save',
-                'aButtons': ['csv', 'xls', 'pdf']
-            },
-            {
-                'sExtends': 'text',
-                'sButtonText': '+ New Facility', 
-                'fnClick'   : function ( nButton, oConfig, oFlash ) {
-                    window.location = "#/newFacility";
+        .withOption('responsive', true)
+
+        .withColReorder()
+        // .withColReorderOrder([1, 0, 2])
+        .withColReorderOption('iFixedColumnsRight', 1)
+        // .withColReorderCallback(function() {
+        //         console.log('Columns order has been changed with: ' + this.fnOrder());
+        //     })
+
+        .withTableTools('assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        .withTableToolsButtons([
+                'copy',
+                'print', {
+                    'sExtends': 'collection',
+                    'sButtonText': 'Save',
+                    'aButtons': ['csv', 'xls', 'pdf']
                 },
-                'sButtonText': 'Reload', 
-                'fnClick'   : function ( nButton, oConfig, oFlash ) {
-                    
-                    $state.reload();
-                    reloadFacilities();
+                {
+                    'sExtends': 'text',
+                    'sButtonText': '+ New Facility', 
+                    'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                        window.location = "#/newFacility";
+                    },
+                    'sButtonText': 'Reload', 
+                    'fnClick'   : function ( nButton, oConfig, oFlash ) {
+
+                        $state.reload();
+                        reloadFacilities();
+                    }
                 }
-            }
-        ]);
-    $scope.dtColumns = [
-        DTColumnBuilder.newColumn('facility_id').withTitle('facility #'),
-        DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
-        DTColumnBuilder.newColumn('facility_email').withTitle('Email'),
-        DTColumnBuilder.newColumn('facility_phone').withTitle('Phone'),
-        DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
-        DTColumnBuilder.newColumn('county_name').withTitle('County'),
-        DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county'),
-        DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
-        DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
-        DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
-                return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="view_facility('+data.facility_id+')">View</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
-            }),
-    ];
-    $scope.dtColumnDefs = [
-        // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
-    ];
-    $scope.dtInstance = {};
+            ]);
+        $scope.dtColumns = [
+            DTColumnBuilder.newColumn('facility_id').withTitle('facility #'),
+            DTColumnBuilder.newColumn('facility_mfl_code').withTitle('MFL CODE'),
+            DTColumnBuilder.newColumn('facility_email').withTitle('Email'),
+            DTColumnBuilder.newColumn('facility_phone').withTitle('Phone'),
+            DTColumnBuilder.newColumn('facility_name').withTitle('Facility'),
+            DTColumnBuilder.newColumn('county_name').withTitle('County'),
+            DTColumnBuilder.newColumn('sub_county_name').withTitle('Sub-county'),
+            DTColumnBuilder.newColumn('partner_name').withTitle('Partner'),
+            DTColumnBuilder.newColumn('central_site_name').withTitle('Central Site'),        
+            DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(function(data, type, full, meta) {
+                    return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="edit_facility('+data.facility_id+')">Edit</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" ng-show="sess.loggedin" onClick="view_facility('+data.facility_id+')">View</button><button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick ="remove_facility('+data.facility_id+')" >Remove</button>';
+                }),
+        ];
+
+        $scope.dtColumnDefs = [
+            // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
+        ];
+
+        $scope.dtInstance = {};
+    }
+    $scope.build();
 
     reloadFacilities =function () {
-        console.log($scope.dtInstance);    
+        // console.log($scope.dtInstance);          
+        $scope.build();  
         var resetPaging = false;
         $scope.dtInstance.reloadData(callback, resetPaging);
         // $scope.dtInstance.rerender();
