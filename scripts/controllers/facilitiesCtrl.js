@@ -16,11 +16,10 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
         })
         .withDataProp('data')
         // .withOption('stateSave', true)
-        // .withOption('processing', true)
+        .withOption('processing', true)
         .withOption('serverSide', true)
         .withOption('scrollX', '100%')
         .withPaginationType('full_numbers')
-
 
         .withColVis()
         // .withColVisStateChange(stateChange)
