@@ -82,7 +82,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
     $scope.build();
 
     reloadFacilities =function () {
-        console.log($scope.dtInstance);          
+        // console.log($scope.dtInstance);          
         $scope.build();  
         var resetPaging = false;
         $scope.dtInstance.reloadData(callback, resetPaging);
