@@ -19,6 +19,10 @@ SELECT
 		ON `uv`.`value` = `f`.`id`
 		AND `g`.`id`  ='4'
 
+	LEFT JOIN `report_user_subscription` `rus`
+	ON `u`.`id` = `rus`.`aauth_user_id`
+	AND `rus`.`report_type_id` = '2'
+
 
 WHERE 
 (`u`.`email` REGEXP '[-a-z0-9~!$%^&*_=+}{\\\'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\\'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?'
