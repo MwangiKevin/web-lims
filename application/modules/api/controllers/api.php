@@ -175,8 +175,8 @@ class api extends MY_Controller {
 		$method = $this->_detect_method();
 
 		if ($method=="post"){
-			// echo json_encode($this->fcdrrs_m->create(),JSON_PRETTY_PRINT);
-			$this->temp_fcdrrs_m->create();
+			echo json_encode($this->fcdrrs_m->create(),JSON_PRETTY_PRINT);
+			// $this->temp_fcdrrs_m->create();
 		}
 
 		else if($method=="get"){
