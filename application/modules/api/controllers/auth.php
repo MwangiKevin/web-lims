@@ -95,4 +95,8 @@ class auth extends MY_Controller {
 		echo json_encode($this->aauth->list_groups($id));			
 	}
 
+	public function change_password(){
+		
+	}
+
 }
