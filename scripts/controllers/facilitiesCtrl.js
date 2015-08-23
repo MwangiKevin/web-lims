@@ -5,6 +5,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
 
     $scope.dtOptions = DTOptionsBuilder.newOptions()
 
+    $scope.dtInstance = {};
 
     $scope.build = function(){
         $scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -15,11 +16,10 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
         })
         .withDataProp('data')
         // .withOption('stateSave', true)
-        // .withOption('processing', true)
+        .withOption('processing', true)
         .withOption('serverSide', true)
         .withOption('scrollX', '100%')
         .withPaginationType('full_numbers')
-
 
         .withColVis()
         // .withColVisStateChange(stateChange)
@@ -76,7 +76,7 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
             // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
         ];
 
-        $scope.dtInstance = {};
+        // $scope.dtInstance = {};
     }
     $scope.build();
 

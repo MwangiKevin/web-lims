@@ -31,7 +31,7 @@ app.controller('fcdrrsCtrl',
             })
         .withDataProp('data')    
         .withOption('stateSave', false)
-        // .withOption('processing', true)
+        .withOption('processing', true)
         .withOption('serverSide', true)
         .withOption('scrollX', '100%')
         .withPaginationType('full_numbers')
