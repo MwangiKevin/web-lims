@@ -1,6 +1,7 @@
 <div class="ui segment">
 	<br/>
   <h3><center><div class="ui blue horizontal label big ">User Details: </div> {{user.user_name}}</center></h3>
+  <pre>{{user}}<pre/>
 </div>
 <div class="ui grid">
   	<div class="eight wide column">
