@@ -164,7 +164,10 @@ class users_m extends MY_Model{
 			//aauth fields
 			$this->aauth->update_user($id, $user['email'],$user['pass'], $user['user_name']);
 
+			//phone
 			$this->aauth->set_user_var('phone',$user['phone'],$id);
+
+	        // $this->aauth->set_member(1,2);
 		}
 	
 	}

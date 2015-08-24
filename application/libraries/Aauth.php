@@ -1123,6 +1123,44 @@ class Aauth {
 		$this->info($this->CI->lang->line('aauth_info_already_member'));
 		return TRUE;
 	}
+	//tested
+	/**
+	 * Set member
+	 * Set a user to one group only
+	 * @param int $user_id User id to add to group
+	 * @param int|string $group_par Group id or name to add user to
+	 * @return bool Add success/failure
+	 */
+	public function set_member($user_id, $group_par) {
+
+		$group_id = $this->get_group_id($group_par);
+
+		if( ! $group_id ) {
+
+			$this->error( $this->CI->lang->line('aauth_error_no_group') );
+			return FALSE;
+		}
+
+		$query = $this->CI->db->where('user_id',$user_id);
+		$query = $this->CI->db->where('group_id',$group_id);
+		$query = $this->CI->db->get($this->config_vars['user_to_group']);
+
+
+		$trimQuery = $this->CI->db->where('user_id',$user_id);
+		$trimQuery = $this->CI->db->where('group_id !=',$group_id);
+		$trimQuery = $this->CI->db->delete($this->config_vars['user_to_group']);
+
+		if ($query->num_rows() < 1) {
+			$data = array(
+				'user_id' => $user_id,
+				'group_id' => $group_id
+			);
+
+			return $this->CI->db->insert($this->config_vars['user_to_group'], $data);
+		}
+		$this->info($this->CI->lang->line('aauth_info_already_member'));
+		return TRUE;
+}
 
 	//tested
 	/**
