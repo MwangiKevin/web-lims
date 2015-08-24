@@ -1,6 +1,7 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_get_report_candidates`(report_type_id int(11))
 BEGIN
 			SET @QUERY =    "SELECT 
+									`u`.`id` AS `user_id`,
 									`u`.`name` AS `name`,
 									 CASE WHEN `g`.`id`  ='4' THEN `f`.`email` ELSE `u`.`email` END AS `email`,
 									`u2g`.`group_id` AS `group_id`,
@@ -28,7 +29,7 @@ BEGIN
 									ON `uv`.`value` = `f`.`id`
 									AND `g`.`id`  ='4'
 
-								LEFT JOIN `report_user_subscription` `rus`
+								RIGHT JOIN `report_user_subscription` `rus`
 								ON `u`.`id` = `rus`.`aauth_user_id`
 							";
 
@@ -49,7 +50,7 @@ BEGIN
 
         SET @QUERY = CONCAT(@QUERY,@QUERY2);
 
-        -- PREPARE stmt FROM @QUERY;
-        -- EXECUTE stmt;
-        SELECT @QUERY;
+        PREPARE stmt FROM @QUERY;
+        EXECUTE stmt;
+        -- SELECT @QUERY;
     END
