@@ -4,8 +4,15 @@ BEGIN
 									`u`.`name` AS `name`,
 									 CASE WHEN `g`.`id`  ='4' THEN `f`.`email` ELSE `u`.`email` END AS `email`,
 									`u2g`.`group_id` AS `group_id`,
-									`g`.`name` AS `group`,		
-									`u2g`.`group_id` AS `filter_type`,
+									`g`.`name` AS `group`,	
+									CASE `g`.`name`
+									 	WHEN 'facility_users' THEN 1 
+									 	WHEN 'facility_default' THEN 1 
+									 	WHEN 'sub_county_level_user' THEN 2 
+									 	WHEN 'county_level_user' THEN 3 
+									 	WHEN 'partners' THEN 4
+									 	ELSE 0 
+									END AS `filter_type`,	
 									`uv`.`value` AS `filter_id`
 
 								FROM `aauth_users` `u`
@@ -42,7 +49,7 @@ BEGIN
 
         SET @QUERY = CONCAT(@QUERY,@QUERY2);
 
-        PREPARE stmt FROM @QUERY;
-        EXECUTE stmt;
+        -- PREPARE stmt FROM @QUERY;
+        -- EXECUTE stmt;
         SELECT @QUERY;
     END
