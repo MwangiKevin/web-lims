@@ -323,8 +323,6 @@
 	<script src="<?php echo base_url('scripts/controllers/usersCtrl.js');?>"></script>
 
 
-
-
 	<!--Factories, Services and providers -->
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
@@ -343,6 +341,8 @@
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/authmain.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/filters/propsFilter.js');?>"></script>
 
 	<script>
 

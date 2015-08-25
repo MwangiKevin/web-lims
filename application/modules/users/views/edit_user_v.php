@@ -13,10 +13,24 @@
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large ">Group</div><div class="field"></div>
-		          	<select ng-model="user.default_user_group.group_id" convert-to-number>		          		
-					  	<!-- <option value="0">*Choose one option*</option> -->
+		         <!--  	<select ng-model="user.default_user_group.group_id" convert-to-number>		          		
+					  	<option value="0">*Choose one option*</option>
 					  	<option ng-repeat ="group in user_groups" value="{{group.id}}">{{group.name}}</option>
-					</select>
+					</select> -->
+					<div class="left floated left aligned six wide column">
+  						<ui-select ng-model="user.default_user_group" theme="selectize" ng-disabled="disabled" style="min-width: 550px;">
+    						<ui-select-match placeholder="Select ">{{$select.selected.name}}</ui-select-match>
+    						<ui-select-choices repeat="group in user_groups | propsFilter: {name: $select.search, definition: $select.search} ">
+      							<div ng-bind-html="group.name | highlight: $select.search"></div>
+      							<small>
+							        desc: <span ng-bind-html="''+group.definition | highlight: $select.search"></span>
+      							</small>
+    						</ui-select-choices>
+  						</ui-select>
+					</div>
+					<br/>
+					<br/>
+					<br/>
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large ">E-mail Address</div><div class="field"></div>

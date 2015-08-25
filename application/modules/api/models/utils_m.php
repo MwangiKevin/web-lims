@@ -37,7 +37,7 @@ class utils_m extends MY_Model{
 
 					$u_id = (int) R::getAll("SELECT id FROM aauth_users  WHERE email ='$mfl_code'")[0]['id'];
 
-					$this->aauth->add_member($u_id,'facility_default');
+					$this->aauth->set_member($u_id,'facility_default');
 					
 
 					$f_id = (int) R::getAll("SELECT f.id FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl_code'")[0]['id'];

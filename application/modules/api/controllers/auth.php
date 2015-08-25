@@ -92,7 +92,13 @@ class auth extends MY_Controller {
 	}
 
 	public function list_groups($id=NULL){
-		echo json_encode($this->aauth->list_groups($id));			
+		$groups = $this->aauth->list_groups($id);
+
+		foreach ($groups as $key => $value) {
+			$groups[$key]->group_id = $value->id;
+		}
+
+		echo json_encode($groups);			
 	}
 
 	public function change_password(){

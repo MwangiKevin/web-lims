@@ -105,6 +105,7 @@ class users_m extends MY_Model{
 							        "filter_type"=> 0,
 							        "filter_id"=> 0
 						);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$users['id']);
 				}	
 				else if($users['default_user_group']['group_id']== 3) {
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
@@ -167,7 +168,15 @@ class users_m extends MY_Model{
 			//phone
 			$this->aauth->set_user_var('phone',$user['phone'],$id);
 
-	        // $this->aauth->set_member(1,2);
+	        $this->aauth->set_member($id,$user['default_user_group']['group_id']);
+
+	   //      if(){
+
+				// $this->aauth->set_user_var('linked_entity_id',$user['phone'],$id);
+
+	   //      }
+
+
 		}
 	
 	}
