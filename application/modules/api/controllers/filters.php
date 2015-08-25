@@ -30,62 +30,75 @@ class filters extends MY_Controller {
 		$counties 		= $this->counties_m		->	read();
 		$partners 		= $this->partners_m		->	read();
 
-		foreach ($facilities as $key => $value) {
 
-			$item = array(
-					'name' 			=>	$value['facility_name'],
-					'email'			=>	$value['facility_email'],
-					'phone' 		=>	$value['facility_phone'],
-					'type' 			=>	"Facilities",
-					'filter_type'	=>	1,
-					'filter_id'		=>	(int) $value['facility_id']
-				);	
-			array_push($entities, $item);
+		$entity_type = $this->input->get("entity_type");
+
+		if($entity_type == 'all' || $entity_type == '' || $entity_type == 'facilities'){
+
+			foreach ($facilities as $key => $value) {
+
+				$item = array(
+						'name' 			=>	$value['facility_name'],
+						'email'			=>	$value['facility_email'],
+						'phone' 		=>	$value['facility_phone'],
+						'type' 			=>	"Facilities",
+						'filter_type'	=>	1,
+						'filter_id'		=>	(int) $value['facility_id']
+					);	
+				array_push($entities, $item);
+			}
+
 		}
 
+		if($entity_type == 'all' || $entity_type == '' || $entity_type == 'sub_counties'){
 
-		foreach ($sub_counties as $key => $value) {
+			foreach ($sub_counties as $key => $value) {
 
-			$item = array(
-					'name' 			=>	$value['name'],
-					'email'			=>	"",
-					'phone' 		=>	"",
-					'type' 			=>	"Sub Counties",
-					'filter_type'	=>	2,
-					'filter_id'		=>	(int) $value['id']
-				);	
-			array_push($entities, $item);
+				$item = array(
+						'name' 			=>	$value['name'],
+						'email'			=>	"",
+						'phone' 		=>	"",
+						'type' 			=>	"Sub Counties",
+						'filter_type'	=>	2,
+						'filter_id'		=>	(int) $value['id']
+					);	
+				array_push($entities, $item);
+			}
+
 		}
 
+		if($entity_type == 'all' || $entity_type == '' || $entity_type == 'counties'){
 
+			foreach ($counties as $key => $value) {
 
-		foreach ($counties as $key => $value) {
+				$item = array(
+						'name' 			=>	$value['name'],
+						'email'			=>	"",
+						'phone' 		=>	"",
+						'type' 			=>	"Counties",
+						'filter_type'	=>	3,
+						'filter_id'		=>	(int) $value['id']
+					);	
+				array_push($entities, $item);
+			}
 
-			$item = array(
-					'name' 			=>	$value['name'],
-					'email'			=>	"",
-					'phone' 		=>	"",
-					'type' 			=>	"Counties",
-					'filter_type'	=>	3,
-					'filter_id'		=>	(int) $value['id']
-				);	
-			array_push($entities, $item);
+		}		
+
+		if($entity_type == 'all' || $entity_type == '' || $entity_type == 'partners'){
+			foreach ($partners as $key => $value) {
+
+				$item = array(
+						'name' 			=>	$value['name'],
+						'email'			=>	"",
+						'phone' 		=>	"",
+						'type' 			=>	"Partners",
+						'filter_type'	=>	4,
+						'filter_id'		=>	(int) $value['id']
+					);	
+				array_push($entities, $item);
+			}
+
 		}
-
-		foreach ($partners as $key => $value) {
-
-			$item = array(
-					'name' 			=>	$value['name'],
-					'email'			=>	"",
-					'phone' 		=>	"",
-					'type' 			=>	"Partners",
-					'filter_type'	=>	4,
-					'filter_id'		=>	(int) $value['id']
-				);	
-			array_push($entities, $item);
-		}
-
-
 		echo json_encode($entities,JSON_PRETTY_PRINT);
 
 	}	

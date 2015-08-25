@@ -170,12 +170,17 @@ class users_m extends MY_Model{
 
 	        $this->aauth->set_member($id,$user['default_user_group']['group_id']);
 
-	   //      if(){
+	        $group_id = (int) $user['default_user_group']['group_id'];
 
-				// $this->aauth->set_user_var('linked_entity_id',$user['phone'],$id);
+	        if( $group_id == 3 || $group_id == 4 || $group_id == 5 || $group_id == 6 || $group_id == 7 ){
 
-	   //      }
+				$this->aauth->set_user_var('linked_entity_id',$user['linked_entity']['filter_id'],$id);
 
+	        }else{
+
+				$this->aauth->set_user_var('linked_entity_id','-1',$id);
+
+	        }
 
 		}
 	
