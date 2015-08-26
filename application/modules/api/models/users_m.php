@@ -160,6 +160,18 @@ class users_m extends MY_Model{
 
 		$user = json_decode($request_fields, true);
 
+		$banned 	=	(int) $user['banned'];
+
+		if ($banned==0 && $this->aauth->is_banned($id)) {
+
+			$this->aauth->unban_user($id);
+
+		}elseif($banned==1 && !$this->aauth->is_banned($id)){
+
+			$this->aauth->ban_user($id);
+
+		}
+
 		if(!is_null($id)){
 
 			//aauth fields
@@ -187,6 +199,7 @@ class users_m extends MY_Model{
 	}
 
 	public function remove($id){
+
 	}
 
 }

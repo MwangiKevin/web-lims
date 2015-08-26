@@ -20,7 +20,7 @@ app.controller('usersCtrl',
      
     apiAuth.requireLogin();
 
-    // Commons.activeMenu = "partners";
+    // Commons.activeMenu = "users";
 
     $scope.partner_id = $stateParams.id;
 
@@ -73,7 +73,14 @@ app.controller('usersCtrl',
         DTColumnBuilder.newColumn('user_name').withTitle('Name'),
         DTColumnBuilder.newColumn('email').withTitle('E-mail'),
         DTColumnBuilder.newColumn('phone').withTitle('Phone').notSortable(),
-        // DTColumnBuilder.newColumn('default_user_group.name').withTitle('Group').notSortable(),
+        DTColumnBuilder.newColumn('banned').withTitle('Status').renderWith(function(data, type, full, meta) {
+             if(data==0){
+                return "Active";
+             }else{                
+                return "Banned";
+             }
+
+        }),
         DTColumnBuilder.newColumn(null).withTitle('Group').notSortable().renderWith(function(data, type, full, meta) {
               var arr= data.default_user_group;
               arr.constructor 
@@ -87,7 +94,7 @@ app.controller('usersCtrl',
 
         }), 
         DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
-                return '<button ng-show="sess.loggedin" onClick="edit_user('+data.id+')">Edit</button><button ng-show="sess.loggedin" onClick="reset_password('+data.id+')">Reset Password</button><button ng-show="sess.loggedin" onClick="Set_password_to('+data.id+')">Set password to</button><button ng-show="sess.loggedin" onClick="ban_user('+data.id+')">Ban User</button>';
+                return '<button ng-show="sess.loggedin" onClick="edit_user('+data.id+')">Edit</button><button ng-show="sess.loggedin" onClick="reset_password('+data.id+')">Reset Password</button><button ng-show="sess.loggedin" onClick="Set_password_to('+data.id+')">Set password to</button>';
             }),
     ];
 

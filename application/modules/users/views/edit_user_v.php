@@ -38,7 +38,7 @@
 			    </div>	
 			    <div class="field">
 			    	<div class="ui horizontal label large">banned?</div>
-		      		<input type="checkbox" ng-model="banned">
+		      		<input type="checkbox" ng-model="banned" >
 					<div class="field"></div>
 		        </div>		
 			</form>
