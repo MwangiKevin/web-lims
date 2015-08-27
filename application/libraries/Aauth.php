@@ -441,6 +441,8 @@ class Aauth {
 			$this->CI->email->subject($this->CI->lang->line('aauth_email_reset_subject'));
 			$this->CI->email->message($this->CI->lang->line('aauth_email_reset_link') . $row->id . '/' . $ver_code );
 			$this->CI->email->send();
+		}else{
+			return false;
 		}
 	}
 
@@ -460,6 +462,43 @@ class Aauth {
 		$pass = random_string('alnum',8);
 
 		if( $query->num_rows() > 0 ){
+
+			$data =	 array(
+				'verification_code' => '',
+				'pass' => $this->hash_password($pass, $user_id)
+			);
+
+			$row = $query->row();
+			$email = $row->email;
+
+			$this->CI->db->where('id', $user_id);
+			$this->CI->db->update($this->config_vars['users'] , $data);
+
+			$this->CI->email->from( $this->config_vars['email'], $this->config_vars['name']);
+			$this->CI->email->to($email);
+			$this->CI->email->subject($this->CI->lang->line('aauth_email_reset_success_subject'));
+			$this->CI->email->message($this->CI->lang->line('aauth_email_reset_success_new_password') . $pass);
+			$this->CI->email->send();
+
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	/**
+	 * Reset password
+	 * Generate new password and email it to the user
+	 * @param int $user_id User id to reset password for
+	 * @param string $pass password
+	 * @return bool Password reset fails/succeeds
+	 */
+	public function set_password($user_id, $pass){
+
+		$query = $this->CI->db->where('id', $user_id);
+		$query = $this->CI->db->get( $this->config_vars['users'] );
+
+		if( $query->num_rows() > 0  && $this->is_admin()){
 
 			$data =	 array(
 				'verification_code' => '',

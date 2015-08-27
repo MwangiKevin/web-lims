@@ -101,8 +101,25 @@ class auth extends MY_Controller {
 		echo json_encode($groups);			
 	}
 
-	public function change_password(){
+	public function set_password(){
+
+		$sess 			=				
+		$id				=		(int)	$this->input->post("id");
+		$password		=		$this->input->post("password");
+
+		if($this->aauth->is_admin()){
+
+			return $this->aauth->set_password($id,$password);
+
+		}
+
 		
+	}
+
+	public function remind_password(){
+
+		$this->aauth->remind_password("mwangikevinn@gmail.com");
+
 	}
 
 }

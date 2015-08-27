@@ -1,7 +1,7 @@
 <div class="ui segment">
 	<br/>
   <h3><center><div class="ui blue horizontal label big ">User Details: </div> {{user.user_name}}</center></h3>
-  <pre>{{user}}<pre/>
+  <!-- <pre>{{sess}}<pre/> -->
 </div>
 <div class="ui grid">
   	<div class="eight wide column">
@@ -30,7 +30,7 @@
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large ">E-mail Address</div><div class="field"></div>
-		          	<input type="text" ng-model="user.email" >
+		          	<input type="text" ng-model="user.email" disabled >
 		        </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large ">Phone</div><div class="field"></div>
