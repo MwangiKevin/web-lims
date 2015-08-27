@@ -115,6 +115,18 @@ class auth extends MY_Controller {
 
 		
 	}
+	public function reset_password(){
+
+		$sess 			=				
+		$id				=		(int)	$this->input->post("id");
+		$ver_code		=		$this->input->post("ver_code");
+
+		if($id<=0){$id=null;}
+
+		return $this->aauth->reset_password($id,$ver_code);
+
+		
+	}
 
 	public function remind_password(){
 

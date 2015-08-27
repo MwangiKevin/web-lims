@@ -455,6 +455,20 @@ class Aauth {
 	 */
 	public function reset_password($user_id, $ver_code){
 
+		/**
+		 *  admin can reset anyones' password
+		 */
+		if($ver_code== "" && $this->is_admin()){
+
+			$query = $this->CI->db->where('id', $user_id);
+			$query = $this->CI->db->get( $this->config_vars['users'] );
+
+			foreach ($query->result() as $row){
+			    $ver_code = $row->verification_code;
+			}
+
+		}
+
 		$query = $this->CI->db->where('id', $user_id);
 		$query = $this->CI->db->where('verification_code', $ver_code);
 		$query = $this->CI->db->get( $this->config_vars['users'] );
@@ -487,8 +501,8 @@ class Aauth {
 	}
 
 	/**
-	 * Reset password
-	 * Generate new password and email it to the user
+	 * Set password
+	 * password and email it to the user
 	 * @param int $user_id User id to reset password for
 	 * @param string $pass password
 	 * @return bool Password reset fails/succeeds
