@@ -103,23 +103,27 @@ class auth extends MY_Controller {
 
 	public function set_password(){
 
-		$sess 			=				
-		$id				=		(int)	$this->input->post("id");
-		$password		=		$this->input->post("password");
+		$request_body = file_get_contents('php://input');		
+		$user = json_decode($request_body,true);
+
+		$id = $user['id'];
+		$password = $user['password'];
 
 		if($this->aauth->is_admin()){
 
 			return $this->aauth->set_password($id,$password);
 
-		}
-
-		
+		}		
 	}
+
 	public function reset_password(){
 
-		$sess 			=				
-		$id				=		(int)	$this->input->post("id");
-		$ver_code		=		$this->input->post("ver_code");
+		$request_body = file_get_contents('php://input');		
+		$user = json_decode($request_body,true);
+
+
+		$id = (int) $user['id'];
+		$ver_code = $user['ver_code'];
 
 		if($id<=0){$id=null;}
 
@@ -133,5 +137,4 @@ class auth extends MY_Controller {
 		$this->aauth->remind_password("mwangikevinn@gmail.com");
 
 	}
-
 }

@@ -193,8 +193,8 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/pagination/bs-paginate-only.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.css');?>">
-	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.css');?>">
-	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/ie9.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/dist/sweetalert.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/dev/ie9.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bower_components/datatables/media/css/jquery.dataTables.css">
@@ -244,7 +244,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-underscore/angular-underscore.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/waypoints/lib/jquery.waypoints.min.js');?>"></script>
-	<script src="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/sweetalert/dist/sweetalert.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-sweetalert/SweetAlert.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.js');?>"></script>
@@ -431,6 +431,15 @@
 }
 .cg-busy-default-wrapper{	
     cursor: no-drop;
+}
+
+.sweet-alert input{
+	/*display: block !important;  */
+	/*-webkit-text-security: disc;
+
+	-moz-text-security: disc;
+
+	text-security: disc;*/
 }
 </style>
 

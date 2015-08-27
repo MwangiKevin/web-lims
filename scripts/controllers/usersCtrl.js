@@ -94,18 +94,68 @@ app.controller('usersCtrl',
 
         }), 
         DTColumnBuilder.newColumn(null).withTitle('Action').renderWith(function(data, type, full, meta) {
-                return '<button ng-show="sess.loggedin" onClick="edit_user('+data.id+')">Edit</button><button ng-show="sess.loggedin" onClick="reset_password('+data.id+')">Reset Password</button><button ng-show="sess.loggedin" onClick="Set_password_to('+data.id+')">Set password to</button>';
+                return '<button ng-show="sess.loggedin" onClick="edit_user('+data.id+')">Edit</button><button ng-show="sess.loggedin" onClick="reset_password('+data.id+',\''+data.user_name+'\')">Reset Password</button><button ng-show="sess.loggedin" onClick="Set_password_to('+data.id+',\''+data.user_name+'\')">Set password to</button>';
             }),
     ];
 
     edit_user = function(id){
         window.location = "#/editUser/"+id;
     }
-    ban_user = function(id){
+    reset_password = function(id,name){
+
+        SweetAlert.swal({   
+            title: "Reset Password for :"+name,   
+            text: "Are you sure you want to reset the password?<br><s>This will send a confirmation email</s>",   
+            type: "warning",   
+            showCancelButton: true,   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "Yes, Reset it!",  
+            closeOnConfirm: false 
+        }, function(){   
+            return $http.post(
+                'api/auth/reset_password',
+                {
+                    id: id,
+                    ver_code: ""
+                }
+            )
+            .then(function(response){
+                swal("Nice!", "You Have successfully reset the password of:"+name, "success"); 
+            },function(response){
+                swal("Error!", "Something went wrong", "error"); 
+            });
+        });
     }
-    reset_password = function(id){
-    }
-    Set_password_to = function(id){
+    Set_password_to = function(id,name){
+
+        SweetAlert.swal({   
+            title: "Set Password for :"+name,   
+            text: "Type the password to be used",   
+            type: "input",   
+            showCancelButton: true,   
+            closeOnConfirm: false,   
+            animation: "slide-from-top",   
+            inputPlaceholder: "123456" 
+        }, function(inputValue){   
+            if (inputValue === false) return false;      
+            if (inputValue === "") {     
+                swal.showInputError("You need to write something!");     
+                return false   
+            }      
+
+            return $http.post(
+                'api/auth/set_password',
+                {
+                    id: id,
+                    password: inputValue
+                }
+            )
+            .then(function(response){
+                swal("Nice!", "You Have successfully changed the password of:"+name, "success"); 
+            },function(response){
+                swal("Error!", "Something went wrong", "error"); 
+            });
+        });
     }
 
 
