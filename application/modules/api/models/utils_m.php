@@ -32,7 +32,7 @@ class utils_m extends MY_Model{
 
 			try{
 
-				if( !is_null($mfl_code) && $this->aauth->create_user($value['facility_mfl_code'],'123456',$value['name']) ){
+				if( !is_null($mfl_code) && $this->aauth->create_user($value['facility_mfl_code'],$this->get_default_password(),$value['name']) ){
 
 
 					$u_id = (int) R::getAll("SELECT id FROM aauth_users  WHERE email ='$mfl_code'")[0]['id'];
