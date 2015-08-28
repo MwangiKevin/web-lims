@@ -19,6 +19,8 @@ app.controller('editUserCtrl',
 
     $scope.user_id = $stateParams.id;
 
+    $scope.filter_group_type = "all";
+
     $scope.entities = [{ name: '', email:'',phone:'', type: '' }];
     $scope.user_groups=[];
 
@@ -43,6 +45,39 @@ app.controller('editUserCtrl',
             })
         }
     }
+
+    $scope.$watch('user.default_user_group.group_id', function(){
+
+        if(angular.isUndefined($scope.user.default_user_group)){
+
+        }
+        else if($scope.user.default_user_group.group_id == 3 || $scope.user.default_user_group.group_id == 4 ){
+
+            $scope.filter_group_type = "facilities";
+
+        }else if ($scope.user.default_user_group.group_id == 5){
+
+            $scope.filter_group_type = "counties";
+
+        }else if ($scope.user.default_user_group.group_id == 6){
+
+            $scope.filter_group_type = "sub_counties";
+
+        }else if ($scope.user.default_user_group.group_id == 7){
+
+            $scope.filter_group_type = "partners";
+
+        }else{
+
+            $scope.filter_group_type = "none";
+        }
+
+        $scope.user.linked_entity = [];
+
+        $scope.refreshEntities("");
+       
+            
+    }, true );
 
     $scope.$watch('banned', function(){
        
@@ -77,7 +112,8 @@ app.controller('editUserCtrl',
     $scope.populate_user();
 
     $scope.refreshEntities = function(search_term) {
-        Filters.getEntities(search_term)
+        var entity_type = $scope.filter_group_type ;
+        Filters.getEntities(search_term,5,entity_type)
         .success(function (ents) {
             $scope.entities = ents;
         })

@@ -8,12 +8,16 @@ app.factory('Filters',['$http','$activityIndicator', function($http,$activityInd
 		},
 		entity:{}
 	};
-	Filters.getEntities = function (search_term) {
+	Filters.getEntities = function (search_term,items,type) {
+		if(!items || angular.isUndefined(items))  {
+			items = 3;
+		}
 
-		// search_term="";
-		
+		if(!type || angular.isUndefined(type))  {
+			type = "all";
+		}		
 		$activityIndicator.startAnimating();
-		return $http.get('api/filters/entities',{params:{limit_items:3,search:search_term}}).success(function(){$activityIndicator.stopAnimating()});
+		return $http.get('api/filters/entities',{params:{limit_items:items,search:search_term,entity_type:type}}).success(function(){$activityIndicator.stopAnimating()});
 	};
 	
 	Filters.getDates = function () {
