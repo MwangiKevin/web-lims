@@ -301,9 +301,9 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
-	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/loginCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/logoutCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/changePassCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/registrationCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 

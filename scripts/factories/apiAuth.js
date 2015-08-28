@@ -65,7 +65,7 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 			)
 		.success(function(response){
 			notify({ message:'You have successfully logged in'} );
-			$activityIndicator.stopAnimating() 
+			$activityIndicator.stopAnimating();
 		});
 	}
 	apiAuth.logout = function(){

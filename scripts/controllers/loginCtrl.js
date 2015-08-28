@@ -1,4 +1,4 @@
-app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth', 'Restangular','$localStorage','$sessionStorage', function ($scope,$rootScope,$state,Commons,apiAuth,Restangular,$localStorage,$sessionStorage){
+app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth', 'Restangular','$window','$localStorage','$sessionStorage', function ($scope,$rootScope,$state,Commons,apiAuth,Restangular,$window,$localStorage,$sessionStorage){
     
    	$scope.username = "";
    	$scope.password = "";
@@ -35,7 +35,10 @@ app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth',
       }
     })
     .done(function( data, textStatus, jqXHR ){
+
+
         apiAuth.loginConfirmed();
+
 
         $rootScope.getSessionDetails().success(function(data){
 
@@ -49,6 +52,29 @@ app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth',
             $rootScope.menuName= "Action";      
           }
         })
+
+        if(jqXHR.status == 202){
+          // swal("Change password!", "You are using the default password. \nYou need to change it");
+          swal({   
+            title: "Change password",   
+            text: "You are using the default password. \nYou need to change it!",   
+            type: "warning",   
+            showCancelButton: true,   
+            confirmButtonColor: "#DD6B55",   
+            confirmButtonText: "Yes, Change it!",   
+            cancelButtonText: "No, cancel!",   
+            closeOnConfirm: true,   
+            closeOnCancel: false 
+          },
+          function(isConfirm){   
+            if (isConfirm) { 
+              // $location.path( "#/change_password" );   
+              $window.location.href = "#/change_password";
+            } else {     
+              swal("Cancelled", "You will be asked to change the password next time.", "error");   
+            } 
+          });
+        }
      })
 
       .fail(function( jqXHR, textStatus, errorThrown ){      
