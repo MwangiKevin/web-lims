@@ -213,6 +213,7 @@
 
 	<!--JS libraries -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js');?>"></script>
+	<script src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.js"></script>
 	<script src="<?php //echo base_url('assets/bower_components/jquery-ui/jquery-ui.min.js')?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/semantic/dist/semantic.js');?>"></script>
@@ -253,7 +254,6 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-http-auth/src/http-auth-interceptor.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-cookie/angular-cookie.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/ng-token-auth/dist/ng-token-auth.min.js');?>"></script>
-	<script type="text/javascript" charset="utf8" src="<?php echo base_url();?>assets/bower_components/datatables/media/js/jquery.dataTables.js"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-datatables/dist/angular-datatables.min.js');?>"></script>
 
 	<script src="<?php echo base_url('assets/bower_components/datatables-tabletools/js/dataTables.tableTools.js');?>"></script>
@@ -302,6 +302,7 @@
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/loginCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/logoutCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/registrationCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 

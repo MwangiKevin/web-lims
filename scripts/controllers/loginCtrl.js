@@ -1,4 +1,4 @@
-app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restangular','$localStorage','$sessionStorage', function ($scope,$rootScope,Commons,apiAuth,Restangular,$localStorage,$sessionStorage){
+app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth', 'Restangular','$localStorage','$sessionStorage', function ($scope,$rootScope,$state,Commons,apiAuth,Restangular,$localStorage,$sessionStorage){
     
    	$scope.username = "";
    	$scope.password = "";
@@ -11,6 +11,13 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restang
         filter_id   : 0,
         user:[]       
     });
+    
+    $rootScope.getFilterType = function(){
+        return $rootScope.$storage.filter_type;
+    }
+    $rootScope.getFilterId = function(){
+        return $rootScope.$storage.filter_id;
+    }
 
     $scope.submit = function (){
     	username = $scope.username;
@@ -23,7 +30,7 @@ app.controller('loginCtrl',['$scope','$rootScope','Commons', 'apiAuth', 'Restang
        type: 'POST',
        data:formData,
        success:function(res){
-
+          $state.reload();
       }
     })
     .done(function( data, textStatus, jqXHR ){
