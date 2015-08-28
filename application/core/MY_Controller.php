@@ -26,8 +26,8 @@ class  MY_Controller  extends  MX_Controller {
 	public function footer(){
 		$this->load->view("tmpl_footer_v");
 	}
-	public function logout(){
-		
+	public function get_default_password(){
+		return $this->config->item("default_password");
 	}
 
 	protected function _detect_method() {

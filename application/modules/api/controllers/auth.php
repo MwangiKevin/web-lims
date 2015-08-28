@@ -17,6 +17,10 @@ class auth extends MY_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
+		if($password == $this->get_default_password()){
+
+			http_response_code(202);
+		}
 
 		if ($this->aauth->login($username, $password)){
 			$details =	array(
