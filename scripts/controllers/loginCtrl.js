@@ -5,7 +5,8 @@ app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth',
     
     $scope.selected = {
               facility:[]
-    }    
+    }  
+    $scope.auth_error = false;  
     $rootScope.$storage= $rootScope.store = $localStorage.$default({
         filter_type : 0,
         filter_id   : 0,
@@ -37,8 +38,11 @@ app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth',
         apiAuth.loginConfirmed();
 
         $rootScope.getSessionDetails().success(function(data){
-          $rootScope.sess= data;
 
+          $scope.auth_error = false;  
+          $rootScope.sess= data;
+          $scope.password = "";
+          
           if(data.loggedin){
             $rootScope.menuName= data.name;
           }else{
@@ -47,9 +51,9 @@ app.controller('loginCtrl',['$scope','$rootScope','$state','Commons', 'apiAuth',
         })
      })
 
-      .fail(function( jqXHR, textStatus, errorThrown ){
-        console.log(errorThrown);
-      })
+      .fail(function( jqXHR, textStatus, errorThrown ){      
+          $scope.auth_error = true;  
+      })    
     }
 
     $scope.facilities=[]; 

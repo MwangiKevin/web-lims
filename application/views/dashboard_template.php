@@ -126,6 +126,7 @@
 							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
 						</div>						
 						<div class="ui teal message">Note: The default password is "123456"</div>
+						<div class="ui red message" ng-show="auth_error">The credentials you entered are incorrect</div>
 						<div class="field">
 							<label for="username">Facility Login: </label>
 							<div class="ui icon input">								
