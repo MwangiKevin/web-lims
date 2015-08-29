@@ -126,6 +126,7 @@
 							<h1><img src="<?php echo base_url('assets/images/nascop.jpg');?>" height="80"  alt="" style="z-index: -50;border-radius:0.2857rem;"></h1>
 						</div>						
 						<div class="ui teal message">Note: The default password is "123456"</div>
+						<div class="ui red message" ng-show="auth_error">The credentials you entered are incorrect</div>
 						<div class="field">
 							<label for="username">Facility Login: </label>
 							<div class="ui icon input">								
@@ -193,8 +194,8 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/customized_bootstrap/pagination/bs-paginate-only.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-form-for/dist/form-for.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.css');?>">
-	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.css');?>">
-	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/lib/ie9.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/dist/sweetalert.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/sweetalert/dev/ie9.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.css');?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/bower_components/datatables/media/css/jquery.dataTables.css">
@@ -244,7 +245,7 @@
 	<script src="<?php echo base_url('assets/bower_components/angular-underscore/angular-underscore.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-busy/dist/angular-busy.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/waypoints/lib/jquery.waypoints.min.js');?>"></script>
-	<script src="<?php echo base_url('assets/bower_components/sweetalert/lib/sweet-alert.min.js');?>"></script>
+	<script src="<?php echo base_url('assets/bower_components/sweetalert/dist/sweetalert.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-sweetalert/SweetAlert.min.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angularjs-toaster/toaster.js');?>"></script>
 	<script src="<?php echo base_url('assets/bower_components/angular-notify/dist/angular-notify.min.js');?>"></script>
@@ -300,8 +301,9 @@
 	<script src="<?php echo base_url('scripts/controllers/cd4TestsCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/cd4DevicesCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/deviceUploadsCtrl.js');?>"></script>
-	<script src="<?php echo base_url('scripts/controllers/limsLoginCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/loginCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/logoutCtrl.js');?>"></script>
+	<script src="<?php echo base_url('scripts/controllers/changePassCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/registrationCtrl.js');?>"></script>
 	<script src="<?php echo base_url('scripts/controllers/admin/partnersCtrl.js');?>"></script>
 
@@ -323,8 +325,6 @@
 	<script src="<?php echo base_url('scripts/controllers/usersCtrl.js');?>"></script>
 
 
-
-
 	<!--Factories, Services and providers -->
 
 	<script src="<?php echo base_url('scripts/factories/Filters.js');?>"></script>
@@ -343,6 +343,8 @@
 	<script src="<?php echo base_url('scripts/directives/onlyDigits.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/mAppLoading.js');?>"></script>
 	<script src="<?php echo base_url('scripts/directives/authmain.js');?>"></script>
+
+	<script src="<?php echo base_url('scripts/filters/propsFilter.js');?>"></script>
 
 	<script>
 
@@ -431,6 +433,15 @@
 }
 .cg-busy-default-wrapper{	
     cursor: no-drop;
+}
+
+.sweet-alert input{
+	/*display: block !important;  */
+	/*-webkit-text-security: disc;
+
+	-moz-text-security: disc;
+
+	text-security: disc;*/
 }
 </style>
 

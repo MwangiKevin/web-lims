@@ -21,7 +21,6 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 			'api/auth/get_session_details'
 			)
 		.success(function(response){
-			// console.log(response);
 			if(response.loggedin){
 
 				$rootScope.$storage.filter_type = response.user.linked_entity.filter_type;
@@ -66,15 +65,15 @@ app.factory('apiAuth', ['authService','$rootScope','$http','$activityIndicator',
 			)
 		.success(function(response){
 			notify({ message:'You have successfully logged in'} );
-			$activityIndicator.stopAnimating() 
+			$activityIndicator.stopAnimating();
 		});
 	}
 	apiAuth.logout = function(){
 		return $http.post('api/auth/logout')
 		.success(function(response){
 			$location.path( "/logout" );
-			$activityIndicator.stopAnimating() 
-			notify({ message:'Your session was ended'} );
+			$activityIndicator.stopAnimating();
+			// notify({ message:'Your session was ended'} );
 
 		})
 	}

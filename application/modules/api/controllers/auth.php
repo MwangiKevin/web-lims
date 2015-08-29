@@ -17,6 +17,10 @@ class auth extends MY_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
+		if($password == $this->get_default_password()){
+
+			http_response_code(202);
+		}
 
 		if ($this->aauth->login($username, $password)){
 			$details =	array(
@@ -92,11 +96,49 @@ class auth extends MY_Controller {
 	}
 
 	public function list_groups($id=NULL){
-		echo json_encode($this->aauth->list_groups($id));			
+		$groups = $this->aauth->list_groups($id);
+
+		foreach ($groups as $key => $value) {
+			$groups[$key]->group_id = $value->id;
+		}
+
+		echo json_encode($groups);			
 	}
 
-	public function change_password(){
+	public function set_password(){
+
+		$request_body = file_get_contents('php://input');		
+		$user = json_decode($request_body,true);
+
+		$id = $user['id'];
+		$password = $user['password'];
+
+		if($this->aauth->is_admin()){
+
+			return $this->aauth->set_password($id,$password);
+
+		}		
+	}
+
+	public function reset_password(){
+
+		$request_body = file_get_contents('php://input');		
+		$user = json_decode($request_body,true);
+
+
+		$id = (int) $user['id'];
+		$ver_code = $user['ver_code'];
+
+		if($id<=0){$id=null;}
+
+		return $this->aauth->reset_password($id,$ver_code);
+
 		
 	}
 
+	public function remind_password(){
+
+		$this->aauth->remind_password("mwangikevinn@gmail.com");
+
+	}
 }
