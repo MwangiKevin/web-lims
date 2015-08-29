@@ -13,10 +13,10 @@ app.controller('changePassCtrl',['$scope','$http','Commons','$location',function
 
     }else{
       this.loading = true;
-      $http.post(Commons.baseURL+'api/auth/change_password',{params:$scope.user})
+      $http.post(Commons.baseURL+'api/auth/set_password',{password:$scope.user.password})
       .success(function(response){
         $location.path( "/dashboard" );        
-        swal("Registered!", "You have been successfully changed your password . \n Check your email to confirm", "success");
+        swal("Password Changed!", "You have been successfully changed your password . \n Check your email to confirm", "success");
       }) 
       .error(function(response){  
         $scope.loading = false;
