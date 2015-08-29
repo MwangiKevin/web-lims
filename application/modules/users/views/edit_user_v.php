@@ -1,6 +1,7 @@
 <div class="ui segment">
 	<br/>
   <h3><center><div class="ui blue horizontal label big ">User Details: </div> {{user.user_name}}</center></h3>
+  <!-- <pre>{{sess}}<pre/> -->
 </div>
 <div class="ui grid">
   	<div class="eight wide column">
@@ -12,14 +13,24 @@
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large ">Group</div><div class="field"></div>
-		          	<select ng-model="user.default_user_group.group_id" convert-to-number>		          		
-					  	<!-- <option value="0">*Choose one option*</option> -->
-					  	<option ng-repeat ="group in user_groups" value="{{group.id}}">{{group.name}}</option>
-					</select>
+					<div class="left floated left aligned six wide column">
+  						<ui-select ng-model="user.default_user_group" theme="selectize" ng-disabled="disabled" style="min-width: 550px;">
+    						<ui-select-match placeholder="Select ">{{$select.selected.name}}</ui-select-match>
+    						<ui-select-choices repeat="group in user_groups | propsFilter: {name: $select.search, definition: $select.search} ">
+      							<div ng-bind-html="group.name | highlight: $select.search"></div>
+      							<small>
+							        desc: <span ng-bind-html="''+group.definition | highlight: $select.search"></span>
+      							</small>
+    						</ui-select-choices>
+  						</ui-select>
+					</div>
+					<br/>
+					<br/>
+					<br/>
 		        </div>
 		        <div class="field">
 		        	<div class="ui horizontal label large ">E-mail Address</div><div class="field"></div>
-		          	<input type="text" ng-model="user.email" >
+		          	<input type="text" ng-model="user.email" disabled >
 		        </div>
 			    <div class="field">
 		        	<div class="ui horizontal label large ">Phone</div><div class="field"></div>
@@ -27,7 +38,7 @@
 			    </div>	
 			    <div class="field">
 			    	<div class="ui horizontal label large">banned?</div>
-		      		<input type="checkbox" ng-model="banned">
+		      		<input type="checkbox" ng-model="banned" >
 					<div class="field"></div>
 		        </div>		
 			</form>

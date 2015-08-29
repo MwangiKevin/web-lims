@@ -1,3 +1,8 @@
+
+<br/>
+<br/>
+<br/>
+<br/>
 <div>
 	Your session has been terminated
 </div>

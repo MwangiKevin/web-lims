@@ -7,18 +7,17 @@ class registration extends MY_Controller {
 
 		parent::__construct();
 		
-		// header('Content-Type: application/json; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 		$this->load->library("Aauth");		
 	}
 
-	function submit(){
+	public function submit(){
 		$request_body = file_get_contents('php://input');
 		
 		$new_user = json_decode($request_body,true)['params'];
 
-		// print_r($new_user);
-
 		if($this->aauth->create_user($new_user['email'],$new_user['password'],$new_user['givenname'].' '.$new_user['surname'])){
+			http_response_code(201);
 			echo "user Created";
 		}else{
 			http_response_code(500);

@@ -441,6 +441,8 @@ class Aauth {
 			$this->CI->email->subject($this->CI->lang->line('aauth_email_reset_subject'));
 			$this->CI->email->message($this->CI->lang->line('aauth_email_reset_link') . $row->id . '/' . $ver_code );
 			$this->CI->email->send();
+		}else{
+			return false;
 		}
 	}
 
@@ -453,6 +455,20 @@ class Aauth {
 	 */
 	public function reset_password($user_id, $ver_code){
 
+		/**
+		 *  admin can reset anyones' password
+		 */
+		if($ver_code== "" && $this->is_admin()){
+
+			$query = $this->CI->db->where('id', $user_id);
+			$query = $this->CI->db->get( $this->config_vars['users'] );
+
+			foreach ($query->result() as $row){
+			    $ver_code = $row->verification_code;
+			}
+
+		}
+
 		$query = $this->CI->db->where('id', $user_id);
 		$query = $this->CI->db->where('verification_code', $ver_code);
 		$query = $this->CI->db->get( $this->config_vars['users'] );
@@ -460,6 +476,54 @@ class Aauth {
 		$pass = random_string('alnum',8);
 
 		if( $query->num_rows() > 0 ){
+
+			$data =	 array(
+				'verification_code' => '',
+				'pass' => $this->hash_password($pass, $user_id)
+			);
+
+			$row = $query->row();
+			$email = $row->email;
+
+			$this->CI->db->where('id', $user_id);
+			$this->CI->db->update($this->config_vars['users'] , $data);
+
+			$this->CI->email->from( $this->config_vars['email'], $this->config_vars['name']);
+			$this->CI->email->to($email);
+			$this->CI->email->subject($this->CI->lang->line('aauth_email_reset_success_subject'));
+			$this->CI->email->message($this->CI->lang->line('aauth_email_reset_success_new_password') . $pass);
+			$this->CI->email->send();
+
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+	/**
+	 * Set password
+	 * password and email it to the user
+	 * @param int $user_id User id to reset password for
+	 * @param string $pass password
+	 * @return bool Password reset fails/succeeds
+	 */
+	public function set_password($user_id=0, $pass){
+
+		$valid = TRUE;
+
+		if ($user_id==0){			
+			$user_id = $this->CI->session->userdata('id');
+		}
+
+		$query = $this->CI->db->where('id', $user_id);
+		$query = $this->CI->db->get( $this->config_vars['users'] );
+
+		if ( strlen($pass) < 5 OR strlen($pass) > $this->config_vars['max'] ){
+			$this->error($this->CI->lang->line('aauth_error_password_invalid'));
+			$valid = FALSE;
+		}
+
+		if( $query->num_rows() > 0  && $this->is_admin() && $valid){
 
 			$data =	 array(
 				'verification_code' => '',
@@ -1123,6 +1187,44 @@ class Aauth {
 		$this->info($this->CI->lang->line('aauth_info_already_member'));
 		return TRUE;
 	}
+	//tested
+	/**
+	 * Set member
+	 * Set a user to one group only
+	 * @param int $user_id User id to add to group
+	 * @param int|string $group_par Group id or name to add user to
+	 * @return bool Add success/failure
+	 */
+	public function set_member($user_id, $group_par) {
+
+		$group_id = $this->get_group_id($group_par);
+
+		if( ! $group_id ) {
+
+			$this->error( $this->CI->lang->line('aauth_error_no_group') );
+			return FALSE;
+		}
+
+		$query = $this->CI->db->where('user_id',$user_id);
+		$query = $this->CI->db->where('group_id',$group_id);
+		$query = $this->CI->db->get($this->config_vars['user_to_group']);
+
+
+		$trimQuery = $this->CI->db->where('user_id',$user_id);
+		$trimQuery = $this->CI->db->where('group_id !=',$group_id);
+		$trimQuery = $this->CI->db->delete($this->config_vars['user_to_group']);
+
+		if ($query->num_rows() < 1) {
+			$data = array(
+				'user_id' => $user_id,
+				'group_id' => $group_id
+			);
+
+			return $this->CI->db->insert($this->config_vars['user_to_group'], $data);
+		}
+		$this->info($this->CI->lang->line('aauth_info_already_member'));
+		return TRUE;
+}
 
 	//tested
 	/**
@@ -1679,7 +1781,8 @@ class Aauth {
 	 * @param string $message Message to add to array
 	 * @param boolean $flashdata if TRUE add $message to CI flashdata (deflault: FALSE)
 	 */
-	public function error($message = '', $flashdata = FALSE){
+	public function error($message = '', $flashdata = FALSE){		
+		http_response_code(500);
 		$this->errors[] = $message;
 		if($flashdata)
 		{

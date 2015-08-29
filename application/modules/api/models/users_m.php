@@ -65,13 +65,6 @@ class users_m extends MY_Model{
 			$users =  $users_res;	
 
 			foreach ($users as $key => $value) {
-				// $this->aauth->add_member($users[$key]['id'],'facility_default');
-				
-				// $mfl = $users[$key]['email'];
-				 
-				// $f_id = (int) R::getAll("SELECT f.id FROM aauth_users  u LEFT JOIN facility f ON f.mfl_code = u.email WHERE f.mfl_code ='$mfl'")[0]['id'];
-
-				// $this->aauth->set_user_var('linked_entity_id',$f_id,$users[$key]['id']);
 
 				$users[$key]['default_user_group']  = (array) $this->aauth->get_user_groups($users[$key]['id'])[0];
 				$users[$key]['user_groups']  = (array) $this->aauth->get_user_groups($users[$key]['id']);
@@ -90,7 +83,7 @@ class users_m extends MY_Model{
 					$users[$key]['phone'] = (string) $fac_res['phone'];
 
 				}else{
-					$users[$key]['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users[$key]['id']);
+					$users[$key]['phone']  = (string) $this->aauth->get_user_var('phone',$users[$key]['id']);
 				}
 
 			}
@@ -112,10 +105,11 @@ class users_m extends MY_Model{
 							        "filter_type"=> 0,
 							        "filter_id"=> 0
 						);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$users['id']);
 				}	
 				else if($users['default_user_group']['group_id']== 3) {
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 4 ){
 					$users['linked_entity'] = $this->facilities_m->read($users['linked_entity_id']);
@@ -131,22 +125,22 @@ class users_m extends MY_Model{
 				}
 				else if($users['default_user_group']['group_id']== 6){
 					$users['linked_entity'] = $this->sub_counties_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 5){
 					$users['linked_entity'] = $this->counties_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$users['id']);
 				}
 				else if($users['default_user_group']['group_id']== 7){
 					$users['linked_entity'] = $this->partners_m->read($users['linked_entity_id']);
-					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$users['id']);
 				}
 				else{
 					$users['linked_entity'] = array(
 							        "filter_type"=> -1,
 							        "filter_id"=> -1
 						);					
-					$users['phone']  = (string) $this->aauth->get_user_var('phone',$f_id,$users['id']);
+					$users['phone']  = (string) $this->aauth->get_user_var('phone',$users['id']);
 				}
 			}
 		}
@@ -166,13 +160,46 @@ class users_m extends MY_Model{
 
 		$user = json_decode($request_fields, true);
 
+		$banned 	=	(int) $user['banned'];
+
+		if ($banned==0 && $this->aauth->is_banned($id)) {
+
+			$this->aauth->unban_user($id);
+
+		}elseif($banned==1 && !$this->aauth->is_banned($id)){
+
+			$this->aauth->ban_user($id);
+
+		}
+
 		if(!is_null($id)){
+
+			//aauth fields
 			$this->aauth->update_user($id, $user['email'],$user['pass'], $user['user_name']);
+
+			//phone
+			$this->aauth->set_user_var('phone',$user['phone'],$id);
+
+	        $this->aauth->set_member($id,$user['default_user_group']['group_id']);
+
+	        $group_id = (int) $user['default_user_group']['group_id'];
+
+	        if( $group_id == 3 || $group_id == 4 || $group_id == 5 || $group_id == 6 || $group_id == 7 ){
+
+				$this->aauth->set_user_var('linked_entity_id',$user['linked_entity']['filter_id'],$id);
+
+	        }else{
+
+				$this->aauth->set_user_var('linked_entity_id','-1',$id);
+
+	        }
+
 		}
 	
 	}
 
 	public function remove($id){
+
 	}
 
 }
