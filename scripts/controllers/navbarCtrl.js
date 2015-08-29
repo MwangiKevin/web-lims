@@ -36,6 +36,10 @@ app.controller('navbarCtrl',
 		apiAuth.logout().success(function(data){
 			$rootScope.getSessionDetails();
 		});
+	}	
 
+	$scope.change_password = function(){
+        window.location = "#/change_password";
+		$rootScope.getSessionDetails();
 	}
 }])
