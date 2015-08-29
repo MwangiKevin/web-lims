@@ -110,7 +110,7 @@ class auth extends MY_Controller {
 		$request_body = file_get_contents('php://input');		
 		$user = json_decode($request_body,true);
 
-		$id = $user['id'];
+		$id = (int) $user['id'];
 		$password = $user['password'];
 
 		if($this->aauth->is_admin()){

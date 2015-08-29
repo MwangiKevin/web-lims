@@ -507,12 +507,23 @@ class Aauth {
 	 * @param string $pass password
 	 * @return bool Password reset fails/succeeds
 	 */
-	public function set_password($user_id, $pass){
+	public function set_password($user_id=0, $pass){
+
+		$valid = TRUE;
+
+		if ($user_id==0){			
+			$user_id = $this->CI->session->userdata('id');
+		}
 
 		$query = $this->CI->db->where('id', $user_id);
 		$query = $this->CI->db->get( $this->config_vars['users'] );
 
-		if( $query->num_rows() > 0  && $this->is_admin()){
+		if ( strlen($pass) < 5 OR strlen($pass) > $this->config_vars['max'] ){
+			$this->error($this->CI->lang->line('aauth_error_password_invalid'));
+			$valid = FALSE;
+		}
+
+		if( $query->num_rows() > 0  && $this->is_admin() && $valid){
 
 			$data =	 array(
 				'verification_code' => '',
@@ -1770,7 +1781,8 @@ class Aauth {
 	 * @param string $message Message to add to array
 	 * @param boolean $flashdata if TRUE add $message to CI flashdata (deflault: FALSE)
 	 */
-	public function error($message = '', $flashdata = FALSE){
+	public function error($message = '', $flashdata = FALSE){		
+		http_response_code(500);
 		$this->errors[] = $message;
 		if($flashdata)
 		{
