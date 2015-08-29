@@ -151,7 +151,7 @@ app.controller('usersCtrl',
                 }
             )
             .then(function(response){
-                swal("Nice!", "You Have successfully changed the password of:"+name, "success"); 
+                swal("Success!", "You Have successfully changed the password of:"+name, "success"); 
             },function(response){
                 swal("Error!", "Something went wrong", "error"); 
             });
