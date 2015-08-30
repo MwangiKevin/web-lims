@@ -30,6 +30,13 @@ class  MY_Controller  extends  MX_Controller {
 		return $this->config->item("default_password");
 	}
 
+	public function is_current_user($id=0){
+
+		$logged_in = (int) $this->aauth->get_user($id)->id;
+		
+		return $id==$logged_in;
+	}
+
 	protected function _detect_method() {
 		$method = strtolower($this->input->server('REQUEST_METHOD'));
 
