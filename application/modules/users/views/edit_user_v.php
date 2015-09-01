@@ -71,6 +71,13 @@
 			</form>
 		</div>
   	</div>
+
+  	<div class="eight wide column"> 
+		<div style="" class="ui segment">
+			<h3><center>Reports Subscription:</center></h3> 
+			<table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="row-border hover table table-bordered"></table>
+		</div>	
+	</div>
   	<div class="sixteen wide column"> 
   	<div class="ui segment">
   		<!-- <pre>{{sess.user.default_user_group}}</pre> -->

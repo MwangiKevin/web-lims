@@ -13,7 +13,11 @@ app.controller('editUserCtrl',
     'notify',
     'Restangular',
     'apiAuth',
-    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth){
+    'DTOptionsBuilder',
+    'DTColumnBuilder',
+    'DTColumnDefBuilder',
+    'DTInstances',
+    function($stateParams,$state,$scope,$http,ngProgress,Filters,Commons,$activityIndicator,API,SweetAlert,notify,Restangular,apiAuth,DTOptionsBuilder,DTColumnBuilder,DTColumnDefBuilder,DTInstances){
      
     apiAuth.requireLogin();
 
@@ -138,6 +142,56 @@ app.controller('editUserCtrl',
     }
         
     $scope.get_user_groups();
+
+
+
+
+    $scope.dtOptions = DTOptionsBuilder.newOptions()
+
+    $scope.dtInstance = {};
+
+    $scope.build = function(){
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+        .withSource({
+            url: Commons.baseURL+'api/report_types',
+            data:{user_id:$scope.user_id,datatable:true,verbose:true},
+            type: 'GET'
+        })
+        .withDataProp('data')
+        // .withOption('stateSave', true)
+        .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withOption('scrollX', '100%')
+        .withPaginationType('full_numbers')
+
+        .withColVis()
+        // .withColVisStateChange(stateChange)
+        // .withColVisOption('aiExclude', [1,2,3,4,5])
+
+
+        .withOption('responsive', false)
+
+        .withColReorder()
+        // .withColReorderOrder([1, 0, 2])
+        .withColReorderOption('iFixedColumnsRight', 1)
+        // .withColReorderCallback(function() {
+        //         console.log('Columns order has been changed with: ' + this.fnOrder());
+        //     })
+
+        // .withTableTools('assets/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf')
+        $scope.dtColumns = [
+            DTColumnBuilder.newColumn('id').withTitle('#'),
+            DTColumnBuilder.newColumn('report_name').withTitle('Name'),
+            DTColumnBuilder.newColumn('subscribed').withTitle('Subscribed'),
+        ];
+
+        $scope.dtColumnDefs = [
+            // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
+        ];
+
+        // $scope.dtInstance = {};
+    }
+    $scope.build();
 
 
 }]);
