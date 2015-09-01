@@ -300,26 +300,26 @@ class api extends MY_Controller {
 	}
 
 
-	public function report_types(){
+	public function report_types($id=NULL){
 
-		$this->load->model("reports_types_m");	
+		$this->load->model("report_types_m");	
 
 		$method = $this->_detect_method();
 		
 		if ($method=="post"){
-			echo json_encode($this->reports_types_m->create(),JSON_PRETTY_PRINT);
+			echo json_encode($this->report_types_m->create(),JSON_PRETTY_PRINT);
 		}
 
 		else if($method=="get"){
-			echo json_encode($this->reports_types_m->read($id),JSON_PRETTY_PRINT);
+			echo json_encode($this->report_types_m->read($id),JSON_PRETTY_PRINT);
 		}
 
 		else if ($method=="put"){
-			echo json_encode($this->reports_types_m->update($id),JSON_PRETTY_PRINT);
+			echo json_encode($this->report_types_m->update($id),JSON_PRETTY_PRINT);
 		}
 
 		else if ($method=="delete"){
-			echo json_encode($this->reports_types_m->remove($id),JSON_PRETTY_PRINT);
+			echo json_encode($this->report_types_m->remove($id),JSON_PRETTY_PRINT);
 		}
 	}
 
