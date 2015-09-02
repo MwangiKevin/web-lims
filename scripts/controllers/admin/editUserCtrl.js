@@ -25,8 +25,6 @@ app.controller('editUserCtrl',
 
     $scope.filter_group_type = "all";
 
-    $scope.subscription     =   {};
-
     $scope.entities = [{ name: '', email:'',phone:'', type: '' }];
     $scope.user_groups=[];
 
