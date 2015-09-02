@@ -85,5 +85,5 @@
 			<h3><center>Reports Subscription:</center></h3> 
 			<table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" dt-instance="dtInstance"  class="row-border hover table table-bordered"></table>
 		</div>	
-	</div>{{subscription}}
+	</div>
 </div>
