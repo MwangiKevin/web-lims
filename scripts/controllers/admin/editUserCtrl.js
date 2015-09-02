@@ -25,6 +25,8 @@ app.controller('editUserCtrl',
 
     $scope.filter_group_type = "all";
 
+    $scope.subscription     =   {};
+
     $scope.entities = [{ name: '', email:'',phone:'', type: '' }];
     $scope.user_groups=[];
 
@@ -182,16 +184,73 @@ app.controller('editUserCtrl',
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').withTitle('#'),
             DTColumnBuilder.newColumn('report_name').withTitle('Name'),
-            DTColumnBuilder.newColumn('subscribed').withTitle('Subscribed'),
-        ];
+            DTColumnBuilder.newColumn(null).withTitle('Subscribed').renderWith(function(data, type, full, meta) {
+                    
+                    var subscribed = parseInt(data.subscribed);
+                    var rpt_id = parseInt(data.id);
 
-        $scope.dtColumnDefs = [
-            // DTColumnDefBuilder.newColumnDef('edit').withTitle('Edit').notSortable()
-        ];
 
-        // $scope.dtInstance = {};
+                    if(subscribed==1){                        
+
+                        return '<input type="checkbox" checked  onclick="unsubscribe('+$scope.user_id+','+rpt_id+')">';
+                    }else{
+
+                        return '<input type="checkbox"   onclick="subscribe('+$scope.user_id+','+rpt_id+')">';
+
+                    }
+
+                    // return '<button class="ColVis_Button ColVis_MasterButton" style="height:14px;" onClick="a()">Edit</button>';
+
+                }),,
+        ];
     }
     $scope.build();
 
+    $scope.reloadRpts = function () {
+        // console.log($scope.dtInstance);          
+        $scope.build();  
+        var resetPaging = false;
+        $scope.dtInstance.reloadData(callback, resetPaging);
+        // $scope.dtInstance.rerender();
+    }
+    function callback(json) {
+        // console.log(json);
+    }
+
+    $scope.rptSubscribe = function(usr,rpt){
+
+        $scope.reloadRpts();
+
+        return  $http.get(
+            'api/reports/subscribe/'+usr+'/'+rpt
+            );
+
+    }
+
+    $scope.rptUnsubscribe = function(usr,rpt){
+
+        $scope.reloadRpts();
+
+        return  $http.get(
+            'api/reports/unsubscribe/'+usr+'/'+rpt
+            );
+
+    }
+
 
 }]);
+
+
+function subscribe(usr,rpt){
+
+    angular.element('#userEdit').scope().$apply(function(){
+        angular.element('#userEdit').scope().rptSubscribe(usr,rpt);
+    })
+}
+
+function unsubscribe(usr,rpt){
+
+    angular.element('#userEdit').scope().$apply(function(){
+        angular.element('#userEdit').scope().rptUnsubscribe(usr,rpt);
+    })
+}

@@ -1,4 +1,4 @@
-<div class="ui segment">
+<div class="ui segment" id="userEdit">
 	<br/>
   <h3><center><div class="ui blue horizontal label big ">User Details: </div> {{user.user_name}}</center></h3>
   <!-- <pre>{{sess}}<pre/> -->
@@ -72,19 +72,18 @@
 		</div>
   	</div>
 
+  	<div class="sixteen wide column"> 
+  		<div class="ui segment">
+		  	<div class="ui primary button" ng-click="put_user()"> Update Details </div>
+			<button class="ui button" ng-click="back_users()"> Back To Users </button>
+			<!-- <div style="height:50px"></div>  -->
+		</div> 	
+	</div>
+
   	<div class="eight wide column"> 
 		<div style="" class="ui segment">
 			<h3><center>Reports Subscription:</center></h3> 
-			<table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="row-border hover table table-bordered"></table>
+			<table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" dt-instance="dtInstance"  class="row-border hover table table-bordered"></table>
 		</div>	
-	</div>
-  	<div class="sixteen wide column"> 
-  	<div class="ui segment">
-  		<!-- <pre>{{sess.user.default_user_group}}</pre> -->
-  		<!-- <pre>{{user}}</pre> -->
-	  	<div class="ui primary button" ng-click="put_user()"> Update Details </div>
-		<button class="ui button" ng-click="back_users()"> Back To Users </button>
-		<div style="height:50px"></div> 
-	</div>	
-  </div>
+	</div>{{subscription}}
 </div>
