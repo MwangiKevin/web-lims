@@ -3,7 +3,10 @@ BEGIN
 	SET @QUERY =    "SELECT 
 							`typ`.`id`,
 							`typ`.`report_name`,
-							`typ`.`description`
+                            `typ`.`description`,
+                            `typ`.`relative_url`,
+                            `typ`.`periodic_interval`,
+                            `typ`.`last_batch_sending`
 						FROM `report_type` `typ` 
                         WHERE 1                          
 						";
@@ -17,6 +20,9 @@ BEGIN
                             `typ`.`id`,
                             `typ`.`report_name`,
                             `typ`.`description`,
+                            `typ`.`relative_url`,
+                            `typ`.`periodic_interval`,
+                            `typ`.`last_batch_sending`,
                              CASE WHEN `rus`.`id`  IS NULL THEN 0 ELSE 1 END AS `subscribed`
                         FROM `report_type` `typ`
                             LEFT JOIN `report_user_subscription` `rus`

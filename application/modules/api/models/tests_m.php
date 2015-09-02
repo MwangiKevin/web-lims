@@ -54,6 +54,14 @@ class tests_m extends MY_Model{
 
 		$tests_res = $this->api_get_tests($id,$search,$order_col,$order_dir,$limit_start,$limit_items,'false',$filter_type,$filter_id );
 
+		if(!$this->aauth->is_member("facility_default")&& !$this->aauth->is_member("facility_user")){
+
+			foreach ($tests_res as $key => $value) {
+				$tests_res[$key][sample] = "############";
+			}
+
+		}
+
 		if($is_datatable){
 
 			$tests = $this->arr_to_dt_response($tests_res,$draw,$total_records,$records_filtered);
