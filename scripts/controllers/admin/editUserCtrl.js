@@ -217,21 +217,21 @@ app.controller('editUserCtrl',
 
     $scope.rptSubscribe = function(usr,rpt){
 
-        $scope.reloadRpts();
-
         return  $http.get(
             'api/reports/subscribe/'+usr+'/'+rpt
-            );
+            ).success(function(response){
+                $scope.reloadRpts();
+            });
 
     }
 
     $scope.rptUnsubscribe = function(usr,rpt){
 
-        $scope.reloadRpts();
-
         return  $http.get(
             'api/reports/unsubscribe/'+usr+'/'+rpt
-            );
+            ).success(function(response){
+                $scope.reloadRpts();
+            });
 
     }
 

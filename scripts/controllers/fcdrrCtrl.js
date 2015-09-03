@@ -10,10 +10,27 @@ app.controller('fcdrrCtrl', ['$stateParams', '$state', '$rootScope', '$scope', '
     }
     $scope.showMonth = function() {
         var objDate = new Date($scope.fcdrr.from_date);
-        locale = "en-us", month = objDate.toLocaleString(locale, {
+
+        var months = [];
+
+        months[0] = "January";
+        months[1] = "February";
+        months[2] = "March";
+        months[3] = "April";
+        months[4] = "May";
+        months[5] = "June";
+        months[6] = "July";
+        months[7] = "August";
+        months[8] = "September";
+        months[9] = "October";
+        months[10] = "November";
+        months[11] = "December";
+
+        locale = "en-us", month = objDate.getMonth(locale, {
             month: "long"
         });
-        return month;
+
+        return months[month];
     }
     $scope.showYear = function() {
         var objDate = new Date($scope.fcdrr.from_date);
