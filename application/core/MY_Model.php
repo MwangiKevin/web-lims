@@ -37,6 +37,10 @@ class MY_Model extends CI_Model{
 		}
 		return $datemonth;
 	}
+	
+	public function get_default_password(){
+		return $this->config->item("default_password");
+	}
 
 	public function get_yearmonth_categories_wordly($start_date=null,$end_date=null){
 

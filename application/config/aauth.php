@@ -46,7 +46,7 @@ $config['aauth'] = array(
     'max' => 13,
 
     // non alphanumeric characters that are allowed in a name
-    'valid_chars' => array(' ', '\''),
+    'valid_chars' => array(' ', '\'','(',')','.',',','-'),
 
     // ddos protection,
     //if it is true, the user will be banned temporary when he exceed the login 'try'

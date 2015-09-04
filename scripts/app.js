@@ -32,26 +32,6 @@ var app = angular
 	
 	$stateProvider
 	
-	//LIMS Login	
-	.state('limsLogin',{
-		url: '/lims_login',	
-		views:{
-			'main':{
-				templateUrl: 'login/lims_login',
-				controller: 'limsLoginCtrl'
-			},
-			'navbar':{
-				templateUrl: 'login/nav_bar',
-				controller: 'navbarCtrl'
-			},
-			'footer':{
-				templateUrl: 'dashboard/footer',
-				controller: ['$scope', function($scope){
-				}]
-			}
-		}
-	})
-
 	
 	.state('Dashboard',{
 		url: '/',		
@@ -87,7 +67,28 @@ var app = angular
 				controller:  'registrationCtrl'
 			},
 			'navbar':{
-				templateUrl: 'login/navbar',
+				templateUrl: 'login/nav_bar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
+		}
+	})
+
+
+	.state('ChangePass',{
+		url: '/change_password',		
+		abstract: false,
+		views:{
+			'main':{
+				templateUrl: 'login/change_password',
+				controller:  'changePassCtrl'
+			},
+			'navbar':{
+				templateUrl: 'login/nav_bar',
 				controller: 'navbarCtrl'
 			},
 			'footer':{
@@ -106,15 +107,15 @@ var app = angular
 				templateUrl: 'login/logout',
 				controller:  'logoutCtrl'
 			},
-			// 'navbar':{
-			// 	templateUrl: 'login/logout',
-			// 	controller: 'navbarCtrl'
-			// },
-			// 'footer':{
-			// 	templateUrl: 'dashboard/footer',
-			// 	controller: ['$scope', function($scope){
-			// 	}]
-			// }
+			'navbar':{
+				templateUrl: 'login/nav_bar',
+				controller: 'navbarCtrl'
+			},
+			'footer':{
+				templateUrl: 'dashboard/footer',
+				controller: ['$scope', function($scope){
+				}]
+			}
 		}
 	})
 
