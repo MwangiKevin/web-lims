@@ -42,6 +42,13 @@ app.controller('cd4DevicesCtrl', ['$scope','$rootScope','Commons','Restangular',
                     'aButtons': ['csv', 'xls', 'pdf']
                 },
                 {
+                    'sExtends': 'text',
+                    'sButtonText': '+ New Device', 
+                    'fnClick'   : function ( nButton, oConfig, oFlash ) {
+                        window.location = "#/newCD4Device";
+                    }
+                },
+                {
                     'sExtends': 'text',             
                     'sButtonText': 'Reload', 
                     'fnClick'   : function ( nButton, oConfig, oFlash ) {
