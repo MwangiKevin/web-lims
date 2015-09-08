@@ -76,7 +76,7 @@ app.controller('editUserCtrl',
             $scope.filter_group_type = "none";
         }
 
-        $scope.user.linked_entity = [];
+        // $scope.user.linked_entity = [];  find a way not to clear on first load
 
         $scope.refreshEntities("");
        
@@ -217,21 +217,21 @@ app.controller('editUserCtrl',
 
     $scope.rptSubscribe = function(usr,rpt){
 
-        $scope.reloadRpts();
-
         return  $http.get(
             'api/reports/subscribe/'+usr+'/'+rpt
-            );
+            ).success(function(response){
+                $scope.reloadRpts();
+            });
 
     }
 
     $scope.rptUnsubscribe = function(usr,rpt){
 
-        $scope.reloadRpts();
-
         return  $http.get(
             'api/reports/unsubscribe/'+usr+'/'+rpt
-            );
+            ).success(function(response){
+                $scope.reloadRpts();
+            });
 
     }
 
