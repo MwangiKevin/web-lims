@@ -9,7 +9,7 @@ class utils extends MY_Controller {
 		parent::__construct();
 
 		
-		header('Content-Type: application/json; charset=utf-8');
+		// header('Content-Type: application/json; charset=utf-8');
 		// $this->load->model('api/api_m');
 	}
 
@@ -20,5 +20,20 @@ class utils extends MY_Controller {
 			$this->load->model("utils_m");	
 
 			echo json_encode($this->utils_m->create_facility_default_user($id),JSON_PRETTY_PRINT);
+	}
+
+	public function remap_facility_default_users() {
+
+
+			$this->load->model("utils_m");	
+
+			echo json_encode($this->utils_m->remap_facility_default_users(),JSON_PRETTY_PRINT);
+	}
+	public function reset_facility_default_users() {
+
+
+			$this->load->model("utils_m");	
+
+			echo json_encode($this->utils_m->reset_facility_default_users(),JSON_PRETTY_PRINT);
 	}
 }

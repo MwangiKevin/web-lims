@@ -48,7 +48,10 @@ app.controller('facilitiesCtrl', ['$scope','$rootScope','$state','Commons', 'Res
                     'sButtonText': '+ New Facility', 
                     'fnClick'   : function ( nButton, oConfig, oFlash ) {
                         window.location = "#/newFacility";
-                    },
+                    }
+                },
+                {
+                    'sExtends': 'text',
                     'sButtonText': 'Reload', 
                     'fnClick'   : function ( nButton, oConfig, oFlash ) {
 
