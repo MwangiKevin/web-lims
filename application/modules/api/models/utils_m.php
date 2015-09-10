@@ -60,4 +60,64 @@ class utils_m extends MY_Model{
 
 	}
 
+	public function remap_facility_default_users(){
+		$sql = "SELECT 
+						`u`.`id` 	AS	`user_id`,
+						`u`.`email`	AS	`user_mfl`,
+						`u`.`name` 	AS 	`user_name`,
+						`f`.`id` 	AS 	`facility_id`,
+						`f`.`name` 	AS 	`facility_name`,
+						`f`.`mfl_code`,
+						`ug`.`group_id`,
+						`uv`.`key`,
+						`uv`.`value`
+
+
+					FROM `aauth_users` `u`
+						LEFT JOIN `aauth_user_to_group` `ug`
+						ON `ug`.`user_id` = `u`.`id` 
+						AND `ug`.`group_id` = '4'
+						RIGHT JOIN `facility` `f`
+						ON `u`.`email` = `f`.`mfl_code`
+						LEFT JOIN `aauth_user_variables` `uv`
+						ON `uv`.`user_id` = `u`.`id`
+						AND `uv`.`key` = 'linked_entity_id'
+
+					";
+
+		$fac_us 	=	R::getAll($sql);
+
+		foreach ($fac_us as $key => $value) {
+			if($value[user_id] == null){
+
+				echo "<br/>".$value[facility_name];
+				$facility_id = (int) $value[facility_id];
+				$this->create_facility_default_user($facility_id);
+
+
+			}
+		}
+	}
+
+	public function reset_facility_default_users(){
+		$sql = "SELECT 
+					`u`.`id`AS `user_id`,
+					`u`.`email` AS `mfl_code`,
+					`u`.`name`,
+					`f`.`id` `facility_id`    
+				FROM `aauth_users` `u` 
+				LEFT JOIN `facility` `f` ON `u`.`email` = `f`.`mfl_code`
+				WHERE `u`.`email` > 0";
+
+		$res = R::getAll($sql);
+
+		foreach ($res as $key => $value) {
+
+			// echo "j";
+
+	        $this->aauth->set_member($value['user_id'],4);
+			$this->aauth->set_user_var('linked_entity_id',$value['facility_id'],$value['user_id']);
+
+		}
+	}
 }
