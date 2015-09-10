@@ -76,7 +76,7 @@ app.controller('editUserCtrl',
             $scope.filter_group_type = "none";
         }
 
-        $scope.user.linked_entity = [];
+        // $scope.user.linked_entity = [];  find a way not to clear on first load
 
         $scope.refreshEntities("");
        
