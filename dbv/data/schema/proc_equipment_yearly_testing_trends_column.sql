@@ -83,7 +83,7 @@ BEGIN
 					LEFT JOIN `cd4_test` `c_t`
 					ON `c_t`.`device_id` = `d`.`id`
 				LEFT JOIN `facility` `f`
-					ON `c_t`.`facility_id ` = `f`.`id`
+					ON `c_t`.`facility_id` = `f`.`id`
 				WHERE 1
 					AND `c_t`.`result_date`<= CURDATE()
 					AND `facility_id` = `user_filter_used`
