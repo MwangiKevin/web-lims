@@ -66,7 +66,7 @@ BEGIN
 			LEFT JOIN `facility` `f`
 				ON `tst`.`facility_id` = `f`.`id`
 						
-			WHERE `result_date` BETWEEN `from_date` AND `from_date`
+			WHERE `result_date` BETWEEN `from_date` AND `to_date`
 			AND `f`.`sub_county_id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
@@ -83,7 +83,7 @@ BEGIN
 			LEFT JOIN `facility` `f`
 				ON `tst`.`facility_id` = `f`.`id`
 						
-			WHERE `result_date` BETWEEN `from_date` AND `from_date`
+			WHERE `result_date` BETWEEN `from_date` AND `to_date`
 			AND `f`.`id` = `user_filter_used`
 			AND `result_date` <= CURDATE()
 			;
