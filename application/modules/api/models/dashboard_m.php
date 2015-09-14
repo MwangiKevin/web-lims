@@ -262,7 +262,8 @@ class dashboard_m extends MY_Model{
 					$reported_placeholder = (int) $value1['count'] ;
 				}				
 			}			
-			$reported_array[$key] = $reported_placeholder;
+			$reported_array[$key] = $reported_placeholder;	
+			$reported_placeholder = 0;
 		}
 
 		foreach ($reported_array as $key => $value) {
