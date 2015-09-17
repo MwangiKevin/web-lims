@@ -137,6 +137,7 @@ class dashboard_m extends MY_Model{
 		// echo $start_date.' --'.$end_date;
 		$data["categories"] 	= 	$this->get_yearmonth_categories_wordly($start_date,$end_date);	
 		$data["series"][0]["name"] 	= 	"Expected Reporting Devices";
+		$data["series"][0]["color"] 	= 	"#2E64FE";
 		$data["series"][0]["data"] 	= 	$this->expected_reporting_dev_array($entity_type,$entity_id,$start_date,$end_date);
 		$data["series"][1]["name"] 	= 	"Reported Devices";
 		$data["series"][1]["color"] 	= 	"#a4d53a";
