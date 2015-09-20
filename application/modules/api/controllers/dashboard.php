@@ -73,7 +73,8 @@ class dashboard extends MY_Controller {
 		$series_data	=	array(
 								0	=>	array(
 											"name"	=>	"Above critical level",
-											"data"	=>	$abv
+											"data"	=>	$abv,
+											"color" => "#2E64FE"
 										),
 								1 	=>	array(
 											"name"	=>	"Below critical level",
