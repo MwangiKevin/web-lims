@@ -150,7 +150,16 @@ class dashboard extends MY_Controller {
 		$data = $this->yearly_testing_trends($entity_type,$entity_id);
 		
 		$consolidated_result = [];
+		
 		array_push($consolidated_result,$categories[0],$data);
+
+		$arr = $consolidated_result[1];
+
+		$colors = $arrayName = array('#2E64FE','#FF00BF','#40FF00','#2E64FE','#DA81F5','#0B4C5F');
+
+		foreach ($arr as $key => $value) {
+			$consolidated_result[1][$key][color] = $colors[$key];
+		}
 		// print_r($consolidated_result);die;
 		echo json_encode($consolidated_result);
 	}
