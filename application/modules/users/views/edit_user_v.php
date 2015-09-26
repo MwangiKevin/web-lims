@@ -29,7 +29,8 @@
 					<br/>
 		        </div>
 		        <div class="field">
-		        	<div class="ui horizontal label large ">E-mail Address</div><div class="field"></div>
+		        	<div class="ui horizontal label large " ng-show="(user.default_user_group.group_id == 4 )?false:true" >E-mail Address</div><div class="field"></div>
+		          	<div class="ui horizontal label large " ng-show="(user.default_user_group.group_id != 4 )?false:true" >MFL-Code</div><div class="field"></div>
 		          	<input type="text" ng-model="user.email" disabled >
 		        </div>
 			    <div class="field">
